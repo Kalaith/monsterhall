@@ -1,13 +1,16 @@
 //! Shared UI drawing helpers.
 
 use macroquad::prelude::*;
-use macroquad_toolkit::ui::{draw_text_block, draw_text_centered_in_box, ButtonStyle};
+use macroquad::text::draw_text_ex;
+use macroquad_toolkit::ui::{
+    draw_text_block_ex, draw_text_centered_in_box, measure_text_size, ButtonStyle, TextStyle,
+};
 
 use crate::ui::theme;
 
 const REFERENCE_WIDTH: f32 = 1920.0;
 const REFERENCE_HEIGHT: f32 = 1080.0;
-const BASE_FONT_BOOST: f32 = 1.12;
+const BASE_FONT_BOOST: f32 = 1.24;
 const MIN_SCALE: f32 = 0.92;
 const MAX_SCALE: f32 = 1.18;
 
@@ -19,7 +22,7 @@ pub fn ui_scale_factor() -> f32 {
 }
 
 pub fn scaled_font_size(font_size: f32) -> f32 {
-    (font_size * ui_scale_factor() * BASE_FONT_BOOST).round()
+    (font_size * ui_scale_factor() * BASE_FONT_BOOST).round().max(18.0)
 }
 
 pub fn scaled_spacing(spacing: f32) -> f32 {
@@ -27,11 +30,21 @@ pub fn scaled_spacing(spacing: f32) -> f32 {
 }
 
 pub fn draw_heading(text: &str, x: f32, y: f32, font_size: f32) {
-    draw_text(text, x, y, scaled_font_size(font_size), theme::TEXT_STRONG);
+    draw_text_ex(
+        text,
+        x,
+        y,
+        TextStyle::new(scaled_font_size(font_size), theme::TEXT_STRONG).params(),
+    );
 }
 
 pub fn draw_body_text(text: &str, x: f32, y: f32, font_size: f32, color: Color) {
-    draw_text(text, x, y, scaled_font_size(font_size), color);
+    draw_text_ex(
+        text,
+        x,
+        y,
+        TextStyle::new(scaled_font_size(font_size), color).params(),
+    );
 }
 
 fn primary_button_style() -> ButtonStyle {
@@ -98,11 +111,22 @@ fn utility_button_style() -> ButtonStyle {
 }
 
 fn draw_button_label(text: &str, x: f32, y: f32, w: f32, h: f32, color: Color, font_size: f32) {
-    let size = scaled_font_size(font_size);
-    let dims = measure_text(text, None, size as u16, 1.0);
+    let size = scaled_font_size(font_size.max(h * 0.38));
+    let dims = measure_text_size(text, TextStyle::new(size, color));
     let text_x = x + (w - dims.width) * 0.5;
     let text_y = y + (h + dims.height) * 0.5 - 2.0;
-    draw_text(text, text_x, text_y, size, color);
+    draw_text_ex(
+        text,
+        text_x + 1.5,
+        text_y + 2.0,
+        TextStyle::new(size, Color::new(0.02, 0.01, 0.03, 0.88)).params(),
+    );
+    draw_text_ex(
+        text,
+        text_x,
+        text_y,
+        TextStyle::new(size, color).params(),
+    );
 }
 
 fn button_rect(x: f32, y: f32, w: f32, h: f32, style: &ButtonStyle) -> bool {
@@ -210,7 +234,12 @@ pub fn draw_wrapped_lines(lines: &[String], x: f32, mut y: f32, font_size: f32, 
     let line_gap = scaled_spacing(8.0);
 
     for line in lines {
-        draw_text(line, x, y, scaled_font_size, color);
+        draw_text_ex(
+            line,
+            x,
+            y,
+            TextStyle::new(scaled_font_size, color).params(),
+        );
         y += scaled_font_size + line_gap;
     }
 }
@@ -236,15 +265,14 @@ pub fn draw_body_text_in_box(
     font_size: f32,
     color: Color,
 ) {
-    let _ = draw_text_block(
+    let _ = draw_text_block_ex(
         text,
         x,
         y,
         width,
         height,
-        scaled_font_size(font_size),
-        scaled_spacing(6.0),
-        color,
+        TextStyle::new(scaled_font_size(font_size), color).with_line_gap(scaled_spacing(6.0)),
+        18.0,
     );
 }
 
@@ -258,14 +286,13 @@ pub fn draw_wrapped_lines_in_box(
     color: Color,
 ) {
     let joined = lines.join("\n");
-    let _ = draw_text_block(
+    let _ = draw_text_block_ex(
         &joined,
         x,
         y,
         width,
         height,
-        scaled_font_size(font_size),
-        scaled_spacing(6.0),
-        color,
+        TextStyle::new(scaled_font_size(font_size), color).with_line_gap(scaled_spacing(6.0)),
+        18.0,
     );
 }

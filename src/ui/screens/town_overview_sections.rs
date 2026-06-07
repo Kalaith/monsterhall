@@ -27,19 +27,25 @@ pub(super) struct TownOverviewLayout {
     pub roster_y: f32,
     pub roster_h: f32,
     pub footer_y: f32,
+    pub compact_height: bool,
 }
 
 impl TownOverviewLayout {
     pub(super) fn new(_game_state: &GameState) -> Self {
         let left_margin = layout::OUTER_MARGIN;
         let content_width = screen_width() - left_margin * 2.0;
-        let priority_y = 92.0;
+        let compact_height = screen_height() < 560.0;
+        let priority_y = if compact_height { 86.0 } else { 92.0 };
         let priority_width = 446.0;
         let summary_x = left_margin + priority_width + layout::SECTION_GAP;
         let summary_width = content_width - priority_width - layout::SECTION_GAP;
         let roster_y = priority_y + 212.0;
         let footer_y = screen_height() - layout::FOOTER_BOTTOM_MARGIN - layout::FOOTER_H;
-        let roster_h = (footer_y - roster_y - layout::SECTION_GAP).max(214.0);
+        let roster_h = if compact_height {
+            0.0
+        } else {
+            (footer_y - roster_y - layout::SECTION_GAP).max(214.0)
+        };
 
         Self {
             left_margin,
@@ -51,6 +57,7 @@ impl TownOverviewLayout {
             roster_y,
             roster_h,
             footer_y,
+            compact_height,
         }
     }
 }
@@ -451,6 +458,35 @@ pub(super) fn draw_summary_strip(
         false,
     );
 
+    if layout.compact_height {
+        let debt_value = game_state
+            .debt
+            .as_ref()
+            .map(|debt| format!("{} in {}d", debt.current_balance_due, debt.days_until_due))
+            .unwrap_or_else(|| "Clear".to_owned());
+        let upkeep = preview_upkeep(data, game_state);
+        let compact_summary = format!(
+            "Gold {}   Materials {}\nEggs {}   Relics {}\nResidue {}   Debt {}\nNext upkeep {}g",
+            game_state.resources.gold,
+            game_state.resources.tower_materials,
+            game_state.resources.eggs,
+            game_state.resources.relics,
+            game_state.resources.arcane_residue,
+            debt_value,
+            upkeep.total_gold
+        );
+        draw_body_text_in_box(
+            &compact_summary,
+            layout.summary_x + layout::PANEL_PADDING,
+            layout.priority_y + 54.0,
+            layout.summary_width - layout::PANEL_PADDING * 2.0,
+            118.0,
+            18.0,
+            theme::TEXT_BODY,
+        );
+        return None;
+    }
+
     let due_value = game_state
         .debt
         .as_ref()
@@ -560,7 +596,7 @@ pub(super) fn draw_monster_roster(
     game_state: &GameState,
     layout: &TownOverviewLayout,
 ) -> Option<UiAction> {
-    if game_state.monsters.is_empty() {
+    if game_state.monsters.is_empty() || layout.compact_height {
         return None;
     }
 

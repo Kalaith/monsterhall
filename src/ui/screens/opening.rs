@@ -37,10 +37,36 @@ pub fn draw_opening_chapter(
         .iter()
         .find(|step| step.id == step_id)?;
 
-    let panel_width = 760.0;
-    let panel_height = 460.0;
+    let panel_width = (screen_width() - 44.0).min(980.0);
+    let panel_height = (screen_height() - 44.0).min(600.0);
     let panel_x = screen_width() * 0.5 - panel_width * 0.5;
     let panel_y = screen_height() * 0.5 - panel_height * 0.5;
+    let body_y = panel_y + 100.0;
+    let button_y = panel_y + panel_height - 70.0;
+    let gain_h = if opening_state.step == OpeningChapterStep::FirstClient {
+        54.0
+    } else {
+        0.0
+    };
+    let gain_y = button_y - gain_h - 12.0;
+    let body_bottom = if gain_h > 0.0 {
+        gain_y - 14.0
+    } else {
+        button_y - 14.0
+    };
+    let body_h = (body_bottom - body_y).max(150.0);
+    let show_art = panel_width >= 900.0 && body_h >= 170.0;
+    let art_size = 190.0_f32.min(panel_width * 0.26).min(body_h);
+    let text_width = if show_art {
+        panel_width - art_size - 86.0
+    } else {
+        panel_width - 48.0
+    };
+    let button_width = match opening_state.step {
+        OpeningChapterStep::BuildRoom => (panel_width - 48.0).min(480.0),
+        OpeningChapterStep::FirstClient => (panel_width - 48.0).min(540.0),
+        _ => (panel_width - 48.0).min(340.0),
+    };
 
     draw_tier_panel(
         panel_x,
@@ -56,59 +82,55 @@ pub fn draw_opening_chapter(
         panel_x + 24.0,
         panel_y + 34.0,
         panel_width - 48.0,
-        40.0,
-        32.0,
+        48.0,
+        38.0,
     );
     draw_wrapped_lines_in_box(
         &step_data.body_lines,
         panel_x + 24.0,
-        panel_y + 96.0,
-        panel_width - 304.0,
-        168.0,
-        20.0,
-        theme::TEXT_BODY,
+        body_y,
+        text_width,
+        body_h,
+        29.0,
+        theme::TEXT_STRONG,
     );
-    draw_story_cg_placeholder(
-        &step_data.title,
-        panel_x + panel_width - 256.0,
-        panel_y + 92.0,
-        228.0,
-        214.0,
-        &step_data.id,
-    );
+    if show_art {
+        draw_story_cg_placeholder(
+            &step_data.title,
+            panel_x + panel_width - art_size - 24.0,
+            body_y + 4.0,
+            art_size,
+            art_size,
+            &step_data.id,
+        );
+    }
 
-    let status_lines = vec![
-        format!(
-            "{} {}",
-            opening_text.status_day_label, game_state.current_day
-        ),
-        format!(
-            "{} {}",
-            opening_text.status_gold_label, game_state.resources.gold
-        ),
-        format!(
-            "{} {}",
-            opening_text.status_materials_label, game_state.resources.tower_materials
-        ),
-        format!(
-            "{} {}",
-            opening_text.status_eggs_label, game_state.resources.eggs
-        ),
-        format!(
-            "{} {}",
+    let status_x = panel_x + 24.0 + button_width + 24.0;
+    let status_w = panel_x + panel_width - 24.0 - status_x;
+    if status_w >= 180.0 {
+        let status_lines = vec![format!(
+            "{} {}  {} {}  {} {}  {} {}  {} {}",
+            opening_text.status_day_label,
+            game_state.current_day,
+            opening_text.status_gold_label,
+            game_state.resources.gold,
+            opening_text.status_materials_label,
+            game_state.resources.tower_materials,
+            opening_text.status_eggs_label,
+            game_state.resources.eggs,
             opening_text.status_roster_label,
             game_state.monsters.len()
-        ),
-    ];
-    draw_wrapped_lines_in_box(
-        &status_lines,
-        panel_x + 24.0,
-        panel_y + 276.0,
-        panel_width - 48.0,
-        90.0,
-        18.0,
-        theme::TEXT_MUTED,
-    );
+        )];
+        draw_wrapped_lines_in_box(
+            &status_lines,
+            status_x,
+            button_y + 2.0,
+            status_w,
+            48.0,
+            18.0,
+            theme::TEXT_BODY,
+        );
+    }
 
     if opening_state.step == OpeningChapterStep::BuildRoom {
         let cost_label = format!(
@@ -118,9 +140,9 @@ pub fn draw_opening_chapter(
         );
         if primary_button(
             panel_x + 24.0,
-            panel_y + panel_height - 70.0,
-            260.0,
-            44.0,
+            button_y,
+            button_width,
+            50.0,
             &cost_label,
         ) {
             return Some(UiAction::BuildOpeningRoom);
@@ -159,26 +181,26 @@ pub fn draw_opening_chapter(
         draw_wrapped_lines_in_box(
             &gain_lines,
             panel_x + 24.0,
-            panel_y + 372.0,
+            gain_y,
             panel_width - 48.0,
-            44.0,
-            17.0,
-            theme::TEXT_MUTED,
+            gain_h,
+            20.0,
+            theme::TEXT_BODY,
         );
         if primary_button(
             panel_x + 24.0,
-            panel_y + panel_height - 70.0,
-            320.0,
-            44.0,
+            button_y,
+            button_width,
+            50.0,
             &reward_label,
         ) {
             return Some(UiAction::ResolveOpeningClient);
         }
     } else if secondary_button(
         panel_x + 24.0,
-        panel_y + panel_height - 70.0,
-        240.0,
-        44.0,
+        button_y,
+        button_width,
+        50.0,
         &step_data.primary_action_label,
     ) {
         return Some(UiAction::ContinueOpening);
@@ -187,7 +209,7 @@ pub fn draw_opening_chapter(
     if let Some(error_message) = last_error {
         draw_inline_status(
             panel_x + 24.0,
-            panel_y + panel_height - 118.0,
+            button_y - 44.0,
             panel_width - 48.0,
             error_message,
             theme::DANGER,

@@ -47,9 +47,10 @@ pub fn draw_hatch_reveal(
         .unwrap_or("The new companion");
 
     let panel_x = layout::OUTER_MARGIN;
-    let panel_y = 96.0;
+    let compact_height = screen_height() < 560.0;
+    let panel_y = if compact_height { 88.0 } else { 96.0 };
     let panel_w = (screen_width() - layout::OUTER_MARGIN * 2.0).max(520.0);
-    let panel_h = (screen_height() - panel_y - 38.0).max(500.0);
+    let panel_h = (screen_height() - panel_y - 24.0).clamp(300.0, 600.0);
     draw_tier_panel(
         panel_x,
         panel_y,
@@ -65,23 +66,28 @@ pub fn draw_hatch_reveal(
         panel_x + 28.0,
         panel_y + 34.0,
         panel_w - 56.0,
-        42.0,
-        31.0,
+        if compact_height { 34.0 } else { 42.0 },
+        if compact_height { 28.0 } else { 31.0 },
     );
     draw_body_text_in_box(
         &stage_body(elapsed, monster_name),
         panel_x + 42.0,
-        panel_y + 80.0,
+        panel_y + if compact_height { 70.0 } else { 80.0 },
         panel_w - 84.0,
-        48.0,
+        if compact_height { 38.0 } else { 48.0 },
         18.0,
         theme::TEXT_BODY,
     );
 
-    let button_y = panel_y + panel_h - 68.0;
+    let button_y = panel_y + panel_h - if compact_height { 54.0 } else { 68.0 };
+    let media_y = panel_y + if compact_height { 122.0 } else { 148.0 };
     let info_y = button_y - 122.0;
-    let media_y = panel_y + 148.0;
-    let media_h = (info_y - media_y - 18.0).max(190.0);
+    let media_bottom = if compact_height {
+        button_y - 14.0
+    } else {
+        info_y - 18.0
+    };
+    let media_h = (media_bottom - media_y).max(if compact_height { 108.0 } else { 190.0 });
     let gap = 24.0;
     let column_w = (panel_w - 64.0 - gap) * 0.5;
     let egg_x = panel_x + 32.0;
@@ -106,16 +112,18 @@ pub fn draw_hatch_reveal(
         media_h,
         reveal_progress,
     );
-    draw_outcome_panel(
-        data,
-        &hatch_state.egg,
-        monster,
-        panel_x + 32.0,
-        info_y,
-        panel_w - 64.0,
-        104.0,
-        reveal_progress,
-    );
+    if !compact_height {
+        draw_outcome_panel(
+            data,
+            &hatch_state.egg,
+            monster,
+            panel_x + 32.0,
+            info_y,
+            panel_w - 64.0,
+            104.0,
+            reveal_progress,
+        );
+    }
 
     if is_complete {
         if primary_button(panel_x + panel_w - 252.0, button_y, 220.0, 44.0, "Continue") {

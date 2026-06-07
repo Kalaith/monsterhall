@@ -22,11 +22,11 @@ pub fn draw_main_menu(
         return Some(action);
     }
 
-    let button_width = 360.0;
-    let button_height = 50.0;
-    let button_gap = 12.0;
+    let button_width = 520.0;
+    let button_height = 72.0;
+    let button_gap = 18.0;
     let button_x = screen_width() * 0.5 - button_width * 0.5;
-    let first_button_y = screen_height() - 182.0;
+    let first_button_y = screen_height() - 250.0;
     let continue_button_y = first_button_y + button_height + button_gap;
     let quit_button_y = continue_button_y + button_height + button_gap;
     if primary_button(
