@@ -1,0 +1,148 @@
+{
+  "version": "1.0.0",
+  "floors": [
+    {
+      "id": "floor_1_slick_cellars",
+      "name": "Slick Cellars",
+      "depth": 1,
+      "description": "Collapsed service tunnels full of low-risk salvage, residue slicks, and crawlspaces where slime scouts shine.",
+      "difficulty": 20,
+      "requires_building_ids": [],
+      "required_roster": [],
+      "mission_ids": [
+        "resource_run",
+        "egg_hunt"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 18,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 3
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "slime_girl",
+          "weight": 9
+        },
+        {
+          "species_id": "succu_slime",
+          "weight": 1
+        }
+      ],
+      "relic_drop_ids": [],
+      "hazard_tags": [
+        "slick_paths",
+        "residue",
+        "crawlspaces"
+      ],
+      "egg_grade_bonus": 0,
+      "corruption_pressure": 0
+    },
+    {
+      "id": "floor_2_molten_baths",
+      "name": "Molten Baths",
+      "depth": 2,
+      "description": "Steamy mineral chambers with unstable residue vents, hard stone deposits, and routes that punish poor preparation.",
+      "difficulty": 34,
+      "requires_building_ids": [
+        "residue_alchemy_bench"
+      ],
+      "required_roster": [
+        {
+          "species_id": "slime_girl",
+          "minimum_quality_rank": 2
+        }
+      ],
+      "mission_ids": [
+        "resource_run",
+        "egg_hunt",
+        "corruption_dive",
+        "relic_raid"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 28,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 7
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "succu_slime",
+          "weight": 4
+        },
+        {
+          "species_id": "harpy_hostess",
+          "weight": 3
+        },
+        {
+          "species_id": "hellhound_bouncer",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "molten_collar"
+      ],
+      "hazard_tags": [
+        "heat",
+        "residue_vents",
+        "steam"
+      ],
+      "egg_grade_bonus": 1,
+      "corruption_pressure": 1
+    },
+    {
+      "id": "floor_3_gilded_kennels",
+      "name": "Gilded Kennels",
+      "depth": 3,
+      "description": "Lavish ruined holding pens and service corridors where strong escorts, alert scouts, and careful handlers matter.",
+      "difficulty": 48,
+      "requires_building_ids": [
+        "aftercare_lounge"
+      ],
+      "required_roster": [
+        {
+          "species_id": "hellhound_bouncer",
+          "minimum_quality_rank": 2
+        }
+      ],
+      "mission_ids": [
+        "resource_run",
+        "egg_hunt",
+        "relic_raid"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 36,
+        "eggs": 1,
+        "relics": 1,
+        "arcane_residue": 10
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "goblin_maid",
+          "weight": 4
+        },
+        {
+          "species_id": "lamia_binder",
+          "weight": 4
+        },
+        {
+          "species_id": "succu_slime",
+          "weight": 2
+        }
+      ],
+      "relic_drop_ids": [
+        "gilded_leash"
+      ],
+      "hazard_tags": [
+        "beast_pens",
+        "ambush",
+        "heavy_cargo"
+      ],
+      "egg_grade_bonus": 1,
+      "corruption_pressure": 2
+    }
+  ]
+}

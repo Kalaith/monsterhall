@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "archetypes": [
+    {
+      "id": "curious_local",
+      "name": "Local Delver",
+      "description": "Nearby adventurers and townsfolk bringing modest but practical requests while Monsterhall proves itself.",
+      "tags": [
+        "starter",
+        "local_work"
+      ],
+      "spawn_weight": 10
+    },
+    {
+      "id": "road_mercenary",
+      "name": "Caravan Captain",
+      "description": "Traveling crews with cargo, route problems, and enough coin to pay for reliable monsterfolk support.",
+      "tags": [
+        "escort",
+        "repeat_contract"
+      ],
+      "spawn_weight": 7
+    },
+    {
+      "id": "veiled_patron",
+      "name": "Tower Scholar",
+      "description": "Discreet researchers and sponsors who pay well for specialized staff, rare finds, and careful documentation.",
+      "tags": [
+        "special",
+        "high_payout"
+      ],
+      "spawn_weight": 3
+    }
+  ]
+}

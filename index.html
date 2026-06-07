@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monsterhall | Web Hatchery Games</title>
+    <link rel="stylesheet" href="../shared.css">
+    <style>
+        .game-container canvas {
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-page">
+        <header class="game-header">
+            <h1>Monsterhall</h1>
+            <a href="../" class="back-link">Back to All Games</a>
+        </header>
+
+        <div class="game-container" id="game-container">
+            <div class="loading-overlay" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading game...</p>
+            </div>
+            <canvas id="glcanvas" tabindex="1"></canvas>
+        </div>
+
+        <div class="game-controls">
+            <button class="btn btn-secondary btn-icon" onclick="toggleFullscreen()" title="Fullscreen">FS</button>
+            <button class="btn btn-secondary" onclick="focusGame()">Focus Game</button>
+            <span style="flex: 1;"></span>
+            <span style="color: var(--text-muted); font-size: 0.85rem;">Mouse-first play. Click the canvas to begin.</span>
+        </div>
+
+        <div class="game-info">
+            <div class="info-main">
+                <section class="info-section">
+                    <h2>About This Game</h2>
+                    <p>
+                        Build a frontier monster guild beside a cursed tower, recruit unusual companions,
+                        and send support teams into the depths for treasure, relics, eggs, and discoveries.
+                    </p>
+                </section>
+
+                <section class="info-section" style="margin-top: 1rem;">
+                    <h2>Play Style</h2>
+                    <p>
+                        The interface is designed to be fully playable with a mouse. Keyboard shortcuts may exist, but they are not required and are not shown in the interface.
+                    </p>
+                </section>
+            </div>
+
+            <aside class="game-sidebar">
+                <div class="sidebar-section">
+                    <h3>Status</h3>
+                    <span class="status-badge playable">Playable</span>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Details</h3>
+                    <ul class="meta-list">
+                        <li><span class="label">Genre</span><span class="value">Management Sim</span></li>
+                        <li><span class="label">Engine</span><span class="value">Macroquad</span></li>
+                        <li><span class="label">Platform</span><span class="value">Browser, Windows</span></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3>Downloads</h3>
+                    <a href="dist/monsterhall_windows.zip" class="btn btn-secondary"
+                        style="width: 100%; justify-content: center;" download>Windows Build
+                    </a>
+                </div>            </aside>
+        </div>
+
+        <footer class="game-footer">
+            <p>Built with Rust + Macroquad | <a href="/">Web Hatchery</a></p>
+        </footer>
+    </div>
+
+    <script src="mq_js_bundle.js?v=monsterhall-1-9-2"></script>
+    <script>
+        document.getElementById('loading').style.display = 'none';
+        load("monsterhall.wasm?v=monsterhall-1-9-2");
+
+        function toggleFullscreen() {
+            const container = document.getElementById('game-container');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function focusGame() {
+            document.getElementById('glcanvas').focus();
+        }
+    </script>
+</body>
+
+</html>
+

@@ -1,0 +1,175 @@
+{
+  "version": "1.1.0",
+  "traits": [
+    {
+      "id": "stretchy",
+      "name": "Stretchy",
+      "category": "body",
+      "icon_key": "stretch",
+      "description": "Extremely flexible body shape handles demanding patrons and awkward tower hazards.",
+      "stat_modifiers": {
+        "power": 0,
+        "charm": 0,
+        "endurance": 2,
+        "instinct": 0
+      },
+      "guild_income_pct": 2,
+      "expedition_success_pct": 4,
+      "injury_risk_pct": -5,
+      "stress_change_flat": -1
+    },
+    {
+      "id": "eager",
+      "name": "Eager",
+      "category": "temperament",
+      "icon_key": "spark",
+      "description": "Jumps into work with enthusiasm and recovers more easily from busy shifts.",
+      "stat_modifiers": {
+        "power": 0,
+        "charm": 1,
+        "endurance": 1,
+        "instinct": 0
+      },
+      "guild_income_pct": 10,
+      "expedition_success_pct": 0,
+      "injury_risk_pct": 0,
+      "stress_change_flat": -2
+    },
+    {
+      "id": "submissive",
+      "name": "Calming Presence",
+      "category": "temperament",
+      "icon_key": "ribbon",
+      "description": "Thrives under clear direction and helps settle demanding patrons.",
+      "stat_modifiers": {
+        "power": 0,
+        "charm": 2,
+        "endurance": 0,
+        "instinct": 0
+      },
+      "guild_income_pct": 12,
+      "expedition_success_pct": -2,
+      "injury_risk_pct": 0,
+      "stress_change_flat": -1
+    },
+    {
+      "id": "dominant",
+      "name": "Commanding",
+      "category": "leadership",
+      "icon_key": "whip",
+      "description": "Takes charge quickly and cuts through resistance in the tower.",
+      "stat_modifiers": {
+        "power": 2,
+        "charm": 0,
+        "endurance": 0,
+        "instinct": 0
+      },
+      "guild_income_pct": 6,
+      "expedition_success_pct": 8,
+      "injury_risk_pct": 3,
+      "stress_change_flat": 1
+    },
+    {
+      "id": "hatchery_attuned",
+      "name": "Hatchery-Minded",
+      "category": "hatchery",
+      "icon_key": "nest",
+      "description": "Naturally suited to nursery work, egg care, and sensitive roster-growth rituals.",
+      "stat_modifiers": {
+        "power": 0,
+        "charm": 2,
+        "endurance": 1,
+        "instinct": 0
+      },
+      "guild_income_pct": 14,
+      "expedition_success_pct": 0,
+      "injury_risk_pct": 0,
+      "stress_change_flat": 0
+    },
+    {
+      "id": "corruption_tuned",
+      "name": "Instability Tuned",
+      "category": "arcane",
+      "icon_key": "veil",
+      "description": "Sensitive to the tower's deeper energies and more likely to benefit from them.",
+      "stat_modifiers": {
+        "power": 1,
+        "charm": 0,
+        "endurance": 0,
+        "instinct": 2
+      },
+      "guild_income_pct": 0,
+      "expedition_success_pct": 10,
+      "injury_risk_pct": 2,
+      "stress_change_flat": 1
+    },
+    {
+      "id": "graceful",
+      "name": "Graceful",
+      "category": "body",
+      "icon_key": "feather",
+      "description": "Moves with polished poise in both service rooms and cramped corridors.",
+      "stat_modifiers": {
+        "power": 0,
+        "charm": 1,
+        "endurance": 0,
+        "instinct": 1
+      },
+      "guild_income_pct": 8,
+      "expedition_success_pct": 5,
+      "injury_risk_pct": -3,
+      "stress_change_flat": -1
+    },
+    {
+      "id": "greedy",
+      "name": "Opportunistic",
+      "category": "temperament",
+      "icon_key": "coin",
+      "description": "Always pushes for richer patrons, better margins, and juicier loot.",
+      "stat_modifiers": {
+        "power": 0,
+        "charm": 1,
+        "endurance": 0,
+        "instinct": 1
+      },
+      "guild_income_pct": 15,
+      "expedition_success_pct": 4,
+      "injury_risk_pct": 0,
+      "stress_change_flat": 1
+    },
+    {
+      "id": "resilient",
+      "name": "Resilient",
+      "category": "temperament",
+      "icon_key": "shield",
+      "description": "Bounces back quickly from strain, bruises, and overwork.",
+      "stat_modifiers": {
+        "power": 1,
+        "charm": 0,
+        "endurance": 2,
+        "instinct": 0
+      },
+      "guild_income_pct": 0,
+      "expedition_success_pct": 6,
+      "injury_risk_pct": -8,
+      "stress_change_flat": -2
+    },
+    {
+      "id": "feral_instinct",
+      "name": "Sharp Instinct",
+      "category": "instinct",
+      "icon_key": "fang",
+      "description": "Untrained intuition improves exploration and rare-find chances.",
+      "stat_modifiers": {
+        "power": 1,
+        "charm": 0,
+        "endurance": 0,
+        "instinct": 2
+      },
+      "guild_income_pct": -2,
+      "expedition_success_pct": 12,
+      "injury_risk_pct": 1,
+      "stress_change_flat": 0
+    }
+  ]
+}

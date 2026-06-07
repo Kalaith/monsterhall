@@ -1,0 +1,225 @@
+{
+  "version": "1.0.0",
+  "rooms": [
+    {
+      "id": "vanilla_suite",
+      "name": "Common Room",
+      "description": "Warm benches, privacy screens, and a practical task board for Monsterhall's first patrons.",
+      "service_summary": "Basic reception, lodging, and hospitality work for cautious local patrons.",
+      "required_building_ids": [],
+      "service_tier": 1,
+      "base_gold_yield": 24,
+      "base_residue_yield": 6,
+      "stamina_cost": 10,
+      "client_tiers": [
+        "local_adventurers"
+      ],
+      "trained_skill_ids": [
+        "scouting",
+        "hospitality",
+        "charm"
+      ],
+      "work_history_gains": {
+        "scouting_runs": 1,
+        "guard_duties": 0,
+        "hospitality_jobs": 1,
+        "craft_jobs": 0,
+        "contracts_completed": 1,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
+      "preferred_trait_ids": [
+        "eager",
+        "submissive",
+        "graceful"
+      ],
+      "preferred_species_ids": [
+        "slime_girl",
+        "succu_slime",
+        "goblin_maid",
+        "harpy_hostess"
+      ],
+      "strategic_niche": "comfort",
+      "upgrade_building_ids": [
+        "aftercare_lounge",
+        "luxury_room_renovation"
+      ],
+      "fatigue_modifier": -1,
+      "stress_modifier": -1,
+      "corruption_pressure": 0,
+      "guest_appeal": 6,
+      "job_kind": "hospitality_desk",
+      "base_materials_yield": 0,
+      "reputation_yield": 1,
+      "preparation_quality_bonus": 1,
+      "recovery_bonus": 1
+    },
+    {
+      "id": "packroom_annex",
+      "name": "Packroom Annex",
+      "description": "A secured preparation bay for awkward cargo, sealed packs, and hazardous tower samples.",
+      "service_summary": "Hands-on logistics work that tests guarding, crafting, and hazard tolerance.",
+      "required_building_ids": [
+        "residue_alchemy_bench"
+      ],
+      "service_tier": 2,
+      "base_gold_yield": 55,
+      "base_residue_yield": 14,
+      "stamina_cost": 16,
+      "client_tiers": [
+        "local_adventurers",
+        "monster_diplomats"
+      ],
+      "trained_skill_ids": [
+        "crafting",
+        "charm"
+      ],
+      "work_history_gains": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 0,
+        "craft_jobs": 1,
+        "contracts_completed": 0,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "preferred_trait_ids": [
+        "dominant",
+        "corruption_tuned",
+        "stretchy"
+      ],
+      "preferred_species_ids": [
+        "golemkin_warden",
+        "lamia_binder",
+        "hellhound_bouncer"
+      ],
+      "strategic_niche": "corruption",
+      "upgrade_building_ids": [
+        "residue_alchemy_bench",
+        "monster_kink_archive",
+        "relic_residue_condenser"
+      ],
+      "fatigue_modifier": 2,
+      "stress_modifier": 2,
+      "corruption_pressure": 3,
+      "guest_appeal": 8,
+      "job_kind": "packroom_support",
+      "base_materials_yield": 2,
+      "reputation_yield": 1,
+      "preparation_quality_bonus": 3,
+      "recovery_bonus": 0
+    },
+    {
+      "id": "nursery_wing",
+      "name": "Nursery Wing",
+      "description": "A quiet hatchery-adjacent room for egg care, lineage records, and sensitive guild contracts.",
+      "service_summary": "Private nursery and archive work built around careful handling and long-term roster growth.",
+      "required_building_ids": [
+        "warm_love_nest",
+        "monster_kink_archive"
+      ],
+      "service_tier": 3,
+      "base_gold_yield": 72,
+      "base_residue_yield": 18,
+      "stamina_cost": 18,
+      "client_tiers": [
+        "wealthy_nobles",
+        "monster_diplomats"
+      ],
+      "trained_skill_ids": [
+        "hospitality",
+        "charm"
+      ],
+      "work_history_gains": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 1,
+        "craft_jobs": 0,
+        "contracts_completed": 1,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
+      "preferred_trait_ids": [
+        "hatchery_attuned",
+        "submissive"
+      ],
+      "preferred_species_ids": [
+        "golemkin_warden",
+        "lamia_binder",
+        "moth_priestess"
+      ],
+      "strategic_niche": "hatchery",
+      "upgrade_building_ids": [
+        "warm_love_nest",
+        "monster_kink_archive",
+        "prestige_hospitality_wing"
+      ],
+      "fatigue_modifier": 1,
+      "stress_modifier": 1,
+      "corruption_pressure": 1,
+      "guest_appeal": 10,
+      "job_kind": "hatchery_care",
+      "base_materials_yield": 1,
+      "reputation_yield": 2,
+      "preparation_quality_bonus": 2,
+      "recovery_bonus": 1
+    },
+    {
+      "id": "public_stage",
+      "name": "Reception Hall",
+      "description": "A busy front room where confidence, polish, and spectacle turn visitors into paying patrons.",
+      "service_summary": "Public-facing guild service focused on reception, negotiation, and crowd management.",
+      "required_building_ids": [
+        "silk_rope_forge",
+        "aftercare_lounge"
+      ],
+      "service_tier": 3,
+      "base_gold_yield": 86,
+      "base_residue_yield": 20,
+      "stamina_cost": 20,
+      "client_tiers": [
+        "wealthy_nobles"
+      ],
+      "trained_skill_ids": [
+        "scouting",
+        "guarding",
+        "charm"
+      ],
+      "work_history_gains": {
+        "scouting_runs": 1,
+        "guard_duties": 1,
+        "hospitality_jobs": 0,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "preferred_trait_ids": [
+        "dominant",
+        "graceful",
+        "greedy"
+      ],
+      "preferred_species_ids": [
+        "succu_slime",
+        "goblin_maid",
+        "harpy_hostess",
+        "moth_priestess"
+      ],
+      "strategic_niche": "performance",
+      "upgrade_building_ids": [
+        "silk_rope_forge",
+        "aftercare_lounge",
+        "luxury_room_renovation"
+      ],
+      "fatigue_modifier": 1,
+      "stress_modifier": 2,
+      "corruption_pressure": 0,
+      "guest_appeal": 14,
+      "job_kind": "reception_briefing",
+      "base_materials_yield": 0,
+      "reputation_yield": 2,
+      "preparation_quality_bonus": 3,
+      "recovery_bonus": 0
+    }
+  ]
+}

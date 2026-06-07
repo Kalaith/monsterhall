@@ -1,0 +1,307 @@
+{
+  "cell_size": 64,
+  "atlas": "ui_icon_atlas.png",
+  "icons": {
+    "resource_gold": {
+      "category": "resources",
+      "x": 0,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "resource_materials": {
+      "category": "resources",
+      "x": 64,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "resource_egg": {
+      "category": "resources",
+      "x": 128,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "resource_relic": {
+      "category": "resources",
+      "x": 192,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "resource_residue": {
+      "category": "resources",
+      "x": 256,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "stat_power": {
+      "category": "stats",
+      "x": 320,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "stat_charm": {
+      "category": "stats",
+      "x": 384,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "stat_endurance": {
+      "category": "stats",
+      "x": 448,
+      "y": 0,
+      "w": 64,
+      "h": 64
+    },
+    "stat_instinct": {
+      "category": "stats",
+      "x": 0,
+      "y": 64,
+      "w": 64,
+      "h": 64
+    },
+    "condition_fatigue": {
+      "category": "conditions",
+      "x": 64,
+      "y": 64,
+      "w": 64,
+      "h": 64
+    },
+    "condition_stress": {
+      "category": "conditions",
+      "x": 128,
+      "y": 64,
+      "w": 64,
+      "h": 64
+    },
+    "condition_injury": {
+      "category": "conditions",
+      "x": 192,
+      "y": 64,
+      "w": 64,
+      "h": 64
+    },
+    "condition_corruption": {
+      "category": "conditions",
+      "x": 256,
+      "y": 64,
+      "w": 64,
+      "h": 64
+    },
+    "assign_idle": {
+      "category": "assignments",
+      "x": 320,
+      "y": 64,
+      "w": 64,
+      "h": 64
+    },
+    "assign_guild_job": {
+      "category": "assignments",
+      "x": 384,
+      "y": 64,
+      "w": 64,
+      "h": 64
+    },
+    "assign_resting": {
+      "category": "assignments",
+      "x": 448,
+      "y": 64,
+      "w": 64,
+      "h": 64
+    },
+    "assign_expedition": {
+      "category": "assignments",
+      "x": 0,
+      "y": 128,
+      "w": 64,
+      "h": 64
+    },
+    "assign_guest_request": {
+      "category": "assignments",
+      "x": 64,
+      "y": 128,
+      "w": 64,
+      "h": 64
+    },
+    "nav_town": {
+      "category": "navigation",
+      "x": 128,
+      "y": 128,
+      "w": 64,
+      "h": 64
+    },
+    "nav_planner": {
+      "category": "navigation",
+      "x": 192,
+      "y": 128,
+      "w": 64,
+      "h": 64
+    },
+    "nav_guild_jobs": {
+      "category": "navigation",
+      "x": 256,
+      "y": 128,
+      "w": 64,
+      "h": 64
+    },
+    "nav_guest": {
+      "category": "navigation",
+      "x": 320,
+      "y": 128,
+      "w": 64,
+      "h": 64
+    },
+    "nav_chamber": {
+      "category": "navigation",
+      "x": 384,
+      "y": 128,
+      "w": 64,
+      "h": 64
+    },
+    "nav_expedition": {
+      "category": "navigation",
+      "x": 448,
+      "y": 128,
+      "w": 64,
+      "h": 64
+    },
+    "nav_journal": {
+      "category": "navigation",
+      "x": 0,
+      "y": 192,
+      "w": 64,
+      "h": 64
+    },
+    "nav_settings": {
+      "category": "navigation",
+      "x": 64,
+      "y": 192,
+      "w": 64,
+      "h": 64
+    },
+    "nav_end_day": {
+      "category": "navigation",
+      "x": 128,
+      "y": 192,
+      "w": 64,
+      "h": 64
+    },
+    "status_available": {
+      "category": "status",
+      "x": 192,
+      "y": 192,
+      "w": 64,
+      "h": 64
+    },
+    "status_built": {
+      "category": "status",
+      "x": 256,
+      "y": 192,
+      "w": 64,
+      "h": 64
+    },
+    "status_locked": {
+      "category": "status",
+      "x": 320,
+      "y": 192,
+      "w": 64,
+      "h": 64
+    },
+    "status_assigned": {
+      "category": "status",
+      "x": 384,
+      "y": 192,
+      "w": 64,
+      "h": 64
+    },
+    "status_blocked": {
+      "category": "status",
+      "x": 448,
+      "y": 192,
+      "w": 64,
+      "h": 64
+    },
+    "status_warning": {
+      "category": "status",
+      "x": 0,
+      "y": 256,
+      "w": 64,
+      "h": 64
+    },
+    "status_accepted": {
+      "category": "status",
+      "x": 64,
+      "y": 256,
+      "w": 64,
+      "h": 64
+    },
+    "status_completed": {
+      "category": "status",
+      "x": 128,
+      "y": 256,
+      "w": 64,
+      "h": 64
+    },
+    "status_failed": {
+      "category": "status",
+      "x": 192,
+      "y": 256,
+      "w": 64,
+      "h": 64
+    },
+    "mission_resource_run": {
+      "category": "missions",
+      "x": 256,
+      "y": 256,
+      "w": 64,
+      "h": 64
+    },
+    "mission_egg_hunt": {
+      "category": "missions",
+      "x": 320,
+      "y": 256,
+      "w": 64,
+      "h": 64
+    },
+    "mission_relic_raid": {
+      "category": "missions",
+      "x": 384,
+      "y": 256,
+      "w": 64,
+      "h": 64
+    },
+    "mission_corruption_dive": {
+      "category": "missions",
+      "x": 448,
+      "y": 256,
+      "w": 64,
+      "h": 64
+    },
+    "action_save": {
+      "category": "actions",
+      "x": 0,
+      "y": 320,
+      "w": 64,
+      "h": 64
+    },
+    "action_close": {
+      "category": "actions",
+      "x": 64,
+      "y": 320,
+      "w": 64,
+      "h": 64
+    },
+    "action_quit": {
+      "category": "actions",
+      "x": 128,
+      "y": 320,
+      "w": 64,
+      "h": 64
+    }
+  }
+}

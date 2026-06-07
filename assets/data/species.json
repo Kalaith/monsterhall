@@ -1,0 +1,220 @@
+{
+  "version": "1.2.0",
+  "species": [
+    {
+      "id": "slime_girl",
+      "name": "Slime Companion",
+      "description": "A flexible starter companion who handles cleanup, residue recovery, narrow tunnel scouting, and simple hospitality better than any ordinary hireling.",
+      "portrait_key": "slime_girl_portrait",
+      "base_stats": {
+        "power": 3,
+        "charm": 2,
+        "endurance": 5,
+        "instinct": 2
+      },
+      "starting_traits": [
+        "stretchy"
+      ],
+      "preferred_room_ids": [
+        "vanilla_suite",
+        "packroom_annex"
+      ],
+      "hatching_cost": {
+        "gold": 25,
+        "tower_materials": 0,
+        "eggs": 1,
+        "relics": 0,
+        "arcane_residue": 3
+      }
+    },
+    {
+      "id": "succu_slime",
+      "name": "Residue Slime",
+      "description": "A slime variant tuned to arcane residue, useful for alchemy support, patron consultations, and careful work around unstable tower finds.",
+      "portrait_key": "succu_slime_portrait",
+      "base_stats": {
+        "power": 2,
+        "charm": 8,
+        "endurance": 5,
+        "instinct": 5
+      },
+      "starting_traits": [
+        "eager",
+        "corruption_tuned"
+      ],
+      "preferred_room_ids": [
+        "vanilla_suite",
+        "public_stage"
+      ],
+      "hatching_cost": {
+        "gold": 40,
+        "tower_materials": 5,
+        "eggs": 1,
+        "relics": 0,
+        "arcane_residue": 8
+      }
+    },
+    {
+      "id": "goblin_maid",
+      "name": "Imp Runner",
+      "description": "A quick errand-runner with sharp hands and sharper instincts, ideal for courier work, supply packing, and risky scouting.",
+      "portrait_key": "goblin_maid_portrait",
+      "base_stats": {
+        "power": 4,
+        "charm": 6,
+        "endurance": 4,
+        "instinct": 5
+      },
+      "starting_traits": [
+        "greedy",
+        "graceful"
+      ],
+      "preferred_room_ids": [
+        "vanilla_suite",
+        "public_stage"
+      ],
+      "hatching_cost": {
+        "gold": 50,
+        "tower_materials": 10,
+        "eggs": 1,
+        "relics": 0,
+        "arcane_residue": 7
+      }
+    },
+    {
+      "id": "golemkin_warden",
+      "name": "Golemkin Warden",
+      "description": "A durable tower-born specialist suited to maintenance, sealed sample handling, safe frontline support, and heavy guild infrastructure.",
+      "portrait_key": "golemkin_warden_portrait",
+      "base_stats": {
+        "power": 5,
+        "charm": 6,
+        "endurance": 5,
+        "instinct": 6
+      },
+      "starting_traits": [
+        "corruption_tuned",
+        "dominant"
+      ],
+      "preferred_room_ids": [
+        "packroom_annex",
+        "nursery_wing"
+      ],
+      "hatching_cost": {
+        "gold": 75,
+        "tower_materials": 20,
+        "eggs": 1,
+        "relics": 1,
+        "arcane_residue": 12
+      }
+    },
+    {
+      "id": "harpy_hostess",
+      "name": "Harpy Lookout",
+      "description": "A fast aerial companion who excels at lookout duty, courier work, vertical scouting, and keeping the reception hall lively.",
+      "portrait_key": "harpy_hostess_portrait",
+      "base_stats": {
+        "power": 3,
+        "charm": 7,
+        "endurance": 4,
+        "instinct": 6
+      },
+      "starting_traits": [
+        "graceful",
+        "eager"
+      ],
+      "preferred_room_ids": [
+        "public_stage",
+        "vanilla_suite"
+      ],
+      "hatching_cost": {
+        "gold": 60,
+        "tower_materials": 15,
+        "eggs": 1,
+        "relics": 0,
+        "arcane_residue": 9
+      }
+    },
+    {
+      "id": "lamia_binder",
+      "name": "Lamia Routekeeper",
+      "description": "A calm route specialist with strong memory, careful posture-reading, and a gift for negotiation at the reception desk.",
+      "portrait_key": "lamia_binder_portrait",
+      "base_stats": {
+        "power": 6,
+        "charm": 6,
+        "endurance": 6,
+        "instinct": 4
+      },
+      "starting_traits": [
+        "dominant",
+        "hatchery_attuned"
+      ],
+      "preferred_room_ids": [
+        "nursery_wing",
+        "packroom_annex"
+      ],
+      "hatching_cost": {
+        "gold": 70,
+        "tower_materials": 18,
+        "eggs": 1,
+        "relics": 0,
+        "arcane_residue": 10
+      }
+    },
+    {
+      "id": "hellhound_bouncer",
+      "name": "Minotaur Porter",
+      "description": "A powerful escort and hauler who protects fragile parties, clears obstacles, and keeps heavy guild work moving.",
+      "portrait_key": "hellhound_bouncer_portrait",
+      "base_stats": {
+        "power": 7,
+        "charm": 3,
+        "endurance": 7,
+        "instinct": 4
+      },
+      "starting_traits": [
+        "resilient",
+        "feral_instinct"
+      ],
+      "preferred_room_ids": [
+        "packroom_annex",
+        "public_stage"
+      ],
+      "hatching_cost": {
+        "gold": 65,
+        "tower_materials": 18,
+        "eggs": 1,
+        "relics": 0,
+        "arcane_residue": 7
+      }
+    },
+    {
+      "id": "moth_priestess",
+      "name": "Moth Archivist",
+      "description": "A quiet relic reader drawn to old tower lore, useful for archive research, ritual notes, and delicate discoveries.",
+      "portrait_key": "moth_priestess_portrait",
+      "base_stats": {
+        "power": 3,
+        "charm": 7,
+        "endurance": 4,
+        "instinct": 8
+      },
+      "starting_traits": [
+        "corruption_tuned",
+        "graceful"
+      ],
+      "preferred_room_ids": [
+        "nursery_wing",
+        "public_stage"
+      ],
+      "hatching_cost": {
+        "gold": 85,
+        "tower_materials": 22,
+        "eggs": 1,
+        "relics": 1,
+        "arcane_residue": 14
+      }
+    }
+  ]
+}

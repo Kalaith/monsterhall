@@ -1,0 +1,125 @@
+{
+  "version": "1.1.0",
+  "first_milestone_id": "scrap_note_1",
+  "milestones": [
+    {
+      "id": "scrap_note_1",
+      "name": "Founding Note Due",
+      "description": "A runner from your creditor leaves a reminder at the guild hall. The amount is small, but it proves Monsterhall has to pay its way.",
+      "amount_due": 250,
+      "days_allowed": 30,
+      "reward": {
+        "gold": 0,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      },
+      "failure_penalty_gold": 25,
+      "failure_stress_flat": 4,
+      "next_milestone_id": "collector_visit_2"
+    },
+    {
+      "id": "collector_visit_2",
+      "name": "Collector At The Gate",
+      "description": "A collector arrives in person and wants proof that your new guild can turn tower support into coin. Excuses will cost you.",
+      "amount_due": 1200,
+      "days_allowed": 45,
+      "reward": {
+        "gold": 0,
+        "tower_materials": 8,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 2
+      },
+      "failure_penalty_gold": 40,
+      "failure_stress_flat": 6,
+      "next_milestone_id": "interest_crush_3"
+    },
+    {
+      "id": "interest_crush_3",
+      "name": "Interest Crush",
+      "description": "The debt is now large enough that starter jobs are not enough. You need a broader roster, better rooms, and patrons who pay for specifics.",
+      "amount_due": 35000,
+      "days_allowed": 50,
+      "reward": {
+        "gold": 0,
+        "tower_materials": 10,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 4
+      },
+      "failure_penalty_gold": 55,
+      "failure_stress_flat": 8,
+      "next_milestone_id": "ledgers_bared_4"
+    },
+    {
+      "id": "ledgers_bared_4",
+      "name": "Ledgers Bared",
+      "description": "Your creditor demands written proof that the tower can carry a real operation. The payment is higher, but so is the time to prepare for it.",
+      "amount_due": 65000,
+      "days_allowed": 55,
+      "reward": {
+        "gold": 0,
+        "tower_materials": 12,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 6
+      },
+      "failure_penalty_gold": 70,
+      "failure_stress_flat": 9,
+      "next_milestone_id": "tribute_cart_5"
+    },
+    {
+      "id": "tribute_cart_5",
+      "name": "Tribute Cart",
+      "description": "A wagon crew arrives to haul away what you owe. If the guild cannot meet the tribute, the crew will help themselves to supplies and morale.",
+      "amount_due": 150000,
+      "days_allowed": 60,
+      "reward": {
+        "gold": 0,
+        "tower_materials": 14,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 8
+      },
+      "failure_penalty_gold": 85,
+      "failure_stress_flat": 11,
+      "next_milestone_id": "broker_compact_6"
+    },
+    {
+      "id": "broker_compact_6",
+      "name": "Broker Compact",
+      "description": "The debt has become formal enough to attract brokers, signatures, and humiliating witnesses. The amount is steep, but the tower is finally being treated like a guild.",
+      "amount_due": 300000,
+      "days_allowed": 35,
+      "reward": {
+        "gold": 0,
+        "tower_materials": 18,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 10
+      },
+      "failure_penalty_gold": 90,
+      "failure_stress_flat": 11,
+      "next_milestone_id": "founders_due_7"
+    },
+    {
+      "id": "founders_due_7",
+      "name": "Founder's Due",
+      "description": "This final payment marks the point where Monsterhall stops being a desperate outpost and starts becoming a serious institution.",
+      "amount_due": 2500000,
+      "days_allowed": 180,
+      "reward": {
+        "gold": 0,
+        "tower_materials": 24,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 12
+      },
+      "failure_penalty_gold": 90,
+      "failure_stress_flat": 12,
+      "next_milestone_id": null
+    }
+  ]
+}

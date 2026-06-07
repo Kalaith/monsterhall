@@ -1,0 +1,93 @@
+{
+  "version": "1.0.0",
+  "missions": [
+    {
+      "id": "resource_run",
+      "name": "Resource Run",
+      "description": "Prioritize bulk salvage, useful scrap, and safe hauling for steady guild growth.",
+      "reward_focus": "materials",
+      "prep_cost": {
+        "gold": 3,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      },
+      "success_bonus_pct": 6,
+      "materials_multiplier_pct": 135,
+      "residue_multiplier_pct": 85,
+      "egg_bonus_flat": 0,
+      "relic_bonus_flat": 0,
+      "injury_risk_pct": -4,
+      "preferred_role": "delver",
+      "egg_grade_bonus": 0,
+      "hazard_risk_modifier_pct": -3
+    },
+    {
+      "id": "egg_hunt",
+      "name": "Egg Hunt",
+      "description": "Search nesting sites, rescue pockets, and hatchery traces for future companions.",
+      "reward_focus": "eggs",
+      "prep_cost": {
+        "gold": 5,
+        "tower_materials": 1,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      },
+      "success_bonus_pct": 20,
+      "materials_multiplier_pct": 80,
+      "residue_multiplier_pct": 90,
+      "egg_bonus_flat": 1,
+      "relic_bonus_flat": 0,
+      "injury_risk_pct": 2,
+      "preferred_role": "hatchery_specialist",
+      "egg_grade_bonus": 1,
+      "hazard_risk_modifier_pct": 2
+    },
+    {
+      "id": "relic_raid",
+      "name": "Relic Recovery",
+      "description": "Push toward old tower artifacts, sealed notes, and sponsor-worthy discoveries.",
+      "reward_focus": "relics",
+      "prep_cost": {
+        "gold": 12,
+        "tower_materials": 3,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 1
+      },
+      "success_bonus_pct": -4,
+      "materials_multiplier_pct": 75,
+      "residue_multiplier_pct": 100,
+      "egg_bonus_flat": 0,
+      "relic_bonus_flat": 1,
+      "injury_risk_pct": 8,
+      "preferred_role": "delver",
+      "egg_grade_bonus": 1,
+      "hazard_risk_modifier_pct": 8
+    },
+    {
+      "id": "corruption_dive",
+      "name": "Scout Route",
+      "description": "Map unstable passages, record hazards, and gather arcane residue for future preparations.",
+      "reward_focus": "residue",
+      "prep_cost": {
+        "gold": 8,
+        "tower_materials": 1,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 2
+      },
+      "success_bonus_pct": -2,
+      "materials_multiplier_pct": 70,
+      "residue_multiplier_pct": 145,
+      "egg_bonus_flat": 0,
+      "relic_bonus_flat": 0,
+      "injury_risk_pct": 10,
+      "preferred_role": "corruption_adept",
+      "egg_grade_bonus": 2,
+      "hazard_risk_modifier_pct": 12
+    }
+  ]
+}

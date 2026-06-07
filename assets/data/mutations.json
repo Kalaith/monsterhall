@@ -1,0 +1,42 @@
+{
+  "version": "1.2.0",
+  "mutations": [
+    {
+      "id": "slime_to_succu",
+      "source_species_id": "slime_girl",
+      "target_species_id": "succu_slime",
+      "minimum_corruption": 8,
+      "required_trait_ids": [],
+      "granted_trait_ids": [
+        "corruption_tuned"
+      ],
+      "event_text": "{name} absorbs enough tower residue to reform as a {target_species}."
+    },
+    {
+      "id": "succu_to_nymph",
+      "source_species_id": "succu_slime",
+      "target_species_id": "golemkin_warden",
+      "minimum_corruption": 16,
+      "required_trait_ids": [
+        "corruption_tuned"
+      ],
+      "granted_trait_ids": [
+        "dominant"
+      ],
+      "event_text": "{name} hardens around the tower's strange rhythm and reforms as a {target_species}."
+    },
+    {
+      "id": "harpy_to_moth",
+      "source_species_id": "harpy_hostess",
+      "target_species_id": "moth_priestess",
+      "minimum_corruption": 18,
+      "required_trait_ids": [
+        "graceful"
+      ],
+      "granted_trait_ids": [
+        "corruption_tuned"
+      ],
+      "event_text": "{name}'s feathers dim into luminous dust as she reforms into a {target_species}, ready for archive work."
+    }
+  ]
+}

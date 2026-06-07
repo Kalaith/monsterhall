@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "source_size": {
+    "width": 1672,
+    "height": 941
+  },
+  "backdrops": [
+    {
+      "id": "title_page",
+      "path": "assets/images/backdrops/title_page.png",
+      "usage": [
+        "main_menu"
+      ],
+      "notes": "Title screen illustration used as the main menu backdrop."
+    },
+    {
+      "id": "main_menu",
+      "path": "assets/images/backdrops/main_menu.png",
+      "usage": [
+        "main_menu"
+      ],
+      "notes": "Exterior ruined keep and tower at night, UI-safe central sky."
+    },
+    {
+      "id": "town",
+      "path": "assets/images/backdrops/town.png",
+      "usage": [
+        "journal",
+        "shared_town_fallback"
+      ],
+      "notes": "Cozy monster guild hall workplace, contract board, job rooms, and safe frontier-town logistics."
+    },
+    {
+      "id": "town_overview",
+      "path": "assets/images/backdrops/town_overview.png",
+      "usage": [
+        "town_overview"
+      ],
+      "notes": "Organic command chamber view with ritual glow, candles, chains, and UI-safe dark table space."
+    },
+    {
+      "id": "chamber",
+      "path": "assets/images/backdrops/chamber.png",
+      "usage": [
+        "chamber_management"
+      ],
+      "notes": "Warm hatchery and nursery workspace with egg shelves, care ledgers, and gentle monster companion recruitment tone."
+    },
+    {
+      "id": "expedition",
+      "path": "assets/images/backdrops/expedition.png",
+      "usage": [
+        "expedition_planning"
+      ],
+      "notes": "Tower route room with maps, hazard tags, supply packs, rescue notes, and preparation quality cues."
+    }
+  ]
+}

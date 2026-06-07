@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "client_tiers": [
+    {
+      "id": "local_adventurers",
+      "name": "Local Delvers",
+      "description": "Early patrons with modest coin and straightforward tower-support needs.",
+      "income_multiplier_pct": 100,
+      "residue_multiplier_pct": 100
+    },
+    {
+      "id": "wealthy_nobles",
+      "name": "Guild Sponsors",
+      "description": "Richer patrons who pay well for privacy, polish, and specialized preparation.",
+      "income_multiplier_pct": 145,
+      "residue_multiplier_pct": 115
+    },
+    {
+      "id": "monster_diplomats",
+      "name": "Frontier Factions",
+      "description": "Rare faction envoys who value species expertise, tower lore, and instability-safe work.",
+      "income_multiplier_pct": 165,
+      "residue_multiplier_pct": 150
+    }
+  ]
+}

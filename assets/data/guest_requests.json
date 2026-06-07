@@ -1,0 +1,577 @@
+{
+  "version": "1.0.0",
+  "requests": [
+    {
+      "id": "starter_slime_bedding",
+      "name": "Residue Recovery",
+      "description": "A shy local scholar needs a slime companion to recover caustic residue from a crawlspace no ordinary hireling can enter.",
+      "archetype_id": "curious_local",
+      "requested_room_id": "vanilla_suite",
+      "required_species_ids": [
+        "slime_girl"
+      ],
+      "minimum_quality_rank": 1,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 0,
+        "hospitality": 1,
+        "crafting": 0,
+        "charm": 0
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 0,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 22,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 4
+      },
+      "penalty_gold": 10,
+      "deadline_days": 2,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "eager",
+        "stretchy"
+      ],
+      "preferred_role": "comfort",
+      "follow_up_request_id": "repeat_client_confidence",
+      "partial_success_score": 16,
+      "reputation_reward": 1,
+      "category": "guild_service",
+      "patron_tier_id": "local_adventurers",
+      "preparation_quality_required": 0,
+      "preparation_quality_bonus": 2
+    },
+    {
+      "id": "repeat_client_confidence",
+      "name": "Route Confidence Check",
+      "description": "A repeat patron wants a practiced companion to review a shallow-floor route and identify obvious hazards before tomorrow's delve.",
+      "archetype_id": "curious_local",
+      "requested_room_id": "vanilla_suite",
+      "required_species_ids": [],
+      "minimum_quality_rank": 1,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 0,
+        "hospitality": 2,
+        "crafting": 0,
+        "charm": 0
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 0,
+        "hospitality_jobs": 1,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 26,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 5
+      },
+      "penalty_gold": 14,
+      "deadline_days": 3,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "eager",
+        "submissive"
+      ],
+      "preferred_role": "comfort",
+      "follow_up_request_id": "quiet_room_return",
+      "partial_success_score": 20,
+      "reputation_reward": 1,
+      "category": "route_planning",
+      "patron_tier_id": "local_adventurers",
+      "preparation_quality_required": 0,
+      "preparation_quality_bonus": 2
+    },
+    {
+      "id": "quiet_room_return",
+      "name": "Quiet Lodging Support",
+      "description": "A cautious traveler wants a calm guild room and a companion who knows how to settle frightened patrons.",
+      "archetype_id": "curious_local",
+      "requested_room_id": "vanilla_suite",
+      "required_species_ids": [],
+      "minimum_quality_rank": 1,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 0,
+        "hospitality": 1,
+        "crafting": 0,
+        "charm": 0
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 0,
+        "hospitality_jobs": 1,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 24,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 4
+      },
+      "penalty_gold": 12,
+      "deadline_days": 3,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "submissive",
+        "graceful"
+      ],
+      "preferred_role": "comfort",
+      "partial_success_score": 18,
+      "reputation_reward": 1,
+      "category": "lodging_support",
+      "patron_tier_id": "local_adventurers",
+      "preparation_quality_required": 0,
+      "preparation_quality_bonus": 2
+    },
+    {
+      "id": "mercenary_stage_tease",
+      "name": "Mercenary Briefing",
+      "description": "A passing mercenary band wants a confident front-room worker who can hold attention, explain tower risks, and keep the room orderly.",
+      "archetype_id": "road_mercenary",
+      "requested_room_id": "public_stage",
+      "required_species_ids": [],
+      "minimum_quality_rank": 2,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 2,
+        "hospitality": 0,
+        "crafting": 0,
+        "charm": 2
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 1,
+        "hospitality_jobs": 0,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 68,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 10
+      },
+      "penalty_gold": 18,
+      "deadline_days": 4,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "dominant",
+        "graceful"
+      ],
+      "preferred_role": "performer",
+      "follow_up_request_id": "harpy_headliner_show",
+      "partial_success_score": 24,
+      "reputation_reward": 2,
+      "category": "escort_preparation",
+      "patron_tier_id": "local_adventurers",
+      "preparation_quality_required": 2,
+      "preparation_quality_bonus": 3
+    },
+    {
+      "id": "succu_salon_booking",
+      "name": "Residue Consultation",
+      "description": "A regular patron pays for a residue-sensitive companion who can explain strange tower samples without alarming the room.",
+      "archetype_id": "veiled_patron",
+      "requested_room_id": "vanilla_suite",
+      "required_species_ids": [
+        "succu_slime"
+      ],
+      "minimum_quality_rank": 2,
+      "required_skill_thresholds": {
+        "scouting": 2,
+        "guarding": 1,
+        "hospitality": 2,
+        "crafting": 0,
+        "charm": 2
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 0,
+        "hospitality_jobs": 2,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 88,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 14
+      },
+      "penalty_gold": 24,
+      "deadline_days": 4,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "corruption_tuned",
+        "eager"
+      ],
+      "preferred_role": "performer",
+      "follow_up_request_id": "veiled_suite_audience",
+      "partial_success_score": 26,
+      "reputation_reward": 2,
+      "category": "guild_service",
+      "patron_tier_id": "monster_diplomats",
+      "preparation_quality_required": 2,
+      "preparation_quality_bonus": 3
+    },
+    {
+      "id": "goblin_service_loop",
+      "name": "Supply Upsell Run",
+      "description": "A merchant wants a quick, persuasive helper who can turn basic supply packing into a larger caravan order.",
+      "archetype_id": "curious_local",
+      "requested_room_id": "public_stage",
+      "required_species_ids": [
+        "goblin_maid"
+      ],
+      "minimum_quality_rank": 2,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 1,
+        "hospitality": 0,
+        "crafting": 0,
+        "charm": 2
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 1,
+        "hospitality_jobs": 0,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 64,
+        "tower_materials": 6,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 8
+      },
+      "penalty_gold": 18,
+      "deadline_days": 3,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "greedy",
+        "graceful"
+      ],
+      "preferred_role": "performer",
+      "partial_success_score": 24,
+      "reputation_reward": 2,
+      "category": "guild_service",
+      "patron_tier_id": "local_adventurers",
+      "preparation_quality_required": 2,
+      "preparation_quality_bonus": 3
+    },
+    {
+      "id": "harpy_headliner_show",
+      "name": "Lookout Demonstration",
+      "description": "A noble party books the reception hall for a high-skill lookout demonstration and a polished guild briefing.",
+      "archetype_id": "veiled_patron",
+      "requested_room_id": "public_stage",
+      "required_species_ids": [
+        "harpy_hostess"
+      ],
+      "minimum_quality_rank": 3,
+      "required_skill_thresholds": {
+        "scouting": 2,
+        "guarding": 2,
+        "hospitality": 0,
+        "crafting": 0,
+        "charm": 3
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 2,
+        "guard_duties": 2,
+        "hospitality_jobs": 0,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 2,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 104,
+        "tower_materials": 4,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 15
+      },
+      "penalty_gold": 30,
+      "deadline_days": 4,
+      "is_special": true,
+      "preferred_trait_ids": [
+        "graceful",
+        "dominant"
+      ],
+      "preferred_role": "performer",
+      "partial_success_score": 34,
+      "reputation_reward": 3,
+      "category": "guild_service",
+      "patron_tier_id": "wealthy_nobles",
+      "preparation_quality_required": 4,
+      "preparation_quality_bonus": 6
+    },
+    {
+      "id": "hellhound_guard_shift",
+      "name": "Rough Escort Prep",
+      "description": "A mercenary captain pays extra for a resilient guard to prepare a dangerous escort through unstable corridors.",
+      "archetype_id": "road_mercenary",
+      "requested_room_id": "packroom_annex",
+      "required_species_ids": [
+        "hellhound_bouncer"
+      ],
+      "minimum_quality_rank": 2,
+      "required_skill_thresholds": {
+        "scouting": 0,
+        "guarding": 0,
+        "hospitality": 0,
+        "crafting": 1,
+        "charm": 1
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 0,
+        "craft_jobs": 1,
+        "contracts_completed": 0,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 82,
+        "tower_materials": 8,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 11
+      },
+      "penalty_gold": 22,
+      "deadline_days": 4,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "resilient",
+        "dominant"
+      ],
+      "preferred_role": "delver",
+      "partial_success_score": 24,
+      "reputation_reward": 2,
+      "category": "escort_preparation",
+      "patron_tier_id": "monster_diplomats",
+      "preparation_quality_required": 2,
+      "preparation_quality_bonus": 3
+    },
+    {
+      "id": "lamia_binding_rite",
+      "name": "Route Memory Consultation",
+      "description": "A discreet noble insists on a lamia guide for slow route planning, posture reading, and careful negotiation.",
+      "archetype_id": "veiled_patron",
+      "requested_room_id": "nursery_wing",
+      "required_species_ids": [
+        "lamia_binder"
+      ],
+      "minimum_quality_rank": 2,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 0,
+        "hospitality": 2,
+        "crafting": 0,
+        "charm": 2
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 0,
+        "hospitality_jobs": 2,
+        "craft_jobs": 0,
+        "contracts_completed": 1,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 112,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 14
+      },
+      "penalty_gold": 30,
+      "deadline_days": 4,
+      "is_special": true,
+      "preferred_trait_ids": [
+        "dominant",
+        "hatchery_attuned"
+      ],
+      "preferred_role": "hatchery_specialist",
+      "partial_success_score": 32,
+      "reputation_reward": 3,
+      "category": "guild_service",
+      "patron_tier_id": "wealthy_nobles",
+      "preparation_quality_required": 2,
+      "preparation_quality_bonus": 6
+    },
+    {
+      "id": "sealed_vault_handling",
+      "name": "Vault Sample Handling",
+      "description": "A masked diplomat pays elite rates for a companion shaped by instability and skilled enough to handle volatile tower samples.",
+      "archetype_id": "veiled_patron",
+      "requested_room_id": "packroom_annex",
+      "required_species_ids": [
+        "golemkin_warden"
+      ],
+      "minimum_quality_rank": 3,
+      "required_skill_thresholds": {
+        "scouting": 0,
+        "guarding": 1,
+        "hospitality": 1,
+        "crafting": 2,
+        "charm": 3
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 0,
+        "craft_jobs": 2,
+        "contracts_completed": 0,
+        "recovery_shifts": 2,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 128,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 18
+      },
+      "penalty_gold": 36,
+      "deadline_days": 5,
+      "is_special": true,
+      "preferred_trait_ids": [
+        "corruption_tuned",
+        "stretchy"
+      ],
+      "preferred_role": "corruption_adept",
+      "partial_success_score": 36,
+      "reputation_reward": 3,
+      "category": "hazard_handling",
+      "patron_tier_id": "wealthy_nobles",
+      "preparation_quality_required": 4,
+      "preparation_quality_bonus": 6
+    },
+    {
+      "id": "moth_relic_vigil",
+      "name": "Relic Vigil",
+      "description": "A veiled collector requests a quiet relic specialist for a ceremonial watch over an unstable tower artifact.",
+      "archetype_id": "veiled_patron",
+      "requested_room_id": "nursery_wing",
+      "required_species_ids": [
+        "moth_priestess"
+      ],
+      "minimum_quality_rank": 3,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 1,
+        "hospitality": 2,
+        "crafting": 0,
+        "charm": 3
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 0,
+        "hospitality_jobs": 2,
+        "craft_jobs": 0,
+        "contracts_completed": 1,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 138,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 2,
+        "arcane_residue": 20
+      },
+      "penalty_gold": 42,
+      "deadline_days": 5,
+      "is_special": true,
+      "preferred_trait_ids": [
+        "corruption_tuned",
+        "hatchery_attuned"
+      ],
+      "preferred_role": "hatchery_specialist",
+      "partial_success_score": 34,
+      "reputation_reward": 4,
+      "category": "relic_research",
+      "patron_tier_id": "wealthy_nobles",
+      "preparation_quality_required": 4,
+      "preparation_quality_bonus": 7
+    },
+    {
+      "id": "veiled_suite_audience",
+      "name": "Private Patron Audience",
+      "description": "A veiled patron requests a composed companion for a demanding private consultation and guild service review.",
+      "archetype_id": "veiled_patron",
+      "requested_room_id": "vanilla_suite",
+      "required_species_ids": [],
+      "minimum_quality_rank": 2,
+      "required_skill_thresholds": {
+        "scouting": 2,
+        "guarding": 0,
+        "hospitality": 3,
+        "crafting": 0,
+        "charm": 2
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 0,
+        "hospitality_jobs": 2,
+        "craft_jobs": 0,
+        "contracts_completed": 1,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 92,
+        "tower_materials": 5,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 12
+      },
+      "penalty_gold": 28,
+      "deadline_days": 4,
+      "is_special": true,
+      "preferred_trait_ids": [
+        "submissive",
+        "eager"
+      ],
+      "preferred_role": "comfort",
+      "partial_success_score": 28,
+      "reputation_reward": 2,
+      "category": "lodging_support",
+      "patron_tier_id": "wealthy_nobles",
+      "preparation_quality_required": 2,
+      "preparation_quality_bonus": 5
+    }
+  ]
+}

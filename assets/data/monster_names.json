@@ -1,0 +1,177 @@
+{
+  "version": "1.2.0",
+  "name_pools": [
+    {
+      "id": "slime_lineage",
+      "species_ids": [
+        "slime_girl"
+      ],
+      "names": [
+        "Mira",
+        "Nessa",
+        "Vela",
+        "Suri",
+        "Lumi",
+        "Iria",
+        "Tessa",
+        "Melle",
+        "Calia",
+        "Oona",
+        "Rielle",
+        "Zia",
+        "Mina",
+        "Lira",
+        "Sella",
+        "Nori"
+      ]
+    },
+    {
+      "id": "succu_slime_salon",
+      "species_ids": [
+        "succu_slime"
+      ],
+      "names": [
+        "Velisse",
+        "Sorelle",
+        "Nyra",
+        "Caelis",
+        "Ivelle",
+        "Mirelle",
+        "Saphine",
+        "Lys",
+        "Virea",
+        "Tahlia",
+        "Nerra",
+        "Ophine"
+      ]
+    },
+    {
+      "id": "goblin_bedchamber",
+      "species_ids": [
+        "goblin_maid"
+      ],
+      "names": [
+        "Ketta",
+        "Brin",
+        "Sazza",
+        "Rikka",
+        "Tolli",
+        "Nix",
+        "Varka",
+        "Mib",
+        "Drena",
+        "Perri",
+        "Snikka",
+        "Jori",
+        "Wrenk",
+        "Paska"
+      ]
+    },
+    {
+      "id": "harpy_perfume_house",
+      "species_ids": [
+        "harpy_hostess"
+      ],
+      "names": [
+        "Avelle",
+        "Cori",
+        "Nym",
+        "Sera",
+        "Talie",
+        "Vixi",
+        "Kaia",
+        "Liora",
+        "Phae",
+        "Rina",
+        "Zephyra",
+        "Arielle",
+        "Melli",
+        "Cyra"
+      ]
+    },
+    {
+      "id": "lamia_chamber",
+      "species_ids": [
+        "lamia_binder"
+      ],
+      "names": [
+        "Sesh",
+        "Veska",
+        "Maelis",
+        "Nahara",
+        "Rys",
+        "Sivra",
+        "Talyth",
+        "Orissa",
+        "Khemi",
+        "Lazha",
+        "Serqet",
+        "Nyshara",
+        "Velkha",
+        "Issari"
+      ]
+    },
+    {
+      "id": "hellhound_kennel",
+      "species_ids": [
+        "hellhound_bouncer"
+      ],
+      "names": [
+        "Brasa",
+        "Kora",
+        "Vex",
+        "Hesta",
+        "Nyxen",
+        "Ruma",
+        "Sable",
+        "Tarka",
+        "Iggi",
+        "Mora",
+        "Brakka",
+        "Raze",
+        "Kest",
+        "Harka"
+      ]
+    },
+    {
+      "id": "golemkin_stone_court",
+      "species_ids": [
+        "golemkin_warden"
+      ],
+      "names": [
+        "Nerisse",
+        "Thalassa",
+        "Lethia",
+        "Morae",
+        "Vaelith",
+        "Sycoris",
+        "Melyra",
+        "Orlisse",
+        "Cireth",
+        "Vossae",
+        "Luneth",
+        "Ismene"
+      ]
+    },
+    {
+      "id": "moth_veil_court",
+      "species_ids": [
+        "moth_priestess"
+      ],
+      "names": [
+        "Ashae",
+        "Velora",
+        "Syrae",
+        "Eiryn",
+        "Calyra",
+        "Ilyne",
+        "Sorrel",
+        "Vespera",
+        "Noctelle",
+        "Aureth",
+        "Selmira",
+        "Ysolde"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "version": "1.0.0",
+  "opening_steps": [
+    {
+      "id": "camp",
+      "title": "A Tower No One Survives",
+      "body_lines": [
+        "The tower has broken every ordinary expedition sent into it.",
+        "You have inherited a ruined hall and a debt so large the creditors have stopped asking politely.",
+        "Monsterhall is not a business plan. It is the only chance left before they decide your life is worth less than the balance."
+      ],
+      "primary_action_label": "Search The Ruins"
+    },
+    {
+      "id": "discovery",
+      "title": "A Hidden Hatchery",
+      "body_lines": [
+        "Behind a collapsed wall, old guild markings lead to a sealed hatchery room still warm with tower magic.",
+        "The machinery is strange, but not hostile. It was built to care for something alive and bind it without breaking it.",
+        "You know enough old taming rites to understand what this means: monsters can survive the tower where hired delvers cannot."
+      ],
+      "primary_action_label": "Open The Hatchery"
+    },
+    {
+      "id": "incubation",
+      "title": "The First Egg",
+      "body_lines": [
+        "A storage cradle unlocks and reveals a single translucent egg humming with residue from the shallow floors.",
+        "When you lift it, a cracked brass thorn bites your thumb. One drop of blood falls across the shell and sinks into the glow.",
+        "The hatchery answers the bond. It is not treasure in the usual sense; it is a future worker, scout, guide, and companion."
+      ],
+      "primary_action_label": "Take The Egg"
+    },
+    {
+      "id": "hatch",
+      "title": "The First Slime Companion",
+      "body_lines": [
+        "The egg opens into a timid slime companion who studies the room with nervous curiosity.",
+        "The blood-mark holds. She listens when you speak, trusts the taming signs, and does not lash out like the tower-born monsters in old execution reports.",
+        "If one monster can be guided, then the creditors have a reason to keep you alive long enough to pay."
+      ],
+      "primary_action_label": "Welcome Her"
+    },
+    {
+      "id": "build_room",
+      "title": "Make The Hall Useful",
+      "body_lines": [
+        "One companion is a beginning, not a guild. You need a room where patrons can bring contracts and staff can work safely.",
+        "It will cost materials and coin, but a real service room can turn strange talent into steady income.",
+        "Build the first guild room and make Monsterhall operational."
+      ],
+      "primary_action_label": "Build First Room"
+    },
+    {
+      "id": "first_client",
+      "title": "The First Contract",
+      "body_lines": [
+        "A creditor's witness arrives with a nervous local delver and a simple job: recover residue from a passage too narrow and caustic for humans.",
+        "Your slime companion is scared, but capable. This is exactly the kind of work Monsterhall was made to handle.",
+        "One fulfilled contract is enough to prove you can tame monsters, earn coin, and pay the debt instead of being buried under it."
+      ],
+      "primary_action_label": "Take First Contract"
+    }
+  ],
+  "camp_discovery_log": "You found a sealed hatchery hidden in the ruined guild hall.",
+  "discovery_incubation_log": "The hatchery responded to tower residue, old taming rites, and a drop of your blood.",
+  "hatch_loyalty_log": "The blood-marked slime companion trusts your taming signs enough to work with the guild.",
+  "build_first_room_not_enough_resources_error": "Not enough resources to build the first guild service room.",
+  "build_first_room_completion_log": "You scraped together a practical guild room and made it ready for the first contract.",
+  "first_room_cost": {
+    "gold": 40,
+    "tower_materials": 20,
+    "eggs": 0,
+    "relics": 0,
+    "arcane_residue": 0
+  },
+  "first_client_reward": {
+    "gold": 28,
+    "tower_materials": 0,
+    "eggs": 0,
+    "relics": 0,
+    "arcane_residue": 4
+  },
+  "first_client_skill_gains": {
+    "scouting": 1,
+    "guarding": 0,
+    "hospitality": 3,
+    "crafting": 0,
+    "charm": 0
+  },
+  "first_client_work_history_gains": {
+    "scouting_runs": 1,
+    "guard_duties": 0,
+    "hospitality_jobs": 1,
+    "craft_jobs": 0,
+    "contracts_completed": 1,
+    "recovery_shifts": 0,
+    "hatchery_assists": 0
+  },
+  "first_client_missing_monster_error": "The first slime companion has not hatched yet.",
+  "first_client_completion_log_template": "{name} completed the first contract and proved Monsterhall can pay the debt. She gained scouting and hospitality experience.",
+  "hatch_missing_monster_error": "The hatchery did not create a slime companion.",
+  "first_hatched_monster_name": "Mira",
+  "first_hatch_log": "The blood-marked egg opened into a timid slime companion with a talent for residue work.",
+  "debt_status_due_template": "{name} due in {days} days.",
+  "debt_initialize_log_template": "The creditors stay the blade for now: {gold} due in {days} days.",
+  "debt_intro_with_debt_template": "The guild is open because the creditors believe your tame monsters can earn. First debt due in {days} days: {gold} gold.",
+  "debt_intro_without_debt": "The guild is open. Build, train, and support deeper expeditions.",
+  "debt_paid_update_template": "Paid {name} for {gold} gold.",
+  "debt_paid_event_template": "Debt paid: {name} settled for {gold} gold.",
+  "debt_next_due_update_template": "Next due: {name} in {days} days.",
+  "debt_next_due_event_template": "Next debt milestone: {name} due in {days} days.",
+  "debt_cleared_event": "The current debt chain is cleared for now.",
+  "debt_missed_status_template": "Payment missed. {gold} gold due in {days} days.",
+  "debt_missed_update_template": "Missed {name}. New balance {gold} gold, due in {days} days.",
+  "debt_missed_event_template": "Debt missed: {name} was not paid. {gold} gold was squeezed out of the guild.",
+  "debt_missed_stress_template": "Creditor pressure raised roster stress by {stress}.",
+  "guest_name_template": "{archetype} Contract",
+  "guest_missing_assigned_girl_event_template": "{guest} fell through because the assigned companion is gone.",
+  "guest_failed_event_template": "{guest} failed: {reason}",
+  "guest_satisfied_event_template": "{guest} was fulfilled by {girl} through the {room}.",
+  "guest_completed_update_template": "{guest} completed: +{gold} gold, +{residue} residue.",
+  "guest_completed_roster_template": "{girl} completed a contract for {gold} gold.",
+  "guest_expired_update_template": "{guest} expired: -{gold} gold.",
+  "guest_expired_event_template": "{guest} expired unmet and cost the guild {gold} gold.",
+  "guest_requires_template": "Requires {value}.",
+  "guest_already_on_expedition_reason": "Already assigned to an expedition.",
+  "guest_requirement_detail_template": "Requires {label} {required} (current {current})."
+}

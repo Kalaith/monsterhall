@@ -1,0 +1,396 @@
+{
+  "version": "1.0.0",
+  "buildings": [
+    {
+      "id": "slime_pool",
+      "name": "Slime Pool",
+      "category": "habitat",
+      "description": "A warm nutrient basin that keeps basic slime companions healthy, calm, and ready for guild work.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 500,
+        "tower_materials": 100,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 50
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [],
+        "client_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 4,
+        "expedition_success_pct": 0,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 2,
+        "charm_training_flat": 1,
+        "population_cap_flat": 0,
+        "town_job_limit_flat": 0
+      }
+    },
+    {
+      "id": "warm_love_nest",
+      "name": "Nursery Wing",
+      "category": "habitat",
+      "description": "A plush nesting wing for egg care, companion recovery, and sensitive patron contracts.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 1650,
+        "tower_materials": 200,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 100
+      },
+      "unlocks": {
+        "room_ids": [
+          "nursery_wing"
+        ],
+        "floor_ids": [],
+        "species_ids": [
+          "lamia_binder"
+        ],
+        "client_tiers": [
+          "wealthy_nobles"
+        ]
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 8,
+        "expedition_success_pct": 0,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 3,
+        "charm_training_flat": 2,
+        "population_cap_flat": 2,
+        "town_job_limit_flat": 3
+      }
+    },
+    {
+      "id": "residue_alchemy_bench",
+      "name": "Alchemy Bench",
+      "category": "workshop",
+      "description": "Brews residue stabilizers, field salves, and recovery draughts that improve both guild service and delves.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 750,
+        "tower_materials": 150,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 50
+      },
+      "unlocks": {
+        "room_ids": [
+          "packroom_annex"
+        ],
+        "floor_ids": [
+          "floor_2_molten_baths"
+        ],
+        "species_ids": [],
+        "client_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 6,
+        "expedition_success_pct": 5,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 0,
+        "charm_training_flat": 0,
+        "population_cap_flat": 0,
+        "town_job_limit_flat": 1
+      }
+    },
+    {
+      "id": "silk_rope_forge",
+      "name": "Forge Corner",
+      "category": "workshop",
+      "description": "Produces reinforced cord, climbing gear, stage fixtures, and expedition kit for controlled hazard work.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 1350,
+        "tower_materials": 200,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 100
+      },
+      "unlocks": {
+        "room_ids": [
+          "public_stage"
+        ],
+        "floor_ids": [],
+        "species_ids": [
+          "goblin_maid",
+          "harpy_hostess"
+        ],
+        "client_tiers": [
+          "wealthy_nobles"
+        ]
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 9,
+        "expedition_success_pct": 3,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 0,
+        "charm_training_flat": 1,
+        "population_cap_flat": 1,
+        "town_job_limit_flat": 3
+      }
+    },
+    {
+      "id": "healing_hot_springs",
+      "name": "Recovery Baths",
+      "category": "recovery",
+      "description": "Mineral baths soothe bruises after hard contracts or rougher expeditions.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 800,
+        "tower_materials": 150,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 50
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [
+          "hellhound_bouncer"
+        ],
+        "client_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 0,
+        "expedition_success_pct": 0,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 4,
+        "stress_recovery_flat": 2,
+        "charm_training_flat": 0,
+        "population_cap_flat": 0,
+        "town_job_limit_flat": 0
+      }
+    },
+    {
+      "id": "aftercare_lounge",
+      "name": "Recovery Lounge",
+      "category": "recovery",
+      "description": "Comfortable recovery space reduces burnout and keeps demanding guild work sustainable.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 750,
+        "tower_materials": 150,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 50
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [
+          "floor_3_gilded_kennels"
+        ],
+        "species_ids": [
+          "succu_slime"
+        ],
+        "client_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 4,
+        "expedition_success_pct": 0,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 1,
+        "stress_recovery_flat": 5,
+        "charm_training_flat": 0,
+        "population_cap_flat": 1,
+        "town_job_limit_flat": 2
+      }
+    },
+    {
+      "id": "hatchery_scrying_pool",
+      "name": "Hatchery Scrying Pool",
+      "category": "research",
+      "description": "A still ritual basin that reads heat trails through the tower and points expeditions toward viable eggs.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 1000,
+        "tower_materials": 200,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 50
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [],
+        "client_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 0,
+        "expedition_success_pct": 4,
+        "egg_discovery_flat": 40,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 0,
+        "charm_training_flat": 0,
+        "population_cap_flat": 0,
+        "town_job_limit_flat": 0
+      }
+    },
+    {
+      "id": "monster_kink_archive",
+      "name": "Species Archive",
+      "category": "research",
+      "description": "Catalogs species preferences, role fits, and tower-instability outcomes.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 2450,
+        "tower_materials": 300,
+        "eggs": 0,
+        "relics": 4,
+        "arcane_residue": 150
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [
+          "golemkin_warden"
+        ],
+        "client_tiers": [
+          "monster_diplomats"
+        ]
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 8,
+        "expedition_success_pct": 6,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 0,
+        "charm_training_flat": 2,
+        "population_cap_flat": 2,
+        "town_job_limit_flat": 3
+      }
+    },
+    {
+      "id": "tower_route_cartography",
+      "name": "Route Map Chamber",
+      "category": "research",
+      "description": "Maps safe routes, hidden dens, and instability veins deeper in the tower.",
+      "build_limit": 1,
+      "cost": {
+        "gold": 3100,
+        "tower_materials": 400,
+        "eggs": 0,
+        "relics": 5,
+        "arcane_residue": 200
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [
+          "moth_priestess"
+        ],
+        "client_tiers": [
+          "monster_diplomats"
+        ]
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 0,
+        "expedition_success_pct": 12,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 0,
+        "charm_training_flat": 0,
+        "population_cap_flat": 2,
+        "town_job_limit_flat": 2
+      }
+    },
+    {
+      "id": "luxury_room_renovation",
+      "name": "Guild Room Renovation",
+      "category": "prestige",
+      "description": "A costly refit of panels, privacy wards, and service fixtures for rooms that already attract serious coin.",
+      "build_limit": 3,
+      "cost": {
+        "gold": 4500,
+        "tower_materials": 700,
+        "eggs": 0,
+        "relics": 6,
+        "arcane_residue": 500
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [],
+        "client_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 6,
+        "expedition_success_pct": 0,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 1,
+        "charm_training_flat": 1,
+        "population_cap_flat": 0,
+        "town_job_limit_flat": 0
+      }
+    },
+    {
+      "id": "relic_residue_condenser",
+      "name": "Relic Residue Condenser",
+      "category": "project",
+      "description": "A repeatable ritual machine that burns relics and arcane residue into stable tower infrastructure instead of immediate roster growth.",
+      "build_limit": 10,
+      "cost": {
+        "gold": 13000,
+        "tower_materials": 1500,
+        "eggs": 0,
+        "relics": 15,
+        "arcane_residue": 25000
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [],
+        "client_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 2,
+        "expedition_success_pct": 2,
+        "egg_discovery_flat": 5,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 0,
+        "charm_training_flat": 0,
+        "population_cap_flat": 0,
+        "town_job_limit_flat": 0
+      }
+    },
+    {
+      "id": "prestige_hospitality_wing",
+      "name": "Prestige Hospitality Wing",
+      "category": "prestige",
+      "description": "A lavish patron-facing wing with private baths, screened waiting rooms, and enough polish to justify elite maintenance costs.",
+      "build_limit": 2,
+      "cost": {
+        "gold": 6500,
+        "tower_materials": 900,
+        "eggs": 0,
+        "relics": 10,
+        "arcane_residue": 700
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [],
+        "client_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 8,
+        "expedition_success_pct": 0,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 2,
+        "charm_training_flat": 2,
+        "population_cap_flat": 0,
+        "town_job_limit_flat": 1
+      }
+    }
+  ]
+}

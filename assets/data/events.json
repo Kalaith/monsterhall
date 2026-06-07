@@ -1,0 +1,797 @@
+{
+  "version": "1.1.0",
+  "events": [
+    {
+      "id": "guild_job_soft_arrival",
+      "category": "Guild Jobs",
+      "phase": "shift_resolution",
+      "text": "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "guild_job_slime_delight",
+      "category": "Guild Jobs",
+      "phase": "shift_resolution",
+      "text": "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
+      "required_trait_ids": [
+        "stretchy"
+      ],
+      "required_species_ids": [
+        "slime_girl"
+      ]
+    },
+    {
+      "id": "guild_job_stage_roar",
+      "category": "Guild Jobs",
+      "phase": "shift_resolution",
+      "text": "The front hall buzzes after a fast-footed runner turns a messy supply request into a profitable contract.",
+      "required_trait_ids": [
+        "graceful"
+      ],
+      "required_species_ids": [
+        "goblin_maid"
+      ]
+    },
+    {
+      "id": "guild_job_harpy_ovation",
+      "category": "Guild Jobs",
+      "phase": "shift_resolution",
+      "text": "A harpy lookout turns a route briefing into a full-room spectacle, and the patrons leave talking about Monsterhall by name.",
+      "required_trait_ids": [
+        "graceful"
+      ],
+      "required_species_ids": [
+        "harpy_hostess"
+      ]
+    },
+    {
+      "id": "guild_job_lamia_clasp",
+      "category": "Guild Jobs",
+      "phase": "shift_resolution",
+      "text": "A lamia routekeeper calms a tense patron, memorizes their route, and turns a risky request into orderly work.",
+      "required_trait_ids": [
+        "dominant"
+      ],
+      "required_species_ids": [
+        "lamia_binder"
+      ]
+    },
+    {
+      "id": "tower_cellar_cache",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Hidden behind burst casks, the companions uncover old stonework worth hauling home for repairs and upgrades.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_corruption_bloom",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
+      "required_trait_ids": [
+        "corruption_tuned"
+      ],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_goblin_haul",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "The quick runner comes back grinning with a sack of trinkets she definitely found before anyone else noticed.",
+      "required_trait_ids": [
+        "greedy"
+      ],
+      "required_species_ids": [
+        "goblin_maid"
+      ]
+    },
+    {
+      "id": "tower_hellhound_clearance",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "The heavy porter shoulders through fallen stone and drags the rest of the party home with extra salvage.",
+      "required_trait_ids": [
+        "resilient"
+      ],
+      "required_species_ids": [
+        "hellhound_bouncer"
+      ]
+    },
+    {
+      "id": "tower_moth_relic_glow",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A moth archivist finds hidden sigils in the dark and coaxes the tower into giving up old treasures.",
+      "required_trait_ids": [
+        "corruption_tuned"
+      ],
+      "required_species_ids": [
+        "moth_priestess"
+      ]
+    },
+    {
+      "id": "corruption_slime_blush",
+      "category": "corruption",
+      "phase": "gain",
+      "text": "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
+      "required_trait_ids": [],
+      "required_species_ids": [
+        "slime_girl",
+        "succu_slime"
+      ]
+    },
+    {
+      "id": "corruption_tuned_thrum",
+      "category": "corruption",
+      "phase": "gain",
+      "text": "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
+      "required_trait_ids": [
+        "corruption_tuned"
+      ],
+      "required_species_ids": []
+    },
+    {
+      "id": "corruption_moth_hush",
+      "category": "corruption",
+      "phase": "gain",
+      "text": "Dusty luminous scales cling to the companion on the walk home, each one humming with a low ritual promise.",
+      "required_trait_ids": [],
+      "required_species_ids": [
+        "moth_priestess"
+      ]
+    },
+    {
+      "id": "town_aftercare_evening",
+      "category": "town",
+      "phase": "day_end",
+      "text": "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "town_hatchery_stirring",
+      "category": "town",
+      "phase": "day_end",
+      "text": "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "special_generous_regular",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Slime Pool draws a grateful local who pays extra after a messy residue problem is solved without anyone getting hurt.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "slime_pool"
+      ],
+      "event_tags": [
+        "beneficial",
+        "habitat",
+        "tier_1"
+      ],
+      "weight": 4,
+      "trigger_chance_pct": 4,
+      "min_day": 8,
+      "reward": {
+        "gold": 90,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 6
+      },
+      "situation_days": 2,
+      "situation_label": "Grateful Locals",
+      "situation_upkeep_pressure_pct": 0,
+      "situation_guest_bonus": 1
+    },
+    {
+      "id": "special_merchant_overstock",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A nervous supplier unloads cheap Slime Pool repair stock before leaving town, giving Monsterhall a rare bargain.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "slime_pool"
+      ],
+      "event_tags": [
+        "beneficial",
+        "materials",
+        "habitat",
+        "tier_1"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 3,
+      "min_day": 15,
+      "cost": {
+        "gold": 70,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      },
+      "reward": {
+        "gold": 0,
+        "tower_materials": 45,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_roof_leak",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A sudden leak near the Slime Pool forces an ugly repair bill before patrons notice the damp.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "slime_pool"
+      ],
+      "event_tags": [
+        "expense",
+        "maintenance",
+        "habitat",
+        "tier_1"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 3,
+      "min_day": 20,
+      "cost": {
+        "gold": 130,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      },
+      "situation_days": 3,
+      "situation_label": "Roof Repair Rush",
+      "situation_upkeep_pressure_pct": 15,
+      "situation_guest_bonus": 0
+    },
+    {
+      "id": "special_collector_tip",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A visiting collector pays for tower rumors and leaves behind enough coin to soften the next debt window.",
+      "required_trait_ids": [
+        "greedy"
+      ],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "monster_kink_archive"
+      ],
+      "event_tags": [
+        "beneficial",
+        "archive",
+        "tier_4"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 3,
+      "min_day": 30,
+      "reward": {
+        "gold": 180,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_inspection_bribe",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A town inspector starts asking careful questions about permits. The fastest answer is a quiet fee and tidy paperwork.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "aftercare_lounge"
+      ],
+      "event_tags": [
+        "expense",
+        "inspection",
+        "tier_3"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 2,
+      "min_day": 45,
+      "cost": {
+        "gold": 260,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      },
+      "situation_days": 4,
+      "situation_label": "Inspection Pressure",
+      "situation_upkeep_pressure_pct": 10,
+      "situation_guest_bonus": 1
+    },
+    {
+      "id": "special_love_nest_premium_booking",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Nursery Wing draws a careful patron who pays well for egg handling, privacy, and spotless records.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "warm_love_nest"
+      ],
+      "event_tags": [
+        "beneficial",
+        "income",
+        "tier_1"
+      ],
+      "weight": 4,
+      "trigger_chance_pct": 3,
+      "min_day": 10,
+      "reward": {
+        "gold": 150,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 10
+      }
+    },
+    {
+      "id": "special_love_nest_linen_refresh",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Nursery Wing needs a full bedding and ward refresh after a demanding hatchery week.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "warm_love_nest"
+      ],
+      "event_tags": [
+        "expense",
+        "maintenance",
+        "tier_1"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 2,
+      "min_day": 12,
+      "cost": {
+        "gold": 120,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_potion_lab_bottled_batch",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Alchemy Bench finishes a clean stabilizer batch, selling the surplus to trusted patrons before dawn.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "residue_alchemy_bench"
+      ],
+      "event_tags": [
+        "beneficial",
+        "lab",
+        "tier_2"
+      ],
+      "weight": 4,
+      "trigger_chance_pct": 3,
+      "min_day": 20,
+      "reward": {
+        "gold": 220,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 30
+      }
+    },
+    {
+      "id": "special_potion_lab_spill",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A cracked alembic in the Alchemy Bench ruins supplies and leaves the workroom needing careful cleaning.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "residue_alchemy_bench"
+      ],
+      "event_tags": [
+        "expense",
+        "lab",
+        "maintenance",
+        "tier_2"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 2,
+      "min_day": 25,
+      "cost": {
+        "gold": 180,
+        "tower_materials": 25,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 15
+      }
+    },
+    {
+      "id": "special_rope_forge_private_order",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Forge Corner completes a private commission for reinforced travel gear and sealed sample cases.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "silk_rope_forge"
+      ],
+      "event_tags": [
+        "beneficial",
+        "crafting",
+        "tier_2"
+      ],
+      "weight": 4,
+      "trigger_chance_pct": 3,
+      "min_day": 28,
+      "reward": {
+        "gold": 260,
+        "tower_materials": 20,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_rope_forge_restock",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Forge Corner burns through its good stock and needs fresh fittings before the next rush.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "silk_rope_forge"
+      ],
+      "event_tags": [
+        "expense",
+        "crafting",
+        "maintenance",
+        "tier_2"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 2,
+      "min_day": 30,
+      "cost": {
+        "gold": 210,
+        "tower_materials": 20,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_aftercare_reputation",
+      "category": "special",
+      "phase": "day_end",
+      "text": "Word of the Recovery Lounge reaches careful patrons who pay more for a guild that treats its companions well.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "aftercare_lounge"
+      ],
+      "event_tags": [
+        "beneficial",
+        "aftercare",
+        "tier_3"
+      ],
+      "weight": 4,
+      "trigger_chance_pct": 3,
+      "min_day": 45,
+      "reward": {
+        "gold": 360,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 20
+      },
+      "situation_days": 3,
+      "situation_label": "Recovery Reputation",
+      "situation_upkeep_pressure_pct": 0,
+      "situation_guest_bonus": 1
+    },
+    {
+      "id": "special_healing_springs_mineral_bloom",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Recovery Baths bloom with rare minerals, and a discreet buyer pays for bottled runoff.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "healing_hot_springs"
+      ],
+      "event_tags": [
+        "beneficial",
+        "healing",
+        "tier_3"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 2,
+      "min_day": 50,
+      "reward": {
+        "gold": 300,
+        "tower_materials": 35,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_healing_springs_pipework",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Recovery Baths need urgent pipework repairs before the mineral heat floods the lower rooms.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "healing_hot_springs"
+      ],
+      "event_tags": [
+        "expense",
+        "healing",
+        "maintenance",
+        "tier_3"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 2,
+      "min_day": 55,
+      "cost": {
+        "gold": 320,
+        "tower_materials": 30,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_archive_relic_auction",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Species Archive authenticates a rare relic note, drawing a collector who pays before asking questions.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "monster_kink_archive"
+      ],
+      "event_tags": [
+        "beneficial",
+        "archive",
+        "tier_4"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 2,
+      "min_day": 80,
+      "reward": {
+        "gold": 520,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_archive_security_upgrade",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A failed archive break-in forces new locks, warding, and quiet payments to keep the story contained.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "monster_kink_archive"
+      ],
+      "event_tags": [
+        "expense",
+        "archive",
+        "security",
+        "tier_4"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 1,
+      "min_day": 90,
+      "cost": {
+        "gold": 480,
+        "tower_materials": 45,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_cartography_patron_route",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Route Map Chamber charts a lucrative safe path and sells the briefing to elite patrons.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "tower_route_cartography"
+      ],
+      "event_tags": [
+        "beneficial",
+        "cartography",
+        "late_game"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 2,
+      "min_day": 140,
+      "reward": {
+        "gold": 850,
+        "tower_materials": 60,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 50
+      }
+    },
+    {
+      "id": "special_cartography_creditor_interference",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A creditor's agent tampers with the Route Map Chamber ledgers, forcing a costly cleanup before sponsors see the breach.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "tower_route_cartography"
+      ],
+      "event_tags": [
+        "expense",
+        "crisis",
+        "late_game"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 1,
+      "min_day": 180,
+      "cost": {
+        "gold": 900,
+        "tower_materials": 80,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 0
+      }
+    },
+    {
+      "id": "special_luxury_ward_refresh",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The renovated guild rooms need fresh privacy wards and imported linens before elite patrons notice the wear.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "luxury_room_renovation"
+      ],
+      "event_tags": [
+        "expense",
+        "luxury",
+        "maintenance",
+        "late_game"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 2,
+      "min_day": 170,
+      "cost": {
+        "gold": 1200,
+        "tower_materials": 90,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 80
+      }
+    },
+    {
+      "id": "special_luxury_private_patron",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A private patron pays for a full guild wing reservation, then quietly funds tomorrow's staff comforts.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "luxury_room_renovation"
+      ],
+      "event_tags": [
+        "beneficial",
+        "luxury",
+        "late_game"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 2,
+      "min_day": 180,
+      "reward": {
+        "gold": 900,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 120
+      }
+    },
+    {
+      "id": "special_condenser_ritual_burn",
+      "category": "special",
+      "phase": "day_end",
+      "text": "The Relic Residue Condenser stabilizes a volatile hatchery by burning stored residue through old tower metal.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "relic_residue_condenser"
+      ],
+      "event_tags": [
+        "expense",
+        "conversion",
+        "late_game"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 2,
+      "min_day": 190,
+      "cost": {
+        "gold": 700,
+        "tower_materials": 120,
+        "eggs": 0,
+        "relics": 2,
+        "arcane_residue": 220
+      }
+    },
+    {
+      "id": "special_prestige_hosting_season",
+      "category": "special",
+      "phase": "day_end",
+      "text": "Prestige contracts expect impossible service standards, and keeping the hospitality wing flawless costs almost as much as it earns.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "prestige_hospitality_wing"
+      ],
+      "event_tags": [
+        "expense",
+        "prestige",
+        "maintenance",
+        "late_game"
+      ],
+      "weight": 3,
+      "trigger_chance_pct": 2,
+      "min_day": 220,
+      "cost": {
+        "gold": 1800,
+        "tower_materials": 140,
+        "eggs": 0,
+        "relics": 2,
+        "arcane_residue": 120
+      }
+    },
+    {
+      "id": "special_prestige_referral_chain",
+      "category": "special",
+      "phase": "day_end",
+      "text": "A chain of prestige referrals fills the contract book, bringing valuable coin while raising Monsterhall's expected standard.",
+      "required_trait_ids": [],
+      "required_species_ids": [],
+      "required_building_ids": [
+        "prestige_hospitality_wing"
+      ],
+      "event_tags": [
+        "beneficial",
+        "prestige",
+        "late_game"
+      ],
+      "weight": 2,
+      "trigger_chance_pct": 2,
+      "min_day": 230,
+      "reward": {
+        "gold": 1400,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 150
+      },
+      "situation_days": 5,
+      "situation_label": "Prestige Referral Chain",
+      "situation_upkeep_pressure_pct": 12,
+      "situation_guest_bonus": 2
+    }
+  ]
+}
