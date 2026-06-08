@@ -1,6 +1,8 @@
 use std::cell::RefCell;
 
 use macroquad::prelude::*;
+use macroquad::text::draw_text_ex;
+use macroquad_toolkit::ui::{measure_text_size, TextStyle};
 
 use super::art::{BackdropKind, UiIcon};
 use crate::ui::theme;
@@ -354,10 +356,11 @@ pub(super) fn draw_text_center(
     size: f32,
     color: Color,
 ) {
-    let dims = measure_text(text, None, size as u16, 1.0);
+    let style = TextStyle::new(size, color);
+    let dims = measure_text_size(text, style);
     let text_x = x + (w - dims.width) * 0.5;
     let text_y = y + (h + dims.height) * 0.5 - 4.0;
-    draw_text(text, text_x, text_y, size, color);
+    draw_text_ex(text, text_x, text_y, style.params());
 }
 
 pub(super) fn draw_backdrop_texture(kind: BackdropKind, w: f32, h: f32) -> bool {

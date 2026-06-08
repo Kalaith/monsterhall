@@ -1,4 +1,6 @@
 use macroquad::prelude::*;
+use macroquad::text::draw_text_ex;
+use macroquad_toolkit::ui::TextStyle;
 
 use super::art_helpers::{
     accent_from_seed, draw_arches, draw_backdrop_texture, draw_building_scene, draw_cover_texture,
@@ -483,7 +485,12 @@ pub fn draw_egg_thumbnail(egg: &EggState, x: f32, y: f32, w: f32, h: f32) {
 
 pub fn draw_trait_icons(data: &GameData, trait_ids: &[String], x: f32, y: f32, w: f32) {
     if trait_ids.is_empty() {
-        draw_text("No traits", x, y + 18.0, 18.0, theme::TEXT_DIM);
+        draw_text_ex(
+            "No traits",
+            x,
+            y + 18.0,
+            TextStyle::new(18.0, theme::TEXT_DIM).params(),
+        );
         return;
     }
 
@@ -533,13 +540,17 @@ pub fn draw_condition_badges(monster: &CompanionState, x: f32, y: f32, w: f32) {
             Color::new(theme::PANEL_0.r, theme::PANEL_0.g, theme::PANEL_0.b, 0.92),
             *accent,
         );
-        draw_text(label, badge_x + 8.0, y + 19.0, 18.0, theme::TEXT_STRONG);
-        draw_text(
+        draw_text_ex(
+            label,
+            badge_x + 8.0,
+            y + 19.0,
+            TextStyle::new(18.0, theme::TEXT_STRONG).params(),
+        );
+        draw_text_ex(
             &format!("{value}"),
             badge_x + 24.0,
             y + 19.0,
-            18.0,
-            theme::TEXT_BODY,
+            TextStyle::new(18.0, theme::TEXT_BODY).params(),
         );
     }
 }
