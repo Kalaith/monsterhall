@@ -2,7 +2,7 @@ use macroquad::prelude::*;
 use macroquad::time::get_time;
 
 use crate::data::GameData;
-use crate::state::{EggState, GameState, HatchRevealState, CompanionState};
+use crate::state::{CompanionState, EggState, GameState, HatchRevealState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_backdrop, draw_egg_thumbnail, draw_species_portrait, BackdropKind};
 use crate::ui::chrome::{

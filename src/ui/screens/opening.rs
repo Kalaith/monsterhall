@@ -138,13 +138,7 @@ pub fn draw_opening_chapter(
             step_data.primary_action_label,
             format_resource_cost(&data.ui_text, &data.story_events.first_room_cost)
         );
-        if primary_button(
-            panel_x + 24.0,
-            button_y,
-            button_width,
-            50.0,
-            &cost_label,
-        ) {
+        if primary_button(panel_x + 24.0, button_y, button_width, 50.0, &cost_label) {
             return Some(UiAction::BuildOpeningRoom);
         }
     } else if opening_state.step == OpeningChapterStep::FirstClient {
@@ -187,13 +181,7 @@ pub fn draw_opening_chapter(
             20.0,
             theme::TEXT_BODY,
         );
-        if primary_button(
-            panel_x + 24.0,
-            button_y,
-            button_width,
-            50.0,
-            &reward_label,
-        ) {
+        if primary_button(panel_x + 24.0, button_y, button_width, 50.0, &reward_label) {
             return Some(UiAction::ResolveOpeningClient);
         }
     } else if secondary_button(

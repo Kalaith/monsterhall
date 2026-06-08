@@ -3,7 +3,7 @@
 use std::collections::HashSet;
 
 use crate::data::GameData;
-use crate::state::{EggState, GameState, CompanionJobState};
+use crate::state::{CompanionJobState, EggState, GameState};
 
 pub fn validate_game_state_references(
     data: &GameData,
@@ -15,12 +15,7 @@ pub fn validate_game_state_references(
             .iter()
             .map(|entry| entry.id.as_str()),
     );
-    let room_ids = collect_ids(
-        data.guild_rooms
-            .rooms
-            .iter()
-            .map(|entry| entry.id.as_str()),
-    );
+    let room_ids = collect_ids(data.guild_rooms.rooms.iter().map(|entry| entry.id.as_str()));
     let floor_ids = collect_ids(data.floors.floors.iter().map(|entry| entry.id.as_str()));
     let species_ids = collect_ids(data.species.species.iter().map(|entry| entry.id.as_str()));
     let mission_ids = collect_ids(data.missions.missions.iter().map(|entry| entry.id.as_str()));

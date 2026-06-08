@@ -1,5 +1,5 @@
 use crate::data::GameData;
-use crate::state::{GuildHallManagementState, GameState};
+use crate::state::{GameState, GuildHallManagementState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_backdrop, BackdropKind};
 

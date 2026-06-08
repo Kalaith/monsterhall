@@ -207,9 +207,7 @@ pub fn monster_role_summary(
         };
     }
 
-    if monster.skills.charm >= 2
-        || monster.skills.hospitality >= 2
-        || monster.skills.guarding >= 2
+    if monster.skills.charm >= 2 || monster.skills.hospitality >= 2 || monster.skills.guarding >= 2
     {
         return MonsterRoleSummary {
             readiness_label: profile.readiness_ready_label.clone(),

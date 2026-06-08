@@ -141,10 +141,7 @@ impl GameData {
             "traits",
         )?;
         validate_unique_ids(
-            self.guild_rooms
-                .rooms
-                .iter()
-                .map(|entry| entry.id.as_str()),
+            self.guild_rooms.rooms.iter().map(|entry| entry.id.as_str()),
             "guild rooms",
         )?;
         validate_unique_ids(
@@ -178,12 +175,7 @@ impl GameData {
                 .iter()
                 .map(|entry| entry.id.as_str()),
         );
-        let room_ids = collect_ids(
-            self.guild_rooms
-                .rooms
-                .iter()
-                .map(|entry| entry.id.as_str()),
-        );
+        let room_ids = collect_ids(self.guild_rooms.rooms.iter().map(|entry| entry.id.as_str()));
         let building_ids = collect_ids(
             self.buildings
                 .buildings
@@ -318,10 +310,7 @@ impl GameData {
 
         for request in &self.contracts.requests {
             if request.name.trim().is_empty() {
-                return Err(format!(
-                    "contract '{}' must contain a name.",
-                    request.id
-                ));
+                return Err(format!("contract '{}' must contain a name.", request.id));
             }
             if request.description.trim().is_empty() {
                 return Err(format!(
@@ -379,7 +368,12 @@ impl GameData {
             );
         }
 
-        if self.story_events.first_client_work_history_gains.hospitality_jobs == 0 {
+        if self
+            .story_events
+            .first_client_work_history_gains
+            .hospitality_jobs
+            == 0
+        {
             return Err(
                 "story_events.json must define first_client_work_history_gains.hospitality_jobs."
                     .to_owned(),
@@ -698,9 +692,7 @@ impl GameData {
         }
 
         if self.config.new_game.town_job_limit == 0 {
-            return Err(
-                "config.new_game.town_job_limit must be greater than zero.".to_owned(),
-            );
+            return Err("config.new_game.town_job_limit must be greater than zero.".to_owned());
         }
 
         if self.config.new_game.population_cap == 0 {

@@ -6,8 +6,8 @@ use super::art_helpers::{
     draw_scene_columns, draw_text_center, draw_tower_silhouette, hash, icon_source, mix,
     with_ui_textures,
 };
-use crate::data::{GuildRoomData, BuildingData, GameData, TowerFloorData};
-use crate::state::{EggState, ContractState, CompanionState};
+use crate::data::{BuildingData, GameData, GuildRoomData, TowerFloorData};
+use crate::state::{CompanionState, ContractState, EggState};
 use crate::ui::theme;
 use crate::ui::view_models::species_name_by_id;
 

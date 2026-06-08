@@ -1,9 +1,7 @@
 use macroquad::prelude::{screen_height, screen_width};
 
 use crate::data::GameData;
-use crate::state::{
-    GameState, ContractDeskState, ContractState, ContractStatus, CompanionState,
-};
+use crate::state::{CompanionState, ContractDeskState, ContractState, ContractStatus, GameState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_guest_silhouette, draw_room_thumbnail};
 use crate::ui::chrome::{
@@ -18,10 +16,10 @@ use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
 use crate::ui::theme;
 use crate::ui::view_models::{
-    evaluate_guest_candidate, fill_template, format_resources_state,
+    companion_skill_summary, evaluate_guest_candidate, fill_template, format_resources_state,
     guest_history_requirement_label, guest_skill_requirement_label,
     guest_species_requirement_label, guest_status_label, monster_name_by_id, monster_quality_label,
-    quality_label, room_name_by_id, work_history_summary, companion_skill_summary, species_name_by_id,
+    quality_label, room_name_by_id, species_name_by_id, work_history_summary,
 };
 
 fn compact_text(text: &str, max_len: usize) -> String {
@@ -331,10 +329,7 @@ pub(super) fn draw_selected_request_panel(
         138.0,
         108.0,
         52.0,
-        &data
-            .ui_text
-            .contract_desk
-            .context_accepted_requests_label,
+        &data.ui_text.contract_desk.context_accepted_requests_label,
         &accepted_count,
         theme::PRIMARY,
     );

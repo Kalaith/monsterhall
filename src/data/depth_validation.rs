@@ -24,10 +24,7 @@ pub(super) fn validate_depth_systems(data: &GameData) -> Result<(), String> {
             &format!("guild room '{}'.upgrade_building_ids", room.id),
         )?;
         if let Some(niche) = room.strategic_niche.as_deref() {
-            validate_role_or_niche(
-                niche,
-                &format!("guild room '{}'.strategic_niche", room.id),
-            )?;
+            validate_role_or_niche(niche, &format!("guild room '{}'.strategic_niche", room.id))?;
         }
     }
 
@@ -44,10 +41,7 @@ pub(super) fn validate_depth_systems(data: &GameData) -> Result<(), String> {
             &format!("contract '{}'.preferred_trait_ids", request.id),
         )?;
         if let Some(role) = request.preferred_role.as_deref() {
-            validate_role_or_niche(
-                role,
-                &format!("contract '{}'.preferred_role", request.id),
-            )?;
+            validate_role_or_niche(role, &format!("contract '{}'.preferred_role", request.id))?;
         }
         if let Some(follow_up_id) = request.follow_up_request_id.as_deref() {
             if follow_up_id == request.id {

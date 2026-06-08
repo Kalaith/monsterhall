@@ -2,8 +2,9 @@
 
 use crate::data::{GameData, ResourceAmountData, StatBlockData};
 use crate::state::{
-    ChamberState, GameState, CompanionState, CompanionJobState, OpeningChapterStep,
-    PlayerTownState, ResourcesState, CompanionWorkHistoryState, CompanionSkillState, StoryProgressState,
+    ChamberState, CompanionJobState, CompanionSkillState, CompanionState,
+    CompanionWorkHistoryState, GameState, OpeningChapterStep, PlayerTownState, ResourcesState,
+    StoryProgressState,
 };
 
 pub fn create_new_game_state(data: &GameData) -> GameState {

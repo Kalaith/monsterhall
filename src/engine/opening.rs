@@ -1,7 +1,7 @@
 //! Scripted opening chapter logic.
 
 use crate::data::GameData;
-use crate::state::{GameState, CompanionJobState, OpeningChapterStep};
+use crate::state::{CompanionJobState, GameState, OpeningChapterStep};
 
 use super::{create_opening_egg, hatch_species};
 
@@ -92,18 +92,32 @@ pub fn resolve_first_client(data: &GameData, game_state: &mut GameState) -> Resu
     first_girl.skills.hospitality += data.story_events.first_client_skill_gains.hospitality;
     first_girl.skills.crafting += data.story_events.first_client_skill_gains.crafting;
     first_girl.skills.charm += data.story_events.first_client_skill_gains.charm;
-    first_girl.work_history.scouting_runs += data.story_events.first_client_work_history_gains.scouting_runs;
-    first_girl.work_history.guard_duties += data.story_events.first_client_work_history_gains.guard_duties;
-    first_girl.work_history.hospitality_jobs +=
-        data.story_events.first_client_work_history_gains.hospitality_jobs;
-    first_girl.work_history.craft_jobs += data.story_events.first_client_work_history_gains.craft_jobs;
-    first_girl.work_history.contracts_completed +=
-        data.story_events.first_client_work_history_gains.contracts_completed;
+    first_girl.work_history.scouting_runs += data
+        .story_events
+        .first_client_work_history_gains
+        .scouting_runs;
+    first_girl.work_history.guard_duties += data
+        .story_events
+        .first_client_work_history_gains
+        .guard_duties;
+    first_girl.work_history.hospitality_jobs += data
+        .story_events
+        .first_client_work_history_gains
+        .hospitality_jobs;
+    first_girl.work_history.craft_jobs +=
+        data.story_events.first_client_work_history_gains.craft_jobs;
+    first_girl.work_history.contracts_completed += data
+        .story_events
+        .first_client_work_history_gains
+        .contracts_completed;
     first_girl.work_history.recovery_shifts += data
         .story_events
         .first_client_work_history_gains
         .recovery_shifts;
-    first_girl.work_history.hatchery_assists += data.story_events.first_client_work_history_gains.hatchery_assists;
+    first_girl.work_history.hatchery_assists += data
+        .story_events
+        .first_client_work_history_gains
+        .hatchery_assists;
     first_girl.current_job = CompanionJobState::Idle;
 
     game_state.story_progress.first_client_completed = true;

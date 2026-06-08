@@ -2,7 +2,7 @@ use macroquad::prelude::{screen_height, screen_width};
 
 use crate::data::GameData;
 use crate::engine::preview_guild_job;
-use crate::state::{GuildHallManagementState, GameState, CompanionJobState};
+use crate::state::{CompanionJobState, GameState, GuildHallManagementState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::draw_room_thumbnail;
 use crate::ui::chrome::{
@@ -68,7 +68,10 @@ fn compact_sentence(text: &str, max_len: usize) -> String {
     }
 }
 
-pub(super) fn draw_header(data: &GameData, _layout: &GuildHallManagementLayout) -> Option<UiAction> {
+pub(super) fn draw_header(
+    data: &GameData,
+    _layout: &GuildHallManagementLayout,
+) -> Option<UiAction> {
     if let Some(action) = draw_top_utility_bar(&data.ui_text.common.settings_button) {
         return Some(action);
     }
@@ -191,30 +194,22 @@ pub(super) fn draw_selected_room_panel(
         .collect::<Vec<_>>();
     let projected_gold = assigned_workers
         .iter()
-        .filter_map(|monster| {
-            preview_guild_job(data, game_state, monster, &selected_room.id).ok()
-        })
+        .filter_map(|monster| preview_guild_job(data, game_state, monster, &selected_room.id).ok())
         .map(|preview| preview.projected_gold)
         .sum::<u32>();
     let projected_residue = assigned_workers
         .iter()
-        .filter_map(|monster| {
-            preview_guild_job(data, game_state, monster, &selected_room.id).ok()
-        })
+        .filter_map(|monster| preview_guild_job(data, game_state, monster, &selected_room.id).ok())
         .map(|preview| preview.projected_arcane_residue)
         .sum::<u32>();
     let projected_materials = assigned_workers
         .iter()
-        .filter_map(|monster| {
-            preview_guild_job(data, game_state, monster, &selected_room.id).ok()
-        })
+        .filter_map(|monster| preview_guild_job(data, game_state, monster, &selected_room.id).ok())
         .map(|preview| preview.projected_materials)
         .sum::<u32>();
     let projected_prep = assigned_workers
         .iter()
-        .filter_map(|monster| {
-            preview_guild_job(data, game_state, monster, &selected_room.id).ok()
-        })
+        .filter_map(|monster| preview_guild_job(data, game_state, monster, &selected_room.id).ok())
         .map(|preview| preview.preparation_quality)
         .sum::<u32>();
 
@@ -375,7 +370,12 @@ fn draw_worker_cards(
                     history_gain_label(data, &value.projected_work_history_gains)
                 )
             })
-            .unwrap_or_else(|| data.ui_text.guild_hall_management.no_preview_message.clone());
+            .unwrap_or_else(|| {
+                data.ui_text
+                    .guild_hall_management
+                    .no_preview_message
+                    .clone()
+            });
         let summary = worker_decision_summary(data, monster, prediction);
 
         let species_label = species_name_by_id(data, &monster.species_id);

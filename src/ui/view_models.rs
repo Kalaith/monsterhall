@@ -2,7 +2,7 @@
 
 use crate::data::{GameData, UiTextData};
 use crate::engine::evaluate_contract_eligibility;
-use crate::state::{GameState, CompanionJobState};
+use crate::state::{CompanionJobState, GameState};
 use crate::ui::actions::UiAction;
 use crate::ui::theme;
 use macroquad::prelude::Color;
@@ -77,7 +77,10 @@ pub fn format_resource_cost(
         parts.push(format!("{} {}", cost.relics, common_text.relics_unit));
     }
     if cost.arcane_residue > 0 {
-        parts.push(format!("{} {}", cost.arcane_residue, common_text.residue_unit));
+        parts.push(format!(
+            "{} {}",
+            cost.arcane_residue, common_text.residue_unit
+        ));
     }
 
     if parts.is_empty() {
@@ -165,10 +168,7 @@ pub fn describe_building_effects(
             &common_text.building_worker_limit_template,
             &[(
                 "{value}",
-                building
-                    .passive_modifiers
-                    .town_job_limit_flat
-                    .to_string(),
+                building.passive_modifiers.town_job_limit_flat.to_string(),
             )],
         ));
     }
@@ -292,14 +292,22 @@ pub fn guest_skill_requirement_label(
     if skills.scouting > 0 {
         parts.push(format!(
             "{}{}",
-            common_text.skill_label_scouting.chars().next().unwrap_or('K'),
+            common_text
+                .skill_label_scouting
+                .chars()
+                .next()
+                .unwrap_or('K'),
             skills.scouting
         ));
     }
     if skills.guarding > 0 {
         parts.push(format!(
             "{}{}",
-            common_text.skill_label_guarding.chars().next().unwrap_or('O'),
+            common_text
+                .skill_label_guarding
+                .chars()
+                .next()
+                .unwrap_or('O'),
             skills.guarding
         ));
     }
@@ -317,18 +325,18 @@ pub fn guest_skill_requirement_label(
     if skills.crafting > 0 {
         parts.push(format!(
             "{}{}",
-            common_text.skill_label_crafting.chars().next().unwrap_or('A'),
+            common_text
+                .skill_label_crafting
+                .chars()
+                .next()
+                .unwrap_or('A'),
             skills.crafting
         ));
     }
     if skills.charm > 0 {
         parts.push(format!(
             "{}{}",
-            common_text
-                .skill_label_charm
-                .chars()
-                .next()
-                .unwrap_or('S'),
+            common_text.skill_label_charm.chars().next().unwrap_or('S'),
             skills.charm
         ));
     }
@@ -558,10 +566,7 @@ pub fn species_portrait_key_by_id(data: &GameData, species_id: &str) -> String {
         .unwrap_or_else(|| "portrait_missing".to_owned())
 }
 
-pub fn trait_names_for_monster(
-    data: &GameData,
-    monster: &crate::state::CompanionState,
-) -> String {
+pub fn trait_names_for_monster(data: &GameData, monster: &crate::state::CompanionState) -> String {
     let names = monster
         .trait_ids
         .iter()
@@ -669,9 +674,15 @@ pub fn work_history_summary(data: &GameData, monster: &crate::state::CompanionSt
     fill_template(
         &data.ui_text.common.work_history_summary_template,
         &[
-            ("{scouting runs}", monster.work_history.scouting_runs.to_string()),
+            (
+                "{scouting runs}",
+                monster.work_history.scouting_runs.to_string(),
+            ),
             ("{guarding}", monster.work_history.guard_duties.to_string()),
-            ("{hospitality}", monster.work_history.hospitality_jobs.to_string()),
+            (
+                "{hospitality}",
+                monster.work_history.hospitality_jobs.to_string(),
+            ),
             ("{crafting}", monster.work_history.craft_jobs.to_string()),
             (
                 "{completed contracts}",
@@ -681,7 +692,10 @@ pub fn work_history_summary(data: &GameData, monster: &crate::state::CompanionSt
     )
 }
 
-pub fn history_gain_label(data: &GameData, history: &crate::state::CompanionWorkHistoryState) -> String {
+pub fn history_gain_label(
+    data: &GameData,
+    history: &crate::state::CompanionWorkHistoryState,
+) -> String {
     let mut parts = Vec::new();
 
     if history.scouting_runs > 0 {

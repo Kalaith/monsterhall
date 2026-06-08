@@ -10,7 +10,7 @@ use macroquad::{
 
 use crate::data::{load_game_data, GameData};
 use crate::engine::{
-    advance_opening_step, assign_monster_to_expedition, assign_monster_to_contract,
+    advance_opening_step, assign_monster_to_contract, assign_monster_to_expedition,
     assign_monster_to_idle, assign_monster_to_rest, assign_monster_to_room, build_first_room,
     clear_contract_assignment, configure_expedition_plan, convert_egg, create_new_game_state,
     debt_intro_status, hatch_selected_egg, initialize_first_debt, pay_debt_now, purchase_building,
@@ -19,15 +19,14 @@ use crate::engine::{
 };
 use crate::state::{
     load_app_settings, load_compatible_save_data, peek_save_version, save_app_settings,
-    save_exists, save_game, settings_exist, AppSettings, GuildHallManagementState,
-    HatcheryManagementState, DayResultsState, ExpeditionPlanningState, ExpeditionPriority,
-    GamePhase, GameState, ContractDeskState, JournalState, LoadingState, MainMenuState,
-    MonsterProfileState, OpeningChapterState, OpeningChapterStep, SaveData, TownManagementState,
-    TownOverviewState,
+    save_exists, save_game, settings_exist, AppSettings, ContractDeskState, DayResultsState,
+    ExpeditionPlanningState, ExpeditionPriority, GamePhase, GameState, GuildHallManagementState,
+    HatcheryManagementState, JournalState, LoadingState, MainMenuState, MonsterProfileState,
+    OpeningChapterState, OpeningChapterStep, SaveData, TownManagementState, TownOverviewState,
 };
 use crate::ui::{
-    draw_guild_hall_management, draw_hatchery_management, draw_day_results, draw_expedition_planning,
-    draw_contract_desk, draw_hatch_reveal, draw_journal, draw_loading_screen, draw_main_menu,
+    draw_contract_desk, draw_day_results, draw_expedition_planning, draw_guild_hall_management,
+    draw_hatch_reveal, draw_hatchery_management, draw_journal, draw_loading_screen, draw_main_menu,
     draw_monster_profile, draw_opening_chapter, draw_settings_modal, draw_town_management,
     draw_town_overview, UiAction,
 };
@@ -180,7 +179,12 @@ impl Game {
                     return;
                 };
 
-                draw_hatchery_management(data, chamber_state, game_state, self.last_error.as_deref())
+                draw_hatchery_management(
+                    data,
+                    chamber_state,
+                    game_state,
+                    self.last_error.as_deref(),
+                )
             }
             GamePhase::Journal(journal_state) => {
                 let Some(data) = self.data.as_ref() else {
@@ -200,7 +204,12 @@ impl Game {
                     return;
                 };
 
-                draw_guild_hall_management(data, guild_jobs_state, game_state, self.last_error.as_deref())
+                draw_guild_hall_management(
+                    data,
+                    guild_jobs_state,
+                    game_state,
+                    self.last_error.as_deref(),
+                )
             }
             GamePhase::ExpeditionPlanning(expedition_state) => {
                 let Some(data) = self.data.as_ref() else {

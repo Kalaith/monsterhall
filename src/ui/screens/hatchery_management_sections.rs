@@ -3,8 +3,8 @@ use macroquad::prelude::{screen_height, screen_width};
 use crate::data::{GameData, ResourceAmountData};
 use crate::engine::effective_population_cap;
 use crate::state::{
-    HatcheryManagementState, EggConversionKind, EggIncubationState, EggState, GameState,
-    CompanionState,
+    CompanionState, EggConversionKind, EggIncubationState, EggState, GameState,
+    HatcheryManagementState,
 };
 use crate::ui::actions::UiAction;
 use crate::ui::art::draw_egg_thumbnail;

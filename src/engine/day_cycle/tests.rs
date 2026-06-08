@@ -1,9 +1,10 @@
 use super::*;
 use crate::data::{GuildRoomData, MissionData, TowerFloorData};
 use crate::state::{
-    ChamberState, EggIncubationState, ExpeditionPriority, ExpeditionState, GameState,
-    ContractState, ContractStatus, CompanionState, CompanionJobState, OpeningChapterStep,
-    PlayerTownState, ResourcesState, CompanionWorkHistoryState, CompanionSkillState, StoryProgressState,
+    ChamberState, CompanionJobState, CompanionSkillState, CompanionState,
+    CompanionWorkHistoryState, ContractState, ContractStatus, EggIncubationState,
+    ExpeditionPriority, ExpeditionState, GameState, OpeningChapterStep, PlayerTownState,
+    ResourcesState, StoryProgressState,
 };
 
 #[test]
@@ -194,9 +195,7 @@ fn release_monster_clears_assignments_without_emptying_roster() {
         game_state.active_contracts[0].status,
         ContractStatus::Pending
     ));
-    assert!(game_state.active_contracts[0]
-        .assigned_monster_id
-        .is_none());
+    assert!(game_state.active_contracts[0].assigned_monster_id.is_none());
     assert!(release_monster(&mut game_state, "monster_001").is_err());
 }
 

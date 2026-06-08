@@ -1,5 +1,5 @@
 use crate::data::GameData;
-use crate::state::{HatcheryManagementState, GameState};
+use crate::state::{GameState, HatcheryManagementState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_backdrop, BackdropKind};
 

@@ -8,13 +8,13 @@ use serde::Serialize;
 use super::*;
 use crate::engine::day_cycle;
 use crate::engine::{
-    advance_opening_step, assign_monster_to_expedition, assign_monster_to_contract,
+    advance_opening_step, assign_monster_to_contract, assign_monster_to_expedition,
     assign_monster_to_rest, assign_monster_to_room, build_first_room, configure_expedition_plan,
     convert_egg, create_new_game_state, create_opening_egg, hatch_selected_egg,
     initialize_first_debt, preview_expedition_plan, purchase_building, refresh_contracts,
     replace_monster_with_selected_egg, resolve_day, resolve_first_client,
 };
-use crate::state::{EggConversionKind, ExpeditionPriority, ContractStatus};
+use crate::state::{ContractStatus, EggConversionKind, ExpeditionPriority};
 
 const SIMULATION_BASE_SEED: u64 = 0x5EED_1EAD_CAFE_BABE;
 const LONG_CAMPAIGN_SEEDS: [(u32, u64); 3] = [

@@ -148,13 +148,19 @@ pub(super) fn apply_work_history_gains(
 ) {
     history.scouting_runs = history.scouting_runs.saturating_add(gains.scouting_runs);
     history.guard_duties = history.guard_duties.saturating_add(gains.guard_duties);
-    history.hospitality_jobs = history.hospitality_jobs.saturating_add(gains.hospitality_jobs);
+    history.hospitality_jobs = history
+        .hospitality_jobs
+        .saturating_add(gains.hospitality_jobs);
     history.craft_jobs = history.craft_jobs.saturating_add(gains.craft_jobs);
-    history.contracts_completed = history.contracts_completed.saturating_add(gains.contracts_completed);
+    history.contracts_completed = history
+        .contracts_completed
+        .saturating_add(gains.contracts_completed);
     history.recovery_shifts = history
         .recovery_shifts
         .saturating_add(gains.recovery_shifts);
-    history.hatchery_assists = history.hatchery_assists.saturating_add(gains.hatchery_assists);
+    history.hatchery_assists = history
+        .hatchery_assists
+        .saturating_add(gains.hatchery_assists);
 }
 
 pub(super) fn roll_work_history_gains(
@@ -166,7 +172,8 @@ pub(super) fn roll_work_history_gains(
         "vanilla_suite" => {
             gains.scouting_runs = roll_binary_gain(room.work_history_gains.scouting_runs, 70);
             gains.hospitality_jobs = roll_binary_gain(room.work_history_gains.hospitality_jobs, 45);
-            gains.contracts_completed = roll_binary_gain(room.work_history_gains.contracts_completed, 12);
+            gains.contracts_completed =
+                roll_binary_gain(room.work_history_gains.contracts_completed, 12);
         }
         "packroom_annex" => {
             gains.craft_jobs = roll_binary_gain(room.work_history_gains.craft_jobs, 55);
@@ -174,7 +181,8 @@ pub(super) fn roll_work_history_gains(
         }
         "nursery_wing" => {
             gains.hospitality_jobs = roll_binary_gain(room.work_history_gains.hospitality_jobs, 65);
-            gains.contracts_completed = roll_binary_gain(room.work_history_gains.contracts_completed, 30);
+            gains.contracts_completed =
+                roll_binary_gain(room.work_history_gains.contracts_completed, 30);
             gains.hatchery_assists = roll_binary_gain(room.work_history_gains.hatchery_assists, 5);
         }
         "public_stage" => {
@@ -187,7 +195,8 @@ pub(super) fn roll_work_history_gains(
             gains.guard_duties = roll_binary_gain(room.work_history_gains.guard_duties, 35);
             gains.hospitality_jobs = roll_binary_gain(room.work_history_gains.hospitality_jobs, 50);
             gains.craft_jobs = roll_binary_gain(room.work_history_gains.craft_jobs, 35);
-            gains.contracts_completed = roll_binary_gain(room.work_history_gains.contracts_completed, 15);
+            gains.contracts_completed =
+                roll_binary_gain(room.work_history_gains.contracts_completed, 15);
             gains.recovery_shifts = roll_binary_gain(room.work_history_gains.recovery_shifts, 40);
             gains.hatchery_assists = roll_binary_gain(room.work_history_gains.hatchery_assists, 5);
         }
@@ -208,7 +217,9 @@ pub(super) fn roll_binary_gain(max_gain: u32, chance_pct: i32) -> u32 {
     }
 }
 
-pub(super) fn summarize_work_history_gains(gains: &crate::data::CompanionWorkHistoryProgressionData) -> String {
+pub(super) fn summarize_work_history_gains(
+    gains: &crate::data::CompanionWorkHistoryProgressionData,
+) -> String {
     let mut parts = Vec::new();
 
     if gains.scouting_runs > 0 {
@@ -224,7 +235,10 @@ pub(super) fn summarize_work_history_gains(gains: &crate::data::CompanionWorkHis
         parts.push(format!("crafting +{}", gains.craft_jobs));
     }
     if gains.contracts_completed > 0 {
-        parts.push(format!("completed contracts +{}", gains.contracts_completed));
+        parts.push(format!(
+            "completed contracts +{}",
+            gains.contracts_completed
+        ));
     }
     if gains.recovery_shifts > 0 {
         parts.push(format!("recovery +{}", gains.recovery_shifts));
@@ -312,10 +326,7 @@ pub(super) fn expedition_corruption_gain(
     gain
 }
 
-pub(super) fn try_apply_mutation(
-    data: &GameData,
-    monster: &mut CompanionState,
-) -> Option<String> {
+pub(super) fn try_apply_mutation(data: &GameData, monster: &mut CompanionState) -> Option<String> {
     let mutation = data.mutations.mutations.iter().find(|mutation| {
         mutation.source_species_id == monster.species_id
             && monster.corruption >= mutation.minimum_corruption

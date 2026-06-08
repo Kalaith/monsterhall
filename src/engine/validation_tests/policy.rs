@@ -394,8 +394,7 @@ pub(super) fn assign_guest_bookings(data: &GameData, game_state: &mut GameState)
             let report =
                 crate::engine::evaluate_contract_eligibility(data, game_state, &request, monster);
             if report.is_eligible
-                && assign_monster_to_contract(data, game_state, &request_id, &monster_id)
-                    .is_ok()
+                && assign_monster_to_contract(data, game_state, &request_id, &monster_id).is_ok()
             {
                 break;
             }

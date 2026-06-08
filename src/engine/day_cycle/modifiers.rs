@@ -26,10 +26,7 @@ pub(super) fn collect_building_modifiers(
     combined
 }
 
-pub(super) fn collect_trait_modifiers(
-    data: &GameData,
-    monster: &CompanionState,
-) -> TraitAggregate {
+pub(super) fn collect_trait_modifiers(data: &GameData, monster: &CompanionState) -> TraitAggregate {
     let mut aggregate = TraitAggregate::default();
 
     for trait_id in &monster.trait_ids {

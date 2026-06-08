@@ -391,9 +391,10 @@ impl Game {
                     status_message,
                 ))
             }
-            GamePhase::ContractDesk(state) => GamePhase::ContractDesk(
-                ContractDeskState::new(state.selected_request_id.clone(), status_message),
-            ),
+            GamePhase::ContractDesk(state) => GamePhase::ContractDesk(ContractDeskState::new(
+                state.selected_request_id.clone(),
+                status_message,
+            )),
             GamePhase::HatcheryManagement(state) => {
                 GamePhase::HatcheryManagement(HatcheryManagementState::with_scroll(
                     state.selected_egg_id.clone(),

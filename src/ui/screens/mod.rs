@@ -2,21 +2,21 @@
 
 use crate::data::GameData;
 use crate::state::{
-    AppSettings, GuildHallManagementState, HatcheryManagementState, ExpeditionPlanningState,
-    GameState, ContractDeskState, HatchRevealState, JournalState, MonsterProfileState,
+    AppSettings, ContractDeskState, ExpeditionPlanningState, GameState, GuildHallManagementState,
+    HatchRevealState, HatcheryManagementState, JournalState, MonsterProfileState,
     OpeningChapterState, TownManagementState, TownOverviewState,
 };
 use crate::ui::actions::UiAction;
 
-mod guild_hall_management;
-mod guild_hall_management_sections;
-mod hatchery_management;
-mod hatchery_management_sections;
-mod day_results;
-mod expedition_planning;
 mod contract_desk;
 mod contract_desk_sections;
+mod day_results;
+mod expedition_planning;
+mod guild_hall_management;
+mod guild_hall_management_sections;
 mod hatch_reveal;
+mod hatchery_management;
+mod hatchery_management_sections;
 mod journal;
 mod loading;
 mod main_menu;
@@ -83,7 +83,12 @@ pub fn draw_guild_hall_management(
     game_state: &GameState,
     last_error: Option<&str>,
 ) -> Option<UiAction> {
-    guild_hall_management::draw_guild_hall_management(data, guild_jobs_state, game_state, last_error)
+    guild_hall_management::draw_guild_hall_management(
+        data,
+        guild_jobs_state,
+        game_state,
+        last_error,
+    )
 }
 
 pub fn draw_contract_desk(

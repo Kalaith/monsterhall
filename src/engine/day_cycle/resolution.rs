@@ -130,8 +130,10 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
 
                 game_state.resources.gold += gold_gain;
                 game_state.resources.arcane_residue += residue_gain;
-                game_state.resources.tower_materials =
-                    game_state.resources.tower_materials.saturating_add(materials_gain);
+                game_state.resources.tower_materials = game_state
+                    .resources
+                    .tower_materials
+                    .saturating_add(materials_gain);
                 summary.guild_job_gold += gold_gain;
                 summary.guild_job_arcane_residue += residue_gain;
 
@@ -177,10 +179,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
 
                 let room_niche_label = display_room_niche(&depth_profile.niche);
                 let room_profile_label = if depth_profile.upgrade_tier > 0 {
-                    format!(
-                        "{} tier {}",
-                        room_niche_label, depth_profile.upgrade_tier
-                    )
+                    format!("{} tier {}", room_niche_label, depth_profile.upgrade_tier)
                 } else {
                     room_niche_label.to_owned()
                 };
@@ -260,15 +259,15 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                         ExpeditionPriority::Balanced => 0,
                         ExpeditionPriority::Aggressive => 6,
                         ExpeditionPriority::Safe => -4,
-        ExpeditionPriority::RecoveryFocused => -1,
-        ExpeditionPriority::Curiosity => -2,
+                        ExpeditionPriority::RecoveryFocused => -1,
+                        ExpeditionPriority::Curiosity => -2,
                     };
                     let priority_injury_risk = match expedition.priority {
                         ExpeditionPriority::Balanced => 0,
                         ExpeditionPriority::Aggressive => 8,
                         ExpeditionPriority::Safe => -10,
-        ExpeditionPriority::RecoveryFocused => -14,
-        ExpeditionPriority::Curiosity => 5,
+                        ExpeditionPriority::RecoveryFocused => -14,
+                        ExpeditionPriority::Curiosity => 5,
                     };
                     let depth_profile = active_expedition_depth_profile.clone().unwrap_or_default();
                     let total_success = data.config.day_cycle.base_expedition_success
@@ -495,7 +494,10 @@ pub(super) fn apply_expedition_prep_cost(
         .resources
         .tower_materials
         .saturating_sub(materials_paid);
-    game_state.resources.arcane_residue = game_state.resources.arcane_residue.saturating_sub(residue_paid);
+    game_state.resources.arcane_residue = game_state
+        .resources
+        .arcane_residue
+        .saturating_sub(residue_paid);
 
     summary.expedition_prep_gold = gold_paid;
     summary.expedition_prep_materials = materials_paid;

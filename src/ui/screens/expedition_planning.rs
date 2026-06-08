@@ -2,7 +2,7 @@ use macroquad::prelude::{screen_height, screen_width};
 
 use crate::data::GameData;
 use crate::engine::preview_expedition_plan;
-use crate::state::{ExpeditionPlanningState, ExpeditionPriority, GameState, CompanionJobState};
+use crate::state::{CompanionJobState, ExpeditionPlanningState, ExpeditionPriority, GameState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_backdrop, draw_floor_preview, BackdropKind};
 use crate::ui::chrome::{

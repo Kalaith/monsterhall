@@ -1,5 +1,5 @@
 use super::*;
-use crate::state::{GameState, CompanionState};
+use crate::state::{CompanionState, GameState};
 
 #[derive(Debug, Serialize, Clone)]
 pub(super) struct SimulationResourcesSnapshot {
@@ -526,9 +526,7 @@ pub(super) fn guest_pressure_by_tier(
         match request.status {
             ContractStatus::Pending => metrics.pending += 1,
             ContractStatus::Accepted => metrics.accepted += 1,
-            ContractStatus::Completed
-            | ContractStatus::Failed
-            | ContractStatus::Declined => {}
+            ContractStatus::Completed | ContractStatus::Failed | ContractStatus::Declined => {}
         }
         if !request_start
             .iter()
@@ -549,9 +547,7 @@ pub(super) fn guest_pressure_by_tier(
         match start.status {
             ContractStatus::Accepted => metrics.completed += 1,
             ContractStatus::Pending => metrics.expired += 1,
-            ContractStatus::Completed
-            | ContractStatus::Failed
-            | ContractStatus::Declined => {}
+            ContractStatus::Completed | ContractStatus::Failed | ContractStatus::Declined => {}
         }
     }
     let tier_generated = tiers.iter().map(|metrics| metrics.generated).sum::<usize>();
@@ -579,10 +575,7 @@ pub(super) fn tier_metrics_mut(
         .expect("tier metrics should contain inserted value")
 }
 
-pub(super) fn contract_tier(
-    data: &GameData,
-    request: &crate::state::ContractState,
-) -> u32 {
+pub(super) fn contract_tier(data: &GameData, request: &crate::state::ContractState) -> u32 {
     data.guild_rooms
         .rooms
         .iter()

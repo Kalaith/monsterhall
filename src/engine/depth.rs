@@ -1,10 +1,8 @@
-use crate::data::{
-    GuildRoomData, EventData, GameData, ContractData, MissionData, TowerFloorData,
-};
+use crate::data::{ContractData, EventData, GameData, GuildRoomData, MissionData, TowerFloorData};
 use crate::state::{
-    ExpeditionPriority, GameState, ContractHistoryRequirementState, ContractState,
-    ContractStatus, ContractSkillRequirementState, CompanionState, CompanionJobState, ResourcesState,
-    TownSituationState,
+    CompanionJobState, CompanionState, ContractHistoryRequirementState,
+    ContractSkillRequirementState, ContractState, ContractStatus, ExpeditionPriority, GameState,
+    ResourcesState, TownSituationState,
 };
 
 #[derive(Debug, Clone)]
@@ -94,7 +92,8 @@ pub(crate) fn room_depth_profile_for_town(
         .count() as u32
         + project_count.min(2);
 
-    let (gold_bias, residue_bias, stress_bias, corruption_bias, guest_appeal) = match niche.as_str() {
+    let (gold_bias, residue_bias, stress_bias, corruption_bias, guest_appeal) = match niche.as_str()
+    {
         "comfort" => (8, 0, -2, 0, 8),
         "performance" => (14, 4, 1, 0, 12),
         "hatchery" => (10, 8, 2, 1, 10),
@@ -242,7 +241,11 @@ pub(crate) fn contract_depth_score(
         .map(|room| room_depth_profile(data, game_state, room).guest_appeal)
         .unwrap_or_default();
     let relationship_score = monster.bond.min(12) + monster.reputation.max(0) as u32;
-    trait_score + role_score + room_score + relationship_score + town_preparation_quality(data, game_state)
+    trait_score
+        + role_score
+        + room_score
+        + relationship_score
+        + town_preparation_quality(data, game_state)
 }
 
 pub(crate) fn contract_partial_success(
@@ -261,7 +264,8 @@ pub(crate) fn contract_partial_success(
     };
     template.partial_success_score > 0
         && town_preparation_quality(data, game_state) >= request.preparation_quality_required
-        && contract_depth_score(data, game_state, request, monster) >= template.partial_success_score
+        && contract_depth_score(data, game_state, request, monster)
+            >= template.partial_success_score
 }
 
 pub(crate) fn contract_follow_up_request(
@@ -305,12 +309,14 @@ pub(crate) fn town_preparation_quality(data: &GameData, game_state: &GameState) 
                 .rooms
                 .iter()
                 .find(|room| &room.id == room_id)
-                .map(|room| room.preparation_quality_bonus
-                    .saturating_add(monster.skills.scouting / 2)
-                    .saturating_add(monster.skills.guarding / 2)
-                    .saturating_add(monster.skills.hospitality / 3)
-                    .saturating_add(monster.skills.navigation / 2)
-                    .saturating_add(monster.skills.arcana / 2)),
+                .map(|room| {
+                    room.preparation_quality_bonus
+                        .saturating_add(monster.skills.scouting / 2)
+                        .saturating_add(monster.skills.guarding / 2)
+                        .saturating_add(monster.skills.hospitality / 3)
+                        .saturating_add(monster.skills.navigation / 2)
+                        .saturating_add(monster.skills.arcana / 2)
+                }),
             _ => None,
         })
         .sum::<u32>();
@@ -523,7 +529,9 @@ fn request_from_template(
             guard_duties: template.required_work_history_thresholds.guard_duties,
             hospitality_jobs: template.required_work_history_thresholds.hospitality_jobs,
             craft_jobs: template.required_work_history_thresholds.craft_jobs,
-            contracts_completed: template.required_work_history_thresholds.contracts_completed,
+            contracts_completed: template
+                .required_work_history_thresholds
+                .contracts_completed,
             recovery_shifts: template.required_work_history_thresholds.recovery_shifts,
             hatchery_assists: template.required_work_history_thresholds.hatchery_assists,
         },

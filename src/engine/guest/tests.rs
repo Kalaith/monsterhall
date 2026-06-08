@@ -1,8 +1,8 @@
 use super::*;
 use crate::data::GameData;
 use crate::state::{
-    ChamberState, GameState, OpeningChapterStep, PlayerTownState, ResourcesState, CompanionWorkHistoryState,
-    CompanionSkillState, StoryProgressState,
+    ChamberState, CompanionSkillState, CompanionWorkHistoryState, GameState, OpeningChapterStep,
+    PlayerTownState, ResourcesState, StoryProgressState,
 };
 
 #[test]

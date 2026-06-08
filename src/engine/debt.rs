@@ -328,7 +328,7 @@ mod tests {
     use super::*;
     use crate::data::GameData;
     use crate::state::{
-        ChamberState, GameState, CompanionState, OpeningChapterStep, PlayerTownState,
+        ChamberState, CompanionState, GameState, OpeningChapterStep, PlayerTownState,
         ResourcesState, StoryProgressState,
     };
 
@@ -532,10 +532,8 @@ mod tests {
                 "../../assets/data/guest_archetypes.json"
             ))
             .expect("guest archetypes should deserialize"),
-            contracts: serde_json::from_str(include_str!(
-                "../../assets/data/guest_requests.json"
-            ))
-            .expect("contracts should deserialize"),
+            contracts: serde_json::from_str(include_str!("../../assets/data/guest_requests.json"))
+                .expect("contracts should deserialize"),
             patron_tiers: serde_json::from_str(include_str!("../../assets/data/client_tiers.json"))
                 .expect("patron tiers should deserialize"),
             missions: serde_json::from_str(include_str!("../../assets/data/missions.json"))
@@ -556,10 +554,8 @@ mod tests {
                 .expect("floors should deserialize"),
             traits: serde_json::from_str(include_str!("../../assets/data/traits.json"))
                 .expect("traits should deserialize"),
-            guild_rooms: serde_json::from_str(include_str!(
-                "../../assets/data/guild_rooms.json"
-            ))
-            .expect("rooms should deserialize"),
+            guild_rooms: serde_json::from_str(include_str!("../../assets/data/guild_rooms.json"))
+                .expect("rooms should deserialize"),
             events: serde_json::from_str(include_str!("../../assets/data/events.json"))
                 .expect("events should deserialize"),
         }

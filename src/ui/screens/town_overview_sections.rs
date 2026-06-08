@@ -2,7 +2,7 @@ use macroquad::prelude::*;
 
 use crate::data::GameData;
 use crate::engine::preview_upkeep;
-use crate::state::{GameState, CompanionState, CompanionJobState, TownOverviewState};
+use crate::state::{CompanionJobState, CompanionState, GameState, TownOverviewState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_species_portrait, draw_ui_icon, icon_for_metric_label};
 use crate::ui::chrome::{draw_screen_title, draw_top_utility_bar};
@@ -11,7 +11,7 @@ use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
 use crate::ui::theme;
 use crate::ui::view_models::{
-    action_from_action_hint, assignment_label, daily_priority_summary, companion_skill_summary,
+    action_from_action_hint, assignment_label, companion_skill_summary, daily_priority_summary,
     species_name_by_id,
 };
 

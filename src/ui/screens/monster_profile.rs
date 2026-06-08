@@ -14,9 +14,9 @@ use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
 use crate::ui::theme;
 use crate::ui::view_models::{
-    assignment_label, fill_template, monster_quality_label, monster_role_summary,
-    work_history_summary, companion_skill_summary, species_name_by_id, species_portrait_key_by_id,
-    trait_names_for_monster,
+    assignment_label, companion_skill_summary, fill_template, monster_quality_label,
+    monster_role_summary, species_name_by_id, species_portrait_key_by_id, trait_names_for_monster,
+    work_history_summary,
 };
 
 struct MonsterProfileLayout {

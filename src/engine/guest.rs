@@ -7,10 +7,10 @@ use super::{
     active_situation_guest_bonus, apply_monster_relationship_gain, contract_depth_score,
     contract_follow_up_request, contract_partial_success,
 };
-use crate::data::{GameData, ContractData};
+use crate::data::{ContractData, GameData};
 use crate::state::{
-    GameState, ContractHistoryRequirementState, ContractState, ContractStatus,
-    ContractSkillRequirementState, CompanionState, CompanionJobState, ResourcesState,
+    CompanionJobState, CompanionState, ContractHistoryRequirementState,
+    ContractSkillRequirementState, ContractState, ContractStatus, GameState, ResourcesState,
 };
 
 const MIN_ACTIVE_GUEST_REQUESTS: usize = 3;
@@ -120,7 +120,9 @@ pub fn refresh_contracts(
                 guard_duties: template.required_work_history_thresholds.guard_duties,
                 hospitality_jobs: template.required_work_history_thresholds.hospitality_jobs,
                 craft_jobs: template.required_work_history_thresholds.craft_jobs,
-                contracts_completed: template.required_work_history_thresholds.contracts_completed,
+                contracts_completed: template
+                    .required_work_history_thresholds
+                    .contracts_completed,
                 recovery_shifts: template.required_work_history_thresholds.recovery_shifts,
                 hatchery_assists: template.required_work_history_thresholds.hatchery_assists,
             },
@@ -444,7 +446,8 @@ pub fn resolve_contracts(
                     roster_updates.push(progression_update);
                 }
                 if !partial_success {
-                    if let Some(follow_up) = contract_follow_up_request(data, game_state, &request) {
+                    if let Some(follow_up) = contract_follow_up_request(data, game_state, &request)
+                    {
                         follow_up_requests.push(follow_up);
                     }
                 }
@@ -470,9 +473,7 @@ pub fn resolve_contracts(
                 ));
             }
             ContractStatus::Pending => remaining_requests.push(request),
-            ContractStatus::Completed
-            | ContractStatus::Failed
-            | ContractStatus::Declined => {}
+            ContractStatus::Completed | ContractStatus::Failed | ContractStatus::Declined => {}
         }
     }
 

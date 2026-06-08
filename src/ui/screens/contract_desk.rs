@@ -1,5 +1,5 @@
 use crate::data::GameData;
-use crate::state::{GameState, ContractDeskState};
+use crate::state::{ContractDeskState, GameState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_backdrop, BackdropKind};
 

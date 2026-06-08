@@ -22,7 +22,9 @@ pub fn ui_scale_factor() -> f32 {
 }
 
 pub fn scaled_font_size(font_size: f32) -> f32 {
-    (font_size * ui_scale_factor() * BASE_FONT_BOOST).round().max(18.0)
+    (font_size * ui_scale_factor() * BASE_FONT_BOOST)
+        .round()
+        .max(18.0)
 }
 
 pub fn scaled_spacing(spacing: f32) -> f32 {
@@ -121,12 +123,7 @@ fn draw_button_label(text: &str, x: f32, y: f32, w: f32, h: f32, color: Color, f
         text_y + 2.0,
         TextStyle::new(size, Color::new(0.02, 0.01, 0.03, 0.88)).params(),
     );
-    draw_text_ex(
-        text,
-        text_x,
-        text_y,
-        TextStyle::new(size, color).params(),
-    );
+    draw_text_ex(text, text_x, text_y, TextStyle::new(size, color).params());
 }
 
 fn button_rect(x: f32, y: f32, w: f32, h: f32, style: &ButtonStyle) -> bool {
@@ -234,12 +231,7 @@ pub fn draw_wrapped_lines(lines: &[String], x: f32, mut y: f32, font_size: f32, 
     let line_gap = scaled_spacing(8.0);
 
     for line in lines {
-        draw_text_ex(
-            line,
-            x,
-            y,
-            TextStyle::new(scaled_font_size, color).params(),
-        );
+        draw_text_ex(line, x, y, TextStyle::new(scaled_font_size, color).params());
         y += scaled_font_size + line_gap;
     }
 }
