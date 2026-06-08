@@ -82,10 +82,48 @@
         </footer>
     </div>
 
-    <script src="mq_js_bundle.js?v=monsterhall-1-9-10"></script>
+    <script src="mq_js_bundle.js?v=monsterhall-1-9-20"></script>
+    <script src="sapp_jsutils.js?v=monsterhall-1-9-20"></script>
     <script>
         document.getElementById('loading').style.display = 'none';
-        load("monsterhall.wasm?v=monsterhall-1-9-10");
+        function installMonsterhallStorageBridge(imports) {
+            imports.env.storage_set_extern = function (keyObject, valueObject) {
+                const key = consume_js_object(keyObject);
+                const value = consume_js_object(valueObject);
+                window.localStorage.setItem(key, value);
+            };
+            imports.env.storage_get_extern = function (keyObject) {
+                const key = consume_js_object(keyObject);
+                const value = window.localStorage.getItem(key);
+                return value === null ? -1 : js_object(value);
+            };
+            imports.env.storage_remove_extern = function (keyObject) {
+                const key = consume_js_object(keyObject);
+                window.localStorage.removeItem(key);
+            };
+            imports.env.storage_exists_extern = function (keyObject) {
+                const key = consume_js_object(keyObject);
+                return window.localStorage.getItem(key) !== null;
+            };
+        }
+        miniquad_add_plugin({
+            name: "monsterhall_storage",
+            version: 1,
+            register_plugin: installMonsterhallStorageBridge
+        });
+        if (typeof importObject !== "undefined" && importObject.env) {
+            installMonsterhallStorageBridge(importObject);
+        }
+        if (typeof add_missing_functions_stabs === "function") {
+            const addMissingFunctions = add_missing_functions_stabs;
+            add_missing_functions_stabs = function (module) {
+                installMonsterhallStorageBridge(importObject);
+                const result = addMissingFunctions(module);
+                installMonsterhallStorageBridge(importObject);
+                return result;
+            };
+        }
+        load("monsterhall.wasm?v=monsterhall-1-9-20");
 
         function toggleFullscreen() {
             const container = document.getElementById('game-container');

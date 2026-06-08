@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "common": {
     "settings_button": "Settings",
-    "return_to_town_button": "Return To Town",
+    "return_to_town_button": "Guild Hall",
     "main_menu_button": "Main Menu",
     "end_day_button": "End Day",
     "save_campaign_button": "Save Campaign",
@@ -11,7 +11,7 @@
     "guest_desk_button": "Contract Desk",
     "chamber_button": "Hatchery",
     "journal_button": "Journal",
-    "town_planner_button": "Town Planner",
+    "town_planner_button": "Buildings",
     "quit_game_button": "Quit Game",
     "close_button": "Close",
     "assign_button": "Assign",
@@ -210,7 +210,7 @@
     "instinct_label": "Instinct"
   },
   "town_management": {
-    "title": "Guild Hall Management",
+    "title": "Buildings",
     "subtitle": "Build support structures, review unlock chains, and see how guild growth opens rooms, species, and floors.",
     "buildings_panel_title": "Buildings",
     "selected_building_panel_title": "Selected Building",

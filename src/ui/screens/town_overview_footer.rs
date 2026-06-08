@@ -17,7 +17,7 @@ pub(super) fn draw_town_overview_footer(
 ) -> Option<UiAction> {
     let common = &data.ui_text.common;
     let actions: [(&str, UiAction); 8] = [
-        ("Town", UiAction::ReturnToTownOverview),
+        ("Guild Hall", UiAction::ReturnToTownOverview),
         (
             common.town_planner_button.as_str(),
             UiAction::OpenTownManagement,

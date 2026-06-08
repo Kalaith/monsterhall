@@ -12,7 +12,7 @@
     "web_storage_key": "monsterhall.save",
     "native_settings_path": "settings.json",
     "web_settings_key": "monsterhall.settings",
-    "autosave_enabled": false
+    "autosave_enabled": true
   },
   "display": {
     "start_fullscreen": true,

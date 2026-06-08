@@ -229,6 +229,7 @@ impl Game {
                     HatchRevealReturn::HatcheryManagement { inventory_scroll },
                 ));
                 self.last_error = None;
+                self.autosave_game_state();
             }
             Err(message) => {
                 self.last_error = Some(message);
@@ -301,6 +302,7 @@ impl Game {
                     HatchRevealReturn::HatcheryManagement { inventory_scroll },
                 ));
                 self.last_error = None;
+                self.autosave_game_state();
             }
             Err(message) => {
                 self.last_error = Some(message);
@@ -338,6 +340,16 @@ impl Game {
             self.last_error = Some("Game data is not available.".to_owned());
             return;
         };
+
+        const REPLACE_SAVE_CONFIRMATION: &str =
+            "A saved campaign exists. Click New Campaign again to replace it, or Continue Campaign to load it.";
+        if save_exists(self.save_identifier())
+            && self.last_error.as_deref() != Some(REPLACE_SAVE_CONFIRMATION)
+        {
+            self.phase = GamePhase::MainMenu(MainMenuState::new(true));
+            self.last_error = Some(REPLACE_SAVE_CONFIRMATION.to_owned());
+            return;
+        }
 
         let game_state = create_new_game_state(data);
         let save_data = SaveData::new(data.config.save_version, game_state.clone());
@@ -429,6 +441,24 @@ impl Game {
         }
     }
 
+    pub(super) fn autosave_game_state(&mut self) {
+        let Some(data) = self.data.as_ref() else {
+            return;
+        };
+        if !data.config.persistence.autosave_enabled {
+            return;
+        }
+
+        let Some(game_state) = self.game_state.clone() else {
+            return;
+        };
+
+        let save_data = SaveData::new(data.config.save_version, game_state);
+        if let Err(message) = save_game(self.save_identifier(), &save_data) {
+            self.last_error = Some(message);
+        }
+    }
+
     pub(super) fn resolve_active_day(&mut self) {
         let Some(data) = self.data.as_ref() else {
             self.last_error = Some("Game data is not available.".to_owned());
@@ -451,6 +481,7 @@ impl Game {
         let summary = resolve_day(data, game_state);
         self.phase = GamePhase::DayResults(DayResultsState::new(summary));
         self.last_error = None;
+        self.autosave_game_state();
     }
 
     pub(super) fn quit_game(&mut self) {
@@ -565,6 +596,7 @@ impl Game {
                     }
                     _ => {}
                 }
+                self.autosave_game_state();
             }
             Err(message) => {
                 self.last_error = Some(message);
