@@ -2,7 +2,7 @@
 
 use std::collections::HashSet;
 
-use macroquad::rand::gen_range;
+use macroquad_toolkit::rng::gen_range;
 
 use super::{
     apply_monster_relationship_gain, complete_town_project_if_needed, debt::resolve_debt_cycle,

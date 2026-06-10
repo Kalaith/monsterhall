@@ -69,9 +69,7 @@ fn save_json<T: Serialize>(save_key: &str, value: &T) -> Result<(), String> {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn save_json<T: Serialize>(save_key: &str, value: &T) -> Result<(), String> {
-    let serialized = serde_json::to_string_pretty(value)
-        .map_err(|error| format!("Failed to serialize save data: {error}"))?;
-    macroquad_toolkit::persistence::save_string_atomic(save_key, &serialized)
+    macroquad_toolkit::persistence::save_json_atomic(save_key, value)
         .map_err(|error| format!("Failed to write {save_key}: {error}"))
 }
 
@@ -84,9 +82,8 @@ fn load_json<T: DeserializeOwned>(save_key: &str) -> Result<T, String> {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn load_json<T: DeserializeOwned>(save_key: &str) -> Result<T, String> {
-    let serialized = load_raw_json(save_key)?;
-    serde_json::from_str(&serialized)
-        .map_err(|error| format!("Failed to parse {save_key}: {error}"))
+    macroquad_toolkit::persistence::load_json(save_key)
+        .map_err(|error| format!("Failed to load {save_key}: {error}"))
 }
 
 #[cfg(target_arch = "wasm32")]
@@ -105,14 +102,13 @@ fn load_legacy_raw_browser_save(save_key: &str) -> Result<String, String> {
     let serialized = macroquad_toolkit::wasm_storage::storage_get(save_key)
         .ok_or_else(|| format!("No legacy browser save found for key '{save_key}'."))?;
     if serialized.trim().is_empty() {
-        return Err(format!("No legacy browser save found for key '{save_key}'."));
+        return Err(format!(
+            "No legacy browser save found for key '{save_key}'."
+        ));
     }
 
-    let _ = macroquad_toolkit::persistence::save_string_key(
-        TOOLKIT_GAME_NAME,
-        save_key,
-        &serialized,
-    );
+    let _ =
+        macroquad_toolkit::persistence::save_string_key(TOOLKIT_GAME_NAME, save_key, &serialized);
     Ok(serialized)
 }
 

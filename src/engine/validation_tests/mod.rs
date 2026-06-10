@@ -2,7 +2,7 @@ use std::fs;
 use std::path::PathBuf;
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
-use macroquad::rand::srand;
+use macroquad_toolkit::rng::srand;
 use serde::Serialize;
 
 use super::*;

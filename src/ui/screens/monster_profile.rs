@@ -86,7 +86,14 @@ pub fn draw_monster_profile(
     let species_name = species_name_by_id(data, &monster.species_id);
     let assignment = assignment_label(data, &monster.current_job);
 
-    draw_profile_summary(data, monster, &layout, &species_name, assignment, &role_summary);
+    draw_profile_summary(
+        data,
+        monster,
+        &layout,
+        &species_name,
+        assignment,
+        &role_summary,
+    );
 
     let gap = 16.0;
     let identity_w = (layout.content_width * 0.29).clamp(248.0, 292.0);
@@ -270,7 +277,12 @@ fn draw_identity_panel(
         x + w - 22.0,
         y + 238.0,
         1.0,
-        Color::new(theme::BORDER_1.r, theme::BORDER_1.g, theme::BORDER_1.b, 0.46),
+        Color::new(
+            theme::BORDER_1.r,
+            theme::BORDER_1.g,
+            theme::BORDER_1.b,
+            0.46,
+        ),
     );
     draw_body_text("Today", x + 22.0, y + 264.0, 17.0, theme::TEXT_STRONG);
     draw_body_text_in_box(
@@ -337,16 +349,72 @@ fn draw_best_use_panel(
 
     let tile_w = ((w * 0.60) - 18.0) / 4.0;
     let tile_x = x + w * 0.40;
-    draw_metric_tile(tile_x, y + 42.0, tile_w, 58.0, &ui.fatigue_label, &monster.fatigue.to_string(), condition_color(monster.fatigue, 2, false));
-    draw_metric_tile(tile_x + tile_w + 6.0, y + 42.0, tile_w, 58.0, &ui.stress_label, &monster.stress.to_string(), condition_color(monster.stress, 2, false));
-    draw_metric_tile(tile_x + (tile_w + 6.0) * 2.0, y + 42.0, tile_w, 58.0, &ui.injury_label, &monster.injury.to_string(), condition_color(monster.injury, 0, true));
-    draw_metric_tile(tile_x + (tile_w + 6.0) * 3.0, y + 42.0, tile_w, 58.0, "Instability", &monster.corruption.to_string(), theme::INFO);
+    draw_metric_tile(
+        tile_x,
+        y + 42.0,
+        tile_w,
+        58.0,
+        &ui.fatigue_label,
+        &monster.fatigue.to_string(),
+        condition_color(monster.fatigue, 2, false),
+    );
+    draw_metric_tile(
+        tile_x + tile_w + 6.0,
+        y + 42.0,
+        tile_w,
+        58.0,
+        &ui.stress_label,
+        &monster.stress.to_string(),
+        condition_color(monster.stress, 2, false),
+    );
+    draw_metric_tile(
+        tile_x + (tile_w + 6.0) * 2.0,
+        y + 42.0,
+        tile_w,
+        58.0,
+        &ui.injury_label,
+        &monster.injury.to_string(),
+        condition_color(monster.injury, 0, true),
+    );
+    draw_metric_tile(
+        tile_x + (tile_w + 6.0) * 3.0,
+        y + 42.0,
+        tile_w,
+        58.0,
+        "Instability",
+        &monster.corruption.to_string(),
+        theme::INFO,
+    );
 
     let strength_y = y + 108.0;
     let strength_w = ((w * 0.60) - 24.0) / 3.0;
-    draw_profile_chip(tile_x, strength_y, strength_w, 30.0, &ui.power_label, &monster.stats.power.to_string(), theme::INFO);
-    draw_profile_chip(tile_x + strength_w + 8.0, strength_y, strength_w, 30.0, &ui.charm_label, &monster.stats.charm.to_string(), theme::POSITIVE);
-    draw_profile_chip(tile_x + (strength_w + 8.0) * 2.0, strength_y, strength_w, 30.0, &ui.endurance_label, &monster.stats.endurance.to_string(), theme::WARNING);
+    draw_profile_chip(
+        tile_x,
+        strength_y,
+        strength_w,
+        30.0,
+        &ui.power_label,
+        &monster.stats.power.to_string(),
+        theme::INFO,
+    );
+    draw_profile_chip(
+        tile_x + strength_w + 8.0,
+        strength_y,
+        strength_w,
+        30.0,
+        &ui.charm_label,
+        &monster.stats.charm.to_string(),
+        theme::POSITIVE,
+    );
+    draw_profile_chip(
+        tile_x + (strength_w + 8.0) * 2.0,
+        strength_y,
+        strength_w,
+        30.0,
+        &ui.endurance_label,
+        &monster.stats.endurance.to_string(),
+        theme::WARNING,
+    );
 }
 
 fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w: f32, h: f32) {
@@ -368,7 +436,11 @@ fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w
     for (index, (label, value, color)) in [
         ("Scout", monster.skills.scouting.to_string(), theme::INFO),
         ("Guard", monster.skills.guarding.to_string(), theme::WARNING),
-        ("Hosp.", monster.skills.hospitality.to_string(), theme::POSITIVE),
+        (
+            "Hosp.",
+            monster.skills.hospitality.to_string(),
+            theme::POSITIVE,
+        ),
         ("Craft", monster.skills.crafting.to_string(), theme::GOLD),
         ("Charm", monster.skills.charm.to_string(), theme::ROSE),
         ("Bond", monster.bond.to_string(), theme::PRIMARY),
@@ -387,10 +459,42 @@ fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w
     draw_gold_separator(x + 18.0, y + 148.0, w - 36.0);
     let tower_y = y + 164.0;
     let tower_w = (w - 60.0) / 4.0;
-    draw_profile_chip(x + 18.0, tower_y, tower_w, chip_h, "Power", &monster.stats.power.to_string(), theme::INFO);
-    draw_profile_chip(x + 24.0 + tower_w, tower_y, tower_w, chip_h, "Charm", &monster.stats.charm.to_string(), theme::POSITIVE);
-    draw_profile_chip(x + 30.0 + tower_w * 2.0, tower_y, tower_w, chip_h, "Endure", &monster.stats.endurance.to_string(), theme::WARNING);
-    draw_profile_chip(x + 36.0 + tower_w * 3.0, tower_y, tower_w, chip_h, "Instinct", &monster.stats.instinct.to_string(), theme::ROSE);
+    draw_profile_chip(
+        x + 18.0,
+        tower_y,
+        tower_w,
+        chip_h,
+        "Power",
+        &monster.stats.power.to_string(),
+        theme::INFO,
+    );
+    draw_profile_chip(
+        x + 24.0 + tower_w,
+        tower_y,
+        tower_w,
+        chip_h,
+        "Charm",
+        &monster.stats.charm.to_string(),
+        theme::POSITIVE,
+    );
+    draw_profile_chip(
+        x + 30.0 + tower_w * 2.0,
+        tower_y,
+        tower_w,
+        chip_h,
+        "Endure",
+        &monster.stats.endurance.to_string(),
+        theme::WARNING,
+    );
+    draw_profile_chip(
+        x + 36.0 + tower_w * 3.0,
+        tower_y,
+        tower_w,
+        chip_h,
+        "Instinct",
+        &monster.stats.instinct.to_string(),
+        theme::ROSE,
+    );
 }
 
 fn draw_gold_separator(x: f32, y: f32, w: f32) {
@@ -426,15 +530,7 @@ fn draw_traits_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, 
     );
 }
 
-fn draw_profile_chip(
-    x: f32,
-    y: f32,
-    w: f32,
-    h: f32,
-    label: &str,
-    value: &str,
-    color: Color,
-) {
+fn draw_profile_chip(x: f32, y: f32, w: f32, h: f32, label: &str, value: &str, color: Color) {
     let fill = Color::new(theme::PANEL_1.r, theme::PANEL_1.g, theme::PANEL_1.b, 0.90);
     let border = Color::new(color.r, color.g, color.b, 0.72);
     let style = macroquad_toolkit::ui::ChamferedSurfaceStyle::new(fill, border)

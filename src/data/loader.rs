@@ -36,7 +36,10 @@ pub async fn load_game_data() -> Result<GameData, String> {
 pub async fn load_game_data() -> Result<GameData, String> {
     let data = GameData {
         config: parse_embedded("config.json", include_str!("../../assets/data/config.json"))?,
-        ui_text: parse_embedded("ui_text.json", include_str!("../../assets/data/ui_text.json"))?,
+        ui_text: parse_embedded(
+            "ui_text.json",
+            include_str!("../../assets/data/ui_text.json"),
+        )?,
         debt_milestones: parse_embedded(
             "debt_milestones.json",
             include_str!("../../assets/data/debt_milestones.json"),
@@ -53,7 +56,10 @@ pub async fn load_game_data() -> Result<GameData, String> {
             "client_tiers.json",
             include_str!("../../assets/data/client_tiers.json"),
         )?,
-        missions: parse_embedded("missions.json", include_str!("../../assets/data/missions.json"))?,
+        missions: parse_embedded(
+            "missions.json",
+            include_str!("../../assets/data/missions.json"),
+        )?,
         mutations: parse_embedded(
             "mutations.json",
             include_str!("../../assets/data/mutations.json"),
@@ -66,7 +72,10 @@ pub async fn load_game_data() -> Result<GameData, String> {
             "monster_names.json",
             include_str!("../../assets/data/monster_names.json"),
         )?,
-        species: parse_embedded("species.json", include_str!("../../assets/data/species.json"))?,
+        species: parse_embedded(
+            "species.json",
+            include_str!("../../assets/data/species.json"),
+        )?,
         buildings: parse_embedded(
             "buildings.json",
             include_str!("../../assets/data/buildings.json"),
