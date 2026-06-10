@@ -27,6 +27,8 @@ fn guest_eligibility_rejects_wrong_species_and_missing_room() {
     let request = ContractState {
         request_id: "guest_request_001".to_owned(),
         template_id: "succu_salon_booking".to_owned(),
+        category: String::new(),
+        patron_tier_id: None,
         guest_name: "Veiled Patron".to_owned(),
         archetype_id: "veiled_patron".to_owned(),
         requested_room_id: "public_stage".to_owned(),
@@ -40,6 +42,8 @@ fn guest_eligibility_rejects_wrong_species_and_missing_room() {
         reward: ResourcesState::default(),
         penalty_gold: 10,
         deadline_day: 6,
+        preparation_quality_required: 0,
+        preparation_quality_bonus: 0,
         status: ContractStatus::Pending,
         assigned_monster_id: None,
         chain_depth: 0,
@@ -62,11 +66,11 @@ fn guest_eligibility_rejects_wrong_species_and_missing_room() {
     assert!(report
         .failure_reasons
         .iter()
-        .any(|reason| reason.contains("Requires Public Stage.")));
+        .any(|reason| reason.contains("Requires Reception Hall.")));
     assert!(report
         .failure_reasons
         .iter()
-        .any(|reason| reason.contains("Requires Succu-Slime.")));
+        .any(|reason| reason.contains("Requires Residue Slime.")));
 }
 
 #[test]
@@ -91,6 +95,8 @@ fn guest_eligibility_accepts_trained_matching_specialist() {
     let request = ContractState {
         request_id: "guest_request_002".to_owned(),
         template_id: "lamia_binding_rite".to_owned(),
+        category: String::new(),
+        patron_tier_id: None,
         guest_name: "Veiled Patron".to_owned(),
         archetype_id: "veiled_patron".to_owned(),
         requested_room_id: "nursery_wing".to_owned(),
@@ -111,6 +117,8 @@ fn guest_eligibility_accepts_trained_matching_specialist() {
         reward: ResourcesState::default(),
         penalty_gold: 10,
         deadline_day: 6,
+        preparation_quality_required: 0,
+        preparation_quality_bonus: 0,
         status: ContractStatus::Pending,
         assigned_monster_id: None,
         chain_depth: 0,

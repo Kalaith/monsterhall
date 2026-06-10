@@ -18,6 +18,8 @@ fn golemkin_room_and_trait_add_corruption() {
         service_tier: 2,
         base_gold_yield: 1,
         base_residue_yield: 1,
+        base_materials_yield: 0,
+        reputation_yield: 0,
         stamina_cost: 1,
         patron_tiers: vec!["local_adventurers".to_owned()],
         trained_skill_ids: vec!["crafting".to_owned(), "charm".to_owned()],
@@ -37,6 +39,9 @@ fn golemkin_room_and_trait_add_corruption() {
         stress_modifier: 0,
         corruption_pressure: 0,
         guest_appeal: 0,
+        job_kind: String::new(),
+        preparation_quality_bonus: 0,
+        recovery_bonus: 0,
     };
     let monster = test_monster(vec!["corruption_tuned".to_owned()]);
 
@@ -188,7 +193,7 @@ fn release_monster_clears_assignments_without_emptying_roster() {
 
     let message = release_monster(&mut game_state, "monster_002").expect("release should work");
 
-    assert_eq!(message, "Liora left the keep.");
+    assert_eq!(message, "Liora left Monsterhall.");
     assert_eq!(game_state.monsters.len(), 1);
     assert!(game_state.active_expedition.is_none());
     assert!(matches!(
@@ -210,6 +215,8 @@ fn trained_room_skills_add_guild_job_bonus() {
         service_tier: 1,
         base_gold_yield: 30,
         base_residue_yield: 6,
+        base_materials_yield: 0,
+        reputation_yield: 0,
         stamina_cost: 10,
         patron_tiers: vec!["local_adventurers".to_owned()],
         trained_skill_ids: vec![
@@ -233,6 +240,9 @@ fn trained_room_skills_add_guild_job_bonus() {
         stress_modifier: 0,
         corruption_pressure: 0,
         guest_appeal: 0,
+        job_kind: String::new(),
+        preparation_quality_bonus: 0,
+        recovery_bonus: 0,
     };
 
     let novice = test_monster(Vec::new());

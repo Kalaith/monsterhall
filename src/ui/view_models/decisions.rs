@@ -278,11 +278,11 @@ mod tests {
         assert!(game_state
             .event_log
             .iter()
-            .any(|entry| entry.contains("warm opening hidden in the ruined tower wall")));
+            .any(|entry| entry.contains("sealed hatchery hidden in the ruined guild hall")));
         assert!(game_state
             .event_log
             .iter()
-            .any(|entry| entry.contains("produced a strange egg")));
+            .any(|entry| entry.contains("drop of your blood")));
     }
 
     #[test]
@@ -308,7 +308,7 @@ mod tests {
         assert!(game_state
             .event_log
             .iter()
-            .any(|entry| entry.contains("proved the tower can pay")));
+            .any(|entry| entry.contains("proved Monsterhall can pay the debt")));
         assert!(game_state.event_log.len() >= 6);
     }
 

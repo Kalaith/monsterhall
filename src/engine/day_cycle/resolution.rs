@@ -46,17 +46,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         &mut summary.roster_updates,
     );
 
-    if let Some(expedition) = &active_expedition {
-        if let Some(mission) = data
-            .missions
-            .missions
-            .iter()
-            .find(|entry| entry.id == expedition.mission_id)
-        {
-            apply_expedition_prep_cost(game_state, &mut summary, mission);
-        }
-    }
-    let active_expedition_depth_profile = active_expedition.as_ref().and_then(|expedition| {
+    let active_expedition_context = active_expedition.as_ref().and_then(|expedition| {
         let floor = data
             .floors
             .floors
@@ -75,17 +65,84 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     .assigned_monster_ids
                     .iter()
                     .any(|id| id == &monster.id)
+                    && matches!(monster.current_job, CompanionJobState::OnExpedition { .. })
             })
             .collect::<Vec<_>>();
-        Some(expedition_depth_profile(
+        if party.is_empty() {
+            return None;
+        }
+        let depth_profile = expedition_depth_profile(
             data,
             game_state,
             floor,
             mission,
             &expedition.priority,
             &party,
+        );
+        let plan_preview = super::previews::calculate_expedition_plan(
+            data,
+            game_state,
+            floor,
+            mission,
+            &expedition.priority,
+            &party,
+        );
+        Some((
+            floor.id.clone(),
+            floor.egg_species_entries.clone(),
+            depth_profile,
+            plan_preview,
         ))
     });
+
+    if active_expedition_context.is_some() {
+        if let Some(expedition) = &active_expedition {
+            if let Some(mission) = data
+                .missions
+                .missions
+                .iter()
+                .find(|entry| entry.id == expedition.mission_id)
+            {
+                apply_expedition_prep_cost(game_state, &mut summary, mission);
+            }
+        }
+    }
+
+    if let Some((floor_id, egg_species_entries, depth_profile, plan_preview)) =
+        &active_expedition_context
+    {
+        game_state.resources.tower_materials = game_state
+            .resources
+            .tower_materials
+            .saturating_add(plan_preview.projected_materials);
+        game_state.resources.arcane_residue = game_state
+            .resources
+            .arcane_residue
+            .saturating_add(plan_preview.projected_arcane_residue);
+        game_state.resources.relics = game_state
+            .resources
+            .relics
+            .saturating_add(plan_preview.projected_relics);
+        pending_egg_rewards.push((
+            floor_id.clone(),
+            egg_species_entries.clone(),
+            plan_preview.projected_eggs,
+            depth_profile.egg_grade_score,
+        ));
+
+        summary.expedition_materials = summary
+            .expedition_materials
+            .saturating_add(plan_preview.projected_materials);
+        summary.expedition_arcane_residue = summary
+            .expedition_arcane_residue
+            .saturating_add(plan_preview.projected_arcane_residue);
+        summary.expedition_eggs = summary
+            .expedition_eggs
+            .saturating_add(plan_preview.projected_eggs);
+        summary.expedition_relics = summary
+            .expedition_relics
+            .saturating_add(plan_preview.projected_relics);
+    }
 
     for monster in &mut game_state.monsters {
         if guest_serviced_monster_ids.contains(&monster.id) {
@@ -255,13 +312,6 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                         ));
                         continue;
                     };
-                    let priority_bonus = match expedition.priority {
-                        ExpeditionPriority::Balanced => 0,
-                        ExpeditionPriority::Aggressive => 6,
-                        ExpeditionPriority::Safe => -4,
-                        ExpeditionPriority::RecoveryFocused => -1,
-                        ExpeditionPriority::Curiosity => -2,
-                    };
                     let priority_injury_risk = match expedition.priority {
                         ExpeditionPriority::Balanced => 0,
                         ExpeditionPriority::Aggressive => 8,
@@ -269,66 +319,28 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                         ExpeditionPriority::RecoveryFocused => -14,
                         ExpeditionPriority::Curiosity => 5,
                     };
-                    let depth_profile = active_expedition_depth_profile.clone().unwrap_or_default();
-                    let total_success = data.config.day_cycle.base_expedition_success
-                        + monster.stats.power * 4
-                        + monster.stats.instinct * 2
-                        + building_bonus.expedition_success_pct
-                        + trait_modifier.expedition_success_pct
-                        + mission.success_bonus_pct
-                        + priority_bonus
-                        + depth_profile.success_bonus
-                        - floor.difficulty as i32;
-                    let reward_bonus = (total_success.max(0) as u32
-                        / data.config.day_cycle.expedition_reward_success_divisor)
-                        .max(1);
-                    let material_gain = (floor.baseline_rewards.tower_materials
-                        + (monster.stats.power.max(0) as u32
-                            * data.config.day_cycle.expedition_power_materials_multiplier)
-                        + reward_bonus)
-                        * mission.materials_multiplier_pct
-                        * depth_profile.material_multiplier_pct
-                        / 10_000;
-                    let residue_gain = (floor.baseline_rewards.arcane_residue
-                        + (monster.stats.instinct.max(0) as u32
-                            * data.config.day_cycle.expedition_instinct_residue_multiplier))
-                        * mission.residue_multiplier_pct
-                        * depth_profile.residue_multiplier_pct
-                        / 10_000;
-                    let egg_discovery_score = total_success + building_bonus.egg_discovery_flat;
-                    let egg_gain = if egg_discovery_score
-                        >= data.config.day_cycle.expedition_egg_reward_threshold
+                    if !expedition
+                        .assigned_monster_ids
+                        .iter()
+                        .any(|assigned_id| assigned_id == &monster.id)
                     {
-                        floor.baseline_rewards.eggs
-                            + mission.egg_bonus_flat
-                            + depth_profile.egg_bonus
-                    } else {
-                        0
+                        summary.event_lines.push(format!(
+                            "{} was marked for an expedition but was not on the active roster list.",
+                            monster.name
+                        ));
+                        monster.current_job = CompanionJobState::Idle;
+                        continue;
+                    }
+                    let Some((_, _, depth_profile, plan_preview)) = &active_expedition_context
+                    else {
+                        summary.event_lines.push(format!(
+                            "{} could not complete the expedition because no valid party plan exists.",
+                            monster.name
+                        ));
+                        monster.current_job = CompanionJobState::Idle;
+                        continue;
                     };
-                    let relic_gain = if total_success
-                        >= data.config.day_cycle.expedition_relic_reward_threshold
-                    {
-                        floor.baseline_rewards.relics
-                            + mission.relic_bonus_flat
-                            + depth_profile.relic_bonus
-                    } else {
-                        0
-                    };
-
-                    game_state.resources.tower_materials += material_gain;
-                    game_state.resources.arcane_residue += residue_gain;
-                    pending_egg_rewards.push((
-                        floor.id.clone(),
-                        floor.egg_species_entries.clone(),
-                        egg_gain,
-                        depth_profile.egg_grade_score,
-                    ));
-                    game_state.resources.relics += relic_gain;
-
-                    summary.expedition_materials += material_gain;
-                    summary.expedition_arcane_residue += residue_gain;
-                    summary.expedition_eggs += egg_gain;
-                    summary.expedition_relics += relic_gain;
+                    let total_success = plan_preview.success_score;
 
                     monster.fatigue = monster
                         .fatigue
@@ -384,6 +396,12 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     {
                         summary.event_lines.push(event_text);
                     }
+                } else {
+                    summary.event_lines.push(format!(
+                        "{} was marked for an expedition, but no active expedition exists.",
+                        monster.name
+                    ));
+                    monster.current_job = CompanionJobState::Idle;
                 }
             }
             CompanionJobState::Idle => {

@@ -49,7 +49,7 @@ fn blocked_candidate_summary(request: &ContractState, monster: &CompanionState) 
     }
     push_requirement_gap(
         &mut parts,
-        "Kiss",
+        "Scout",
         monster.skills.scouting,
         request.required_skill_thresholds.scouting,
     );
@@ -61,7 +61,7 @@ fn blocked_candidate_summary(request: &ContractState, monster: &CompanionState) 
     );
     push_requirement_gap(
         &mut parts,
-        "Vag",
+        "Hospitality",
         monster.skills.hospitality,
         request.required_skill_thresholds.hospitality,
     );
@@ -73,13 +73,13 @@ fn blocked_candidate_summary(request: &ContractState, monster: &CompanionState) 
     );
     push_requirement_gap(
         &mut parts,
-        "Sed",
+        "Charm",
         monster.skills.charm,
         request.required_skill_thresholds.charm,
     );
     push_requirement_gap(
         &mut parts,
-        "Kiss Hist",
+        "Scout Hist",
         monster.work_history.scouting_runs,
         request.required_work_history_thresholds.scouting_runs,
     );
@@ -91,7 +91,7 @@ fn blocked_candidate_summary(request: &ContractState, monster: &CompanionState) 
     );
     push_requirement_gap(
         &mut parts,
-        "Vag Hist",
+        "Hospitality Hist",
         monster.work_history.hospitality_jobs,
         request.required_work_history_thresholds.hospitality_jobs,
     );
@@ -123,7 +123,7 @@ impl ContractDeskLayout {
         let requests_w = 290.0;
         let detail_x = left_margin + requests_w + layout::SECTION_GAP;
         let detail_w = content_width - requests_w - layout::SECTION_GAP;
-        let candidates_y = 336.0;
+        let candidates_y = 356.0;
         let footer_y = screen_height() - layout::FOOTER_BOTTOM_MARGIN - layout::FOOTER_H;
         let requests_h = (footer_y - 92.0 - layout::SECTION_GAP).max(228.0);
 
@@ -294,7 +294,7 @@ pub(super) fn draw_selected_request_panel(
         layout.detail_x,
         92.0,
         layout.detail_w,
-        228.0,
+        248.0,
         Some(&data.ui_text.contract_desk.selected_request_panel_title),
         PanelTier::Primary,
         true,
@@ -422,7 +422,7 @@ pub(super) fn draw_selected_request_panel(
 
     draw_badge(
         layout.detail_x + 344.0,
-        206.0,
+        214.0,
         148.0,
         22.0,
         &guest_species_requirement_label(data, request),
@@ -430,7 +430,7 @@ pub(super) fn draw_selected_request_panel(
     );
     draw_badge(
         layout.detail_x + 500.0,
-        206.0,
+        214.0,
         180.0,
         22.0,
         &guest_skill_requirement_label(data, &request.required_skill_thresholds),
@@ -438,7 +438,7 @@ pub(super) fn draw_selected_request_panel(
     );
     draw_badge(
         layout.detail_x + 688.0,
-        206.0,
+        214.0,
         116.0,
         22.0,
         &format!("Min {}", quality_label(request.minimum_quality_rank.max(1))),
@@ -446,7 +446,7 @@ pub(super) fn draw_selected_request_panel(
     );
     draw_badge(
         layout.detail_x + 344.0,
-        236.0,
+        244.0,
         336.0,
         22.0,
         &guest_history_requirement_label(data, &request.required_work_history_thresholds),
@@ -460,7 +460,7 @@ pub(super) fn draw_selected_request_panel(
         .unwrap_or_else(|| data.ui_text.common.none_label.clone());
     draw_inline_status(
         layout.detail_x + 344.0,
-        266.0,
+        282.0,
         336.0,
         &format!(
             "{}: {assigned_label}",
@@ -491,7 +491,7 @@ pub(super) fn draw_selected_request_panel(
     if request.assigned_monster_id.is_some()
         && utility_button(
             layout.detail_x + layout.detail_w - 180.0,
-            266.0,
+            282.0,
             156.0,
             26.0,
             &data.ui_text.contract_desk.clear_assignment_button,
@@ -503,7 +503,7 @@ pub(super) fn draw_selected_request_panel(
     if let Some(error_message) = last_error {
         draw_inline_error(
             layout.detail_x + 344.0,
-            294.0,
+            314.0,
             layout.detail_w - 368.0,
             error_message,
         );
@@ -522,7 +522,7 @@ pub(super) fn draw_eligible_panel(
         layout.left_margin,
         layout.candidates_y,
         layout.content_width,
-        298.0,
+        (layout.footer_y - layout.candidates_y - layout::SECTION_GAP).max(238.0),
         Some(&data.ui_text.contract_desk.eligible_girls_panel_title),
         PanelTier::Support,
         false,

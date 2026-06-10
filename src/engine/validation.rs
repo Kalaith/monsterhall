@@ -86,10 +86,26 @@ pub fn validate_game_state_references(
                     ));
                 }
             }
-            CompanionJobState::OnExpedition { expedition_id: _ } => {
-                if game_state.active_expedition.is_none() {
+            CompanionJobState::OnExpedition { expedition_id } => {
+                let Some(expedition) = &game_state.active_expedition else {
                     return Err(format!(
                         "monster '{}' is marked on expedition but no active expedition exists.",
+                        monster.name
+                    ));
+                };
+                if &expedition.expedition_id != expedition_id {
+                    return Err(format!(
+                        "monster '{}' is assigned to expedition '{}', but active expedition is '{}'.",
+                        monster.name, expedition_id, expedition.expedition_id
+                    ));
+                }
+                if !expedition
+                    .assigned_monster_ids
+                    .iter()
+                    .any(|assigned_id| assigned_id == &monster.id)
+                {
+                    return Err(format!(
+                        "monster '{}' is marked on expedition but is missing from the active expedition roster.",
                         monster.name
                     ));
                 }
@@ -145,6 +161,25 @@ pub fn validate_game_state_references(
             &monster_ids,
             "save active_expedition.assigned_monster_ids",
         )?;
+        for monster_id in &expedition.assigned_monster_ids {
+            let Some(monster) = game_state
+                .monsters
+                .iter()
+                .find(|monster| &monster.id == monster_id)
+            else {
+                continue;
+            };
+            if !matches!(
+                &monster.current_job,
+                CompanionJobState::OnExpedition { expedition_id }
+                    if expedition_id == &expedition.expedition_id
+            ) {
+                return Err(format!(
+                    "active expedition lists monster '{}' but that monster is not assigned back to the active expedition.",
+                    monster.name
+                ));
+            }
+        }
     }
 
     Ok(())

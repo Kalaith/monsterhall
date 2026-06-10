@@ -73,8 +73,8 @@ impl ExpeditionLayout {
         let floors_w = 278.0;
         let detail_x = left_margin + floors_w + layout::SECTION_GAP;
         let detail_w = content_width - floors_w - layout::SECTION_GAP;
-        let detail_h = 274.0;
-        let team_y = 384.0;
+        let detail_h = 294.0;
+        let team_y = 406.0;
         let footer_y = screen_height() - layout::FOOTER_BOTTOM_MARGIN - layout::FOOTER_H;
         let team_h = (footer_y - team_y - layout::SECTION_GAP).max(240.0);
 
@@ -296,7 +296,7 @@ pub fn draw_expedition_planning(
     let priority_panel_x = control_x + mission_panel_w + control_gap;
     let priority_panel_w = (control_w - mission_panel_w - control_gap).max(240.0);
     let mission_panel_h = 58.0;
-    let priority_panel_h = 78.0;
+    let priority_panel_h = 94.0;
     draw_tier_panel(
         control_x,
         control_y,
@@ -322,13 +322,13 @@ pub fn draw_expedition_planning(
     let priority_inner_w = priority_panel_w - 24.0;
     let priority_button_w = ((priority_inner_w - 8.0) / 2.0).max(112.0);
     let top_button_y = control_y + 10.0;
-    let priority_button_h = 20.0;
-    let mission_count = selected_floor.mission_ids.iter().take(3).count().max(1) as f32;
+    let priority_button_h = 24.0;
+    let mission_count = selected_floor.mission_ids.len().max(1) as f32;
     let mission_gap = 8.0;
     let mission_button_w =
-        ((mission_inner_w - mission_gap * (mission_count - 1.0)) / mission_count).max(84.0);
+        ((mission_inner_w - mission_gap * (mission_count - 1.0)) / mission_count).max(58.0);
 
-    for (index, mission_id) in selected_floor.mission_ids.iter().take(3).enumerate() {
+    for (index, mission_id) in selected_floor.mission_ids.iter().enumerate() {
         let Some(mission) = data
             .missions
             .missions
@@ -344,7 +344,7 @@ pub fn draw_expedition_planning(
                 top_button_y,
                 mission_button_w,
                 24.0,
-                &compact_text(&mission.name, 14),
+                &compact_text(&mission.name, 12),
             )
         } else {
             secondary_button(
@@ -352,7 +352,7 @@ pub fn draw_expedition_planning(
                 top_button_y,
                 mission_button_w,
                 24.0,
-                &compact_text(&mission.name, 14),
+                &compact_text(&mission.name, 12),
             )
         };
         if pressed {
@@ -383,7 +383,7 @@ pub fn draw_expedition_planning(
         let col = index % 2;
         let row = index / 2;
         let x = priority_inner_x + col as f32 * (priority_button_w + 8.0);
-        let y = top_button_y + row as f32 * 20.0;
+        let y = top_button_y + row as f32 * 24.0;
         let is_selected =
             std::mem::discriminant(&expedition_state.priority) == std::mem::discriminant(value);
         let pressed = if is_selected {
@@ -397,7 +397,7 @@ pub fn draw_expedition_planning(
     }
 
     if let Some(preview) = &preview {
-        let metric_y = 316.0;
+        let metric_y = 328.0;
         let metric_gap = 8.0;
         let mut metrics = vec![
             (
@@ -463,7 +463,7 @@ pub fn draw_expedition_planning(
             draw_body_text(
                 &expedition_prep_cost_label(mission),
                 layout.detail_x + 16.0,
-                374.0,
+                386.0,
                 13.0,
                 theme::TEXT_MUTED,
             );

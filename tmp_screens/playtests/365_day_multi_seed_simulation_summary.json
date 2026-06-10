@@ -1,0 +1,200 @@
+{
+  "simulation_days": 365,
+  "samples": [
+    {
+      "sample": 1,
+      "rng_seed": 911212545,
+      "girls": 20,
+      "buildings": 9,
+      "gold": 329419,
+      "debt_gap": -2170581,
+      "relics": 84,
+      "arcane_residue": 112451,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 120 days.",
+      "max_active_requests": 6,
+      "expirations": 295
+    },
+    {
+      "sample": 2,
+      "rng_seed": 911212546,
+      "girls": 20,
+      "buildings": 16,
+      "gold": 691323,
+      "debt_gap": -1808677,
+      "relics": 58,
+      "arcane_residue": 90061,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 84 days.",
+      "max_active_requests": 6,
+      "expirations": 371
+    },
+    {
+      "sample": 3,
+      "rng_seed": 911212547,
+      "girls": 20,
+      "buildings": 15,
+      "gold": 638280,
+      "debt_gap": -1861720,
+      "relics": 61,
+      "arcane_residue": 85066,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 85 days.",
+      "max_active_requests": 6,
+      "expirations": 353
+    },
+    {
+      "sample": 4,
+      "rng_seed": 911212548,
+      "girls": 20,
+      "buildings": 15,
+      "gold": 637936,
+      "debt_gap": -1862064,
+      "relics": 64,
+      "arcane_residue": 85627,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 86 days.",
+      "max_active_requests": 6,
+      "expirations": 361
+    },
+    {
+      "sample": 5,
+      "rng_seed": 911212549,
+      "girls": 20,
+      "buildings": 16,
+      "gold": 628526,
+      "debt_gap": -1871474,
+      "relics": 68,
+      "arcane_residue": 85711,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 87 days.",
+      "max_active_requests": 6,
+      "expirations": 359
+    },
+    {
+      "sample": 6,
+      "rng_seed": 911212550,
+      "girls": 20,
+      "buildings": 15,
+      "gold": 643459,
+      "debt_gap": -1856541,
+      "relics": 60,
+      "arcane_residue": 85881,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 86 days.",
+      "max_active_requests": 6,
+      "expirations": 359
+    },
+    {
+      "sample": 7,
+      "rng_seed": 911212551,
+      "girls": 20,
+      "buildings": 15,
+      "gold": 645103,
+      "debt_gap": -1854897,
+      "relics": 73,
+      "arcane_residue": 85883,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 85 days.",
+      "max_active_requests": 6,
+      "expirations": 362
+    },
+    {
+      "sample": 8,
+      "rng_seed": 911212552,
+      "girls": 20,
+      "buildings": 17,
+      "gold": 837306,
+      "debt_gap": -1662694,
+      "relics": 67,
+      "arcane_residue": 63950,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 84 days.",
+      "max_active_requests": 6,
+      "expirations": 364
+    },
+    {
+      "sample": 9,
+      "rng_seed": 911212553,
+      "girls": 20,
+      "buildings": 16,
+      "gold": 621839,
+      "debt_gap": -1878161,
+      "relics": 63,
+      "arcane_residue": 85496,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 88 days.",
+      "max_active_requests": 6,
+      "expirations": 360
+    },
+    {
+      "sample": 10,
+      "rng_seed": 911212554,
+      "girls": 20,
+      "buildings": 13,
+      "gold": 750442,
+      "debt_gap": -1749558,
+      "relics": 0,
+      "arcane_residue": 107214,
+      "missed_payments": 0,
+      "debt_milestone_id": "founders_due_7",
+      "debt_status": "Founder's Due due in 85 days.",
+      "max_active_requests": 6,
+      "expirations": 353
+    }
+  ],
+  "girls": {
+    "average": 20.0,
+    "min": 20,
+    "max": 20
+  },
+  "buildings": {
+    "average": 14.7,
+    "min": 9,
+    "max": 17
+  },
+  "gold": {
+    "average": 642363.3,
+    "min": 329419,
+    "max": 837306
+  },
+  "debt_gap": {
+    "average": -1857636.7,
+    "min": -2170581,
+    "max": -1662694
+  },
+  "relics": {
+    "average": 59.8,
+    "min": 0,
+    "max": 84
+  },
+  "arcane_residue": {
+    "average": 88734.0,
+    "min": 63950,
+    "max": 112451
+  },
+  "missed_payments": {
+    "average": 0.0,
+    "min": 0,
+    "max": 0
+  },
+  "max_active_requests": {
+    "average": 6.0,
+    "min": 6,
+    "max": 6
+  },
+  "expirations": {
+    "average": 353.7,
+    "min": 295,
+    "max": 371
+  }
+}

@@ -112,11 +112,12 @@ pub fn draw_town_management(
         .or_else(|| data.buildings.buildings.first())?;
     let summary = building_decision_summary(data, game_state, selected_building);
 
+    let list_h = (layout.footer_y - 92.0 - layout::SECTION_GAP).max(420.0);
     draw_tier_panel(
         layout.left_margin,
         92.0,
         layout.list_w,
-        542.0,
+        list_h,
         Some(&ui.buildings_panel_title),
         PanelTier::Support,
         false,
@@ -175,7 +176,7 @@ pub fn draw_town_management(
         }
     }
 
-    let legend_y = 560.0;
+    let legend_y = (layout.footer_y - 76.0).min(560.0);
     draw_status_marker(
         layout.left_margin + 16.0,
         legend_y,
@@ -311,11 +312,13 @@ pub fn draw_town_management(
         theme::INFO,
     );
 
+    let effects_y = 424.0;
+    let effects_h = (layout.footer_y - effects_y - layout::SECTION_GAP).max(168.0);
     draw_tier_panel(
         layout.detail_x,
-        424.0,
+        effects_y,
         layout.detail_w,
-        210.0,
+        effects_h,
         Some(&ui.effects_panel_title),
         PanelTier::Support,
         false,

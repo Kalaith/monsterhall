@@ -352,18 +352,28 @@ pub(super) fn draw_selected_egg_panel(
     let unlocked_species_ids = unlocked_species_ids_for_egg(game_state, egg);
     let preview = egg_outcome_preview_label(egg, game_state, data);
     let top_section_y = layout.content_y + 56.0;
-    draw_egg_thumbnail(egg, layout.detail_x + 18.0, top_section_y, 140.0, 112.0);
+    let compact_detail = layout.detail_w < 760.0;
+    let egg_w = if compact_detail { 112.0 } else { 140.0 };
+    let egg_h = if compact_detail { 90.0 } else { 112.0 };
+    let detail_text_x = layout.detail_x + if compact_detail { 146.0 } else { 176.0 };
+    let detail_text_w = if compact_detail {
+        layout.detail_w - 170.0
+    } else {
+        layout.detail_w - 450.0
+    }
+    .max(220.0);
+    draw_egg_thumbnail(egg, layout.detail_x + 18.0, top_section_y, egg_w, egg_h);
     draw_body_text(
         &egg.id,
-        layout.detail_x + 176.0,
+        detail_text_x,
         top_section_y + 18.0,
         24.0,
         theme::TEXT_STRONG,
     );
     draw_inline_status(
-        layout.detail_x + 176.0,
+        detail_text_x,
         top_section_y + 30.0,
-        230.0,
+        detail_text_w.min(230.0),
         if egg.incubation_state == EggIncubationState::ReadyToHatch {
             &chamber_text.prepared_outcome_label
         } else {
@@ -377,9 +387,9 @@ pub(super) fn draw_selected_egg_panel(
     );
     draw_body_text_in_box(
         &preview,
-        layout.detail_x + 176.0,
+        detail_text_x,
         top_section_y + 72.0,
-        layout.detail_w - 450.0,
+        detail_text_w,
         34.0,
         14.0,
         theme::TEXT_BODY,

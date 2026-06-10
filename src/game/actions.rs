@@ -118,8 +118,9 @@ impl Game {
                 };
 
                 self.with_game_state(|game_state, data| {
+                    assign_monster_to_expedition(data, game_state, &monster_id, &floor_id)?;
                     configure_expedition_plan(game_state, &floor_id, &mission_id, priority);
-                    assign_monster_to_expedition(data, game_state, &monster_id, &floor_id)
+                    Ok(())
                 });
             }
             UiAction::AssignMonsterToRest(monster_id) => {

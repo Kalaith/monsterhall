@@ -74,13 +74,43 @@ pub fn preview_expedition_plan(
         .iter()
         .find(|entry| entry.id == mission_id)
         .ok_or_else(|| format!("Unknown mission id '{mission_id}'."))?;
-    let building_bonus = collect_building_modifiers(data, game_state);
-
     let assigned_monsters = game_state
         .monsters
         .iter()
-        .filter(|monster| matches!(&monster.current_job, CompanionJobState::OnExpedition { .. }))
+        .filter(|monster| {
+            matches!(&monster.current_job, CompanionJobState::OnExpedition { .. })
+                && game_state
+                    .active_expedition
+                    .as_ref()
+                    .map(|expedition| {
+                        expedition
+                            .assigned_monster_ids
+                            .iter()
+                            .any(|assigned_id| assigned_id == &monster.id)
+                    })
+                    .unwrap_or(true)
+        })
         .collect::<Vec<_>>();
+
+    Ok(calculate_expedition_plan(
+        data,
+        game_state,
+        floor,
+        mission,
+        priority,
+        &assigned_monsters,
+    ))
+}
+
+pub(crate) fn calculate_expedition_plan(
+    data: &GameData,
+    game_state: &GameState,
+    floor: &crate::data::TowerFloorData,
+    mission: &crate::data::MissionData,
+    priority: &ExpeditionPriority,
+    assigned_monsters: &[&CompanionState],
+) -> ExpeditionPlanPreview {
+    let building_bonus = collect_building_modifiers(data, game_state);
 
     let total_power = assigned_monsters
         .iter()
@@ -185,14 +215,14 @@ pub fn preview_expedition_plan(
         + depth_profile.injury_risk_delta
         - total_endurance as i32 * 3;
 
-    Ok(ExpeditionPlanPreview {
+    ExpeditionPlanPreview {
         success_score,
         projected_materials,
         projected_arcane_residue,
         projected_eggs,
         projected_relics,
         injury_risk_score,
-    })
+    }
 }
 
 pub(super) fn preview_guild_job_for_town(
