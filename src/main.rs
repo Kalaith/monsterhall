@@ -11,7 +11,6 @@ mod ui;
 use game::Game;
 
 const WINDOW_TITLE: &str = "Monsterhall";
-const UI_FONT_BYTES: &[u8] = include_bytes!("../assets/fonts/Rajdhani-SemiBold.ttf");
 
 #[derive(Deserialize)]
 struct StartupConfig {
@@ -70,8 +69,7 @@ fn window_conf() -> Conf {
 
 #[macroquad::main(window_conf)]
 async fn main() {
-    macroquad_toolkit::ui::set_default_ui_font_from_bytes(UI_FONT_BYTES)
-        .expect("embedded UI font should load");
+    macroquad_toolkit::ui::ensure_default_ui_font().expect("toolkit UI font should load");
     macroquad_toolkit::ui::set_min_ui_font_size(18.0);
 
     let mut game = Game::new().await;
