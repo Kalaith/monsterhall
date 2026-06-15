@@ -24,3 +24,10 @@ Build the only guild capable of surviving the tower by proving that monster comp
 ## Current Scope
 
 Playable management loop with hatching, assignments, daily results, expeditions, contracts, debt progression, rooms, species, and events.
+# Practical Future Improvements
+
+- Add economy and debt simulation tests for contracts, rooms, species growth, expedition payouts, and recovery costs.
+- Split assignment, expedition, and event resolution from scene rendering so daily outcomes can be tested with fixtures.
+- Add validation for companion state transitions covering fatigue, stress, injury, recovery, hatching, and job assignment.
+- Create balance scenarios for early debt, mid-game room growth, and late tower expeditions.
+
