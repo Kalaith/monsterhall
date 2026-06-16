@@ -340,7 +340,7 @@ impl Game {
 
         let max_scroll = game_state.event_log.len().saturating_sub(12);
         let event_log_scroll = scroll_override
-            .or_else(|| match &self.phase {
+            .or(match &self.phase {
                 GamePhase::Journal(state) => Some(state.event_log_scroll),
                 _ => None,
             })

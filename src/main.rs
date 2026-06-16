@@ -1,3 +1,5 @@
+#![allow(clippy::too_many_arguments)]
+
 use macroquad::prelude::*;
 use macroquad_toolkit::colors::dark;
 use serde::Deserialize;

@@ -20,7 +20,7 @@ pub(super) struct UiTextures {
 }
 
 thread_local! {
-    static UI_TEXTURES: RefCell<Option<UiTextures>> = RefCell::new(None);
+    static UI_TEXTURES: RefCell<Option<UiTextures>> = const { RefCell::new(None) };
 }
 
 pub(super) fn draw_tower_silhouette(x: f32, y: f32, w: f32, h: f32, accent: Color) {

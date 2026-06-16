@@ -479,7 +479,7 @@ pub fn draw_expedition_planning(
     }
 
     let visible_members = game_state.monsters.len().min(6);
-    let team_rows = ((visible_members.max(1) + 1) / 2) as f32;
+    let team_rows = visible_members.max(1).div_ceil(2) as f32;
     let visible_team_h = if game_state.monsters.is_empty() {
         150.0
     } else {
@@ -528,7 +528,7 @@ pub fn draw_expedition_planning(
                 CharacterCardSpec {
                     name: &monster.name,
                     species: &species_label,
-                    state: &state_label,
+                    state: state_label,
                     key_value: &key_value,
                     color: if assigned {
                         theme::POSITIVE

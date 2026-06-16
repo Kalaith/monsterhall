@@ -557,6 +557,7 @@ pub fn species_name_by_id(data: &GameData, species_id: &str) -> String {
         .unwrap_or_else(|| species_id.to_owned())
 }
 
+#[allow(dead_code)]
 pub fn species_portrait_key_by_id(data: &GameData, species_id: &str) -> String {
     data.species
         .species

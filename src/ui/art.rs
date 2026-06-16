@@ -522,6 +522,7 @@ pub fn draw_trait_icons(data: &GameData, trait_ids: &[String], x: f32, y: f32, w
     }
 }
 
+#[allow(dead_code)]
 pub fn draw_condition_badges(monster: &CompanionState, x: f32, y: f32, w: f32) {
     let badges = [
         ("F", monster.fatigue, color_u8!(205, 175, 90, 255)),

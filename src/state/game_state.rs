@@ -110,6 +110,7 @@ impl TownOverviewState {
 #[derive(Debug, Clone)]
 pub struct MonsterProfileState {
     pub selected_monster_id: String,
+    #[allow(dead_code)]
     pub status_message: String,
 }
 

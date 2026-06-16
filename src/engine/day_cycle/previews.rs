@@ -167,7 +167,7 @@ pub(crate) fn calculate_expedition_plan(
         floor,
         mission,
         priority,
-        &assigned_monsters,
+        assigned_monsters,
     );
 
     let success_score = data.config.day_cycle.base_expedition_success

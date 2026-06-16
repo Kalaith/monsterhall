@@ -258,7 +258,7 @@ pub(super) fn draw_inventory_panel(
             theme::TEXT_STRONG,
         );
         draw_body_text(
-            &egg_grade_label(egg, data),
+            egg_grade_label(egg, data),
             layout.left_margin + 108.0,
             row_y + 40.0,
             13.0,
@@ -400,7 +400,7 @@ pub(super) fn draw_selected_egg_panel(
         top_section_y + 112.0,
         142.0,
         24.0,
-        &egg_grade_label(egg, data),
+        egg_grade_label(egg, data),
         theme::PRIMARY,
     );
     draw_badge(

@@ -660,7 +660,7 @@ fn draw_roster_card_organic(
 
     draw_body_text(&monster.name, text_x, y + 30.0, 20.0, theme::TEXT_STRONG);
     draw_body_text(&species_label, text_x, y + 52.0, 13.0, theme::TEXT_BODY);
-    draw_organic_status(text_x, y + 66.0, text_w, 28.0, &state_label, accent);
+    draw_organic_status(text_x, y + 66.0, text_w, 28.0, state_label, accent);
     draw_body_text_in_box(
         &key_value,
         text_x,

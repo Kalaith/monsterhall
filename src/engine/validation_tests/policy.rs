@@ -329,7 +329,7 @@ pub(super) fn hatch_pacing_allows(game_state: &GameState, hatches_this_policy: u
     }
 
     if game_state.monsters.len() < 6 {
-        return game_state.current_day % 3 == 0;
+        return game_state.current_day.is_multiple_of(3);
     }
 
     if game_state.monsters.len() >= 12 {
@@ -338,11 +338,11 @@ pub(super) fn hatch_pacing_allows(game_state: &GameState, hatches_this_policy: u
         } else {
             18
         };
-        return game_state.current_day % late_campaign_cadence == 0;
+        return game_state.current_day.is_multiple_of(late_campaign_cadence);
     }
 
     let mid_campaign_cadence = if game_state.current_day <= 30 { 12 } else { 6 };
-    game_state.current_day % mid_campaign_cadence == 0
+    game_state.current_day.is_multiple_of(mid_campaign_cadence)
 }
 
 pub(super) fn assign_guest_bookings(data: &GameData, game_state: &mut GameState) {

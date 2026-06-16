@@ -125,7 +125,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
     assert!(!game_state.monsters.is_empty());
     assert!(game_state.event_log.len() > starting_log_len);
     assert!(
-        game_state.town.constructed_building_ids.len() >= 1,
+        !game_state.town.constructed_building_ids.is_empty(),
         "thirty-day simulation should show at least one building investment"
     );
     assert!(

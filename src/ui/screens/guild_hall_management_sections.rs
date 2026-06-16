@@ -327,7 +327,7 @@ fn draw_worker_cards(
     title: &str,
     collapse_empty: bool,
 ) -> Option<UiAction> {
-    let rows = ((workers.len().max(1) + 1) / 2) as f32;
+    let rows = workers.len().max(1).div_ceil(2) as f32;
     let panel_h = if workers.is_empty() {
         if collapse_empty {
             118.0
