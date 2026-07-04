@@ -1,6 +1,7 @@
 #![allow(clippy::too_many_arguments)]
 
 use macroquad::prelude::*;
+use macroquad_toolkit::capture;
 use macroquad_toolkit::colors::dark;
 use serde::Deserialize;
 
@@ -59,11 +60,14 @@ fn window_conf() -> Conf {
         .map(|config| config.display.start_fullscreen)
         .unwrap_or(true);
 
+    // While capturing, force a windowed, fixed-size framebuffer so screenshots
+    // are deterministic (MONSTERHALL_WINDOW_WIDTH/HEIGHT override the config).
+    let capturing = capture::capture_requested("MONSTERHALL");
     Conf {
         window_title: title,
-        window_width: width,
-        window_height: height,
-        fullscreen,
+        window_width: capture::env_i32("MONSTERHALL_WINDOW_WIDTH", width),
+        window_height: capture::env_i32("MONSTERHALL_WINDOW_HEIGHT", height),
+        fullscreen: fullscreen && !capturing,
         window_resizable: true,
         ..Default::default()
     }
@@ -75,6 +79,20 @@ async fn main() {
     macroquad_toolkit::ui::set_min_ui_font_size(18.0);
 
     let mut game = Game::new().await;
+
+    // Screenshot harness: when MONSTERHALL_CAPTURE_PATH is set, render
+    // deterministic frames, write a PNG, and exit. The boot flow lands on the
+    // main menu, so that is what gets photographed; the scene env var is
+    // currently unused.
+    if let Some(config) = capture::CaptureConfig::from_env("MONSTERHALL") {
+        capture::run_capture(&config, |_dt| {
+            clear_background(dark::BACKGROUND);
+            game.update();
+            game.draw();
+        })
+        .await;
+        return;
+    }
 
     loop {
         clear_background(dark::BACKGROUND);

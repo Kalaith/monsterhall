@@ -65,7 +65,12 @@ impl Game {
             Ok(loaded_data) => {
                 loading_state.mark_ready();
                 let settings = load_or_default_settings(&loaded_data);
-                apply_display_settings(&settings);
+                // Saved display settings would override the fixed capture
+                // window (fullscreen/resolution), breaking deterministic
+                // screenshots — keep window_conf's size while capturing.
+                if !macroquad_toolkit::capture::capture_requested("MONSTERHALL") {
+                    apply_display_settings(&settings);
+                }
                 (Some(loaded_data), Some(settings), None)
             }
             Err(message) => {
