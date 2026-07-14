@@ -1,5 +1,6 @@
 use macroquad::prelude::*;
 use macroquad::time::get_time;
+use macroquad_toolkit::math::ease_out_cubic;
 
 use crate::data::GameData;
 use crate::state::{CompanionState, EggState, GameState, HatchRevealState};
@@ -35,8 +36,8 @@ pub fn draw_hatch_reveal(
 
     let now = get_time();
     let elapsed = hatch_state.elapsed_seconds(now);
-    let crack_progress = ease_out(((elapsed - 0.45) / 1.0).clamp(0.0, 1.0));
-    let reveal_progress = ease_out(((elapsed - 1.35) / 0.85).clamp(0.0, 1.0));
+    let crack_progress = ease_out_cubic(((elapsed - 0.45) / 1.0).clamp(0.0, 1.0));
+    let reveal_progress = ease_out_cubic(((elapsed - 1.35) / 0.85).clamp(0.0, 1.0));
     let is_complete = hatch_state.is_complete(now);
     let monster = game_state
         .monsters
@@ -434,8 +435,4 @@ fn outcome_lines(
             "Roster profile unavailable.".to_owned(),
         ]
     }
-}
-
-fn ease_out(value: f32) -> f32 {
-    1.0 - (1.0 - value).powi(3)
 }

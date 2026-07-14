@@ -1,11 +1,12 @@
 use macroquad::prelude::*;
+use macroquad_toolkit::colors::mix;
+use macroquad_toolkit::math::hash_str;
 use macroquad_toolkit::ui::TextStyle;
 
 use super::art_helpers::{
     accent_from_seed, draw_arches, draw_backdrop_texture, draw_building_scene, draw_cover_texture,
     draw_figure_silhouette, draw_floor_scene, draw_icon_glyph, draw_room_scene, draw_round_panel,
-    draw_scene_columns, draw_text_center, draw_tower_silhouette, hash, icon_source, mix,
-    with_ui_textures,
+    draw_scene_columns, draw_text_center, draw_tower_silhouette, icon_source, with_ui_textures,
 };
 use crate::data::{BuildingData, GameData, GuildRoomData, TowerFloorData};
 use crate::state::{CompanionState, ContractState, EggState};
@@ -290,7 +291,7 @@ pub fn icon_for_metric_label(label: &str) -> Option<UiIcon> {
 }
 
 pub fn draw_story_cg_placeholder(title: &str, x: f32, y: f32, w: f32, h: f32, seed: &str) {
-    let seed = hash(seed);
+    let seed = hash_str(seed);
     let accent = accent_from_seed(seed);
     draw_round_panel(
         x,
@@ -330,7 +331,7 @@ pub fn draw_species_portrait(
     h: f32,
 ) {
     let seed_key = format!("{}:{}", monster.species_id, monster.name);
-    let seed = hash(&seed_key);
+    let seed = hash_str(&seed_key);
     let accent = accent_from_seed(seed);
     let species_name = species_name_by_id(data, &monster.species_id);
 
@@ -385,7 +386,7 @@ pub fn draw_species_portrait(
 }
 
 pub fn draw_guest_silhouette(request: &ContractState, x: f32, y: f32, w: f32, h: f32) {
-    let seed = hash(&request.guest_name);
+    let seed = hash_str(&request.guest_name);
     let accent = accent_from_seed(seed);
     draw_round_panel(
         x,
@@ -416,7 +417,7 @@ pub fn draw_guest_silhouette(request: &ContractState, x: f32, y: f32, w: f32, h:
 }
 
 pub fn draw_room_thumbnail(room: &GuildRoomData, x: f32, y: f32, w: f32, h: f32) {
-    let accent = accent_from_seed(hash(&room.id));
+    let accent = accent_from_seed(hash_str(&room.id));
     draw_round_panel(
         x,
         y,
@@ -429,7 +430,7 @@ pub fn draw_room_thumbnail(room: &GuildRoomData, x: f32, y: f32, w: f32, h: f32)
 }
 
 pub fn draw_floor_preview(floor: &TowerFloorData, x: f32, y: f32, w: f32, h: f32) {
-    let accent = accent_from_seed(hash(&floor.id));
+    let accent = accent_from_seed(hash_str(&floor.id));
     draw_round_panel(
         x,
         y,
@@ -442,7 +443,7 @@ pub fn draw_floor_preview(floor: &TowerFloorData, x: f32, y: f32, w: f32, h: f32
 }
 
 pub fn draw_building_thumbnail(building: &BuildingData, x: f32, y: f32, w: f32, h: f32) {
-    let accent = accent_from_seed(hash(&building.id));
+    let accent = accent_from_seed(hash_str(&building.id));
     draw_round_panel(
         x,
         y,
@@ -455,7 +456,7 @@ pub fn draw_building_thumbnail(building: &BuildingData, x: f32, y: f32, w: f32, 
 }
 
 pub fn draw_egg_thumbnail(egg: &EggState, x: f32, y: f32, w: f32, h: f32) {
-    let seed = hash(&egg.id);
+    let seed = hash_str(&egg.id);
     let accent = accent_from_seed(seed);
     draw_round_panel(
         x,
@@ -509,7 +510,7 @@ pub fn draw_trait_icons(data: &GameData, trait_ids: &[String], x: f32, y: f32, w
         let row = index / per_row;
         let cell_x = x + col as f32 * (cell + 8.0);
         let cell_y = y + row as f32 * (cell + 8.0);
-        let accent = accent_from_seed(hash(&trait_data.icon_key));
+        let accent = accent_from_seed(hash_str(&trait_data.icon_key));
         draw_round_panel(
             cell_x,
             cell_y,

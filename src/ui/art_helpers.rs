@@ -530,21 +530,3 @@ pub(super) fn accent_from_seed(seed: u32) -> Color {
         _ => theme::DANGER,
     }
 }
-
-pub(super) fn hash(input: &str) -> u32 {
-    let mut value = 2166136261u32;
-    for byte in input.as_bytes() {
-        value ^= u32::from(*byte);
-        value = value.wrapping_mul(16777619);
-    }
-    value
-}
-
-pub(super) fn mix(a: Color, b: Color, t: f32) -> Color {
-    Color::new(
-        a.r + (b.r - a.r) * t,
-        a.g + (b.g - a.g) * t,
-        a.b + (b.b - a.b) * t,
-        a.a + (b.a - a.a) * t,
-    )
-}
