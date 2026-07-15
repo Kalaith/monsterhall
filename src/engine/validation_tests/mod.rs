@@ -45,9 +45,15 @@ fn simulation_rng_guard() -> MutexGuard<'static, ()> {
 
 mod fixtures;
 mod policy;
+mod policy_buildings;
+mod policy_eggs;
+mod policy_growth;
+mod policy_guests;
+mod policy_jobs;
 mod reporting;
 mod scenarios;
 
 use fixtures::*;
 use policy::*;
+use policy_guests::*;
 use reporting::*;
