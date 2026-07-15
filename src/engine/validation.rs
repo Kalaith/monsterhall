@@ -247,5 +247,4 @@ where
 }
 
 #[cfg(test)]
-#[path = "validation_tests/mod.rs"]
 mod validation_tests;
