@@ -1,0 +1,27 @@
+{
+  "title": "Monsterhall",
+  "status": { "text": "Playable", "class": "playable" },
+  "controls_hint": "Mouse-first play. Click the canvas to begin.",
+  "canvas_rendering": "pixelated",
+  "about": [
+    "Build a frontier monster guild beside a cursed tower, recruit unusual companions, and send support teams into the depths for treasure, relics, eggs, and discoveries."
+  ],
+  "extra_sections": [
+    {
+      "heading": "Play Style",
+      "body": "<p>The interface is designed to be fully playable with a mouse. Keyboard shortcuts may exist, but they are not required and are not shown in the interface.</p>"
+    }
+  ],
+  "details": [
+    { "label": "Genre", "value": "Management Sim" },
+    { "label": "Engine", "value": "Macroquad" },
+    { "label": "Platform", "value": "Browser, Windows" }
+  ],
+  "download": {
+    "href": "monsterhall_windows.zip",
+    "label": "Windows Build"
+  },
+  "wasm_cache_bust": "monsterhall-1-9-33",
+  "asset_cache_bust": "monsterhall-1-9-33",
+  "repository": "https://github.com/Kalaith/monsterhall"
+}
