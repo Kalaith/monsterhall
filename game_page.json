@@ -1,10 +1,13 @@
 {
   "title": "Monsterhall",
-  "status": { "text": "Playable", "class": "playable" },
+  "status": {
+    "text": "Playable",
+    "class": "playable"
+  },
   "controls_hint": "Mouse-first play. Click the canvas to begin.",
   "canvas_rendering": "pixelated",
   "about": [
-    "Build a frontier monster guild beside a cursed tower, recruit unusual companions, and send support teams into the depths for treasure, relics, eggs, and discoveries."
+    "Found a monster guild in the shadow of a cursed tower. Recruit strange companions and send teams into the depths for treasure, relics, and secrets."
   ],
   "extra_sections": [
     {
@@ -13,9 +16,18 @@
     }
   ],
   "details": [
-    { "label": "Genre", "value": "Management Sim" },
-    { "label": "Engine", "value": "Macroquad" },
-    { "label": "Platform", "value": "Browser, Windows" }
+    {
+      "label": "Genre",
+      "value": "Management Sim"
+    },
+    {
+      "label": "Engine",
+      "value": "Macroquad"
+    },
+    {
+      "label": "Platform",
+      "value": "Browser, Windows"
+    }
   ],
   "download": {
     "href": "monsterhall_windows.zip",
