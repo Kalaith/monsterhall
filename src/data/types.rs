@@ -297,6 +297,23 @@ pub struct BuildingData {
     pub passive_modifiers: BuildingModifierData,
 }
 
+/// A named find from the tower. `relic_drop_ids` on a floor already decides
+/// whether that floor can pay a relic; this is what the relic actually is.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RelicData {
+    pub id: String,
+    pub name: String,
+    pub description: String,
+    /// Line reported when a party brings this one up.
+    pub discovery_note: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RelicCatalogData {
+    pub version: String,
+    pub relics: Vec<RelicData>,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TowerFloorCatalogData {
     pub version: String,
@@ -698,6 +715,7 @@ pub struct GameData {
     pub species: SpeciesCatalogData,
     pub buildings: BuildingCatalogData,
     pub floors: TowerFloorCatalogData,
+    pub relics: RelicCatalogData,
     pub traits: TraitCatalogData,
     pub guild_rooms: GuildRoomCatalogData,
     pub events: EventCatalogData,

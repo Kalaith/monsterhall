@@ -70,7 +70,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 | Events | 38 | — | Healthy. Deep-floor events are the gap, not event count. |
 | Patron tiers | 3 | 4–5 | `patron_tiers.json`; upkeep bands already reference tier 4. |
 | Debt milestones | 7 | — | ~455 days of chain against 3 floors of tower. Mismatched, in the tower's favour to fix. |
-| Relic drops | 2 declared, now **gate relic yield** | named objects | `relic_drop_ids` decides whether a floor can pay a relic. The ids are still not objects with names/descriptions/patrons — that is phase 2. |
+| Relic drops | **28 named** ✅ | named objects | `relics.json` gives every declared drop a name, description and discovery note, reported in the day log when found. Validated both ways: no unknown drop, no unfindable relic. Still no *patron* who wants one — that is the remaining half. |
 
 ### How the planner values a floor — read this before authoring one
 
@@ -485,6 +485,28 @@ Stop the loop and report if:
   **mutations 3**, **relics still ids not objects** (~30 `relic_drop_ids` now exist across the tower
   and not one has a name, description or a patron who wants it — that is the single largest content
   gap the tower has opened up), **guild rooms 4**, **contracts 12**, **patron tiers 3**.
+
+- **2026-08-02 — phase 2 opens: relics become objects.** 28 `relic_drop_ids` existed across the tower
+  as bare strings — unvalidated, unnamed, and invisible: a relic was a number going up. Added
+  `assets/data/relics.json` (id, name, description, discovery_note) covering all 28, `RelicData` /
+  `RelicCatalogData` in the schema, and load-time validation **in both directions** — a floor may not
+  name a relic that does not exist, and a relic no floor drops fails the load as prose nobody can
+  reach. `day_cycle/relics.rs` reports the find in the day's event log, which the journal already
+  renders, so no new UI was needed.
+  **One real trap, caught by the harness.** The first version picked the relic with `gen_range`,
+  which consumes the seeded RNG and shifted every downstream roll: a 365-day campaign went from 17
+  buildings to 8 on a cosmetic change. It now rotates on `resolved_day` instead. **Flavour output
+  must never draw from the simulation's RNG** — the numbers are identical to the previous commit
+  except `final_event_log_entries`, which is the whole point.
+  **Also deduplicated four copies of `test_game_data()`** (bootstrap, debt, guest/tests,
+  view_models/decisions) onto the shared `crate::data::test_game_data`. They were straight copies
+  and every one of them broke when the catalog was added, which is exactly the recurring tax the
+  shared fixture exists to stop. ~45 lines gone.
+  **Result:** 56 tests (was 52), balance byte-identical, publish green. Assets are now 27 files.
+  **Next iteration should know:** the other half of "relics as objects" is a **patron who wants one** —
+  contracts can reward relics but nothing ever *asks* for a named one, so the collection has no
+  demand behind it. After that the thin axes are **species 8** (nothing lives only at depth 20+),
+  **missions 4** for 25 floors, **mutations 3**, **guild rooms 4**, **patron tiers 3**.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

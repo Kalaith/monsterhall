@@ -112,6 +112,31 @@ impl GameData {
         Ok(())
     }
 
+    /// A relic no floor drops is a relic that cannot be found, which makes it
+    /// prose nobody will ever read.
+    pub(super) fn validate_relics(&self) -> Result<(), String> {
+        for relic in &self.relics.relics {
+            if relic.name.trim().is_empty() || relic.description.trim().is_empty() {
+                return Err(format!(
+                    "relic '{}' must have a name and description.",
+                    relic.id
+                ));
+            }
+            if !self
+                .floors
+                .floors
+                .iter()
+                .any(|floor| floor.relic_drop_ids.contains(&relic.id))
+            {
+                return Err(format!(
+                    "relic '{}' is dropped by no floor and can never be found.",
+                    relic.id
+                ));
+            }
+        }
+        Ok(())
+    }
+
     pub(super) fn validate_floors(&self, ids: &IdIndex<'_>) -> Result<(), String> {
         let IdIndex {
             building_ids,
@@ -188,6 +213,14 @@ impl GameData {
                     "floor '{}' has difficulty {} above the beatable ceiling of {max_difficulty}.",
                     floor.id, floor.difficulty
                 ));
+            }
+            for relic_id in &floor.relic_drop_ids {
+                if !self.relics.relics.iter().any(|relic| &relic.id == relic_id) {
+                    return Err(format!(
+                        "floor '{}'.relic_drop_ids references unknown relic '{relic_id}'.",
+                        floor.id
+                    ));
+                }
             }
             self.validate_floor_survey_chain(floor)?;
         }

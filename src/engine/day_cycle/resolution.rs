@@ -145,6 +145,18 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         if let Some(expedition) = &active_expedition {
             record_expedition_survey(data, &mut game_state.town, expedition, floor_id);
         }
+        if plan_preview.projected_relics > 0 {
+            if let Some(floor) = data
+                .floors
+                .floors
+                .iter()
+                .find(|entry| &entry.id == floor_id)
+            {
+                if let Some(line) = relic_discovery_line(data, floor, resolved_day) {
+                    summary.event_lines.push(line);
+                }
+            }
+        }
     }
 
     for monster in &mut game_state.monsters {

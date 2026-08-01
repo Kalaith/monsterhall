@@ -92,6 +92,7 @@ impl GameData {
         self.validate_rooms(&ids)?;
         self.validate_buildings(&ids)?;
         self.validate_floors(&ids)?;
+        self.validate_relics()?;
         self.validate_events(&ids)?;
         self.validate_references(&ids)?;
         self.validate_new_game(&ids)?;

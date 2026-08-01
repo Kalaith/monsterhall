@@ -326,7 +326,7 @@ pub fn resolve_debt_cycle(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::data::GameData;
+    use crate::data::test_game_data;
     use crate::state::{
         CompanionState, GameState, OpeningChapterStep, PlayerTownState, ResourcesState,
         StoryProgressState,
@@ -512,48 +512,5 @@ mod tests {
             .event_log
             .iter()
             .any(|entry| entry.contains("paid")));
-    }
-
-    fn test_game_data() -> GameData {
-        GameData {
-            config: serde_json::from_str(include_str!("../../assets/data/config.json"))
-                .expect("config should deserialize"),
-            ui_text: serde_json::from_str(include_str!("../../assets/data/ui_text.json"))
-                .expect("ui text should deserialize"),
-            debt_milestones: serde_json::from_str(include_str!(
-                "../../assets/data/debt_milestones.json"
-            ))
-            .expect("debt milestones should deserialize"),
-            patron_archetypes: serde_json::from_str(include_str!(
-                "../../assets/data/patron_archetypes.json"
-            ))
-            .expect("guest archetypes should deserialize"),
-            contracts: serde_json::from_str(include_str!("../../assets/data/contracts.json"))
-                .expect("contracts should deserialize"),
-            patron_tiers: serde_json::from_str(include_str!("../../assets/data/patron_tiers.json"))
-                .expect("patron tiers should deserialize"),
-            missions: serde_json::from_str(include_str!("../../assets/data/missions.json"))
-                .expect("missions should deserialize"),
-            mutations: serde_json::from_str(include_str!("../../assets/data/mutations.json"))
-                .expect("mutations should deserialize"),
-            story_events: serde_json::from_str(include_str!("../../assets/data/story_events.json"))
-                .expect("story events should deserialize"),
-            monster_names: serde_json::from_str(include_str!(
-                "../../assets/data/monster_names.json"
-            ))
-            .expect("monster names should deserialize"),
-            species: serde_json::from_str(include_str!("../../assets/data/species.json"))
-                .expect("species should deserialize"),
-            buildings: serde_json::from_str(include_str!("../../assets/data/buildings.json"))
-                .expect("buildings should deserialize"),
-            floors: serde_json::from_str(include_str!("../../assets/data/floors.json"))
-                .expect("floors should deserialize"),
-            traits: serde_json::from_str(include_str!("../../assets/data/traits.json"))
-                .expect("traits should deserialize"),
-            guild_rooms: serde_json::from_str(include_str!("../../assets/data/guild_rooms.json"))
-                .expect("rooms should deserialize"),
-            events: serde_json::from_str(include_str!("../../assets/data/events.json"))
-                .expect("events should deserialize"),
-        }
     }
 }

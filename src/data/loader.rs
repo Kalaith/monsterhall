@@ -23,6 +23,7 @@ pub async fn load_game_data() -> Result<GameData, String> {
         species: load_data("species").await?,
         buildings: load_data("buildings").await?,
         floors: load_data("floors").await?,
+        relics: load_data("relics").await?,
         traits: load_data("traits").await?,
         guild_rooms: load_data("guild_rooms").await?,
         events: load_data("events").await?,
@@ -81,6 +82,7 @@ pub async fn load_game_data() -> Result<GameData, String> {
             include_str!("../../assets/data/buildings.json"),
         )?,
         floors: parse_embedded("floors.json", include_str!("../../assets/data/floors.json"))?,
+        relics: parse_embedded("relics.json", include_str!("../../assets/data/relics.json"))?,
         traits: parse_embedded("traits.json", include_str!("../../assets/data/traits.json"))?,
         guild_rooms: parse_embedded(
             "guild_rooms.json",
@@ -118,6 +120,7 @@ pub(crate) fn test_game_data() -> GameData {
         species: parse_test_json(include_str!("../../assets/data/species.json")),
         buildings: parse_test_json(include_str!("../../assets/data/buildings.json")),
         floors: parse_test_json(include_str!("../../assets/data/floors.json")),
+        relics: parse_test_json(include_str!("../../assets/data/relics.json")),
         traits: parse_test_json(include_str!("../../assets/data/traits.json")),
         guild_rooms: parse_test_json(include_str!("../../assets/data/guild_rooms.json")),
         events: parse_test_json(include_str!("../../assets/data/events.json")),

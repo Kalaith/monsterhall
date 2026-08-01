@@ -1,0 +1,173 @@
+{
+  "version": "1.0.0",
+  "relics": [
+    {
+      "id": "unspent_lamp",
+      "name": "An Unspent Lamp",
+      "description": "A tower lamp still holding its charge after a century of burning. Nobody has worked out what it is drawing on.",
+      "discovery_note": "The party carries up a lamp that is still, impossibly, unspent."
+    },
+    {
+      "id": "foremans_seal",
+      "name": "The Foreman's Seal",
+      "description": "A supervisor's stamp for closing work orders. The last order it closed sealed the stair below the office.",
+      "discovery_note": "A foreman's seal comes up, its last impression still legible in wax."
+    },
+    {
+      "id": "molten_collar",
+      "name": "Molten Collar",
+      "description": "A ring of mineral glass formed in a vent and cooled around nothing at all.",
+      "discovery_note": "A collar of vent-glass is eased out of the rock intact."
+    },
+    {
+      "id": "flue_scale",
+      "name": "Flue Scale",
+      "description": "A sheet of baked residue peeled whole from a duct wall, layered like a season's growth.",
+      "discovery_note": "A whole sheet of flue scale comes away without cracking."
+    },
+    {
+      "id": "cast_fitting",
+      "name": "Cast Fitting",
+      "description": "A finished coupling from the abandoned pour, cast to a tolerance the guild's forge cannot match.",
+      "discovery_note": "A cast fitting is recovered, finer than anything the forge can make."
+    },
+    {
+      "id": "pressure_seal",
+      "name": "Pressure Seal",
+      "description": "A boiler seal that has held for a hundred years and is still holding when it is lifted free.",
+      "discovery_note": "A pressure seal is worked loose without venting what it held."
+    },
+    {
+      "id": "cinder_shell",
+      "name": "Cinder Shell",
+      "description": "Shell fragment from the ash banks, thicker than any egg the hatchery has handled.",
+      "discovery_note": "A fragment of cinder shell is lifted from the warm ash."
+    },
+    {
+      "id": "gilded_leash",
+      "name": "Gilded Leash",
+      "description": "A handler's lead in gold wire, sized for something that was never a dog.",
+      "discovery_note": "A gilded leash is recovered from an open pen."
+    },
+    {
+      "id": "brass_tally",
+      "name": "Brass Tally",
+      "description": "An exhibition tally plate, stamped with a count and a word in no language the archive holds.",
+      "discovery_note": "A brass tally is prised off the menagerie wall."
+    },
+    {
+      "id": "keepers_goad",
+      "name": "Keeper's Goad",
+      "description": "A handler's goad that hums when carried and stops when set down.",
+      "discovery_note": "A keeper's goad is taken from the rack, still humming."
+    },
+    {
+      "id": "warded_harness",
+      "name": "Warded Harness",
+      "description": "Restraint harness cut for a shape the guild has no name for, and warded on the inside.",
+      "discovery_note": "A warded harness comes up, its buckles facing inward."
+    },
+    {
+      "id": "brood_ledger",
+      "name": "Brood Ledger",
+      "description": "A breeding record listing lineages, dates, and outcomes, kept in a steady hand for far too long.",
+      "discovery_note": "A brood ledger is recovered, the entries unbroken for centuries."
+    },
+    {
+      "id": "unclaimed_lot",
+      "name": "Unclaimed Lot",
+      "description": "An auction lot still boxed and tagged, its buyer's column blank.",
+      "discovery_note": "An unclaimed lot is carried out, still tagged and boxed."
+    },
+    {
+      "id": "auction_ledger",
+      "name": "Auction Ledger",
+      "description": "Sale records for things the tower caught. The final page lists the guild's own founding year.",
+      "discovery_note": "An auction ledger surfaces, and the last page gives the guild pause."
+    },
+    {
+      "id": "sealed_index",
+      "name": "Sealed Index",
+      "description": "An index to the tower's records, warded shut from the reader's side.",
+      "discovery_note": "A sealed index is taken from the archive, still shut."
+    },
+    {
+      "id": "ward_key",
+      "name": "Ward Key",
+      "description": "A key cut for the archive ward, found on the wrong side of it.",
+      "discovery_note": "A ward key is found lying on the wrong side of its own door."
+    },
+    {
+      "id": "living_cartogram",
+      "name": "Living Cartogram",
+      "description": "A map of the tower that revises itself. Corridors appear on it days before they appear underfoot.",
+      "discovery_note": "A cartogram comes up that has redrawn itself since it was picked up."
+    },
+    {
+      "id": "catalogued_relic",
+      "name": "Catalogued Relic",
+      "description": "An object from a numbered niche, entered in a catalogue that is still being kept.",
+      "discovery_note": "An object is taken from its niche, and the catalogue is amended."
+    },
+    {
+      "id": "niche_seal",
+      "name": "Niche Seal",
+      "description": "The stone plug from a reliquary niche, carved with an entry number and a caution.",
+      "discovery_note": "A niche seal is drawn out whole, its caution still crisp."
+    },
+    {
+      "id": "governor_cog",
+      "name": "Governor Cog",
+      "description": "A regulating gear from machinery that did not stop when it was removed.",
+      "discovery_note": "A governor cog is lifted clear, and the hall keeps running without it."
+    },
+    {
+      "id": "understair_keystone",
+      "name": "Understair Keystone",
+      "description": "A keystone from the older stonework, cut for a span no human mason would attempt.",
+      "discovery_note": "A keystone from the older work is brought up, impossibly well cut."
+    },
+    {
+      "id": "descent_marker",
+      "name": "Descent Marker",
+      "description": "A depth marker from the long stair, numbered in a sequence that does not start at the top.",
+      "discovery_note": "A descent marker is recovered, numbered from somewhere below."
+    },
+    {
+      "id": "answering_stone",
+      "name": "Answering Stone",
+      "description": "A fragment of the chorus vault that repeats what is said to it, an hour later.",
+      "discovery_note": "A fragment of the answering stone is carried out, still replying."
+    },
+    {
+      "id": "empty_socket",
+      "name": "Empty Socket",
+      "description": "A mounting from the hollow works, shaped around something that was removed carefully.",
+      "discovery_note": "A socket mounting is recovered, its fittings undamaged."
+    },
+    {
+      "id": "feeder_line",
+      "name": "Feeder Line",
+      "description": "A length of conduit that ran from the core to the machinery, still faintly warm.",
+      "discovery_note": "A length of feeder line comes up warm to the touch."
+    },
+    {
+      "id": "guildmark_seal",
+      "name": "Guildmark Seal",
+      "description": "A seal bearing the guild's own mark, cut before the guild existed.",
+      "discovery_note": "A seal is recovered carrying a mark the guild has used for one generation."
+    },
+    {
+      "id": "core_ember",
+      "name": "Core Ember",
+      "description": "A coal from the core that has not cooled and does not consume anything.",
+      "discovery_note": "An ember is carried up from the core, still burning nothing."
+    },
+    {
+      "id": "founding_shell",
+      "name": "Founding Shell",
+      "description": "Shell from the core's own clutch, matching the fragments kept in the guild's first record.",
+      "discovery_note": "A shell fragment matches the one in the guild's founding record exactly."
+    }
+  ]
+}
