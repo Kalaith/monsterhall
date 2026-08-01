@@ -5,134 +5,134 @@
       "sample": 1,
       "rng_seed": 911212545,
       "companions": 20,
-      "buildings": 15,
-      "gold": 636800,
-      "debt_gap": -1863200,
-      "relics": 61,
-      "arcane_residue": 85412,
+      "buildings": 17,
+      "gold": 915475,
+      "debt_gap": -1584525,
+      "relics": 75,
+      "arcane_residue": 63245,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
-      "debt_status": "Founder's Due due in 87 days.",
+      "debt_status": "Founder's Due due in 85 days.",
       "max_active_requests": 6,
-      "expirations": 352
+      "expirations": 378
     },
     {
       "sample": 2,
       "rng_seed": 911212546,
       "companions": 20,
-      "buildings": 16,
-      "gold": 699915,
-      "debt_gap": -1800085,
-      "relics": 68,
-      "arcane_residue": 90721,
+      "buildings": 13,
+      "gold": 785397,
+      "debt_gap": -1714603,
+      "relics": 0,
+      "arcane_residue": 110951,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
       "debt_status": "Founder's Due due in 84 days.",
       "max_active_requests": 6,
-      "expirations": 369
+      "expirations": 361
     },
     {
       "sample": 3,
       "rng_seed": 911212547,
       "companions": 20,
-      "buildings": 15,
-      "gold": 638280,
-      "debt_gap": -1861720,
-      "relics": 61,
-      "arcane_residue": 85066,
+      "buildings": 17,
+      "gold": 1217561,
+      "debt_gap": -1282439,
+      "relics": 111,
+      "arcane_residue": 63044,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
-      "debt_status": "Founder's Due due in 85 days.",
+      "debt_status": "Founder's Due due in 84 days.",
       "max_active_requests": 6,
-      "expirations": 353
+      "expirations": 371
     },
     {
       "sample": 4,
       "rng_seed": 911212548,
       "companions": 20,
-      "buildings": 15,
-      "gold": 637936,
-      "debt_gap": -1862064,
-      "relics": 64,
-      "arcane_residue": 85627,
+      "buildings": 14,
+      "gold": 693153,
+      "debt_gap": -1806847,
+      "relics": 0,
+      "arcane_residue": 115960,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
-      "debt_status": "Founder's Due due in 86 days.",
+      "debt_status": "Founder's Due due in 84 days.",
       "max_active_requests": 6,
-      "expirations": 361
+      "expirations": 375
     },
     {
       "sample": 5,
       "rng_seed": 911212549,
       "companions": 20,
-      "buildings": 16,
-      "gold": 630279,
-      "debt_gap": -1869721,
-      "relics": 68,
-      "arcane_residue": 85228,
+      "buildings": 9,
+      "gold": 350893,
+      "debt_gap": -2149107,
+      "relics": 36,
+      "arcane_residue": 122721,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
-      "debt_status": "Founder's Due due in 87 days.",
+      "debt_status": "Founder's Due due in 105 days.",
       "max_active_requests": 6,
-      "expirations": 356
+      "expirations": 317
     },
     {
       "sample": 6,
       "rng_seed": 911212550,
       "companions": 20,
-      "buildings": 13,
-      "gold": 724720,
-      "debt_gap": -1775280,
-      "relics": 2,
-      "arcane_residue": 108368,
+      "buildings": 15,
+      "gold": 858182,
+      "debt_gap": -1641818,
+      "relics": 15,
+      "arcane_residue": 117794,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
       "debt_status": "Founder's Due due in 84 days.",
       "max_active_requests": 6,
-      "expirations": 369
+      "expirations": 379
     },
     {
       "sample": 7,
       "rng_seed": 911212551,
       "companions": 20,
       "buildings": 15,
-      "gold": 645114,
-      "debt_gap": -1854886,
-      "relics": 72,
-      "arcane_residue": 85881,
+      "gold": 952442,
+      "debt_gap": -1547558,
+      "relics": 9,
+      "arcane_residue": 113055,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
-      "debt_status": "Founder's Due due in 85 days.",
+      "debt_status": "Founder's Due due in 84 days.",
       "max_active_requests": 6,
-      "expirations": 362
+      "expirations": 376
     },
     {
       "sample": 8,
       "rng_seed": 911212552,
       "companions": 20,
-      "buildings": 17,
-      "gold": 851502,
-      "debt_gap": -1648498,
-      "relics": 71,
-      "arcane_residue": 64726,
+      "buildings": 16,
+      "gold": 1006788,
+      "debt_gap": -1493212,
+      "relics": 0,
+      "arcane_residue": 91006,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
       "debt_status": "Founder's Due due in 84 days.",
       "max_active_requests": 6,
-      "expirations": 374
+      "expirations": 372
     },
     {
       "sample": 9,
       "rng_seed": 911212553,
       "companions": 20,
       "buildings": 17,
-      "gold": 912745,
-      "debt_gap": -1587255,
-      "relics": 84,
-      "arcane_residue": 64458,
+      "gold": 833518,
+      "debt_gap": -1666482,
+      "relics": 65,
+      "arcane_residue": 64261,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
-      "debt_status": "Founder's Due due in 85 days.",
+      "debt_status": "Founder's Due due in 84 days.",
       "max_active_requests": 6,
       "expirations": 374
     },
@@ -140,16 +140,16 @@
       "sample": 10,
       "rng_seed": 911212554,
       "companions": 20,
-      "buildings": 12,
-      "gold": 758696,
-      "debt_gap": -1741304,
+      "buildings": 13,
+      "gold": 792064,
+      "debt_gap": -1707936,
       "relics": 0,
-      "arcane_residue": 106444,
+      "arcane_residue": 111271,
       "missed_payments": 0,
       "debt_milestone_id": "founders_due_7",
       "debt_status": "Founder's Due due in 85 days.",
       "max_active_requests": 6,
-      "expirations": 333
+      "expirations": 356
     }
   ],
   "companions": {
@@ -158,29 +158,29 @@
     "max": 20
   },
   "buildings": {
-    "average": 15.1,
-    "min": 12,
+    "average": 14.6,
+    "min": 9,
     "max": 17
   },
   "gold": {
-    "average": 713598.7,
-    "min": 630279,
-    "max": 912745
+    "average": 840547.3,
+    "min": 350893,
+    "max": 1217561
   },
   "debt_gap": {
-    "average": -1786401.3,
-    "min": -1869721,
-    "max": -1587255
+    "average": -1659452.7,
+    "min": -2149107,
+    "max": -1282439
   },
   "relics": {
-    "average": 55.1,
+    "average": 31.1,
     "min": 0,
-    "max": 84
+    "max": 111
   },
   "arcane_residue": {
-    "average": 86193.1,
-    "min": 64458,
-    "max": 108368
+    "average": 97330.8,
+    "min": 63044,
+    "max": 122721
   },
   "missed_payments": {
     "average": 0.0,
@@ -193,8 +193,8 @@
     "max": 6
   },
   "expirations": {
-    "average": 360.3,
-    "min": 333,
-    "max": 374
+    "average": 365.9,
+    "min": 317,
+    "max": 379
   }
 }

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "floors": [
     {
       "id": "floor_1_slick_cellars",
@@ -8,6 +8,8 @@
       "description": "Collapsed service tunnels full of low-risk salvage, residue slicks, and crawlspaces where slime scouts shine.",
       "difficulty": 20,
       "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [],
+      "required_surveys": 1,
       "required_roster": [],
       "mission_ids": [
         "resource_run",
@@ -40,14 +42,193 @@
       "corruption_pressure": 0
     },
     {
+      "id": "drowned_larder",
+      "name": "Drowned Larder",
+      "depth": 2,
+      "description": "Flooded provision vaults where the tower once stored a season at a time. The haul is heavy and the water has ruined anything delicate, so this is a floor for strong backs rather than careful hands.",
+      "difficulty": 24,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "floor_1_slick_cellars"
+      ],
+      "required_surveys": 2,
+      "required_roster": [],
+      "mission_ids": [
+        "resource_run",
+        "scout_route"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 30,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 1
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "slime_companion",
+          "weight": 5
+        },
+        {
+          "species_id": "minotaur_porter",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [],
+      "hazard_tags": [
+        "standing_water",
+        "rot",
+        "unstable_shelving"
+      ],
+      "egg_grade_bonus": 0,
+      "corruption_pressure": 0
+    },
+    {
+      "id": "lamp_gallery",
+      "name": "Lamp Gallery",
+      "depth": 3,
+      "description": "A long hall of arcane lamps that never went out. Residue pools thick beneath them, and the glare draws things that learned to wait at the edge of the light.",
+      "difficulty": 27,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "drowned_larder"
+      ],
+      "required_surveys": 2,
+      "required_roster": [],
+      "mission_ids": [
+        "resource_run",
+        "scout_route",
+        "relic_raid"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 10,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 16
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "residue_slime",
+          "weight": 5
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "unspent_lamp"
+      ],
+      "hazard_tags": [
+        "glare",
+        "residue_bloom",
+        "watchers"
+      ],
+      "egg_grade_bonus": 1,
+      "corruption_pressure": 2
+    },
+    {
+      "id": "cistern_stair",
+      "name": "Cistern Stair",
+      "depth": 4,
+      "description": "A spiral of maintenance landings around a dry cistern shaft, climbing further than it has any right to. What nests up in the updraft is worth far more than what it is worth in numbers.",
+      "difficulty": 30,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "lamp_gallery"
+      ],
+      "required_surveys": 2,
+      "required_roster": [],
+      "mission_ids": [
+        "resource_run",
+        "egg_hunt",
+        "scout_route"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 14,
+        "eggs": 1,
+        "relics": 0,
+        "arcane_residue": 4
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "harpy_lookout",
+          "weight": 5
+        },
+        {
+          "species_id": "lamia_routekeeper",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [],
+      "hazard_tags": [
+        "vertical_shafts",
+        "cold_updraft",
+        "long_fall"
+      ],
+      "egg_grade_bonus": 2,
+      "corruption_pressure": 1
+    },
+    {
+      "id": "foremans_rest",
+      "name": "Foreman's Rest",
+      "depth": 5,
+      "description": "Offices, ledgers, and a cold hearth: the last place built by people who expected to go home again. Past the far wall is a sealed stair, and everything below it belongs to the tower rather than to us.",
+      "difficulty": 32,
+      "requires_building_ids": [
+        "tower_route_cartography"
+      ],
+      "requires_surveyed_floor_ids": [
+        "cistern_stair"
+      ],
+      "required_surveys": 3,
+      "required_roster": [],
+      "mission_ids": [
+        "resource_run",
+        "relic_raid",
+        "scout_route"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 18,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 6
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        },
+        {
+          "species_id": "imp_runner",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "foremans_seal"
+      ],
+      "hazard_tags": [
+        "sealed_doors",
+        "old_wards",
+        "silence"
+      ],
+      "egg_grade_bonus": 1,
+      "corruption_pressure": 1
+    },
+    {
       "id": "floor_2_molten_baths",
       "name": "Molten Baths",
-      "depth": 2,
+      "depth": 6,
       "description": "Steamy mineral chambers with unstable residue vents, hard stone deposits, and routes that punish poor preparation.",
       "difficulty": 34,
       "requires_building_ids": [
         "residue_alchemy_bench"
       ],
+      "requires_surveyed_floor_ids": [],
+      "required_surveys": 1,
       "required_roster": [
         {
           "species_id": "slime_companion",
@@ -95,12 +276,14 @@
     {
       "id": "floor_3_gilded_kennels",
       "name": "Gilded Kennels",
-      "depth": 3,
+      "depth": 11,
       "description": "Lavish ruined holding pens and service corridors where strong escorts, alert scouts, and careful handlers matter.",
       "difficulty": 48,
       "requires_building_ids": [
         "recovery_lounge"
       ],
+      "requires_surveyed_floor_ids": [],
+      "required_surveys": 1,
       "required_roster": [
         {
           "species_id": "minotaur_porter",

@@ -59,7 +59,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 
 | Axis | Now | Target | Notes |
 |---|---|---|---|
-| **Tower floors** | **3** | **25** | `assets/data/floors.json`, depth 1–3, difficulty 20/34/48. The whole point of the game. |
+| **Tower floors** | **7** | **25** | Band 1 authored at depths 1–5. Molten Baths moved to 6, Gilded Kennels to 11 as their band anchors. Difficulty 20/24/27/30/32/34/48. |
 | Missions | 4 | 8–10 | GDD names 6 types; `missions.json` has 4. Rescue/Retrieval and Contract Fulfilment are unwritten. |
 | Species | 8 | 14–18 | Deep bands need companions you can only get down there. |
 | Mutations | 3 | 10+ | The corruption payoff. One mutation per two species is thin. |
@@ -307,6 +307,32 @@ Stop the loop and report if:
   spread difficulty across roughly 20-100 over 25 floors (~+3/floor), not continue the early
   +14/floor slope.** Phase 0 is now clear except the roster-list cap (item 1's leftover); band 1
   authoring can begin.
+
+- **2026-08-01 — phase 1, band 1 authored (depths 1-5).** Four new floors: **Drowned Larder** (2,
+  d24, best raw materials), **Lamp Gallery** (3, d27, best residue, first band-1 relic and the only
+  corruption pressure), **Cistern Stair** (4, d30, vertical, best egg *grade*), **Foreman's Rest**
+  (5, d32, relic + the band gate, needs `tower_route_cartography`). Each is chained to the one above
+  by surveys; Molten Baths moved to depth 6 and Gilded Kennels to 11 as their band anchors, with
+  difficulty and content untouched. Molten Baths gained `scout_route`. 5 discovery events name the
+  new floors before the guild can reach them. **The survey chain is proven against real data** —
+  `drowned_larder` and `lamp_gallery` both opened by survey alone.
+  **Two findings that matter more than the content:**
+  (1) **A serial survey chain stalls on any link that is not worth running.** The first tuning made
+  band 1 uniformly weaker than floor 1, so the policy never picked it and floors 3-5 never opened —
+  with every balance assertion still green, because a floor nobody visits changes nothing. Fixed by
+  making each floor **best-in-class on exactly one axis** rather than uniformly scaled. Added
+  `validation_tests/probe.rs` (`cargo test probe_floor_usage -- --ignored --nocapture`) which prints
+  unlocked/surveys per floor; **run it whenever a band is authored or rewards move** — the standard
+  reports show missions, not floors, and hide this failure completely.
+  (2) **The tower does not pay the scarce resource.** Every floor's `baseline_rewards.gold` is 0, on
+  the originals too. The guild ends a 365-day run sitting on ~62k residue it cannot spend while gold
+  is what buildings, upkeep and debt all consume. A "best residue" floor therefore has no pull —
+  which is why `lamp_gallery` unlocked and still went unrun. Bands 2-5 will hit this harder.
+  **Balance moved substantially and needs a decision before more bands land:** ending gold +91%
+  (630k -> 1.20M), expedition days 178 -> 238, expedition eggs 38 -> 248, hatches 23 -> 33,
+  buildings 15 -> 17. Roster still caps at 20, debt still survives, **no assertion was loosened or
+  touched**. `TODO.md` lists the day-365 target range as an open question, so there is no yardstick
+  to tune against yet — that is the blocker for band 2.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

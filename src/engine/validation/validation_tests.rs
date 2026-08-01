@@ -50,6 +50,7 @@ mod policy_eggs;
 mod policy_growth;
 mod policy_guests;
 mod policy_jobs;
+mod probe;
 mod reporting;
 mod scenarios;
 

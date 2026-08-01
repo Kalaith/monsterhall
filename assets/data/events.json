@@ -792,6 +792,48 @@
       "situation_label": "Prestige Referral Chain",
       "situation_upkeep_pressure_pct": 12,
       "situation_guest_bonus": 2
+    },
+    {
+      "id": "tower_larder_rumour",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_lamp_glow_below",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_cistern_updraft",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A cold draught comes up the maintenance stair carrying feathers and grit. Something is nesting a long way above the last landing.",
+      "required_trait_ids": [],
+      "required_species_ids": [
+        "harpy_lookout"
+      ]
+    },
+    {
+      "id": "tower_foreman_ledger",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_sealed_stair_draft",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+      "required_trait_ids": [],
+      "required_species_ids": []
     }
   ]
 }
