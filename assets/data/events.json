@@ -834,6 +834,40 @@
       "text": "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
       "required_trait_ids": [],
       "required_species_ids": []
+    },
+    {
+      "id": "tower_flue_draw",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_slag_echo",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Something enormous and metal shifts settling in the dark below the vents. The party listens to it for a while and decides it was only cooling.",
+      "required_trait_ids": [],
+      "required_species_ids": [
+        "minotaur_porter"
+      ]
+    },
+    {
+      "id": "tower_boiler_pressure",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_cinder_shell",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+      "required_trait_ids": [],
+      "required_species_ids": []
     }
   ]
 }

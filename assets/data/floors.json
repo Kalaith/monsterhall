@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "floors": [
     {
       "id": "floor_1_slick_cellars",
@@ -272,6 +272,190 @@
       ],
       "egg_grade_bonus": 1,
       "corruption_pressure": 1
+    },
+    {
+      "id": "flue_warrens",
+      "name": "Flue Warrens",
+      "depth": 7,
+      "description": "The vent network that once carried the baths' heat away, barely wider than a crawlspace and hot enough to blister. Residue bakes onto the flue walls in sheets, and only the small and the flexible come back with any of it.",
+      "difficulty": 37,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "floor_2_molten_baths"
+      ],
+      "required_surveys": 2,
+      "required_roster": [],
+      "mission_ids": [
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 36,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 12
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "residue_slime",
+          "weight": 5
+        },
+        {
+          "species_id": "imp_runner",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "flue_scale"
+      ],
+      "hazard_tags": [
+        "flue_crawl",
+        "scalding_draft",
+        "soot"
+      ],
+      "egg_grade_bonus": 1,
+      "corruption_pressure": 2
+    },
+    {
+      "id": "slagworks",
+      "name": "Slagworks",
+      "depth": 8,
+      "description": "The tower's old foundry floor, still warm after a century. Ingots, fittings and cold-cast scrap lie where the pour was abandoned, and every load of it needs a strong back and a clear route out.",
+      "difficulty": 40,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "flue_warrens"
+      ],
+      "required_surveys": 2,
+      "required_roster": [],
+      "mission_ids": [
+        "resource_run",
+        "scout_route"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 58,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 6
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "minotaur_porter",
+          "weight": 5
+        },
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "cast_fitting"
+      ],
+      "hazard_tags": [
+        "molten_runoff",
+        "collapsing_moulds",
+        "heat"
+      ],
+      "egg_grade_bonus": 1,
+      "corruption_pressure": 1
+    },
+    {
+      "id": "boiler_cathedral",
+      "name": "Boiler Cathedral",
+      "depth": 9,
+      "description": "A vaulted hall of pressure vessels the height of houses, each one sealed and still holding. What the tower thought worth locking inside a boiler is worth carrying home, if the seal is opened in the right order.",
+      "difficulty": 43,
+      "requires_building_ids": [
+        "forge_corner"
+      ],
+      "requires_surveyed_floor_ids": [
+        "slagworks"
+      ],
+      "required_surveys": 2,
+      "required_roster": [],
+      "mission_ids": [
+        "relic_raid",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 40,
+        "eggs": 0,
+        "relics": 3,
+        "arcane_residue": 14
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "pressure_seal"
+      ],
+      "hazard_tags": [
+        "pressure",
+        "steam_bursts",
+        "old_wards"
+      ],
+      "egg_grade_bonus": 2,
+      "corruption_pressure": 2
+    },
+    {
+      "id": "cinder_nursery",
+      "name": "Cinder Nursery",
+      "depth": 10,
+      "description": "Warm ash banked against the vent mouths, and something has been laying in it for a long time. The heat brings clutches on further than anywhere shallower in the tower, and the guild's first truly formidable companions come up out of this ash.",
+      "difficulty": 46,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "boiler_cathedral"
+      ],
+      "required_surveys": 3,
+      "required_roster": [],
+      "mission_ids": [
+        "egg_hunt",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 34,
+        "eggs": 1,
+        "relics": 2,
+        "arcane_residue": 12
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "harpy_lookout",
+          "weight": 5
+        },
+        {
+          "species_id": "residue_slime",
+          "weight": 3
+        },
+        {
+          "species_id": "minotaur_porter",
+          "weight": 2
+        }
+      ],
+      "relic_drop_ids": [
+        "cinder_shell"
+      ],
+      "hazard_tags": [
+        "ember_fall",
+        "thermal_updraft",
+        "brooding_heat"
+      ],
+      "egg_grade_bonus": 3,
+      "corruption_pressure": 2
     },
     {
       "id": "floor_3_gilded_kennels",

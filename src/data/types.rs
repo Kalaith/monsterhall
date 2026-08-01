@@ -173,6 +173,13 @@ pub struct DayCycleConfigData {
     /// authoring one is a content error rather than a hard floor.
     #[serde(default = "default_max_floor_difficulty")]
     pub max_floor_difficulty: u32,
+    /// Portion of a floor's difficulty taken off the egg and relic reward bars.
+    ///
+    /// `success_score` already has `difficulty` subtracted from it, so a flat
+    /// threshold charges depth twice and deep floors stop yielding eggs at all —
+    /// which severs the one link that lets the tower produce better companions.
+    #[serde(default = "default_reward_threshold_depth_relief_pct")]
+    pub reward_threshold_depth_relief_pct: i32,
     pub expedition_egg_reward_threshold: i32,
     pub expedition_relic_reward_threshold: i32,
     pub expedition_injury_threshold: i32,
@@ -518,6 +525,10 @@ fn default_skill_wage_divisor() -> u32 {
 
 fn default_understrength_income_pct() -> u32 {
     45
+}
+
+fn default_reward_threshold_depth_relief_pct() -> i32 {
+    60
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

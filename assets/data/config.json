@@ -148,6 +148,7 @@
     "survey_familiarity_relief": 1,
     "max_survey_familiarity_relief": 6,
     "max_floor_difficulty": 120,
+    "reward_threshold_depth_relief_pct": 60,
     "expedition_egg_reward_threshold": 68,
     "expedition_relic_reward_threshold": 88,
     "expedition_injury_threshold": 55

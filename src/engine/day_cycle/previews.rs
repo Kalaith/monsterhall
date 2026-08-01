@@ -194,19 +194,25 @@ pub(crate) fn calculate_expedition_plan(
         * priority_residue_bonus_pct
         * depth_profile.residue_multiplier_pct
         / 1_000_000;
+    // Depth is already priced into `success_score`; charging it again at the
+    // reward bar would mean the deepest floors never produce eggs or relics,
+    // and better companions are the only thing the tower is really for.
+    let depth_relief =
+        floor.difficulty as i32 * data.config.day_cycle.reward_threshold_depth_relief_pct / 100;
+    let egg_threshold = data.config.day_cycle.expedition_egg_reward_threshold - depth_relief;
+    let relic_threshold = data.config.day_cycle.expedition_relic_reward_threshold - depth_relief;
+
     let egg_discovery_score = success_score + building_bonus.egg_discovery_flat;
-    let projected_eggs =
-        if egg_discovery_score >= data.config.day_cycle.expedition_egg_reward_threshold {
-            floor.baseline_rewards.eggs + mission.egg_bonus_flat + depth_profile.egg_bonus
-        } else {
-            0
-        };
-    let projected_relics =
-        if success_score >= data.config.day_cycle.expedition_relic_reward_threshold {
-            floor.baseline_rewards.relics + mission.relic_bonus_flat + depth_profile.relic_bonus
-        } else {
-            0
-        };
+    let projected_eggs = if egg_discovery_score >= egg_threshold {
+        floor.baseline_rewards.eggs + mission.egg_bonus_flat + depth_profile.egg_bonus
+    } else {
+        0
+    };
+    let projected_relics = if success_score >= relic_threshold {
+        floor.baseline_rewards.relics + mission.relic_bonus_flat + depth_profile.relic_bonus
+    } else {
+        0
+    };
     let injury_risk_score = floor.difficulty as i32
         + mission.injury_risk_pct
         + priority_injury_risk

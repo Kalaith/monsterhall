@@ -532,14 +532,29 @@ fn multi_seed_365_simulation_summary_reports_variance() {
         .iter()
         .filter(|sample| sample.debt_milestone_id.as_deref() == Some("founders_due_7"))
         .count();
+    let cleared = summary
+        .samples
+        .iter()
+        .filter(|sample| sample.debt_milestone_id.is_none())
+        .count();
     assert!(
-        reached_final_window * 2 > summary.samples.len(),
-        "most seeds should reach the final debt window by day 365, got {reached_final_window} of {}",
-        summary.samples.len()
+        reached_final_window + cleared > summary.samples.len() / 2,
+        "most seeds should reach or clear the final debt window by day 365, got {reached_final_window} at it and {cleared} past it",
+        );
+    // Rewritten for an eleven-floor tower. This used to read "current
+    // three-floor samples should not fully clear Founder's Due", from a point
+    // where the campaign simply could not be finished. With bands one and two
+    // authored and the escort economy paying for depth, some campaigns now win
+    // — and that is the intended shape. What must stay true is that winning is
+    // not a formality: it has to remain out of reach for a fair share of runs.
+    assert!(
+        cleared > 0,
+        "an eleven-floor tower should let some campaigns clear Founder's Due"
     );
     assert!(
-        summary.samples.iter().all(|sample| sample.debt_gap < 0),
-        "current three-floor samples should not fully clear Founder's Due"
+        cleared < summary.samples.len(),
+        "clearing Founder's Due should not be guaranteed, but all {} seeds managed it",
+        summary.samples.len()
     );
     assert!(
         summary.debt_gap.average < -500_000.0,

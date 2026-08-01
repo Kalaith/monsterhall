@@ -59,7 +59,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 
 | Axis | Now | Target | Notes |
 |---|---|---|---|
-| **Tower floors** | **7** | **25** | Band 1 authored at depths 1–5. Molten Baths moved to 6, Gilded Kennels to 11 as their band anchors. Difficulty 20/24/27/30/32/34/48. |
+| **Tower floors** | **11** | **25** | Bands 1 and 2 authored, depths 1–10, plus Gilded Kennels at 11. Difficulty 20→48. All eleven are reachable and all but Gilded Kennels are actually run by the planner. |
 | Missions | 4 | 8–10 | GDD names 6 types; `missions.json` has 4. Rescue/Retrieval and Contract Fulfilment are unwritten. |
 | Species | 8 | 14–18 | Deep bands need companions you can only get down there. |
 | Mutations | 3 | 10+ | The corruption payoff. One mutation per two species is thin. |
@@ -358,6 +358,36 @@ Stop the loop and report if:
   now poor enough that it neither builds nor delves as freely, which is the honest cost of a real
   wage bill against a 7-floor tower. Bands 2-5 are what feed it: deep floors produce rank 4-5
   escorts, and `frontier_factions` at 240% is waiting for them. Re-measure this table after band 2.
+
+- **2026-08-02 — phase 1, band 2 authored (depths 7-10), and the tower finally pays.** Four floors:
+  **Flue Warrens** (7, d37, the hot route down), **Slagworks** (8, d40, best materials in the game),
+  **Boiler Cathedral** (9, d43, best relics), **Cinder Nursery** (10, d46, best egg grade — the
+  guild's first rank-4 escorts). Four discovery events. **Three engine fixes the content forced,
+  each one a thing the tower could not do without:**
+  (1) **Route survey crediting** (`surveys.rs::route_survey_count`) — a survey requirement is met by
+  the named floor *or anything deeper*, because a party running depth 10 walks depth 3 to get there.
+  Without it a shallow floor that is never the best available run stalls every floor beneath it
+  forever, which is exactly what had happened to `lamp_gallery` and `flue_warrens`.
+  (2) **Rewards must scale steeply with difficulty.** Measured: a floor at difficulty 37 needs
+  roughly **2.3x** the baseline of a difficulty-24 floor before the planner will ever choose it,
+  because difficulty is subtracted from success and success feeds the reward bonus. Materials alone
+  is the wrong lever — **relics are what make a deep floor worth the risk** (Molten Baths competes
+  at 28 materials because it also carries a relic and an egg grade).
+  (3) **`reward_threshold_depth_relief_pct` (60).** The egg and relic bars were flat (68 / 88) while
+  `success_score` already had difficulty subtracted, so depth was charged twice and deep floors
+  almost never yielded eggs. The roster was **11 rank-2 and 9 rank-3, zero rank-4**, meaning the
+  entire escort economy's payoff could never arrive. With the bars made depth-relative, rank 4
+  appears, buildings go 9 -> 14, gold 66k -> 198k.
+  **Result:** 8 of 10 seeds fill the roster, zero missed payments, buildings avg 14.3, and **4 of 10
+  campaigns now fully clear Founder's Due** — the game is winnable for the first time. One stale
+  assertion rewritten with reasoning in place: it literally read "current three-floor samples should
+  not fully clear Founder's Due" and now checks that winning happens but is not guaranteed.
+  **Next iteration should know:** (a) **arcane residue is still a dead resource** — ~100k accumulates
+  unspent, so any floor whose identity is "best residue" will never be chosen; it needs a sink before
+  band 3, or stop using it as a floor axis. (b) `floor_3_gilded_kennels` (d11) is unlocked all
+  campaign and **never run** — it is building-gated, sits above band 2's rewards, and needs
+  rebalancing when band 3 anchors on it. (c) Run `probe_floor_usage` after every band; the standard
+  reports show missions, not floors, and would have hidden all of this.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

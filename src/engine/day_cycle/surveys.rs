@@ -60,18 +60,50 @@ pub(super) fn survey_count(town: &PlayerTownState, floor_id: &str) -> u32 {
 /// True when every prerequisite floor is surveyed deeply enough and every
 /// required building stands. Floors with no survey prerequisites are never
 /// chain-unlocked by this path — a building's `unlocks.floor_ids` opens those.
-fn chain_unlock_is_satisfied(town: &PlayerTownState, floor: &crate::data::TowerFloorData) -> bool {
+fn chain_unlock_is_satisfied(
+    data: &GameData,
+    town: &PlayerTownState,
+    floor: &crate::data::TowerFloorData,
+) -> bool {
     if floor.requires_surveyed_floor_ids.is_empty() {
         return false;
     }
     floor
         .requires_surveyed_floor_ids
         .iter()
-        .all(|required_id| survey_count(town, required_id) >= floor.required_surveys)
+        .all(|required_id| route_survey_count(data, town, required_id) >= floor.required_surveys)
         && floor
             .requires_building_ids
             .iter()
             .all(|building_id| town.constructed_building_ids.contains(building_id))
+}
+
+/// Surveys credited towards knowing a floor, counting the floor itself and
+/// anything deeper.
+///
+/// A party running the tenth floor walks the third to get there, so a guild that
+/// routinely delves past a floor knows it whether or not that floor was ever the
+/// day's destination. Without this a shallow floor that is never the best choice
+/// stalls every floor beneath it forever — the chain is serial, and the planner
+/// only ever picks the single most valuable run available.
+fn route_survey_count(data: &GameData, town: &PlayerTownState, floor_id: &str) -> u32 {
+    let Some(required_depth) = data
+        .floors
+        .floors
+        .iter()
+        .find(|floor| floor.id == floor_id)
+        .map(|floor| floor.depth)
+    else {
+        return survey_count(town, floor_id);
+    };
+
+    data.floors
+        .floors
+        .iter()
+        .filter(|floor| floor.depth >= required_depth)
+        .map(|floor| survey_count(town, &floor.id))
+        .max()
+        .unwrap_or_default()
 }
 
 /// Opens every floor whose survey chain is now satisfied. Swept once per day so
@@ -83,7 +115,7 @@ pub(super) fn unlock_surveyed_floors(data: &GameData, town: &mut PlayerTownState
         if town.unlocked_floor_ids.contains(&floor.id) {
             continue;
         }
-        if !chain_unlock_is_satisfied(town, floor) {
+        if !chain_unlock_is_satisfied(data, town, floor) {
             continue;
         }
         town.unlocked_floor_ids.push(floor.id.clone());
@@ -98,6 +130,7 @@ pub(super) fn unlock_surveyed_floors(data: &GameData, town: &mut PlayerTownState
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::data::test_game_data;
 
     fn floor(id: &str, requires: &[&str], required_surveys: u32) -> crate::data::TowerFloorData {
         crate::data::TowerFloorData {
@@ -155,10 +188,18 @@ mod tests {
         let floors = [floor("floor_b", &["floor_a"], 2)];
 
         record_floor_survey(&mut town, "floor_a", 1);
-        assert!(!chain_unlock_is_satisfied(&town, &floors[0]));
+        assert!(!chain_unlock_is_satisfied(
+            &test_game_data(),
+            &town,
+            &floors[0]
+        ));
 
         record_floor_survey(&mut town, "floor_a", 1);
-        assert!(chain_unlock_is_satisfied(&town, &floors[0]));
+        assert!(chain_unlock_is_satisfied(
+            &test_game_data(),
+            &town,
+            &floors[0]
+        ));
     }
 
     #[test]
@@ -167,10 +208,10 @@ mod tests {
         let deep = floor("floor_c", &["floor_a", "floor_b"], 1);
 
         record_floor_survey(&mut town, "floor_a", 5);
-        assert!(!chain_unlock_is_satisfied(&town, &deep));
+        assert!(!chain_unlock_is_satisfied(&test_game_data(), &town, &deep));
 
         record_floor_survey(&mut town, "floor_b", 1);
-        assert!(chain_unlock_is_satisfied(&town, &deep));
+        assert!(chain_unlock_is_satisfied(&test_game_data(), &town, &deep));
     }
 
     /// The band gate: surveys alone do not open a floor whose building is unbuilt.
@@ -181,11 +222,11 @@ mod tests {
         deep.requires_building_ids = vec!["route_map_chamber".to_owned()];
         record_floor_survey(&mut town, "floor_a", 3);
 
-        assert!(!chain_unlock_is_satisfied(&town, &deep));
+        assert!(!chain_unlock_is_satisfied(&test_game_data(), &town, &deep));
 
         town.constructed_building_ids
             .push("route_map_chamber".to_owned());
-        assert!(chain_unlock_is_satisfied(&town, &deep));
+        assert!(chain_unlock_is_satisfied(&test_game_data(), &town, &deep));
     }
 
     /// Floors with no survey prerequisites keep their old behaviour exactly:
@@ -196,7 +237,11 @@ mod tests {
         let building_gated = floor("floor_b", &[], 1);
         record_floor_survey(&mut town, "floor_a", 99);
 
-        assert!(!chain_unlock_is_satisfied(&town, &building_gated));
+        assert!(!chain_unlock_is_satisfied(
+            &test_game_data(),
+            &town,
+            &building_gated
+        ));
     }
 
     #[test]
@@ -243,12 +288,34 @@ mod tests {
             if town.unlocked_floor_ids.contains(&floor.id) {
                 continue;
             }
-            if !chain_unlock_is_satisfied(town, floor) {
+            if !chain_unlock_is_satisfied(&test_game_data(), town, floor) {
                 continue;
             }
             town.unlocked_floor_ids.push(floor.id.clone());
             opened.push(floor.name.clone());
         }
         opened
+    }
+
+    /// A guild that routinely runs a deep floor has walked every floor above it,
+    /// so those count as known. Without this a shallow floor that is never the
+    /// best available run stalls the whole chain beneath it.
+    #[test]
+    fn deeper_running_credits_the_floors_walked_through() {
+        let data = test_game_data();
+        let mut town = PlayerTownState::default();
+
+        // Nobody has ever made the Lamp Gallery the destination...
+        assert_eq!(survey_count(&town, "lamp_gallery"), 0);
+        // ...but the guild runs the Molten Baths, far below it, constantly.
+        record_floor_survey(&mut town, "floor_2_molten_baths", 6);
+
+        assert_eq!(
+            route_survey_count(&data, &town, "lamp_gallery"),
+            6,
+            "running a deeper floor should count as knowing the shallower ones"
+        );
+        // Depth still has to be earned: nothing credits a floor below the deepest run.
+        assert_eq!(route_survey_count(&data, &town, "cinder_nursery"), 0);
     }
 }

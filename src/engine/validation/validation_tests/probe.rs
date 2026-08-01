@@ -36,6 +36,12 @@ fn probe_floor_usage() {
         game_state.egg_inventory.len(),
     );
 
+    let mut ranks = [0usize; 6];
+    for monster in &game_state.monsters {
+        ranks[usize::from(monster.quality_rank).min(5)] += 1;
+    }
+    println!("RANKS (1..5): {:?}", &ranks[1..]);
+
     for floor in &data.floors.floors {
         let surveys = game_state
             .town
