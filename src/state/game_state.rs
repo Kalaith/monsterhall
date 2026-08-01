@@ -308,10 +308,22 @@ pub struct PlayerTownState {
     #[serde(alias = "patron_tiers")]
     pub patron_tiers: Vec<String>,
     pub completed_project_ids: Vec<String>,
+    /// Survey progress per floor. A floor is surveyed by running expeditions on
+    /// it, which is how the deeper floors open.
+    #[serde(default)]
+    pub floor_surveys: Vec<FloorSurveyState>,
     pub active_situations: Vec<TownSituationState>,
     pub party_size: u8,
     #[serde(alias = "guild_job_worker_limit")]
     pub town_job_limit: u8,
+}
+
+/// How well the guild knows one floor. Earned by running expeditions there.
+#[derive(Debug, Clone, Serialize, Deserialize, Default)]
+#[serde(default)]
+pub struct FloorSurveyState {
+    pub floor_id: String,
+    pub surveys: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]

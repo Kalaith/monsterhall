@@ -176,6 +176,46 @@ impl GameData {
                     floor.id
                 ));
             }
+            self.validate_floor_survey_chain(floor)?;
+        }
+        Ok(())
+    }
+
+    /// A survey chain that names a floor which does not exist, names itself, or
+    /// asks for zero surveys is a floor that can never open — and the failure
+    /// would show up as an unreachable floor rather than an error, so it is
+    /// caught at load instead.
+    fn validate_floor_survey_chain(
+        &self,
+        floor: &crate::data::TowerFloorData,
+    ) -> Result<(), String> {
+        if floor.requires_surveyed_floor_ids.is_empty() {
+            return Ok(());
+        }
+        if floor.required_surveys == 0 {
+            return Err(format!(
+                "floor '{}' lists a survey chain but requires zero surveys.",
+                floor.id
+            ));
+        }
+        for required_id in &floor.requires_surveyed_floor_ids {
+            if required_id == &floor.id {
+                return Err(format!(
+                    "floor '{}' cannot require surveying itself.",
+                    floor.id
+                ));
+            }
+            if !self
+                .floors
+                .floors
+                .iter()
+                .any(|candidate| &candidate.id == required_id)
+            {
+                return Err(format!(
+                    "floor '{}'.requires_surveyed_floor_ids references unknown floor '{}'.",
+                    floor.id, required_id
+                ));
+            }
         }
         Ok(())
     }

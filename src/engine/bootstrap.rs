@@ -56,6 +56,7 @@ pub fn create_new_game_state(data: &GameData) -> GameState {
         unlocked_species_ids: collect_unlocked_species_ids(data),
         patron_tiers: vec!["local_delvers".to_owned()],
         completed_project_ids: Vec::new(),
+        floor_surveys: Vec::new(),
         active_situations: Vec::new(),
         party_size: new_game.party_size,
         town_job_limit: new_game.town_job_limit,

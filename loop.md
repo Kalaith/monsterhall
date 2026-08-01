@@ -105,12 +105,12 @@ These are the known hard blockers. Each is one iteration or less.
    assigned; `town_management.rs:142` takes 10 of the buildings, which will bite as buildings grow
    past 20. The team panel is height-bounded 2-column cards, so it needs paging of its own shape
    rather than a copy of the floor list.
-2. **Floors can only be unlocked by buildings.** `unlocked_floor_ids` is written in exactly two
-   places: `bootstrap.rs:56` (starting floors) and `day_cycle/helpers.rs:81`
-   (`building.unlocks.floor_ids`). Twenty-five floors cannot mean twenty-five buildings. Add a
-   depth-chain unlock — a `#[serde(default)]` prerequisite on `TowerFloorData` (previous floor
-   surveyed / a scout-route mission completed there / a depth threshold) — and keep the building
-   gate as the *band* gate. Buildings open a band; running the band opens its floors.
+2. ~~**Floors can only be unlocked by buildings.**~~ **Done 2026-08-01** — survey chain in
+   `day_cycle/surveys.rs`. Floors declare `requires_surveyed_floor_ids` + `required_surveys`;
+   expeditions bank survey points on the floor they ran (missions carry `survey_value`, scout route
+   is worth 2); a daily sweep opens any floor whose chain and buildings are both satisfied.
+   **No floor uses it yet** — band 1 is its first real customer, and authoring those floors is what
+   proves the mechanism against real data.
 3. **The depth curve is linear and tuned for 3.** In `src/engine/depth.rs:139`,
    `hazard_risk = depth * 2 + hazard_tags.len() * 3 + mission modifier`, and it feeds
    `success_bonus -= hazard_risk / 3` and `injury_risk_delta`. At depth 25 that is ~50 hazard before
@@ -267,6 +267,25 @@ Stop the loop and report if:
   menu** (`src/main.rs:83` — the scene env var is parsed but unused), so no screen except the menu
   can be visually verified; every UI slice in this loop is unit-test-verified only until that is
   fixed. Balance numbers unmoved (pure UI).
+
+- **2026-08-01 — phase 0, blocker 2 (floor unlock chain).** Floors could only be opened by
+  `building.unlocks.floor_ids`, which cannot scale to 25. Added a survey chain: `TowerFloorData`
+  gains `requires_surveyed_floor_ids` + `required_surveys` (both `#[serde(default)]`),
+  `MissionData` gains `survey_value` (default 1; `scout_route` set to 2, giving that mission its
+  first unique reason to exist), `PlayerTownState` gains `floor_surveys` (`#[serde(default)]`, so
+  old saves load untouched). `day_cycle/surveys.rs` records a survey when an expedition pays out
+  and sweeps once per day to open floors whose chain **and** `requires_building_ids` are satisfied
+  — which also makes `requires_building_ids` live data for the first time; it was previously
+  validated and never enforced. Load-time validation rejects a chain naming an unknown floor,
+  itself, or zero surveys. **Also extracted `day_cycle/upkeep.rs`** (5 upkeep functions, 171 lines)
+  because `resolution.rs` sat at 792 against the 800 hard limit and had no room for the hook; it is
+  now 625. 9 tests added (43 total, was 34) — 8 unit tests on the chain, plus one that runs the
+  real 30-day cycle and asserts surveys actually accumulate, because the unit tests would all pass
+  even if the `resolve_day` hook were dead code. Balance reports byte-identical: the mechanism is
+  dormant until a floor declares a chain. **Next iteration should know:** phase 0 items 3 and 4
+  (the linear depth curve, and `relic_bonus`'s hard-coded `depth >= 3`) are the last blockers
+  before band authoring, and both are in `engine/depth.rs`; they are worth doing together since
+  both are the same "tuned for 3 floors" problem.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

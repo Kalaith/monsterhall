@@ -56,6 +56,8 @@ fn scout_route_rewards_more_corruption() {
         description: String::new(),
         difficulty: 10,
         requires_building_ids: Vec::new(),
+        requires_surveyed_floor_ids: Vec::new(),
+        required_surveys: 1,
         required_roster: Vec::new(),
         mission_ids: vec!["scout_route".to_owned()],
         baseline_rewards: ResourceAmountData::default(),
@@ -80,6 +82,7 @@ fn scout_route_rewards_more_corruption() {
         preferred_role: None,
         egg_grade_bonus: 0,
         hazard_risk_modifier_pct: 0,
+        survey_value: 1,
     };
     let monster = test_monster(vec!["corruption_tuned".to_owned()]);
 
@@ -104,6 +107,7 @@ fn removing_last_monster_clears_expedition() {
             unlocked_species_ids: vec!["slime_companion".to_owned()],
             patron_tiers: vec!["local_delvers".to_owned()],
             completed_project_ids: Vec::new(),
+            floor_surveys: Vec::new(),
             active_situations: Vec::new(),
             party_size: 3,
             town_job_limit: 2,
@@ -160,6 +164,7 @@ fn release_monster_clears_assignments_without_emptying_roster() {
             unlocked_species_ids: vec!["slime_companion".to_owned()],
             patron_tiers: vec!["local_delvers".to_owned()],
             completed_project_ids: Vec::new(),
+            floor_surveys: Vec::new(),
             active_situations: Vec::new(),
             party_size: 3,
             town_job_limit: 2,
@@ -267,6 +272,7 @@ fn incubating_and_hatching_use_egg_inventory() {
             unlocked_species_ids: vec!["slime_companion".to_owned()],
             patron_tiers: vec!["local_delvers".to_owned()],
             completed_project_ids: Vec::new(),
+            floor_surveys: Vec::new(),
             active_situations: Vec::new(),
             party_size: 3,
             town_job_limit: 2,

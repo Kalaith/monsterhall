@@ -25,7 +25,9 @@ mod modifiers;
 mod previews;
 mod progression;
 mod resolution;
+mod surveys;
 mod types;
+mod upkeep;
 
 #[cfg(test)]
 mod tests;
@@ -37,6 +39,8 @@ use modifiers::*;
 use previews::*;
 use progression::*;
 use resolution::*;
+use surveys::*;
+use upkeep::*;
 
 pub use actions::{
     assign_monster_to_expedition, assign_monster_to_idle, assign_monster_to_rest,

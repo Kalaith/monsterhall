@@ -284,6 +284,10 @@ pub struct MissionData {
     pub egg_grade_bonus: u32,
     #[serde(default)]
     pub hazard_risk_modifier_pct: i32,
+    /// Survey points one completed run on this mission is worth. Mapping a route
+    /// is the scout's whole job, so it maps faster than a salvage haul does.
+    #[serde(default = "default_survey_value")]
+    pub survey_value: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -430,6 +434,14 @@ fn default_quality_rank() -> u8 {
     1
 }
 
+fn default_required_surveys() -> u32 {
+    1
+}
+
+fn default_survey_value() -> u32 {
+    1
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OpeningStoryStepData {
     pub id: String,
@@ -446,6 +458,15 @@ pub struct TowerFloorData {
     pub description: String,
     pub difficulty: u32,
     pub requires_building_ids: Vec<String>,
+    /// Floors that must be surveyed before this one opens. Empty means the floor
+    /// is not chain-unlocked — a building's `unlocks.floor_ids` opens it, or it
+    /// is a starting floor. A tower deeper than a handful of floors cannot mean
+    /// one building per floor, so depth is earned by running the floor above.
+    #[serde(default)]
+    pub requires_surveyed_floor_ids: Vec<String>,
+    /// Survey points needed on each floor in `requires_surveyed_floor_ids`.
+    #[serde(default = "default_required_surveys")]
+    pub required_surveys: u32,
     #[serde(default)]
     pub required_roster: Vec<FloorRosterRequirementData>,
     pub mission_ids: Vec<String>,

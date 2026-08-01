@@ -87,7 +87,8 @@
       "injury_risk_pct": 10,
       "preferred_role": "corruption_adept",
       "egg_grade_bonus": 2,
-      "hazard_risk_modifier_pct": 12
+      "hazard_risk_modifier_pct": 12,
+      "survey_value": 2
     }
   ]
 }

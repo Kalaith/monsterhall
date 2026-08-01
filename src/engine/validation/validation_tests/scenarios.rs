@@ -19,6 +19,53 @@ fn invalid_expedition_mission_is_rejected_before_runtime_resolution() {
     assert!(error.contains("unknown mission 'missing_mission'"));
 }
 
+/// The survey chain's unit tests all pass against synthetic floors, so they
+/// would keep passing if the hook in `resolve_day` were never reached. This runs
+/// the real day cycle and asserts expeditions actually leave survey progress
+/// behind — the only thing that makes deeper floors reachable.
+#[test]
+fn running_expeditions_records_survey_progress_on_the_real_day_cycle() {
+    let _rng_guard = simulation_rng_guard();
+    seed_simulation(SIMULATION_BASE_SEED ^ 7);
+    let data = test_game_data();
+    let mut game_state = create_new_game_state(&data);
+    play_opening_sequence(&data, &mut game_state);
+
+    let mut expedition_days = 0u32;
+    for _ in 0..30 {
+        let policy_metrics = run_daily_policy(&data, &mut game_state);
+        if policy_metrics.expedition_members_assigned > 0 {
+            expedition_days += 1;
+        }
+        resolve_day(&data, &mut game_state);
+    }
+
+    assert!(
+        expedition_days > 0,
+        "the policy should have run at least one expedition in thirty days"
+    );
+    let surveyed: u32 = game_state
+        .town
+        .floor_surveys
+        .iter()
+        .map(|entry| entry.surveys)
+        .sum();
+    assert!(
+        surveyed >= expedition_days,
+        "each of the {expedition_days} expedition days should leave at least one survey point, got {surveyed}"
+    );
+    for entry in &game_state.town.floor_surveys {
+        assert!(
+            data.floors
+                .floors
+                .iter()
+                .any(|floor| floor.id == entry.floor_id),
+            "survey recorded against unknown floor '{}'",
+            entry.floor_id
+        );
+    }
+}
+
 #[test]
 fn thirty_day_simulation_keeps_gameplay_state_valid() {
     let _rng_guard = simulation_rng_guard();
