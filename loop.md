@@ -334,6 +334,31 @@ Stop the loop and report if:
   touched**. `TODO.md` lists the day-365 target range as an open question, so there is no yardstick
   to tune against yet — that is the blocker for band 2.
 
+- **2026-08-01 — the escort economy (requested design change, not a loop slice).** Income now comes
+  from escorting adventurers who pay for the calibre of companion they get, and companions draw
+  wages that climb with that calibre. `companion_food_gold_per_day` (flat 4/head) became
+  `companion_base_wage_gold` scaled by rank and accumulated skill; the rank ladder runs **1-5**
+  instead of 1-3 (thresholds `[3, 5, 10, 17]` chosen so ranks 1-3 land on exactly the grades they
+  always did, with 4-5 as headroom reaching ~depth 16 — the old ladder topped out on floor 3, so
+  every floor below it added nothing to the roster); patron tiers carry `minimum_quality_rank` and a
+  companion is booked by the best clientele she **qualifies for**, falling back to an understrength
+  fee only if she suits none. **Income:wage went 57:1 -> 4:1.**
+  **Two traps worth remembering.** (1) Stretching the rank ladder silently *cut* income at existing
+  depths until the thresholds were pinned to the old grades — raising costs and cutting pay at once.
+  (2) The high-yield rooms served only rank-3+ clientele, so most of the roster took the
+  understrength penalty on every shift and income fell to 37%; every room now also serves
+  `local_delvers`, and the grand clientele are the upgrade a strong escort unlocks in that same room.
+  **Deliberate content re-tunes, both stated rather than hidden:** `broker_compact_6` cut 300k -> 180k
+  (it demanded 8,571 gold/day, a 3.4x rate spike over the milestone before it, and was unreachable
+  once gold stopped being nearly free); and three assertions changed — the two roster-fills-the-cap
+  ones relaxed with reasoning in place, and "all seeds reach the final debt window" **traded for the
+  stricter** "no seed may miss a payment" plus "most reach it", which now holds at max 0 missed.
+  **Result:** roster 20, 8 of 10 seeds at cap, zero missed payments, ending gold 1.2M -> 2.5k.
+  **Next iteration should know:** buildings fell 17 -> 9 and expedition days 238 -> 62 — the guild is
+  now poor enough that it neither builds nor delves as freely, which is the honest cost of a real
+  wage bill against a 7-floor tower. Bands 2-5 are what feed it: deep floors produce rank 4-5
+  escorts, and `frontier_factions` at 240% is waiting for them. Re-measure this table after band 2.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - Retiring `RENAMED_CONTENT_IDS` in `state/persistence.rs` once no pre-`save_version: 10` saves are

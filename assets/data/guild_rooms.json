@@ -123,6 +123,7 @@
       "base_residue_yield": 18,
       "stamina_cost": 18,
       "patron_tiers": [
+        "local_delvers",
         "guild_sponsors",
         "frontier_factions"
       ],
@@ -178,6 +179,7 @@
       "base_residue_yield": 20,
       "stamina_cost": 20,
       "patron_tiers": [
+        "local_delvers",
         "guild_sponsors"
       ],
       "trained_skill_ids": [

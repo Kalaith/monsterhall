@@ -516,12 +516,26 @@ fn multi_seed_365_simulation_summary_reports_variance() {
         "multi-seed roster averaged {:.1}, well short of the {population_cap} cap - the wage load has broken growth",
         summary.companions.average
     );
+    // Deliberately changed with the wage economy, and traded for a stricter
+    // invariant. Every seed used to arrive at the founder's due by day 365
+    // because gold was close to free; wages introduce real pacing variance, so
+    // some campaigns are still working through the broker's compact. What must
+    // hold now is that nobody is *failing*: not one seed may miss a payment,
+    // and most must still reach the final window.
     assert!(
-        summary
-            .samples
-            .iter()
-            .all(|sample| sample.debt_milestone_id.as_deref() == Some("founders_due_7")),
-        "multi-seed samples should reach the final debt window"
+        summary.missed_payments.max == 0,
+        "no seed should miss a debt payment, worst case missed {}",
+        summary.missed_payments.max
+    );
+    let reached_final_window = summary
+        .samples
+        .iter()
+        .filter(|sample| sample.debt_milestone_id.as_deref() == Some("founders_due_7"))
+        .count();
+    assert!(
+        reached_final_window * 2 > summary.samples.len(),
+        "most seeds should reach the final debt window by day 365, got {reached_final_window} of {}",
+        summary.samples.len()
     );
     assert!(
         summary.samples.iter().all(|sample| sample.debt_gap < 0),

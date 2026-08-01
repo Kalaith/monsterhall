@@ -91,7 +91,7 @@
       "id": "broker_compact_6",
       "name": "Broker Compact",
       "description": "The debt has become formal enough to attract brokers, signatures, and humiliating witnesses. The amount is steep, but the tower is finally being treated like a guild.",
-      "amount_due": 300000,
+      "amount_due": 180000,
       "days_allowed": 35,
       "reward": {
         "gold": 0,

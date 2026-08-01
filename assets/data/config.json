@@ -111,7 +111,7 @@
       400
     ],
     "skill_wage_divisor": 4,
-    "understrength_income_pct": 45,
+    "understrength_income_pct": 70,
     "building_maintenance_cost_divisor": 20,
     "upkeep_bands": [
       {
