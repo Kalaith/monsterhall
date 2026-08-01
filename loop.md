@@ -98,11 +98,13 @@ produces an unplayable game and a balance harness that fails for the wrong reaso
 
 These are the known hard blockers. Each is one iteration or less.
 
-1. **Floor list is capped at four.** `src/ui/screens/expedition_planning.rs:178` —
-   `available_floors.iter().take(4)`. With five unlocked floors the fifth is unreachable. Needs
-   scrolling or paging in the floors panel. Check the companion lists too:
-   `expedition_planning.rs:510` and `contract_desk_sections.rs:556` both `.take(6)` against a
-   20-companion roster cap; `town_management.rs:142` takes 10 of the buildings.
+1. ~~**Floor list is capped at four.**~~ **Done 2026-08-01** — paged window in
+   `expedition_planning_sections.rs`, see Ledger. Still open, and the natural next slice: the
+   **roster lists**. `expedition_planning.rs` team panel and `contract_desk_sections.rs:556` both
+   `.take(6)` against a 20-companion population cap, so most of a late-game roster cannot be
+   assigned; `town_management.rs:142` takes 10 of the buildings, which will bite as buildings grow
+   past 20. The team panel is height-bounded 2-column cards, so it needs paging of its own shape
+   rather than a copy of the floor list.
 2. **Floors can only be unlocked by buildings.** `unlocked_floor_ids` is written in exactly two
    places: `bootstrap.rs:56` (starting floors) and `day_cycle/helpers.rs:81`
    (`building.unlocks.floor_ids`). Twenty-five floors cannot mean twenty-five buildings. Add a
@@ -252,7 +254,19 @@ Stop the loop and report if:
 
 <!-- One line per iteration. Newest at the bottom. -->
 
-- _(empty — first iteration starts here; expect it to be a phase-0 blocker)_
+- **2026-08-01 — phase 0, blocker 1 (floor list cap).** `expedition_planning.rs` drew
+  `available_floors.take(4)`; replaced with a paged window in a new
+  `expedition_planning_sections.rs`. The page is derived from the selected floor's index, not
+  stored — no new state, no new `UiAction`, no save impact. Panel fits 6 rows; past 6 floors the
+  last row becomes a `<` / `>` pager with an "n-m of N" label, stepping a whole page. Rendering for
+  ≤6 floors is byte-identical to before, so today's 3-floor tower is unchanged. 8 unit tests on the
+  window logic (34 total, was 26). **Next iteration should know:** (a) the roster lists are still
+  capped — `expedition_planning.rs` team panel and `contract_desk_sections.rs:556` both `.take(6)`
+  against a 20-companion cap, and that panel is height-bounded 2-column cards so it needs a
+  different treatment than the floor list; (b) the capture harness photographs **only the main
+  menu** (`src/main.rs:83` — the scene env var is parsed but unused), so no screen except the menu
+  can be visually verified; every UI slice in this loop is unit-test-verified only until that is
+  fixed. Balance numbers unmoved (pure UI).
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

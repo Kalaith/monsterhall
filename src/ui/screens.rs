@@ -12,6 +12,7 @@ mod contract_desk;
 mod contract_desk_sections;
 mod day_results;
 mod expedition_planning;
+mod expedition_planning_sections;
 mod guild_hall_management;
 mod guild_hall_management_sections;
 mod hatch_reveal;

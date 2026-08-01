@@ -16,8 +16,14 @@ use crate::ui::core::{
     draw_body_text, draw_body_text_in_box, primary_button, secondary_button, utility_button,
 };
 use crate::ui::layout;
+use crate::ui::screens::expedition_planning_sections::{
+    draw_floor_list, floor_row_capacity, FloorListWindow,
+};
 use crate::ui::theme;
-use crate::ui::view_models::{assignment_label, fill_template, species_name_by_id};
+use crate::ui::view_models::{assignment_label, species_name_by_id};
+
+/// Top of the first floor row, just below the floors panel title.
+const FLOORS_FIRST_ROW_Y: f32 = 134.0;
 
 fn compact_text(text: &str, max_len: usize) -> String {
     let compact = text.split_whitespace().collect::<Vec<_>>().join(" ");
@@ -175,39 +181,25 @@ pub fn draw_expedition_planning(
         .iter()
         .find(|mission| mission.id == selected_mission_id);
 
-    for (index, floor) in available_floors.iter().take(4).enumerate() {
-        let y = 134.0 + index as f32 * 40.0;
-        let label = if floor.id == selected_floor.id {
-            fill_template(
-                &expedition_text.floor_depth_template,
-                &[
-                    ("{name}", floor.name.clone()),
-                    ("{depth}", floor.depth.to_string()),
-                ],
-            )
-        } else {
-            floor.name.clone()
-        };
-        let pressed = if floor.id == selected_floor.id {
-            primary_button(
-                layout.left_margin + 12.0,
-                y,
-                layout.floors_w - 24.0,
-                30.0,
-                &label,
-            )
-        } else {
-            secondary_button(
-                layout.left_margin + 12.0,
-                y,
-                layout.floors_w - 24.0,
-                30.0,
-                &label,
-            )
-        };
-        if pressed {
-            return Some(UiAction::SelectExpeditionFloor(floor.id.clone()));
-        }
+    let selected_index = available_floors
+        .iter()
+        .position(|floor| floor.id == selected_floor.id)
+        .unwrap_or_default();
+    let floor_window = FloorListWindow::new(
+        available_floors.len(),
+        selected_index,
+        floor_row_capacity(92.0, layout.detail_h, FLOORS_FIRST_ROW_Y),
+    );
+    if let Some(action) = draw_floor_list(
+        &available_floors,
+        &selected_floor.id,
+        floor_window,
+        &expedition_text.floor_depth_template,
+        layout.left_margin + 12.0,
+        FLOORS_FIRST_ROW_Y,
+        layout.floors_w - 24.0,
+    ) {
+        return Some(action);
     }
 
     let preview = preview_expedition_plan(
