@@ -176,6 +176,18 @@ impl GameData {
                     floor.id
                 ));
             }
+            // `difficulty` is subtracted from expedition success and added to
+            // injury risk, so past a point no realistic party can clear a floor
+            // and it becomes content the player can see but never beat. Band
+            // authoring is expected to spread difficulty across the tower, not
+            // extend the early slope.
+            let max_difficulty = self.config.day_cycle.max_floor_difficulty;
+            if floor.difficulty > max_difficulty {
+                return Err(format!(
+                    "floor '{}' has difficulty {} above the beatable ceiling of {max_difficulty}.",
+                    floor.id, floor.difficulty
+                ));
+            }
             self.validate_floor_survey_chain(floor)?;
         }
         Ok(())

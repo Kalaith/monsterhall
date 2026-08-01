@@ -40,7 +40,7 @@
   "total_expedition_eggs": 32,
   "final_resources": {
     "gold": 32016,
-    "tower_materials": 3480,
+    "tower_materials": 3492,
     "eggs": 19,
     "relics": 23,
     "arcane_residue": 10050
@@ -74,14 +74,14 @@
     },
     "ending_resources": {
       "gold": 32016,
-      "tower_materials": 3480,
+      "tower_materials": 3492,
       "eggs": 19,
       "relics": 23,
       "arcane_residue": 10050
     },
     "net_change": {
       "gold": 31873,
-      "tower_materials": 3440,
+      "tower_materials": 3452,
       "eggs": 19,
       "relics": 23,
       "arcane_residue": 10031
@@ -103,7 +103,7 @@
       "active_contracts": 3,
       "resources": {
         "gold": 114,
-        "tower_materials": 1233,
+        "tower_materials": 1235,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 701
@@ -140,7 +140,7 @@
       "active_contracts": 6,
       "resources": {
         "gold": 32016,
-        "tower_materials": 3480,
+        "tower_materials": 3492,
         "eggs": 19,
         "relics": 23,
         "arcane_residue": 10050
@@ -2179,7 +2179,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 37,
+      "expedition_materials": 38,
       "expedition_arcane_residue": 8,
       "expedition_eggs": 2,
       "expedition_relics": 0,
@@ -2222,7 +2222,7 @@
       },
       "resources": {
         "gold": 144,
-        "tower_materials": 635,
+        "tower_materials": 636,
         "eggs": 5,
         "relics": 0,
         "arcane_residue": 311
@@ -2344,7 +2344,7 @@
       },
       "resources": {
         "gold": 247,
-        "tower_materials": 701,
+        "tower_materials": 702,
         "eggs": 5,
         "relics": 0,
         "arcane_residue": 348
@@ -2465,7 +2465,7 @@
       },
       "resources": {
         "gold": 326,
-        "tower_materials": 768,
+        "tower_materials": 769,
         "eggs": 5,
         "relics": 0,
         "arcane_residue": 381
@@ -2583,7 +2583,7 @@
       },
       "resources": {
         "gold": 425,
-        "tower_materials": 834,
+        "tower_materials": 835,
         "eggs": 5,
         "relics": 0,
         "arcane_residue": 417
@@ -2705,7 +2705,7 @@
       },
       "resources": {
         "gold": 266,
-        "tower_materials": 944,
+        "tower_materials": 945,
         "eggs": 5,
         "relics": 0,
         "arcane_residue": 424
@@ -2822,7 +2822,7 @@
       },
       "resources": {
         "gold": 395,
-        "tower_materials": 1010,
+        "tower_materials": 1011,
         "eggs": 5,
         "relics": 0,
         "arcane_residue": 466
@@ -2946,7 +2946,7 @@
       },
       "resources": {
         "gold": 441,
-        "tower_materials": 1077,
+        "tower_materials": 1078,
         "eggs": 4,
         "relics": 0,
         "arcane_residue": 495
@@ -3065,7 +3065,7 @@
       },
       "resources": {
         "gold": 708,
-        "tower_materials": 1145,
+        "tower_materials": 1146,
         "eggs": 4,
         "relics": 0,
         "arcane_residue": 557
@@ -3193,7 +3193,7 @@
       },
       "resources": {
         "gold": 807,
-        "tower_materials": 1212,
+        "tower_materials": 1213,
         "eggs": 4,
         "relics": 0,
         "arcane_residue": 594
@@ -3316,7 +3316,7 @@
       },
       "resources": {
         "gold": 208,
-        "tower_materials": 1129,
+        "tower_materials": 1130,
         "eggs": 4,
         "relics": 0,
         "arcane_residue": 601
@@ -3398,7 +3398,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 36,
+      "expedition_materials": 37,
       "expedition_arcane_residue": 8,
       "expedition_eggs": 2,
       "expedition_relics": 0,
@@ -3441,7 +3441,7 @@
       },
       "resources": {
         "gold": 73,
-        "tower_materials": 1164,
+        "tower_materials": 1166,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 609
@@ -3556,7 +3556,7 @@
       },
       "resources": {
         "gold": 30,
-        "tower_materials": 1232,
+        "tower_materials": 1234,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 668
@@ -3683,7 +3683,7 @@
       },
       "resources": {
         "gold": 114,
-        "tower_materials": 1233,
+        "tower_materials": 1235,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 701
@@ -3806,7 +3806,7 @@
       },
       "resources": {
         "gold": 315,
-        "tower_materials": 1300,
+        "tower_materials": 1302,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 758
@@ -3931,7 +3931,7 @@
       },
       "resources": {
         "gold": 182,
-        "tower_materials": 1365,
+        "tower_materials": 1367,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 765
@@ -4046,7 +4046,7 @@
       },
       "resources": {
         "gold": 383,
-        "tower_materials": 1432,
+        "tower_materials": 1434,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 822
@@ -4171,7 +4171,7 @@
       },
       "resources": {
         "gold": 422,
-        "tower_materials": 1498,
+        "tower_materials": 1500,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 855
@@ -4291,7 +4291,7 @@
       },
       "resources": {
         "gold": 627,
-        "tower_materials": 1565,
+        "tower_materials": 1567,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 913
@@ -4415,7 +4415,7 @@
       },
       "resources": {
         "gold": 776,
-        "tower_materials": 1633,
+        "tower_materials": 1635,
         "eggs": 5,
         "relics": 0,
         "arcane_residue": 967
@@ -4498,7 +4498,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 38,
+      "expedition_materials": 39,
       "expedition_arcane_residue": 8,
       "expedition_eggs": 2,
       "expedition_relics": 0,
@@ -4541,7 +4541,7 @@
       },
       "resources": {
         "gold": 335,
-        "tower_materials": 1526,
+        "tower_materials": 1529,
         "eggs": 7,
         "relics": 0,
         "arcane_residue": 1009
@@ -4675,7 +4675,7 @@
       },
       "resources": {
         "gold": 616,
-        "tower_materials": 1600,
+        "tower_materials": 1603,
         "eggs": 7,
         "relics": 0,
         "arcane_residue": 1094
@@ -4806,7 +4806,7 @@
       },
       "resources": {
         "gold": 411,
-        "tower_materials": 1666,
+        "tower_materials": 1669,
         "eggs": 7,
         "relics": 0,
         "arcane_residue": 1101
@@ -4922,7 +4922,7 @@
       },
       "resources": {
         "gold": 603,
-        "tower_materials": 1668,
+        "tower_materials": 1671,
         "eggs": 7,
         "relics": 0,
         "arcane_residue": 1165
@@ -5009,7 +5009,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 65,
+      "expedition_materials": 66,
       "expedition_arcane_residue": 12,
       "expedition_eggs": 0,
       "expedition_relics": 0,
@@ -5052,7 +5052,7 @@
       },
       "resources": {
         "gold": 962,
-        "tower_materials": 1738,
+        "tower_materials": 1742,
         "eggs": 7,
         "relics": 0,
         "arcane_residue": 1266
@@ -5143,7 +5143,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 65,
+      "expedition_materials": 66,
       "expedition_arcane_residue": 12,
       "expedition_eggs": 0,
       "expedition_relics": 0,
@@ -5186,7 +5186,7 @@
       },
       "resources": {
         "gold": 973,
-        "tower_materials": 1806,
+        "tower_materials": 1811,
         "eggs": 6,
         "relics": 0,
         "arcane_residue": 1315
@@ -5313,7 +5313,7 @@
       },
       "resources": {
         "gold": 1674,
-        "tower_materials": 1909,
+        "tower_materials": 1914,
         "eggs": 6,
         "relics": 1,
         "arcane_residue": 1476
@@ -5458,7 +5458,7 @@
       },
       "resources": {
         "gold": 33,
-        "tower_materials": 1762,
+        "tower_materials": 1767,
         "eggs": 8,
         "relics": 2,
         "arcane_residue": 1394
@@ -5577,7 +5577,7 @@
       },
       "resources": {
         "gold": 339,
-        "tower_materials": 1860,
+        "tower_materials": 1865,
         "eggs": 10,
         "relics": 3,
         "arcane_residue": 1480
@@ -5663,7 +5663,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 96,
+      "expedition_materials": 98,
       "expedition_arcane_residue": 17,
       "expedition_eggs": 0,
       "expedition_relics": 1,
@@ -5706,7 +5706,7 @@
       },
       "resources": {
         "gold": 1346,
-        "tower_materials": 1959,
+        "tower_materials": 1966,
         "eggs": 10,
         "relics": 4,
         "arcane_residue": 1642
@@ -5844,7 +5844,7 @@
       },
       "resources": {
         "gold": 1334,
-        "tower_materials": 1857,
+        "tower_materials": 1864,
         "eggs": 10,
         "relics": 5,
         "arcane_residue": 1744
@@ -5976,7 +5976,7 @@
       },
       "resources": {
         "gold": 2146,
-        "tower_materials": 1912,
+        "tower_materials": 1919,
         "eggs": 11,
         "relics": 6,
         "arcane_residue": 1879
@@ -6110,7 +6110,7 @@
       },
       "resources": {
         "gold": 1848,
-        "tower_materials": 1770,
+        "tower_materials": 1777,
         "eggs": 13,
         "relics": 7,
         "arcane_residue": 1993
@@ -6207,7 +6207,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 98,
+      "expedition_materials": 99,
       "expedition_arcane_residue": 17,
       "expedition_eggs": 0,
       "expedition_relics": 1,
@@ -6250,7 +6250,7 @@
       },
       "resources": {
         "gold": 2073,
-        "tower_materials": 1868,
+        "tower_materials": 1876,
         "eggs": 13,
         "relics": 8,
         "arcane_residue": 2078
@@ -6335,7 +6335,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 98,
+      "expedition_materials": 99,
       "expedition_arcane_residue": 17,
       "expedition_eggs": 0,
       "expedition_relics": 1,
@@ -6378,7 +6378,7 @@
       },
       "resources": {
         "gold": 1626,
-        "tower_materials": 1966,
+        "tower_materials": 1975,
         "eggs": 13,
         "relics": 9,
         "arcane_residue": 2095
@@ -6455,7 +6455,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 98,
+      "expedition_materials": 99,
       "expedition_arcane_residue": 17,
       "expedition_eggs": 0,
       "expedition_relics": 1,
@@ -6498,7 +6498,7 @@
       },
       "resources": {
         "gold": 3593,
-        "tower_materials": 2069,
+        "tower_materials": 2079,
         "eggs": 13,
         "relics": 10,
         "arcane_residue": 2374
@@ -6644,7 +6644,7 @@
       },
       "resources": {
         "gold": 1117,
-        "tower_materials": 1825,
+        "tower_materials": 1835,
         "eggs": 15,
         "relics": 7,
         "arcane_residue": 2313
@@ -6771,7 +6771,7 @@
       },
       "resources": {
         "gold": 1639,
-        "tower_materials": 1881,
+        "tower_materials": 1891,
         "eggs": 16,
         "relics": 8,
         "arcane_residue": 2454
@@ -6907,7 +6907,7 @@
       },
       "resources": {
         "gold": 4051,
-        "tower_materials": 1941,
+        "tower_materials": 1951,
         "eggs": 18,
         "relics": 9,
         "arcane_residue": 2801
@@ -7014,7 +7014,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 57,
+      "expedition_materials": 58,
       "expedition_arcane_residue": 18,
       "expedition_eggs": 2,
       "expedition_relics": 1,
@@ -7057,7 +7057,7 @@
       },
       "resources": {
         "gold": 40,
-        "tower_materials": 1597,
+        "tower_materials": 1608,
         "eggs": 20,
         "relics": 5,
         "arcane_residue": 2619
@@ -7189,7 +7189,7 @@
       },
       "resources": {
         "gold": 447,
-        "tower_materials": 1702,
+        "tower_materials": 1713,
         "eggs": 20,
         "relics": 6,
         "arcane_residue": 2778
@@ -7281,7 +7281,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 57,
+      "expedition_materials": 58,
       "expedition_arcane_residue": 18,
       "expedition_eggs": 2,
       "expedition_relics": 1,
@@ -7333,7 +7333,7 @@
       },
       "resources": {
         "gold": 2118,
-        "tower_materials": 1762,
+        "tower_materials": 1774,
         "eggs": 22,
         "relics": 7,
         "arcane_residue": 3070
@@ -7493,7 +7493,7 @@
       },
       "resources": {
         "gold": 2144,
-        "tower_materials": 1886,
+        "tower_materials": 1898,
         "eggs": 22,
         "relics": 8,
         "arcane_residue": 3160
@@ -7633,7 +7633,7 @@
       },
       "resources": {
         "gold": 2858,
-        "tower_materials": 1993,
+        "tower_materials": 2005,
         "eggs": 21,
         "relics": 9,
         "arcane_residue": 3379
@@ -7788,7 +7788,7 @@
       },
       "resources": {
         "gold": 3461,
-        "tower_materials": 2068,
+        "tower_materials": 2080,
         "eggs": 21,
         "relics": 10,
         "arcane_residue": 3598
@@ -7942,7 +7942,7 @@
       },
       "resources": {
         "gold": 3575,
-        "tower_materials": 2148,
+        "tower_materials": 2160,
         "eggs": 21,
         "relics": 11,
         "arcane_residue": 3744
@@ -8091,7 +8091,7 @@
       },
       "resources": {
         "gold": 3238,
-        "tower_materials": 2252,
+        "tower_materials": 2264,
         "eggs": 21,
         "relics": 12,
         "arcane_residue": 3832
@@ -8229,7 +8229,7 @@
       },
       "resources": {
         "gold": 4226,
-        "tower_materials": 2357,
+        "tower_materials": 2369,
         "eggs": 21,
         "relics": 13,
         "arcane_residue": 4051
@@ -8386,7 +8386,7 @@
       },
       "resources": {
         "gold": 5288,
-        "tower_materials": 2463,
+        "tower_materials": 2475,
         "eggs": 21,
         "relics": 14,
         "arcane_residue": 4286
@@ -8537,7 +8537,7 @@
       },
       "resources": {
         "gold": 5090,
-        "tower_materials": 2567,
+        "tower_materials": 2579,
         "eggs": 21,
         "relics": 15,
         "arcane_residue": 4380
@@ -8675,7 +8675,7 @@
       },
       "resources": {
         "gold": 6449,
-        "tower_materials": 2672,
+        "tower_materials": 2684,
         "eggs": 21,
         "relics": 16,
         "arcane_residue": 4619
@@ -8829,7 +8829,7 @@
       },
       "resources": {
         "gold": 6880,
-        "tower_materials": 2777,
+        "tower_materials": 2789,
         "eggs": 21,
         "relics": 17,
         "arcane_residue": 4789
@@ -8975,7 +8975,7 @@
       },
       "resources": {
         "gold": 5959,
-        "tower_materials": 2880,
+        "tower_materials": 2892,
         "eggs": 21,
         "relics": 18,
         "arcane_residue": 4806
@@ -9108,7 +9108,7 @@
       },
       "resources": {
         "gold": 7931,
-        "tower_materials": 2986,
+        "tower_materials": 2998,
         "eggs": 21,
         "relics": 19,
         "arcane_residue": 5143
@@ -9274,7 +9274,7 @@
       },
       "resources": {
         "gold": 8388,
-        "tower_materials": 3092,
+        "tower_materials": 3104,
         "eggs": 21,
         "relics": 20,
         "arcane_residue": 5311
@@ -9416,7 +9416,7 @@
       },
       "resources": {
         "gold": 8599,
-        "tower_materials": 3197,
+        "tower_materials": 3209,
         "eggs": 20,
         "relics": 21,
         "arcane_residue": 5447
@@ -9561,7 +9561,7 @@
       },
       "resources": {
         "gold": 10167,
-        "tower_materials": 3314,
+        "tower_materials": 3326,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 5861
@@ -9728,7 +9728,7 @@
       },
       "resources": {
         "gold": 11206,
-        "tower_materials": 3318,
+        "tower_materials": 3330,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 6080
@@ -9876,7 +9876,7 @@
       },
       "resources": {
         "gold": 11662,
-        "tower_materials": 3320,
+        "tower_materials": 3332,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 6237
@@ -10022,7 +10022,7 @@
       },
       "resources": {
         "gold": 13886,
-        "tower_materials": 3325,
+        "tower_materials": 3337,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 6576
@@ -10177,7 +10177,7 @@
       },
       "resources": {
         "gold": 15412,
-        "tower_materials": 3330,
+        "tower_materials": 3342,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 6838
@@ -10322,7 +10322,7 @@
       },
       "resources": {
         "gold": 16431,
-        "tower_materials": 3333,
+        "tower_materials": 3345,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 7053
@@ -10467,7 +10467,7 @@
       },
       "resources": {
         "gold": 18749,
-        "tower_materials": 3338,
+        "tower_materials": 3350,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 7406
@@ -10625,7 +10625,7 @@
       },
       "resources": {
         "gold": 19740,
-        "tower_materials": 3341,
+        "tower_materials": 3353,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 7614
@@ -10773,7 +10773,7 @@
       },
       "resources": {
         "gold": 20801,
-        "tower_materials": 3344,
+        "tower_materials": 3356,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 7829
@@ -10916,7 +10916,7 @@
       },
       "resources": {
         "gold": 23037,
-        "tower_materials": 3349,
+        "tower_materials": 3361,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 8167
@@ -11069,7 +11069,7 @@
       },
       "resources": {
         "gold": 24060,
-        "tower_materials": 3352,
+        "tower_materials": 3364,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 8382
@@ -11216,7 +11216,7 @@
       },
       "resources": {
         "gold": 25197,
-        "tower_materials": 3355,
+        "tower_materials": 3367,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 8614
@@ -11367,7 +11367,7 @@
       },
       "resources": {
         "gold": 26857,
-        "tower_materials": 3360,
+        "tower_materials": 3372,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 8898
@@ -11515,7 +11515,7 @@
       },
       "resources": {
         "gold": 27926,
-        "tower_materials": 3363,
+        "tower_materials": 3375,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 9115
@@ -11658,7 +11658,7 @@
       },
       "resources": {
         "gold": 28613,
-        "tower_materials": 3366,
+        "tower_materials": 3378,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 9318
@@ -11806,7 +11806,7 @@
       },
       "resources": {
         "gold": 30162,
-        "tower_materials": 3371,
+        "tower_materials": 3383,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 9602
@@ -11957,7 +11957,7 @@
       },
       "resources": {
         "gold": 31228,
-        "tower_materials": 3374,
+        "tower_materials": 3386,
         "eggs": 20,
         "relics": 22,
         "arcane_residue": 9839
@@ -12107,7 +12107,7 @@
       },
       "resources": {
         "gold": 32016,
-        "tower_materials": 3480,
+        "tower_materials": 3492,
         "eggs": 19,
         "relics": 23,
         "arcane_residue": 10050

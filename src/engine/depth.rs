@@ -117,6 +117,49 @@ pub(crate) fn room_depth_profile_for_town(
     }
 }
 
+/// Hazard a floor presents to one run, before the party's own strengths.
+///
+/// Depth and hazard tags push it up; the guild's familiarity with the floor
+/// pulls it back down. That second term is what makes a deep tower playable at
+/// all — nothing else on the player's side scales with depth, so without it a
+/// floor's authored `difficulty` would have to stay nearly flat for twenty-five
+/// floors, and depth would stop meaning anything. A floor is brutal on first
+/// contact and becomes routine once the guild has walked it enough.
+pub(crate) fn floor_hazard_risk(
+    data: &GameData,
+    game_state: &GameState,
+    floor: &TowerFloorData,
+    mission: &MissionData,
+) -> i32 {
+    let day_cycle = &data.config.day_cycle;
+    let raw_hazard = floor.depth as i32 * day_cycle.depth_hazard_per_floor
+        + floor.hazard_tags.len() as i32 * day_cycle.hazard_tag_risk
+        + mission.hazard_risk_modifier_pct;
+
+    (raw_hazard - floor_familiarity_relief(data, game_state, floor)).max(0)
+}
+
+/// How much the guild's survey notes take off a floor's hazard, capped so a
+/// well-trodden floor never becomes free.
+fn floor_familiarity_relief(
+    data: &GameData,
+    game_state: &GameState,
+    floor: &TowerFloorData,
+) -> i32 {
+    let day_cycle = &data.config.day_cycle;
+    let surveys = game_state
+        .town
+        .floor_surveys
+        .iter()
+        .find(|entry| entry.floor_id == floor.id)
+        .map(|entry| entry.surveys)
+        .unwrap_or_default();
+
+    (surveys as i32)
+        .saturating_mul(day_cycle.survey_familiarity_relief)
+        .clamp(0, day_cycle.max_survey_familiarity_relief.max(0))
+}
+
 pub(crate) fn expedition_depth_profile(
     data: &GameData,
     game_state: &GameState,
@@ -136,9 +179,7 @@ pub(crate) fn expedition_depth_profile(
         })
         .unwrap_or_else(|| inferred_mission_role_bonus(mission, party));
     let project_bonus = town_project_count(data, game_state) as i32 * 2;
-    let hazard_risk = floor.depth as i32 * 2
-        + floor.hazard_tags.len() as i32 * 3
-        + mission.hazard_risk_modifier_pct;
+    let hazard_risk = floor_hazard_risk(data, game_state, floor, mission);
     let priority_grade_bonus = match priority {
         ExpeditionPriority::Aggressive => 1,
         ExpeditionPriority::Safe => 0,
@@ -162,7 +203,9 @@ pub(crate) fn expedition_depth_profile(
         },
         injury_risk_delta: hazard_risk - role_bonus / 2,
         egg_bonus: reward_focus_bonus,
-        relic_bonus: u32::from(mission.reward_focus == "relics" && floor.depth >= 3),
+        relic_bonus: u32::from(
+            mission.reward_focus == "relics" && !floor.relic_drop_ids.is_empty(),
+        ),
         egg_grade_score: floor
             .depth
             .saturating_add(floor.egg_grade_bonus)
@@ -550,5 +593,133 @@ fn request_from_template(
         assigned_monster_id: None,
         chain_depth,
         partial_progress: 0,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::data::test_game_data;
+    use crate::state::FloorSurveyState;
+
+    fn floor_named<'a>(data: &'a GameData, id: &str) -> &'a TowerFloorData {
+        data.floors
+            .floors
+            .iter()
+            .find(|floor| floor.id == id)
+            .expect("test floor should exist")
+    }
+
+    fn mission_named<'a>(data: &'a GameData, id: &str) -> &'a MissionData {
+        data.missions
+            .missions
+            .iter()
+            .find(|mission| mission.id == id)
+            .expect("test mission should exist")
+    }
+
+    #[test]
+    fn familiarity_relief_lowers_hazard_and_then_stops() {
+        let data = test_game_data();
+        let mut game_state = crate::engine::create_new_game_state(&data);
+        let floor = floor_named(&data, "floor_1_slick_cellars").clone();
+        let mission = mission_named(&data, "resource_run").clone();
+
+        let unknown = floor_hazard_risk(&data, &game_state, &floor, &mission);
+
+        game_state.town.floor_surveys.push(FloorSurveyState {
+            floor_id: floor.id.clone(),
+            surveys: 2,
+        });
+        let walked_twice = floor_hazard_risk(&data, &game_state, &floor, &mission);
+        assert!(
+            walked_twice < unknown,
+            "a surveyed floor should be less hazardous: {walked_twice} vs {unknown}"
+        );
+
+        game_state.town.floor_surveys[0].surveys = 500;
+        let walked_forever = floor_hazard_risk(&data, &game_state, &floor, &mission);
+        let cap = data.config.day_cycle.max_survey_familiarity_relief;
+        assert_eq!(
+            walked_forever,
+            unknown - cap,
+            "relief must stop at the configured cap, never make a floor free"
+        );
+    }
+
+    #[test]
+    fn hazard_never_falls_below_zero() {
+        let data = test_game_data();
+        let mut game_state = crate::engine::create_new_game_state(&data);
+        let mut floor = floor_named(&data, "floor_1_slick_cellars").clone();
+        floor.hazard_tags.clear();
+        floor.depth = 1;
+        let mission = mission_named(&data, "resource_run").clone();
+        game_state.town.floor_surveys.push(FloorSurveyState {
+            floor_id: floor.id.clone(),
+            surveys: 9_999,
+        });
+
+        assert!(floor_hazard_risk(&data, &game_state, &floor, &mission) >= 0);
+    }
+
+    /// The relic gate used to read `floor.depth >= 3`, which silently ignored
+    /// the relics a floor actually declares. A shallow floor holding a named
+    /// relic should yield it; a deep floor holding none should not.
+    #[test]
+    fn relic_yield_follows_declared_drops_not_depth() {
+        let data = test_game_data();
+        let game_state = crate::engine::create_new_game_state(&data);
+        let relic_raid = mission_named(&data, "relic_raid").clone();
+        let base = floor_named(&data, "floor_2_molten_baths").clone();
+
+        let mut shallow_with_relic = base.clone();
+        shallow_with_relic.depth = 1;
+        shallow_with_relic.relic_drop_ids = vec!["molten_collar".to_owned()];
+        let profile = expedition_depth_profile(
+            &data,
+            &game_state,
+            &shallow_with_relic,
+            &relic_raid,
+            &ExpeditionPriority::Balanced,
+            &[],
+        );
+        assert_eq!(profile.relic_bonus, 1);
+
+        let mut deep_without_relic = base.clone();
+        deep_without_relic.depth = 20;
+        deep_without_relic.relic_drop_ids.clear();
+        let profile = expedition_depth_profile(
+            &data,
+            &game_state,
+            &deep_without_relic,
+            &relic_raid,
+            &ExpeditionPriority::Balanced,
+            &[],
+        );
+        assert_eq!(
+            profile.relic_bonus, 0,
+            "depth alone must not conjure a relic the floor does not hold"
+        );
+    }
+
+    /// A relic-bearing floor still only pays out on a relic-focused mission.
+    #[test]
+    fn a_salvage_run_does_not_yield_relics() {
+        let data = test_game_data();
+        let game_state = crate::engine::create_new_game_state(&data);
+        let floor = floor_named(&data, "floor_3_gilded_kennels").clone();
+        assert!(!floor.relic_drop_ids.is_empty());
+
+        let profile = expedition_depth_profile(
+            &data,
+            &game_state,
+            &floor,
+            mission_named(&data, "resource_run"),
+            &ExpeditionPriority::Balanced,
+            &[],
+        );
+
+        assert_eq!(profile.relic_bonus, 0);
     }
 }

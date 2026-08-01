@@ -140,6 +140,22 @@ pub struct DayCycleConfigData {
     pub building_maintenance_cost_divisor: u32,
     #[serde(default)]
     pub upkeep_bands: Vec<UpkeepBandData>,
+    /// Hazard added per floor of depth. The primary depth dial is each floor's
+    /// authored `difficulty`; this is the engine's slope on top of it.
+    #[serde(default = "default_depth_hazard_per_floor")]
+    pub depth_hazard_per_floor: i32,
+    #[serde(default = "default_hazard_tag_risk")]
+    pub hazard_tag_risk: i32,
+    /// Hazard removed per survey point banked on the floor being run. Depth is
+    /// meant to be survivable through familiarity, not only through stats.
+    #[serde(default = "default_survey_familiarity_relief")]
+    pub survey_familiarity_relief: i32,
+    #[serde(default = "default_max_survey_familiarity_relief")]
+    pub max_survey_familiarity_relief: i32,
+    /// Difficulty past which a floor cannot be beaten by any realistic party, so
+    /// authoring one is a content error rather than a hard floor.
+    #[serde(default = "default_max_floor_difficulty")]
+    pub max_floor_difficulty: u32,
     pub expedition_egg_reward_threshold: i32,
     pub expedition_relic_reward_threshold: i32,
     pub expedition_injury_threshold: i32,
@@ -440,6 +456,26 @@ fn default_required_surveys() -> u32 {
 
 fn default_survey_value() -> u32 {
     1
+}
+
+fn default_depth_hazard_per_floor() -> i32 {
+    2
+}
+
+fn default_hazard_tag_risk() -> i32 {
+    3
+}
+
+fn default_survey_familiarity_relief() -> i32 {
+    1
+}
+
+fn default_max_survey_familiarity_relief() -> i32 {
+    6
+}
+
+fn default_max_floor_difficulty() -> u32 {
+    120
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

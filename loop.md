@@ -70,7 +70,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 | Events | 38 | — | Healthy. Deep-floor events are the gap, not event count. |
 | Patron tiers | 3 | 4–5 | `patron_tiers.json`; upkeep bands already reference tier 4. |
 | Debt milestones | 7 | — | ~455 days of chain against 3 floors of tower. Mismatched, in the tower's favour to fix. |
-| Relic drops | declared, **never read** | wired | `relic_drop_ids` parses in `types.rs:457` and nothing consumes it. Named relics are free depth. |
+| Relic drops | 2 declared, now **gate relic yield** | named objects | `relic_drop_ids` decides whether a floor can pay a relic. The ids are still not objects with names/descriptions/patrons — that is phase 2. |
 
 ### Standing themes, several iterations each
 
@@ -111,13 +111,11 @@ These are the known hard blockers. Each is one iteration or less.
    is worth 2); a daily sweep opens any floor whose chain and buildings are both satisfied.
    **No floor uses it yet** — band 1 is its first real customer, and authoring those floors is what
    proves the mechanism against real data.
-3. **The depth curve is linear and tuned for 3.** In `src/engine/depth.rs:139`,
-   `hazard_risk = depth * 2 + hazard_tags.len() * 3 + mission modifier`, and it feeds
-   `success_bonus -= hazard_risk / 3` and `injury_risk_delta`. At depth 25 that is ~50 hazard before
-   tags, against `expedition_injury_threshold: 55` and `expedition_relic_reward_threshold: 88` in
-   `config.json`. Reshape it (band-relative depth, diminishing curve, or preparation scaling that
-   grows with the tower) so deep floors are hard, not arithmetically impossible.
-4. **`relic_bonus` hard-codes `floor.depth >= 3`** (`depth.rs:165`). Make it data or band-relative.
+3. ~~**The depth curve is linear and tuned for 3.**~~ **Done 2026-08-01** — coefficients moved to
+   `config.json`, and survey familiarity now subtracts from hazard, so investment scales with the
+   tower. See the Ledger for the reward-threshold ceiling that band authoring must respect.
+4. ~~**`relic_bonus` hard-codes `floor.depth >= 3`.**~~ **Done 2026-08-01** — a floor yields relics
+   when it declares `relic_drop_ids`, which also turns that dead field live.
 5. **Save compatibility.** `config.json` carries `save_version: 9` and `content_version: 1.9.0`.
    Any new state field must be `#[serde(default)]` and wired through `state/persistence.rs`, and
    `validate_game_state_references` (`engine/validation.rs`) must still accept old saves. Bump
@@ -286,6 +284,29 @@ Stop the loop and report if:
   (the linear depth curve, and `relic_bonus`'s hard-coded `depth >= 3`) are the last blockers
   before band authoring, and both are in `engine/depth.rs`; they are worth doing together since
   both are the same "tuned for 3 floors" problem.
+
+- **2026-08-01 — phase 0, blockers 3 + 4 (depth curve and relic gate).** Reading the real math first
+  changed the diagnosis: `success_score` subtracts `floor.difficulty` and `injury_risk_score` adds
+  it, so **authored `difficulty` is the dominant depth dial**, not the engine's `depth * 2` term. At
+  the current +14/floor slope, floor 25 would want difficulty ~356 against a success ceiling near
+  180. The real problem was that *nothing on the player's side scaled with the tower*. Fixed by
+  (a) moving `depth_hazard_per_floor`, `hazard_tag_risk` and the familiarity numbers into
+  `config.json` per the data-driven rule, and (b) making banked surveys subtract from a floor's
+  hazard, capped by `max_survey_familiarity_relief` — so a floor is brutal on first contact and
+  becomes routine once walked, which gives the survey system from the last iteration a second job.
+  `relic_bonus` now keys off `floor.relic_drop_ids` instead of `depth >= 3`, turning another dead
+  field live; `floor_2_molten_baths` has declared `molten_collar` all along and never yielded it.
+  Added a load-time ceiling (`max_floor_difficulty`, 120) so band authoring cannot write a floor
+  nobody can beat. 4 tests (47 total, was 43). **Balance moved, slightly and in one place only:**
+  365-day `tower_materials` 10061 -> 10073 (+0.1%), from marginally better success scores. Roster,
+  buildings, eggs, relics, gold, residue and debt are all byte-identical, and no assertion was
+  touched. **Next iteration should know:** the validation ceiling of 120 is deliberately generous —
+  the *practical* ceiling is lower and set by the reward thresholds, not by success going negative.
+  `expedition_egg_reward_threshold: 68` and `expedition_relic_reward_threshold: 88` mean a floor
+  around difficulty 90+ still "succeeds" but stops paying eggs and relics. **Band authoring must
+  spread difficulty across roughly 20-100 over 25 floors (~+3/floor), not continue the early
+  +14/floor slope.** Phase 0 is now clear except the roster-list cap (item 1's leftover); band 1
+  authoring can begin.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

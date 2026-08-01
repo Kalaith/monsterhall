@@ -121,6 +121,11 @@
         "maintenance_multiplier_pct": 150
       }
     ],
+    "depth_hazard_per_floor": 2,
+    "hazard_tag_risk": 3,
+    "survey_familiarity_relief": 1,
+    "max_survey_familiarity_relief": 6,
+    "max_floor_difficulty": 120,
     "expedition_egg_reward_threshold": 68,
     "expedition_relic_reward_threshold": 88,
     "expedition_injury_threshold": 55
