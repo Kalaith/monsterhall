@@ -904,6 +904,48 @@
       "required_species_ids": [
         "moth_archivist"
       ]
+    },
+    {
+      "id": "tower_archive_ward",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Below the auction hall a ward stands across a doorway, set from the far side. Whatever filed the tower's records did not intend them to leave.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_cartogram_hint",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A recovered sheet maps floors the guild has never walked, and two of the routes on it end at rooms that are not there yet.",
+      "required_trait_ids": [],
+      "required_species_ids": [
+        "moth_archivist"
+      ]
+    },
+    {
+      "id": "tower_reliquary_count",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Someone is still keeping the catalogue. A niche recorded as full last trip is recorded as full again, in fresher ink.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_machinery_turning",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Machinery the size of a street is still running down there, and nobody can say what it is for. Companions who stand near it come back a little altered.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_understair_stone",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Past the machinery the stonework changes: older, better cut, and not sized for anything that walks upright.",
+      "required_trait_ids": [],
+      "required_species_ids": []
     }
   ]
 }

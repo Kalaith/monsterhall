@@ -59,7 +59,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 
 | Axis | Now | Target | Notes |
 |---|---|---|---|
-| **Tower floors** | **15** | **25** | Bands 1–3 authored, depths 1–15, difficulty 20→64. All fifteen unlock and are reached in a 365-day campaign. |
+| **Tower floors** | **20** | **25** | Bands 1–4 authored, depths 1–20, difficulty 20→84. All twenty unlock and are reached in a 365-day campaign. |
 | Missions | 4 | 8–10 | GDD names 6 types; `missions.json` has 4. Rescue/Retrieval and Contract Fulfilment are unwritten. |
 | Species | 8 | 14–18 | Deep bands need companions you can only get down there. |
 | Mutations | 3 | 10+ | The corruption payoff. One mutation per two species is thin. |
@@ -88,6 +88,15 @@ So a floor is chosen on **eggs and relics**; materials are almost noise and resi
 Raising Menagerie Walk from 70 to 98 materials changed the campaign by literally zero — one relic is
 worth 35 materials. Injury scales with difficulty, so a deep floor must pay in eggs and relics just
 to break even.
+
+**Rewards must rise monotonically with depth.** Injury climbs every floor, so a floor that pays less
+than the one above it while costing more is simply skipped — and because a chain needs the *deepest
+known* floor surveyed, one skipped floor stalls everything beneath it. Band 4 stalled outright until
+its eggs and relics were made to ramp 2→3 and 8→12 across depths 16–20.
+
+**A band's deepest floor is the doorway to the next band**, so it must be the best prize in its band,
+not its hardest afterthought. `auction_floor` (d15) sat unrun until it was raised above `broodpens`
+above it; that single change opened band 4.
 
 **And the filter that hides floors entirely:** when the guild wants eggs the planner skips every
 mission whose `reward_focus` is not eggs. A floor with no `egg_hunt` in `mission_ids` is invisible
@@ -434,6 +443,24 @@ Stop the loop and report if:
   (b) `auction_floor` (d15) unlocks but still shows 0 surveys — the deepest floor is always the last
   to be worth it; expect the same for the bottom of each new band. (c) Bands 4-5 (16-25) are all that
   remain; difficulty should run ~68-100 and the ceiling `max_floor_difficulty` is 120.
+
+- **2026-08-02 — phase 1, band 4 authored (depths 16-20); the tower turns purposeful.** Five floors:
+  **Sealed Archive** (16, d68, warded from the inside), **Cartogram Vault** (17, d72, maps showing
+  floors that do not exist yet), **The Reliquary** (18, d76, wants a rank-3 Moth Archivist; a
+  catalogue something is still keeping), **Instrument Halls** (19, d80, machinery still running),
+  **The Understair** (20, d84, where the stonework stops being built for people). Five events.
+  **Two authoring rules learned here and promoted into the guidance above**, because both stalled the
+  band outright before they were understood: rewards must rise **monotonically** with depth (my own
+  band-4 draft had Sealed Archive paying less than the floor above it while costing more), and a
+  band's **deepest** floor must be its best prize because it is the doorway to the next band —
+  `auction_floor` sat unrun until raised above `broodpens`, and that one change opened all of band 4.
+  **Result:** all 20 floors unlock and are reached; the guild's preferred destination is now depth 20.
+  Gold 671k -> 732k, rank-5 escorts 8 -> 10, buildings 17. 18-20 companions per seed, 4 of 10 clear
+  Founder's Due, zero missed payments, 52 tests green, no assertion touched.
+  **Next iteration should know:** band 5 (21-25) is all that remains; difficulty should run ~88-104
+  against the `max_floor_difficulty` ceiling of 120, and the ramp must continue past eggs 3 /
+  relics 12. `tower_core` already exists as a magic egg source (`day_cycle/eggs.rs:7`) and is the
+  thread band 5 should pay off.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

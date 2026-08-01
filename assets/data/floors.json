@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "floors": [
     {
       "id": "floor_1_slick_cellars",
@@ -681,9 +681,9 @@
       ],
       "baseline_rewards": {
         "gold": 0,
-        "tower_materials": 70,
-        "eggs": 1,
-        "relics": 6,
+        "tower_materials": 74,
+        "eggs": 2,
+        "relics": 7,
         "arcane_residue": 18
       },
       "egg_species_entries": [
@@ -709,8 +709,249 @@
         "unclaimed_lots",
         "old_contracts"
       ],
-      "egg_grade_bonus": 3,
+      "egg_grade_bonus": 4,
       "corruption_pressure": 3
+    },
+    {
+      "id": "sealed_archive",
+      "name": "Sealed Archive",
+      "depth": 16,
+      "description": "Shelves standing in rows behind a ward that was set from this side. The tower kept records of itself down here, and it did not intend them to leave.",
+      "difficulty": 68,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "auction_floor"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "relic_raid",
+        "egg_hunt",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 60,
+        "eggs": 2,
+        "relics": 8,
+        "arcane_residue": 20
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "moth_archivist",
+          "weight": 5
+        },
+        {
+          "species_id": "golemkin_warden",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "sealed_index",
+        "ward_key"
+      ],
+      "hazard_tags": [
+        "standing_ward",
+        "dry_air",
+        "things_that_read"
+      ],
+      "egg_grade_bonus": 4,
+      "corruption_pressure": 4
+    },
+    {
+      "id": "cartogram_vault",
+      "name": "Cartogram Vault",
+      "depth": 17,
+      "description": "Maps of the tower, drawn from the inside, showing more floors than the guild has ever counted. Some of the routes on them do not exist yet.",
+      "difficulty": 72,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "sealed_archive"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "scout_route",
+        "egg_hunt",
+        "relic_raid",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 64,
+        "eggs": 2,
+        "relics": 9,
+        "arcane_residue": 24
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        },
+        {
+          "species_id": "lamia_routekeeper",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "living_cartogram"
+      ],
+      "hazard_tags": [
+        "shifting_plan",
+        "false_corridors",
+        "vertigo"
+      ],
+      "egg_grade_bonus": 5,
+      "corruption_pressure": 4
+    },
+    {
+      "id": "the_reliquary",
+      "name": "The Reliquary",
+      "depth": 18,
+      "description": "Nothing here was salvage when it was put down. Each niche holds one object, catalogued, and the catalogue is still being kept by something.",
+      "difficulty": 76,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "cartogram_vault"
+      ],
+      "required_surveys": 1,
+      "required_roster": [
+        {
+          "species_id": "moth_archivist",
+          "minimum_quality_rank": 3
+        }
+      ],
+      "mission_ids": [
+        "relic_raid",
+        "egg_hunt",
+        "resource_run",
+        "scout_route"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 62,
+        "eggs": 3,
+        "relics": 10,
+        "arcane_residue": 22
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "catalogued_relic",
+        "niche_seal"
+      ],
+      "hazard_tags": [
+        "catalogued",
+        "observed",
+        "reverent_silence"
+      ],
+      "egg_grade_bonus": 4,
+      "corruption_pressure": 5
+    },
+    {
+      "id": "instrument_halls",
+      "name": "Instrument Halls",
+      "depth": 19,
+      "description": "Machinery the size of streets, still turning, still doing whatever the tower built it to do. Standing near it too long leaves a companion changed in ways the hall cannot always undo.",
+      "difficulty": 80,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "the_reliquary"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "egg_hunt",
+        "relic_raid",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 68,
+        "eggs": 3,
+        "relics": 11,
+        "arcane_residue": 26
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 5
+        },
+        {
+          "species_id": "residue_slime",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "governor_cog"
+      ],
+      "hazard_tags": [
+        "running_machinery",
+        "instability_bloom",
+        "no_safe_stopping"
+      ],
+      "egg_grade_bonus": 5,
+      "corruption_pressure": 6
+    },
+    {
+      "id": "the_understair",
+      "name": "The Understair",
+      "depth": 20,
+      "description": "Below the machinery the stair keeps going, and the stonework changes hands: older, better fitted, and not built for people. Whatever the tower is, it starts here.",
+      "difficulty": 84,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "instrument_halls"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "scout_route",
+        "egg_hunt",
+        "relic_raid",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 74,
+        "eggs": 3,
+        "relics": 12,
+        "arcane_residue": 28
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        },
+        {
+          "species_id": "residue_slime",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "understair_keystone"
+      ],
+      "hazard_tags": [
+        "older_stonework",
+        "wrong_geometry",
+        "deep_cold"
+      ],
+      "egg_grade_bonus": 5,
+      "corruption_pressure": 6
     }
   ]
 }
