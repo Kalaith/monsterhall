@@ -60,7 +60,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 | Axis | Now | Target | Notes |
 |---|---|---|---|
 | **Tower floors** | **25** ✅ | **25** | **Target met.** All five bands authored, depths 1–25, difficulty 20→104 against a ceiling of 120. Every floor unlocks and is reached in a 365-day campaign; the guild's preferred destination is the Tower Core at the bottom. |
-| Missions | 4 | 8–10 | GDD names 6 types; `missions.json` has 4. Rescue/Retrieval and Contract Fulfilment are unwritten. |
+| Missions | **7** | 8–10 | The GDD's six are all written, plus `sealed_extraction`. **The harness cannot measure a mission** — see the ledger for 2026-08-02; mission work is verified by reading the probe's SCORE table, not by balance movement. |
 | Species | **12** | 14–18 | Four now hatch only below depth 16 (`wyrm_registrar`, `gargoyle_stairwarden`, `revenant_chorister`, `salamander_corekeeper`). Bands 1–3 still share the original eight. |
 | Mutations | 3 | 10+ | The corruption payoff. One mutation per four species is now thin. |
 | Buildings | 12 | 20+ | Buildings are the only species/floor gate today, and **a new one is very hard to land** — see the ledger for 2026-08-02. |
@@ -102,6 +102,13 @@ above it; that single change opened band 4.
 mission whose `reward_focus` is not eggs. A floor with no `egg_hunt` in `mission_ids` is invisible
 for most of the campaign no matter what it pays. Adding `egg_hunt` to three band-3 floors took the
 tower from stalling at depth 12 to running all fifteen floors and producing eight rank-5 companions.
+
+**The planner runs one expedition a day at the single best (floor, mission) pair in the whole
+tower.** So it is structurally incapable of showing mission variety: whatever wins, wins every day,
+and adding a mission changes the balance reports by exactly zero unless it beats that one pair — in
+which case it becomes the new monoculture. **Do not tune a mission until the balance numbers move.**
+Judge missions by the probe's `SCORE` table, which prints every mission of every unlocked floor
+side by side; that is where a stance being strictly dominated is visible.
 
 ### Standing themes, several iterations each
 
@@ -553,6 +560,47 @@ Stop the loop and report if:
   **Next iteration should know:** the thin axes are now **missions 4** for 25 floors (the GDD names
   six; deep floors want rescue and sealed-extraction stances), **mutations 3** against 12 species,
   **guild rooms 4**, **patron tiers 3**, and relics still have no patron who asks for a *named* one.
+
+- **2026-08-02 — phase 2, three mission stances, and the relic missions start paying again.**
+  The GDD names six mission types and only four existed; every floor below depth 6 carried the same
+  four, so no floor uniquely permitted anything. Added **Rescue Retrieval** (go in after one specific
+  thing that is still alive: focus eggs, +3 egg grade, dear and dangerous, prefers `comfort`),
+  **Contract Fulfilment** (an order in hand — a lot number, a shelfmark: focus relics, +14 success,
+  −6 injury, poor at everything it was not sent for, prefers `performer`), and **Sealed Extraction**
+  (cut a ward, take what is inside, close it again: the largest relic payout in the game and by far
+  the worst injury, prefers `corruption_adept`). Each sits on six thematically-right floors — things
+  the tower keeps alive, places somebody wrote an inventory, and doors shut on purpose — so a floor's
+  mission list finally says something about the floor. Six events.
+  **The bug the content exposed is the real content here.** `success_score` gates the reward payout
+  *and* carries the mission's own `success_bonus_pct`, so a stance that is deliberately riskier stops
+  paying the thing it exists to fetch. Below depth 17 **Relic Recovery yielded no relics at all** —
+  the Egg Hunt's +20 success walked off with the floor's entire relic pile while the dedicated relic
+  mission came back with nothing. New `mission_focus_reward_relief_pct` (17) takes a further slice of
+  difficulty off *one* bar when the mission was chosen to look for exactly that reward. At the Tower
+  Core relic yields now read egg_hunt 20 < relic_raid 22 < sealed_extraction 23, with injury climbing
+  140 → 152 → 174 to match: a real decision where there was previously a dominant answer.
+  **Two shape lessons.** (a) A *flat* relief was the first attempt and it closed the tower: shallow
+  floors were already near their bars, so a safe depth-5 errand started paying three relics for
+  almost no injury and the guild never went deep again. The relief has to scale with difficulty,
+  exactly like `reward_threshold_depth_relief_pct`, because the gap it closes is a depth effect.
+  (b) A relic mission should not be success-negative at all — cutting a ward is slow and dangerous,
+  not *unlikely to find the thing*, so `sealed_extraction` pays for itself in injury (+26) rather
+  than in success, which is both better fiction and the only way it clears its own bar.
+  **One UI bug the content exposed.** The mission buttons were a single row splitting the panel by
+  count with a 58px floor — which silently overflowed at five missions and drew the last buttons
+  across the priority panel. `MissionGrid` in `expedition_planning_sections.rs` wraps them and sizes
+  the panel from the result; four missions still render exactly as before. 4 unit tests, including
+  one that asserts no button leaves the panel at any count from 1 to 8.
+  **Result:** every numeric field in all four balance reports is **byte-identical** to the previous
+  commit — only the sampled event-log strings moved. That is the expected outcome and is written up
+  under "How the planner values a floor" above: the planner runs one expedition a day at one globally
+  best pair, so it cannot see mission variety at all. 60 tests (was 56), no assertion touched, publish
+  green. New load-time validation: an unknown `reward_focus` is now a startup error rather than a
+  mission that silently stops being about anything.
+  **Next iteration should know:** the thin axes are **mutations 3** against 12 species (deep floors
+  push `corruption_pressure` up to 8 and almost nothing comes of it — this is the most obvious gap
+  left), **guild rooms 4** for a 20-companion roster, **patron tiers 3** with upkeep bands already
+  referencing a fourth, and relics still have no patron who asks for one by name.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

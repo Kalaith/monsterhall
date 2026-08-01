@@ -89,6 +89,75 @@
       "egg_grade_bonus": 2,
       "hazard_risk_modifier_pct": 12,
       "survey_value": 2
+    },
+    {
+      "id": "rescue_retrieval",
+      "name": "Rescue Retrieval",
+      "description": "Go in after one specific thing that is still alive down there. Slower, dearer, and far more dangerous than searching nests, but what comes back up is much further along than anything found cold.",
+      "reward_focus": "eggs",
+      "prep_cost": {
+        "gold": 18,
+        "tower_materials": 4,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 2
+      },
+      "success_bonus_pct": 2,
+      "materials_multiplier_pct": 60,
+      "residue_multiplier_pct": 70,
+      "egg_bonus_flat": 1,
+      "relic_bonus_flat": 0,
+      "injury_risk_pct": 14,
+      "preferred_role": "comfort",
+      "egg_grade_bonus": 3,
+      "hazard_risk_modifier_pct": 10,
+      "survey_value": 1
+    },
+    {
+      "id": "contract_fulfilment",
+      "name": "Contract Fulfilment",
+      "description": "Go in with an order in hand: a lot number, a shelfmark, a line on somebody's list. The party knows exactly where it is going and does not look at anything else on the way.",
+      "reward_focus": "relics",
+      "prep_cost": {
+        "gold": 22,
+        "tower_materials": 2,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 3
+      },
+      "success_bonus_pct": 14,
+      "materials_multiplier_pct": 55,
+      "residue_multiplier_pct": 60,
+      "egg_bonus_flat": 0,
+      "relic_bonus_flat": 1,
+      "injury_risk_pct": -6,
+      "preferred_role": "performer",
+      "egg_grade_bonus": 0,
+      "hazard_risk_modifier_pct": -6,
+      "survey_value": 1
+    },
+    {
+      "id": "sealed_extraction",
+      "name": "Sealed Extraction",
+      "description": "Cut into something that was shut on purpose, take what is inside, and shut it again. Everything about it is worse than a sweep except what it pays.",
+      "reward_focus": "relics",
+      "prep_cost": {
+        "gold": 30,
+        "tower_materials": 6,
+        "eggs": 0,
+        "relics": 0,
+        "arcane_residue": 8
+      },
+      "success_bonus_pct": 2,
+      "materials_multiplier_pct": 50,
+      "residue_multiplier_pct": 90,
+      "egg_bonus_flat": 0,
+      "relic_bonus_flat": 2,
+      "injury_risk_pct": 26,
+      "preferred_role": "corruption_adept",
+      "egg_grade_bonus": 1,
+      "hazard_risk_modifier_pct": 12,
+      "survey_value": 1
     }
   ]
 }

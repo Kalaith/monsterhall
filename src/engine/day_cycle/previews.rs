@@ -199,8 +199,26 @@ pub(crate) fn calculate_expedition_plan(
     // and better companions are the only thing the tower is really for.
     let depth_relief =
         floor.difficulty as i32 * data.config.day_cycle.reward_threshold_depth_relief_pct / 100;
-    let egg_threshold = data.config.day_cycle.expedition_egg_reward_threshold - depth_relief;
-    let relic_threshold = data.config.day_cycle.expedition_relic_reward_threshold - depth_relief;
+    // A party that went down looking for one thing in particular clears that
+    // thing's bar more easily. Without this a riskier stance is charged for its
+    // own risk twice, and the mission named after a reward is the worst way to
+    // come back with one.
+    let focus_relief =
+        floor.difficulty as i32 * data.config.day_cycle.mission_focus_reward_relief_pct / 100;
+    let egg_focus_relief = if mission.reward_focus == "eggs" {
+        focus_relief
+    } else {
+        0
+    };
+    let relic_focus_relief = if mission.reward_focus == "relics" {
+        focus_relief
+    } else {
+        0
+    };
+    let egg_threshold =
+        data.config.day_cycle.expedition_egg_reward_threshold - depth_relief - egg_focus_relief;
+    let relic_threshold =
+        data.config.day_cycle.expedition_relic_reward_threshold - depth_relief - relic_focus_relief;
 
     let egg_discovery_score = success_score + building_bonus.egg_discovery_flat;
     let projected_eggs = if egg_discovery_score >= egg_threshold {

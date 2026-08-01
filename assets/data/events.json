@@ -1036,6 +1036,54 @@
       "text": "Two eggs brought up from below the auction floor have gone cold and hard overnight in the open hatchery. Whatever they were, the guild will not find out without a warded room to keep them in.",
       "required_trait_ids": [],
       "required_species_ids": []
+    },
+    {
+      "id": "tower_rescue_still_calling",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Something in the pens is still calling on a four-day-old schedule, patient and unhurried, as though it fully expects an answer. A retrieval would be a different kind of run from a nest sweep.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_rescue_carried_up",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "The party comes back up carrying rather than hauling, and nobody says much on the stair. Whatever was retrieved is a great deal further along than anything the guild has found cold.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_order_in_hand",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A patron's list turns out to be accurate to the shelf. The party walks to the mark, lifts the one thing on the order, and walks back out past a great deal they were not paid to notice.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_lot_still_listed",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Half the lots on the auction boards are still listed as unclaimed, with the reserve prices legible. Anyone holding the matching paperwork could simply go and collect.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_seal_cut_and_reset",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "The ward is cut, the contents come out, and the ward goes back exactly as it was. The guild is getting good at leaving no evidence that anything was opened.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_seal_shut_from_inside",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Another door shut from the inside, and no way through it that does not involve cutting. Whatever the tower seals, it seals with something on the far side of the seal.",
+      "required_trait_ids": [],
+      "required_species_ids": []
     }
   ]
 }

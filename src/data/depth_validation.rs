@@ -32,6 +32,19 @@ pub(super) fn validate_depth_systems(data: &GameData) -> Result<(), String> {
         if let Some(role) = mission.preferred_role.as_deref() {
             validate_role_or_niche(role, &format!("mission '{}'.preferred_role", mission.id))?;
         }
+        // The engine matches this string to decide the mission's multipliers,
+        // its inferred party role and which reward bar it relieves. An unknown
+        // focus is not a warning at runtime — it silently drops all of them, and
+        // the mission just quietly stops being about anything.
+        if !matches!(
+            mission.reward_focus.as_str(),
+            "materials" | "eggs" | "relics" | "residue"
+        ) {
+            return Err(format!(
+                "mission '{}' has unknown reward_focus '{}'.",
+                mission.id, mission.reward_focus
+            ));
+        }
     }
 
     for request in &data.contracts.requests {

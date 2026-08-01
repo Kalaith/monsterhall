@@ -188,7 +188,8 @@
       "mission_ids": [
         "resource_run",
         "relic_raid",
-        "scout_route"
+        "scout_route",
+        "contract_fulfilment"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -378,7 +379,8 @@
       "mission_ids": [
         "relic_raid",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "sealed_extraction"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -423,7 +425,8 @@
       "mission_ids": [
         "egg_hunt",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "rescue_retrieval"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -478,7 +481,8 @@
         "resource_run",
         "egg_hunt",
         "relic_raid",
-        "scout_route"
+        "scout_route",
+        "rescue_retrieval"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -528,7 +532,8 @@
         "resource_run",
         "egg_hunt",
         "scout_route",
-        "relic_raid"
+        "relic_raid",
+        "rescue_retrieval"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -576,7 +581,9 @@
         "relic_raid",
         "egg_hunt",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "contract_fulfilment",
+        "sealed_extraction"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -627,7 +634,8 @@
       "mission_ids": [
         "egg_hunt",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "rescue_retrieval"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -677,7 +685,8 @@
         "relic_raid",
         "egg_hunt",
         "resource_run",
-        "scout_route"
+        "scout_route",
+        "contract_fulfilment"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -728,7 +737,9 @@
         "relic_raid",
         "egg_hunt",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "contract_fulfilment",
+        "sealed_extraction"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -779,7 +790,8 @@
         "scout_route",
         "egg_hunt",
         "relic_raid",
-        "resource_run"
+        "resource_run",
+        "contract_fulfilment"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -834,7 +846,8 @@
         "relic_raid",
         "egg_hunt",
         "resource_run",
-        "scout_route"
+        "scout_route",
+        "contract_fulfilment"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -989,7 +1002,8 @@
         "egg_hunt",
         "relic_raid",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "rescue_retrieval"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -1039,7 +1053,8 @@
         "egg_hunt",
         "relic_raid",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "rescue_retrieval"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -1089,7 +1104,8 @@
         "egg_hunt",
         "relic_raid",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "sealed_extraction"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -1145,7 +1161,8 @@
         "egg_hunt",
         "relic_raid",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "sealed_extraction"
       ],
       "baseline_rewards": {
         "gold": 0,
@@ -1203,7 +1220,8 @@
         "egg_hunt",
         "relic_raid",
         "scout_route",
-        "resource_run"
+        "resource_run",
+        "sealed_extraction"
       ],
       "baseline_rewards": {
         "gold": 0,

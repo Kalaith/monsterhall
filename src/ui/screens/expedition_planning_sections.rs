@@ -171,9 +171,109 @@ pub(super) fn draw_floor_list(
     None
 }
 
+pub(super) const MISSION_BUTTON_H: f32 = 24.0;
+pub(super) const MISSION_GAP: f32 = 8.0;
+const MISSION_MIN_BUTTON_W: f32 = 58.0;
+
+/// How a floor's mission buttons are arranged inside the mission panel.
+///
+/// The buttons used to be one row, split evenly by mission count and clamped to
+/// a 58px minimum. That silently overflowed the moment a floor offered five:
+/// the clamp won, the row grew past the panel, and the last buttons drew across
+/// the priority panel beside it. Floors carry up to six stances now, so the row
+/// wraps and the panel is sized from the result.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub(super) struct MissionGrid {
+    pub(super) columns: usize,
+    pub(super) rows: usize,
+    pub(super) button_w: f32,
+}
+
+impl MissionGrid {
+    pub(super) fn new(mission_count: usize, inner_w: f32) -> Self {
+        let mission_count = mission_count.max(1);
+        // How many minimum-width buttons fit across, before deciding to wrap.
+        let fitting =
+            ((inner_w + MISSION_GAP) / (MISSION_MIN_BUTTON_W + MISSION_GAP)).floor() as usize;
+        let columns = fitting.clamp(1, mission_count);
+        let rows = mission_count.div_ceil(columns);
+        // Spend the whole panel width on however many columns are actually used,
+        // so a two-mission floor still draws two wide buttons.
+        let button_w = ((inner_w - MISSION_GAP * (columns - 1) as f32) / columns as f32).max(1.0);
+
+        Self {
+            columns,
+            rows,
+            button_w,
+        }
+    }
+
+    pub(super) fn cell(&self, index: usize) -> (f32, f32) {
+        let column = index % self.columns;
+        let row = index / self.columns;
+        (
+            column as f32 * (self.button_w + MISSION_GAP),
+            row as f32 * (MISSION_BUTTON_H + MISSION_GAP),
+        )
+    }
+
+    /// Panel height that holds every row, matching the old 58px for one row.
+    pub(super) fn panel_height(&self) -> f32 {
+        34.0 + self.rows as f32 * MISSION_BUTTON_H + (self.rows - 1) as f32 * MISSION_GAP
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn four_missions_still_draw_as_one_row() {
+        let grid = MissionGrid::new(4, 268.0);
+
+        assert_eq!(grid.rows, 1);
+        assert_eq!(grid.columns, 4);
+        assert_eq!(grid.panel_height(), 58.0);
+    }
+
+    #[test]
+    fn a_sixth_mission_wraps_instead_of_leaving_the_panel() {
+        let grid = MissionGrid::new(6, 268.0);
+
+        assert!(grid.rows > 1);
+        let (offset_x, _) = grid.cell(grid.columns - 1);
+        assert!(
+            offset_x + grid.button_w <= 268.0,
+            "last button in a row ends at {}, panel is 268 wide",
+            offset_x + grid.button_w
+        );
+    }
+
+    #[test]
+    fn every_mission_stays_inside_the_panel_at_any_count() {
+        for count in 1..=8 {
+            let grid = MissionGrid::new(count, 268.0);
+            for index in 0..count {
+                let (offset_x, offset_y) = grid.cell(index);
+                assert!(
+                    offset_x + grid.button_w <= 268.0 + f32::EPSILON,
+                    "mission {index} of {count} overflows the panel width"
+                );
+                assert!(
+                    offset_y + MISSION_BUTTON_H <= grid.panel_height() - 34.0 + f32::EPSILON,
+                    "mission {index} of {count} overflows the panel height"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn a_narrow_panel_still_draws_one_readable_column() {
+        let grid = MissionGrid::new(4, 40.0);
+
+        assert_eq!(grid.columns, 1);
+        assert_eq!(grid.rows, 4);
+    }
 
     #[test]
     fn every_floor_is_drawn_when_the_tower_fits_the_panel() {

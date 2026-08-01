@@ -180,6 +180,23 @@ pub struct DayCycleConfigData {
     /// which severs the one link that lets the tower produce better companions.
     #[serde(default = "default_reward_threshold_depth_relief_pct")]
     pub reward_threshold_depth_relief_pct: i32,
+    /// Further portion of a floor's difficulty taken off one reward's bar when
+    /// the mission was chosen to look for exactly that reward.
+    ///
+    /// The same double-charge as above, one level down: a mission's
+    /// `success_bonus_pct` feeds `success_score`, and `success_score` gates the
+    /// payout, so a stance that is deliberately riskier stops paying the thing
+    /// it exists to fetch. Below depth 17 that made Relic Recovery the *worst*
+    /// way to bring back a relic — it yielded none at all while the Egg Hunt's
+    /// +20 success carried off the floor's entire relic pile.
+    ///
+    /// Scaled by difficulty rather than flat, because the gap it closes is a
+    /// depth effect. A flat relief lands hardest on the shallow floors that were
+    /// already clearing their bars, and a safe depth-5 errand paying three
+    /// relics for no injury is enough to keep the guild out of the deep tower
+    /// entirely.
+    #[serde(default = "default_mission_focus_reward_relief_pct")]
+    pub mission_focus_reward_relief_pct: i32,
     pub expedition_egg_reward_threshold: i32,
     pub expedition_relic_reward_threshold: i32,
     pub expedition_injury_threshold: i32,
@@ -546,6 +563,10 @@ fn default_understrength_income_pct() -> u32 {
 
 fn default_reward_threshold_depth_relief_pct() -> i32 {
     60
+}
+
+fn default_mission_focus_reward_relief_pct() -> i32 {
+    15
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

@@ -17,7 +17,7 @@ use crate::ui::core::{
 };
 use crate::ui::layout;
 use crate::ui::screens::expedition_planning_sections::{
-    draw_floor_list, floor_row_capacity, FloorListWindow,
+    draw_floor_list, floor_row_capacity, FloorListWindow, MissionGrid, MISSION_BUTTON_H,
 };
 use crate::ui::theme;
 use crate::ui::view_models::{assignment_label, species_name_by_id};
@@ -287,7 +287,9 @@ pub fn draw_expedition_planning(
     let mission_panel_w = 292.0_f32.min(control_w * 0.42);
     let priority_panel_x = control_x + mission_panel_w + control_gap;
     let priority_panel_w = (control_w - mission_panel_w - control_gap).max(240.0);
-    let mission_panel_h = 58.0;
+    let mission_inner_w = mission_panel_w - 24.0;
+    let mission_grid = MissionGrid::new(selected_floor.mission_ids.len(), mission_inner_w);
+    let mission_panel_h = mission_grid.panel_height();
     let priority_panel_h = 94.0;
     draw_tier_panel(
         control_x,
@@ -309,17 +311,11 @@ pub fn draw_expedition_planning(
     );
 
     let mission_inner_x = control_x + 12.0;
-    let mission_inner_w = mission_panel_w - 24.0;
     let priority_inner_x = priority_panel_x + 12.0;
     let priority_inner_w = priority_panel_w - 24.0;
     let priority_button_w = ((priority_inner_w - 8.0) / 2.0).max(112.0);
     let top_button_y = control_y + 10.0;
     let priority_button_h = 24.0;
-    let mission_count = selected_floor.mission_ids.len().max(1) as f32;
-    let mission_gap = 8.0;
-    let mission_button_w =
-        ((mission_inner_w - mission_gap * (mission_count - 1.0)) / mission_count).max(58.0);
-
     for (index, mission_id) in selected_floor.mission_ids.iter().enumerate() {
         let Some(mission) = data
             .missions
@@ -329,21 +325,23 @@ pub fn draw_expedition_planning(
         else {
             continue;
         };
-        let x = mission_inner_x + index as f32 * (mission_button_w + mission_gap);
+        let (offset_x, offset_y) = mission_grid.cell(index);
+        let x = mission_inner_x + offset_x;
+        let y = top_button_y + offset_y;
         let pressed = if *mission_id == selected_mission_id {
             primary_button(
                 x,
-                top_button_y,
-                mission_button_w,
-                24.0,
+                y,
+                mission_grid.button_w,
+                MISSION_BUTTON_H,
                 &compact_text(&mission.name, 12),
             )
         } else {
             secondary_button(
                 x,
-                top_button_y,
-                mission_button_w,
-                24.0,
+                y,
+                mission_grid.button_w,
+                MISSION_BUTTON_H,
                 &compact_text(&mission.name, 12),
             )
         };
