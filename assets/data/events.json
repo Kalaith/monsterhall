@@ -988,6 +988,54 @@
       "text": "The lowest air in the shaft is warm and moving, and it smells the way the hatchery does on a good morning.",
       "required_trait_ids": [],
       "required_species_ids": []
+    },
+    {
+      "id": "tower_registrar_shelfmarks",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Every shelfmark in the sealed archive is current, in a hand nobody can match, and the ink on the last one is not dry.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_registrar_coil",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Something long moves between two stacks without disturbing either, and the party finds the crate they were looking for already set out for them.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_stairwarden_count",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "One of the carvings on the understair is not a carving. It has been counting the party down, and it counts them back up short a lantern.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_chorister_reply",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Someone hums to break the quiet in the chorus vault. The vault finishes the phrase, in a voice that has had a great deal longer to think about it.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_corekeeper_turning",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "In the warm room the clutches are turned, evenly, on a schedule. Nobody sees who does it, but the ash is worn into a path around every nest.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_deep_eggs_go_cold",
+      "category": "town",
+      "phase": "day_end",
+      "text": "Two eggs brought up from below the auction floor have gone cold and hard overnight in the open hatchery. Whatever they were, the guild will not find out without a warded room to keep them in.",
+      "required_trait_ids": [],
+      "required_species_ids": []
     }
   ]
 }

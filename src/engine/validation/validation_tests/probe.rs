@@ -22,9 +22,15 @@ fn probe_floor_usage() {
     let data = test_game_data();
     let mut game_state = create_new_game_state(&data);
     play_opening_sequence(&data, &mut game_state);
-    for _ in 0..365 {
+    // The day a species unlocks is the whole story for a deep one: unlocked on
+    // day 324 of 365 is not content, however good the entry reads.
+    let mut unlock_day: std::collections::HashMap<String, u32> = std::collections::HashMap::new();
+    for day in 0..365u32 {
         run_daily_policy(&data, &mut game_state);
         resolve_day(&data, &mut game_state);
+        for species_id in &game_state.town.unlocked_species_ids {
+            unlock_day.entry(species_id.clone()).or_insert(day);
+        }
     }
 
     println!(
@@ -93,6 +99,27 @@ fn probe_floor_usage() {
         ranks[usize::from(monster.quality_rank).min(5)] += 1;
     }
     println!("RANKS (1..5): {:?}", &ranks[1..]);
+
+    // A species the campaign never hatches is invisible content, and the
+    // standard reports count companions rather than what they are.
+    for species in &data.species.species {
+        let in_roster = game_state
+            .monsters
+            .iter()
+            .filter(|monster| monster.species_id == species.id)
+            .count();
+        match unlock_day.get(&species.id) {
+            Some(day) => println!(
+                "SPECIES {:<24} unlocked_day={day:<4} in_roster={in_roster}",
+                species.id
+            ),
+            None => println!("SPECIES {:<24} never unlocked", species.id),
+        }
+    }
+    println!(
+        "BUILDINGS {:?}",
+        game_state.town.constructed_building_ids.clone()
+    );
 
     for floor in &data.floors.floors {
         let surveys = game_state

@@ -215,6 +215,114 @@
         "relics": 1,
         "arcane_residue": 14
       }
+    },
+    {
+      "id": "wyrm_registrar",
+      "name": "Wyrm Registrar",
+      "description": "A pale coil of a creature grown long in the sealed stacks, still keeping the tower's catalogue current because nothing ever told it to stop. It knows where everything is, including the things the guild would rather were lost.",
+      "portrait_key": "wyrm_registrar_portrait",
+      "base_stats": {
+        "power": 4,
+        "charm": 9,
+        "endurance": 6,
+        "instinct": 9
+      },
+      "starting_traits": [
+        "meticulous",
+        "graceful"
+      ],
+      "preferred_room_ids": [
+        "reception_hall",
+        "nursery_wing"
+      ],
+      "hatching_cost": {
+        "gold": 120,
+        "tower_materials": 40,
+        "eggs": 1,
+        "relics": 2,
+        "arcane_residue": 20
+      }
+    },
+    {
+      "id": "gargoyle_stairwarden",
+      "name": "Gargoyle Stairwarden",
+      "description": "Cut from the same stone as the understair and about as willing to move. A stairwarden counts what goes down and what comes back up, and takes the difference personally.",
+      "portrait_key": "gargoyle_stairwarden_portrait",
+      "base_stats": {
+        "power": 10,
+        "charm": 4,
+        "endurance": 10,
+        "instinct": 6
+      },
+      "starting_traits": [
+        "stonebound",
+        "resilient"
+      ],
+      "preferred_room_ids": [
+        "packroom_annex",
+        "common_room"
+      ],
+      "hatching_cost": {
+        "gold": 140,
+        "tower_materials": 60,
+        "eggs": 1,
+        "relics": 2,
+        "arcane_residue": 18
+      }
+    },
+    {
+      "id": "revenant_chorister",
+      "name": "Revenant Chorister",
+      "description": "Something the chorus vault kept singing until it learned to sing back. She answers every question put to her, in a voice that has had a great deal longer than the asker to consider it.",
+      "portrait_key": "revenant_chorister_portrait",
+      "base_stats": {
+        "power": 5,
+        "charm": 11,
+        "endurance": 6,
+        "instinct": 10
+      },
+      "starting_traits": [
+        "corruption_tuned",
+        "long_patience"
+      ],
+      "preferred_room_ids": [
+        "reception_hall",
+        "packroom_annex"
+      ],
+      "hatching_cost": {
+        "gold": 180,
+        "tower_materials": 70,
+        "eggs": 1,
+        "relics": 3,
+        "arcane_residue": 30
+      }
+    },
+    {
+      "id": "salamander_corekeeper",
+      "name": "Salamander Corekeeper",
+      "description": "She was turning eggs in the warm room at the bottom of the tower before the guild had a name, and she turns them the same way in the hatchery. Whatever the core is sending, she is why it arrives intact.",
+      "portrait_key": "salamander_corekeeper_portrait",
+      "base_stats": {
+        "power": 7,
+        "charm": 10,
+        "endurance": 9,
+        "instinct": 8
+      },
+      "starting_traits": [
+        "hatchery_attuned",
+        "long_patience"
+      ],
+      "preferred_room_ids": [
+        "nursery_wing",
+        "packroom_annex"
+      ],
+      "hatching_cost": {
+        "gold": 220,
+        "tower_materials": 90,
+        "eggs": 1,
+        "relics": 4,
+        "arcane_residue": 40
+      }
     }
   ]
 }

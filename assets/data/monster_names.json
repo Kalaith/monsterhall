@@ -172,6 +172,86 @@
         "Selmira",
         "Ysolde"
       ]
+    },
+    {
+      "id": "wyrm_registrar_lineage",
+      "species_ids": [
+        "wyrm_registrar"
+      ],
+      "names": [
+        "Sisyl",
+        "Amberre",
+        "Thessa",
+        "Ondrelle",
+        "Vaskia",
+        "Merenn",
+        "Ysolde",
+        "Corrash",
+        "Ilvette",
+        "Nashra",
+        "Perrine",
+        "Sylthe"
+      ]
+    },
+    {
+      "id": "gargoyle_stairwarden_lineage",
+      "species_ids": [
+        "gargoyle_stairwarden"
+      ],
+      "names": [
+        "Brede",
+        "Osma",
+        "Karth",
+        "Ondra",
+        "Grisel",
+        "Tarn",
+        "Vessa",
+        "Hale",
+        "Morrin",
+        "Stenna",
+        "Ruvel",
+        "Dolch"
+      ]
+    },
+    {
+      "id": "revenant_chorister_lineage",
+      "species_ids": [
+        "revenant_chorister"
+      ],
+      "names": [
+        "Cassine",
+        "Verel",
+        "Mournay",
+        "Silene",
+        "Anthea",
+        "Orise",
+        "Lethe",
+        "Vespra",
+        "Halcyne",
+        "Tessaly",
+        "Norane",
+        "Aurelle"
+      ]
+    },
+    {
+      "id": "salamander_corekeeper_lineage",
+      "species_ids": [
+        "salamander_corekeeper"
+      ],
+      "names": [
+        "Cindra",
+        "Vaela",
+        "Sorrha",
+        "Pyrelle",
+        "Ashein",
+        "Kemma",
+        "Iolanthe",
+        "Ferra",
+        "Solane",
+        "Ruvenne",
+        "Thala",
+        "Emberis"
+      ]
     }
   ]
 }

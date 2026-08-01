@@ -172,9 +172,10 @@ impl GameData {
                 species_ids,
                 &format!("contract '{}'.required_species_ids", request.id),
             )?;
-            if !(1..=3).contains(&request.minimum_quality_rank) {
+            let max_rank = self.config.day_cycle.egg_quality_rank_thresholds.len() as u8 + 1;
+            if !(1..=max_rank).contains(&request.minimum_quality_rank) {
                 return Err(format!(
-                    "contract '{}'.minimum_quality_rank must be between 1 and 3.",
+                    "contract '{}'.minimum_quality_rank must be between 1 and {max_rank}.",
                     request.id
                 ));
             }

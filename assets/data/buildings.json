@@ -238,7 +238,7 @@
       "id": "species_archive",
       "name": "Species Archive",
       "category": "research",
-      "description": "Catalogs species preferences, role fits, and tower-instability outcomes.",
+      "description": "A dedicated study wing for tower species: sealed cases, warded incubation drawers, and enough archive discipline that an egg from below the auction floor keeps instead of going cold.",
       "build_limit": 1,
       "cost": {
         "gold": 2450,
@@ -251,7 +251,9 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [
-          "golemkin_warden"
+          "golemkin_warden",
+          "wyrm_registrar",
+          "gargoyle_stairwarden"
         ],
         "patron_tiers": [
           "frontier_factions"
@@ -272,7 +274,7 @@
       "id": "tower_route_cartography",
       "name": "Route Map Chamber",
       "category": "research",
-      "description": "Maps safe routes, hidden dens, and instability veins deeper in the tower.",
+      "description": "A mapping office that turns survey notes into routes the guild can walk twice, including the ones that end at the bottom of the tower and come back with something living.",
       "build_limit": 1,
       "cost": {
         "gold": 3100,
@@ -285,7 +287,9 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [
-          "moth_archivist"
+          "moth_archivist",
+          "revenant_chorister",
+          "salamander_corekeeper"
         ],
         "patron_tiers": [
           "frontier_factions"

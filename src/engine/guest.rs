@@ -596,12 +596,17 @@ fn request_template_available(
             .unlocked_room_ids
             .iter()
             .any(|room_id| room_id == &template.requested_room_id)
+        // A patron asks for what the hall is known to have, not for what the
+        // guild has read about. Keying this off the unlock alone was survivable
+        // while every species came from a shallow floor and hatched within
+        // days; a species that only hatches below the auction floor stays
+        // unlocked and absent for most of a campaign, and the desk fills up
+        // with work nobody in the hall can take.
         && template.required_species_ids.iter().all(|species_id| {
             game_state
-                .town
-                .unlocked_species_ids
+                .monsters
                 .iter()
-                .any(|entry| entry == species_id)
+                .any(|monster| &monster.species_id == species_id)
         })
         && template
             .patron_tier_id

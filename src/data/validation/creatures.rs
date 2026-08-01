@@ -33,6 +33,44 @@ impl GameData {
                     species.id
                 ));
             }
+            // Both halves of "the player can actually end up with one of
+            // these". A species needs an egg somewhere in the tower to hatch
+            // from, and something that unlocks the right to hatch it; miss
+            // either and the entry is prose nobody will ever read in play.
+            if !self.floors.floors.iter().any(|floor| {
+                floor
+                    .egg_species_entries
+                    .iter()
+                    .any(|entry| entry.species_id == species.id)
+            }) {
+                return Err(format!(
+                    "species '{}' is on no floor's egg_species_entries, so no egg can ever produce it.",
+                    species.id
+                ));
+            }
+            let starts_unlocked = self
+                .config
+                .new_game
+                .starting_species_ids
+                .iter()
+                .any(|id| id == &species.id)
+                || self
+                    .config
+                    .new_game
+                    .starter_monsters
+                    .iter()
+                    .any(|starter| starter.species_id == species.id);
+            let building_unlocks = self
+                .buildings
+                .buildings
+                .iter()
+                .any(|building| building.unlocks.species_ids.contains(&species.id));
+            if !starts_unlocked && !building_unlocks {
+                return Err(format!(
+                    "species '{}' is unlocked by no building and is not a starting species, so it can never be hatched.",
+                    species.id
+                ));
+            }
         }
         Ok(())
     }

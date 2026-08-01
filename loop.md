@@ -61,13 +61,13 @@ Re-count these from the JSON each iteration rather than trusting the table.
 |---|---|---|---|
 | **Tower floors** | **25** ✅ | **25** | **Target met.** All five bands authored, depths 1–25, difficulty 20→104 against a ceiling of 120. Every floor unlocks and is reached in a 365-day campaign; the guild's preferred destination is the Tower Core at the bottom. |
 | Missions | 4 | 8–10 | GDD names 6 types; `missions.json` has 4. Rescue/Retrieval and Contract Fulfilment are unwritten. |
-| Species | 8 | 14–18 | Deep bands need companions you can only get down there. |
-| Mutations | 3 | 10+ | The corruption payoff. One mutation per two species is thin. |
-| Buildings | 12 | 20+ | Buildings are the only floor gate today (see below). |
+| Species | **12** | 14–18 | Four now hatch only below depth 16 (`wyrm_registrar`, `gargoyle_stairwarden`, `revenant_chorister`, `salamander_corekeeper`). Bands 1–3 still share the original eight. |
+| Mutations | 3 | 10+ | The corruption payoff. One mutation per four species is now thin. |
+| Buildings | 12 | 20+ | Buildings are the only species/floor gate today, and **a new one is very hard to land** — see the ledger for 2026-08-02. |
 | Guild rooms | 4 | 7–8 | Four rooms for a 20-companion roster. |
-| Traits | 10 | 16+ | Traits drive contract fit and role assignment. |
-| Contracts | 12 | 25+ | Should reference named floors and deep species. |
-| Events | 38 | — | Healthy. Deep-floor events are the gap, not event count. |
+| Traits | **13** | 16+ | Traits drive contract fit and role assignment. |
+| Contracts | **16** | 25+ | Should reference named floors and deep species. Every species now has exactly one patron who asks for it by name. |
+| Events | 67 | — | Healthy. Deep-floor events are the gap, not event count. |
 | Patron tiers | 3 | 4–5 | `patron_tiers.json`; upkeep bands already reference tier 4. |
 | Debt milestones | 7 | — | ~455 days of chain against 3 floors of tower. Mismatched, in the tower's favour to fix. |
 | Relic drops | **28 named** ✅ | named objects | `relics.json` gives every declared drop a name, description and discovery note, reported in the day log when found. Validated both ways: no unknown drop, no unfindable relic. Still no *patron* who wants one — that is the remaining half. |
@@ -508,7 +508,61 @@ Stop the loop and report if:
   demand behind it. After that the thin axes are **species 8** (nothing lives only at depth 20+),
   **missions 4** for 25 floors, **mutations 3**, **guild rooms 4**, **patron tiers 3**.
 
+- **2026-08-02 — phase 2, four species that only live at the bottom of the tower.** Ten floors of
+  endgame were drawing from the same eight species available at depth 3, so the roster you finished
+  with said nothing about how deep you got. Added **Wyrm Registrar** (16–18, keeps the sealed
+  archive's catalogue; performer), **Gargoyle Stairwarden** (19–21, cut from the understair and
+  counts what goes down; delver), **Revenant Chorister** (22–24, answers in a voice that has had
+  longer to think; corruption adept) and **Salamander Corekeeper** (24–25, turns the clutches in the
+  warm room; hatchery specialist) — four species, four distinct inferred roles, three traits
+  (`meticulous`, `stonebound`, `long_patience`), four name pools, four patrons who ask for them by
+  name, six events, and room preferences so they earn where they belong.
+  **The gate is depth, not gold, and that was the whole fight.** My first draft gated them behind two
+  new buildings. Three findings, all worth keeping:
+  (1) **The harness's building gate has one early window and then shuts.**
+  `can_make_growth_investment` values a building against `conservative_daily_gold_income`, which caps
+  at 8 income units — so once the debt milestones get large, no one-off building is affordable again
+  until ~day 320. `species_archive` (day 60) and `tower_route_cartography` (day 70) squeeze through
+  that window; **a new one-off building essentially cannot.** Any future slice that wants to add a
+  building must solve this first.
+  (2) **A cheap new building can close the tower.** The policy buys whatever is affordable today
+  rather than saving for the plan, so a 2,350-gold vault held the guild's gold under cartography's
+  3,100 and slid it from day 72 to day 321 — which never opened the survey chain, and **the bottom
+  fourteen floors were never entered all campaign** with every assertion still green. A strict
+  "one-off blocks everything behind it" ordering fixed it and measured *better* than today's baseline
+  (gold 932k, ranks [0,0,2,5,13], all 25 floors) — **not shipped this iteration**, because it is a
+  separate concern from species; it is written up under Deferred as a ready-made slice.
+  (3) So the four species were attached to the two deep-tower buildings that already exist and are
+  already bought — the species archive and the cartography office, both of which read as exactly the
+  institutions that would let you keep such a thing. The real gate is that their eggs only exist on
+  floors 16+.
+  **One bug the content exposed, one stale cap.** Contracts were offered whenever their species was
+  *unlocked*, which was fine when every species hatched days after its unlock; a deep species stays
+  unlocked and absent for most of a campaign, so the desk filled with unfillable work — rejections
+  1,279 → 2,327. `request_template_available` now asks whether the hall actually has one, which took
+  rejections to **324**, a quarter of the pre-existing baseline. And contract
+  `minimum_quality_rank` was still validated against the pre-escort-economy 1–3 ladder; it now derives
+  the ceiling from `egg_quality_rank_thresholds` like the floor roster requirements already did.
+  **Result:** all four species reach the roster, all 25 floors still reached, **rank-5 escorts 10 →
+  14**, gold 730k → 846k, hatches 33 → 37, buildings 17 → 16, 4 of 10 seeds clear Founder's Due,
+  zero missed payments. 56 tests green, no assertion touched. New load-time validation: a species must
+  appear in some floor's egg pool **and** be unlockable, so the next authored species cannot be
+  invisible the way these nearly were. `probe_floor_usage` now prints per-species unlock day and
+  roster count — **read the unlock day, not just the count**; unlocked on day 324 of 365 is not
+  content.
+  **Next iteration should know:** the thin axes are now **missions 4** for 25 floors (the GDD names
+  six; deep floors want rescue and sealed-extraction stances), **mutations 3** against 12 species,
+  **guild rooms 4**, **patron tiers 3**, and relics still have no patron who asks for a *named* one.
+
 ## Deferred (needs a new system or a decision; not for this loop)
+
+- **Make the validation policy's build order a plan rather than a shopping list.** Measured and
+  working in this iteration but deliberately left out of it: in `policy_buildings.rs`, let a one-off
+  building the guild still wants block the purchases behind it instead of being skipped over
+  (repeatable sinks must not block, or the condenser sits in front of the prestige wing forever).
+  On today's content that measured gold 730k → 932k, rank-5 escorts 10 → 13 and all 25 floors, with
+  no assertion touched. It is a real improvement and it is also the precondition for ever adding
+  another building, but it moves every balance number, so it deserves its own iteration.
 
 - Retiring `RENAMED_CONTENT_IDS` in `state/persistence.rs` once no pre-`save_version: 10` saves are
   plausibly in circulation. Harmless to keep; delete it at the 1.0 release, not before.

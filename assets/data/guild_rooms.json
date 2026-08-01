@@ -86,12 +86,14 @@
       "preferred_trait_ids": [
         "commanding",
         "corruption_tuned",
-        "stretchy"
+        "stretchy",
+        "stonebound"
       ],
       "preferred_species_ids": [
         "golemkin_warden",
         "lamia_routekeeper",
-        "minotaur_porter"
+        "minotaur_porter",
+        "gargoyle_stairwarden"
       ],
       "strategic_niche": "corruption",
       "upgrade_building_ids": [
@@ -142,12 +144,14 @@
       },
       "preferred_trait_ids": [
         "hatchery_attuned",
-        "calming_presence"
+        "calming_presence",
+        "long_patience"
       ],
       "preferred_species_ids": [
         "golemkin_warden",
         "lamia_routekeeper",
-        "moth_archivist"
+        "moth_archivist",
+        "salamander_corekeeper"
       ],
       "strategic_niche": "hatchery",
       "upgrade_building_ids": [
@@ -199,13 +203,16 @@
       "preferred_trait_ids": [
         "commanding",
         "graceful",
-        "opportunistic"
+        "opportunistic",
+        "meticulous"
       ],
       "preferred_species_ids": [
         "residue_slime",
         "imp_runner",
         "harpy_lookout",
-        "moth_archivist"
+        "moth_archivist",
+        "wyrm_registrar",
+        "revenant_chorister"
       ],
       "strategic_niche": "performance",
       "upgrade_building_ids": [

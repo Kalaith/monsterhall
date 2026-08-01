@@ -572,6 +572,198 @@
       "patron_tier_id": "guild_sponsors",
       "preparation_quality_required": 2,
       "preparation_quality_bonus": 5
+    },
+    {
+      "id": "registrar_shelfmark_audit",
+      "name": "Shelfmark Audit",
+      "description": "A guild sponsor has bought a crate of archive salvage and cannot read a single shelfmark on it. She wants the creature that wrote them, sitting at her table, for an afternoon.",
+      "archetype_id": "tower_scholar",
+      "requested_room_id": "reception_hall",
+      "required_species_ids": [
+        "wyrm_registrar"
+      ],
+      "minimum_quality_rank": 3,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 0,
+        "hospitality": 2,
+        "crafting": 0,
+        "charm": 3
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 1,
+        "guard_duties": 0,
+        "hospitality_jobs": 2,
+        "craft_jobs": 0,
+        "contracts_completed": 1,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 165,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 22
+      },
+      "penalty_gold": 48,
+      "deadline_days": 5,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "meticulous",
+        "graceful"
+      ],
+      "preferred_role": "performer",
+      "partial_success_score": 38,
+      "reputation_reward": 4,
+      "category": "relic_research",
+      "patron_tier_id": "guild_sponsors",
+      "preparation_quality_required": 4,
+      "preparation_quality_bonus": 7
+    },
+    {
+      "id": "stairwarden_descent_escort",
+      "name": "Descent Escort",
+      "description": "A faction survey party will not go below the instrument halls without something on the stair ahead of them that the stair already belongs to. They are paying for the stone, not the conversation.",
+      "archetype_id": "caravan_captain",
+      "requested_room_id": "packroom_annex",
+      "required_species_ids": [
+        "gargoyle_stairwarden"
+      ],
+      "minimum_quality_rank": 4,
+      "required_skill_thresholds": {
+        "scouting": 2,
+        "guarding": 3,
+        "hospitality": 0,
+        "crafting": 1,
+        "charm": 0
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 2,
+        "guard_duties": 2,
+        "hospitality_jobs": 0,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 190,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 1,
+        "arcane_residue": 26
+      },
+      "penalty_gold": 55,
+      "deadline_days": 6,
+      "is_special": false,
+      "preferred_trait_ids": [
+        "stonebound",
+        "resilient"
+      ],
+      "preferred_role": "delver",
+      "partial_success_score": 42,
+      "reputation_reward": 4,
+      "category": "escort_preparation",
+      "patron_tier_id": "frontier_factions",
+      "preparation_quality_required": 5,
+      "preparation_quality_bonus": 8
+    },
+    {
+      "id": "chorister_answer_session",
+      "name": "Answer Session",
+      "description": "An envoy has a question she has carried for eleven years and no living authority left to put it to. She will pay frontier rates for one evening, one chorister, and no witnesses.",
+      "archetype_id": "tower_scholar",
+      "requested_room_id": "reception_hall",
+      "required_species_ids": [
+        "revenant_chorister"
+      ],
+      "minimum_quality_rank": 4,
+      "required_skill_thresholds": {
+        "scouting": 0,
+        "guarding": 1,
+        "hospitality": 3,
+        "crafting": 0,
+        "charm": 4
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 3,
+        "craft_jobs": 0,
+        "contracts_completed": 2,
+        "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "reward": {
+        "gold": 235,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 2,
+        "arcane_residue": 34
+      },
+      "penalty_gold": 68,
+      "deadline_days": 6,
+      "is_special": true,
+      "preferred_trait_ids": [
+        "corruption_tuned",
+        "long_patience"
+      ],
+      "preferred_role": "corruption_adept",
+      "partial_success_score": 46,
+      "reputation_reward": 5,
+      "category": "hazard_handling",
+      "patron_tier_id": "frontier_factions",
+      "preparation_quality_required": 6,
+      "preparation_quality_bonus": 9
+    },
+    {
+      "id": "corekeeper_sending_vigil",
+      "name": "Sending Vigil",
+      "description": "The factions have worked out that the eggs come from somewhere and that something down there turns them. They want the one who does it to sit a vigil over a clutch of their own, and they are not asking what it costs.",
+      "archetype_id": "tower_scholar",
+      "requested_room_id": "nursery_wing",
+      "required_species_ids": [
+        "salamander_corekeeper"
+      ],
+      "minimum_quality_rank": 5,
+      "required_skill_thresholds": {
+        "scouting": 1,
+        "guarding": 0,
+        "hospitality": 3,
+        "crafting": 2,
+        "charm": 4
+      },
+      "required_work_history_thresholds": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 2,
+        "craft_jobs": 0,
+        "contracts_completed": 2,
+        "recovery_shifts": 0,
+        "hatchery_assists": 3
+      },
+      "reward": {
+        "gold": 285,
+        "tower_materials": 0,
+        "eggs": 0,
+        "relics": 2,
+        "arcane_residue": 44
+      },
+      "penalty_gold": 84,
+      "deadline_days": 7,
+      "is_special": true,
+      "preferred_trait_ids": [
+        "hatchery_attuned",
+        "long_patience"
+      ],
+      "preferred_role": "hatchery_specialist",
+      "partial_success_score": 52,
+      "reputation_reward": 6,
+      "category": "relic_research",
+      "patron_tier_id": "frontier_factions",
+      "preparation_quality_required": 6,
+      "preparation_quality_bonus": 10
     }
   ]
 }

@@ -170,6 +170,57 @@
       "expedition_success_pct": 12,
       "injury_risk_pct": 1,
       "stress_change_flat": 0
+    },
+    {
+      "id": "meticulous",
+      "name": "Meticulous",
+      "category": "temperament",
+      "icon_key": "shelfmark",
+      "description": "Counts, files, and re-counts. Nothing passes through her hands unrecorded, which patrons pay for and hazards resent.",
+      "stat_modifiers": {
+        "power": 0,
+        "charm": 1,
+        "endurance": 0,
+        "instinct": 1
+      },
+      "guild_income_pct": 12,
+      "expedition_success_pct": 3,
+      "injury_risk_pct": -2,
+      "stress_change_flat": 0
+    },
+    {
+      "id": "stonebound",
+      "name": "Stonebound",
+      "category": "body",
+      "icon_key": "slab",
+      "description": "Cut from the same stone as the stair, and about as easy to move off it.",
+      "stat_modifiers": {
+        "power": 1,
+        "charm": 0,
+        "endurance": 3,
+        "instinct": 0
+      },
+      "guild_income_pct": 0,
+      "expedition_success_pct": 5,
+      "injury_risk_pct": -10,
+      "stress_change_flat": -1
+    },
+    {
+      "id": "long_patience",
+      "name": "Long Patience",
+      "category": "arcane",
+      "icon_key": "hourglass",
+      "description": "Has had considerably longer than anyone else to think the problem through, and is in no hurry to explain it.",
+      "stat_modifiers": {
+        "power": 0,
+        "charm": 2,
+        "endurance": 0,
+        "instinct": 2
+      },
+      "guild_income_pct": 6,
+      "expedition_success_pct": 7,
+      "injury_risk_pct": 1,
+      "stress_change_flat": 1
     }
   ]
 }
