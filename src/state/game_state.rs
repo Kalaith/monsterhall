@@ -86,7 +86,7 @@ pub struct StoryProgressState {
     pub opening_step: OpeningChapterStep,
     pub tower_hole_discovered: bool,
     pub first_egg_created: bool,
-    pub first_slimegirl_hatched: bool,
+    pub first_companion_hatched: bool,
     pub hatched_species_ids: Vec<String>,
     pub first_room_built: bool,
     pub first_client_completed: bool,
@@ -305,7 +305,7 @@ pub struct PlayerTownState {
     pub unlocked_room_ids: Vec<String>,
     pub unlocked_floor_ids: Vec<String>,
     pub unlocked_species_ids: Vec<String>,
-    #[serde(alias = "client_tiers")]
+    #[serde(alias = "patron_tiers")]
     pub patron_tiers: Vec<String>,
     pub completed_project_ids: Vec<String>,
     pub active_situations: Vec<TownSituationState>,
@@ -354,13 +354,6 @@ pub struct EggState {
 
 fn default_quality_rank() -> u8 {
     1
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[serde(default)]
-pub struct ChamberState {
-    pub exposure_risk: u32,
-    pub is_secret_intact: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -586,9 +579,8 @@ pub struct GameState {
     pub resources: ResourcesState,
     pub town: PlayerTownState,
     pub egg_inventory: Vec<EggState>,
-    pub chamber: ChamberState,
     pub debt: Option<DebtState>,
-    #[serde(alias = "active_guest_requests")]
+    #[serde(alias = "active_contracts")]
     pub active_contracts: Vec<ContractState>,
     pub monsters: Vec<CompanionState>,
     pub active_expedition: Option<ExpeditionState>,

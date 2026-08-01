@@ -8,6 +8,8 @@ mod validation;
 mod validation_helpers;
 
 pub use loader::load_game_data;
+#[cfg(test)]
+pub(crate) use loader::test_game_data;
 pub use types::{
     BuildingData, CompanionSkillProgressionData, CompanionWorkHistoryProgressionData, ContractData,
     EggSpeciesEntryData, EventData, GameData, GuildRoomData, MissionData, PatronTierData,

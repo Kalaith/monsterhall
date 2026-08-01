@@ -18,7 +18,7 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [],
-        "client_tiers": []
+        "patron_tiers": []
       },
       "passive_modifiers": {
         "guild_income_pct": 4,
@@ -32,7 +32,7 @@
       }
     },
     {
-      "id": "warm_love_nest",
+      "id": "nursery_habitat",
       "name": "Nursery Wing",
       "category": "habitat",
       "description": "A plush nesting wing for egg care, companion recovery, and sensitive patron contracts.",
@@ -50,10 +50,10 @@
         ],
         "floor_ids": [],
         "species_ids": [
-          "lamia_binder"
+          "lamia_routekeeper"
         ],
-        "client_tiers": [
-          "wealthy_nobles"
+        "patron_tiers": [
+          "guild_sponsors"
         ]
       },
       "passive_modifiers": {
@@ -88,7 +88,7 @@
           "floor_2_molten_baths"
         ],
         "species_ids": [],
-        "client_tiers": []
+        "patron_tiers": []
       },
       "passive_modifiers": {
         "guild_income_pct": 6,
@@ -102,7 +102,7 @@
       }
     },
     {
-      "id": "silk_rope_forge",
+      "id": "forge_corner",
       "name": "Forge Corner",
       "category": "workshop",
       "description": "Produces reinforced cord, climbing gear, stage fixtures, and expedition kit for controlled hazard work.",
@@ -116,15 +116,15 @@
       },
       "unlocks": {
         "room_ids": [
-          "public_stage"
+          "reception_hall"
         ],
         "floor_ids": [],
         "species_ids": [
-          "goblin_maid",
-          "harpy_hostess"
+          "imp_runner",
+          "harpy_lookout"
         ],
-        "client_tiers": [
-          "wealthy_nobles"
+        "patron_tiers": [
+          "guild_sponsors"
         ]
       },
       "passive_modifiers": {
@@ -139,7 +139,7 @@
       }
     },
     {
-      "id": "healing_hot_springs",
+      "id": "recovery_baths",
       "name": "Recovery Baths",
       "category": "recovery",
       "description": "Mineral baths soothe bruises after hard contracts or rougher expeditions.",
@@ -155,9 +155,9 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [
-          "hellhound_bouncer"
+          "minotaur_porter"
         ],
-        "client_tiers": []
+        "patron_tiers": []
       },
       "passive_modifiers": {
         "guild_income_pct": 0,
@@ -171,7 +171,7 @@
       }
     },
     {
-      "id": "aftercare_lounge",
+      "id": "recovery_lounge",
       "name": "Recovery Lounge",
       "category": "recovery",
       "description": "Comfortable recovery space reduces burnout and keeps demanding guild work sustainable.",
@@ -189,9 +189,9 @@
           "floor_3_gilded_kennels"
         ],
         "species_ids": [
-          "succu_slime"
+          "residue_slime"
         ],
-        "client_tiers": []
+        "patron_tiers": []
       },
       "passive_modifiers": {
         "guild_income_pct": 4,
@@ -221,7 +221,7 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [],
-        "client_tiers": []
+        "patron_tiers": []
       },
       "passive_modifiers": {
         "guild_income_pct": 0,
@@ -235,7 +235,7 @@
       }
     },
     {
-      "id": "monster_kink_archive",
+      "id": "species_archive",
       "name": "Species Archive",
       "category": "research",
       "description": "Catalogs species preferences, role fits, and tower-instability outcomes.",
@@ -253,8 +253,8 @@
         "species_ids": [
           "golemkin_warden"
         ],
-        "client_tiers": [
-          "monster_diplomats"
+        "patron_tiers": [
+          "frontier_factions"
         ]
       },
       "passive_modifiers": {
@@ -285,10 +285,10 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [
-          "moth_priestess"
+          "moth_archivist"
         ],
-        "client_tiers": [
-          "monster_diplomats"
+        "patron_tiers": [
+          "frontier_factions"
         ]
       },
       "passive_modifiers": {
@@ -303,7 +303,7 @@
       }
     },
     {
-      "id": "luxury_room_renovation",
+      "id": "guild_room_renovation",
       "name": "Guild Room Renovation",
       "category": "prestige",
       "description": "A costly refit of panels, privacy wards, and service fixtures for rooms that already attract serious coin.",
@@ -319,7 +319,7 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [],
-        "client_tiers": []
+        "patron_tiers": []
       },
       "passive_modifiers": {
         "guild_income_pct": 6,
@@ -349,7 +349,7 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [],
-        "client_tiers": []
+        "patron_tiers": []
       },
       "passive_modifiers": {
         "guild_income_pct": 2,
@@ -379,7 +379,7 @@
         "room_ids": [],
         "floor_ids": [],
         "species_ids": [],
-        "client_tiers": []
+        "patron_tiers": []
       },
       "passive_modifiers": {
         "guild_income_pct": 8,

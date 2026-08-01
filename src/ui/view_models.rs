@@ -467,7 +467,7 @@ pub fn monster_depth_role_label(monster: &crate::state::CompanionState) -> &'sta
         "performer"
     } else if monster.stats.power >= monster.stats.charm + 2 {
         "delver"
-    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "submissive") {
+    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "calming_presence") {
         "comfort specialist"
     } else {
         "versatile"

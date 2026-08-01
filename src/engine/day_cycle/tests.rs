@@ -1,10 +1,9 @@
 use super::*;
 use crate::data::{GuildRoomData, MissionData, TowerFloorData};
 use crate::state::{
-    ChamberState, CompanionJobState, CompanionSkillState, CompanionState,
-    CompanionWorkHistoryState, ContractState, ContractStatus, EggIncubationState,
-    ExpeditionPriority, ExpeditionState, GameState, OpeningChapterStep, PlayerTownState,
-    ResourcesState, StoryProgressState,
+    CompanionJobState, CompanionSkillState, CompanionState, CompanionWorkHistoryState,
+    ContractState, ContractStatus, EggIncubationState, ExpeditionPriority, ExpeditionState,
+    GameState, OpeningChapterStep, PlayerTownState, ResourcesState, StoryProgressState,
 };
 
 #[test]
@@ -21,7 +20,7 @@ fn golemkin_room_and_trait_add_corruption() {
         base_materials_yield: 0,
         reputation_yield: 0,
         stamina_cost: 1,
-        patron_tiers: vec!["local_adventurers".to_owned()],
+        patron_tiers: vec!["local_delvers".to_owned()],
         trained_skill_ids: vec!["crafting".to_owned(), "charm".to_owned()],
         work_history_gains: crate::data::CompanionWorkHistoryProgressionData {
             scouting_runs: 0,
@@ -49,7 +48,7 @@ fn golemkin_room_and_trait_add_corruption() {
 }
 
 #[test]
-fn corruption_dive_rewards_more_corruption() {
+fn scout_route_rewards_more_corruption() {
     let floor = TowerFloorData {
         id: "floor_4".to_owned(),
         name: "Heart Vault".to_owned(),
@@ -58,7 +57,7 @@ fn corruption_dive_rewards_more_corruption() {
         difficulty: 10,
         requires_building_ids: Vec::new(),
         required_roster: Vec::new(),
-        mission_ids: vec!["corruption_dive".to_owned()],
+        mission_ids: vec!["scout_route".to_owned()],
         baseline_rewards: ResourceAmountData::default(),
         egg_species_entries: Vec::new(),
         relic_drop_ids: Vec::new(),
@@ -67,7 +66,7 @@ fn corruption_dive_rewards_more_corruption() {
         corruption_pressure: 0,
     };
     let mission = MissionData {
-        id: "corruption_dive".to_owned(),
+        id: "scout_route".to_owned(),
         name: "Corruption Dive".to_owned(),
         description: String::new(),
         reward_focus: "residue".to_owned(),
@@ -100,20 +99,16 @@ fn removing_last_monster_clears_expedition() {
         },
         town: PlayerTownState {
             constructed_building_ids: Vec::new(),
-            unlocked_room_ids: vec!["vanilla_suite".to_owned()],
+            unlocked_room_ids: vec!["common_room".to_owned()],
             unlocked_floor_ids: vec!["floor_1".to_owned()],
-            unlocked_species_ids: vec!["slime_girl".to_owned()],
-            patron_tiers: vec!["local_adventurers".to_owned()],
+            unlocked_species_ids: vec!["slime_companion".to_owned()],
+            patron_tiers: vec!["local_delvers".to_owned()],
             completed_project_ids: Vec::new(),
             active_situations: Vec::new(),
             party_size: 3,
             town_job_limit: 2,
         },
         egg_inventory: Vec::new(),
-        chamber: ChamberState {
-            exposure_risk: 0,
-            is_secret_intact: true,
-        },
         debt: None,
         active_contracts: Vec::new(),
         monsters: vec![test_monster(Vec::new())],
@@ -129,7 +124,7 @@ fn removing_last_monster_clears_expedition() {
             opening_step: OpeningChapterStep::Complete,
             tower_hole_discovered: true,
             first_egg_created: true,
-            first_slimegirl_hatched: true,
+            first_companion_hatched: true,
             hatched_species_ids: Vec::new(),
             first_room_built: true,
             first_client_completed: true,
@@ -160,20 +155,19 @@ fn release_monster_clears_assignments_without_emptying_roster() {
         resources: ResourcesState::default(),
         town: PlayerTownState {
             constructed_building_ids: Vec::new(),
-            unlocked_room_ids: vec!["vanilla_suite".to_owned()],
+            unlocked_room_ids: vec!["common_room".to_owned()],
             unlocked_floor_ids: vec!["floor_1".to_owned()],
-            unlocked_species_ids: vec!["slime_girl".to_owned()],
-            patron_tiers: vec!["local_adventurers".to_owned()],
+            unlocked_species_ids: vec!["slime_companion".to_owned()],
+            patron_tiers: vec!["local_delvers".to_owned()],
             completed_project_ids: Vec::new(),
             active_situations: Vec::new(),
             party_size: 3,
             town_job_limit: 2,
         },
         egg_inventory: Vec::new(),
-        chamber: ChamberState::default(),
         debt: None,
         active_contracts: vec![ContractState {
-            request_id: "guest_request_001".to_owned(),
+            request_id: "contract_001".to_owned(),
             status: ContractStatus::Accepted,
             assigned_monster_id: Some("monster_002".to_owned()),
             ..ContractState::default()
@@ -207,7 +201,7 @@ fn release_monster_clears_assignments_without_emptying_roster() {
 #[test]
 fn trained_room_skills_add_guild_job_bonus() {
     let room = GuildRoomData {
-        id: "vanilla_suite".to_owned(),
+        id: "common_room".to_owned(),
         name: "Vanilla Suite".to_owned(),
         description: String::new(),
         service_summary: "Soft service".to_owned(),
@@ -218,7 +212,7 @@ fn trained_room_skills_add_guild_job_bonus() {
         base_materials_yield: 0,
         reputation_yield: 0,
         stamina_cost: 10,
-        patron_tiers: vec!["local_adventurers".to_owned()],
+        patron_tiers: vec!["local_delvers".to_owned()],
         trained_skill_ids: vec![
             "scouting".to_owned(),
             "hospitality".to_owned(),
@@ -233,7 +227,7 @@ fn trained_room_skills_add_guild_job_bonus() {
             ..crate::data::CompanionWorkHistoryProgressionData::default()
         },
         preferred_trait_ids: Vec::new(),
-        preferred_species_ids: vec!["slime_girl".to_owned()],
+        preferred_species_ids: vec!["slime_companion".to_owned()],
         strategic_niche: None,
         upgrade_building_ids: Vec::new(),
         fatigue_modifier: 0,
@@ -270,18 +264,14 @@ fn incubating_and_hatching_use_egg_inventory() {
             constructed_building_ids: Vec::new(),
             unlocked_room_ids: Vec::new(),
             unlocked_floor_ids: vec!["floor_1".to_owned()],
-            unlocked_species_ids: vec!["slime_girl".to_owned()],
-            patron_tiers: vec!["local_adventurers".to_owned()],
+            unlocked_species_ids: vec!["slime_companion".to_owned()],
+            patron_tiers: vec!["local_delvers".to_owned()],
             completed_project_ids: Vec::new(),
             active_situations: Vec::new(),
             party_size: 3,
             town_job_limit: 2,
         },
         egg_inventory: Vec::new(),
-        chamber: ChamberState {
-            exposure_risk: 0,
-            is_secret_intact: true,
-        },
         debt: None,
         active_contracts: Vec::new(),
         monsters: Vec::new(),
@@ -290,7 +280,7 @@ fn incubating_and_hatching_use_egg_inventory() {
             opening_step: OpeningChapterStep::Complete,
             tower_hole_discovered: true,
             first_egg_created: true,
-            first_slimegirl_hatched: false,
+            first_companion_hatched: false,
             hatched_species_ids: Vec::new(),
             first_room_built: false,
             first_client_completed: false,
@@ -300,23 +290,26 @@ fn incubating_and_hatching_use_egg_inventory() {
         event_log: Vec::new(),
     };
 
-    create_opening_egg(&mut game_state, "slime_girl");
+    create_opening_egg(&mut game_state, "slime_companion");
     assert_eq!(game_state.resources.eggs, 1);
-    assert_eq!(raw_egg_count_for_species(&game_state, "slime_girl"), 1);
+    assert_eq!(raw_egg_count_for_species(&game_state, "slime_companion"), 1);
 
     let mut egg = game_state.egg_inventory[0].clone();
-    egg.selected_species_id = Some("slime_girl".to_owned());
+    egg.selected_species_id = Some("slime_companion".to_owned());
     egg.incubation_state = EggIncubationState::ReadyToHatch;
     egg.loyalty_imprinted = true;
     game_state.egg_inventory[0] = egg;
 
-    assert_eq!(ready_egg_count_for_species(&game_state, "slime_girl"), 1);
+    assert_eq!(
+        ready_egg_count_for_species(&game_state, "slime_companion"),
+        1
+    );
 }
 
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),
-        species_id: "slime_girl".to_owned(),
+        species_id: "slime_companion".to_owned(),
         name: "Mira".to_owned(),
         quality_rank: 1,
         stats: crate::data::StatBlockData {

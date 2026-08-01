@@ -68,7 +68,7 @@
       "hazard_risk_modifier_pct": 8
     },
     {
-      "id": "corruption_dive",
+      "id": "scout_route",
       "name": "Scout Route",
       "description": "Map unstable passages, record hazards, and gather arcane residue for future preparations.",
       "reward_focus": "residue",

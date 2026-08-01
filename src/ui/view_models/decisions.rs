@@ -258,7 +258,7 @@ mod tests {
         advance_opening_step(&data, &mut game_state).expect("incubation step should advance");
         advance_opening_step(&data, &mut game_state).expect("hatch step should advance");
         build_first_room(&data, &mut game_state).expect("first room should build");
-        create_opening_egg(&mut game_state, "slime_girl");
+        create_opening_egg(&mut game_state, "slime_companion");
 
         let priority = daily_priority_summary(&data, &game_state);
         let guidance = onboarding_lines(&data, &game_state);
@@ -318,10 +318,10 @@ mod tests {
             ui_text: parse_json(include_str!("../../../assets/data/ui_text.json")),
             debt_milestones: parse_json(include_str!("../../../assets/data/debt_milestones.json")),
             patron_archetypes: parse_json(include_str!(
-                "../../../assets/data/guest_archetypes.json"
+                "../../../assets/data/patron_archetypes.json"
             )),
-            contracts: parse_json(include_str!("../../../assets/data/guest_requests.json")),
-            patron_tiers: parse_json(include_str!("../../../assets/data/client_tiers.json")),
+            contracts: parse_json(include_str!("../../../assets/data/contracts.json")),
+            patron_tiers: parse_json(include_str!("../../../assets/data/patron_tiers.json")),
             missions: parse_json(include_str!("../../../assets/data/missions.json")),
             mutations: parse_json(include_str!("../../../assets/data/mutations.json")),
             story_events: parse_json(include_str!("../../../assets/data/story_events.json")),

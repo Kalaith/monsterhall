@@ -8,7 +8,7 @@ impl GameData {
         let IdIndex {
             trait_ids,
             building_ids,
-            client_tier_ids,
+            patron_tier_ids,
             species_ids,
             ..
         } = ids;
@@ -36,7 +36,7 @@ impl GameData {
             )?;
             validate_reference_list(
                 &room.patron_tiers,
-                client_tier_ids,
+                patron_tier_ids,
                 &format!("guild room '{}'.patron_tiers", room.id),
             )?;
             if room.trained_skill_ids.is_empty() {
@@ -77,7 +77,7 @@ impl GameData {
         let IdIndex {
             room_ids,
             floor_ids,
-            client_tier_ids,
+            patron_tier_ids,
             species_ids,
             ..
         } = ids;
@@ -99,7 +99,7 @@ impl GameData {
             )?;
             validate_reference_list(
                 &building.unlocks.patron_tiers,
-                client_tier_ids,
+                patron_tier_ids,
                 &format!("building '{}'.unlocks.patron_tiers", building.id),
             )?;
             if building.build_limit == 0 {

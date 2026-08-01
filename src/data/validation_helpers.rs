@@ -101,8 +101,8 @@ pub(super) fn validate_story_event_text_fields(
             &story_events.guest_name_template,
         ),
         (
-            "story_events.guest_missing_assigned_girl_event_template",
-            &story_events.guest_missing_assigned_girl_event_template,
+            "story_events.guest_missing_assigned_companion_event_template",
+            &story_events.guest_missing_assigned_companion_event_template,
         ),
         (
             "story_events.guest_failed_event_template",

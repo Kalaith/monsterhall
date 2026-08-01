@@ -13,8 +13,8 @@ use crate::state::{
     ContractSkillRequirementState, ContractState, ContractStatus, GameState, ResourcesState,
 };
 
-const MIN_ACTIVE_GUEST_REQUESTS: usize = 3;
-const MAX_ACTIVE_GUEST_REQUESTS: usize = 6;
+const MIN_ACTIVE_CONTRACTS: usize = 3;
+const MAX_ACTIVE_CONTRACTS: usize = 6;
 
 fn story_text(template: &str, replacements: &[(&str, String)]) -> String {
     let mut output = template.to_owned();
@@ -89,7 +89,7 @@ pub fn refresh_contracts(
 
         let candidate_request = ContractState {
             request_id: format!(
-                "guest_request_{:03}",
+                "contract_{:03}",
                 game_state.current_day as usize * 10 + next_sequence
             ),
             template_id: template.id.clone(),
@@ -169,13 +169,13 @@ pub fn refresh_contracts(
 }
 
 fn active_contract_limit(game_state: &GameState) -> usize {
-    MIN_ACTIVE_GUEST_REQUESTS
+    MIN_ACTIVE_CONTRACTS
         .saturating_add(game_state.monsters.len() / 5)
         .saturating_add(game_state.town.unlocked_room_ids.len().saturating_sub(1))
         .saturating_add(game_state.town.patron_tiers.len().saturating_sub(1))
         .saturating_add(game_state.town.constructed_building_ids.len() / 4)
         .saturating_add(active_situation_guest_bonus(game_state) as usize)
-        .min(MAX_ACTIVE_GUEST_REQUESTS)
+        .min(MAX_ACTIVE_CONTRACTS)
 }
 
 fn scaled_guest_deadline_days(
@@ -332,7 +332,9 @@ pub fn resolve_contracts(
                     .position(|monster| monster.id == monster_id)
                 else {
                     event_lines.push(story_text(
-                        &data.story_events.guest_missing_assigned_girl_event_template,
+                        &data
+                            .story_events
+                            .guest_missing_assigned_companion_event_template,
                         &[("{guest}", request.guest_name.clone())],
                     ));
                     continue;
@@ -417,7 +419,7 @@ pub fn resolve_contracts(
                     &data.story_events.guest_satisfied_event_template,
                     &[
                         ("{guest}", request.guest_name.clone()),
-                        ("{girl}", monster.name.clone()),
+                        ("{companion}", monster.name.clone()),
                         ("{room}", room.name.clone()),
                     ],
                 ));
@@ -432,7 +434,7 @@ pub fn resolve_contracts(
                 roster_updates.push(story_text(
                     &data.story_events.guest_completed_roster_template,
                     &[
-                        ("{girl}", monster.name.clone()),
+                        ("{companion}", monster.name.clone()),
                         ("{gold}", gold_reward.to_string()),
                     ],
                 ));

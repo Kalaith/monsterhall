@@ -10,21 +10,71 @@ pub fn save_game(save_key: &str, save_data: &SaveData) -> Result<(), String> {
     save_json(save_key, save_data)
 }
 
-pub fn load_save_data(save_key: &str) -> Result<SaveData, String> {
-    load_json(save_key)
-}
+/// Save version that first stored the renamed content ids. Saves written before
+/// it still name species, rooms, buildings, traits, patron tiers and missions by
+/// their pre-rename ids, which no longer resolve against the data catalogs.
+const RENAMED_CONTENT_ID_SAVE_VERSION: u32 = 10;
+
+/// Old id -> new id, applied to saves older than [`RENAMED_CONTENT_ID_SAVE_VERSION`].
+/// Ids are matched as whole quoted JSON tokens, so companion names and prose are
+/// never touched.
+const RENAMED_CONTENT_IDS: &[(&str, &str)] = &[
+    // species
+    ("slime_girl", "slime_companion"),
+    ("succu_slime", "residue_slime"),
+    ("goblin_maid", "imp_runner"),
+    ("harpy_hostess", "harpy_lookout"),
+    ("lamia_binder", "lamia_routekeeper"),
+    ("hellhound_bouncer", "minotaur_porter"),
+    ("moth_priestess", "moth_archivist"),
+    // guild rooms
+    ("vanilla_suite", "common_room"),
+    ("public_stage", "reception_hall"),
+    // buildings
+    ("warm_love_nest", "nursery_habitat"),
+    ("silk_rope_forge", "forge_corner"),
+    ("monster_kink_archive", "species_archive"),
+    ("aftercare_lounge", "recovery_lounge"),
+    ("luxury_room_renovation", "guild_room_renovation"),
+    ("healing_hot_springs", "recovery_baths"),
+    // traits
+    ("submissive", "calming_presence"),
+    ("dominant", "commanding"),
+    ("greedy", "opportunistic"),
+    ("feral_instinct", "sharp_instinct"),
+    // patron tiers
+    ("local_adventurers", "local_delvers"),
+    ("wealthy_nobles", "guild_sponsors"),
+    ("monster_diplomats", "frontier_factions"),
+    // missions
+    ("corruption_dive", "scout_route"),
+    // renamed story flag
+    ("first_slimegirl_hatched", "first_companion_hatched"),
+];
 
 pub fn load_compatible_save_data(
     save_key: &str,
     current_save_version: u32,
 ) -> Result<(SaveData, bool), String> {
-    let mut save_data = load_save_data(save_key)?;
-    if save_data.version > current_save_version {
+    let serialized = load_raw_json(save_key)?;
+    let on_disk_version = macroquad_toolkit::persistence::peek_version_from_str(&serialized)?
+        .and_then(|version| version.parse::<u32>().ok())
+        .unwrap_or_default();
+
+    if on_disk_version > current_save_version {
         return Err(format!(
-            "Save version {} is newer than supported version {}.",
-            save_data.version, current_save_version
+            "Save version {on_disk_version} is newer than supported version {current_save_version}.",
         ));
     }
+
+    let serialized = if on_disk_version < RENAMED_CONTENT_ID_SAVE_VERSION {
+        migrate_renamed_content_ids(&serialized)
+    } else {
+        serialized
+    };
+
+    let mut save_data: SaveData = serde_json::from_str(&serialized)
+        .map_err(|error| format!("Failed to parse {save_key}: {error}"))?;
 
     let was_migrated = save_data.version < current_save_version;
     if was_migrated {
@@ -32,6 +82,14 @@ pub fn load_compatible_save_data(
     }
 
     Ok((save_data, was_migrated))
+}
+
+fn migrate_renamed_content_ids(serialized: &str) -> String {
+    let mut migrated = serialized.to_owned();
+    for (old_id, new_id) in RENAMED_CONTENT_IDS {
+        migrated = migrated.replace(&format!("\"{old_id}\""), &format!("\"{new_id}\""));
+    }
+    migrated
 }
 
 pub fn peek_save_version(save_key: &str) -> Result<Option<u32>, String> {
@@ -174,19 +232,78 @@ mod tests {
         .expect("temp save should be writable");
 
         let (save_data, was_migrated) =
-            load_compatible_save_data(path.to_str().expect("temp path should be utf-8"), 9)
+            load_compatible_save_data(path.to_str().expect("temp path should be utf-8"), 10)
                 .expect("older save should migrate");
 
         assert!(was_migrated);
-        assert_eq!(save_data.version, 9);
+        assert_eq!(save_data.version, 10);
         assert_eq!(save_data.game_state.current_day, 4);
         assert!(save_data
             .game_state
             .town
             .constructed_building_ids
             .is_empty());
-        assert_eq!(save_data.game_state.chamber.exposure_risk, 0);
         assert!(!save_data.game_state.story_progress.first_special_guest_seen);
+
+        let _ = std::fs::remove_file(path);
+    }
+
+    #[test]
+    #[cfg(not(target_arch = "wasm32"))]
+    fn load_compatible_save_data_renames_pre_rename_content_ids() {
+        let path = std::env::temp_dir().join(format!(
+            "monsterhall_save_id_rename_{}.json",
+            std::process::id()
+        ));
+        std::fs::write(
+            &path,
+            r#"{
+  "version": 9,
+  "game_state": {
+    "current_day": 12,
+    "resources": { "gold": 90, "tower_materials": 30, "eggs": 0, "relics": 0, "arcane_residue": 8 },
+    "town": {
+      "constructed_building_ids": ["aftercare_lounge"],
+      "unlocked_room_ids": ["vanilla_suite", "public_stage"],
+      "unlocked_floor_ids": ["floor_1_slick_cellars"],
+      "unlocked_species_ids": ["slime_girl", "succu_slime"],
+      "patron_tiers": ["wealthy_nobles"]
+    },
+    "monsters": [
+      {
+        "id": "monster_1",
+        "name": "Dominant Kora",
+        "species_id": "hellhound_bouncer",
+        "trait_ids": ["dominant", "submissive"]
+      }
+    ]
+  }
+}"#,
+        )
+        .expect("temp save should be writable");
+
+        let (save_data, was_migrated) =
+            load_compatible_save_data(path.to_str().expect("temp path should be utf-8"), 10)
+                .expect("pre-rename save should migrate");
+
+        assert!(was_migrated);
+        let town = &save_data.game_state.town;
+        assert_eq!(town.constructed_building_ids, vec!["recovery_lounge"]);
+        assert_eq!(
+            town.unlocked_room_ids,
+            vec!["common_room", "reception_hall"]
+        );
+        assert_eq!(
+            town.unlocked_species_ids,
+            vec!["slime_companion", "residue_slime"]
+        );
+        assert_eq!(town.patron_tiers, vec!["guild_sponsors"]);
+
+        let monster = &save_data.game_state.monsters[0];
+        assert_eq!(monster.species_id, "minotaur_porter");
+        assert_eq!(monster.trait_ids, vec!["commanding", "calming_presence"]);
+        // Prose and companion names are left alone: only whole quoted ids are rewritten.
+        assert_eq!(monster.name, "Dominant Kora");
 
         let _ = std::fs::remove_file(path);
     }

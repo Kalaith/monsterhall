@@ -41,7 +41,7 @@ pub(crate) fn monster_role(monster: &CompanionState) -> &'static str {
         "performer"
     } else if monster.stats.power >= monster.stats.charm + 2 {
         "delver"
-    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "submissive") {
+    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "calming_presence") {
         "comfort"
     } else {
         "versatile"
@@ -498,7 +498,7 @@ fn request_from_template(
         .unwrap_or_else(|| template.archetype_id.clone());
     ContractState {
         request_id: format!(
-            "guest_request_{:03}_chain_{chain_depth}",
+            "contract_{:03}_chain_{chain_depth}",
             game_state.current_day as usize * 10 + game_state.active_contracts.len() + 1
         ),
         template_id: template.id.clone(),

@@ -14,8 +14,8 @@ mod story;
 struct IdIndex<'a> {
     trait_ids: HashSet<&'a str>,
     debt_milestone_ids: HashSet<&'a str>,
-    guest_archetype_ids: HashSet<&'a str>,
-    client_tier_ids: HashSet<&'a str>,
+    patron_archetype_ids: HashSet<&'a str>,
+    patron_tier_ids: HashSet<&'a str>,
     room_ids: HashSet<&'a str>,
     building_ids: HashSet<&'a str>,
     floor_ids: HashSet<&'a str>,
@@ -33,13 +33,13 @@ impl<'a> IdIndex<'a> {
                 .iter()
                 .map(|entry| entry.id.as_str()),
         );
-        let guest_archetype_ids = collect_ids(
+        let patron_archetype_ids = collect_ids(
             data.patron_archetypes
                 .archetypes
                 .iter()
                 .map(|entry| entry.id.as_str()),
         );
-        let client_tier_ids = collect_ids(
+        let patron_tier_ids = collect_ids(
             data.patron_tiers
                 .patron_tiers
                 .iter()
@@ -64,8 +64,8 @@ impl<'a> IdIndex<'a> {
         Self {
             trait_ids,
             debt_milestone_ids,
-            guest_archetype_ids,
-            client_tier_ids,
+            patron_archetype_ids,
+            patron_tier_ids,
             room_ids,
             building_ids,
             floor_ids,

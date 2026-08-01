@@ -1,8 +1,8 @@
 use super::*;
 use crate::data::GameData;
 use crate::state::{
-    ChamberState, CompanionSkillState, CompanionWorkHistoryState, GameState, OpeningChapterStep,
-    PlayerTownState, ResourcesState, StoryProgressState,
+    CompanionSkillState, CompanionWorkHistoryState, GameState, OpeningChapterStep, PlayerTownState,
+    ResourcesState, StoryProgressState,
 };
 
 #[test]
@@ -12,11 +12,10 @@ fn guest_eligibility_rejects_wrong_species_and_missing_room() {
         current_day: 4,
         resources: ResourcesState::default(),
         town: PlayerTownState {
-            unlocked_room_ids: vec!["vanilla_suite".to_owned()],
-            unlocked_species_ids: vec!["slime_girl".to_owned(), "succu_slime".to_owned()],
+            unlocked_room_ids: vec!["common_room".to_owned()],
+            unlocked_species_ids: vec!["slime_companion".to_owned(), "residue_slime".to_owned()],
             ..PlayerTownState::default()
         },
-        chamber: ChamberState::default(),
         story_progress: StoryProgressState {
             opening_step: OpeningChapterStep::Complete,
             first_client_completed: true,
@@ -25,14 +24,14 @@ fn guest_eligibility_rejects_wrong_species_and_missing_room() {
         ..GameState::default()
     };
     let request = ContractState {
-        request_id: "guest_request_001".to_owned(),
-        template_id: "succu_salon_booking".to_owned(),
+        request_id: "contract_001".to_owned(),
+        template_id: "residue_consultation".to_owned(),
         category: String::new(),
         patron_tier_id: None,
         guest_name: "Veiled Patron".to_owned(),
-        archetype_id: "veiled_patron".to_owned(),
-        requested_room_id: "public_stage".to_owned(),
-        required_species_ids: vec!["succu_slime".to_owned()],
+        archetype_id: "tower_scholar".to_owned(),
+        requested_room_id: "reception_hall".to_owned(),
+        required_species_ids: vec!["residue_slime".to_owned()],
         minimum_quality_rank: 1,
         required_skill_thresholds: ContractSkillRequirementState {
             charm: 2,
@@ -51,7 +50,7 @@ fn guest_eligibility_rejects_wrong_species_and_missing_room() {
     };
     let monster = CompanionState {
         id: "monster_001".to_owned(),
-        species_id: "slime_girl".to_owned(),
+        species_id: "slime_companion".to_owned(),
         name: "Mira".to_owned(),
         skills: CompanionSkillState {
             charm: 2,
@@ -81,10 +80,9 @@ fn guest_eligibility_accepts_trained_matching_specialist() {
         resources: ResourcesState::default(),
         town: PlayerTownState {
             unlocked_room_ids: vec!["nursery_wing".to_owned()],
-            unlocked_species_ids: vec!["lamia_binder".to_owned()],
+            unlocked_species_ids: vec!["lamia_routekeeper".to_owned()],
             ..PlayerTownState::default()
         },
-        chamber: ChamberState::default(),
         story_progress: StoryProgressState {
             opening_step: OpeningChapterStep::Complete,
             first_client_completed: true,
@@ -93,14 +91,14 @@ fn guest_eligibility_accepts_trained_matching_specialist() {
         ..GameState::default()
     };
     let request = ContractState {
-        request_id: "guest_request_002".to_owned(),
+        request_id: "contract_002".to_owned(),
         template_id: "lamia_binding_rite".to_owned(),
         category: String::new(),
         patron_tier_id: None,
         guest_name: "Veiled Patron".to_owned(),
-        archetype_id: "veiled_patron".to_owned(),
+        archetype_id: "tower_scholar".to_owned(),
         requested_room_id: "nursery_wing".to_owned(),
-        required_species_ids: vec!["lamia_binder".to_owned()],
+        required_species_ids: vec!["lamia_routekeeper".to_owned()],
         minimum_quality_rank: 1,
         required_skill_thresholds: ContractSkillRequirementState {
             scouting: 1,
@@ -126,7 +124,7 @@ fn guest_eligibility_accepts_trained_matching_specialist() {
     };
     let monster = CompanionState {
         id: "monster_001".to_owned(),
-        species_id: "lamia_binder".to_owned(),
+        species_id: "lamia_routekeeper".to_owned(),
         name: "Sesh".to_owned(),
         quality_rank: 2,
         skills: CompanionSkillState {
@@ -155,9 +153,9 @@ fn test_game_data() -> GameData {
         config: parse_json(include_str!("../../../assets/data/config.json")),
         ui_text: parse_json(include_str!("../../../assets/data/ui_text.json")),
         debt_milestones: parse_json(include_str!("../../../assets/data/debt_milestones.json")),
-        patron_archetypes: parse_json(include_str!("../../../assets/data/guest_archetypes.json")),
-        contracts: parse_json(include_str!("../../../assets/data/guest_requests.json")),
-        patron_tiers: parse_json(include_str!("../../../assets/data/client_tiers.json")),
+        patron_archetypes: parse_json(include_str!("../../../assets/data/patron_archetypes.json")),
+        contracts: parse_json(include_str!("../../../assets/data/contracts.json")),
+        patron_tiers: parse_json(include_str!("../../../assets/data/patron_tiers.json")),
         missions: parse_json(include_str!("../../../assets/data/missions.json")),
         mutations: parse_json(include_str!("../../../assets/data/mutations.json")),
         story_events: parse_json(include_str!("../../../assets/data/story_events.json")),

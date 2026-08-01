@@ -83,18 +83,18 @@ pub(super) fn should_gain_charm(
     gains: &crate::data::CompanionWorkHistoryProgressionData,
     is_guest_booking: bool,
 ) -> bool {
-    let has_intimate_history = gains.scouting_runs > 0
+    let has_tracked_history = gains.scouting_runs > 0
         || gains.guard_duties > 0
         || gains.hospitality_jobs > 0
         || gains.craft_jobs > 0
         || gains.recovery_shifts > 0;
-    if !has_intimate_history {
+    if !has_tracked_history {
         return false;
     }
 
     let chance_pct = match room.id.as_str() {
-        "vanilla_suite" if is_guest_booking => 12,
-        "public_stage" => {
+        "common_room" if is_guest_booking => 12,
+        "reception_hall" => {
             if is_guest_booking {
                 80
             } else {
@@ -169,7 +169,7 @@ pub(super) fn roll_work_history_gains(
     let mut gains = crate::data::CompanionWorkHistoryProgressionData::default();
 
     match room.id.as_str() {
-        "vanilla_suite" => {
+        "common_room" => {
             gains.scouting_runs = roll_binary_gain(room.work_history_gains.scouting_runs, 70);
             gains.hospitality_jobs = roll_binary_gain(room.work_history_gains.hospitality_jobs, 45);
             gains.contracts_completed =
@@ -185,7 +185,7 @@ pub(super) fn roll_work_history_gains(
                 roll_binary_gain(room.work_history_gains.contracts_completed, 30);
             gains.hatchery_assists = roll_binary_gain(room.work_history_gains.hatchery_assists, 5);
         }
-        "public_stage" => {
+        "reception_hall" => {
             gains.scouting_runs = roll_binary_gain(room.work_history_gains.scouting_runs, 35);
             gains.guard_duties = roll_binary_gain(room.work_history_gains.guard_duties, 55);
             gains.recovery_shifts = roll_binary_gain(room.work_history_gains.recovery_shifts, 65);

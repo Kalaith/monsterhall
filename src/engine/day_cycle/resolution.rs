@@ -550,12 +550,13 @@ pub(super) fn apply_expedition_prep_cost(
 pub(super) fn upkeep_forecast_for_counts(
     data: &GameData,
     constructed_building_ids: &[String],
-    girl_count: usize,
-    client_tier_count: usize,
+    companion_count: usize,
+    patron_tier_count: usize,
     extra_building_id: Option<&str>,
 ) -> UpkeepForecast {
-    let raw_food_gold =
-        girl_count.saturating_mul(data.config.day_cycle.girl_food_gold_per_day as usize) as u32;
+    let raw_food_gold = companion_count
+        .saturating_mul(data.config.day_cycle.companion_food_gold_per_day as usize)
+        as u32;
     let building_upkeep_gold = constructed_building_ids
         .iter()
         .map(String::as_str)
@@ -574,7 +575,7 @@ pub(super) fn upkeep_forecast_for_counts(
         (building_upkeep_gold / 4).max(1)
     };
     let raw_maintenance_gold = building_upkeep_gold.saturating_sub(raw_cleaning_gold);
-    let upkeep_band = active_upkeep_band(data, girl_count, client_tier_count);
+    let upkeep_band = active_upkeep_band(data, companion_count, patron_tier_count);
     let food_gold = scale_upkeep(raw_food_gold, upkeep_band.food_multiplier_pct);
     let cleaning_gold = scale_upkeep(raw_cleaning_gold, upkeep_band.cleaning_multiplier_pct);
     let maintenance_gold =
@@ -582,11 +583,11 @@ pub(super) fn upkeep_forecast_for_counts(
     let total_gold = food_gold
         .saturating_add(cleaning_gold)
         .saturating_add(maintenance_gold);
-    let next_girl_total_gold = upkeep_forecast_total_for_counts(
+    let next_companion_total_gold = upkeep_forecast_total_for_counts(
         data,
         constructed_building_ids,
-        girl_count + 1,
-        client_tier_count,
+        companion_count + 1,
+        patron_tier_count,
         None,
     );
     let next_building_delta_gold = data
@@ -605,8 +606,8 @@ pub(super) fn upkeep_forecast_for_counts(
             upkeep_forecast_total_for_counts(
                 data,
                 constructed_building_ids,
-                girl_count,
-                client_tier_count,
+                companion_count,
+                patron_tier_count,
                 Some(building.id.as_str()),
             )
             .saturating_sub(total_gold)
@@ -619,10 +620,10 @@ pub(super) fn upkeep_forecast_for_counts(
         cleaning_gold,
         maintenance_gold,
         total_gold,
-        active_band_min_girls: upkeep_band.min_girls,
+        active_band_min_companions: upkeep_band.min_companions,
         active_band_min_patron_tiers: upkeep_band.min_patron_tiers,
-        next_girl_total_gold,
-        next_girl_delta_gold: next_girl_total_gold.saturating_sub(total_gold),
+        next_companion_total_gold,
+        next_companion_delta_gold: next_companion_total_gold.saturating_sub(total_gold),
         next_building_total_gold,
         next_building_delta_gold,
     }
@@ -631,12 +632,13 @@ pub(super) fn upkeep_forecast_for_counts(
 pub(super) fn upkeep_forecast_total_for_counts(
     data: &GameData,
     constructed_building_ids: &[String],
-    girl_count: usize,
-    client_tier_count: usize,
+    companion_count: usize,
+    patron_tier_count: usize,
     extra_building_id: Option<&str>,
 ) -> u32 {
-    let raw_food_gold =
-        girl_count.saturating_mul(data.config.day_cycle.girl_food_gold_per_day as usize) as u32;
+    let raw_food_gold = companion_count
+        .saturating_mul(data.config.day_cycle.companion_food_gold_per_day as usize)
+        as u32;
     let building_upkeep_gold = constructed_building_ids
         .iter()
         .map(String::as_str)
@@ -655,7 +657,7 @@ pub(super) fn upkeep_forecast_total_for_counts(
         (building_upkeep_gold / 4).max(1)
     };
     let raw_maintenance_gold = building_upkeep_gold.saturating_sub(raw_cleaning_gold);
-    let upkeep_band = active_upkeep_band(data, girl_count, client_tier_count);
+    let upkeep_band = active_upkeep_band(data, companion_count, patron_tier_count);
 
     scale_upkeep(raw_food_gold, upkeep_band.food_multiplier_pct)
         .saturating_add(scale_upkeep(
@@ -670,21 +672,21 @@ pub(super) fn upkeep_forecast_total_for_counts(
 
 pub(super) fn active_upkeep_band(
     data: &GameData,
-    girl_count: usize,
-    client_tier_count: usize,
+    companion_count: usize,
+    patron_tier_count: usize,
 ) -> crate::data::UpkeepBandData {
     data.config
         .day_cycle
         .upkeep_bands
         .iter()
         .filter(|band| {
-            girl_count >= band.min_girls as usize
-                || client_tier_count >= band.min_patron_tiers as usize
+            companion_count >= band.min_companions as usize
+                || patron_tier_count >= band.min_patron_tiers as usize
         })
-        .max_by_key(|band| band.min_girls.max(band.min_patron_tiers))
+        .max_by_key(|band| band.min_companions.max(band.min_patron_tiers))
         .cloned()
         .unwrap_or(crate::data::UpkeepBandData {
-            min_girls: 0,
+            min_companions: 0,
             min_patron_tiers: 0,
             food_multiplier_pct: 100,
             cleaning_multiplier_pct: 100,

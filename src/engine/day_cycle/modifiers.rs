@@ -46,7 +46,7 @@ pub(super) fn collect_trait_modifiers(data: &GameData, monster: &CompanionState)
     aggregate
 }
 
-pub(super) fn active_client_tier_for_room<'a>(
+pub(super) fn active_patron_tier_for_room<'a>(
     data: &'a GameData,
     town: &PlayerTownState,
     room: &'a crate::data::GuildRoomData,

@@ -30,10 +30,10 @@ pub fn preview_upkeep(data: &GameData, game_state: &GameState) -> UpkeepForecast
             .food_gold
             .saturating_add(forecast.cleaning_gold)
             .saturating_add(forecast.maintenance_gold);
-        forecast.next_girl_total_gold =
-            scale_upkeep(forecast.next_girl_total_gold, pressure_multiplier_pct);
-        forecast.next_girl_delta_gold = forecast
-            .next_girl_total_gold
+        forecast.next_companion_total_gold =
+            scale_upkeep(forecast.next_companion_total_gold, pressure_multiplier_pct);
+        forecast.next_companion_delta_gold = forecast
+            .next_companion_total_gold
             .saturating_sub(forecast.total_gold);
         forecast.next_building_total_gold =
             scale_upkeep(forecast.next_building_total_gold, pressure_multiplier_pct);
@@ -250,7 +250,7 @@ pub(super) fn preview_guild_job_for_town(
     } else {
         0
     };
-    let client_tier = active_client_tier_for_room(data, town, room)?;
+    let patron_tier = active_patron_tier_for_room(data, town, room)?;
     let skill_bonus = guild_job_skill_bonus(monster, room);
     let depth_profile = room_depth_profile_for_town(
         &town.constructed_building_ids,
@@ -289,12 +289,12 @@ pub(super) fn preview_guild_job_for_town(
     Ok(GuildJobPreview {
         success_score,
         projected_gold: base_gold
-            * client_tier.income_multiplier_pct
+            * patron_tier.income_multiplier_pct
             * depth_profile.gold_multiplier_pct
             * quality_income_multiplier_pct(monster.quality_rank)
             / 1_000_000,
         projected_arcane_residue: base_residue
-            * client_tier.residue_multiplier_pct
+            * patron_tier.residue_multiplier_pct
             * depth_profile.residue_multiplier_pct
             / 10_000,
         projected_materials: base_materials,

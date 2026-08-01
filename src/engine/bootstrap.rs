@@ -2,9 +2,8 @@
 
 use crate::data::{GameData, ResourceAmountData, StatBlockData};
 use crate::state::{
-    ChamberState, CompanionJobState, CompanionSkillState, CompanionState,
-    CompanionWorkHistoryState, GameState, OpeningChapterStep, PlayerTownState, ResourcesState,
-    StoryProgressState,
+    CompanionJobState, CompanionSkillState, CompanionState, CompanionWorkHistoryState, GameState,
+    OpeningChapterStep, PlayerTownState, ResourcesState, StoryProgressState,
 };
 
 pub fn create_new_game_state(data: &GameData) -> GameState {
@@ -55,7 +54,7 @@ pub fn create_new_game_state(data: &GameData) -> GameState {
         unlocked_room_ids: new_game.starting_room_ids.clone(),
         unlocked_floor_ids: new_game.starting_floor_ids.clone(),
         unlocked_species_ids: collect_unlocked_species_ids(data),
-        patron_tiers: vec!["local_adventurers".to_owned()],
+        patron_tiers: vec!["local_delvers".to_owned()],
         completed_project_ids: Vec::new(),
         active_situations: Vec::new(),
         party_size: new_game.party_size,
@@ -67,10 +66,6 @@ pub fn create_new_game_state(data: &GameData) -> GameState {
         resources: resources_from_data(&new_game.starting_resources),
         town,
         egg_inventory: Vec::new(),
-        chamber: ChamberState {
-            exposure_risk: 0,
-            is_secret_intact: true,
-        },
         debt: None,
         active_contracts: Vec::new(),
         monsters,
@@ -79,7 +74,7 @@ pub fn create_new_game_state(data: &GameData) -> GameState {
             opening_step: OpeningChapterStep::Camp,
             tower_hole_discovered: false,
             first_egg_created: false,
-            first_slimegirl_hatched: false,
+            first_companion_hatched: false,
             hatched_species_ids: Vec::new(),
             first_room_built: false,
             first_client_completed: false,
@@ -144,13 +139,13 @@ mod tests {
     fn new_game_bootstrap_preserves_configured_starting_rooms() {
         let mut data = test_game_data();
         data.config.new_game.starting_room_ids =
-            vec!["vanilla_suite".to_owned(), "packroom_annex".to_owned()];
+            vec!["common_room".to_owned(), "packroom_annex".to_owned()];
 
         let game_state = create_new_game_state(&data);
 
         assert_eq!(
             game_state.town.unlocked_room_ids,
-            vec!["vanilla_suite".to_owned(), "packroom_annex".to_owned()]
+            vec!["common_room".to_owned(), "packroom_annex".to_owned()]
         );
     }
 
@@ -159,9 +154,9 @@ mod tests {
             config: parse_json(include_str!("../../assets/data/config.json")),
             ui_text: parse_json(include_str!("../../assets/data/ui_text.json")),
             debt_milestones: parse_json(include_str!("../../assets/data/debt_milestones.json")),
-            patron_archetypes: parse_json(include_str!("../../assets/data/guest_archetypes.json")),
-            contracts: parse_json(include_str!("../../assets/data/guest_requests.json")),
-            patron_tiers: parse_json(include_str!("../../assets/data/client_tiers.json")),
+            patron_archetypes: parse_json(include_str!("../../assets/data/patron_archetypes.json")),
+            contracts: parse_json(include_str!("../../assets/data/contracts.json")),
+            patron_tiers: parse_json(include_str!("../../assets/data/patron_tiers.json")),
             missions: parse_json(include_str!("../../assets/data/missions.json")),
             mutations: parse_json(include_str!("../../assets/data/mutations.json")),
             story_events: parse_json(include_str!("../../assets/data/story_events.json")),

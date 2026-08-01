@@ -6,9 +6,9 @@
       "name": "Residue Recovery",
       "description": "A shy local scholar needs a slime companion to recover caustic residue from a crawlspace no ordinary hireling can enter.",
       "archetype_id": "curious_local",
-      "requested_room_id": "vanilla_suite",
+      "requested_room_id": "common_room",
       "required_species_ids": [
-        "slime_girl"
+        "slime_companion"
       ],
       "minimum_quality_rank": 1,
       "required_skill_thresholds": {
@@ -46,7 +46,7 @@
       "partial_success_score": 16,
       "reputation_reward": 1,
       "category": "guild_service",
-      "patron_tier_id": "local_adventurers",
+      "patron_tier_id": "local_delvers",
       "preparation_quality_required": 0,
       "preparation_quality_bonus": 2
     },
@@ -55,7 +55,7 @@
       "name": "Route Confidence Check",
       "description": "A repeat patron wants a practiced companion to review a shallow-floor route and identify obvious hazards before tomorrow's delve.",
       "archetype_id": "curious_local",
-      "requested_room_id": "vanilla_suite",
+      "requested_room_id": "common_room",
       "required_species_ids": [],
       "minimum_quality_rank": 1,
       "required_skill_thresholds": {
@@ -86,14 +86,14 @@
       "is_special": false,
       "preferred_trait_ids": [
         "eager",
-        "submissive"
+        "calming_presence"
       ],
       "preferred_role": "comfort",
       "follow_up_request_id": "quiet_room_return",
       "partial_success_score": 20,
       "reputation_reward": 1,
       "category": "route_planning",
-      "patron_tier_id": "local_adventurers",
+      "patron_tier_id": "local_delvers",
       "preparation_quality_required": 0,
       "preparation_quality_bonus": 2
     },
@@ -102,7 +102,7 @@
       "name": "Quiet Lodging Support",
       "description": "A cautious traveler wants a calm guild room and a companion who knows how to settle frightened patrons.",
       "archetype_id": "curious_local",
-      "requested_room_id": "vanilla_suite",
+      "requested_room_id": "common_room",
       "required_species_ids": [],
       "minimum_quality_rank": 1,
       "required_skill_thresholds": {
@@ -132,14 +132,14 @@
       "deadline_days": 3,
       "is_special": false,
       "preferred_trait_ids": [
-        "submissive",
+        "calming_presence",
         "graceful"
       ],
       "preferred_role": "comfort",
       "partial_success_score": 18,
       "reputation_reward": 1,
       "category": "lodging_support",
-      "patron_tier_id": "local_adventurers",
+      "patron_tier_id": "local_delvers",
       "preparation_quality_required": 0,
       "preparation_quality_bonus": 2
     },
@@ -147,8 +147,8 @@
       "id": "mercenary_stage_tease",
       "name": "Mercenary Briefing",
       "description": "A passing mercenary band wants a confident front-room worker who can hold attention, explain tower risks, and keep the room orderly.",
-      "archetype_id": "road_mercenary",
-      "requested_room_id": "public_stage",
+      "archetype_id": "caravan_captain",
+      "requested_room_id": "reception_hall",
       "required_species_ids": [],
       "minimum_quality_rank": 2,
       "required_skill_thresholds": {
@@ -178,7 +178,7 @@
       "deadline_days": 4,
       "is_special": false,
       "preferred_trait_ids": [
-        "dominant",
+        "commanding",
         "graceful"
       ],
       "preferred_role": "performer",
@@ -186,18 +186,18 @@
       "partial_success_score": 24,
       "reputation_reward": 2,
       "category": "escort_preparation",
-      "patron_tier_id": "local_adventurers",
+      "patron_tier_id": "local_delvers",
       "preparation_quality_required": 2,
       "preparation_quality_bonus": 3
     },
     {
-      "id": "succu_salon_booking",
+      "id": "residue_consultation",
       "name": "Residue Consultation",
       "description": "A regular patron pays for a residue-sensitive companion who can explain strange tower samples without alarming the room.",
-      "archetype_id": "veiled_patron",
-      "requested_room_id": "vanilla_suite",
+      "archetype_id": "tower_scholar",
+      "requested_room_id": "common_room",
       "required_species_ids": [
-        "succu_slime"
+        "residue_slime"
       ],
       "minimum_quality_rank": 2,
       "required_skill_thresholds": {
@@ -235,7 +235,7 @@
       "partial_success_score": 26,
       "reputation_reward": 2,
       "category": "guild_service",
-      "patron_tier_id": "monster_diplomats",
+      "patron_tier_id": "frontier_factions",
       "preparation_quality_required": 2,
       "preparation_quality_bonus": 3
     },
@@ -244,9 +244,9 @@
       "name": "Supply Upsell Run",
       "description": "A merchant wants a quick, persuasive helper who can turn basic supply packing into a larger caravan order.",
       "archetype_id": "curious_local",
-      "requested_room_id": "public_stage",
+      "requested_room_id": "reception_hall",
       "required_species_ids": [
-        "goblin_maid"
+        "imp_runner"
       ],
       "minimum_quality_rank": 2,
       "required_skill_thresholds": {
@@ -276,14 +276,14 @@
       "deadline_days": 3,
       "is_special": false,
       "preferred_trait_ids": [
-        "greedy",
+        "opportunistic",
         "graceful"
       ],
       "preferred_role": "performer",
       "partial_success_score": 24,
       "reputation_reward": 2,
       "category": "guild_service",
-      "patron_tier_id": "local_adventurers",
+      "patron_tier_id": "local_delvers",
       "preparation_quality_required": 2,
       "preparation_quality_bonus": 3
     },
@@ -291,10 +291,10 @@
       "id": "harpy_headliner_show",
       "name": "Lookout Demonstration",
       "description": "A noble party books the reception hall for a high-skill lookout demonstration and a polished guild briefing.",
-      "archetype_id": "veiled_patron",
-      "requested_room_id": "public_stage",
+      "archetype_id": "tower_scholar",
+      "requested_room_id": "reception_hall",
       "required_species_ids": [
-        "harpy_hostess"
+        "harpy_lookout"
       ],
       "minimum_quality_rank": 3,
       "required_skill_thresholds": {
@@ -325,24 +325,24 @@
       "is_special": true,
       "preferred_trait_ids": [
         "graceful",
-        "dominant"
+        "commanding"
       ],
       "preferred_role": "performer",
       "partial_success_score": 34,
       "reputation_reward": 3,
       "category": "guild_service",
-      "patron_tier_id": "wealthy_nobles",
+      "patron_tier_id": "guild_sponsors",
       "preparation_quality_required": 4,
       "preparation_quality_bonus": 6
     },
     {
-      "id": "hellhound_guard_shift",
+      "id": "rough_escort_prep",
       "name": "Rough Escort Prep",
       "description": "A mercenary captain pays extra for a resilient guard to prepare a dangerous escort through unstable corridors.",
-      "archetype_id": "road_mercenary",
+      "archetype_id": "caravan_captain",
       "requested_room_id": "packroom_annex",
       "required_species_ids": [
-        "hellhound_bouncer"
+        "minotaur_porter"
       ],
       "minimum_quality_rank": 2,
       "required_skill_thresholds": {
@@ -373,13 +373,13 @@
       "is_special": false,
       "preferred_trait_ids": [
         "resilient",
-        "dominant"
+        "commanding"
       ],
       "preferred_role": "delver",
       "partial_success_score": 24,
       "reputation_reward": 2,
       "category": "escort_preparation",
-      "patron_tier_id": "monster_diplomats",
+      "patron_tier_id": "frontier_factions",
       "preparation_quality_required": 2,
       "preparation_quality_bonus": 3
     },
@@ -387,10 +387,10 @@
       "id": "lamia_binding_rite",
       "name": "Route Memory Consultation",
       "description": "A discreet noble insists on a lamia guide for slow route planning, posture reading, and careful negotiation.",
-      "archetype_id": "veiled_patron",
+      "archetype_id": "tower_scholar",
       "requested_room_id": "nursery_wing",
       "required_species_ids": [
-        "lamia_binder"
+        "lamia_routekeeper"
       ],
       "minimum_quality_rank": 2,
       "required_skill_thresholds": {
@@ -420,14 +420,14 @@
       "deadline_days": 4,
       "is_special": true,
       "preferred_trait_ids": [
-        "dominant",
+        "commanding",
         "hatchery_attuned"
       ],
       "preferred_role": "hatchery_specialist",
       "partial_success_score": 32,
       "reputation_reward": 3,
       "category": "guild_service",
-      "patron_tier_id": "wealthy_nobles",
+      "patron_tier_id": "guild_sponsors",
       "preparation_quality_required": 2,
       "preparation_quality_bonus": 6
     },
@@ -435,7 +435,7 @@
       "id": "sealed_vault_handling",
       "name": "Vault Sample Handling",
       "description": "A masked diplomat pays elite rates for a companion shaped by instability and skilled enough to handle volatile tower samples.",
-      "archetype_id": "veiled_patron",
+      "archetype_id": "tower_scholar",
       "requested_room_id": "packroom_annex",
       "required_species_ids": [
         "golemkin_warden"
@@ -475,7 +475,7 @@
       "partial_success_score": 36,
       "reputation_reward": 3,
       "category": "hazard_handling",
-      "patron_tier_id": "wealthy_nobles",
+      "patron_tier_id": "guild_sponsors",
       "preparation_quality_required": 4,
       "preparation_quality_bonus": 6
     },
@@ -483,10 +483,10 @@
       "id": "moth_relic_vigil",
       "name": "Relic Vigil",
       "description": "A veiled collector requests a quiet relic specialist for a ceremonial watch over an unstable tower artifact.",
-      "archetype_id": "veiled_patron",
+      "archetype_id": "tower_scholar",
       "requested_room_id": "nursery_wing",
       "required_species_ids": [
-        "moth_priestess"
+        "moth_archivist"
       ],
       "minimum_quality_rank": 3,
       "required_skill_thresholds": {
@@ -523,7 +523,7 @@
       "partial_success_score": 34,
       "reputation_reward": 4,
       "category": "relic_research",
-      "patron_tier_id": "wealthy_nobles",
+      "patron_tier_id": "guild_sponsors",
       "preparation_quality_required": 4,
       "preparation_quality_bonus": 7
     },
@@ -531,8 +531,8 @@
       "id": "veiled_suite_audience",
       "name": "Private Patron Audience",
       "description": "A veiled patron requests a composed companion for a demanding private consultation and guild service review.",
-      "archetype_id": "veiled_patron",
-      "requested_room_id": "vanilla_suite",
+      "archetype_id": "tower_scholar",
+      "requested_room_id": "common_room",
       "required_species_ids": [],
       "minimum_quality_rank": 2,
       "required_skill_thresholds": {
@@ -562,14 +562,14 @@
       "deadline_days": 4,
       "is_special": true,
       "preferred_trait_ids": [
-        "submissive",
+        "calming_presence",
         "eager"
       ],
       "preferred_role": "comfort",
       "partial_success_score": 28,
       "reputation_reward": 2,
       "category": "lodging_support",
-      "patron_tier_id": "wealthy_nobles",
+      "patron_tier_id": "guild_sponsors",
       "preparation_quality_required": 2,
       "preparation_quality_bonus": 5
     }

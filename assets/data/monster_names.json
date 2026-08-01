@@ -2,9 +2,9 @@
   "version": "1.2.0",
   "name_pools": [
     {
-      "id": "slime_lineage",
+      "id": "slime_companion_lineage",
       "species_ids": [
-        "slime_girl"
+        "slime_companion"
       ],
       "names": [
         "Mira",
@@ -26,9 +26,9 @@
       ]
     },
     {
-      "id": "succu_slime_salon",
+      "id": "residue_slime_lineage",
       "species_ids": [
-        "succu_slime"
+        "residue_slime"
       ],
       "names": [
         "Velisse",
@@ -46,9 +46,9 @@
       ]
     },
     {
-      "id": "goblin_bedchamber",
+      "id": "imp_runner_lineage",
       "species_ids": [
-        "goblin_maid"
+        "imp_runner"
       ],
       "names": [
         "Ketta",
@@ -68,9 +68,9 @@
       ]
     },
     {
-      "id": "harpy_perfume_house",
+      "id": "harpy_lookout_lineage",
       "species_ids": [
-        "harpy_hostess"
+        "harpy_lookout"
       ],
       "names": [
         "Avelle",
@@ -90,9 +90,9 @@
       ]
     },
     {
-      "id": "lamia_chamber",
+      "id": "lamia_routekeeper_lineage",
       "species_ids": [
-        "lamia_binder"
+        "lamia_routekeeper"
       ],
       "names": [
         "Sesh",
@@ -112,9 +112,9 @@
       ]
     },
     {
-      "id": "hellhound_kennel",
+      "id": "minotaur_porter_lineage",
       "species_ids": [
-        "hellhound_bouncer"
+        "minotaur_porter"
       ],
       "names": [
         "Brasa",
@@ -134,7 +134,7 @@
       ]
     },
     {
-      "id": "golemkin_stone_court",
+      "id": "golemkin_warden_lineage",
       "species_ids": [
         "golemkin_warden"
       ],
@@ -154,9 +154,9 @@
       ]
     },
     {
-      "id": "moth_veil_court",
+      "id": "moth_archivist_lineage",
       "species_ids": [
-        "moth_priestess"
+        "moth_archivist"
       ],
       "names": [
         "Ashae",

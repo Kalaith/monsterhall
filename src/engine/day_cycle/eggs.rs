@@ -105,7 +105,7 @@ pub(super) fn choose_weighted_floor_egg_species(
     egg_species_entries
         .last()
         .map(|entry| entry.species_id.clone())
-        .unwrap_or_else(|| "slime_girl".to_owned())
+        .unwrap_or_else(|| "slime_companion".to_owned())
 }
 
 pub(super) fn prepare_raw_egg_for_species(

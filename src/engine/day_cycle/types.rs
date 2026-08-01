@@ -28,10 +28,10 @@ pub struct UpkeepForecast {
     pub cleaning_gold: u32,
     pub maintenance_gold: u32,
     pub total_gold: u32,
-    pub active_band_min_girls: u32,
+    pub active_band_min_companions: u32,
     pub active_band_min_patron_tiers: u32,
-    pub next_girl_total_gold: u32,
-    pub next_girl_delta_gold: u32,
+    pub next_companion_total_gold: u32,
+    pub next_companion_delta_gold: u32,
     pub next_building_total_gold: u32,
     pub next_building_delta_gold: u32,
 }

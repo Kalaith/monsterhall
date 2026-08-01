@@ -20,7 +20,7 @@ pub fn validate_game_state_references(
     let species_ids = collect_ids(data.species.species.iter().map(|entry| entry.id.as_str()));
     let mission_ids = collect_ids(data.missions.missions.iter().map(|entry| entry.id.as_str()));
     let trait_ids = collect_ids(data.traits.traits.iter().map(|entry| entry.id.as_str()));
-    let client_tier_ids = collect_ids(
+    let patron_tier_ids = collect_ids(
         data.patron_tiers
             .patron_tiers
             .iter()
@@ -51,7 +51,7 @@ pub fn validate_game_state_references(
     )?;
     validate_reference_list(
         &game_state.town.patron_tiers,
-        &client_tier_ids,
+        &patron_tier_ids,
         "save town.patron_tiers",
     )?;
 

@@ -523,7 +523,7 @@ pub(super) fn draw_eligible_panel(
         layout.candidates_y,
         layout.content_width,
         (layout.footer_y - layout.candidates_y - layout::SECTION_GAP).max(238.0),
-        Some(&data.ui_text.contract_desk.eligible_girls_panel_title),
+        Some(&data.ui_text.contract_desk.eligible_companions_panel_title),
         PanelTier::Support,
         false,
     );

@@ -36,7 +36,7 @@
       "stress_change_flat": -2
     },
     {
-      "id": "submissive",
+      "id": "calming_presence",
       "name": "Calming Presence",
       "category": "temperament",
       "icon_key": "ribbon",
@@ -53,7 +53,7 @@
       "stress_change_flat": -1
     },
     {
-      "id": "dominant",
+      "id": "commanding",
       "name": "Commanding",
       "category": "leadership",
       "icon_key": "whip",
@@ -121,7 +121,7 @@
       "stress_change_flat": -1
     },
     {
-      "id": "greedy",
+      "id": "opportunistic",
       "name": "Opportunistic",
       "category": "temperament",
       "icon_key": "coin",
@@ -155,7 +155,7 @@
       "stress_change_flat": -2
     },
     {
-      "id": "feral_instinct",
+      "id": "sharp_instinct",
       "name": "Sharp Instinct",
       "category": "instinct",
       "icon_key": "fang",

@@ -22,11 +22,11 @@
       },
       "egg_species_entries": [
         {
-          "species_id": "slime_girl",
+          "species_id": "slime_companion",
           "weight": 9
         },
         {
-          "species_id": "succu_slime",
+          "species_id": "residue_slime",
           "weight": 1
         }
       ],
@@ -50,14 +50,14 @@
       ],
       "required_roster": [
         {
-          "species_id": "slime_girl",
+          "species_id": "slime_companion",
           "minimum_quality_rank": 2
         }
       ],
       "mission_ids": [
         "resource_run",
         "egg_hunt",
-        "corruption_dive",
+        "scout_route",
         "relic_raid"
       ],
       "baseline_rewards": {
@@ -69,15 +69,15 @@
       },
       "egg_species_entries": [
         {
-          "species_id": "succu_slime",
+          "species_id": "residue_slime",
           "weight": 4
         },
         {
-          "species_id": "harpy_hostess",
+          "species_id": "harpy_lookout",
           "weight": 3
         },
         {
-          "species_id": "hellhound_bouncer",
+          "species_id": "minotaur_porter",
           "weight": 3
         }
       ],
@@ -99,11 +99,11 @@
       "description": "Lavish ruined holding pens and service corridors where strong escorts, alert scouts, and careful handlers matter.",
       "difficulty": 48,
       "requires_building_ids": [
-        "aftercare_lounge"
+        "recovery_lounge"
       ],
       "required_roster": [
         {
-          "species_id": "hellhound_bouncer",
+          "species_id": "minotaur_porter",
           "minimum_quality_rank": 2
         }
       ],
@@ -121,15 +121,15 @@
       },
       "egg_species_entries": [
         {
-          "species_id": "goblin_maid",
+          "species_id": "imp_runner",
           "weight": 4
         },
         {
-          "species_id": "lamia_binder",
+          "species_id": "lamia_routekeeper",
           "weight": 4
         },
         {
-          "species_id": "succu_slime",
+          "species_id": "residue_slime",
           "weight": 2
         }
       ],

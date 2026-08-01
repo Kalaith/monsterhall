@@ -1,7 +1,7 @@
 {
   "title": "Monsterhall",
-  "content_version": "1.9.0",
-  "save_version": 9,
+  "content_version": "1.10.0",
+  "save_version": 10,
   "input": {
     "primary_mode": "mouse",
     "keyboard_shortcuts_enabled": true,
@@ -63,7 +63,7 @@
       "floor_1_slick_cellars"
     ],
     "starting_species_ids": [
-      "slime_girl"
+      "slime_companion"
     ],
     "starter_monsters": [],
     "party_size": 3,
@@ -89,33 +89,33 @@
     "expedition_instinct_residue_multiplier": 2,
     "expedition_endurance_safety_divisor": 3,
     "expedition_reward_success_divisor": 5,
-    "girl_food_gold_per_day": 4,
+    "companion_food_gold_per_day": 4,
     "building_maintenance_cost_divisor": 20,
     "upkeep_bands": [
       {
-        "min_girls": 1,
-        "min_client_tiers": 1,
+        "min_companions": 1,
+        "min_patron_tiers": 1,
         "food_multiplier_pct": 100,
         "cleaning_multiplier_pct": 100,
         "maintenance_multiplier_pct": 100
       },
       {
-        "min_girls": 8,
-        "min_client_tiers": 2,
+        "min_companions": 8,
+        "min_patron_tiers": 2,
         "food_multiplier_pct": 125,
         "cleaning_multiplier_pct": 120,
         "maintenance_multiplier_pct": 115
       },
       {
-        "min_girls": 12,
-        "min_client_tiers": 3,
+        "min_companions": 12,
+        "min_patron_tiers": 3,
         "food_multiplier_pct": 150,
         "cleaning_multiplier_pct": 140,
         "maintenance_multiplier_pct": 130
       },
       {
-        "min_girls": 16,
-        "min_client_tiers": 4,
+        "min_companions": 16,
+        "min_patron_tiers": 4,
         "food_multiplier_pct": 180,
         "cleaning_multiplier_pct": 165,
         "maintenance_multiplier_pct": 150

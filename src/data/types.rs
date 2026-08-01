@@ -136,7 +136,7 @@ pub struct DayCycleConfigData {
     pub expedition_instinct_residue_multiplier: u32,
     pub expedition_endurance_safety_divisor: u32,
     pub expedition_reward_success_divisor: u32,
-    pub girl_food_gold_per_day: u32,
+    pub companion_food_gold_per_day: u32,
     pub building_maintenance_cost_divisor: u32,
     #[serde(default)]
     pub upkeep_bands: Vec<UpkeepBandData>,
@@ -147,8 +147,7 @@ pub struct DayCycleConfigData {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UpkeepBandData {
-    pub min_girls: u32,
-    #[serde(alias = "min_client_tiers")]
+    pub min_companions: u32,
     pub min_patron_tiers: u32,
     pub food_multiplier_pct: u32,
     pub cleaning_multiplier_pct: u32,
@@ -208,7 +207,6 @@ pub struct BuildingCatalogData {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PatronTierCatalogData {
     pub version: String,
-    #[serde(alias = "client_tiers")]
     pub patron_tiers: Vec<PatronTierData>,
 }
 
@@ -226,7 +224,6 @@ pub struct BuildingUnlocksData {
     pub room_ids: Vec<String>,
     pub floor_ids: Vec<String>,
     pub species_ids: Vec<String>,
-    #[serde(alias = "client_tiers")]
     pub patron_tiers: Vec<String>,
 }
 
@@ -339,7 +336,7 @@ pub struct StoryEventCatalogData {
     pub debt_missed_event_template: String,
     pub debt_missed_stress_template: String,
     pub guest_name_template: String,
-    pub guest_missing_assigned_girl_event_template: String,
+    pub guest_missing_assigned_companion_event_template: String,
     pub guest_failed_event_template: String,
     pub guest_satisfied_event_template: String,
     pub guest_completed_update_template: String,
@@ -517,7 +514,6 @@ pub struct GuildRoomData {
     #[serde(default)]
     pub reputation_yield: i32,
     pub stamina_cost: u32,
-    #[serde(alias = "client_tiers")]
     pub patron_tiers: Vec<String>,
     pub trained_skill_ids: Vec<String>,
     #[serde(alias = "history_gains")]

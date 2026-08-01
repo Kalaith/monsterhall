@@ -140,7 +140,7 @@ impl GameData {
 
     pub(super) fn validate_contracts(&self, ids: &IdIndex<'_>) -> Result<(), String> {
         let IdIndex {
-            guest_archetype_ids,
+            patron_archetype_ids,
             room_ids,
             species_ids,
             ..
@@ -155,7 +155,7 @@ impl GameData {
                     request.id
                 ));
             }
-            if !guest_archetype_ids.contains(request.archetype_id.as_str()) {
+            if !patron_archetype_ids.contains(request.archetype_id.as_str()) {
                 return Err(format!(
                     "contract '{}' references unknown archetype '{}'.",
                     request.id, request.archetype_id

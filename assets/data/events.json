@@ -18,7 +18,7 @@
         "stretchy"
       ],
       "required_species_ids": [
-        "slime_girl"
+        "slime_companion"
       ]
     },
     {
@@ -30,7 +30,7 @@
         "graceful"
       ],
       "required_species_ids": [
-        "goblin_maid"
+        "imp_runner"
       ]
     },
     {
@@ -42,7 +42,7 @@
         "graceful"
       ],
       "required_species_ids": [
-        "harpy_hostess"
+        "harpy_lookout"
       ]
     },
     {
@@ -51,10 +51,10 @@
       "phase": "shift_resolution",
       "text": "A lamia routekeeper calms a tense patron, memorizes their route, and turns a risky request into orderly work.",
       "required_trait_ids": [
-        "dominant"
+        "commanding"
       ],
       "required_species_ids": [
-        "lamia_binder"
+        "lamia_routekeeper"
       ]
     },
     {
@@ -81,14 +81,14 @@
       "phase": "expedition_resolution",
       "text": "The quick runner comes back grinning with a sack of trinkets she definitely found before anyone else noticed.",
       "required_trait_ids": [
-        "greedy"
+        "opportunistic"
       ],
       "required_species_ids": [
-        "goblin_maid"
+        "imp_runner"
       ]
     },
     {
-      "id": "tower_hellhound_clearance",
+      "id": "tower_porter_clearance",
       "category": "expedition",
       "phase": "expedition_resolution",
       "text": "The heavy porter shoulders through fallen stone and drags the rest of the party home with extra salvage.",
@@ -96,7 +96,7 @@
         "resilient"
       ],
       "required_species_ids": [
-        "hellhound_bouncer"
+        "minotaur_porter"
       ]
     },
     {
@@ -108,7 +108,7 @@
         "corruption_tuned"
       ],
       "required_species_ids": [
-        "moth_priestess"
+        "moth_archivist"
       ]
     },
     {
@@ -118,8 +118,8 @@
       "text": "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
       "required_trait_ids": [],
       "required_species_ids": [
-        "slime_girl",
-        "succu_slime"
+        "slime_companion",
+        "residue_slime"
       ]
     },
     {
@@ -139,11 +139,11 @@
       "text": "Dusty luminous scales cling to the companion on the walk home, each one humming with a low ritual promise.",
       "required_trait_ids": [],
       "required_species_ids": [
-        "moth_priestess"
+        "moth_archivist"
       ]
     },
     {
-      "id": "town_aftercare_evening",
+      "id": "town_recovery_evening",
       "category": "town",
       "phase": "day_end",
       "text": "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes.",
@@ -259,11 +259,11 @@
       "phase": "day_end",
       "text": "A visiting collector pays for tower rumors and leaves behind enough coin to soften the next debt window.",
       "required_trait_ids": [
-        "greedy"
+        "opportunistic"
       ],
       "required_species_ids": [],
       "required_building_ids": [
-        "monster_kink_archive"
+        "species_archive"
       ],
       "event_tags": [
         "beneficial",
@@ -289,7 +289,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "aftercare_lounge"
+        "recovery_lounge"
       ],
       "event_tags": [
         "expense",
@@ -319,7 +319,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "warm_love_nest"
+        "nursery_habitat"
       ],
       "event_tags": [
         "beneficial",
@@ -345,7 +345,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "warm_love_nest"
+        "nursery_habitat"
       ],
       "event_tags": [
         "expense",
@@ -424,7 +424,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "silk_rope_forge"
+        "forge_corner"
       ],
       "event_tags": [
         "beneficial",
@@ -450,7 +450,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "silk_rope_forge"
+        "forge_corner"
       ],
       "event_tags": [
         "expense",
@@ -470,18 +470,18 @@
       }
     },
     {
-      "id": "special_aftercare_reputation",
+      "id": "special_recovery_reputation",
       "category": "special",
       "phase": "day_end",
       "text": "Word of the Recovery Lounge reaches careful patrons who pay more for a guild that treats its companions well.",
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "aftercare_lounge"
+        "recovery_lounge"
       ],
       "event_tags": [
         "beneficial",
-        "aftercare",
+        "recovery",
         "tier_3"
       ],
       "weight": 4,
@@ -507,7 +507,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "healing_hot_springs"
+        "recovery_baths"
       ],
       "event_tags": [
         "beneficial",
@@ -533,7 +533,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "healing_hot_springs"
+        "recovery_baths"
       ],
       "event_tags": [
         "expense",
@@ -560,7 +560,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "monster_kink_archive"
+        "species_archive"
       ],
       "event_tags": [
         "beneficial",
@@ -586,7 +586,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "monster_kink_archive"
+        "species_archive"
       ],
       "event_tags": [
         "expense",
@@ -665,7 +665,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "luxury_room_renovation"
+        "guild_room_renovation"
       ],
       "event_tags": [
         "expense",
@@ -692,7 +692,7 @@
       "required_trait_ids": [],
       "required_species_ids": [],
       "required_building_ids": [
-        "luxury_room_renovation"
+        "guild_room_renovation"
       ],
       "event_tags": [
         "beneficial",

@@ -560,10 +560,10 @@ pub(super) fn draw_summary_strip(
             upkeep.food_gold,
             upkeep.cleaning_gold,
             upkeep.maintenance_gold,
-            upkeep.active_band_min_girls,
+            upkeep.active_band_min_companions,
             upkeep.active_band_min_patron_tiers,
-            upkeep.next_girl_total_gold,
-            upkeep.next_girl_delta_gold,
+            upkeep.next_companion_total_gold,
+            upkeep.next_companion_delta_gold,
             upkeep.next_building_total_gold,
             upkeep.next_building_delta_gold
         ),

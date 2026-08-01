@@ -68,10 +68,10 @@ pub(super) struct UpkeepForecastSnapshot {
     pub(super) cleaning_gold: u32,
     pub(super) maintenance_gold: u32,
     pub(super) total_gold: u32,
-    pub(super) active_band_min_girls: u32,
+    pub(super) active_band_min_companions: u32,
     pub(super) active_band_min_patron_tiers: u32,
-    pub(super) next_girl_total_gold: u32,
-    pub(super) next_girl_delta_gold: u32,
+    pub(super) next_companion_total_gold: u32,
+    pub(super) next_companion_delta_gold: u32,
     pub(super) next_building_total_gold: u32,
     pub(super) next_building_delta_gold: u32,
 }
@@ -86,7 +86,7 @@ pub(super) struct ExpeditionOpportunityMetrics {
     pub(super) prep_materials: u32,
     pub(super) prep_arcane_residue: u32,
     pub(super) prep_shortfall: u32,
-    pub(super) unavailable_girls: usize,
+    pub(super) unavailable_companions: usize,
     pub(super) accepted_guest_locks: usize,
     pub(super) pending_guest_pressure: usize,
     pub(super) missed_guest_deadlines: usize,
@@ -95,7 +95,7 @@ pub(super) struct ExpeditionOpportunityMetrics {
 #[derive(Debug, Serialize)]
 pub(super) struct SimulationMilestoneSnapshot {
     pub(super) day: u32,
-    pub(super) girls: usize,
+    pub(super) companions: usize,
     pub(super) population_cap: usize,
     pub(super) town_job_limit: u8,
     pub(super) buildings: usize,
@@ -111,7 +111,7 @@ pub(super) struct SimulationMilestoneSnapshot {
 #[derive(Debug, Serialize)]
 pub(super) struct SimulationDayReport {
     pub(super) day: u32,
-    pub(super) girls: usize,
+    pub(super) companions: usize,
     pub(super) population_cap: usize,
     pub(super) eggs_in_inventory: usize,
     pub(super) buildings: usize,
@@ -164,7 +164,7 @@ pub(super) struct SimulationReport {
     pub(super) ending_day: u32,
     pub(super) opening_event_log_entries: usize,
     pub(super) final_event_log_entries: usize,
-    pub(super) final_girls: usize,
+    pub(super) final_roster_size: usize,
     pub(super) final_buildings: usize,
     pub(super) final_active_contracts: usize,
     pub(super) final_average_bond: f64,
@@ -209,7 +209,7 @@ pub(super) struct SimulationReport {
 pub(super) struct MultiSeedSimulationSample {
     pub(super) sample: usize,
     pub(super) rng_seed: u64,
-    pub(super) girls: usize,
+    pub(super) companions: usize,
     pub(super) buildings: usize,
     pub(super) gold: u32,
     pub(super) debt_gap: i64,
@@ -233,7 +233,7 @@ pub(super) struct NumericRangeSummary<T> {
 pub(super) struct MultiSeedSimulationSummary {
     pub(super) simulation_days: u32,
     pub(super) samples: Vec<MultiSeedSimulationSample>,
-    pub(super) girls: NumericRangeSummary<usize>,
+    pub(super) companions: NumericRangeSummary<usize>,
     pub(super) buildings: NumericRangeSummary<usize>,
     pub(super) gold: NumericRangeSummary<u32>,
     pub(super) debt_gap: NumericRangeSummary<i64>,
@@ -319,7 +319,7 @@ fn monster_validation_role(monster: &CompanionState) -> &'static str {
         "performer"
     } else if monster.stats.power >= monster.stats.charm + 2 {
         "delver"
-    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "submissive") {
+    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "calming_presence") {
         "comfort"
     } else {
         "versatile"
@@ -389,7 +389,7 @@ pub(super) fn build_day_report(
 
     SimulationDayReport {
         day: summary.resolved_day,
-        girls: game_state.monsters.len(),
+        companions: game_state.monsters.len(),
         population_cap: day_cycle::effective_population_cap(data, game_state),
         eggs_in_inventory: game_state.egg_inventory.len(),
         buildings: game_state.town.constructed_building_ids.len(),
@@ -595,10 +595,10 @@ pub(super) fn upkeep_forecast_snapshot(
         cleaning_gold: forecast.cleaning_gold,
         maintenance_gold: forecast.maintenance_gold,
         total_gold: forecast.total_gold,
-        active_band_min_girls: forecast.active_band_min_girls,
+        active_band_min_companions: forecast.active_band_min_companions,
         active_band_min_patron_tiers: forecast.active_band_min_patron_tiers,
-        next_girl_total_gold: forecast.next_girl_total_gold,
-        next_girl_delta_gold: forecast.next_girl_delta_gold,
+        next_companion_total_gold: forecast.next_companion_total_gold,
+        next_companion_delta_gold: forecast.next_companion_delta_gold,
         next_building_total_gold: forecast.next_building_total_gold,
         next_building_delta_gold: forecast.next_building_delta_gold,
     }
@@ -635,7 +635,7 @@ pub(super) fn expedition_opportunity_metrics(
         prep_materials: summary.expedition_prep_materials,
         prep_arcane_residue: summary.expedition_prep_arcane_residue,
         prep_shortfall: summary.expedition_prep_shortfall,
-        unavailable_girls: accepted_guest_locks
+        unavailable_companions: accepted_guest_locks
             .saturating_add(policy_metrics.expedition_members_assigned),
         accepted_guest_locks,
         pending_guest_pressure,
@@ -650,7 +650,7 @@ pub(super) fn milestone_snapshot(
 ) -> SimulationMilestoneSnapshot {
     SimulationMilestoneSnapshot {
         day,
-        girls: game_state.monsters.len(),
+        companions: game_state.monsters.len(),
         population_cap: day_cycle::effective_population_cap(data, game_state),
         town_job_limit: game_state.town.town_job_limit,
         buildings: game_state.town.constructed_building_ids.len(),

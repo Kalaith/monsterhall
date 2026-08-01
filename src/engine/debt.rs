@@ -328,8 +328,8 @@ mod tests {
     use super::*;
     use crate::data::GameData;
     use crate::state::{
-        ChamberState, CompanionState, GameState, OpeningChapterStep, PlayerTownState,
-        ResourcesState, StoryProgressState,
+        CompanionState, GameState, OpeningChapterStep, PlayerTownState, ResourcesState,
+        StoryProgressState,
     };
 
     #[test]
@@ -342,7 +342,6 @@ mod tests {
                 ..ResourcesState::default()
             },
             town: PlayerTownState::default(),
-            chamber: ChamberState::default(),
             monsters: vec![CompanionState::default()],
             story_progress: StoryProgressState {
                 opening_step: OpeningChapterStep::Complete,
@@ -385,7 +384,6 @@ mod tests {
                 ..ResourcesState::default()
             },
             town: PlayerTownState::default(),
-            chamber: ChamberState::default(),
             monsters: vec![CompanionState::default()],
             story_progress: StoryProgressState {
                 opening_step: OpeningChapterStep::Complete,
@@ -446,7 +444,6 @@ mod tests {
                 ..ResourcesState::default()
             },
             town: PlayerTownState::default(),
-            chamber: ChamberState::default(),
             monsters: vec![CompanionState::default()],
             story_progress: StoryProgressState {
                 opening_step: OpeningChapterStep::Complete,
@@ -491,7 +488,6 @@ mod tests {
                 ..ResourcesState::default()
             },
             town: PlayerTownState::default(),
-            chamber: ChamberState::default(),
             monsters: vec![CompanionState::default()],
             story_progress: StoryProgressState {
                 opening_step: OpeningChapterStep::Complete,
@@ -529,12 +525,12 @@ mod tests {
             ))
             .expect("debt milestones should deserialize"),
             patron_archetypes: serde_json::from_str(include_str!(
-                "../../assets/data/guest_archetypes.json"
+                "../../assets/data/patron_archetypes.json"
             ))
             .expect("guest archetypes should deserialize"),
-            contracts: serde_json::from_str(include_str!("../../assets/data/guest_requests.json"))
+            contracts: serde_json::from_str(include_str!("../../assets/data/contracts.json"))
                 .expect("contracts should deserialize"),
-            patron_tiers: serde_json::from_str(include_str!("../../assets/data/client_tiers.json"))
+            patron_tiers: serde_json::from_str(include_str!("../../assets/data/patron_tiers.json"))
                 .expect("patron tiers should deserialize"),
             missions: serde_json::from_str(include_str!("../../assets/data/missions.json"))
                 .expect("missions should deserialize"),

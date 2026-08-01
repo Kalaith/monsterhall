@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "rooms": [
     {
-      "id": "vanilla_suite",
+      "id": "common_room",
       "name": "Common Room",
       "description": "Warm benches, privacy screens, and a practical task board for Monsterhall's first patrons.",
       "service_summary": "Basic reception, lodging, and hospitality work for cautious local patrons.",
@@ -11,8 +11,8 @@
       "base_gold_yield": 24,
       "base_residue_yield": 6,
       "stamina_cost": 10,
-      "client_tiers": [
-        "local_adventurers"
+      "patron_tiers": [
+        "local_delvers"
       ],
       "trained_skill_ids": [
         "scouting",
@@ -30,19 +30,19 @@
       },
       "preferred_trait_ids": [
         "eager",
-        "submissive",
+        "calming_presence",
         "graceful"
       ],
       "preferred_species_ids": [
-        "slime_girl",
-        "succu_slime",
-        "goblin_maid",
-        "harpy_hostess"
+        "slime_companion",
+        "residue_slime",
+        "imp_runner",
+        "harpy_lookout"
       ],
       "strategic_niche": "comfort",
       "upgrade_building_ids": [
-        "aftercare_lounge",
-        "luxury_room_renovation"
+        "recovery_lounge",
+        "guild_room_renovation"
       ],
       "fatigue_modifier": -1,
       "stress_modifier": -1,
@@ -66,9 +66,9 @@
       "base_gold_yield": 55,
       "base_residue_yield": 14,
       "stamina_cost": 16,
-      "client_tiers": [
-        "local_adventurers",
-        "monster_diplomats"
+      "patron_tiers": [
+        "local_delvers",
+        "frontier_factions"
       ],
       "trained_skill_ids": [
         "crafting",
@@ -84,19 +84,19 @@
         "hatchery_assists": 0
       },
       "preferred_trait_ids": [
-        "dominant",
+        "commanding",
         "corruption_tuned",
         "stretchy"
       ],
       "preferred_species_ids": [
         "golemkin_warden",
-        "lamia_binder",
-        "hellhound_bouncer"
+        "lamia_routekeeper",
+        "minotaur_porter"
       ],
       "strategic_niche": "corruption",
       "upgrade_building_ids": [
         "residue_alchemy_bench",
-        "monster_kink_archive",
+        "species_archive",
         "relic_residue_condenser"
       ],
       "fatigue_modifier": 2,
@@ -115,16 +115,16 @@
       "description": "A quiet hatchery-adjacent room for egg care, lineage records, and sensitive guild contracts.",
       "service_summary": "Private nursery and archive work built around careful handling and long-term roster growth.",
       "required_building_ids": [
-        "warm_love_nest",
-        "monster_kink_archive"
+        "nursery_habitat",
+        "species_archive"
       ],
       "service_tier": 3,
       "base_gold_yield": 72,
       "base_residue_yield": 18,
       "stamina_cost": 18,
-      "client_tiers": [
-        "wealthy_nobles",
-        "monster_diplomats"
+      "patron_tiers": [
+        "guild_sponsors",
+        "frontier_factions"
       ],
       "trained_skill_ids": [
         "hospitality",
@@ -141,17 +141,17 @@
       },
       "preferred_trait_ids": [
         "hatchery_attuned",
-        "submissive"
+        "calming_presence"
       ],
       "preferred_species_ids": [
         "golemkin_warden",
-        "lamia_binder",
-        "moth_priestess"
+        "lamia_routekeeper",
+        "moth_archivist"
       ],
       "strategic_niche": "hatchery",
       "upgrade_building_ids": [
-        "warm_love_nest",
-        "monster_kink_archive",
+        "nursery_habitat",
+        "species_archive",
         "prestige_hospitality_wing"
       ],
       "fatigue_modifier": 1,
@@ -165,20 +165,20 @@
       "recovery_bonus": 1
     },
     {
-      "id": "public_stage",
+      "id": "reception_hall",
       "name": "Reception Hall",
       "description": "A busy front room where confidence, polish, and spectacle turn visitors into paying patrons.",
       "service_summary": "Public-facing guild service focused on reception, negotiation, and crowd management.",
       "required_building_ids": [
-        "silk_rope_forge",
-        "aftercare_lounge"
+        "forge_corner",
+        "recovery_lounge"
       ],
       "service_tier": 3,
       "base_gold_yield": 86,
       "base_residue_yield": 20,
       "stamina_cost": 20,
-      "client_tiers": [
-        "wealthy_nobles"
+      "patron_tiers": [
+        "guild_sponsors"
       ],
       "trained_skill_ids": [
         "scouting",
@@ -195,21 +195,21 @@
         "hatchery_assists": 0
       },
       "preferred_trait_ids": [
-        "dominant",
+        "commanding",
         "graceful",
-        "greedy"
+        "opportunistic"
       ],
       "preferred_species_ids": [
-        "succu_slime",
-        "goblin_maid",
-        "harpy_hostess",
-        "moth_priestess"
+        "residue_slime",
+        "imp_runner",
+        "harpy_lookout",
+        "moth_archivist"
       ],
       "strategic_niche": "performance",
       "upgrade_building_ids": [
-        "silk_rope_forge",
-        "aftercare_lounge",
-        "luxury_room_renovation"
+        "forge_corner",
+        "recovery_lounge",
+        "guild_room_renovation"
       ],
       "fatigue_modifier": 1,
       "stress_modifier": 2,

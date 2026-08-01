@@ -139,7 +139,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         ending_day: game_state.current_day,
         opening_event_log_entries: starting_log_len,
         final_event_log_entries: game_state.event_log.len(),
-        final_girls: game_state.monsters.len(),
+        final_roster_size: game_state.monsters.len(),
         final_buildings: game_state.town.constructed_building_ids.len(),
         final_active_contracts: game_state.active_contracts.len(),
         final_average_bond: average_bond(&game_state),
@@ -220,7 +220,7 @@ fn debt_chain_stays_active_beyond_three_months() {
 }
 
 #[test]
-fn thirty_day_policy_averages_about_six_girls() {
+fn thirty_day_policy_averages_about_six_companions() {
     let _rng_guard = simulation_rng_guard();
     let data = test_game_data();
     let simulation_count = 25usize;
@@ -258,11 +258,11 @@ fn thirty_day_policy_averages_about_six_girls() {
     );
     assert!(
         final_roster_min >= 5,
-        "thirty-day policy should not collapse below 5 girls, got min {final_roster_min}"
+        "thirty-day policy should not collapse below 5 companions, got min {final_roster_min}"
     );
     assert!(
         final_roster_max <= 9,
-        "thirty-day policy should not overshoot beyond 9 girls, got max {final_roster_max}"
+        "thirty-day policy should not overshoot beyond 9 companions, got max {final_roster_max}"
     );
 }
 
@@ -282,9 +282,9 @@ fn hatching_respects_population_cap() {
 
     game_state.resources.gold = 10_000;
     game_state.resources.arcane_residue = 10_000;
-    create_opening_egg(&mut game_state, "slime_girl");
+    create_opening_egg(&mut game_state, "slime_companion");
 
-    let error = hatch_selected_egg(&data, &mut game_state, "egg_001", Some("slime_girl"))
+    let error = hatch_selected_egg(&data, &mut game_state, "egg_001", Some("slime_companion"))
         .expect_err("hatching at the population cap should fail");
 
     assert!(error.contains("population cap"));
@@ -315,22 +315,22 @@ fn long_campaign_simulation_reports_stay_valid() {
         );
         assert_eq!(report.simulation_days, simulation_days);
         assert!(
-            report.final_girls <= usize::from(data.config.new_game.max_population_cap),
+            report.final_roster_size <= usize::from(data.config.new_game.max_population_cap),
             "{}-day simulation exceeded population cap: {}",
             simulation_days,
-            report.final_girls
+            report.final_roster_size
         );
         match simulation_days {
             90 => assert!(
-                (7..=16).contains(&report.final_girls),
-                "90-day simulation should still show steady growth, got {} girls",
-                report.final_girls
+                (7..=16).contains(&report.final_roster_size),
+                "90-day simulation should still show steady growth, got {} companions",
+                report.final_roster_size
             ),
             180 => {
                 assert!(
-                    report.final_girls >= 10,
-                    "180-day simulation should normally exceed 9 girls, got {}",
-                    report.final_girls
+                    report.final_roster_size >= 10,
+                    "180-day simulation should normally exceed 9 companions, got {}",
+                    report.final_roster_size
                 );
                 assert!(
                     max_active_contracts(&report) >= 5,
@@ -341,9 +341,9 @@ fn long_campaign_simulation_reports_stay_valid() {
             365 => {
                 let population_cap = usize::from(data.config.new_game.max_population_cap);
                 assert_eq!(
-                    report.final_girls, population_cap,
-                    "365-day simulation should reach the hard population cap of {population_cap}, got {} girls",
-                    report.final_girls
+                    report.final_roster_size, population_cap,
+                    "365-day simulation should reach the hard population cap of {population_cap}, got {} companions",
+                    report.final_roster_size
                 );
                 assert!(
                     report.final_buildings >= 9,
@@ -395,7 +395,7 @@ fn multi_seed_365_simulation_summary_reports_variance() {
             MultiSeedSimulationSample {
                 sample: index + 1,
                 rng_seed: *seed,
-                girls: report.final_girls,
+                companions: report.final_roster_size,
                 buildings: report.final_buildings,
                 gold: report.final_resources.gold,
                 debt_gap: report.surplus_summary.debt_gold_gap,
@@ -415,7 +415,7 @@ fn multi_seed_365_simulation_summary_reports_variance() {
         .collect::<Vec<_>>();
     let summary = MultiSeedSimulationSummary {
         simulation_days: 365,
-        girls: summarize_usize(samples.iter().map(|sample| sample.girls)),
+        companions: summarize_usize(samples.iter().map(|sample| sample.companions)),
         buildings: summarize_usize(samples.iter().map(|sample| sample.buildings)),
         gold: summarize_u32(samples.iter().map(|sample| sample.gold)),
         debt_gap: summarize_i64(samples.iter().map(|sample| sample.debt_gap)),
@@ -436,14 +436,14 @@ fn multi_seed_365_simulation_summary_reports_variance() {
         summary
             .samples
             .iter()
-            .all(|sample| sample.girls <= usize::from(data.config.new_game.max_population_cap)),
+            .all(|sample| sample.companions <= usize::from(data.config.new_game.max_population_cap)),
         "multi-seed samples should stay within population cap"
     );
     assert!(
         summary
             .samples
             .iter()
-            .all(|sample| sample.girls == usize::from(data.config.new_game.max_population_cap)),
+            .all(|sample| sample.companions == usize::from(data.config.new_game.max_population_cap)),
         "multi-seed samples should reach population cap by day 365"
     );
     assert!(
@@ -592,7 +592,7 @@ fn run_simulation_report(data: &GameData, simulation_days: u32, rng_seed: u64) -
         ending_day: game_state.current_day,
         opening_event_log_entries: starting_log_len,
         final_event_log_entries: game_state.event_log.len(),
-        final_girls: game_state.monsters.len(),
+        final_roster_size: game_state.monsters.len(),
         final_buildings: game_state.town.constructed_building_ids.len(),
         final_active_contracts: game_state.active_contracts.len(),
         final_average_bond: average_bond(&game_state),

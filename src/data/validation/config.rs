@@ -133,7 +133,7 @@ impl GameData {
             || self.config.day_cycle.expedition_instinct_residue_multiplier == 0
             || self.config.day_cycle.expedition_endurance_safety_divisor == 0
             || self.config.day_cycle.expedition_reward_success_divisor == 0
-            || self.config.day_cycle.girl_food_gold_per_day == 0
+            || self.config.day_cycle.companion_food_gold_per_day == 0
             || self.config.day_cycle.building_maintenance_cost_divisor == 0
         {
             return Err(

@@ -13,9 +13,9 @@ pub async fn load_game_data() -> Result<GameData, String> {
         config: load_data("config").await?,
         ui_text: load_data("ui_text").await?,
         debt_milestones: load_data("debt_milestones").await?,
-        patron_archetypes: load_data("guest_archetypes").await?,
-        contracts: load_data("guest_requests").await?,
-        patron_tiers: load_data("client_tiers").await?,
+        patron_archetypes: load_data("patron_archetypes").await?,
+        contracts: load_data("contracts").await?,
+        patron_tiers: load_data("patron_tiers").await?,
         missions: load_data("missions").await?,
         mutations: load_data("mutations").await?,
         story_events: load_data("story_events").await?,
@@ -45,16 +45,16 @@ pub async fn load_game_data() -> Result<GameData, String> {
             include_str!("../../assets/data/debt_milestones.json"),
         )?,
         patron_archetypes: parse_embedded(
-            "guest_archetypes.json",
-            include_str!("../../assets/data/guest_archetypes.json"),
+            "patron_archetypes.json",
+            include_str!("../../assets/data/patron_archetypes.json"),
         )?,
         contracts: parse_embedded(
-            "guest_requests.json",
-            include_str!("../../assets/data/guest_requests.json"),
+            "contracts.json",
+            include_str!("../../assets/data/contracts.json"),
         )?,
         patron_tiers: parse_embedded(
-            "client_tiers.json",
-            include_str!("../../assets/data/client_tiers.json"),
+            "patron_tiers.json",
+            include_str!("../../assets/data/patron_tiers.json"),
         )?,
         missions: parse_embedded(
             "missions.json",
@@ -96,4 +96,50 @@ pub async fn load_game_data() -> Result<GameData, String> {
 #[cfg(target_arch = "wasm32")]
 fn parse_embedded<T: DeserializeOwned>(label: &str, json: &str) -> Result<T, String> {
     serde_json::from_str(json).map_err(|error| format!("JSON parse error in {label}: {error}"))
+}
+
+/// The shipped catalogs, parsed straight from `assets/data/`. Shared by every
+/// test that needs real content rather than a hand-built fixture.
+#[cfg(test)]
+pub(crate) fn test_game_data() -> GameData {
+    GameData {
+        config: parse_test_json(include_str!("../../assets/data/config.json")),
+        ui_text: parse_test_json(include_str!("../../assets/data/ui_text.json")),
+        debt_milestones: parse_test_json(include_str!("../../assets/data/debt_milestones.json")),
+        patron_archetypes: parse_test_json(include_str!(
+            "../../assets/data/patron_archetypes.json"
+        )),
+        contracts: parse_test_json(include_str!("../../assets/data/contracts.json")),
+        patron_tiers: parse_test_json(include_str!("../../assets/data/patron_tiers.json")),
+        missions: parse_test_json(include_str!("../../assets/data/missions.json")),
+        mutations: parse_test_json(include_str!("../../assets/data/mutations.json")),
+        story_events: parse_test_json(include_str!("../../assets/data/story_events.json")),
+        monster_names: parse_test_json(include_str!("../../assets/data/monster_names.json")),
+        species: parse_test_json(include_str!("../../assets/data/species.json")),
+        buildings: parse_test_json(include_str!("../../assets/data/buildings.json")),
+        floors: parse_test_json(include_str!("../../assets/data/floors.json")),
+        traits: parse_test_json(include_str!("../../assets/data/traits.json")),
+        guild_rooms: parse_test_json(include_str!("../../assets/data/guild_rooms.json")),
+        events: parse_test_json(include_str!("../../assets/data/events.json")),
+    }
+}
+
+#[cfg(test)]
+fn parse_test_json<T: serde::de::DeserializeOwned>(json: &str) -> T {
+    serde_json::from_str(json).expect("test data should deserialize")
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// The shipped catalogs are only cross-checked at game startup, so a broken
+    /// reference between two JSON files would otherwise surface as a launch
+    /// failure rather than a red test. Every id content authors write lands here.
+    #[test]
+    fn shipped_data_catalogs_cross_reference_cleanly() {
+        test_game_data()
+            .validate()
+            .expect("shipped assets/data catalogs should pass load-time validation");
+    }
 }

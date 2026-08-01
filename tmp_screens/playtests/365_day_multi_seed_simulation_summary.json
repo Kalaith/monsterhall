@@ -4,7 +4,7 @@
     {
       "sample": 1,
       "rng_seed": 911212545,
-      "girls": 20,
+      "companions": 20,
       "buildings": 9,
       "gold": 329419,
       "debt_gap": -2170581,
@@ -19,7 +19,7 @@
     {
       "sample": 2,
       "rng_seed": 911212546,
-      "girls": 20,
+      "companions": 20,
       "buildings": 16,
       "gold": 691323,
       "debt_gap": -1808677,
@@ -34,7 +34,7 @@
     {
       "sample": 3,
       "rng_seed": 911212547,
-      "girls": 20,
+      "companions": 20,
       "buildings": 15,
       "gold": 638280,
       "debt_gap": -1861720,
@@ -49,7 +49,7 @@
     {
       "sample": 4,
       "rng_seed": 911212548,
-      "girls": 20,
+      "companions": 20,
       "buildings": 15,
       "gold": 637936,
       "debt_gap": -1862064,
@@ -64,7 +64,7 @@
     {
       "sample": 5,
       "rng_seed": 911212549,
-      "girls": 20,
+      "companions": 20,
       "buildings": 16,
       "gold": 628526,
       "debt_gap": -1871474,
@@ -79,7 +79,7 @@
     {
       "sample": 6,
       "rng_seed": 911212550,
-      "girls": 20,
+      "companions": 20,
       "buildings": 15,
       "gold": 643459,
       "debt_gap": -1856541,
@@ -94,7 +94,7 @@
     {
       "sample": 7,
       "rng_seed": 911212551,
-      "girls": 20,
+      "companions": 20,
       "buildings": 15,
       "gold": 645103,
       "debt_gap": -1854897,
@@ -109,7 +109,7 @@
     {
       "sample": 8,
       "rng_seed": 911212552,
-      "girls": 20,
+      "companions": 20,
       "buildings": 17,
       "gold": 837306,
       "debt_gap": -1662694,
@@ -124,7 +124,7 @@
     {
       "sample": 9,
       "rng_seed": 911212553,
-      "girls": 20,
+      "companions": 20,
       "buildings": 16,
       "gold": 621839,
       "debt_gap": -1878161,
@@ -139,7 +139,7 @@
     {
       "sample": 10,
       "rng_seed": 911212554,
-      "girls": 20,
+      "companions": 20,
       "buildings": 13,
       "gold": 750442,
       "debt_gap": -1749558,
@@ -152,7 +152,7 @@
       "expirations": 353
     }
   ],
-  "girls": {
+  "companions": {
     "average": 20.0,
     "min": 20,
     "max": 20

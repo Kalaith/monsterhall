@@ -5,16 +5,16 @@ use super::*;
 pub(super) fn purchase_priority_buildings(data: &GameData, game_state: &mut GameState) -> usize {
     let build_order = [
         "slime_pool",
-        "aftercare_lounge",
-        "healing_hot_springs",
+        "recovery_lounge",
+        "recovery_baths",
         "residue_alchemy_bench",
-        "silk_rope_forge",
+        "forge_corner",
         "hatchery_scrying_pool",
-        "warm_love_nest",
-        "monster_kink_archive",
+        "nursery_habitat",
+        "species_archive",
         "tower_route_cartography",
         "relic_residue_condenser",
-        "luxury_room_renovation",
+        "guild_room_renovation",
         "prestige_hospitality_wing",
     ];
     let mut purchased = 0usize;

@@ -2,10 +2,10 @@
   "version": "1.2.0",
   "species": [
     {
-      "id": "slime_girl",
+      "id": "slime_companion",
       "name": "Slime Companion",
       "description": "A flexible starter companion who handles cleanup, residue recovery, narrow tunnel scouting, and simple hospitality better than any ordinary hireling.",
-      "portrait_key": "slime_girl_portrait",
+      "portrait_key": "slime_companion_portrait",
       "base_stats": {
         "power": 3,
         "charm": 2,
@@ -16,7 +16,7 @@
         "stretchy"
       ],
       "preferred_room_ids": [
-        "vanilla_suite",
+        "common_room",
         "packroom_annex"
       ],
       "hatching_cost": {
@@ -28,10 +28,10 @@
       }
     },
     {
-      "id": "succu_slime",
+      "id": "residue_slime",
       "name": "Residue Slime",
       "description": "A slime variant tuned to arcane residue, useful for alchemy support, patron consultations, and careful work around unstable tower finds.",
-      "portrait_key": "succu_slime_portrait",
+      "portrait_key": "residue_slime_portrait",
       "base_stats": {
         "power": 2,
         "charm": 8,
@@ -43,8 +43,8 @@
         "corruption_tuned"
       ],
       "preferred_room_ids": [
-        "vanilla_suite",
-        "public_stage"
+        "common_room",
+        "reception_hall"
       ],
       "hatching_cost": {
         "gold": 40,
@@ -55,10 +55,10 @@
       }
     },
     {
-      "id": "goblin_maid",
+      "id": "imp_runner",
       "name": "Imp Runner",
       "description": "A quick errand-runner with sharp hands and sharper instincts, ideal for courier work, supply packing, and risky scouting.",
-      "portrait_key": "goblin_maid_portrait",
+      "portrait_key": "imp_runner_portrait",
       "base_stats": {
         "power": 4,
         "charm": 6,
@@ -66,12 +66,12 @@
         "instinct": 5
       },
       "starting_traits": [
-        "greedy",
+        "opportunistic",
         "graceful"
       ],
       "preferred_room_ids": [
-        "vanilla_suite",
-        "public_stage"
+        "common_room",
+        "reception_hall"
       ],
       "hatching_cost": {
         "gold": 50,
@@ -94,7 +94,7 @@
       },
       "starting_traits": [
         "corruption_tuned",
-        "dominant"
+        "commanding"
       ],
       "preferred_room_ids": [
         "packroom_annex",
@@ -109,10 +109,10 @@
       }
     },
     {
-      "id": "harpy_hostess",
+      "id": "harpy_lookout",
       "name": "Harpy Lookout",
       "description": "A fast aerial companion who excels at lookout duty, courier work, vertical scouting, and keeping the reception hall lively.",
-      "portrait_key": "harpy_hostess_portrait",
+      "portrait_key": "harpy_lookout_portrait",
       "base_stats": {
         "power": 3,
         "charm": 7,
@@ -124,8 +124,8 @@
         "eager"
       ],
       "preferred_room_ids": [
-        "public_stage",
-        "vanilla_suite"
+        "reception_hall",
+        "common_room"
       ],
       "hatching_cost": {
         "gold": 60,
@@ -136,10 +136,10 @@
       }
     },
     {
-      "id": "lamia_binder",
+      "id": "lamia_routekeeper",
       "name": "Lamia Routekeeper",
       "description": "A calm route specialist with strong memory, careful posture-reading, and a gift for negotiation at the reception desk.",
-      "portrait_key": "lamia_binder_portrait",
+      "portrait_key": "lamia_routekeeper_portrait",
       "base_stats": {
         "power": 6,
         "charm": 6,
@@ -147,7 +147,7 @@
         "instinct": 4
       },
       "starting_traits": [
-        "dominant",
+        "commanding",
         "hatchery_attuned"
       ],
       "preferred_room_ids": [
@@ -163,10 +163,10 @@
       }
     },
     {
-      "id": "hellhound_bouncer",
+      "id": "minotaur_porter",
       "name": "Minotaur Porter",
       "description": "A powerful escort and hauler who protects fragile parties, clears obstacles, and keeps heavy guild work moving.",
-      "portrait_key": "hellhound_bouncer_portrait",
+      "portrait_key": "minotaur_porter_portrait",
       "base_stats": {
         "power": 7,
         "charm": 3,
@@ -175,11 +175,11 @@
       },
       "starting_traits": [
         "resilient",
-        "feral_instinct"
+        "sharp_instinct"
       ],
       "preferred_room_ids": [
         "packroom_annex",
-        "public_stage"
+        "reception_hall"
       ],
       "hatching_cost": {
         "gold": 65,
@@ -190,10 +190,10 @@
       }
     },
     {
-      "id": "moth_priestess",
+      "id": "moth_archivist",
       "name": "Moth Archivist",
       "description": "A quiet relic reader drawn to old tower lore, useful for archive research, ritual notes, and delicate discoveries.",
-      "portrait_key": "moth_priestess_portrait",
+      "portrait_key": "moth_archivist_portrait",
       "base_stats": {
         "power": 3,
         "charm": 7,
@@ -206,7 +206,7 @@
       ],
       "preferred_room_ids": [
         "nursery_wing",
-        "public_stage"
+        "reception_hall"
       ],
       "hatching_cost": {
         "gold": 85,
