@@ -946,6 +946,48 @@
       "text": "Past the machinery the stonework changes: older, better cut, and not sized for anything that walks upright.",
       "required_trait_ids": [],
       "required_species_ids": []
+    },
+    {
+      "id": "tower_descent_counted",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Below the Understair the steps run on without a landing, and every companion who has walked them reports the same thing: something counted them on the way down.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_chorus_answer",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A word spoken into the dark below came back in the same voice, later, having clearly been considered.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_hollow_socket",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "There are sockets down there the size of chapels, shaped to hold whatever used to drive the machinery, and every one of them is empty.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_guildmark_door",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A door far below carries the guild's own mark, cut from the inside, and cut long before there was a guild to have one.",
+      "required_trait_ids": [],
+      "required_species_ids": [
+        "golemkin_warden"
+      ]
+    },
+    {
+      "id": "tower_core_warmth",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "The lowest air in the shaft is warm and moving, and it smells the way the hatchery does on a good morning.",
+      "required_trait_ids": [],
+      "required_species_ids": []
     }
   ]
 }

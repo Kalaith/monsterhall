@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "floors": [
     {
       "id": "floor_1_slick_cellars",
@@ -952,6 +952,255 @@
       ],
       "egg_grade_bonus": 5,
       "corruption_pressure": 6
+    },
+    {
+      "id": "the_long_descent",
+      "name": "The Long Descent",
+      "depth": 21,
+      "description": "No rooms for a full day's climb, only stair, and the stair was cut in one piece. Companions come back certain they were counted on the way down.",
+      "difficulty": 88,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "the_understair"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "egg_hunt",
+        "relic_raid",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 78,
+        "eggs": 3,
+        "relics": 13,
+        "arcane_residue": 30
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "descent_marker"
+      ],
+      "hazard_tags": [
+        "unbroken_stair",
+        "being_counted",
+        "no_landings"
+      ],
+      "egg_grade_bonus": 5,
+      "corruption_pressure": 6
+    },
+    {
+      "id": "chorus_vault",
+      "name": "Chorus Vault",
+      "depth": 22,
+      "description": "A round hall that answers. Speak once and the vault returns it in a voice that has had longer to think about the words than you have.",
+      "difficulty": 92,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "the_long_descent"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "egg_hunt",
+        "relic_raid",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 82,
+        "eggs": 4,
+        "relics": 14,
+        "arcane_residue": 32
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "moth_archivist",
+          "weight": 5
+        },
+        {
+          "species_id": "residue_slime",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "answering_stone"
+      ],
+      "hazard_tags": [
+        "answering_echo",
+        "lost_time",
+        "persuasion"
+      ],
+      "egg_grade_bonus": 6,
+      "corruption_pressure": 7
+    },
+    {
+      "id": "hollow_works",
+      "name": "The Hollow Works",
+      "depth": 23,
+      "description": "The machinery above was fed from here, and what fed it is gone, leaving sockets the size of chapels and a silence that the guild's instruments refuse to record.",
+      "difficulty": 96,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "chorus_vault"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "egg_hunt",
+        "relic_raid",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 86,
+        "eggs": 4,
+        "relics": 15,
+        "arcane_residue": 34
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 5
+        },
+        {
+          "species_id": "residue_slime",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "empty_socket",
+        "feeder_line"
+      ],
+      "hazard_tags": [
+        "absent_machinery",
+        "unrecorded_silence",
+        "structural_hollow"
+      ],
+      "egg_grade_bonus": 6,
+      "corruption_pressure": 7
+    },
+    {
+      "id": "threshold_ward",
+      "name": "The Threshold",
+      "depth": 24,
+      "description": "One door, shut, with the guild's own guildmark cut into it \u2014 older than the guild, and cut from the inside. Everything the tower has done since the cellars was leading here.",
+      "difficulty": 100,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "hollow_works"
+      ],
+      "required_surveys": 1,
+      "required_roster": [
+        {
+          "species_id": "golemkin_warden",
+          "minimum_quality_rank": 4
+        }
+      ],
+      "mission_ids": [
+        "egg_hunt",
+        "relic_raid",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 90,
+        "eggs": 4,
+        "relics": 17,
+        "arcane_residue": 36
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        },
+        {
+          "species_id": "residue_slime",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "guildmark_seal"
+      ],
+      "hazard_tags": [
+        "one_door",
+        "recognised",
+        "the_last_ward"
+      ],
+      "egg_grade_bonus": 6,
+      "corruption_pressure": 8
+    },
+    {
+      "id": "tower_core",
+      "name": "The Tower Core",
+      "depth": 25,
+      "description": "Warm, lit, and in use. Whatever the tower is for is happening here and has been the whole time. The eggs the guild was founded on came up out of this room, and it is not finished sending them.",
+      "difficulty": 104,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "threshold_ward"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "egg_hunt",
+        "relic_raid",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 96,
+        "eggs": 5,
+        "relics": 20,
+        "arcane_residue": 40
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        },
+        {
+          "species_id": "residue_slime",
+          "weight": 4
+        },
+        {
+          "species_id": "lamia_routekeeper",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "core_ember",
+        "founding_shell"
+      ],
+      "hazard_tags": [
+        "in_use",
+        "warm_and_lit",
+        "still_sending"
+      ],
+      "egg_grade_bonus": 7,
+      "corruption_pressure": 8
     }
   ]
 }

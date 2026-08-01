@@ -12,7 +12,7 @@ debt milestones, guild rooms, buildings, eggs, mutations, events, and a 365-day 
 work. What the game is short on is **tower**: the thing the entire fiction is about is three floors
 deep and runs out before the debt chain does.
 
-Target: **a 25-floor tower**, authored as five bands of five, each band a place with its own hazards,
+Target: **a 25-floor tower** — **reached 2026-08-02**. Authored as five bands of five, each band a place with its own hazards,
 species, rewards, gate, and reasons to care — and the systems around it (missions, species, buildings,
 contracts, events, prose) grown to match. Build it so floor 26 is a data entry, not a refactor.
 
@@ -59,7 +59,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 
 | Axis | Now | Target | Notes |
 |---|---|---|---|
-| **Tower floors** | **20** | **25** | Bands 1–4 authored, depths 1–20, difficulty 20→84. All twenty unlock and are reached in a 365-day campaign. |
+| **Tower floors** | **25** ✅ | **25** | **Target met.** All five bands authored, depths 1–25, difficulty 20→104 against a ceiling of 120. Every floor unlocks and is reached in a 365-day campaign; the guild's preferred destination is the Tower Core at the bottom. |
 | Missions | 4 | 8–10 | GDD names 6 types; `missions.json` has 4. Rescue/Retrieval and Contract Fulfilment are unwritten. |
 | Species | 8 | 14–18 | Deep bands need companions you can only get down there. |
 | Mutations | 3 | 10+ | The corruption payoff. One mutation per two species is thin. |
@@ -461,6 +461,30 @@ Stop the loop and report if:
   against the `max_floor_difficulty` ceiling of 120, and the ramp must continue past eggs 3 /
   relics 12. `tower_core` already exists as a magic egg source (`day_cycle/eggs.rs:7`) and is the
   thread band 5 should pay off.
+
+- **2026-08-02 — phase 1 COMPLETE, band 5 authored (depths 21-25). The tower is 25 floors.**
+  **The Long Descent** (21, d88, a day of stair cut in one piece, and something counts you down it),
+  **Chorus Vault** (22, d92, a hall that answers in a voice that has had longer to think),
+  **The Hollow Works** (23, d96, chapel-sized sockets where whatever drove the machinery used to sit),
+  **The Threshold** (24, d100, one door carrying the guild's own mark, cut from the inside and older
+  than the guild; wants a rank-4 Golemkin Warden), and **The Tower Core** (25, d104, warm, lit, in
+  use, and still sending). Five events. **The band needed no tuning passes** — the monotonic ramp and
+  best-prize-at-the-bottom rules from band 4 worked first time, which is the sign those rules are
+  real rather than curve-fitted.
+  **`tower_core` is paid off.** `day_cycle/eggs.rs` has always stamped the guild's founding egg with
+  `source_floor_id: "tower_core"`, a place that did not exist, and `engine/validation.rs` carried an
+  explicit exemption so that dangling id would validate. Depth 25 is now that room, the id resolves
+  like any other floor, and **the exemption is deleted** — the opening egg retroactively came from
+  the bottom of the tower.
+  **Result:** 25 floors, all unlocked and reached; difficulty 20 -> 104. Gold ~730k, ten rank-5
+  escorts, buildings 17, 18-20 companions per seed, 4 of 10 clear Founder's Due, zero missed
+  payments. 52 tests green, no assertion touched across bands 4 and 5.
+  **Phase 1 is done. Next is phase 2 (density)**, and the thin axes are unchanged since day one:
+  **species 8** (deep bands still draw from the same eight — nothing lives only at depth 20+),
+  **missions 4** (the GDD names six; deep floors want rescue and sealed-extraction stances),
+  **mutations 3**, **relics still ids not objects** (~30 `relic_drop_ids` now exist across the tower
+  and not one has a name, description or a patron who wants it — that is the single largest content
+  gap the tower has opened up), **guild rooms 4**, **contracts 12**, **patron tiers 3**.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

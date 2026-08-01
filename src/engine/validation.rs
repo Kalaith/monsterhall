@@ -190,7 +190,10 @@ fn validate_egg_references(
     floor_ids: &HashSet<&str>,
     egg: &EggState,
 ) -> Result<(), String> {
-    if egg.source_floor_id != "tower_core" && !floor_ids.contains(egg.source_floor_id.as_str()) {
+    // `tower_core` used to be special-cased here because the founding egg was
+    // stamped with a place that did not exist. Band 5 built it, at depth 25, so
+    // the id now resolves like any other floor and the exemption is gone.
+    if !floor_ids.contains(egg.source_floor_id.as_str()) {
         return Err(format!(
             "egg '{}' references unknown source floor '{}'.",
             egg.id, egg.source_floor_id
