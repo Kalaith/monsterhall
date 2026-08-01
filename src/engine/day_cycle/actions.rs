@@ -260,7 +260,7 @@ pub fn replace_monster_with_selected_egg(
 }
 
 pub fn convert_egg(
-    _data: &GameData,
+    data: &GameData,
     game_state: &mut GameState,
     egg_id: &str,
     conversion: EggConversionKind,
@@ -271,14 +271,16 @@ pub fn convert_egg(
         .position(|egg| egg.id == egg_id)
         .ok_or_else(|| format!("Unknown egg id '{egg_id}'."))?;
     let egg = game_state.egg_inventory[egg_index].clone();
-    let quality_rank = egg_quality_rank(egg.grade_score);
+    let quality_rank = egg_quality_rank(&data.config.day_cycle, egg.grade_score);
 
     match conversion {
         EggConversionKind::Sell => {
             let gold = match quality_rank {
                 1 => 10,
                 2 => 20,
-                _ => 50,
+                3 => 50,
+                4 => 110,
+                _ => 240,
             };
             game_state.egg_inventory.remove(egg_index);
             game_state.resources.gold = game_state.resources.gold.saturating_add(gold);
@@ -291,7 +293,9 @@ pub fn convert_egg(
             let residue = match quality_rank {
                 1 => 8,
                 2 => 18,
-                _ => 35,
+                3 => 35,
+                4 => 68,
+                _ => 130,
             };
             let relics = u32::from(quality_rank >= 3);
             game_state.egg_inventory.remove(egg_index);
@@ -319,7 +323,9 @@ pub fn convert_egg(
                 .iter()
                 .enumerate()
                 .find(|(index, candidate)| {
-                    *index != egg_index && egg_quality_rank(candidate.grade_score) == quality_rank
+                    *index != egg_index
+                        && egg_quality_rank(&data.config.day_cycle, candidate.grade_score)
+                            == quality_rank
                 })
                 .map(|(index, _)| index)
             else {
@@ -408,7 +414,7 @@ pub(super) fn hatch_species_from_ready_egg(
     let monster_id = next_monster_id(game_state);
     let monster_name = pick_hatched_monster_name(data, game_state, &species.id)?;
     let egg_grade_score = game_state.egg_inventory[egg_index].grade_score;
-    let quality_rank = egg_quality_rank(egg_grade_score);
+    let quality_rank = egg_quality_rank(&data.config.day_cycle, egg_grade_score);
     let replaced_monster = replacement_monster_id
         .map(|monster_id| remove_monster_for_roster_change(game_state, monster_id))
         .transpose()?;

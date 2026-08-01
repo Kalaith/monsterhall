@@ -136,7 +136,24 @@ pub struct DayCycleConfigData {
     pub expedition_instinct_residue_multiplier: u32,
     pub expedition_endurance_safety_divisor: u32,
     pub expedition_reward_success_divisor: u32,
-    pub companion_food_gold_per_day: u32,
+    /// Base daily wage before rank and skill scaling. Wages are the guild's
+    /// answer to a roster that earns more as it gets stronger.
+    pub companion_base_wage_gold: u32,
+    /// Egg grade scores at which a companion reaches rank 2, 3, 4 and 5.
+    #[serde(default = "default_quality_rank_thresholds")]
+    pub egg_quality_rank_thresholds: Vec<u32>,
+    /// What an escort of each rank earns, indexed rank 1..=5.
+    #[serde(default = "default_quality_income_multipliers_pct")]
+    pub quality_income_multipliers_pct: Vec<u32>,
+    /// What an escort of each rank is paid, indexed rank 1..=5.
+    #[serde(default = "default_quality_wage_multipliers_pct")]
+    pub quality_wage_multipliers_pct: Vec<u32>,
+    #[serde(default = "default_skill_wage_divisor")]
+    pub skill_wage_divisor: u32,
+    /// Fee an adventuring party pays when the escort is below the calibre their
+    /// patron tier demands. They still hire, but they do not pay full rate.
+    #[serde(default = "default_understrength_income_pct")]
+    pub understrength_income_pct: u32,
     pub building_maintenance_cost_divisor: u32,
     #[serde(default)]
     pub upkeep_bands: Vec<UpkeepBandData>,
@@ -165,7 +182,8 @@ pub struct DayCycleConfigData {
 pub struct UpkeepBandData {
     pub min_companions: u32,
     pub min_patron_tiers: u32,
-    pub food_multiplier_pct: u32,
+    #[serde(alias = "food_multiplier_pct")]
+    pub wage_multiplier_pct: u32,
     pub cleaning_multiplier_pct: u32,
     pub maintenance_multiplier_pct: u32,
 }
@@ -231,6 +249,10 @@ pub struct PatronTierData {
     pub id: String,
     pub name: String,
     pub description: String,
+    /// Escort rank this clientele expects. Below it they still hire, at
+    /// `understrength_income_pct` of the fee.
+    #[serde(default = "default_quality_rank")]
+    pub minimum_quality_rank: u8,
     pub income_multiplier_pct: u32,
     pub residue_multiplier_pct: u32,
 }
@@ -476,6 +498,26 @@ fn default_max_survey_familiarity_relief() -> i32 {
 
 fn default_max_floor_difficulty() -> u32 {
     120
+}
+
+fn default_quality_rank_thresholds() -> Vec<u32> {
+    vec![3, 6, 11, 18]
+}
+
+fn default_quality_income_multipliers_pct() -> Vec<u32> {
+    vec![100, 175, 300, 500, 800]
+}
+
+fn default_quality_wage_multipliers_pct() -> Vec<u32> {
+    vec![100, 160, 260, 420, 650]
+}
+
+fn default_skill_wage_divisor() -> u32 {
+    4
+}
+
+fn default_understrength_income_pct() -> u32 {
+    45
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

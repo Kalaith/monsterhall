@@ -89,7 +89,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
     let mut total_expedition_prep_materials = 0u32;
     let mut total_expedition_prep_arcane_residue = 0u32;
     let mut total_expedition_prep_shortfall = 0u32;
-    let mut total_upkeep_food_gold = 0u32;
+    let mut total_upkeep_wage_gold = 0u32;
     let mut total_upkeep_cleaning_gold = 0u32;
     let mut total_upkeep_maintenance_gold = 0u32;
     let mut total_upkeep_gold = 0u32;
@@ -132,7 +132,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         total_expedition_prep_materials += summary.expedition_prep_materials;
         total_expedition_prep_arcane_residue += summary.expedition_prep_arcane_residue;
         total_expedition_prep_shortfall += summary.expedition_prep_shortfall;
-        total_upkeep_food_gold += summary.upkeep_food_gold;
+        total_upkeep_wage_gold += summary.upkeep_wage_gold;
         total_upkeep_cleaning_gold += summary.upkeep_cleaning_gold;
         total_upkeep_maintenance_gold += summary.upkeep_maintenance_gold;
         total_upkeep_gold += summary.upkeep_gold;
@@ -205,7 +205,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         total_expedition_prep_materials,
         total_expedition_prep_arcane_residue,
         total_expedition_prep_shortfall,
-        total_upkeep_food_gold,
+        total_upkeep_wage_gold,
         total_upkeep_cleaning_gold,
         total_upkeep_maintenance_gold,
         total_upkeep_gold,
@@ -386,10 +386,23 @@ fn long_campaign_simulation_reports_stay_valid() {
                 );
             }
             365 => {
+                // Deliberately relaxed from `== population_cap` when wages
+                // landed. Filling the last slots used to be free and therefore
+                // inevitable: a companion cost a flat 4 gold a day whatever she
+                // was worth. Wages scale with rank and skill, so the final hires
+                // are now a decision taken under debt pressure rather than a
+                // formality. What still must hold is that the guild grows to
+                // near its ceiling; a roster that stalls well short means the
+                // wage load has broken growth.
                 let population_cap = usize::from(data.config.new_game.max_population_cap);
-                assert_eq!(
-                    report.final_roster_size, population_cap,
-                    "365-day simulation should reach the hard population cap of {population_cap}, got {} companions",
+                assert!(
+                    report.final_roster_size + 2 >= population_cap,
+                    "365-day simulation should grow to within two of the population cap of {population_cap}, got {} companions",
+                    report.final_roster_size
+                );
+                assert!(
+                    report.final_roster_size <= population_cap,
+                    "365-day simulation exceeded the population cap of {population_cap}, got {} companions",
                     report.final_roster_size
                 );
                 assert!(
@@ -486,12 +499,22 @@ fn multi_seed_365_simulation_summary_reports_variance() {
             .all(|sample| sample.companions <= usize::from(data.config.new_game.max_population_cap)),
         "multi-seed samples should stay within population cap"
     );
+    // Also relaxed with the wage economy. Across seeds the roster now lands in
+    // a band rather than pinning to the ceiling, which is the variance wages are
+    // supposed to introduce. Two things still have to be true: some campaigns do
+    // fill the hall, and none of them collapse.
+    let population_cap = usize::from(data.config.new_game.max_population_cap);
     assert!(
         summary
             .samples
             .iter()
-            .all(|sample| sample.companions == usize::from(data.config.new_game.max_population_cap)),
-        "multi-seed samples should reach population cap by day 365"
+            .any(|sample| sample.companions == population_cap),
+        "at least one seed should still fill the hall by day 365"
+    );
+    assert!(
+        summary.companions.average >= (population_cap as f64) * 0.75,
+        "multi-seed roster averaged {:.1}, well short of the {population_cap} cap - the wage load has broken growth",
+        summary.companions.average
     );
     assert!(
         summary
@@ -549,7 +572,7 @@ fn run_simulation_report(data: &GameData, simulation_days: u32, rng_seed: u64) -
     let mut total_expedition_prep_materials = 0u32;
     let mut total_expedition_prep_arcane_residue = 0u32;
     let mut total_expedition_prep_shortfall = 0u32;
-    let mut total_upkeep_food_gold = 0u32;
+    let mut total_upkeep_wage_gold = 0u32;
     let mut total_upkeep_cleaning_gold = 0u32;
     let mut total_upkeep_maintenance_gold = 0u32;
     let mut total_upkeep_gold = 0u32;
@@ -594,7 +617,7 @@ fn run_simulation_report(data: &GameData, simulation_days: u32, rng_seed: u64) -
         total_expedition_prep_materials += summary.expedition_prep_materials;
         total_expedition_prep_arcane_residue += summary.expedition_prep_arcane_residue;
         total_expedition_prep_shortfall += summary.expedition_prep_shortfall;
-        total_upkeep_food_gold += summary.upkeep_food_gold;
+        total_upkeep_wage_gold += summary.upkeep_wage_gold;
         total_upkeep_cleaning_gold += summary.upkeep_cleaning_gold;
         total_upkeep_maintenance_gold += summary.upkeep_maintenance_gold;
         total_upkeep_gold += summary.upkeep_gold;
@@ -658,7 +681,7 @@ fn run_simulation_report(data: &GameData, simulation_days: u32, rng_seed: u64) -
         total_expedition_prep_materials,
         total_expedition_prep_arcane_residue,
         total_expedition_prep_shortfall,
-        total_upkeep_food_gold,
+        total_upkeep_wage_gold,
         total_upkeep_cleaning_gold,
         total_upkeep_maintenance_gold,
         total_upkeep_gold,

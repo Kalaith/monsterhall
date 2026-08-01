@@ -10,7 +10,9 @@ use super::{
     refresh_contracts, room_depth_profile_for_town, start_town_situation_from_event,
     tick_town_situations, upkeep_pressure_pct,
 };
-use crate::data::{BuildingData, EggSpeciesEntryData, GameData, ResourceAmountData};
+use crate::data::{
+    BuildingData, DayCycleConfigData, EggSpeciesEntryData, GameData, ResourceAmountData,
+};
 use crate::state::{
     CompanionJobState, CompanionSkillState, CompanionState, CompanionWorkHistoryState,
     DayResolutionSummary, EggConversionKind, EggIncubationState, EggState, ExpeditionPriority,

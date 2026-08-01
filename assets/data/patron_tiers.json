@@ -5,6 +5,7 @@
       "id": "local_delvers",
       "name": "Local Delvers",
       "description": "Early patrons with modest coin and straightforward tower-support needs.",
+      "minimum_quality_rank": 1,
       "income_multiplier_pct": 100,
       "residue_multiplier_pct": 100
     },
@@ -12,14 +13,16 @@
       "id": "guild_sponsors",
       "name": "Guild Sponsors",
       "description": "Richer patrons who pay well for privacy, polish, and specialized preparation.",
-      "income_multiplier_pct": 145,
+      "minimum_quality_rank": 3,
+      "income_multiplier_pct": 185,
       "residue_multiplier_pct": 115
     },
     {
       "id": "frontier_factions",
       "name": "Frontier Factions",
       "description": "Rare faction envoys who value species expertise, tower lore, and instability-safe work.",
-      "income_multiplier_pct": 165,
+      "minimum_quality_rank": 4,
+      "income_multiplier_pct": 240,
       "residue_multiplier_pct": 150
     }
   ]

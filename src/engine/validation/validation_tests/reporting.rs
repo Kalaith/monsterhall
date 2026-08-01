@@ -64,7 +64,7 @@ pub(super) struct GuestPressureMetrics {
 
 #[derive(Debug, Serialize, Default, Clone)]
 pub(super) struct UpkeepForecastSnapshot {
-    pub(super) food_gold: u32,
+    pub(super) wage_gold: u32,
     pub(super) cleaning_gold: u32,
     pub(super) maintenance_gold: u32,
     pub(super) total_gold: u32,
@@ -135,7 +135,7 @@ pub(super) struct SimulationDayReport {
     pub(super) expedition_prep_materials: u32,
     pub(super) expedition_prep_arcane_residue: u32,
     pub(super) expedition_prep_shortfall: u32,
-    pub(super) upkeep_food_gold: u32,
+    pub(super) upkeep_wage_gold: u32,
     pub(super) upkeep_cleaning_gold: u32,
     pub(super) upkeep_maintenance_gold: u32,
     pub(super) upkeep_gold: u32,
@@ -183,7 +183,7 @@ pub(super) struct SimulationReport {
     pub(super) total_expedition_prep_materials: u32,
     pub(super) total_expedition_prep_arcane_residue: u32,
     pub(super) total_expedition_prep_shortfall: u32,
-    pub(super) total_upkeep_food_gold: u32,
+    pub(super) total_upkeep_wage_gold: u32,
     pub(super) total_upkeep_cleaning_gold: u32,
     pub(super) total_upkeep_maintenance_gold: u32,
     pub(super) total_upkeep_gold: u32,
@@ -413,7 +413,7 @@ pub(super) fn build_day_report(
         expedition_prep_materials: summary.expedition_prep_materials,
         expedition_prep_arcane_residue: summary.expedition_prep_arcane_residue,
         expedition_prep_shortfall: summary.expedition_prep_shortfall,
-        upkeep_food_gold: summary.upkeep_food_gold,
+        upkeep_wage_gold: summary.upkeep_wage_gold,
         upkeep_cleaning_gold: summary.upkeep_cleaning_gold,
         upkeep_maintenance_gold: summary.upkeep_maintenance_gold,
         upkeep_gold: summary.upkeep_gold,
@@ -591,7 +591,7 @@ pub(super) fn upkeep_forecast_snapshot(
 ) -> UpkeepForecastSnapshot {
     let forecast = day_cycle::preview_upkeep(data, game_state);
     UpkeepForecastSnapshot {
-        food_gold: forecast.food_gold,
+        wage_gold: forecast.wage_gold,
         cleaning_gold: forecast.cleaning_gold,
         maintenance_gold: forecast.maintenance_gold,
         total_gold: forecast.total_gold,

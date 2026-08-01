@@ -132,9 +132,10 @@ impl GameData {
                         floor.id, requirement.species_id
                     ));
                 }
-                if !(1..=3).contains(&requirement.minimum_quality_rank) {
+                let max_rank = self.config.day_cycle.egg_quality_rank_thresholds.len() as u8 + 1;
+                if !(1..=max_rank).contains(&requirement.minimum_quality_rank) {
                     return Err(format!(
-                        "floor '{}'.required_roster for species '{}' must require 1 to 3 stars.",
+                        "floor '{}'.required_roster for species '{}' must require 1 to {max_rank} stars.",
                         floor.id, requirement.species_id
                     ));
                 }

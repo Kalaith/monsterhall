@@ -24,7 +24,7 @@ pub struct ExpeditionPlanPreview {
 
 #[derive(Debug, Clone, Default)]
 pub struct UpkeepForecast {
-    pub food_gold: u32,
+    pub wage_gold: u32,
     pub cleaning_gold: u32,
     pub maintenance_gold: u32,
     pub total_gold: u32,

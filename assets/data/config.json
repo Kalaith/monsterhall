@@ -1,6 +1,6 @@
 {
   "title": "Monsterhall",
-  "content_version": "1.10.0",
+  "content_version": "1.11.0",
   "save_version": 10,
   "input": {
     "primary_mode": "mouse",
@@ -89,34 +89,56 @@
     "expedition_instinct_residue_multiplier": 2,
     "expedition_endurance_safety_divisor": 3,
     "expedition_reward_success_divisor": 5,
-    "companion_food_gold_per_day": 4,
+    "companion_base_wage_gold": 4,
+    "egg_quality_rank_thresholds": [
+      3,
+      5,
+      10,
+      17
+    ],
+    "quality_income_multipliers_pct": [
+      100,
+      200,
+      450,
+      700,
+      1000
+    ],
+    "quality_wage_multipliers_pct": [
+      100,
+      140,
+      210,
+      300,
+      400
+    ],
+    "skill_wage_divisor": 4,
+    "understrength_income_pct": 45,
     "building_maintenance_cost_divisor": 20,
     "upkeep_bands": [
       {
         "min_companions": 1,
         "min_patron_tiers": 1,
-        "food_multiplier_pct": 100,
+        "wage_multiplier_pct": 100,
         "cleaning_multiplier_pct": 100,
         "maintenance_multiplier_pct": 100
       },
       {
         "min_companions": 8,
         "min_patron_tiers": 2,
-        "food_multiplier_pct": 125,
+        "wage_multiplier_pct": 125,
         "cleaning_multiplier_pct": 120,
         "maintenance_multiplier_pct": 115
       },
       {
         "min_companions": 12,
         "min_patron_tiers": 3,
-        "food_multiplier_pct": 150,
+        "wage_multiplier_pct": 150,
         "cleaning_multiplier_pct": 140,
         "maintenance_multiplier_pct": 130
       },
       {
         "min_companions": 16,
         "min_patron_tiers": 4,
-        "food_multiplier_pct": 180,
+        "wage_multiplier_pct": 180,
         "cleaning_multiplier_pct": 165,
         "maintenance_multiplier_pct": 150
       }

@@ -27,6 +27,15 @@ fn probe_floor_usage() {
         resolve_day(&data, &mut game_state);
     }
 
+    println!(
+        "ECONOMY gold={} companions={} cap={} buildings={} eggs={}",
+        game_state.resources.gold,
+        game_state.monsters.len(),
+        crate::engine::effective_population_cap(&data, &game_state),
+        game_state.town.constructed_building_ids.len(),
+        game_state.egg_inventory.len(),
+    );
+
     for floor in &data.floors.floors {
         let surveys = game_state
             .town

@@ -33,20 +33,64 @@ pub(super) fn spend_resources(
     resources.arcane_residue -= cost.arcane_residue;
 }
 
-pub(super) fn egg_quality_rank(grade_score: u32) -> u8 {
-    match grade_score {
-        0..=2 => 1,
-        3..=4 => 2,
-        _ => 3,
-    }
+/// Rank a hatched companion lands at, from the grade score of their egg.
+///
+/// The ladder is data so the tower can keep producing better companions all the
+/// way down. It used to top out at rank 3, which a depth-3 floor already
+/// reached — every floor below that added nothing to the roster.
+pub(super) fn egg_quality_rank(day_cycle: &DayCycleConfigData, grade_score: u32) -> u8 {
+    let rank = day_cycle
+        .egg_quality_rank_thresholds
+        .iter()
+        .filter(|threshold| grade_score >= **threshold)
+        .count()
+        + 1;
+    rank.min(max_quality_rank(day_cycle) as usize) as u8
 }
 
-pub(super) fn quality_income_multiplier_pct(quality_rank: u8) -> u32 {
-    match quality_rank.clamp(1, 3) {
-        1 => 100,
-        2 => 200,
-        _ => 450,
-    }
+pub(super) fn max_quality_rank(day_cycle: &DayCycleConfigData) -> u8 {
+    (day_cycle.egg_quality_rank_thresholds.len() + 1).max(1) as u8
+}
+
+/// What an adventuring party pays for an escort of this calibre.
+pub(super) fn quality_income_multiplier_pct(
+    day_cycle: &DayCycleConfigData,
+    quality_rank: u8,
+) -> u32 {
+    rank_multiplier_pct(&day_cycle.quality_income_multipliers_pct, quality_rank)
+}
+
+/// What the guild pays that escort. Trails the income curve on purpose: a
+/// stronger roster is still worth having, just not for free.
+pub(super) fn quality_wage_multiplier_pct(day_cycle: &DayCycleConfigData, quality_rank: u8) -> u32 {
+    rank_multiplier_pct(&day_cycle.quality_wage_multipliers_pct, quality_rank)
+}
+
+fn rank_multiplier_pct(curve: &[u32], quality_rank: u8) -> u32 {
+    let index = usize::from(quality_rank.max(1)) - 1;
+    curve
+        .get(index)
+        .or_else(|| curve.last())
+        .copied()
+        .unwrap_or(100)
+}
+
+/// A single companion's daily wage: a base rate scaled by rank, plus a little
+/// for the skills they have accumulated.
+pub(super) fn companion_daily_wage(
+    day_cycle: &DayCycleConfigData,
+    monster: &CompanionState,
+) -> u32 {
+    let rank_wage = day_cycle
+        .companion_base_wage_gold
+        .saturating_mul(quality_wage_multiplier_pct(day_cycle, monster.quality_rank))
+        .div_ceil(100);
+    let skill_total = monster.skills.scouting
+        + monster.skills.guarding
+        + monster.skills.hospitality
+        + monster.skills.crafting
+        + monster.skills.charm;
+    rank_wage.saturating_add(skill_total / day_cycle.skill_wage_divisor.max(1))
 }
 
 pub(super) fn next_monster_id(game_state: &GameState) -> String {

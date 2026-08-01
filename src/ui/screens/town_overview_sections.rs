@@ -557,7 +557,7 @@ pub(super) fn draw_summary_strip(
         &format!(
             "Next upkeep {}g: wages {}, supplies {}, repairs {}. Band {} companions / {} patron tiers. Companion {}g (+{}), building {}g (+{}).",
             upkeep.total_gold,
-            upkeep.food_gold,
+            upkeep.wage_gold,
             upkeep.cleaning_gold,
             upkeep.maintenance_gold,
             upkeep.active_band_min_companions,

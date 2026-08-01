@@ -15,7 +15,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         expedition_arcane_residue: 0,
         expedition_eggs: 0,
         expedition_relics: 0,
-        upkeep_food_gold: 0,
+        upkeep_wage_gold: 0,
         upkeep_cleaning_gold: 0,
         upkeep_maintenance_gold: 0,
         upkeep_gold: 0,
@@ -466,7 +466,7 @@ pub(super) fn apply_daily_upkeep(
     let paid = game_state.resources.gold.min(total_upkeep);
     game_state.resources.gold = game_state.resources.gold.saturating_sub(paid);
     let shortfall = total_upkeep.saturating_sub(paid);
-    summary.upkeep_food_gold = forecast.food_gold;
+    summary.upkeep_wage_gold = forecast.wage_gold;
     summary.upkeep_cleaning_gold = forecast.cleaning_gold;
     summary.upkeep_maintenance_gold = forecast.maintenance_gold;
     summary.upkeep_gold = paid;
@@ -475,7 +475,7 @@ pub(super) fn apply_daily_upkeep(
     if shortfall == 0 {
         summary.debt_updates.push(format!(
             "Paid {} gold in upkeep: {} wages, {} supplies, {} repairs.",
-            paid, forecast.food_gold, forecast.cleaning_gold, forecast.maintenance_gold
+            paid, forecast.wage_gold, forecast.cleaning_gold, forecast.maintenance_gold
         ));
         return;
     }

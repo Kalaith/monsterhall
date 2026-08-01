@@ -46,31 +46,37 @@ pub(super) fn collect_trait_modifiers(data: &GameData, monster: &CompanionState)
     aggregate
 }
 
+/// The clientele a companion of this calibre draws in a given room.
+///
+/// Parties hire escorts who match what they are attempting. A companion is
+/// booked by the best clientele she actually qualifies for — not by the room's
+/// grandest patron at a discount. Only when she meets none of the room's
+/// clientele does she work understrength, at a reduced fee.
 pub(super) fn active_patron_tier_for_room<'a>(
     data: &'a GameData,
     town: &PlayerTownState,
     room: &'a crate::data::GuildRoomData,
+    quality_rank: u8,
 ) -> Result<&'a crate::data::PatronTierData, String> {
-    let active_tier_id = town
-        .patron_tiers
-        .iter()
-        .filter(|tier_id| room.patron_tiers.contains(*tier_id))
-        .filter_map(|tier_id| {
-            data.patron_tiers
-                .patron_tiers
-                .iter()
-                .position(|entry| entry.id == *tier_id)
-                .map(|index| (index, tier_id))
-        })
-        .max_by_key(|(index, _)| *index)
-        .map(|(_, tier_id)| tier_id.clone())
-        .ok_or_else(|| format!("Room '{}' has no active patron tier.", room.id))?;
+    let available = || {
+        town.patron_tiers
+            .iter()
+            .filter(|tier_id| room.patron_tiers.contains(*tier_id))
+            .filter_map(|tier_id| {
+                data.patron_tiers
+                    .patron_tiers
+                    .iter()
+                    .find(|entry| &entry.id == tier_id)
+            })
+    };
 
-    data.patron_tiers
-        .patron_tiers
-        .iter()
-        .find(|entry| entry.id == active_tier_id)
-        .ok_or_else(|| format!("Unknown patron tier '{}'.", active_tier_id))
+    let qualified = available()
+        .filter(|tier| quality_rank >= tier.minimum_quality_rank)
+        .max_by_key(|tier| tier.income_multiplier_pct);
+
+    qualified
+        .or_else(|| available().min_by_key(|tier| tier.minimum_quality_rank))
+        .ok_or_else(|| format!("Room '{}' has no active patron tier.", room.id))
 }
 
 #[derive(Default)]

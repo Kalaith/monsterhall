@@ -12,7 +12,7 @@ pub use loader::load_game_data;
 pub(crate) use loader::test_game_data;
 pub use types::{
     BuildingData, CompanionSkillProgressionData, CompanionWorkHistoryProgressionData, ContractData,
-    EggSpeciesEntryData, EventData, GameData, GuildRoomData, MissionData, PatronTierData,
-    ResourceAmountData, SpeciesData, StatBlockData, TowerFloorData, UpkeepBandData,
+    DayCycleConfigData, EggSpeciesEntryData, EventData, GameData, GuildRoomData, MissionData,
+    PatronTierData, ResourceAmountData, SpeciesData, StatBlockData, TowerFloorData, UpkeepBandData,
 };
 pub use ui_text::UiTextData;

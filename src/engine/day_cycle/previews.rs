@@ -13,21 +13,20 @@ pub fn effective_population_cap(data: &GameData, game_state: &GameState) -> usiz
 }
 
 pub fn preview_upkeep(data: &GameData, game_state: &GameState) -> UpkeepForecast {
-    let mut forecast = upkeep_forecast_for_counts(
+    let mut forecast = upkeep_forecast_for_roster(
         data,
         &game_state.town.constructed_building_ids,
-        game_state.monsters.len(),
+        &game_state.monsters,
         game_state.town.patron_tiers.len(),
-        None,
     );
     let pressure_multiplier_pct = 100 + upkeep_pressure_pct(game_state);
     if pressure_multiplier_pct > 100 {
-        forecast.food_gold = scale_upkeep(forecast.food_gold, pressure_multiplier_pct);
+        forecast.wage_gold = scale_upkeep(forecast.wage_gold, pressure_multiplier_pct);
         forecast.cleaning_gold = scale_upkeep(forecast.cleaning_gold, pressure_multiplier_pct);
         forecast.maintenance_gold =
             scale_upkeep(forecast.maintenance_gold, pressure_multiplier_pct);
         forecast.total_gold = forecast
-            .food_gold
+            .wage_gold
             .saturating_add(forecast.cleaning_gold)
             .saturating_add(forecast.maintenance_gold);
         forecast.next_companion_total_gold =
@@ -250,7 +249,7 @@ pub(super) fn preview_guild_job_for_town(
     } else {
         0
     };
-    let patron_tier = active_patron_tier_for_room(data, town, room)?;
+    let patron_tier = active_patron_tier_for_room(data, town, room, monster.quality_rank)?;
     let skill_bonus = guild_job_skill_bonus(monster, room);
     let depth_profile = room_depth_profile_for_town(
         &town.constructed_building_ids,
@@ -286,13 +285,30 @@ pub(super) fn preview_guild_job_for_town(
         .saturating_add(monster.skills.navigation / 2)
         .saturating_add(monster.skills.arcana / 2);
 
+    // An adventuring party pays for the calibre of escort it gets. Below what
+    // the tier expects they still hire, but not at full rate.
+    let day_cycle = &data.config.day_cycle;
+    let escort_rate_pct = if monster.quality_rank >= patron_tier.minimum_quality_rank {
+        100
+    } else {
+        day_cycle.understrength_income_pct
+    };
+
+    // Five percentage multipliers stacked on a fee overflows u32 once the rank
+    // curve reaches the top of the ladder, so the escort fee is computed wide.
+    let escort_fee_gold = u64::from(base_gold)
+        * u64::from(patron_tier.income_multiplier_pct)
+        * u64::from(depth_profile.gold_multiplier_pct)
+        * u64::from(quality_income_multiplier_pct(
+            day_cycle,
+            monster.quality_rank,
+        ))
+        * u64::from(escort_rate_pct)
+        / 100_000_000;
+
     Ok(GuildJobPreview {
         success_score,
-        projected_gold: base_gold
-            * patron_tier.income_multiplier_pct
-            * depth_profile.gold_multiplier_pct
-            * quality_income_multiplier_pct(monster.quality_rank)
-            / 1_000_000,
+        projected_gold: u32::try_from(escort_fee_gold).unwrap_or(u32::MAX),
         projected_arcane_residue: base_residue
             * patron_tier.residue_multiplier_pct
             * depth_profile.residue_multiplier_pct
