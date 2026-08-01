@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "floors": [
     {
       "id": "floor_1_slick_cellars",
@@ -183,7 +183,7 @@
       "requires_surveyed_floor_ids": [
         "cistern_stair"
       ],
-      "required_surveys": 3,
+      "required_surveys": 2,
       "required_roster": [],
       "mission_ids": [
         "resource_run",
@@ -283,7 +283,7 @@
       "requires_surveyed_floor_ids": [
         "floor_2_molten_baths"
       ],
-      "required_surveys": 2,
+      "required_surveys": 1,
       "required_roster": [],
       "mission_ids": [
         "scout_route",
@@ -327,7 +327,7 @@
       "requires_surveyed_floor_ids": [
         "flue_warrens"
       ],
-      "required_surveys": 2,
+      "required_surveys": 1,
       "required_roster": [],
       "mission_ids": [
         "resource_run",
@@ -373,7 +373,7 @@
       "requires_surveyed_floor_ids": [
         "slagworks"
       ],
-      "required_surveys": 2,
+      "required_surveys": 1,
       "required_roster": [],
       "mission_ids": [
         "relic_raid",
@@ -418,7 +418,7 @@
       "requires_surveyed_floor_ids": [
         "boiler_cathedral"
       ],
-      "required_surveys": 3,
+      "required_surveys": 1,
       "required_roster": [],
       "mission_ids": [
         "egg_hunt",
@@ -477,13 +477,14 @@
       "mission_ids": [
         "resource_run",
         "egg_hunt",
-        "relic_raid"
+        "relic_raid",
+        "scout_route"
       ],
       "baseline_rewards": {
         "gold": 0,
-        "tower_materials": 36,
+        "tower_materials": 48,
         "eggs": 1,
-        "relics": 1,
+        "relics": 2,
         "arcane_residue": 10
       },
       "egg_species_entries": [
@@ -508,8 +509,208 @@
         "ambush",
         "heavy_cargo"
       ],
-      "egg_grade_bonus": 1,
+      "egg_grade_bonus": 2,
       "corruption_pressure": 2
+    },
+    {
+      "id": "menagerie_walk",
+      "name": "Menagerie Walk",
+      "depth": 12,
+      "description": "The exhibition corridor, where the tower once showed off what it had caught. The cages are open now and the fittings are solid brass, but the walk is long and something has learned the timing of it.",
+      "difficulty": 52,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "floor_3_gilded_kennels"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "resource_run",
+        "egg_hunt",
+        "scout_route",
+        "relic_raid"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 76,
+        "eggs": 1,
+        "relics": 3,
+        "arcane_residue": 8
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "minotaur_porter",
+          "weight": 4
+        },
+        {
+          "species_id": "lamia_routekeeper",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "brass_tally"
+      ],
+      "hazard_tags": [
+        "open_cages",
+        "long_sightlines",
+        "patient_ambush"
+      ],
+      "egg_grade_bonus": 2,
+      "corruption_pressure": 2
+    },
+    {
+      "id": "handlers_vault",
+      "name": "Handler's Vault",
+      "depth": 13,
+      "description": "The keepers' own rooms, locked from the inside. Whatever they used to move dangerous stock safely through the tower is still racked on the walls, and still works.",
+      "difficulty": 56,
+      "requires_building_ids": [
+        "species_archive"
+      ],
+      "requires_surveyed_floor_ids": [
+        "menagerie_walk"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "relic_raid",
+        "egg_hunt",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 50,
+        "eggs": 1,
+        "relics": 6,
+        "arcane_residue": 16
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "golemkin_warden",
+          "weight": 4
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        }
+      ],
+      "relic_drop_ids": [
+        "keepers_goad",
+        "warded_harness"
+      ],
+      "hazard_tags": [
+        "locked_from_inside",
+        "standing_wards",
+        "handler_traps"
+      ],
+      "egg_grade_bonus": 3,
+      "corruption_pressure": 3
+    },
+    {
+      "id": "broodpens",
+      "name": "Broodpens",
+      "depth": 14,
+      "description": "Deep stone pens kept warm by something other than fire, holding lineages the guild has only read about. What comes out of here is not a hatchling so much as an inheritance.",
+      "difficulty": 60,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "handlers_vault"
+      ],
+      "required_surveys": 1,
+      "required_roster": [
+        {
+          "species_id": "minotaur_porter",
+          "minimum_quality_rank": 3
+        }
+      ],
+      "mission_ids": [
+        "egg_hunt",
+        "scout_route",
+        "resource_run"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 52,
+        "eggs": 2,
+        "relics": 5,
+        "arcane_residue": 14
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "lamia_routekeeper",
+          "weight": 4
+        },
+        {
+          "species_id": "golemkin_warden",
+          "weight": 3
+        },
+        {
+          "species_id": "moth_archivist",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "brood_ledger"
+      ],
+      "hazard_tags": [
+        "breeding_stock",
+        "territorial",
+        "deep_warmth"
+      ],
+      "egg_grade_bonus": 4,
+      "corruption_pressure": 3
+    },
+    {
+      "id": "auction_floor",
+      "name": "The Auction Floor",
+      "depth": 15,
+      "description": "A tiered hall with a block at the centre, where the tower sold what it took. The ledgers are still legible and the last lots were never collected.",
+      "difficulty": 64,
+      "requires_building_ids": [],
+      "requires_surveyed_floor_ids": [
+        "broodpens"
+      ],
+      "required_surveys": 1,
+      "required_roster": [],
+      "mission_ids": [
+        "relic_raid",
+        "egg_hunt",
+        "resource_run",
+        "scout_route"
+      ],
+      "baseline_rewards": {
+        "gold": 0,
+        "tower_materials": 70,
+        "eggs": 1,
+        "relics": 6,
+        "arcane_residue": 18
+      },
+      "egg_species_entries": [
+        {
+          "species_id": "moth_archivist",
+          "weight": 4
+        },
+        {
+          "species_id": "imp_runner",
+          "weight": 3
+        },
+        {
+          "species_id": "harpy_lookout",
+          "weight": 3
+        }
+      ],
+      "relic_drop_ids": [
+        "unclaimed_lot",
+        "auction_ledger"
+      ],
+      "hazard_tags": [
+        "tiered_galleries",
+        "unclaimed_lots",
+        "old_contracts"
+      ],
+      "egg_grade_bonus": 3,
+      "corruption_pressure": 3
     }
   ]
 }

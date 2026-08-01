@@ -59,7 +59,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 
 | Axis | Now | Target | Notes |
 |---|---|---|---|
-| **Tower floors** | **11** | **25** | Bands 1 and 2 authored, depths 1–10, plus Gilded Kennels at 11. Difficulty 20→48. All eleven are reachable and all but Gilded Kennels are actually run by the planner. |
+| **Tower floors** | **15** | **25** | Bands 1–3 authored, depths 1–15, difficulty 20→64. All fifteen unlock and are reached in a 365-day campaign. |
 | Missions | 4 | 8–10 | GDD names 6 types; `missions.json` has 4. Rescue/Retrieval and Contract Fulfilment are unwritten. |
 | Species | 8 | 14–18 | Deep bands need companions you can only get down there. |
 | Mutations | 3 | 10+ | The corruption payoff. One mutation per two species is thin. |
@@ -71,6 +71,28 @@ Re-count these from the JSON each iteration rather than trusting the table.
 | Patron tiers | 3 | 4–5 | `patron_tiers.json`; upkeep bands already reference tier 4. |
 | Debt milestones | 7 | — | ~455 days of chain against 3 floors of tower. Mismatched, in the tower's favour to fix. |
 | Relic drops | 2 declared, now **gate relic yield** | named objects | `relic_drop_ids` decides whether a floor can pay a relic. The ids are still not objects with names/descriptions/patrons — that is phase 2. |
+
+### How the planner values a floor — read this before authoring one
+
+Measured from `policy_jobs::expedition_growth_score`, and it is not intuitive:
+
+| term | worth |
+|---|---|
+| **an egg** | **120–180** (180 when the inventory is empty, 15 once pending eggs cover demand) |
+| **a relic** | **70** |
+| a material | **2** |
+| a residue | **1** |
+| injury risk | **−2 per point** |
+
+So a floor is chosen on **eggs and relics**; materials are almost noise and residue is nothing.
+Raising Menagerie Walk from 70 to 98 materials changed the campaign by literally zero — one relic is
+worth 35 materials. Injury scales with difficulty, so a deep floor must pay in eggs and relics just
+to break even.
+
+**And the filter that hides floors entirely:** when the guild wants eggs the planner skips every
+mission whose `reward_focus` is not eggs. A floor with no `egg_hunt` in `mission_ids` is invisible
+for most of the campaign no matter what it pays. Adding `egg_hunt` to three band-3 floors took the
+tower from stalling at depth 12 to running all fifteen floors and producing eight rank-5 companions.
 
 ### Standing themes, several iterations each
 
@@ -388,6 +410,30 @@ Stop the loop and report if:
   campaign and **never run** — it is building-gated, sits above band 2's rewards, and needs
   rebalancing when band 3 anchors on it. (c) Run `probe_floor_usage` after every band; the standard
   reports show missions, not floors, and would have hidden all of this.
+
+- **2026-08-02 — phase 1, band 3 authored (depths 12-15); the tower reaches rank 5.** Four floors:
+  **Menagerie Walk** (12, d52), **Handler's Vault** (13, d56, gated on `species_archive`),
+  **Broodpens** (14, d60, wants a rank-3 Minotaur Porter), **The Auction Floor** (15, d64). Four
+  discovery events. `floor_3_gilded_kennels` rebalanced — it had sat unlocked and unrun all campaign
+  because band 2 overtook it; it is now run heavily.
+  **The finding that unblocked everything** is written up under "How the planner values a floor"
+  above: the planner skips every non-egg mission whenever the guild wants eggs, so a floor without
+  `egg_hunt` is simply invisible. Three floors gained it and the tower went from stalling at depth 12
+  to running all fifteen. Reward tonnage was never the problem — I raised Menagerie Walk from 70 to
+  98 materials and the campaign replayed byte-identically.
+  **Also:** chain requirements dropped to 1 survey below band 1 (band 1 keeps 2 as a teaching pace).
+  With route crediting the guild is delving constantly by then, and 2-3 surveys per link priced deep
+  floors out of a 365-day campaign entirely.
+  **Result:** all 15 floors reached; roster ranks **[0, 1, 8, 3, 8]** — eight rank-5 escorts, so
+  `frontier_factions` at 240% and the 1000% rank multiplier are both live for the first time. Gold
+  199k -> 671k, expedition days 62 -> 87, buildings avg 13.6, 18-20 companions on every seed, 4 of 10
+  clear Founder's Due, **zero missed payments**. 52 tests green, no assertion touched this iteration.
+  **Next iteration should know:** (a) residue is no longer dead — band 2's relic floors unlocked the
+  `relic_residue_condenser` (25k residue, 15 relics, repeatable x10) and residue now swings
+  10k-98k across seeds instead of piling up; the earlier "give residue a sink" note is stale.
+  (b) `auction_floor` (d15) unlocks but still shows 0 surveys — the deepest floor is always the last
+  to be worth it; expect the same for the bottom of each new band. (c) Bands 4-5 (16-25) are all that
+  remain; difficulty should run ~68-100 and the ceiling `max_floor_difficulty` is 120.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

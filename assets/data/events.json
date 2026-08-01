@@ -868,6 +868,42 @@
       "text": "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
       "required_trait_ids": [],
       "required_species_ids": []
+    },
+    {
+      "id": "tower_menagerie_brass",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_handler_lock",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
+      "required_trait_ids": [],
+      "required_species_ids": [
+        "golemkin_warden"
+      ]
+    },
+    {
+      "id": "tower_brood_warmth",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady \u2014 it moves.",
+      "required_trait_ids": [],
+      "required_species_ids": []
+    },
+    {
+      "id": "tower_auction_ledger",
+      "category": "expedition",
+      "phase": "expedition_resolution",
+      "text": "A page recovered from far below lists lots, buyers and a date. The last column is empty all the way down.",
+      "required_trait_ids": [],
+      "required_species_ids": [
+        "moth_archivist"
+      ]
     }
   ]
 }

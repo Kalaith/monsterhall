@@ -40,10 +40,10 @@
   "total_expedition_eggs": 33,
   "final_resources": {
     "gold": 204413,
-    "tower_materials": 16479,
+    "tower_materials": 16569,
     "eggs": 15,
-    "relics": 350,
-    "arcane_residue": 37601
+    "relics": 351,
+    "arcane_residue": 37602
   },
   "final_debt": {
     "active_milestone_id": "tribute_cart_5",
@@ -74,17 +74,17 @@
     },
     "ending_resources": {
       "gold": 204413,
-      "tower_materials": 16479,
+      "tower_materials": 16569,
       "eggs": 15,
-      "relics": 350,
-      "arcane_residue": 37601
+      "relics": 351,
+      "arcane_residue": 37602
     },
     "net_change": {
       "gold": 204270,
-      "tower_materials": 16439,
+      "tower_materials": 16529,
       "eggs": 15,
-      "relics": 350,
-      "arcane_residue": 37582
+      "relics": 351,
+      "arcane_residue": 37583
     },
     "debt_gold_gap": 54413,
     "upkeep_shortfall_gold": 421,
@@ -103,10 +103,10 @@
       "active_contracts": 4,
       "resources": {
         "gold": 108,
-        "tower_materials": 1538,
+        "tower_materials": 1541,
         "eggs": 6,
-        "relics": 1,
-        "arcane_residue": 691
+        "relics": 2,
+        "arcane_residue": 700
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -140,10 +140,10 @@
       "active_contracts": 6,
       "resources": {
         "gold": 35513,
-        "tower_materials": 5100,
+        "tower_materials": 5190,
         "eggs": 20,
-        "relics": 78,
-        "arcane_residue": 9795
+        "relics": 79,
+        "arcane_residue": 9796
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -177,10 +177,10 @@
       "active_contracts": 6,
       "resources": {
         "gold": 204413,
-        "tower_materials": 16479,
+        "tower_materials": 16569,
         "eggs": 15,
-        "relics": 350,
-        "arcane_residue": 37601
+        "relics": 351,
+        "arcane_residue": 37602
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -309,7 +309,7 @@
         "The creditors stay the blade for now: 250 due in 29 days.",
         "Mira returned from Slick Cellars with fresh loot.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -418,7 +418,7 @@
         "The creditors stay the blade for now: 250 due in 28 days.",
         "Mira returned from Slick Cellars with fresh loot.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "Survey notes from the floors above chart a way down to Drowned Larder.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
@@ -534,7 +534,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract expired unmet and cost the guild 10 gold.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -759,7 +759,7 @@
         "Lira came back carrying 1 instability from Drowned Larder.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -1102,7 +1102,7 @@
         "Mina rested and came back steadier for tomorrow.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "Survey notes from the floors above chart a way down to Lamp Gallery.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
@@ -1221,7 +1221,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
@@ -1341,7 +1341,7 @@
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -1583,7 +1583,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
@@ -1705,7 +1705,7 @@
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -1825,7 +1825,7 @@
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -1948,7 +1948,7 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
@@ -2075,7 +2075,7 @@
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -2191,7 +2191,7 @@
         "Suri rested and came back steadier for tomorrow.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -2314,7 +2314,7 @@
         "Local Delver Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -2433,7 +2433,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
@@ -2555,7 +2555,7 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -2798,7 +2798,7 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
@@ -2921,7 +2921,7 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
@@ -3048,7 +3048,7 @@
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -3296,7 +3296,7 @@
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -3551,11 +3551,12 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
+        "Survey notes from the floors above chart a way down to Flue Warrens.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -3673,7 +3674,7 @@
         "Nori came back carrying 1 instability from Drowned Larder.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "Debt paid: Founding Note Due settled for 250 gold.",
         "Next debt milestone: Collector At The Gate due in 45 days.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
@@ -3724,10 +3725,10 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 83,
-      "expedition_arcane_residue": 11,
+      "expedition_materials": 86,
+      "expedition_arcane_residue": 20,
       "expedition_eggs": 0,
-      "expedition_relics": 0,
+      "expedition_relics": 1,
       "expedition_opportunity": {
         "attempted": true,
         "mission_id": "resource_run",
@@ -3767,10 +3768,10 @@
       },
       "resources": {
         "gold": 108,
-        "tower_materials": 1538,
+        "tower_materials": 1541,
         "eggs": 6,
-        "relics": 1,
-        "arcane_residue": 691
+        "relics": 2,
+        "arcane_residue": 700
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -3791,8 +3792,9 @@
         "Lira handled Packroom Annex work. Skills: Crafting +1. History: crafting +1.",
         "Lira absorbs enough tower residue to reform as a Residue Slime.",
         "Mina rested and came back steadier for tomorrow.",
-        "Melle returned from Drowned Larder with fresh loot.",
-        "Melle came back carrying 2 instability from Drowned Larder.",
+        "Melle returned from Flue Warrens with fresh loot.",
+        "Melle came back carrying 7 instability from Flue Warrens.",
+        "Melle hardens around the tower's strange rhythm and reforms as a Golemkin Warden.",
         "Sella rested and came back steadier for tomorrow.",
         "Suri rested and came back steadier for tomorrow.",
         "Nori rested and came back steadier for tomorrow.",
@@ -3801,7 +3803,8 @@
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
+        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Survey notes from the floors above chart a way down to Slagworks.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -3893,10 +3896,10 @@
       },
       "resources": {
         "gold": 519,
-        "tower_materials": 1584,
+        "tower_materials": 1587,
         "eggs": 8,
-        "relics": 2,
-        "arcane_residue": 798
+        "relics": 3,
+        "arcane_residue": 807
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -3930,13 +3933,12 @@
         "Local Delver Contract was fulfilled by Lira through the Common Room.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Survey notes from the floors above chart a way down to Cistern Stair.",
-        "Survey notes from the floors above chart a way down to Flue Warrens.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -3985,8 +3987,8 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 86,
-      "expedition_arcane_residue": 20,
+      "expedition_materials": 138,
+      "expedition_arcane_residue": 17,
       "expedition_eggs": 0,
       "expedition_relics": 1,
       "expedition_opportunity": {
@@ -4028,10 +4030,10 @@
       },
       "resources": {
         "gold": 609,
-        "tower_materials": 1673,
+        "tower_materials": 1728,
         "eggs": 8,
-        "relics": 3,
-        "arcane_residue": 858
+        "relics": 4,
+        "arcane_residue": 864
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -4051,9 +4053,8 @@
         "Mina worked the Packroom Annex as a hazard support tier 2 job for 220 gold, 3 materials, 35 arcane residue, and 7 prep quality.",
         "Mina handled Packroom Annex work. Skills: Charm +1. History: recovery +1.",
         "Mina absorbs enough tower residue to reform as a Residue Slime.",
-        "Melle returned from Flue Warrens with fresh loot.",
-        "Melle came back carrying 7 instability from Flue Warrens.",
-        "Melle hardens around the tower's strange rhythm and reforms as a Golemkin Warden.",
+        "Melle returned from Slagworks with fresh loot.",
+        "Melle came back carrying 7 instability from Slagworks.",
         "Sella rested and came back steadier for tomorrow.",
         "Suri rested and came back steadier for tomorrow.",
         "Nori rested and came back steadier for tomorrow.",
@@ -4062,7 +4063,7 @@
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -4154,10 +4155,10 @@
       },
       "resources": {
         "gold": 841,
-        "tower_materials": 1676,
+        "tower_materials": 1731,
         "eggs": 8,
-        "relics": 3,
-        "arcane_residue": 926
+        "relics": 4,
+        "arcane_residue": 932
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -4238,8 +4239,8 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 106,
-      "expedition_arcane_residue": 22,
+      "expedition_materials": 138,
+      "expedition_arcane_residue": 17,
       "expedition_eggs": 0,
       "expedition_relics": 1,
       "expedition_opportunity": {
@@ -4281,10 +4282,10 @@
       },
       "resources": {
         "gold": 166,
-        "tower_materials": 1634,
+        "tower_materials": 1721,
         "eggs": 8,
-        "relics": 4,
-        "arcane_residue": 949
+        "relics": 5,
+        "arcane_residue": 950
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -4301,8 +4302,8 @@
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1, completed contracts +1.",
         "Lira rested and came back steadier for tomorrow.",
         "Mina rested and came back steadier for tomorrow.",
-        "Melle returned from Flue Warrens with fresh loot.",
-        "Melle came back carrying 7 instability from Flue Warrens.",
+        "Melle returned from Slagworks with fresh loot.",
+        "Melle came back carrying 7 instability from Slagworks.",
         "Sella rested and came back steadier for tomorrow.",
         "Suri rested and came back steadier for tomorrow.",
         "Nori absorbed 3 instability from the Packroom Annex.",
@@ -4312,10 +4313,9 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Survey notes from the floors above chart a way down to Slagworks.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -4407,10 +4407,10 @@
       },
       "resources": {
         "gold": 46,
-        "tower_materials": 1634,
+        "tower_materials": 1721,
         "eggs": 8,
-        "relics": 4,
-        "arcane_residue": 962
+        "relics": 5,
+        "arcane_residue": 963
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -4529,10 +4529,10 @@
       },
       "resources": {
         "gold": 939,
-        "tower_materials": 1784,
+        "tower_materials": 1871,
         "eggs": 7,
-        "relics": 5,
-        "arcane_residue": 1177
+        "relics": 6,
+        "arcane_residue": 1178
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -4570,7 +4570,7 @@
         "Local Delver Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
+        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -4627,7 +4627,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 117,
+      "expedition_materials": 118,
       "expedition_arcane_residue": 15,
       "expedition_eggs": 0,
       "expedition_relics": 1,
@@ -4670,10 +4670,10 @@
       },
       "resources": {
         "gold": 695,
-        "tower_materials": 1901,
+        "tower_materials": 1989,
         "eggs": 7,
-        "relics": 6,
-        "arcane_residue": 1192
+        "relics": 7,
+        "arcane_residue": 1193
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -4696,7 +4696,7 @@
         "Zia came back carrying 7 instability from Slagworks.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -4788,10 +4788,10 @@
       },
       "resources": {
         "gold": 767,
-        "tower_materials": 2042,
+        "tower_materials": 2130,
         "eggs": 7,
-        "relics": 7,
-        "arcane_residue": 1265
+        "relics": 8,
+        "arcane_residue": 1266
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -4819,7 +4819,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
@@ -4913,10 +4913,10 @@
       },
       "resources": {
         "gold": 1149,
-        "tower_materials": 2186,
+        "tower_materials": 2274,
         "eggs": 7,
-        "relics": 8,
-        "arcane_residue": 1387
+        "relics": 9,
+        "arcane_residue": 1388
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -5004,7 +5004,7 @@
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 118,
+      "expedition_materials": 120,
       "expedition_arcane_residue": 15,
       "expedition_eggs": 0,
       "expedition_relics": 1,
@@ -5047,10 +5047,10 @@
       },
       "resources": {
         "gold": 0,
-        "tower_materials": 2104,
+        "tower_materials": 2194,
         "eggs": 7,
-        "relics": 9,
-        "arcane_residue": 1352
+        "relics": 10,
+        "arcane_residue": 1353
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -5074,7 +5074,7 @@
         "Zia rested and came back steadier for tomorrow.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "Hidden behind burst casks, the companions uncover old stonework worth hauling home for repairs and upgrades.",
+        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -5166,10 +5166,10 @@
       },
       "resources": {
         "gold": 328,
-        "tower_materials": 2250,
+        "tower_materials": 2340,
         "eggs": 7,
-        "relics": 10,
-        "arcane_residue": 1480
+        "relics": 11,
+        "arcane_residue": 1481
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -5202,7 +5202,7 @@
         "Local Delver Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -5298,10 +5298,10 @@
       },
       "resources": {
         "gold": 573,
-        "tower_materials": 2395,
+        "tower_materials": 2485,
         "eggs": 6,
-        "relics": 11,
-        "arcane_residue": 1593
+        "relics": 12,
+        "arcane_residue": 1594
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -5339,7 +5339,7 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
@@ -5435,10 +5435,10 @@
       },
       "resources": {
         "gold": 806,
-        "tower_materials": 2536,
+        "tower_materials": 2626,
         "eggs": 6,
-        "relics": 12,
-        "arcane_residue": 1691
+        "relics": 13,
+        "arcane_residue": 1692
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -5470,7 +5470,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
@@ -5564,10 +5564,10 @@
       },
       "resources": {
         "gold": 1020,
-        "tower_materials": 2683,
+        "tower_materials": 2773,
         "eggs": 6,
-        "relics": 13,
-        "arcane_residue": 1823
+        "relics": 14,
+        "arcane_residue": 1824
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -5608,7 +5608,7 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -5704,10 +5704,10 @@
       },
       "resources": {
         "gold": 970,
-        "tower_materials": 2826,
+        "tower_materials": 2916,
         "eggs": 6,
-        "relics": 14,
-        "arcane_residue": 1895
+        "relics": 15,
+        "arcane_residue": 1896
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -5736,7 +5736,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
@@ -5830,10 +5830,10 @@
       },
       "resources": {
         "gold": 1236,
-        "tower_materials": 2971,
+        "tower_materials": 3061,
         "eggs": 6,
-        "relics": 15,
-        "arcane_residue": 2023
+        "relics": 16,
+        "arcane_residue": 2024
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -5867,7 +5867,7 @@
         "Local Delver Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -5963,10 +5963,10 @@
       },
       "resources": {
         "gold": 1644,
-        "tower_materials": 3119,
+        "tower_materials": 3209,
         "eggs": 6,
-        "relics": 16,
-        "arcane_residue": 2157
+        "relics": 17,
+        "arcane_residue": 2158
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -6004,7 +6004,7 @@
         "Local Delver Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -6100,10 +6100,10 @@
       },
       "resources": {
         "gold": 669,
-        "tower_materials": 2965,
+        "tower_materials": 3055,
         "eggs": 8,
-        "relics": 16,
-        "arcane_residue": 2177
+        "relics": 17,
+        "arcane_residue": 2178
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -6234,10 +6234,10 @@
       },
       "resources": {
         "gold": 1927,
-        "tower_materials": 3026,
+        "tower_materials": 3116,
         "eggs": 10,
-        "relics": 17,
-        "arcane_residue": 2421
+        "relics": 18,
+        "arcane_residue": 2422
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -6279,7 +6279,7 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -6379,10 +6379,10 @@
       },
       "resources": {
         "gold": 300,
-        "tower_materials": 2904,
+        "tower_materials": 2994,
         "eggs": 13,
-        "relics": 17,
-        "arcane_residue": 2337
+        "relics": 18,
+        "arcane_residue": 2338
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -6410,7 +6410,7 @@
         "Special event windfall: +300 gold.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -6502,10 +6502,10 @@
       },
       "resources": {
         "gold": 238,
-        "tower_materials": 2959,
+        "tower_materials": 3049,
         "eggs": 15,
-        "relics": 18,
-        "arcane_residue": 2416
+        "relics": 19,
+        "arcane_residue": 2417
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -6534,7 +6534,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
@@ -6628,10 +6628,10 @@
       },
       "resources": {
         "gold": 1171,
-        "tower_materials": 3076,
+        "tower_materials": 3166,
         "eggs": 15,
-        "relics": 21,
-        "arcane_residue": 2625
+        "relics": 22,
+        "arcane_residue": 2626
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -6677,13 +6677,14 @@
         "Local Delver Contract was fulfilled by Suri through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
+        "Survey notes from the floors above chart a way down to Cinder Nursery.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -6775,10 +6776,10 @@
       },
       "resources": {
         "gold": 848,
-        "tower_materials": 3189,
+        "tower_materials": 3279,
         "eggs": 15,
-        "relics": 24,
-        "arcane_residue": 2709
+        "relics": 25,
+        "arcane_residue": 2710
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -6811,7 +6812,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
@@ -6914,10 +6915,10 @@
       },
       "resources": {
         "gold": 1521,
-        "tower_materials": 3307,
+        "tower_materials": 3397,
         "eggs": 14,
-        "relics": 27,
-        "arcane_residue": 2900
+        "relics": 28,
+        "arcane_residue": 2901
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -6956,14 +6957,13 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Hidden behind burst casks, the companions uncover old stonework worth hauling home for repairs and upgrades.",
+        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
-        "Survey notes from the floors above chart a way down to Cinder Nursery.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -7064,10 +7064,10 @@
       },
       "resources": {
         "gold": 2287,
-        "tower_materials": 3422,
+        "tower_materials": 3512,
         "eggs": 14,
-        "relics": 30,
-        "arcane_residue": 3098
+        "relics": 31,
+        "arcane_residue": 3099
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7108,7 +7108,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -7215,10 +7215,10 @@
       },
       "resources": {
         "gold": 2163,
-        "tower_materials": 3536,
+        "tower_materials": 3626,
         "eggs": 14,
-        "relics": 33,
-        "arcane_residue": 3182
+        "relics": 34,
+        "arcane_residue": 3183
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7249,7 +7249,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
@@ -7352,10 +7352,10 @@
       },
       "resources": {
         "gold": 3018,
-        "tower_materials": 3599,
+        "tower_materials": 3689,
         "eggs": 17,
-        "relics": 35,
-        "arcane_residue": 3395
+        "relics": 36,
+        "arcane_residue": 3396
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7396,7 +7396,7 @@
         "Local Delver Contract was fulfilled by Lira through the Common Room.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -7503,10 +7503,10 @@
       },
       "resources": {
         "gold": 191,
-        "tower_materials": 3346,
+        "tower_materials": 3436,
         "eggs": 20,
-        "relics": 33,
-        "arcane_residue": 3316
+        "relics": 34,
+        "arcane_residue": 3317
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7539,7 +7539,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Egg Hunt for 5 gold, 1 materials, and 0 arcane residue.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
@@ -7642,10 +7642,10 @@
       },
       "resources": {
         "gold": 343,
-        "tower_materials": 3463,
+        "tower_materials": 3553,
         "eggs": 20,
-        "relics": 36,
-        "arcane_residue": 3469
+        "relics": 37,
+        "arcane_residue": 3470
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7683,7 +7683,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -7788,10 +7788,10 @@
       },
       "resources": {
         "gold": 2760,
-        "tower_materials": 3578,
+        "tower_materials": 3668,
         "eggs": 19,
-        "relics": 39,
-        "arcane_residue": 3740
+        "relics": 40,
+        "arcane_residue": 3741
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7944,10 +7944,10 @@
       },
       "resources": {
         "gold": 4795,
-        "tower_materials": 3693,
+        "tower_materials": 3783,
         "eggs": 19,
-        "relics": 42,
-        "arcane_residue": 3959
+        "relics": 43,
+        "arcane_residue": 3960
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7990,7 +7990,7 @@
         "Local Delver Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
@@ -8097,10 +8097,10 @@
       },
       "resources": {
         "gold": 1203,
-        "tower_materials": 3355,
+        "tower_materials": 3445,
         "eggs": 22,
-        "relics": 39,
-        "arcane_residue": 3850
+        "relics": 40,
+        "arcane_residue": 3851
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8235,10 +8235,10 @@
       },
       "resources": {
         "gold": 1062,
-        "tower_materials": 3475,
+        "tower_materials": 3565,
         "eggs": 22,
-        "relics": 42,
-        "arcane_residue": 3994
+        "relics": 43,
+        "arcane_residue": 3995
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8273,7 +8273,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -8378,10 +8378,10 @@
       },
       "resources": {
         "gold": 3763,
-        "tower_materials": 3595,
+        "tower_materials": 3685,
         "eggs": 22,
-        "relics": 45,
-        "arcane_residue": 4327
+        "relics": 46,
+        "arcane_residue": 4328
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8431,7 +8431,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -8540,10 +8540,10 @@
       },
       "resources": {
         "gold": 3237,
-        "tower_materials": 3715,
+        "tower_materials": 3805,
         "eggs": 22,
-        "relics": 48,
-        "arcane_residue": 4418
+        "relics": 49,
+        "arcane_residue": 4419
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8577,7 +8577,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
@@ -8680,10 +8680,10 @@
       },
       "resources": {
         "gold": 3187,
-        "tower_materials": 3840,
+        "tower_materials": 3930,
         "eggs": 22,
-        "relics": 51,
-        "arcane_residue": 4574
+        "relics": 52,
+        "arcane_residue": 4575
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8827,10 +8827,10 @@
       },
       "resources": {
         "gold": 5551,
-        "tower_materials": 3968,
+        "tower_materials": 4058,
         "eggs": 22,
-        "relics": 54,
-        "arcane_residue": 4866
+        "relics": 55,
+        "arcane_residue": 4867
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8877,7 +8877,7 @@
         "Local Delver Contract was fulfilled by Mina through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -8986,10 +8986,10 @@
       },
       "resources": {
         "gold": 4523,
-        "tower_materials": 4085,
+        "tower_materials": 4175,
         "eggs": 22,
-        "relics": 57,
-        "arcane_residue": 4889
+        "relics": 58,
+        "arcane_residue": 4890
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9018,7 +9018,7 @@
         "Tower Scholar Contract expired unmet and cost the guild 30 gold.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -9119,10 +9119,10 @@
       },
       "resources": {
         "gold": 4510,
-        "tower_materials": 4210,
+        "tower_materials": 4300,
         "eggs": 22,
-        "relics": 60,
-        "arcane_residue": 5050
+        "relics": 61,
+        "arcane_residue": 5051
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9161,7 +9161,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -9266,10 +9266,10 @@
       },
       "resources": {
         "gold": 7179,
-        "tower_materials": 4342,
+        "tower_materials": 4432,
         "eggs": 22,
-        "relics": 63,
-        "arcane_residue": 5399
+        "relics": 64,
+        "arcane_residue": 5400
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9317,7 +9317,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -9428,10 +9428,10 @@
       },
       "resources": {
         "gold": 6335,
-        "tower_materials": 4347,
+        "tower_materials": 4437,
         "eggs": 22,
-        "relics": 63,
-        "arcane_residue": 5425
+        "relics": 64,
+        "arcane_residue": 5426
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9565,10 +9565,10 @@
       },
       "resources": {
         "gold": 8600,
-        "tower_materials": 4468,
+        "tower_materials": 4558,
         "eggs": 21,
-        "relics": 66,
-        "arcane_residue": 5704
+        "relics": 67,
+        "arcane_residue": 5705
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9612,7 +9612,7 @@
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -9721,10 +9721,10 @@
       },
       "resources": {
         "gold": 11349,
-        "tower_materials": 4601,
+        "tower_materials": 4691,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 6045
+        "relics": 70,
+        "arcane_residue": 6046
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -9768,7 +9768,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -9881,10 +9881,10 @@
       },
       "resources": {
         "gold": 10813,
-        "tower_materials": 4602,
+        "tower_materials": 4692,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 6116
+        "relics": 70,
+        "arcane_residue": 6117
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10018,10 +10018,10 @@
       },
       "resources": {
         "gold": 11534,
-        "tower_materials": 4608,
+        "tower_materials": 4698,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 6358
+        "relics": 70,
+        "arcane_residue": 6359
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10169,10 +10169,10 @@
       },
       "resources": {
         "gold": 15577,
-        "tower_materials": 4621,
+        "tower_materials": 4711,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 6687
+        "relics": 70,
+        "arcane_residue": 6688
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10324,10 +10324,10 @@
       },
       "resources": {
         "gold": 15549,
-        "tower_materials": 4628,
+        "tower_materials": 4718,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 6828
+        "relics": 70,
+        "arcane_residue": 6829
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10467,10 +10467,10 @@
       },
       "resources": {
         "gold": 16380,
-        "tower_materials": 4639,
+        "tower_materials": 4729,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 7086
+        "relics": 70,
+        "arcane_residue": 7087
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10619,10 +10619,10 @@
       },
       "resources": {
         "gold": 19987,
-        "tower_materials": 4651,
+        "tower_materials": 4741,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 7357
+        "relics": 70,
+        "arcane_residue": 7358
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10771,10 +10771,10 @@
       },
       "resources": {
         "gold": 20386,
-        "tower_materials": 4659,
+        "tower_materials": 4749,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 7556
+        "relics": 70,
+        "arcane_residue": 7557
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10919,10 +10919,10 @@
       },
       "resources": {
         "gold": 20783,
-        "tower_materials": 4669,
+        "tower_materials": 4759,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 7758
+        "relics": 70,
+        "arcane_residue": 7759
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11066,10 +11066,10 @@
       },
       "resources": {
         "gold": 24172,
-        "tower_materials": 4682,
+        "tower_materials": 4772,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 8032
+        "relics": 70,
+        "arcane_residue": 8033
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11222,10 +11222,10 @@
       },
       "resources": {
         "gold": 24413,
-        "tower_materials": 4690,
+        "tower_materials": 4780,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 8231
+        "relics": 70,
+        "arcane_residue": 8232
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11369,10 +11369,10 @@
       },
       "resources": {
         "gold": 26535,
-        "tower_materials": 4701,
+        "tower_materials": 4791,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 8506
+        "relics": 70,
+        "arcane_residue": 8507
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11524,10 +11524,10 @@
       },
       "resources": {
         "gold": 28265,
-        "tower_materials": 4713,
+        "tower_materials": 4803,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 8715
+        "relics": 70,
+        "arcane_residue": 8716
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11673,10 +11673,10 @@
       },
       "resources": {
         "gold": 28654,
-        "tower_materials": 4721,
+        "tower_materials": 4811,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 8914
+        "relics": 70,
+        "arcane_residue": 8915
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11822,10 +11822,10 @@
       },
       "resources": {
         "gold": 30837,
-        "tower_materials": 4732,
+        "tower_materials": 4822,
         "eggs": 21,
-        "relics": 69,
-        "arcane_residue": 9183
+        "relics": 70,
+        "arcane_residue": 9184
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11973,10 +11973,10 @@
       },
       "resources": {
         "gold": 32560,
-        "tower_materials": 4861,
+        "tower_materials": 4951,
         "eggs": 21,
-        "relics": 72,
-        "arcane_residue": 9415
+        "relics": 73,
+        "arcane_residue": 9416
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12124,10 +12124,10 @@
       },
       "resources": {
         "gold": 31977,
-        "tower_materials": 4979,
+        "tower_materials": 5069,
         "eggs": 21,
-        "relics": 75,
-        "arcane_residue": 9508
+        "relics": 76,
+        "arcane_residue": 9509
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12162,7 +12162,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
@@ -12265,10 +12265,10 @@
       },
       "resources": {
         "gold": 35513,
-        "tower_materials": 5100,
+        "tower_materials": 5190,
         "eggs": 20,
-        "relics": 78,
-        "arcane_residue": 9795
+        "relics": 79,
+        "arcane_residue": 9796
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12313,7 +12313,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
+        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -12422,10 +12422,10 @@
       },
       "resources": {
         "gold": 39509,
-        "tower_materials": 5230,
+        "tower_materials": 5320,
         "eggs": 20,
-        "relics": 81,
-        "arcane_residue": 10148
+        "relics": 82,
+        "arcane_residue": 10149
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12582,10 +12582,10 @@
       },
       "resources": {
         "gold": 39058,
-        "tower_materials": 5348,
+        "tower_materials": 5438,
         "eggs": 20,
-        "relics": 84,
-        "arcane_residue": 10251
+        "relics": 85,
+        "arcane_residue": 10252
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12624,7 +12624,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
@@ -12727,10 +12727,10 @@
       },
       "resources": {
         "gold": 40465,
-        "tower_materials": 5444,
+        "tower_materials": 5534,
         "eggs": 20,
-        "relics": 87,
-        "arcane_residue": 10483
+        "relics": 88,
+        "arcane_residue": 10484
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12776,7 +12776,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -12883,10 +12883,10 @@
       },
       "resources": {
         "gold": 44356,
-        "tower_materials": 5575,
+        "tower_materials": 5665,
         "eggs": 20,
-        "relics": 90,
-        "arcane_residue": 10839
+        "relics": 91,
+        "arcane_residue": 10840
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12934,7 +12934,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -13045,10 +13045,10 @@
       },
       "resources": {
         "gold": 43683,
-        "tower_materials": 5738,
+        "tower_materials": 5828,
         "eggs": 20,
-        "relics": 93,
-        "arcane_residue": 10932
+        "relics": 94,
+        "arcane_residue": 10933
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13190,10 +13190,10 @@
       },
       "resources": {
         "gold": 47639,
-        "tower_materials": 5868,
+        "tower_materials": 5958,
         "eggs": 20,
-        "relics": 96,
-        "arcane_residue": 11294
+        "relics": 97,
+        "arcane_residue": 11295
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13240,7 +13240,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -13351,10 +13351,10 @@
       },
       "resources": {
         "gold": 49680,
-        "tower_materials": 6015,
+        "tower_materials": 6105,
         "eggs": 20,
-        "relics": 99,
-        "arcane_residue": 11523
+        "relics": 100,
+        "arcane_residue": 11524
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13401,7 +13401,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -13508,10 +13508,10 @@
       },
       "resources": {
         "gold": 49071,
-        "tower_materials": 6133,
+        "tower_materials": 6223,
         "eggs": 20,
-        "relics": 102,
-        "arcane_residue": 11616
+        "relics": 103,
+        "arcane_residue": 11617
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13547,7 +13547,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
@@ -13650,10 +13650,10 @@
       },
       "resources": {
         "gold": 53378,
-        "tower_materials": 6262,
+        "tower_materials": 6352,
         "eggs": 20,
-        "relics": 105,
-        "arcane_residue": 11996
+        "relics": 106,
+        "arcane_residue": 11997
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13702,7 +13702,7 @@
         "Caravan Captain Contract was fulfilled by Zia through the Reception Hall.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -13813,10 +13813,10 @@
       },
       "resources": {
         "gold": 54620,
-        "tower_materials": 6388,
+        "tower_materials": 6478,
         "eggs": 20,
-        "relics": 108,
-        "arcane_residue": 12167
+        "relics": 109,
+        "arcane_residue": 12168
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13960,10 +13960,10 @@
       },
       "resources": {
         "gold": 54971,
-        "tower_materials": 6514,
+        "tower_materials": 6604,
         "eggs": 20,
-        "relics": 111,
-        "arcane_residue": 12392
+        "relics": 112,
+        "arcane_residue": 12393
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14005,7 +14005,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -14112,10 +14112,10 @@
       },
       "resources": {
         "gold": 58920,
-        "tower_materials": 6645,
+        "tower_materials": 6735,
         "eggs": 20,
-        "relics": 114,
-        "arcane_residue": 12754
+        "relics": 115,
+        "arcane_residue": 12755
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14161,7 +14161,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -14272,10 +14272,10 @@
       },
       "resources": {
         "gold": 59705,
-        "tower_materials": 6748,
+        "tower_materials": 6838,
         "eggs": 20,
-        "relics": 117,
-        "arcane_residue": 12914
+        "relics": 118,
+        "arcane_residue": 12915
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14320,7 +14320,7 @@
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
@@ -14423,10 +14423,10 @@
       },
       "resources": {
         "gold": 60055,
-        "tower_materials": 6875,
+        "tower_materials": 6965,
         "eggs": 20,
-        "relics": 120,
-        "arcane_residue": 13139
+        "relics": 121,
+        "arcane_residue": 13140
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14468,7 +14468,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -14575,10 +14575,10 @@
       },
       "resources": {
         "gold": 63586,
-        "tower_materials": 7003,
+        "tower_materials": 7093,
         "eggs": 20,
-        "relics": 123,
-        "arcane_residue": 13441
+        "relics": 124,
+        "arcane_residue": 13442
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14623,7 +14623,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -14732,10 +14732,10 @@
       },
       "resources": {
         "gold": 65165,
-        "tower_materials": 7128,
+        "tower_materials": 7218,
         "eggs": 20,
-        "relics": 126,
-        "arcane_residue": 13671
+        "relics": 127,
+        "arcane_residue": 13672
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14782,7 +14782,7 @@
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -14887,10 +14887,10 @@
       },
       "resources": {
         "gold": 65777,
-        "tower_materials": 7276,
+        "tower_materials": 7366,
         "eggs": 20,
-        "relics": 129,
-        "arcane_residue": 13897
+        "relics": 130,
+        "arcane_residue": 13898
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14936,7 +14936,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -15043,10 +15043,10 @@
       },
       "resources": {
         "gold": 71025,
-        "tower_materials": 7444,
+        "tower_materials": 7534,
         "eggs": 19,
-        "relics": 132,
-        "arcane_residue": 14254
+        "relics": 133,
+        "arcane_residue": 14255
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15097,7 +15097,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
+        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -15208,10 +15208,10 @@
       },
       "resources": {
         "gold": 74285,
-        "tower_materials": 7569,
+        "tower_materials": 7659,
         "eggs": 19,
-        "relics": 135,
-        "arcane_residue": 14538
+        "relics": 136,
+        "arcane_residue": 14539
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15367,10 +15367,10 @@
       },
       "resources": {
         "gold": 74616,
-        "tower_materials": 7697,
+        "tower_materials": 7787,
         "eggs": 19,
-        "relics": 138,
-        "arcane_residue": 14765
+        "relics": 139,
+        "arcane_residue": 14766
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15413,7 +15413,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -15520,10 +15520,10 @@
       },
       "resources": {
         "gold": 78131,
-        "tower_materials": 7825,
+        "tower_materials": 7915,
         "eggs": 19,
-        "relics": 141,
-        "arcane_residue": 15068
+        "relics": 142,
+        "arcane_residue": 15069
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15568,7 +15568,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -15677,10 +15677,10 @@
       },
       "resources": {
         "gold": 81441,
-        "tower_materials": 7950,
+        "tower_materials": 8040,
         "eggs": 19,
-        "relics": 144,
-        "arcane_residue": 15365
+        "relics": 145,
+        "arcane_residue": 15366
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15835,10 +15835,10 @@
       },
       "resources": {
         "gold": 81766,
-        "tower_materials": 8078,
+        "tower_materials": 8168,
         "eggs": 19,
-        "relics": 147,
-        "arcane_residue": 15592
+        "relics": 148,
+        "arcane_residue": 15593
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15987,10 +15987,10 @@
       },
       "resources": {
         "gold": 87061,
-        "tower_materials": 8207,
+        "tower_materials": 8297,
         "eggs": 19,
-        "relics": 150,
-        "arcane_residue": 15964
+        "relics": 151,
+        "arcane_residue": 15965
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16038,7 +16038,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -16149,10 +16149,10 @@
       },
       "resources": {
         "gold": 88126,
-        "tower_materials": 8286,
+        "tower_materials": 8376,
         "eggs": 19,
-        "relics": 153,
-        "arcane_residue": 16195
+        "relics": 154,
+        "arcane_residue": 16196
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16202,7 +16202,7 @@
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
@@ -16307,10 +16307,10 @@
       },
       "resources": {
         "gold": 88267,
-        "tower_materials": 8389,
+        "tower_materials": 8479,
         "eggs": 19,
-        "relics": 156,
-        "arcane_residue": 16407
+        "relics": 157,
+        "arcane_residue": 16408
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16357,7 +16357,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -16464,10 +16464,10 @@
       },
       "resources": {
         "gold": 93795,
-        "tower_materials": 8519,
+        "tower_materials": 8609,
         "eggs": 19,
-        "relics": 159,
-        "arcane_residue": 16843
+        "relics": 160,
+        "arcane_residue": 16844
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16519,7 +16519,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -16630,10 +16630,10 @@
       },
       "resources": {
         "gold": 95002,
-        "tower_materials": 8644,
+        "tower_materials": 8734,
         "eggs": 19,
-        "relics": 162,
-        "arcane_residue": 17016
+        "relics": 163,
+        "arcane_residue": 17017
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16780,10 +16780,10 @@
       },
       "resources": {
         "gold": 95763,
-        "tower_materials": 8773,
+        "tower_materials": 8863,
         "eggs": 19,
-        "relics": 165,
-        "arcane_residue": 17304
+        "relics": 166,
+        "arcane_residue": 17305
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16936,10 +16936,10 @@
       },
       "resources": {
         "gold": 100399,
-        "tower_materials": 8899,
+        "tower_materials": 8989,
         "eggs": 19,
-        "relics": 168,
-        "arcane_residue": 17618
+        "relics": 169,
+        "arcane_residue": 17619
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16987,7 +16987,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -17094,10 +17094,10 @@
       },
       "resources": {
         "gold": 102047,
-        "tower_materials": 9025,
+        "tower_materials": 9115,
         "eggs": 19,
-        "relics": 171,
-        "arcane_residue": 17852
+        "relics": 172,
+        "arcane_residue": 17853
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -17141,7 +17141,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Hidden behind burst casks, the companions uncover old stonework worth hauling home for repairs and upgrades.",
+        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -17248,10 +17248,10 @@
       },
       "resources": {
         "gold": 67802,
-        "tower_materials": 9166,
+        "tower_materials": 9256,
         "eggs": 19,
-        "relics": 174,
-        "arcane_residue": 18144
+        "relics": 175,
+        "arcane_residue": 18145
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -17298,7 +17298,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
+        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -17409,10 +17409,10 @@
       },
       "resources": {
         "gold": 72453,
-        "tower_materials": 9292,
+        "tower_materials": 9382,
         "eggs": 19,
-        "relics": 177,
-        "arcane_residue": 18458
+        "relics": 178,
+        "arcane_residue": 18459
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -17567,10 +17567,10 @@
       },
       "resources": {
         "gold": 74106,
-        "tower_materials": 9418,
+        "tower_materials": 9508,
         "eggs": 19,
-        "relics": 180,
-        "arcane_residue": 18692
+        "relics": 181,
+        "arcane_residue": 18693
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -17613,7 +17613,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -17720,10 +17720,10 @@
       },
       "resources": {
         "gold": 76706,
-        "tower_materials": 9550,
+        "tower_materials": 9640,
         "eggs": 19,
-        "relics": 183,
-        "arcane_residue": 19051
+        "relics": 184,
+        "arcane_residue": 19052
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -17771,7 +17771,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -17882,10 +17882,10 @@
       },
       "resources": {
         "gold": 80755,
-        "tower_materials": 9631,
+        "tower_materials": 9721,
         "eggs": 18,
-        "relics": 186,
-        "arcane_residue": 19353
+        "relics": 187,
+        "arcane_residue": 19354
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -17936,7 +17936,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -18042,10 +18042,10 @@
       },
       "resources": {
         "gold": 84053,
-        "tower_materials": 9758,
+        "tower_materials": 9848,
         "eggs": 18,
-        "relics": 189,
-        "arcane_residue": 19657
+        "relics": 190,
+        "arcane_residue": 19658
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18091,7 +18091,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -18199,10 +18199,10 @@
       },
       "resources": {
         "gold": 86437,
-        "tower_materials": 9890,
+        "tower_materials": 9980,
         "eggs": 18,
-        "relics": 192,
-        "arcane_residue": 20016
+        "relics": 193,
+        "arcane_residue": 20017
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18251,7 +18251,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -18362,10 +18362,10 @@
       },
       "resources": {
         "gold": 89021,
-        "tower_materials": 10015,
+        "tower_materials": 10105,
         "eggs": 18,
-        "relics": 195,
-        "arcane_residue": 20260
+        "relics": 196,
+        "arcane_residue": 20261
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18517,10 +18517,10 @@
       },
       "resources": {
         "gold": 92310,
-        "tower_materials": 10142,
+        "tower_materials": 10232,
         "eggs": 18,
-        "relics": 198,
-        "arcane_residue": 20564
+        "relics": 199,
+        "arcane_residue": 20565
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18567,7 +18567,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -18675,10 +18675,10 @@
       },
       "resources": {
         "gold": 94629,
-        "tower_materials": 10319,
+        "tower_materials": 10409,
         "eggs": 18,
-        "relics": 201,
-        "arcane_residue": 20924
+        "relics": 202,
+        "arcane_residue": 20925
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18840,10 +18840,10 @@
       },
       "resources": {
         "gold": 99001,
-        "tower_materials": 10445,
+        "tower_materials": 10535,
         "eggs": 18,
-        "relics": 204,
-        "arcane_residue": 21235
+        "relics": 205,
+        "arcane_residue": 21236
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18892,7 +18892,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -18999,10 +18999,10 @@
       },
       "resources": {
         "gold": 100487,
-        "tower_materials": 10571,
+        "tower_materials": 10661,
         "eggs": 18,
-        "relics": 207,
-        "arcane_residue": 21472
+        "relics": 208,
+        "arcane_residue": 21473
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19047,7 +19047,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -19153,10 +19153,10 @@
       },
       "resources": {
         "gold": 103026,
-        "tower_materials": 10703,
+        "tower_materials": 10793,
         "eggs": 18,
-        "relics": 210,
-        "arcane_residue": 21843
+        "relics": 211,
+        "arcane_residue": 21844
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19207,7 +19207,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -19318,10 +19318,10 @@
       },
       "resources": {
         "gold": 105584,
-        "tower_materials": 10828,
+        "tower_materials": 10918,
         "eggs": 18,
-        "relics": 213,
-        "arcane_residue": 22085
+        "relics": 214,
+        "arcane_residue": 22086
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19368,7 +19368,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
+        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -19473,10 +19473,10 @@
       },
       "resources": {
         "gold": 107599,
-        "tower_materials": 10954,
+        "tower_materials": 11044,
         "eggs": 18,
-        "relics": 217,
-        "arcane_residue": 22323
+        "relics": 218,
+        "arcane_residue": 22324
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19630,10 +19630,10 @@
       },
       "resources": {
         "gold": 111795,
-        "tower_materials": 11087,
+        "tower_materials": 11177,
         "eggs": 18,
-        "relics": 220,
-        "arcane_residue": 22753
+        "relics": 221,
+        "arcane_residue": 22754
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19684,7 +19684,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -19797,10 +19797,10 @@
       },
       "resources": {
         "gold": 114504,
-        "tower_materials": 11212,
+        "tower_materials": 11302,
         "eggs": 18,
-        "relics": 223,
-        "arcane_residue": 23007
+        "relics": 224,
+        "arcane_residue": 23008
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19955,10 +19955,10 @@
       },
       "resources": {
         "gold": 115988,
-        "tower_materials": 11338,
+        "tower_materials": 11428,
         "eggs": 18,
-        "relics": 226,
-        "arcane_residue": 23245
+        "relics": 227,
+        "arcane_residue": 23246
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20002,7 +20002,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Hidden behind burst casks, the companions uncover old stonework worth hauling home for repairs and upgrades.",
+        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -20108,10 +20108,10 @@
       },
       "resources": {
         "gold": 120013,
-        "tower_materials": 11446,
+        "tower_materials": 11536,
         "eggs": 18,
-        "relics": 229,
-        "arcane_residue": 23661
+        "relics": 230,
+        "arcane_residue": 23662
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20164,7 +20164,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Hidden behind burst casks, the companions uncover old stonework worth hauling home for repairs and upgrades.",
+        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -20277,10 +20277,10 @@
       },
       "resources": {
         "gold": 122386,
-        "tower_materials": 11546,
+        "tower_materials": 11636,
         "eggs": 18,
-        "relics": 232,
-        "arcane_residue": 23890
+        "relics": 233,
+        "arcane_residue": 23891
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20435,10 +20435,10 @@
       },
       "resources": {
         "gold": 124310,
-        "tower_materials": 11674,
+        "tower_materials": 11764,
         "eggs": 18,
-        "relics": 235,
-        "arcane_residue": 24194
+        "relics": 236,
+        "arcane_residue": 24195
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20485,7 +20485,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -20594,10 +20594,10 @@
       },
       "resources": {
         "gold": 128422,
-        "tower_materials": 11805,
+        "tower_materials": 11895,
         "eggs": 18,
-        "relics": 238,
-        "arcane_residue": 24584
+        "relics": 239,
+        "arcane_residue": 24585
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20761,10 +20761,10 @@
       },
       "resources": {
         "gold": 132752,
-        "tower_materials": 11916,
+        "tower_materials": 12006,
         "eggs": 17,
-        "relics": 241,
-        "arcane_residue": 24888
+        "relics": 242,
+        "arcane_residue": 24889
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20813,7 +20813,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -20919,10 +20919,10 @@
       },
       "resources": {
         "gold": 138571,
-        "tower_materials": 12029,
+        "tower_materials": 12119,
         "eggs": 17,
-        "relics": 244,
-        "arcane_residue": 25392
+        "relics": 245,
+        "arcane_residue": 25393
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20977,7 +20977,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -21091,10 +21091,10 @@
       },
       "resources": {
         "gold": 140033,
-        "tower_materials": 12156,
+        "tower_materials": 12246,
         "eggs": 17,
-        "relics": 247,
-        "arcane_residue": 25632
+        "relics": 248,
+        "arcane_residue": 25633
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21141,7 +21141,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -21248,10 +21248,10 @@
       },
       "resources": {
         "gold": 142857,
-        "tower_materials": 12258,
+        "tower_materials": 12348,
         "eggs": 17,
-        "relics": 250,
-        "arcane_residue": 25925
+        "relics": 251,
+        "arcane_residue": 25926
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21302,7 +21302,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -21409,10 +21409,10 @@
       },
       "resources": {
         "gold": 148440,
-        "tower_materials": 12389,
+        "tower_materials": 12479,
         "eggs": 17,
-        "relics": 253,
-        "arcane_residue": 26368
+        "relics": 254,
+        "arcane_residue": 26369
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21464,7 +21464,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -21576,10 +21576,10 @@
       },
       "resources": {
         "gold": 149893,
-        "tower_materials": 12516,
+        "tower_materials": 12606,
         "eggs": 17,
-        "relics": 256,
-        "arcane_residue": 26608
+        "relics": 257,
+        "arcane_residue": 26609
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21625,7 +21625,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -21732,10 +21732,10 @@
       },
       "resources": {
         "gold": 153999,
-        "tower_materials": 12612,
+        "tower_materials": 12702,
         "eggs": 17,
-        "relics": 259,
-        "arcane_residue": 26928
+        "relics": 260,
+        "arcane_residue": 26929
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21787,7 +21787,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -21894,10 +21894,10 @@
       },
       "resources": {
         "gold": 158168,
-        "tower_materials": 12745,
+        "tower_materials": 12835,
         "eggs": 17,
-        "relics": 262,
-        "arcane_residue": 27360
+        "relics": 263,
+        "arcane_residue": 27361
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21946,7 +21946,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
+        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -22058,10 +22058,10 @@
       },
       "resources": {
         "gold": 158991,
-        "tower_materials": 12844,
+        "tower_materials": 12934,
         "eggs": 17,
-        "relics": 265,
-        "arcane_residue": 27523
+        "relics": 266,
+        "arcane_residue": 27524
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22107,7 +22107,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -22212,10 +22212,10 @@
       },
       "resources": {
         "gold": 164025,
-        "tower_materials": 12972,
+        "tower_materials": 13062,
         "eggs": 17,
-        "relics": 268,
-        "arcane_residue": 27915
+        "relics": 269,
+        "arcane_residue": 27916
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22270,7 +22270,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -22379,10 +22379,10 @@
       },
       "resources": {
         "gold": 168191,
-        "tower_materials": 13105,
+        "tower_materials": 13195,
         "eggs": 17,
-        "relics": 271,
-        "arcane_residue": 28347
+        "relics": 272,
+        "arcane_residue": 28348
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22430,7 +22430,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -22542,10 +22542,10 @@
       },
       "resources": {
         "gold": 171289,
-        "tower_materials": 13207,
+        "tower_materials": 13297,
         "eggs": 17,
-        "relics": 274,
-        "arcane_residue": 28641
+        "relics": 275,
+        "arcane_residue": 28642
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22595,7 +22595,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -22704,10 +22704,10 @@
       },
       "resources": {
         "gold": 173902,
-        "tower_materials": 13332,
+        "tower_materials": 13422,
         "eggs": 17,
-        "relics": 277,
-        "arcane_residue": 28895
+        "relics": 278,
+        "arcane_residue": 28896
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22754,7 +22754,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
+        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Dusty luminous scales cling to the companion on the walk home, each one humming with a low ritual promise.",
@@ -22859,10 +22859,10 @@
       },
       "resources": {
         "gold": 178285,
-        "tower_materials": 13465,
+        "tower_materials": 13555,
         "eggs": 17,
-        "relics": 280,
-        "arcane_residue": 29357
+        "relics": 281,
+        "arcane_residue": 29358
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22918,7 +22918,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -23030,10 +23030,10 @@
       },
       "resources": {
         "gold": 181804,
-        "tower_materials": 13593,
+        "tower_materials": 13683,
         "eggs": 17,
-        "relics": 283,
-        "arcane_residue": 29731
+        "relics": 284,
+        "arcane_residue": 29732
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23085,7 +23085,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -23194,10 +23194,10 @@
       },
       "resources": {
         "gold": 184177,
-        "tower_materials": 13717,
+        "tower_materials": 13807,
         "eggs": 17,
-        "relics": 286,
-        "arcane_residue": 29921
+        "relics": 287,
+        "arcane_residue": 29922
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23241,7 +23241,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Dusty luminous scales cling to the companion on the walk home, each one humming with a low ritual promise.",
@@ -23346,10 +23346,10 @@
       },
       "resources": {
         "gold": 188897,
-        "tower_materials": 13851,
+        "tower_materials": 13941,
         "eggs": 17,
-        "relics": 289,
-        "arcane_residue": 30427
+        "relics": 290,
+        "arcane_residue": 30428
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23522,10 +23522,10 @@
       },
       "resources": {
         "gold": 191962,
-        "tower_materials": 13978,
+        "tower_materials": 14068,
         "eggs": 17,
-        "relics": 292,
-        "arcane_residue": 30739
+        "relics": 293,
+        "arcane_residue": 30740
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23574,7 +23574,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "The baths pull their heat from somewhere. Follow the draw far enough and the walls narrow to a crawl, furred with residue nobody has ever scraped.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -23681,10 +23681,10 @@
       },
       "resources": {
         "gold": 196544,
-        "tower_materials": 14089,
+        "tower_materials": 14179,
         "eggs": 16,
-        "relics": 295,
-        "arcane_residue": 31050
+        "relics": 296,
+        "arcane_residue": 31051
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23734,7 +23734,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "An instability bloom curls around the party, leaving them dazed and carrying notes no scholar has seen before.",
+        "Cold water somewhere below sounds like it is moving. Whatever the tower kept in its larder, the flood got there first.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -23842,10 +23842,10 @@
       },
       "resources": {
         "gold": 203393,
-        "tower_materials": 14283,
+        "tower_materials": 14373,
         "eggs": 16,
-        "relics": 298,
-        "arcane_residue": 31606
+        "relics": 299,
+        "arcane_residue": 31607
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23903,7 +23903,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -24017,10 +24017,10 @@
       },
       "resources": {
         "gold": 206446,
-        "tower_materials": 14410,
+        "tower_materials": 14500,
         "eggs": 16,
-        "relics": 301,
-        "arcane_residue": 31918
+        "relics": 302,
+        "arcane_residue": 31919
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24070,7 +24070,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -24177,10 +24177,10 @@
       },
       "resources": {
         "gold": 208545,
-        "tower_materials": 14534,
+        "tower_materials": 14624,
         "eggs": 16,
-        "relics": 304,
-        "arcane_residue": 32108
+        "relics": 305,
+        "arcane_residue": 32109
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24229,7 +24229,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "Dusty luminous scales cling to the companion on the walk home, each one humming with a low ritual promise.",
@@ -24334,10 +24334,10 @@
       },
       "resources": {
         "gold": 216294,
-        "tower_materials": 14669,
+        "tower_materials": 14759,
         "eggs": 16,
-        "relics": 307,
-        "arcane_residue": 32686
+        "relics": 308,
+        "arcane_residue": 32687
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24392,7 +24392,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -24508,10 +24508,10 @@
       },
       "resources": {
         "gold": 217175,
-        "tower_materials": 14795,
+        "tower_materials": 14885,
         "eggs": 16,
-        "relics": 310,
-        "arcane_residue": 32928
+        "relics": 311,
+        "arcane_residue": 32929
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24667,10 +24667,10 @@
       },
       "resources": {
         "gold": 221705,
-        "tower_materials": 14921,
+        "tower_materials": 15011,
         "eggs": 16,
-        "relics": 313,
-        "arcane_residue": 33255
+        "relics": 314,
+        "arcane_residue": 33256
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24827,10 +24827,10 @@
       },
       "resources": {
         "gold": 227731,
-        "tower_materials": 15055,
+        "tower_materials": 15145,
         "eggs": 16,
-        "relics": 316,
-        "arcane_residue": 33761
+        "relics": 317,
+        "arcane_residue": 33762
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24885,7 +24885,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -24999,10 +24999,10 @@
       },
       "resources": {
         "gold": 229085,
-        "tower_materials": 15182,
+        "tower_materials": 15272,
         "eggs": 16,
-        "relics": 319,
-        "arcane_residue": 34066
+        "relics": 320,
+        "arcane_residue": 34067
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25056,7 +25056,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -25163,10 +25163,10 @@
       },
       "resources": {
         "gold": 233158,
-        "tower_materials": 15307,
+        "tower_materials": 15397,
         "eggs": 16,
-        "relics": 322,
-        "arcane_residue": 34330
+        "relics": 323,
+        "arcane_residue": 34331
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25212,7 +25212,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -25319,10 +25319,10 @@
       },
       "resources": {
         "gold": 239293,
-        "tower_materials": 15461,
+        "tower_materials": 15551,
         "eggs": 16,
-        "relics": 325,
-        "arcane_residue": 34839
+        "relics": 326,
+        "arcane_residue": 34840
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25379,7 +25379,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A fragment of shell comes up in the ash, thicker than any egg the hatchery has handled and still warm to hold.",
+        "The stone below the handlers' level is warm without any vent feeding it, and the warmth is not steady — it moves.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -25493,10 +25493,10 @@
       },
       "resources": {
         "gold": 243120,
-        "tower_materials": 15589,
+        "tower_materials": 15679,
         "eggs": 16,
-        "relics": 329,
-        "arcane_residue": 35214
+        "relics": 330,
+        "arcane_residue": 35215
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25551,7 +25551,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -25660,10 +25660,10 @@
       },
       "resources": {
         "gold": 245702,
-        "tower_materials": 15713,
+        "tower_materials": 15803,
         "eggs": 16,
-        "relics": 332,
-        "arcane_residue": 35438
+        "relics": 333,
+        "arcane_residue": 35439
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25817,10 +25817,10 @@
       },
       "resources": {
         "gold": 251743,
-        "tower_materials": 15847,
+        "tower_materials": 15937,
         "eggs": 16,
-        "relics": 335,
-        "arcane_residue": 35947
+        "relics": 336,
+        "arcane_residue": 35948
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25875,7 +25875,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
+        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -25989,10 +25989,10 @@
       },
       "resources": {
         "gold": 190212,
-        "tower_materials": 15987,
+        "tower_materials": 16077,
         "eggs": 16,
-        "relics": 338,
-        "arcane_residue": 36329
+        "relics": 339,
+        "arcane_residue": 36330
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26044,7 +26044,7 @@
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Warm air seeps under the sealed stair at the Foreman's Rest, smelling of wet mineral and steam. The tower proper is breathing down there.",
+        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -26155,10 +26155,10 @@
       },
       "resources": {
         "gold": 192578,
-        "tower_materials": 16111,
+        "tower_materials": 16201,
         "eggs": 16,
-        "relics": 341,
-        "arcane_residue": 36524
+        "relics": 342,
+        "arcane_residue": 36525
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26202,7 +26202,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "A door below the menagerie is locked from the inside, and the lock is the sort a keeper fits when the thing outside is the danger.",
         "Dusty luminous scales cling to the companion on the walk home, each one humming with a low ritual promise.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -26307,10 +26307,10 @@
       },
       "resources": {
         "gold": 198625,
-        "tower_materials": 16245,
+        "tower_materials": 16335,
         "eggs": 16,
-        "relics": 344,
-        "arcane_residue": 37038
+        "relics": 345,
+        "arcane_residue": 37039
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26364,7 +26364,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
+        "A water-swollen work ledger turns up in the salvage, its last entries counting days until a door was to be sealed.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -26479,10 +26479,10 @@
       },
       "resources": {
         "gold": 202084,
-        "tower_materials": 16373,
+        "tower_materials": 16463,
         "eggs": 16,
-        "relics": 347,
-        "arcane_residue": 37416
+        "relics": 348,
+        "arcane_residue": 37417
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26643,10 +26643,10 @@
       },
       "resources": {
         "gold": 204413,
-        "tower_materials": 16479,
+        "tower_materials": 16569,
         "eggs": 15,
-        "relics": 350,
-        "arcane_residue": 37601
+        "relics": 351,
+        "arcane_residue": 37602
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26696,7 +26696,7 @@
         "Tower Scholar Contract was fulfilled by Lira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "A companion sets a palm against the floor and feels it thrum. Whatever is under the slag is still holding pressure after a hundred years.",
+        "Brass plating runs the length of a corridor below the kennels, stamped with tally marks nobody in the guild can read yet.",
         "Dusty luminous scales cling to the companion on the walk home, each one humming with a low ritual promise.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",

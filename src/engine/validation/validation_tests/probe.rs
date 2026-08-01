@@ -36,6 +36,58 @@ fn probe_floor_usage() {
         game_state.egg_inventory.len(),
     );
 
+    // Score every unlocked floor for the strongest idle companion, to see what
+    // the planner actually values rather than guessing from outcomes.
+    if let Some(monster) = game_state.monsters.first().cloned() {
+        let mut sim = game_state.clone();
+        for m in &mut sim.monsters {
+            m.current_job = crate::state::CompanionJobState::Idle;
+        }
+        for floor in &data.floors.floors {
+            if !sim.town.unlocked_floor_ids.contains(&floor.id) {
+                continue;
+            }
+            for mission_id in &floor.mission_ids {
+                crate::engine::configure_expedition_plan(
+                    &mut sim,
+                    &floor.id,
+                    mission_id,
+                    ExpeditionPriority::Balanced,
+                );
+                if crate::engine::assign_monster_to_expedition(
+                    &data,
+                    &mut sim,
+                    &monster.id,
+                    &floor.id,
+                )
+                .is_err()
+                {
+                    println!("SCORE {:<22} {:<14} ASSIGN-FAILED", floor.id, mission_id);
+                    continue;
+                }
+                match crate::engine::preview_expedition_plan(
+                    &data,
+                    &sim,
+                    &floor.id,
+                    mission_id,
+                    &ExpeditionPriority::Balanced,
+                ) {
+                    Ok(p) => println!(
+                        "SCORE {:<22} {:<14} eggs={} relics={} mat={} injury={} success={}",
+                        floor.id,
+                        mission_id,
+                        p.projected_eggs,
+                        p.projected_relics,
+                        p.projected_materials,
+                        p.injury_risk_score,
+                        p.success_score
+                    ),
+                    Err(e) => println!("SCORE {:<22} {:<14} PREVIEW-ERR {e}", floor.id, mission_id),
+                }
+            }
+        }
+    }
+
     let mut ranks = [0usize; 6];
     for monster in &game_state.monsters {
         ranks[usize::from(monster.quality_rank).min(5)] += 1;
