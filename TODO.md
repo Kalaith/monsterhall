@@ -171,6 +171,38 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, sixteenth pass)
+
+The last two screens never photographed crowded, and the lens that has now
+worked three passes running: *fine at day one, wrong by day thirty.*
+
+- ~~The main screen's roster showed three companions of twenty.~~ Fixed.
+  `draw_monster_roster` passed a hardcoded `1` as its row capacity, with a
+  comment explaining that one row lets the pager come out of the card height.
+  The panel is the tallest on the main screen and grows with the window, so at
+  1080p that drew a single row of three into it: **seven pages to see the guild,
+  with about five sixths of the panel left as empty backdrop**. The row count
+  comes from the panel now, the way the hatchery's egg column and the journal's
+  log take theirs, and the cards lay out as a grid. **Three per page → nine.**
+
+- ~~And the shared pager rule was spending a card row on a line of buttons.~~
+  `RosterWindow::new` gave the pager a whole row whenever paging was needed. But
+  all four callers draw their pager *underneath* the last card row, and a card
+  row is 100–172px against a pager that needs 34. The reserve is measured in
+  pixels now, via a new `RosterWindow::from_panel` that takes the usable height
+  and the row pitch — and only applies it when a pager is actually drawn, so a
+  guild that fits still uses every row. Measured across all three roster panels:
+  **town overview 3 → 9 per page, expedition team 6 → 8, contract desk 8 → 10.**
+
+  The guard is a test asserting a pager costs its own height rather than a card
+  row, verified by planting the old rule back. Its first run failed and the
+  *test* was wrong, not the code: with space for exactly four rows and no slack,
+  any reserve must cost a row. The property worth pinning is that it costs one
+  only when there is no pager-sized slack, which is what it now asserts.
+
+- **Balance untouched** — no report file changed at all this pass, not even a
+  version stamp.
+
 ### Found by review, not by the audit (2026-08-03, fifteenth pass)
 
 The two screens no pass had read closely, photographed at campaign scale for the

@@ -14,7 +14,7 @@ use crate::ui::art::draw_condition_badges;
 use crate::ui::art::draw_species_portrait;
 use crate::ui::core::{draw_body_text, draw_body_text_in_box, secondary_button, utility_button};
 use crate::ui::layout;
-use crate::ui::screens::roster_window::{draw_roster_pager, RosterWindow, PAGER_RESERVE_H};
+use crate::ui::screens::roster_window::{draw_roster_pager, RosterWindow};
 use crate::ui::theme;
 
 use crate::ui::view_models::{assignment_label, companion_skill_summary, species_name_by_id};
@@ -49,27 +49,24 @@ pub(super) fn draw_monster_roster(
     // the only place she can be released — so a flat `.min(3)` against a
     // twenty-companion cap meant seventeen companions had no profile screen and
     // could never be let go, which is exactly the wall a guild hits at capacity.
-    let roster = RosterWindow::new(
+    // The panel takes whatever height the screen has left, and this drew a
+    // single row into it: three companions of twenty, seven pages to see the
+    // guild, and about five sixths of the tallest panel on the main screen left
+    // as empty backdrop. The row count comes from the panel now, the way the
+    // hatchery's egg column and the journal's log take theirs.
+    let card_h = ROSTER_CARD_H;
+    let roster = RosterWindow::from_panel(
         game_state.monsters.len(),
         roster_page,
-        1,
+        layout.roster_h - ROSTER_PANEL_CHROME_H,
+        card_h + ROSTER_ROW_GAP,
         ROSTER_STRIP_COLUMNS,
     );
     let visible_count = roster.visible_count;
-    let card_width = if visible_count <= 1 {
-        layout.content_width - layout::PANEL_PADDING * 2.0
-    } else {
-        let total_gap = layout::SECTION_GAP * (visible_count as f32 - 1.0);
-        (layout.content_width - layout::PANEL_PADDING * 2.0 - total_gap) / visible_count as f32
-    };
-    // One row of cards, so the pager comes out of the card height rather than
-    // getting a row of its own.
-    let pager_reserve = if roster.needs_pager() {
-        PAGER_RESERVE_H
-    } else {
-        0.0
-    };
-    let card_h = 162.0_f32.min((layout.roster_h - 62.0 - pager_reserve).max(120.0));
+    let columns = ROSTER_STRIP_COLUMNS.min(visible_count.max(1));
+    let total_gap = layout::SECTION_GAP * (columns as f32 - 1.0);
+    let card_width =
+        (layout.content_width - layout::PANEL_PADDING * 2.0 - total_gap) / columns as f32;
     let card_y = layout.roster_y + 44.0;
 
     for (index, monster) in game_state
@@ -79,21 +76,24 @@ pub(super) fn draw_monster_roster(
         .take(visible_count)
         .enumerate()
     {
+        let column = index % columns;
+        let row = index / columns;
         let card_x = layout.left_margin
             + layout::PANEL_PADDING
-            + index as f32 * (card_width + layout::SECTION_GAP);
-        if let Some(action) =
-            draw_roster_card_organic(data, monster, card_x, card_y, card_width, card_h)
+            + column as f32 * (card_width + layout::SECTION_GAP);
+        let y = card_y + row as f32 * (card_h + ROSTER_ROW_GAP);
+        if let Some(action) = draw_roster_card_organic(data, monster, card_x, y, card_width, card_h)
         {
             return Some(action);
         }
     }
 
+    let rows_drawn = visible_count.div_ceil(columns.max(1));
     if let Some(action) = draw_roster_pager(
         &roster,
         game_state.monsters.len(),
         layout.left_margin + layout::PANEL_PADDING,
-        card_y + card_h + 4.0,
+        card_y + rows_drawn as f32 * (card_h + ROSTER_ROW_GAP) + 4.0,
         layout.content_width - layout::PANEL_PADDING * 2.0,
         UiAction::ShowRosterPage,
     ) {
@@ -102,6 +102,13 @@ pub(super) fn draw_monster_roster(
 
     None
 }
+
+/// A roster card's height, and the space the panel spends on its title and its
+/// pager. `RosterWindow` gives the last row back to the pager when one is
+/// needed, so the chrome here is only the title band plus a bottom margin.
+const ROSTER_CARD_H: f32 = 162.0;
+const ROSTER_ROW_GAP: f32 = 10.0;
+const ROSTER_PANEL_CHROME_H: f32 = 62.0;
 
 fn draw_roster_card_organic(
     data: &GameData,

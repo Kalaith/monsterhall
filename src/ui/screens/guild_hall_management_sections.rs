@@ -342,10 +342,13 @@ fn draw_worker_cards(
     // past its own frame, through the footer and off the bottom of the screen,
     // and the companions on those rows could not be clicked at all. The column
     // now sizes itself from the space it really has and pages the rest.
-    let row_capacity = (((footer_y - y - WORKER_HEADER_H - layout::SECTION_GAP) / WORKER_CARD_H)
-        .floor() as usize)
-        .max(1);
-    let window = RosterWindow::new(workers.len(), roster_page, row_capacity, ROSTER_COLUMNS);
+    let window = RosterWindow::from_panel(
+        workers.len(),
+        roster_page,
+        footer_y - y - WORKER_HEADER_H - layout::SECTION_GAP,
+        WORKER_CARD_H,
+        ROSTER_COLUMNS,
+    );
     let panel_h = if workers.is_empty() {
         if collapse_empty {
             118.0

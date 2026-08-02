@@ -498,11 +498,11 @@ pub fn draw_expedition_planning(
 
     // How many card rows the panel can physically hold, which is what decides
     // whether the roster needs paging at all.
-    let row_capacity = (((layout.team_h - 58.0) / 104.0).floor() as usize).max(1);
-    let roster = RosterWindow::new(
+    let roster = RosterWindow::from_panel(
         game_state.monsters.len(),
         expedition_state.roster_page,
-        row_capacity,
+        layout.team_h - 58.0,
+        104.0,
         ROSTER_COLUMNS,
     );
     let visible_team_h = if game_state.monsters.is_empty() {

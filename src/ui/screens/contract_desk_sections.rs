@@ -557,11 +557,11 @@ pub(super) fn draw_eligible_panel(
     // Rows of cards the panel can hold, which is what decides whether the roster
     // needs paging. The panel keeps its full height either way — it is anchored
     // to the footer — so the pager sits under the cards rather than growing it.
-    let row_capacity = (((panel_h - 42.0) / 100.0).floor() as usize).max(1);
-    let roster = RosterWindow::new(
+    let roster = RosterWindow::from_panel(
         game_state.monsters.len(),
         roster_page,
-        row_capacity,
+        panel_h - 42.0,
+        100.0,
         ROSTER_COLUMNS,
     );
     draw_tier_panel(

@@ -51,9 +51,9 @@ pub(super) struct RosterWindow {
 }
 
 impl RosterWindow {
-    /// `row_capacity` is how many card rows physically fit in the panel. When
-    /// the whole roster fits, no pager is drawn and every row goes to cards, so
-    /// a six-companion guild looks exactly as it did before paging existed.
+    /// `row_capacity` is how many card rows the caller has room to draw, with
+    /// space for the pager already taken out — see [`Self::from_panel`], which
+    /// is what every screen should use.
     pub(super) fn new(roster_len: usize, page: usize, row_capacity: usize, columns: usize) -> Self {
         let row_capacity = row_capacity.max(1);
         let columns = columns.max(1);
@@ -70,15 +70,7 @@ impl RosterWindow {
             };
         }
 
-        // A multi-row panel gives the pager a row of its own; a single-row strip
-        // keeps all its cards and takes the pager out of the card height
-        // instead. Either way the floor is one full row, because a panel too
-        // short to page is still better than one that silently hides the guild.
-        let page_size = if row_capacity > 1 {
-            (row_capacity - 1) * columns
-        } else {
-            columns
-        };
+        let page_size = row_capacity * columns;
         let page_count = roster_len.div_ceil(page_size);
         let page = page.min(page_count.saturating_sub(1));
         let first_index = page * page_size;
@@ -91,6 +83,33 @@ impl RosterWindow {
             page_count,
             columns,
         }
+    }
+
+    /// The window for a panel `usable_h` tall drawing rows `card_row_h` apart.
+    ///
+    /// Every screen here draws its pager *underneath* the last card row, so the
+    /// room it needs is `PAGER_RESERVE_H` — about 34px. The rule this replaces
+    /// gave the pager a whole card row instead, and a card row is 100 to 172px.
+    /// On the Town Overview that cost the tallest panel on the main screen an
+    /// entire row of three companions to make space for one line of buttons.
+    ///
+    /// The reserve only applies when a pager is actually drawn, so a guild that
+    /// fits still uses every row.
+    pub(super) fn from_panel(
+        roster_len: usize,
+        page: usize,
+        usable_h: f32,
+        card_row_h: f32,
+        columns: usize,
+    ) -> Self {
+        let columns = columns.max(1);
+        let rows = |height: f32| (((height / card_row_h).floor()) as usize).max(1);
+
+        let unpaged_rows = rows(usable_h);
+        if roster_len <= unpaged_rows * columns {
+            return Self::new(roster_len, page, unpaged_rows, columns);
+        }
+        Self::new(roster_len, page, rows(usable_h - PAGER_RESERVE_H), columns)
     }
 
     pub(super) fn needs_pager(&self) -> bool {
@@ -176,6 +195,34 @@ pub(super) fn roster_panel_height(window: &RosterWindow, header_h: f32, card_row
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// The pager costs a pager's height, not a card row.
+    ///
+    /// The rule this replaces gave the pager a whole row of cards. On the Town
+    /// Overview, whose card rows are 172px against a 34px pager, that spent an
+    /// entire row of three companions on one line of buttons — the panel showed
+    /// three of twenty and paged seven times with five sixths of itself empty.
+    #[test]
+    fn a_pager_costs_its_own_height_rather_than_a_row_of_cards() {
+        let card_row_h = 172.0;
+        // Four rows plus a pager's worth of slack, which is exactly what a panel
+        // needs to draw four rows and a pager beneath them.
+        let usable_h = card_row_h * 4.0 + PAGER_RESERVE_H;
+
+        let paged = RosterWindow::from_panel(20, 0, usable_h, card_row_h, 3);
+        assert_eq!(
+            paged.card_rows(),
+            4,
+            "a {PAGER_RESERVE_H}px pager should cost its own height, not a {card_row_h}px card row"
+        );
+        assert_eq!(paged.page_size, 12);
+        assert!(paged.needs_pager());
+
+        // And a guild that fits still uses every row, pager or not.
+        let unpaged = RosterWindow::from_panel(12, 0, card_row_h * 4.0, card_row_h, 3);
+        assert_eq!(unpaged.visible_count, 12);
+        assert!(!unpaged.needs_pager());
+    }
 
     /// A guild that fits must render exactly as it did before paging existed.
     #[test]

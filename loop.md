@@ -1227,6 +1227,31 @@ Stop the loop and report if:
   than capped; (c) the town overview and expedition planning are the screens with the
   most panels and have never been photographed crowded.
 
+- **2026-08-03 — sixteenth pass (three companions of twenty on the main screen).**
+  Photographed the last two screens that had never been seen crowded. The Town
+  Overview roster passed a hardcoded `1` as its row capacity into the tallest panel on
+  the main screen — three companions a page against a cap of twenty, seven pages to
+  see the guild, five sixths of the panel empty backdrop. Derived from the panel now,
+  laid out as a grid. Behind it sat a shared bug: `RosterWindow::new` gave the pager a
+  whole card row whenever paging was needed, but all four callers draw their pager
+  *underneath* the cards, and a card row is 100–172px against a 34px pager. Replaced
+  with `RosterWindow::from_panel`, which reserves pixels and only when a pager is
+  actually drawn. **Town overview 3 → 9 per page, expedition team 6 → 8, contract desk
+  8 → 10.**
+  **Result:** 124 tests (was 123), fmt and clippy clean, publish green, **no report
+  file changed at all** — not even a version stamp. Guard verified by planting the old
+  rule; its first run failed and the *test* was wrong, not the code (with space for
+  exactly four rows and no slack, any reserve must cost a row — the property worth
+  pinning is that it costs one only when there is no pager-sized slack).
+  **Next iteration should know:** (a) *fine at day one, wrong by day thirty* has now
+  found defects three passes running and every main screen has been through it —
+  hatchery and town management (buildings) are the two that have never been captured
+  crowded, and the hatchery's egg list is the obvious next candidate since it carries
+  its own scroll; (b) the hardcoded-row-count family should now be **exhausted** — the
+  four panels that had one all derive it, so if a fifth appears it is new code, not a
+  survivor; (c) still open and untouched: the `ui_text` migration (~40 hardcoded
+  strings) and the unbounded event log in the save.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and
