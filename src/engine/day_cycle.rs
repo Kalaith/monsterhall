@@ -5,10 +5,10 @@ use std::collections::HashSet;
 use macroquad_toolkit::rng::gen_range;
 
 use super::{
-    apply_monster_relationship_gain, complete_town_project_if_needed, debt::resolve_debt_cycle,
-    expedition_depth_profile, floor_roster_gate_report, guest::resolve_contracts,
-    refresh_contracts, room_depth_profile_for_town, start_town_situation_from_event,
-    tick_town_situations, upkeep_pressure_pct,
+    apply_monster_relationship_gain, companion::effective_stats, complete_town_project_if_needed,
+    debt::resolve_debt_cycle, expedition_depth_profile, floor_roster_gate_report,
+    guest::resolve_contracts, refresh_contracts, room_depth_profile_for_town,
+    start_town_situation_from_event, tick_town_situations, upkeep_pressure_pct,
 };
 use crate::data::{
     BuildingData, CompanionWorkHistoryProgressionData, DayCycleConfigData, EggSpeciesEntryData,

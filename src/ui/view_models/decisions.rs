@@ -186,7 +186,8 @@ pub fn monster_role_summary(
     monster: &crate::state::CompanionState,
 ) -> MonsterRoleSummary {
     let profile = &data.ui_text.monster_profile;
-    let role_suffix = format!(" ({})", monster_depth_role_label(monster));
+    let stats = crate::engine::effective_stats(data, monster);
+    let role_suffix = format!(" ({})", monster_depth_role_label(data, monster));
     if monster.injury > 0 || monster.stress >= 3 || monster.fatigue >= 3 {
         return MonsterRoleSummary {
             readiness_label: profile.readiness_hurt_label.clone(),
@@ -195,7 +196,7 @@ pub fn monster_role_summary(
         };
     }
 
-    if monster.stats.power >= monster.stats.charm + 2 {
+    if stats.power >= stats.charm + 2 {
         return MonsterRoleSummary {
             readiness_label: profile.readiness_ready_label.clone(),
             readiness_color: theme::INFO,

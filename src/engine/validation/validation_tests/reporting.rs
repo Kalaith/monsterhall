@@ -167,6 +167,9 @@ pub(super) struct SimulationReport {
     pub(super) final_roster_size: usize,
     pub(super) final_buildings: usize,
     pub(super) final_unlocked_floors: usize,
+    /// Floors that can never open again — see `engine::stranded_floor_ids`.
+    /// Distinct from floors the guild simply has not walked to.
+    pub(super) final_stranded_floor_ids: Vec<String>,
     pub(super) final_active_contracts: usize,
     pub(super) final_average_bond: f64,
     pub(super) final_average_reputation: f64,

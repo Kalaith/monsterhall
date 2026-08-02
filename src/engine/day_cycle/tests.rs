@@ -533,6 +533,28 @@ fn every_skill_the_data_names_can_actually_be_trained_and_scored() {
     }
 }
 
+#[test]
+fn traits_change_what_a_companion_is_worth() {
+    let data = crate::data::test_game_data();
+    let plain = test_monster(Vec::new());
+    let stonebound = test_monster(vec!["stonebound".to_owned()]);
+
+    let plain_stats = crate::engine::effective_stats(&data, &plain);
+    let bonus_stats = crate::engine::effective_stats(&data, &stonebound);
+
+    assert_eq!(plain_stats.endurance, plain.stats.endurance);
+    assert!(
+        bonus_stats.endurance > plain_stats.endurance,
+        "stonebound authors an endurance bonus; effective_stats must apply it"
+    );
+    // Summed on demand rather than baked in at hatch, because mutations grant
+    // traits after a companion exists.
+    assert_eq!(
+        stonebound.stats.endurance, plain.stats.endurance,
+        "the bonus must not have been written into the base stats"
+    );
+}
+
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),

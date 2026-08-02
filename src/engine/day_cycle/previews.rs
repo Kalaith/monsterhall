@@ -130,7 +130,7 @@ pub(super) fn expedition_safety_score(
     let trait_modifier = collect_trait_modifiers(data, monster);
     // A worn-down companion braces for less of the hit than her endurance says.
     let effective_endurance = scale_by_effectiveness(
-        monster.stats.endurance.max(0) as u32,
+        effective_stats(data, monster).endurance.max(0) as u32,
         companion_effectiveness_pct(day_cycle, monster),
     );
 
@@ -155,10 +155,10 @@ pub(crate) fn calculate_expedition_plan(
     let day_cycle = &data.config.day_cycle;
 
     // A party carries only what its condition lets it carry. Each companion's
-    // stats are weighted by how worn down she is before anything is totalled,
+    // trait-adjusted stats are weighted by how worn down she is before anything is totalled,
     // so a battered party both succeeds less and — through the endurance term
     // in the safety score — gets hurt more.
-    let effective_stat = |monster: &CompanionState, stat: i32| -> u32 {
+    let condition_weighted = |monster: &CompanionState, stat: i32| -> u32 {
         scale_by_effectiveness(
             stat.max(0) as u32,
             companion_effectiveness_pct(day_cycle, monster),
@@ -167,11 +167,11 @@ pub(crate) fn calculate_expedition_plan(
 
     let total_power = assigned_monsters
         .iter()
-        .map(|monster| effective_stat(monster, monster.stats.power))
+        .map(|monster| condition_weighted(monster, effective_stats(data, monster).power))
         .sum::<u32>();
     let total_instinct = assigned_monsters
         .iter()
-        .map(|monster| effective_stat(monster, monster.stats.instinct))
+        .map(|monster| condition_weighted(monster, effective_stats(data, monster).instinct))
         .sum::<u32>();
     let party_effectiveness_pct = party_effectiveness_pct(day_cycle, assigned_monsters);
     let total_trait_success = assigned_monsters
@@ -289,7 +289,7 @@ pub(crate) fn calculate_expedition_plan(
         .sum::<i32>();
     let total_endurance = assigned_monsters
         .iter()
-        .map(|monster| effective_stat(monster, monster.stats.endurance))
+        .map(|monster| condition_weighted(monster, effective_stats(data, monster).endurance))
         .sum::<u32>();
     let injury_risk_score = floor.difficulty as i32
         + mission.injury_risk_pct
@@ -342,8 +342,10 @@ pub(super) fn preview_guild_job_for_town(
         room,
     );
 
+    let stats = effective_stats(data, monster);
+
     let success_score = data.config.day_cycle.base_guild_job_success
-        + monster.stats.charm * 3
+        + stats.charm * 3
         + skill_bonus
         + room_trait_bonus
         + room_species_bonus
@@ -352,15 +354,14 @@ pub(super) fn preview_guild_job_for_town(
         + depth_profile.success_bonus;
 
     let base_gold = room.base_gold_yield
-        + (monster.stats.charm.max(0) as u32 * data.config.day_cycle.worker_charm_gold_multiplier)
+        + (stats.charm.max(0) as u32 * data.config.day_cycle.worker_charm_gold_multiplier)
         + (success_score.max(0) as u32 / 4);
     let base_residue = room.base_residue_yield
-        + (monster.stats.instinct.max(0) as u32
-            * data.config.day_cycle.worker_instinct_residue_multiplier)
+        + (stats.instinct.max(0) as u32 * data.config.day_cycle.worker_instinct_residue_multiplier)
         + (success_score.max(0) as u32 / 12);
     let base_materials = room
         .base_materials_yield
-        .saturating_add(monster.stats.power.max(0) as u32 / 4)
+        .saturating_add(stats.power.max(0) as u32 / 4)
         .saturating_add(monster.skills.crafting / 2);
     let preparation_quality = room
         .preparation_quality_bonus

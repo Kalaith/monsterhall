@@ -1,6 +1,7 @@
 //! Stateless business logic services.
 
 mod bootstrap;
+mod companion;
 mod day_cycle;
 mod debt;
 mod depth;
@@ -9,6 +10,7 @@ mod opening;
 mod validation;
 
 pub use bootstrap::create_new_game_state;
+pub use companion::{effective_stats, trait_stat_bonus};
 pub use day_cycle::{
     assign_monster_to_expedition, assign_monster_to_idle, assign_monster_to_rest,
     assign_monster_to_room, configure_expedition_plan, convert_egg, create_opening_egg,

@@ -188,6 +188,10 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         final_roster_size: game_state.monsters.len(),
         final_buildings: game_state.town.constructed_building_ids.len(),
         final_unlocked_floors: game_state.town.unlocked_floor_ids.len(),
+        final_stranded_floor_ids: super::super::super::depth::stranded_floor_ids(
+            &data,
+            &game_state,
+        ),
         final_active_contracts: game_state.active_contracts.len(),
         final_average_bond: average_bond(&game_state),
         final_average_reputation: average_reputation(&game_state),
@@ -416,12 +420,18 @@ fn long_campaign_simulation_reports_stay_valid() {
                 // no number here. A mutation that consumed the last Minotaur
                 // Porter closed `broodpens` and with it eleven floors, with
                 // every other assertion in this test still green.
-                assert_eq!(
-                    report.final_unlocked_floors,
-                    data.floors.floors.len(),
-                    "365-day simulation should open the whole tower, got {} of {} floors",
-                    report.final_unlocked_floors,
-                    data.floors.floors.len()
+                //
+                // This used to be asserted as `final_unlocked_floors == 25`,
+                // which conflates a floor that *cannot* open with one the guild
+                // simply never walked to. Route choice is not a defect, and
+                // pinning it made the test fire on four separate correct
+                // gameplay changes while catching nothing. `stranded_floor_ids`
+                // measures the thing the comment above actually describes, and
+                // does it regardless of where the simulated guild chose to go.
+                assert!(
+                    report.final_stranded_floor_ids.is_empty(),
+                    "365-day simulation stranded floors behind gates that can never be met: {:?}",
+                    report.final_stranded_floor_ids
                 );
                 assert!(
                     report.final_resources.arcane_residue < 150_000
@@ -707,6 +717,7 @@ fn run_simulation_report(data: &GameData, simulation_days: u32, rng_seed: u64) -
         final_roster_size: game_state.monsters.len(),
         final_buildings: game_state.town.constructed_building_ids.len(),
         final_unlocked_floors: game_state.town.unlocked_floor_ids.len(),
+        final_stranded_floor_ids: super::super::super::depth::stranded_floor_ids(data, &game_state),
         final_active_contracts: game_state.active_contracts.len(),
         final_average_bond: average_bond(&game_state),
         final_average_reputation: average_reputation(&game_state),

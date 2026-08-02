@@ -160,17 +160,18 @@ fn species_count(game_state: &GameState, species_id: &str) -> usize {
         .count()
 }
 
-fn replacement_score(monster: &CompanionState) -> u32 {
+fn replacement_score(data: &GameData, monster: &CompanionState) -> u32 {
     monster.quality_rank as u32 * 100
         + monster.skills.scouting
         + monster.skills.guarding
         + monster.skills.hospitality
         + monster.skills.crafting
         + monster.skills.charm
-        + monster.stats.charm.max(0) as u32
+        + crate::engine::effective_stats(data, monster).charm.max(0) as u32
 }
 
 fn recommended_replacement<'a>(
+    data: &GameData,
     game_state: &'a GameState,
     species_id: &str,
     new_quality_rank: u8,
@@ -186,7 +187,7 @@ fn recommended_replacement<'a>(
         } else {
             2
         };
-        (priority, replacement_score(monster))
+        (priority, replacement_score(data, monster))
     })
 }
 
@@ -501,7 +502,7 @@ pub(super) fn draw_selected_egg_panel(
             };
             let at_cap = is_roster_at_cap(data, game_state);
             let replacement = if at_cap {
-                recommended_replacement(game_state, species_id, egg_quality_rank(egg))
+                recommended_replacement(data, game_state, species_id, egg_quality_rank(egg))
             } else {
                 None
             };
@@ -614,7 +615,7 @@ pub(super) fn draw_selected_egg_panel(
             };
             let at_cap = is_roster_at_cap(data, game_state);
             let replacement = if at_cap {
-                recommended_replacement(game_state, species_id, egg_quality_rank(egg))
+                recommended_replacement(data, game_state, species_id, egg_quality_rank(egg))
             } else {
                 None
             };

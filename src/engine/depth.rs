@@ -30,16 +30,17 @@ pub(crate) struct ExpeditionDepthProfile {
     pub(crate) corruption_pressure: u32,
 }
 
-pub(crate) fn monster_role(monster: &CompanionState) -> &'static str {
+pub(crate) fn monster_role(data: &GameData, monster: &CompanionState) -> &'static str {
+    let stats = crate::engine::effective_stats(data, monster);
     if monster.corruption >= 10 || monster.trait_ids.iter().any(|id| id == "corruption_tuned") {
         "corruption_adept"
     } else if monster.work_history.hatchery_assists > 0
         || monster.trait_ids.iter().any(|id| id == "hatchery_attuned")
     {
         "hatchery_specialist"
-    } else if monster.skills.charm >= 2 || monster.stats.charm >= monster.stats.power + 2 {
+    } else if monster.skills.charm >= 2 || stats.charm >= stats.power + 2 {
         "performer"
-    } else if monster.stats.power >= monster.stats.charm + 2 {
+    } else if stats.power >= stats.charm + 2 {
         "delver"
     } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "calming_presence") {
         "comfort"
@@ -48,14 +49,15 @@ pub(crate) fn monster_role(monster: &CompanionState) -> &'static str {
     }
 }
 
-pub(crate) fn role_affinity(monster: &CompanionState, role: &str) -> i32 {
+pub(crate) fn role_affinity(data: &GameData, monster: &CompanionState, role: &str) -> i32 {
     if role.is_empty() {
         return 0;
     }
 
-    if monster_role(monster) == role {
+    let role_of_monster = monster_role(data, monster);
+    if role_of_monster == role {
         12
-    } else if monster_role(monster) == "versatile" {
+    } else if role_of_monster == "versatile" {
         4
     } else {
         0
@@ -174,10 +176,10 @@ pub(crate) fn expedition_depth_profile(
         .map(|role| {
             party
                 .iter()
-                .map(|monster| role_affinity(monster, role))
+                .map(|monster| role_affinity(data, monster, role))
                 .sum::<i32>()
         })
-        .unwrap_or_else(|| inferred_mission_role_bonus(mission, party));
+        .unwrap_or_else(|| inferred_mission_role_bonus(data, mission, party));
     let project_bonus = town_project_count(data, game_state) as i32 * 2;
     let hazard_risk = floor_hazard_risk(data, game_state, floor, mission);
     let priority_grade_bonus = match priority {
@@ -274,7 +276,7 @@ pub(crate) fn contract_depth_score(
     let role_score = template
         .preferred_role
         .as_deref()
-        .map(|role| role_affinity(monster, role).max(0) as u32)
+        .map(|role| role_affinity(data, monster, role).max(0) as u32)
         .unwrap_or_default();
     let room_score = data
         .guild_rooms
@@ -512,7 +514,11 @@ fn inferred_room_niche(room: &GuildRoomData) -> &'static str {
     }
 }
 
-fn inferred_mission_role_bonus(mission: &MissionData, party: &[&CompanionState]) -> i32 {
+fn inferred_mission_role_bonus(
+    data: &GameData,
+    mission: &MissionData,
+    party: &[&CompanionState],
+) -> i32 {
     let role = match mission.reward_focus.as_str() {
         "materials" | "relics" => "delver",
         "residue" => "corruption_adept",
@@ -521,7 +527,7 @@ fn inferred_mission_role_bonus(mission: &MissionData, party: &[&CompanionState])
     };
     party
         .iter()
-        .map(|monster| role_affinity(monster, role))
+        .map(|monster| role_affinity(data, monster, role))
         .sum()
 }
 
@@ -592,6 +598,70 @@ fn request_from_template(
         assigned_monster_id: None,
         chain_depth,
     }
+}
+
+/// Floors that can never open again, as distinct from floors nobody has walked
+/// to yet.
+///
+/// The survey chain is serial, so one unrunnable link strands every floor
+/// beneath it — and nothing else in a simulation report notices, because a floor
+/// nobody enters changes no number. The recorded case was a mutation consuming
+/// the guild's last Minotaur Porter, which closed `broodpens` and eleven floors
+/// under it while every other assertion stayed green.
+///
+/// A floor is stranded when a `required_roster` species is neither on the roster
+/// nor obtainable: no unlocked floor drops its egg and no egg in inventory can
+/// become one. Being merely un-surveyed is progress, not a dead end, and must
+/// not be reported here — that distinction is the whole point.
+#[cfg(test)]
+pub(crate) fn stranded_floor_ids(data: &GameData, game_state: &GameState) -> Vec<String> {
+    let is_unlocked = |floor_id: &str| {
+        game_state
+            .town
+            .unlocked_floor_ids
+            .iter()
+            .any(|id| id == floor_id)
+    };
+
+    let species_obtainable = |species_id: &str, minimum_quality_rank: u8| {
+        let minimum = minimum_quality_rank.max(1);
+        if game_state
+            .monsters
+            .iter()
+            .any(|monster| monster.species_id == species_id && monster.quality_rank >= minimum)
+        {
+            return true;
+        }
+        if game_state
+            .egg_inventory
+            .iter()
+            .any(|egg| egg.possible_species_ids.iter().any(|id| id == species_id))
+        {
+            return true;
+        }
+        // Any unlocked floor that drops this egg means the guild can go and
+        // farm one. Rank is left out on purpose: grade is a roll, so a floor
+        // that can produce the species can eventually produce a good one.
+        data.floors.floors.iter().any(|floor| {
+            is_unlocked(&floor.id)
+                && floor
+                    .egg_species_entries
+                    .iter()
+                    .any(|entry| entry.species_id == species_id)
+        })
+    };
+
+    data.floors
+        .floors
+        .iter()
+        .filter(|floor| !is_unlocked(&floor.id))
+        .filter(|floor| {
+            floor.required_roster.iter().any(|requirement| {
+                !species_obtainable(&requirement.species_id, requirement.minimum_quality_rank)
+            })
+        })
+        .map(|floor| floor.id.clone())
+        .collect()
 }
 
 #[cfg(test)]

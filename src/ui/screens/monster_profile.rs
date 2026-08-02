@@ -395,13 +395,15 @@ fn draw_best_use_panel(
 
     let strength_y = y + 108.0;
     let strength_w = ((w * 0.60) - 24.0) / 3.0;
+    let stats = crate::engine::effective_stats(data, monster);
+    let trait_bonus = crate::engine::trait_stat_bonus(data, monster);
     draw_profile_chip(
         tile_x,
         strength_y,
         strength_w,
         30.0,
         &ui.power_label,
-        &monster.stats.power.to_string(),
+        &stat_display(stats.power, trait_bonus.power),
         theme::INFO,
     );
     draw_profile_chip(
@@ -410,7 +412,7 @@ fn draw_best_use_panel(
         strength_w,
         30.0,
         &ui.charm_label,
-        &monster.stats.charm.to_string(),
+        &stat_display(stats.charm, trait_bonus.charm),
         theme::POSITIVE,
     );
     draw_profile_chip(
@@ -419,7 +421,7 @@ fn draw_best_use_panel(
         strength_w,
         30.0,
         &ui.endurance_label,
-        &monster.stats.endurance.to_string(),
+        &stat_display(stats.endurance, trait_bonus.endurance),
         theme::WARNING,
     );
 }
@@ -466,13 +468,15 @@ fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w
     draw_gold_separator(x + 18.0, y + 148.0, w - 36.0);
     let tower_y = y + 164.0;
     let tower_w = (w - 60.0) / 4.0;
+    let stats = crate::engine::effective_stats(data, monster);
+    let trait_bonus = crate::engine::trait_stat_bonus(data, monster);
     draw_profile_chip(
         x + 18.0,
         tower_y,
         tower_w,
         chip_h,
         "Power",
-        &monster.stats.power.to_string(),
+        &stat_display(stats.power, trait_bonus.power),
         theme::INFO,
     );
     draw_profile_chip(
@@ -481,7 +485,7 @@ fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w
         tower_w,
         chip_h,
         "Charm",
-        &monster.stats.charm.to_string(),
+        &stat_display(stats.charm, trait_bonus.charm),
         theme::POSITIVE,
     );
     draw_profile_chip(
@@ -490,7 +494,7 @@ fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w
         tower_w,
         chip_h,
         "Endure",
-        &monster.stats.endurance.to_string(),
+        &stat_display(stats.endurance, trait_bonus.endurance),
         theme::WARNING,
     );
     draw_profile_chip(
@@ -499,9 +503,19 @@ fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w
         tower_w,
         chip_h,
         "Instinct",
-        &monster.stats.instinct.to_string(),
+        &stat_display(stats.instinct, trait_bonus.instinct),
         theme::ROSE,
     );
+}
+
+/// A stat with the part her traits are responsible for called out, so a player
+/// can see why two companions of the same species do not read the same.
+fn stat_display(total: i32, trait_bonus: i32) -> String {
+    if trait_bonus == 0 {
+        total.to_string()
+    } else {
+        format!("{total} ({trait_bonus:+})")
+    }
 }
 
 fn draw_gold_separator(x: f32, y: f32, w: f32) {
