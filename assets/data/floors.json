@@ -25,11 +25,11 @@
       "egg_species_entries": [
         {
           "species_id": "slime_companion",
-          "weight": 9
+          "weight": 6
         },
         {
           "species_id": "residue_slime",
-          "weight": 1
+          "weight": 2
         }
       ],
       "relic_drop_ids": [],
@@ -67,11 +67,11 @@
       "egg_species_entries": [
         {
           "species_id": "slime_companion",
-          "weight": 5
+          "weight": 3
         },
         {
           "species_id": "minotaur_porter",
-          "weight": 4
+          "weight": 2
         }
       ],
       "relic_drop_ids": [],
@@ -110,7 +110,7 @@
       "egg_species_entries": [
         {
           "species_id": "residue_slime",
-          "weight": 5
+          "weight": 3
         },
         {
           "species_id": "moth_archivist",
@@ -159,7 +159,7 @@
         },
         {
           "species_id": "lamia_routekeeper",
-          "weight": 4
+          "weight": 5
         }
       ],
       "relic_drop_ids": [],
@@ -201,11 +201,11 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "imp_runner",
-          "weight": 4
+          "weight": 5
         }
       ],
       "relic_drop_ids": [
@@ -252,7 +252,7 @@
       "egg_species_entries": [
         {
           "species_id": "residue_slime",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "harpy_lookout",
@@ -260,7 +260,7 @@
         },
         {
           "species_id": "minotaur_porter",
-          "weight": 3
+          "weight": 2
         }
       ],
       "relic_drop_ids": [
@@ -300,11 +300,11 @@
       "egg_species_entries": [
         {
           "species_id": "residue_slime",
-          "weight": 5
+          "weight": 3
         },
         {
           "species_id": "imp_runner",
-          "weight": 4
+          "weight": 5
         }
       ],
       "relic_drop_ids": [
@@ -344,11 +344,11 @@
       "egg_species_entries": [
         {
           "species_id": "minotaur_porter",
-          "weight": 5
+          "weight": 3
         },
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         }
       ],
       "relic_drop_ids": [
@@ -392,7 +392,7 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "moth_archivist",
@@ -442,7 +442,7 @@
         },
         {
           "species_id": "residue_slime",
-          "weight": 3
+          "weight": 2
         },
         {
           "species_id": "minotaur_porter",
@@ -494,11 +494,11 @@
       "egg_species_entries": [
         {
           "species_id": "imp_runner",
-          "weight": 4
+          "weight": 5
         },
         {
           "species_id": "lamia_routekeeper",
-          "weight": 4
+          "weight": 5
         },
         {
           "species_id": "residue_slime",
@@ -545,11 +545,11 @@
       "egg_species_entries": [
         {
           "species_id": "minotaur_porter",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "lamia_routekeeper",
-          "weight": 4
+          "weight": 5
         }
       ],
       "relic_drop_ids": [
@@ -595,7 +595,7 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "moth_archivist",
@@ -647,11 +647,11 @@
       "egg_species_entries": [
         {
           "species_id": "lamia_routekeeper",
-          "weight": 4
+          "weight": 5
         },
         {
           "species_id": "golemkin_warden",
-          "weight": 3
+          "weight": 2
         },
         {
           "species_id": "moth_archivist",
@@ -702,7 +702,7 @@
         },
         {
           "species_id": "imp_runner",
-          "weight": 3
+          "weight": 4
         },
         {
           "species_id": "harpy_lookout",
@@ -755,7 +755,7 @@
         },
         {
           "species_id": "golemkin_warden",
-          "weight": 3
+          "weight": 2
         },
         {
           "species_id": "wyrm_registrar",
@@ -807,7 +807,7 @@
         },
         {
           "species_id": "lamia_routekeeper",
-          "weight": 4
+          "weight": 5
         },
         {
           "species_id": "wyrm_registrar",
@@ -859,7 +859,7 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "moth_archivist",
@@ -910,15 +910,15 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 5
-        },
-        {
-          "species_id": "residue_slime",
           "weight": 3
         },
         {
+          "species_id": "residue_slime",
+          "weight": 2
+        },
+        {
           "species_id": "gargoyle_stairwarden",
-          "weight": 4
+          "weight": 2
         }
       ],
       "relic_drop_ids": [
@@ -960,7 +960,7 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "moth_archivist",
@@ -968,11 +968,11 @@
         },
         {
           "species_id": "residue_slime",
-          "weight": 3
+          "weight": 2
         },
         {
           "species_id": "gargoyle_stairwarden",
-          "weight": 5
+          "weight": 3
         }
       ],
       "relic_drop_ids": [
@@ -1015,7 +1015,7 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "moth_archivist",
@@ -1023,7 +1023,7 @@
         },
         {
           "species_id": "gargoyle_stairwarden",
-          "weight": 4
+          "weight": 2
         }
       ],
       "relic_drop_ids": [
@@ -1070,11 +1070,11 @@
         },
         {
           "species_id": "residue_slime",
-          "weight": 3
+          "weight": 2
         },
         {
           "species_id": "revenant_chorister",
-          "weight": 5
+          "weight": 7
         }
       ],
       "relic_drop_ids": [
@@ -1117,15 +1117,15 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 5
+          "weight": 3
         },
         {
           "species_id": "residue_slime",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "revenant_chorister",
-          "weight": 4
+          "weight": 5
         }
       ],
       "relic_drop_ids": [
@@ -1174,7 +1174,7 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "moth_archivist",
@@ -1182,15 +1182,15 @@
         },
         {
           "species_id": "residue_slime",
-          "weight": 3
+          "weight": 2
         },
         {
           "species_id": "revenant_chorister",
-          "weight": 4
+          "weight": 5
         },
         {
           "species_id": "salamander_corekeeper",
-          "weight": 2
+          "weight": 8
         }
       ],
       "relic_drop_ids": [
@@ -1233,7 +1233,7 @@
       "egg_species_entries": [
         {
           "species_id": "golemkin_warden",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "moth_archivist",
@@ -1241,15 +1241,15 @@
         },
         {
           "species_id": "residue_slime",
-          "weight": 4
+          "weight": 2
         },
         {
           "species_id": "lamia_routekeeper",
-          "weight": 3
+          "weight": 4
         },
         {
           "species_id": "salamander_corekeeper",
-          "weight": 5
+          "weight": 14
         }
       ],
       "relic_drop_ids": [

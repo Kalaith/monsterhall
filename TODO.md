@@ -50,10 +50,49 @@ Against that, one of the three mechanics was simply absent:
   power.
 - **Low tiers cannot do high-tier work** — already true: floors gate on
   `required_roster` species and depth scoring reads stats.
-- **High tiers are less flexible across roles** — not implemented. `role_affinity`
-  gives a flat 12 for a matching role and 4 for `versatile` regardless of tier,
-  so a gargoyle is exactly as flexible as a slime. This is the remaining half of
-  the stated intent.
+- ~~High tiers are less flexible across roles.~~ Done. `role_affinity` was a
+  hardcoded flat 12 for a matching role, 4 for `versatile`, 0 otherwise — so a
+  gargoyle was exactly as flexible as a slime and strictly stronger, and there
+  was never a reason to keep a low tier once a high one existed. Off-role now
+  costs a penalty that scales with the species' base-stat total, from nothing at
+  `flexibility_stat_floor` to `off_role_penalty_max` at
+  `flexibility_stat_ceiling` (new `day_cycle.role_affinity` block — the numbers
+  were hardcoded, which was a data-driven-design violation as well). `versatile`
+  is deliberately exempt: being flexible is what that role *is*.
+
+  Built the other way round first — crediting *low* tiers off-role rather than
+  penalising high ones — and reverted it on measurement: inflating a weak
+  companion's apparent off-role value made the policy staff her onto work she was
+  bad at, costing the deterministic campaign a building tier and **11 missed debt
+  payments**. Penalising the strong leaves every existing assignment intact and
+  all 79 tests green.
+
+- ~~Half the tower's eggs funnelled down one lineage.~~ Rebalanced. Following
+  every `egg_species_entries` weight to the species it eventually mutates into:
+
+  | Lineage ends as | Before | After |
+  | --- | --- | --- |
+  | `gargoyle_stairwarden` (via golemkin) | **50.2%** | 32.9% |
+  | `wyrm_registrar` | 28.6% | 31.7% |
+  | `revenant_chorister` | 18.7% | 26.4% |
+  | `salamander_corekeeper` | **2.6%** | 8.9% |
+
+  The egg tables looked varied per floor — `golemkin_warden` and `moth_archivist`
+  each appear on 13 of 25 floors at identical weight — so the skew is invisible
+  unless the lineages are followed through. `residue_slime` is the second most
+  common egg in the tower and converts to golemkin at 16 corruption, which is
+  what stacks the deck. `salamander_corekeeper` at 2.6% also made
+  `corekeeper_sending_vigil` close to unfulfillable for a player who *does*
+  explore. Weights only — no species moved between floors, because the depth
+  tiering is deliberate and correct (`slime_companion` appears on depths 1–2
+  only, and nothing below stat total 19 appears from depth 3 down).
+
+  **Caveat worth stating: the simulation cannot confirm this helps.** The
+  composition reports are byte-identical before and after, because the simulated
+  guild stops running expeditions at day 76 and hatches 21 companions in a whole
+  campaign, so it barely draws from the egg tables at all. This is a fix to the
+  content distribution a *player* sees, validated by arithmetic rather than by
+  the harness.
 
 Two levers were tried against the funnel and **rejected on measurement**, which
 is worth recording so they are not retried blind:

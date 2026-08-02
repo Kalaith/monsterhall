@@ -61,14 +61,48 @@ pub(crate) fn role_affinity(data: &GameData, monster: &CompanionState, role: &st
         return 0;
     }
 
+    let affinity = &data.config.day_cycle.role_affinity;
     let role_of_monster = monster_role(data, monster);
     if role_of_monster == role {
-        12
+        affinity.matched_bonus
     } else if role_of_monster == "versatile" {
-        4
+        affinity.versatile_bonus
     } else {
-        0
+        -off_role_penalty(data, monster)
     }
+}
+
+/// What working outside her role costs a companion.
+///
+/// Off-role used to be a flat zero for everybody, which made a species' tier
+/// pure upside: a `gargoyle_stairwarden` was exactly as flexible as a
+/// `slime_companion` and strictly stronger, so there was never a reason to keep
+/// a low tier once a high one was available. Capability is now paid for with
+/// narrowness — the weakest species work anywhere for free, the strongest are
+/// specialists who lose ground on unfamiliar work.
+///
+/// Expressed as a penalty on the strong rather than a bonus to the weak on
+/// purpose: crediting low tiers off-role inflated their apparent value and the
+/// policy started staffing them onto work they were bad at, which cost the
+/// deterministic campaign a building tier and eleven debt payments.
+fn off_role_penalty(data: &GameData, monster: &CompanionState) -> i32 {
+    let affinity = &data.config.day_cycle.role_affinity;
+    let Some(species) = crate::engine::species_of(data, monster) else {
+        return 0;
+    };
+    let stat_total = crate::engine::species_stat_total(species);
+    let floor = affinity.flexibility_stat_floor;
+    let ceiling = affinity.flexibility_stat_ceiling.max(floor + 1);
+
+    if stat_total <= floor {
+        return 0;
+    }
+    if stat_total >= ceiling {
+        return affinity.off_role_penalty_max;
+    }
+    let above_floor = stat_total - floor;
+    let span = ceiling - floor;
+    affinity.off_role_penalty_max * above_floor as i32 / span as i32
 }
 
 pub(crate) fn room_depth_profile(

@@ -45,3 +45,28 @@ pub fn trait_stat_bonus(data: &GameData, monster: &CompanionState) -> StatBlockD
 
     bonus
 }
+
+/// The species a companion is *right now*.
+///
+/// Mutation rewrites `species_id` mid-campaign, so this is looked up per call
+/// rather than cached at hatch. Both the wage and the role-flexibility term read
+/// it; they must not grow separate copies of the lookup.
+pub fn species_of<'a>(
+    data: &'a GameData,
+    monster: &CompanionState,
+) -> Option<&'a crate::data::SpeciesData> {
+    data.species
+        .species
+        .iter()
+        .find(|species| species.id == monster.species_id)
+}
+
+/// A species' total base stats — the game's existing measure of how capable it
+/// is, reused as its tier so no second authored ranking can drift from it.
+pub fn species_stat_total(species: &crate::data::SpeciesData) -> u32 {
+    (species.base_stats.power
+        + species.base_stats.charm
+        + species.base_stats.endurance
+        + species.base_stats.instinct)
+        .max(0) as u32
+}

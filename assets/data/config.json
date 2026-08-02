@@ -144,6 +144,13 @@
     "expedition_egg_reward_threshold": 68,
     "expedition_relic_reward_threshold": 88,
     "expedition_injury_threshold": 55,
+    "role_affinity": {
+      "matched_bonus": 12,
+      "versatile_bonus": 4,
+      "off_role_penalty_max": 6,
+      "flexibility_stat_floor": 12,
+      "flexibility_stat_ceiling": 30
+    },
     "condition_effects": {
       "fatigue_allowance": 30,
       "stress_allowance": 20,

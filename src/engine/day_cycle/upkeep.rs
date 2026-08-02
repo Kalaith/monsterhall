@@ -16,7 +16,11 @@ pub(super) fn roster_wage_bill(data: &GameData, monsters: &[CompanionState]) -> 
     monsters
         .iter()
         .map(|monster| {
-            companion_daily_wage(&data.config.day_cycle, species_of(data, monster), monster)
+            companion_daily_wage(
+                &data.config.day_cycle,
+                crate::engine::species_of(data, monster),
+                monster,
+            )
         })
         .fold(0u32, |total, wage| total.saturating_add(wage))
 }
@@ -280,7 +284,11 @@ mod tests {
         let expected: u32 = roster
             .iter()
             .map(|monster| {
-                companion_daily_wage(&data.config.day_cycle, species_of(&data, monster), monster)
+                companion_daily_wage(
+                    &data.config.day_cycle,
+                    crate::engine::species_of(&data, monster),
+                    monster,
+                )
             })
             .sum();
 

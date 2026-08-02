@@ -774,3 +774,50 @@ fn a_stronger_species_costs_more_to_keep() {
         }
     }
 }
+
+/// Capability has to be paid for with narrowness, or a high tier is strictly
+/// better than a low one and there is never a reason to keep the low one.
+///
+/// A matching role pays the same to everybody; what differs is what working
+/// *outside* that role costs. The weakest species pay nothing, the strongest pay
+/// the full penalty.
+#[test]
+fn a_stronger_species_is_less_flexible_outside_its_role() {
+    let data = crate::data::test_game_data();
+
+    // Power well above charm makes both `delver`, so tier is the only thing
+    // separating them. A `versatile` companion is deliberately exempt — being
+    // flexible is what that role *is* — so this must not test one.
+    let with_species = |species_id: &str| {
+        let mut monster = test_monster(Vec::new());
+        monster.species_id = species_id.to_owned();
+        monster.stats.power = 9;
+        monster.stats.charm = 2;
+        monster
+    };
+    let slime = with_species("slime_companion");
+    let gargoyle = with_species("gargoyle_stairwarden");
+    let role = crate::engine::monster_role(&data, &slime);
+    assert_eq!(
+        role,
+        crate::engine::monster_role(&data, &gargoyle),
+        "this test only isolates tier if both companions hold the same role"
+    );
+    assert_ne!(role, "versatile", "versatile is exempt from the penalty");
+
+    // On her own role, tier costs nothing.
+    assert_eq!(
+        crate::engine::depth::role_affinity(&data, &slime, role),
+        crate::engine::depth::role_affinity(&data, &gargoyle, role),
+        "a matching role should pay the same whatever the species"
+    );
+
+    // Off it, the stronger species gives up more.
+    let off_role = "comfort";
+    let slime_off = crate::engine::depth::role_affinity(&data, &slime, off_role);
+    let gargoyle_off = crate::engine::depth::role_affinity(&data, &gargoyle, off_role);
+    assert!(
+        gargoyle_off < slime_off,
+        "a gargoyle ({gargoyle_off}) should lose more off-role than a slime ({slime_off})"
+    );
+}

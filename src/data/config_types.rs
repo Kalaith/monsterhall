@@ -187,6 +187,8 @@ pub struct DayCycleConfigData {
     /// How far a worn-down companion's output falls off.
     #[serde(default = "default_condition_effects")]
     pub condition_effects: ConditionEffectData,
+    #[serde(default = "default_role_affinity")]
+    pub role_affinity: RoleAffinityData,
 }
 
 /// The price of running a companion into the ground.
@@ -222,6 +224,38 @@ pub struct ConditionEffectData {
     /// without it the meters are a one-way ratchet.
     pub idle_fatigue_recovery: u32,
     pub idle_stress_recovery: u32,
+}
+
+/// How much a companion's role matters, and how much slack she has outside it.
+///
+/// The peak bonus is the same for everyone; what differs by species is how much
+/// credit she still earns off-role. A slime is worth having on unfamiliar work,
+/// a gargoyle is not — high tiers buy raw capability at the price of being
+/// narrow, which is what stops an all-high-tier roster being strictly correct.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RoleAffinityData {
+    /// Paid when the companion's role is the one the work wants.
+    pub matched_bonus: i32,
+    /// Paid to a `versatile` companion on any work.
+    pub versatile_bonus: i32,
+    /// Off-role penalty carried by the most capable species; scales to zero at
+    /// `flexibility_stat_floor`.
+    pub off_role_penalty_max: i32,
+    /// Species stat total at or below which a companion is fully flexible and
+    /// pays nothing for working outside her role.
+    pub flexibility_stat_floor: u32,
+    /// Species stat total at or above which a companion pays the full penalty.
+    pub flexibility_stat_ceiling: u32,
+}
+
+fn default_role_affinity() -> RoleAffinityData {
+    RoleAffinityData {
+        matched_bonus: 12,
+        versatile_bonus: 4,
+        off_role_penalty_max: 6,
+        flexibility_stat_floor: 12,
+        flexibility_stat_ceiling: 30,
+    }
 }
 
 fn default_condition_effects() -> ConditionEffectData {

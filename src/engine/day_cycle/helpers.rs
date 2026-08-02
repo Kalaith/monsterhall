@@ -119,11 +119,7 @@ pub(super) fn companion_daily_wage(
     // the tier term reads them rather than adding a second authored ranking that
     // could drift from them.
     let species_wage = species.map_or(0, |species| {
-        let stat_total = species.base_stats.power
-            + species.base_stats.charm
-            + species.base_stats.endurance
-            + species.base_stats.instinct;
-        stat_total.max(0) as u32 / day_cycle.species_stat_wage_divisor.max(1)
+        crate::engine::species_stat_total(species) / day_cycle.species_stat_wage_divisor.max(1)
     });
     rank_wage
         .saturating_add(skill_total / day_cycle.skill_wage_divisor.max(1))
@@ -178,16 +174,4 @@ pub(super) fn add_missing_ids(target: &mut Vec<String>, source: &[String]) {
             target.push(value.clone());
         }
     }
-}
-
-/// The species a companion is right now. Mutation rewrites `species_id`, so
-/// this is deliberately looked up per call rather than cached at hatch.
-pub(super) fn species_of<'a>(
-    data: &'a GameData,
-    monster: &CompanionState,
-) -> Option<&'a SpeciesData> {
-    data.species
-        .species
-        .iter()
-        .find(|species| species.id == monster.species_id)
 }

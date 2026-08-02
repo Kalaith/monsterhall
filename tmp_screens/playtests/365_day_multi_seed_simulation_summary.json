@@ -6,10 +6,10 @@
       "rng_seed": 911212545,
       "companions": 20,
       "buildings": 50,
-      "gold": 1665858,
+      "gold": 1668849,
       "debt_gap": 0,
-      "relics": 52,
-      "arcane_residue": 22120,
+      "relics": 53,
+      "arcane_residue": 21247,
       "missed_payments": 0,
       "debt_milestone_id": null,
       "debt_status": "Debt cleared",
@@ -21,10 +21,10 @@
       "rng_seed": 911212546,
       "companions": 20,
       "buildings": 50,
-      "gold": 1496011,
+      "gold": 1473871,
       "debt_gap": 0,
-      "relics": 38,
-      "arcane_residue": 19901,
+      "relics": 42,
+      "arcane_residue": 20092,
       "missed_payments": 0,
       "debt_milestone_id": null,
       "debt_status": "Debt cleared",
@@ -81,30 +81,30 @@
       "rng_seed": 911212550,
       "companions": 20,
       "buildings": 18,
-      "gold": 639433,
-      "debt_gap": 459433,
-      "relics": 22,
-      "arcane_residue": 42532,
+      "gold": 614809,
+      "debt_gap": 434809,
+      "relics": 21,
+      "arcane_residue": 41529,
       "missed_payments": 0,
       "debt_milestone_id": "broker_compact_6",
       "debt_status": "Broker Compact due in 3 days.",
       "max_active_requests": 6,
-      "expirations": 381
+      "expirations": 376
     },
     {
       "sample": 7,
       "rng_seed": 911212551,
       "companions": 20,
-      "buildings": 49,
-      "gold": 1375149,
+      "buildings": 50,
+      "gold": 1601042,
       "debt_gap": 0,
-      "relics": 85,
-      "arcane_residue": 19915,
+      "relics": 80,
+      "arcane_residue": 22644,
       "missed_payments": 0,
       "debt_milestone_id": null,
       "debt_status": "Debt cleared",
       "max_active_requests": 6,
-      "expirations": 346
+      "expirations": 386
     },
     {
       "sample": 8,
@@ -158,28 +158,28 @@
     "max": 20
   },
   "buildings": {
-    "average": 22.2,
+    "average": 22.3,
     "min": 7,
     "max": 50
   },
   "gold": {
-    "average": 666015.0,
+    "average": 684227.0,
     "min": 32565,
-    "max": 1665858
+    "max": 1668849
   },
   "debt_gap": {
-    "average": -1305686.8,
+    "average": -1308149.2,
     "min": -2467435,
-    "max": 459433
+    "max": 434809
   },
   "relics": {
-    "average": 59.3,
-    "min": 22,
+    "average": 59.2,
+    "min": 21,
     "max": 96
   },
   "arcane_residue": {
-    "average": 66607.3,
-    "min": 19901,
+    "average": 66711.7,
+    "min": 20092,
     "max": 104991
   },
   "missed_payments": {
@@ -193,8 +193,8 @@
     "max": 6
   },
   "expirations": {
-    "average": 368.1,
-    "min": 346,
-    "max": 381
+    "average": 371.6,
+    "min": 347,
+    "max": 386
   }
 }
