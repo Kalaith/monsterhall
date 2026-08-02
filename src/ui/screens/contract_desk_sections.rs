@@ -375,13 +375,18 @@ pub(super) fn draw_selected_request_panel(
     draw_body_text(
         &request.guest_name,
         layout.detail_x + 150.0,
-        138.0,
+        134.0,
         24.0,
         theme::TEXT_STRONG,
     );
+    // One column, drawn top to bottom, spaced so nothing lands on anything
+    // else: name 134 (24px, descends to ~154), status badge 158 (28 tall),
+    // category 196, room 216, reward 236, penalty 256, deadline 276. The
+    // original had the name at 138 with the badge starting at 150 and the
+    // category at 180, so three of them overlapped.
     draw_inline_status(
         layout.detail_x + 150.0,
-        150.0,
+        158.0,
         190.0,
         guest_status_label(data, &request.status),
         match request.status {
@@ -394,7 +399,7 @@ pub(super) fn draw_selected_request_panel(
     draw_body_text(
         &room_name_by_id(data, &request.requested_room_id),
         layout.detail_x + 150.0,
-        196.0,
+        216.0,
         15.0,
         theme::TEXT_BODY,
     );
@@ -413,14 +418,14 @@ pub(super) fn draw_selected_request_panel(
             request.preparation_quality_required
         ),
         layout.detail_x + 150.0,
-        180.0,
+        196.0,
         13.0,
         theme::TEXT_MUTED,
     );
     draw_body_text(
         &format_resources_state(data, &request.reward),
         layout.detail_x + 150.0,
-        214.0,
+        236.0,
         15.0,
         theme::POSITIVE,
     );
@@ -430,7 +435,7 @@ pub(super) fn draw_selected_request_panel(
             &[("{gold}", request.penalty_gold.to_string())],
         ),
         layout.detail_x + 150.0,
-        234.0,
+        256.0,
         14.0,
         theme::TEXT_MUTED,
     );
@@ -440,7 +445,7 @@ pub(super) fn draw_selected_request_panel(
             &[("{day}", request.deadline_day.to_string())],
         ),
         layout.detail_x + 150.0,
-        252.0,
+        276.0,
         14.0,
         theme::TEXT_MUTED,
     );
