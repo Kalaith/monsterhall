@@ -532,6 +532,104 @@ fn a_booked_companion_cannot_be_rostered_for_other_work() {
 
 /// Only an *accepted* booking reserves her. A pending offer she has merely been
 /// pencilled against must not lock her out of the hall.
+/// The other order of the same double booking, which the first fix missed.
+///
+/// `assign_monster_to_room` refuses a companion who is already booked, but
+/// booking a companion who is already working the hall was still allowed — and
+/// `resolve_day` settles the contract first and discards her shift, so the guild
+/// job slot was held by somebody whose work would never happen. Refusing the
+/// booking would be wrong: she can serve the contract perfectly well. It is the
+/// slot that is wasted, so the slot goes back.
+#[test]
+fn booking_a_rostered_companion_frees_the_guild_job_slot() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut worker = test_monster(Vec::new());
+    worker.id = "monster_001".to_owned();
+    worker.quality_rank = 1;
+    game_state.monsters = vec![worker];
+    let room_id = data.guild_rooms.rooms[0].id.clone();
+    game_state.active_contracts = vec![ContractState {
+        request_id: "contract_001".to_owned(),
+        requested_room_id: room_id.clone(),
+        status: ContractStatus::Pending,
+        ..ContractState::default()
+    }];
+    if !game_state.town.unlocked_room_ids.contains(&room_id) {
+        game_state.town.unlocked_room_ids.push(room_id.clone());
+    }
+
+    assign_monster_to_room(&mut game_state, "monster_001", &room_id).expect("room should staff");
+    crate::engine::assign_monster_to_contract(
+        &data,
+        &mut game_state,
+        "contract_001",
+        "monster_001",
+    )
+    .expect("a hall worker should still be bookable");
+
+    assert!(
+        matches!(game_state.monsters[0].current_job, CompanionJobState::Idle),
+        "the booking must hand the guild-job slot back, not hold it for a shift          day resolution will discard"
+    );
+    assert_eq!(
+        game_state.active_contracts[0]
+            .assigned_monster_id
+            .as_deref(),
+        Some("monster_001")
+    );
+}
+
+/// A companion changing species has to be written down somewhere the player can
+/// still read tomorrow.
+///
+/// Mutation text went only to `roster_updates`, which lives on the Day Results
+/// screen in a box that holds about seven lines and is never extended into
+/// `event_log`. With a full roster the announcement was clipped away and then
+/// lost, so the player would find a different species on the roster with nothing
+/// anywhere to say when or why — for the one system the whole corruption
+/// mechanic exists to drive.
+#[test]
+fn a_mutation_is_recorded_in_the_permanent_event_log() {
+    let data = crate::data::test_game_data();
+    let first_mutation = data
+        .mutations
+        .mutations
+        .iter()
+        .find(|mutation| mutation.source_species_id == "slime_companion")
+        .expect("the slime lineage should have a first step");
+
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut companion = test_monster(Vec::new());
+    companion.id = "monster_001".to_owned();
+    companion.species_id = first_mutation.source_species_id.clone();
+    companion.corruption = first_mutation.minimum_corruption;
+    companion.current_job = CompanionJobState::Idle;
+    game_state.monsters = vec![companion];
+    let log_before = game_state.event_log.len();
+
+    let summary = resolve_day(&data, &mut game_state);
+
+    assert_eq!(
+        game_state.monsters[0].species_id, first_mutation.target_species_id,
+        "test premise: the companion should mutate this day"
+    );
+    let new_entries = &game_state.event_log[log_before..];
+    assert!(
+        new_entries
+            .iter()
+            .any(|line| line.contains(&game_state.monsters[0].name)),
+        "the mutation should reach the permanent log: {new_entries:?}"
+    );
+    assert!(
+        summary
+            .event_lines
+            .iter()
+            .any(|line| line.contains(&game_state.monsters[0].name)),
+        "and the day's event panel, not just the clipped work summary"
+    );
+}
+
 #[test]
 fn a_pending_offer_does_not_reserve_a_companion() {
     let data = crate::data::test_game_data();

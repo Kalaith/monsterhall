@@ -1,5 +1,16 @@
 use super::*;
 
+/// Runs one day and returns what happened.
+///
+/// Note the difference between the two narrative lists. `roster_updates` is the
+/// day's work summary and lives only on the Day Results screen, in a box that
+/// holds about seven lines; `event_lines` is extended into `game_state.event_log`
+/// at the end of this function, so it is the guild's permanent record and the
+/// journal can scroll it. A mutation belongs in the second: a companion changing
+/// species is one-time and irreversible, and reporting it only in the work
+/// summary meant that with a full roster the announcement was clipped away and
+/// then never written down. The player would simply find a different species on
+/// the roster with nothing anywhere to say when or why.
 pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolutionSummary {
     let resolved_day = game_state.current_day;
     let mut pending_egg_rewards: Vec<(String, Vec<EggSpeciesEntryData>, u32, u32)> = Vec::new();
@@ -277,7 +288,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     summary.roster_updates.push(progression_update);
                 }
                 if let Some(mutation_text) = try_apply_mutation(data, monster) {
-                    summary.roster_updates.push(mutation_text);
+                    summary.event_lines.push(mutation_text);
                 }
 
                 if let Some(event_text) =
@@ -305,7 +316,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     monster.name
                 ));
                 if let Some(mutation_text) = try_apply_mutation(data, monster) {
-                    summary.roster_updates.push(mutation_text);
+                    summary.event_lines.push(mutation_text);
                 }
             }
             CompanionJobState::OnExpedition { .. } => {
@@ -409,7 +420,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     monster.current_job = CompanionJobState::Idle;
                     apply_monster_relationship_gain(data, monster, None, 1, 1);
                     if let Some(mutation_text) = try_apply_mutation(data, monster) {
-                        summary.roster_updates.push(mutation_text);
+                        summary.event_lines.push(mutation_text);
                     }
 
                     if let Some(event_text) =
@@ -441,7 +452,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     .stress
                     .saturating_sub(condition.idle_stress_recovery);
                 if let Some(mutation_text) = try_apply_mutation(data, monster) {
-                    summary.roster_updates.push(mutation_text);
+                    summary.event_lines.push(mutation_text);
                 }
             }
         }

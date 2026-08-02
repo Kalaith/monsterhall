@@ -298,6 +298,29 @@ pub fn assign_monster_to_contract(
     let request = &mut game_state.active_contracts[request_index];
     request.assigned_monster_id = Some(monster_id.to_owned());
     request.status = ContractStatus::Accepted;
+
+    // Taking a booking releases whatever she was rostered for, the same way
+    // every other assignment releases her from an expedition.
+    //
+    // Blocking the reverse order was only half the fix: `assign_monster_to_room`
+    // refuses a companion who is already booked, but booking a companion who is
+    // already working the hall was still allowed — and `resolve_day` settles the
+    // contract first and discards her shift, so the guild-job slot was held by
+    // somebody whose work would never happen. Refusing here would be wrong; she
+    // is perfectly able to take the contract. It is the slot that is wasted, so
+    // the slot goes back.
+    if let Some(monster) = game_state
+        .monsters
+        .iter_mut()
+        .find(|monster| monster.id == monster_id)
+    {
+        if matches!(
+            monster.current_job,
+            CompanionJobState::GuildJob { .. } | CompanionJobState::Resting
+        ) {
+            monster.current_job = CompanionJobState::Idle;
+        }
+    }
     Ok(())
 }
 

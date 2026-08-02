@@ -884,6 +884,46 @@ Stop the loop and report if:
   bands already referencing a fourth, and relics still have no patron who asks
   for one by name.
 
+- **2026-08-03 — the other half of last pass's fix, and the mutation nobody was
+  told about.** Last pass stopped a booked companion being rostered to a room.
+  It did not stop the reverse: **booking a companion who was already working the
+  hall was still allowed**, and `resolve_day` settles the contract first and
+  discards her shift exactly as before — the same bug, reachable by doing the two
+  actions in the other order. Refusing would have been wrong here; she can serve
+  the contract perfectly well, it is the *slot* that is wasted. So taking a
+  booking releases whatever she was rostered for, the way every other assignment
+  already releases her from an expedition, and the slot goes back. Zero balance
+  movement, as predicted — the policy books before it staffs, so only a human
+  reaches that order.
+  **Then the sharper one.** A companion changing species was announced only in
+  `roster_updates`, which lives on the Day Results screen in a 140px box holding
+  about **seven lines** against a twenty-companion roster, and is the one
+  narrative list never extended into `event_log`. So the announcement was usually
+  clipped away and then lost forever: the player finds a different species on the
+  roster with nothing anywhere to say when or why — for the single system the
+  whole corruption mechanic exists to drive, and the one this file has an open
+  design question about. Mutations go to `event_lines` now, which reaches both the
+  Day Results event panel and the scrollable journal. Every scalar in every report
+  is unchanged except `final_event_log_entries` (+23 to +39): the mutations were
+  always happening, they are just written down now.
+  **The authored-data audit that opened `TODO.md` re-ran clean.** Every key in
+  every `assets/data/*.json` is consumed. The five flagged as read only inside
+  `src/data` are deliberate — three are load-time validation rules, and
+  `keyboard_shortcuts_visible` / `primary_mode` are *constraints* the validator
+  actively enforces. No unconnected data remains anywhere in the catalogue.
+  **Result:** 102 tests (was 100), fmt and clippy clean, publish green. Both
+  guards verified by planting the regression.
+  **Next iteration should know:** (a) the code-defect well is genuinely running
+  dry — six passes of sweeps have closed the panel-capacity, frozen-threshold,
+  duplicated-formula, advice-surface and double-booking classes, and the
+  authored-data audit now comes back empty; (b) the one UI capacity issue left is
+  the Day Results `roster_updates` panel, which still clips at ~7 lines, but the
+  information that mattered is journalled now and skills are on the profile
+  screen, so it is convenience rather than loss; (c) **the honest next slice is
+  content** — **guild rooms 4** for a 20-companion roster, **patron tiers 3**
+  with upkeep bands already referencing a fourth, and relics with no patron who
+  asks for one by name.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

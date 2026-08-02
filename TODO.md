@@ -171,6 +171,47 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, sixth pass)
+
+- ~~The double-booking fix only covered one order.~~ Fixed. Last pass made
+  `assign_monster_to_room` refuse a companion already booked onto a contract —
+  but **booking a companion who was already working the hall was still allowed**,
+  and `resolve_day` settles the contract first and discards her shift exactly as
+  before. The same bug, reachable by doing the two actions in the other order.
+
+  Refusing here would have been wrong: she is perfectly able to serve the
+  contract. It is the *slot* that is wasted. So taking a booking now releases
+  whatever she was rostered for — the same way every other assignment already
+  releases her from an expedition — and the guild-job slot goes back for somebody
+  else. **Zero balance movement**, as predicted: the policy books contracts
+  before it staffs rooms, so only a human reaches this order.
+
+- ~~A companion changing species was announced once, in a clipped panel, and
+  never written down.~~ Fixed. Mutation text went only to `roster_updates`, which
+  lives on the Day Results screen inside a 140px box — about **seven lines**
+  against a twenty-companion roster — and is the one narrative list that is
+  *never* extended into `event_log`. So the announcement was usually clipped away
+  and then lost: the player would find a different species on the roster with
+  nothing anywhere to say when or why, for the single system the whole corruption
+  mechanic exists to drive. Mutations now go to `event_lines`, which reaches both
+  the Day Results event panel and the journal, where it can be scrolled back to.
+
+  **Every scalar in every report is unchanged except `final_event_log_entries`**
+  (+23 to +39 across the seeds) — the mutations were always happening, they are
+  just written down now.
+
+- **The authored-data audit that opened this file re-ran clean.** Every key in
+  every `assets/data/*.json` is consumed. The five the sweep flagged as read only
+  inside `src/data` are all deliberate: `max_floor_difficulty`, `event_tags` and
+  `preferred_room_ids` are load-time validation rules, and
+  `keyboard_shortcuts_visible` / `primary_mode` are *constraints* — the validator
+  actively rejects a config that turns shortcuts on-screen or picks a non-mouse
+  primary mode. No unconnected data remains.
+
+  Worth knowing as a design fact rather than a defect: the game deliberately ships
+  its keyboard shortcuts undiscoverable. Enter ends the day, Ctrl+S saves, Escape
+  opens settings, and nothing on screen says so — enforced, not forgotten.
+
 ### Found by review, not by the audit (2026-08-03, fifth pass)
 
 - ~~A companion could be booked for two jobs on the same day, and one of them was
