@@ -140,26 +140,18 @@ impl GameData {
             }
         }
         self.validate_mutation_chains()?;
-        self.validate_mutation_traits_are_reachable()
+        let reachable = self.reachable_trait_states();
+        self.validate_mutation_traits_are_reachable(&reachable)?;
+        self.validate_every_trait_is_reachable(&reachable)
     }
 
-    /// A mutation may only require traits a companion standing at its source
-    /// species could actually be holding.
+    /// Every `(species, traits)` a companion can ever stand in.
     ///
     /// `try_apply_mutation` adds the target species' `starting_traits` *and* the
-    /// mutation's `granted_trait_ids`, so which traits a companion carries
-    /// depends on the whole lineage that brought her there, not on her current
-    /// species alone. That makes the requirement easy to author against the
-    /// wrong set: `golemkin_warden -> gargoyle_stairwarden` needs `commanding`
-    /// and `resilient`, and of the two ways to become a golemkin only the
-    /// `minotaur_porter` route supplies `resilient` — the common
-    /// slime/residue route never does. The mutation is one edit away from being
-    /// unreachable with nothing to say so, which is how
-    /// `corekeeper_sending_vigil` shipped permanently unfulfillable.
-    ///
-    /// Walks the lineage graph from every hatchable species and fails if no
-    /// reachable trait set satisfies a mutation's requirement.
-    fn validate_mutation_traits_are_reachable(&self) -> Result<(), String> {
+    /// mutation's `granted_trait_ids` on top of what she already carries, so
+    /// traits accumulate along a lineage and a companion's set depends on the
+    /// whole route that brought her there, not on her current species.
+    fn reachable_trait_states(&self) -> Vec<(String, Vec<String>)> {
         let mut reachable: Vec<(String, Vec<String>)> = self
             .species
             .species
@@ -202,6 +194,58 @@ impl GameData {
             }
         }
 
+        reachable
+    }
+
+    /// A trait no companion can ever hold is content that cannot fire.
+    ///
+    /// A trait is only ever handed out by a species' `starting_traits` or a
+    /// mutation's `granted_trait_ids`, and every mutation here grants the trait
+    /// its own target species already starts with — so a trait belongs to a
+    /// species or it belongs to nobody. `calming_presence` belonged to nobody
+    /// for the game's whole life while five pieces of content paid for it: two
+    /// guild rooms listed it as preferred, three guest contracts wanted it, and
+    /// `contract_depth_score` read it as a companion who settles a room. All of
+    /// that was written, priced, and unreachable, and nothing said so because
+    /// every consumer of a trait id checks it against `traits.json`, which had
+    /// the trait — the question none of them asked is whether anyone can hold
+    /// it.
+    fn validate_every_trait_is_reachable(
+        &self,
+        reachable: &[(String, Vec<String>)],
+    ) -> Result<(), String> {
+        for trait_data in &self.traits.traits {
+            if !reachable
+                .iter()
+                .any(|(_, traits)| traits.contains(&trait_data.id))
+            {
+                return Err(format!(
+                    "trait '{}' is authored but no species starts with it and no mutation grants it, so no companion can ever hold it.",
+                    trait_data.id
+                ));
+            }
+        }
+        Ok(())
+    }
+
+    /// A mutation may only require traits a companion standing at its source
+    /// species could actually be holding.
+    ///
+    /// Because traits accumulate along a lineage, the requirement is easy to
+    /// author against the
+    /// wrong set: `golemkin_warden -> gargoyle_stairwarden` needs `commanding`
+    /// and `resilient`, and of the two ways to become a golemkin only the
+    /// `minotaur_porter` route supplies `resilient` — the common
+    /// slime/residue route never does. The mutation is one edit away from being
+    /// unreachable with nothing to say so, which is how
+    /// `corekeeper_sending_vigil` shipped permanently unfulfillable.
+    ///
+    /// Checks every mutation's requirement against the lineage states in
+    /// [`Self::reachable_trait_states`].
+    fn validate_mutation_traits_are_reachable(
+        &self,
+        reachable: &[(String, Vec<String>)],
+    ) -> Result<(), String> {
         for mutation in &self.mutations.mutations {
             let satisfiable = reachable.iter().any(|(species_id, traits)| {
                 species_id == &mutation.source_species_id
@@ -256,4 +300,62 @@ fn sorted(traits: &[String]) -> Vec<String> {
     sorted.sort();
     sorted.dedup();
     sorted
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::data::loader::test_game_data;
+
+    /// `calming_presence` was authored with a description, stat block and icon,
+    /// listed as preferred by `common_room` and `nursery_wing`, wanted by three
+    /// guest contracts, and read by `contract_depth_score` — and no species
+    /// started with it and no mutation granted it, so no companion ever had it.
+    #[test]
+    fn every_authored_trait_is_one_some_companion_can_hold() {
+        let data = test_game_data();
+        let reachable = data.reachable_trait_states();
+
+        for trait_data in &data.traits.traits {
+            assert!(
+                reachable
+                    .iter()
+                    .any(|(_, traits)| traits.contains(&trait_data.id)),
+                "trait '{}' is authored but unreachable: no species starts with it and no mutation grants it.",
+                trait_data.id
+            );
+        }
+    }
+
+    /// The trait a room or contract prefers is the one it pays a bonus for, so
+    /// a preference naming a trait nobody holds is a bonus that never lands.
+    #[test]
+    fn every_preferred_trait_is_one_some_companion_can_hold() {
+        let data = test_game_data();
+        let reachable = data.reachable_trait_states();
+        let holdable = |trait_id: &String| {
+            reachable
+                .iter()
+                .any(|(_, traits)| traits.contains(trait_id))
+        };
+
+        for room in &data.guild_rooms.rooms {
+            for trait_id in &room.preferred_trait_ids {
+                assert!(
+                    holdable(trait_id),
+                    "room '{}' prefers '{trait_id}', which no companion can hold.",
+                    room.id
+                );
+            }
+        }
+
+        for request in &data.contracts.requests {
+            for trait_id in &request.preferred_trait_ids {
+                assert!(
+                    holdable(trait_id),
+                    "contract '{}' prefers '{trait_id}', which no companion can hold.",
+                    request.id
+                );
+            }
+        }
+    }
 }

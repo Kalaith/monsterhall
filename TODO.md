@@ -171,6 +171,61 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, eleventh pass)
+
+The tenth pass's heuristic — *a number that cannot be reached* — kept pointing at
+thresholds. Turned one notch, it points at **content**: not a number nobody can
+reach, but a thing nobody can hold.
+
+- ~~`calming_presence` was authored, priced, rewarded in five places, and no
+  companion could ever have it.~~ Fixed. A trait reaches a companion exactly two
+  ways — a species' `starting_traits`, or a mutation's `granted_trait_ids` — and
+  every mutation here grants the trait its own target species already starts
+  with, so a trait belongs to a species or it belongs to nobody. This one
+  belonged to nobody for the game's whole life (`git log -S` finds no species or
+  mutation ever holding it, under this name or its pre-rename `submissive`),
+  while five pieces of content paid for it: `common_room` and `nursery_wing`
+  listed it as preferred, three guest contracts wanted it
+  (`repeat_client_confidence`, `quiet_room_return`, `veiled_suite_audience`),
+  and `contract_depth_score` read it as the companion who settles a room. It is
+  the joint fourth most-wanted trait in the game by consumer count.
+
+  Nothing said so because every consumer checks its trait ids against
+  `traits.json`, which had the trait. The question none of them asked is whether
+  anyone can hold it.
+
+  **Where it belongs was structural, not taste**: `slime_companion` was the only
+  species carrying one trait where the other eleven carry two, and
+  `calming_presence` was the only trait carrying no species. One hole, one
+  orphan, and the trait's own text — *"thrives under clear direction"* — is the
+  biddable starter. It reaches the late roster by inheritance rather than by
+  species: no slime survives to day 365, but the dominant golemkin line descends
+  from one, and traits accumulate along a lineage.
+
+  **Guard**: the mutation-reachability walk already computed every
+  `(species, traits)` state a companion can stand in — it just never asked
+  whether each authored trait appears in one. It is now
+  `reachable_trait_states()`, shared by the existing mutation check and two new
+  tests: every authored trait is holdable, and every trait a room or contract
+  *prefers* is holdable, since a preference naming a trait nobody has is a bonus
+  that never lands. Verified by planting the regression; both fire, naming the
+  trait and the room.
+
+- **Balance deliberately re-based, and this one is large.** Five content hooks
+  that never fired now fire, and the trait's stat block (charm +2, +12% guild
+  income, −1 stress, −2 expedition) was authored against a trait nobody had, so
+  it had never been balanced against play. Ten-seed day-365 means:
+  **gold 855k → 1.26M (+47%), buildings 18.4 → 31.5 (+71%), worst-seed gold
+  109k → 530k, and the worst debt gap +778k → 0** — every seed now clears its
+  milestones. Single-seed `final_corruption_max` **112 → 488**, which does not
+  make the parked mutation/corruption item worse so much as show what it already
+  was at four times the volume.
+
+  **Whether the trait's numbers should now be retuned is a design call, not a
+  bug**, and it is left to the player-facing owner rather than made here: the
+  fix is that the trait exists at all. The measurement above is what a retune
+  would be arguing with.
+
 ### Found by review, not by the audit (2026-08-03, tenth pass)
 
 The ledger's own "thin axes" note turned out to name a live unconnected system

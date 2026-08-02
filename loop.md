@@ -1077,6 +1077,35 @@ Stop the loop and report if:
   and a building to unlock it; (c) the other scoped slice is still the `ui_text`
   migration (~40 hardcoded strings, eighth-pass entry in `TODO.md`).
 
+- **2026-08-03 — eleventh pass (a trait nobody could hold).** Turned the previous
+  pass's heuristic from *a number that cannot be reached* to *content that cannot be
+  reached*, and swept the catalogue for it: every contract requirement against what
+  rooms can teach and bank, every threshold against what the game can supply, and
+  every authored trait against who can carry it. The first two came back clean. The
+  third found `calming_presence` — authored with a description, stat block and icon,
+  preferred by `common_room` and `nursery_wing`, wanted by three guest contracts, and
+  read by `contract_depth_score` — with **no species starting with it and no mutation
+  granting it, for the game's whole life**. `git log -S` confirms it never had a
+  source under this name or its pre-rename `submissive`. Every consumer validated the
+  trait id against `traits.json`, which had it; nobody asked whether a companion
+  could. Given to `slime_companion` on the structural argument (the only species with
+  one trait, the only trait with no species), and the mutation-reachability walk was
+  split into a shared `reachable_trait_states()` so two new tests can ask the second
+  question: is every authored trait holdable, and is every *preferred* trait holdable.
+  Both verified by planting.
+  **Result:** 114 tests (was 112), fmt and clippy clean, publish green,
+  `content_version` 1.19.0, `species.json` 1.3.0. **Balance deliberately re-based and
+  the swing is large** — ten-seed day-365 gold 855k → 1.26M (+47%), buildings 18.4 →
+  31.5, worst-seed gold 109k → 530k, worst debt gap +778k → 0; single-seed
+  `final_corruption_max` 112 → 488. That is five content hooks starting to fire plus a
+  stat block that was never balanced against play because nothing carried it.
+  **Next iteration should know:** (a) the heuristic generalises — *what is authored,
+  priced, and referenced, but unreachable?* — and the trait axis is now guarded, so
+  the untried ones are relics, events and missions; (b) whether `calming_presence`'s
+  numbers want retuning now that they apply is a **design call left open**, with the
+  measurement above as its evidence; (c) the `ui_text` migration (~40 hardcoded
+  strings) is still the largest scoped slice nobody has taken.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and
