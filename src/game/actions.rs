@@ -337,6 +337,51 @@ impl Game {
         self.last_error = None;
     }
 
+    /// Drives the game to a named screen for the screenshot harness.
+    ///
+    /// The capture hook boots to the main menu and photographs whatever is
+    /// there, so every screen built since has gone unphotographed. This starts a
+    /// campaign, plays the opening out, and navigates — the same actions a
+    /// player would take, so a scene that cannot be reached this way is a scene
+    /// the player cannot reach either.
+    pub fn seed_capture_scene(&mut self, scene: &str) {
+        self.apply_action(UiAction::StartNewGame);
+        // A fresh save prompts for confirmation; the second press is the answer.
+        if self.last_error.is_some() {
+            self.apply_action(UiAction::StartNewGame);
+        }
+        for _ in 0..16 {
+            if matches!(self.phase, GamePhase::OpeningChapter(_)) {
+                self.apply_action(UiAction::ContinueOpening);
+            } else if matches!(self.phase, GamePhase::HatchReveal(_)) {
+                self.apply_action(UiAction::ContinueAfterHatch);
+            } else {
+                break;
+            }
+        }
+
+        let action = match scene {
+            "town" | "townoverview" => Some(UiAction::ReturnToTownOverview),
+            "townmanagement" | "planner" => Some(UiAction::OpenTownManagement),
+            "guildhall" | "guildjobs" => Some(UiAction::OpenGuildHallManagement),
+            "contracts" | "contractdesk" => Some(UiAction::OpenContractDesk),
+            "hatchery" => Some(UiAction::OpenHatcheryManagement),
+            "expedition" => Some(UiAction::OpenExpeditionPlanning),
+            "journal" => Some(UiAction::OpenJournal),
+            "settings" => Some(UiAction::OpenSettings),
+            "profile" => self
+                .game_state
+                .as_ref()
+                .and_then(|state| state.monsters.first())
+                .map(|monster| UiAction::OpenMonsterProfile(monster.id.clone())),
+            "dayresults" => Some(UiAction::ResolveDay),
+            _ => None,
+        };
+        if let Some(action) = action {
+            self.apply_action(action);
+        }
+    }
+
     pub(super) fn start_new_game(&mut self) {
         let Some(data) = self.data.as_ref() else {
             self.last_error = Some("Game data is not available.".to_owned());

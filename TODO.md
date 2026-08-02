@@ -198,7 +198,12 @@ fourteen floors going unwalked by the *simulation*, not the ability to test.
 
 - ~~Add a projects status line to Town Management explaining repeatable project count, cost, and purpose.~~ Done. A build limit of forty with no unlocks reads as pointless until something says the thing exists to convert surplus, and nothing did — `reliquary_vault` shipped invisible. The line reports how many repeatable builds stand against how many could, and what they have absorbed.
 - ~~Add a concise project/sink summary to simulation reports.~~ Done: `sink_absorbed` and `sink_capacity` on every report. This is the pair that would have made the relic ceiling obvious immediately — capacity now reads 4,188 relics against the 188 it was, with 142 absorbed and 6 left standing on the deterministic seed. Gold is the one worth watching: capacity 516,500 against 446,624 still banked, so the sinks are roughly adequate and the guild simply is not spending, which is the reserve behaviour described in the Balance section rather than a missing sink.
-- Capture visual baselines for new screens and modal states before relying on screenshot comparison.
+- ~~Capture visual baselines for new screens and modal states before relying on screenshot comparison.~~ Done, and it was overdue. The capture harness existed but only ever photographed the main menu — `MONSTERHALL_CAPTURE_SCENE` was read and discarded, so roughly ten screens changed over this work had never been looked at. `Game::seed_capture_scene` now drives a fresh campaign through the opening and navigates to a named screen using the same actions a player would, so a scene the harness cannot reach is one the player cannot reach either. Baselines for town, buildings, hatchery, contracts, profile and expedition are in `docs/verification/`.
+
+  Looking found three layout defects that no test could have caught:
+  - The projects status line (added two passes ago at `detail_top_y + 194`) drew straight through the town status message added several passes before that at `y = 338`. Two of my own changes, colliding.
+  - The condition badges on the roster card took the full card width, so four enormous boxes each held two characters. Capped at 300px.
+  - Pre-existing: `built_count_label` rendered as "Bui" — 96px was not enough for the label beside its icon, in both metric rows. Both rows re-flowed.
 
 ## Art
 

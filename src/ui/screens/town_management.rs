@@ -279,19 +279,21 @@ pub fn draw_town_management(
     {
         return Some(UiAction::PurchaseBuilding(selected_building.id.clone()));
     }
+    // 96px left no room for the label beside its icon, so "Built" rendered as
+    // "Bui". The row is re-flowed rather than the label shortened.
     draw_metric_tile(
         layout.detail_x + 252.0,
         detail_top_y + 134.0,
-        96.0,
+        120.0,
         54.0,
         &ui.built_count_label,
         &format!("{}/{}", summary.build_count, selected_building.build_limit),
         theme::PRIMARY,
     );
     draw_metric_tile(
-        layout.detail_x + 356.0,
+        layout.detail_x + 380.0,
         detail_top_y + 134.0,
-        308.0,
+        320.0,
         54.0,
         &ui.cost_panel_title,
         &compact_text(
@@ -305,7 +307,7 @@ pub fn draw_town_management(
         },
     );
     draw_metric_tile(
-        layout.detail_x + 672.0,
+        layout.detail_x + 708.0,
         detail_top_y + 134.0,
         112.0,
         54.0,
@@ -317,9 +319,11 @@ pub fn draw_town_management(
     // The repeatable-project sink has no other explanation anywhere: a build
     // limit of forty and no unlocks reads as pointless until something says the
     // thing exists to convert surplus.
+    // Below the status/error slot at y=338, not on top of it. The panel runs to
+    // y=410 and the effects panel starts at 424, so this is the last free band.
     draw_inline_status(
         layout.detail_x,
-        detail_top_y + 194.0,
+        368.0,
         layout.detail_w,
         &projects_status_line(data, game_state),
         theme::INFO,
@@ -380,34 +384,34 @@ pub fn draw_town_management(
     draw_metric_tile(
         metric_x,
         548.0,
-        96.0,
+        112.0,
         50.0,
         &ui.built_label,
         &game_state.town.constructed_building_ids.len().to_string(),
         theme::PRIMARY,
     );
     draw_metric_tile(
-        metric_x + 104.0,
+        metric_x + 120.0,
         548.0,
-        96.0,
+        112.0,
         50.0,
         &ui.rooms_label,
         &game_state.town.unlocked_room_ids.len().to_string(),
         theme::POSITIVE,
     );
     draw_metric_tile(
-        metric_x + 208.0,
+        metric_x + 240.0,
         548.0,
-        96.0,
+        112.0,
         50.0,
         &ui.floors_label,
         &game_state.town.unlocked_floor_ids.len().to_string(),
         theme::WARNING,
     );
     draw_metric_tile(
-        metric_x + 312.0,
+        metric_x + 360.0,
         548.0,
-        96.0,
+        112.0,
         50.0,
         &ui.species_label,
         &game_state.town.unlocked_species_ids.len().to_string(),

@@ -81,10 +81,11 @@ async fn main() {
     let mut game = Game::new().await;
 
     // Screenshot harness: when MONSTERHALL_CAPTURE_PATH is set, render
-    // deterministic frames, write a PNG, and exit. The boot flow lands on the
-    // main menu, so that is what gets photographed; the scene env var is
-    // currently unused.
+    // deterministic frames, write a PNG, and exit. MONSTERHALL_CAPTURE_SCENE
+    // picks which screen to photograph — without it the boot flow lands on the
+    // main menu and every screen built since goes unseen.
     if let Some(config) = capture::CaptureConfig::from_env("MONSTERHALL") {
+        game.seed_capture_scene(&config.scene);
         capture::run_capture(&config, |_dt| {
             clear_background(dark::BACKGROUND);
             game.update();
