@@ -212,6 +212,42 @@ mutation and the check names golemkin).
   is a `corruption_adept` exactly like the warden she replaces. Variety means a
   different *role*, not a different name.
 
+### Found by review, not by the audit (2026-08-03, twenty-fourth pass)
+
+Re-read the crowded screens now that the harness fills the roster with a *varied*
+guild rather than twenty clones. Two of the four assignment screens were telling
+the player nothing they could choose on.
+
+- ~~Every worker card on the Guild Jobs screen ended in the word "Score" with no
+  number.~~ Fixed. The line ran `{gold}g / {materials}m / {residue}r | Prep {n} |
+  Score {n}`, and the box holds about thirty characters —
+  `draw_body_text_in_box` drops whole words past that without a mark, so at a
+  late-campaign purse the last token fell off and ten cards read *"… | Prep 4 |
+  Score"*. A label with no value reads as a missing number rather than as
+  truncation, on the number that screen exists to compare. Reordered to
+  `Score 114 | 343g | Prep 4 | 19r 0m`: what can still fall off the end is the
+  residue/materials tail, which the room panel above reports in full, while
+  score, gold, prep and the worn warning are per-companion.
+
+- ~~The Expedition Desk's team card carried one figure: "Instability 0".~~ Fixed.
+  Instability is the one number a run does *not* turn on, so twenty companions
+  read as twenty identical cards on the screen whose entire job is choosing who
+  goes down the tower — with about seven hundred pixels of empty line beside it.
+  It now reads `comfort specialist | Pow 3 End 7 Ins 2 | Instability 0`, which is
+  what the engine actually scores: role against the mission's preferred one,
+  power for materials, endurance for coming home unhurt, instinct for residue,
+  plus a worn note when condition is costing her. **Her rank moved up beside the
+  species**, because a floor's `required_roster` is written in stars and the card
+  did not say which star she was.
+
+- **Checked and clean this pass, so they are not re-read blind**: the day-results
+  panels fill and count their overflow correctly with a working guild
+  (*"… and 19 more, not shown"*); the profile's Core Stats band shows all four
+  stats including instinct; the town roster cards hold a varied roster without
+  overflow.
+
+- **Balance byte-identical**; no data file changed, so no version stamp moved.
+
 ### Found by review, not by the audit (2026-08-03, twenty-third pass)
 
 Took the slice the last pass wrote down, and the harness turned out to be half

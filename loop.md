@@ -1477,6 +1477,32 @@ Stop the loop and report if:
   completion in it; (c) untaken slices unchanged: `ui_text` migration, unbounded event
   log, corruption's missing relief path.
 
+- **2026-08-03 — twenty-fourth pass (two assignment screens with nothing to choose
+  on).** Took the previous pass's note and re-read the crowded captures now that the
+  harness fills the roster with a *varied* guild. Two finds, both on screens whose whole
+  job is picking a companion. **Guild Jobs**: every worker card ended in the word
+  "Score" with no number — the line ran gold/materials/residue first and the box holds
+  about thirty characters, so at a late-campaign purse `draw_body_text_in_box` dropped
+  the last token without a mark, and a label with no value reads as a missing number
+  rather than as truncation. Reordered to `Score 114 | 343g | Prep 4 | 19r 0m`, so what
+  can still fall off the end is the room-wide tail the panel above reports in full.
+  **Expedition Desk**: the team card's only figure was `Instability 0` — the one number
+  a run does not turn on — so twenty companions read as twenty identical cards with
+  ~700px of empty line beside them. Now `comfort specialist | Pow 3 End 7 Ins 2 |
+  Instability 0`, which is what the engine scores, with her **rank beside the species**
+  because a floor's `required_roster` is written in stars.
+  **Result:** 130 tests, fmt and clippy clean, publish green, **balance byte-identical**
+  and no data file changed, so no version stamp moved. Checked and clean: day-results
+  panels fill and count their overflow with a working guild, the profile's Core Stats
+  band shows all four stats, the town roster holds a varied roster without overflow.
+  **Next iteration should know:** (a) the varied-roster lens is now spent on the four
+  assignment screens; what it has *not* been pointed at is a roster of mixed **species**
+  — the harness clones one species twenty times, so every card still says "Slime
+  Companion" and anything that varies by species (portraits, wage, role, floor gates)
+  photographs identical; (b) both lines fixed here are hardcoded English, part of the
+  recorded `ui_text` migration; (c) the day-results screen has still never been
+  photographed with a **partial** contract completion in it.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

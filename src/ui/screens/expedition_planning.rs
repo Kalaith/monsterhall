@@ -23,7 +23,9 @@ use crate::ui::screens::roster_window::{
     draw_roster_pager, roster_panel_height, RosterWindow, ROSTER_COLUMNS,
 };
 use crate::ui::theme;
-use crate::ui::view_models::{assignment_label, species_name_by_id};
+use crate::ui::view_models::{
+    assignment_label, monster_depth_role_label, monster_quality_label, species_name_by_id,
+};
 
 /// Top of the first floor row, just below the floors panel title.
 const FLOORS_FIRST_ROW_Y: f32 = 134.0;
@@ -555,8 +557,37 @@ pub fn draw_expedition_planning(
             } else {
                 assignment_label(data, &monster.current_job)
             };
-            let species_label = compact_text(&species_name_by_id(data, &monster.species_id), 18);
-            let key_value = format!("Instability {}", monster.corruption);
+            let species_label = format!(
+                "{} | {}",
+                compact_text(&species_name_by_id(data, &monster.species_id), 18),
+                monster_quality_label(data, monster)
+            );
+            // This card carried one figure — her instability — on the screen
+            // whose entire job is choosing who goes down the tower, and
+            // instability is the one number a run does not turn on. Twenty
+            // companions read as twenty identical cards.
+            //
+            // What a run actually turns on: her role against the mission's
+            // preferred one, power for materials, endurance for coming back
+            // unhurt, instinct for residue, and how worn she already is. Her
+            // rank moved up beside the species, because a floor's
+            // `required_roster` is written in stars.
+            let stats = crate::engine::effective_stats(data, monster);
+            let effectiveness = crate::engine::companion_effectiveness(data, monster);
+            let condition_note = if effectiveness < 100 {
+                format!(" | Worn {effectiveness}%")
+            } else {
+                String::new()
+            };
+            let key_value = format!(
+                "{} | Pow {} End {} Ins {}{} | Instability {}",
+                monster_depth_role_label(data, monster),
+                stats.power,
+                stats.endurance,
+                stats.instinct,
+                condition_note,
+                monster.corruption,
+            );
             let card = draw_character_card(
                 data,
                 monster,

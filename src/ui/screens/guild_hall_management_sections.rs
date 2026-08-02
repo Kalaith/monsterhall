@@ -393,20 +393,26 @@ fn draw_worker_cards(
                 } else {
                     String::new()
                 };
-                // The card is narrow and this line grew twice — the condition
-                // note and the work-history odds both landed here. Shortened so
-                // the tail is not cut off mid-word.
-                // The work-history odds are a property of the room, and the room
-                // panel already shows them — repeating them per companion is
-                // what pushed this line past the card's edge.
+                // Ordered by what the player is deciding with, because the box
+                // holds about thirty characters and `draw_body_text_in_box`
+                // drops whole words past that without a mark. Score used to sit
+                // last: at a late-campaign purse the line ran one token over
+                // and every card in the capture read "... | Prep 1 | Score"
+                // with the number gone — which reads as a missing value, not as
+                // truncation, on the number the whole screen exists to compare.
+                //
+                // What can still fall off the end is the residue and materials
+                // tail, and that is deliberate: those are room-wide figures the
+                // panel above already reports in full, while score, gold, prep
+                // and the condition warning are per-companion.
                 format!(
-                    "{}g / {}m / {}r | Prep {} | Score {}{}",
-                    value.projected_gold,
-                    value.projected_materials,
-                    value.projected_arcane_residue,
-                    value.preparation_quality,
+                    "Score {} | {}g | Prep {}{} | {}r {}m",
                     value.success_score,
+                    value.projected_gold,
+                    value.preparation_quality,
                     condition_note,
+                    value.projected_arcane_residue,
+                    value.projected_materials,
                 )
             })
             .unwrap_or_else(|| {
