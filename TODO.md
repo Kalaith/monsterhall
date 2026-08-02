@@ -171,6 +171,53 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, eighth pass)
+
+Three systematic sweeps came back clean before the one that did not, and the
+clean results are worth recording so they are not re-run blind:
+
+- **Every `UiAction` variant is emitted by some screen** — no feature is
+  unreachable, which was the shape behind the profile-screen bug.
+- **Every public engine function is exercised by a test** except
+  `debt_intro_status`, a pure string formatter.
+- **The opening chapter is affordable end to end** — starting resources 180/60/18
+  cover the slime's hatch (25g/3r) and then the first room (40g/20m). It is a
+  linear phase with no way to earn, so an unaffordable step would soft-lock every
+  new campaign permanently; it is already guarded, incidentally, by two journal
+  tests that play the opening out and `.expect()` each step.
+
+- ~~The contract desk's gap badges named five of ten skills and three of seven
+  work histories.~~ Fixed, and this is the **fifth** copy of the same five-of-ten
+  omission — after the wage formula, the hatchery's `replacement_score` and the
+  policy's `monster_service_score`. `blocked_candidate_summary` checked
+  scouting/guarding/hospitality/crafting/charm and three history categories, and
+  the caller only falls back to the engine's *complete* reason list when the
+  summary comes back **empty**. So a candidate blocked by both a covered
+  requirement and an uncovered one showed only the covered half: the card reads
+  "Charm 1/2", the player trains charm, comes back, and she is still blocked with
+  nothing saying why until that first gap closes. All ten skills and all seven
+  categories now, with labels taken from the engine's own `format_skill_name` and
+  `work_history_label` rather than a third naming, so a badge cannot call a
+  requirement one thing while the refusal reason calls it another. Two tests,
+  verified by planting.
+
+- **Player-visible copy is hardcoded in Rust on six screens, and `ui_text.json`
+  is not the source of truth it appears to be.** Measured while chasing the
+  above: roughly forty capitalised literals go straight to draw calls — every
+  Expedition Desk metric tile ("Success", "Injury Risk", "Party Condition",
+  "Materials", "Eggs", "Residue", "Relics"), the Town Management group tabs
+  ("Core", "Projects"), the egg conversion buttons ("Sell Egg", "Refine"), the
+  profile screen's "Today" and "Danger Zone", and essentially the whole Hatch
+  Reveal screen.
+
+  `tests/ui_text_catalog.rs` enforces that every *key* is read and cannot see the
+  inverse, so the catalogue looks authoritative and is not. This is the same
+  complaint the dead-key deletion was justified with — "an author edits the
+  wording and sees no change" — pointing the other way. **Recorded rather than
+  done**: it is a forty-string migration across six screens with real
+  mistyped-key risk and no player-visible benefit today, which is a poor trade
+  against a pass asked to focus on gameplay. It wants its own slice.
+
 ### Found by review, not by the audit (2026-08-03, seventh pass)
 
 This pass swept the **save path**, which six passes of screen-and-engine hunting

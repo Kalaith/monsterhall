@@ -966,6 +966,45 @@ Stop the loop and report if:
   20-companion roster, **patron tiers 3** with upkeep bands already referencing a
   fourth, and relics with no patron who asks for one by name.
 
+- **2026-08-03 — the fifth copy of five-of-ten, and three sweeps that came back
+  clean.** Extending last pass's insight (ask what the harness never runs), three
+  systematic sweeps found nothing and are worth recording so nobody repeats them:
+  every `UiAction` is emitted by some screen; every public engine function is
+  exercised by a test bar `debt_intro_status`; and the opening chapter is
+  affordable end to end — starting 180/60/18 covers the hatch (25g/3r) then the
+  first room (40g/20m), which matters because the opening is a linear phase with
+  no way to earn, so an unaffordable step would permanently soft-lock every new
+  campaign. It is already guarded incidentally by two journal tests that play the
+  opening out.
+  **The one that was not clean:** the contract desk's gap badges checked five of
+  ten skills and three of seven work-history categories — the same five-of-ten
+  omission as the wage formula, `replacement_score` and `monster_service_score`,
+  making this the fifth instance. The caller only falls back to the engine's
+  complete reason list when the summary is **empty**, so a candidate blocked by
+  both a covered and an uncovered requirement showed only the covered half: the
+  card says "Charm 1/2", the player trains charm, comes back, still blocked, and
+  nothing says why until that first gap closes. Now all ten and all seven, with
+  labels from the engine's `format_skill_name` and `work_history_label` so the
+  badge cannot drift from the refusal reason. Verified by planting.
+  **Recorded, not done:** roughly forty player-visible strings are hardcoded in
+  Rust across six screens — every Expedition Desk metric tile, the Town
+  Management group tabs, two egg conversion buttons, and most of Hatch Reveal.
+  `tests/ui_text_catalog.rs` enforces that every key is *read* and cannot see the
+  inverse, so `ui_text.json` looks authoritative and is not. That is the
+  dead-key argument pointing the other way, but it is a forty-string migration
+  with mistyped-key risk and no player-visible gain today, so it wants its own
+  slice rather than being smuggled into a gameplay pass.
+  **Result:** 108 tests (was 106), balance byte-identical, fmt and clippy clean,
+  publish green.
+  **Next iteration should know:** (a) the five-of-ten shape has now appeared
+  **five** times — if a sixth list of skills or work-history categories is ever
+  written out longhand, it is almost certainly wrong; prefer
+  `engine::companion_skill_total` and the label tables; (b) the code-defect
+  sweeps are genuinely saturated — three of four came back empty this pass;
+  (c) the honest next slice remains content — **guild rooms 4** for a
+  20-companion roster, **patron tiers 3** with upkeep bands already referencing a
+  fourth, and relics with no patron who asks for one by name.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

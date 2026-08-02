@@ -39,6 +39,19 @@ fn compact_text(text: &str, max_len: usize) -> String {
     }
 }
 
+/// Why this candidate cannot take this contract, as short gap badges.
+///
+/// Covered five of the ten skills and three of the seven work-history
+/// categories — the same five-of-ten omission as the wage formula, the hatchery
+/// replacement score and the policy's service score, making this the fifth copy
+/// of that mistake. The caller only falls back to the engine's complete reason
+/// list when this returns *nothing*, so a candidate blocked by both a covered
+/// requirement and an uncovered one showed only the covered half: the player
+/// trained the skill the card named, came back, and she was still blocked.
+///
+/// Labels come from the engine rather than a third naming — `format_skill_name`
+/// and `work_history_label` are the same tables the refusal reasons and the day
+/// log use, so the desk cannot drift from them.
 fn blocked_candidate_summary(request: &ContractState, monster: &CompanionState) -> String {
     let mut parts = Vec::new();
     if monster.quality_rank < request.minimum_quality_rank.max(1) {
@@ -48,54 +61,66 @@ fn blocked_candidate_summary(request: &ContractState, monster: &CompanionState) 
             request.minimum_quality_rank.max(1)
         ));
     }
-    push_requirement_gap(
-        &mut parts,
-        "Scout",
-        monster.skills.scouting,
-        request.required_skill_thresholds.scouting,
-    );
-    push_requirement_gap(
-        &mut parts,
-        "Guarding",
-        monster.skills.guarding,
-        request.required_skill_thresholds.guarding,
-    );
-    push_requirement_gap(
-        &mut parts,
-        "Hospitality",
-        monster.skills.hospitality,
-        request.required_skill_thresholds.hospitality,
-    );
-    push_requirement_gap(
-        &mut parts,
-        "Crafting",
-        monster.skills.crafting,
-        request.required_skill_thresholds.crafting,
-    );
-    push_requirement_gap(
-        &mut parts,
-        "Charm",
-        monster.skills.charm,
-        request.required_skill_thresholds.charm,
-    );
-    push_requirement_gap(
-        &mut parts,
-        "Scout Hist",
-        monster.work_history.scouting_runs,
-        request.required_work_history_thresholds.scouting_runs,
-    );
-    push_requirement_gap(
-        &mut parts,
-        "Guarding Hist",
-        monster.work_history.guard_duties,
-        request.required_work_history_thresholds.guard_duties,
-    );
-    push_requirement_gap(
-        &mut parts,
-        "Hospitality Hist",
-        monster.work_history.hospitality_jobs,
-        request.required_work_history_thresholds.hospitality_jobs,
-    );
+
+    let skills = &request.required_skill_thresholds;
+    for (skill_id, required, current) in [
+        ("scouting", skills.scouting, monster.skills.scouting),
+        ("guarding", skills.guarding, monster.skills.guarding),
+        (
+            "hospitality",
+            skills.hospitality,
+            monster.skills.hospitality,
+        ),
+        ("crafting", skills.crafting, monster.skills.crafting),
+        ("charm", skills.charm, monster.skills.charm),
+        ("recovery", skills.recovery, monster.skills.recovery),
+        ("bargaining", skills.bargaining, monster.skills.bargaining),
+        ("navigation", skills.navigation, monster.skills.navigation),
+        ("arcana", skills.arcana, monster.skills.arcana),
+        ("strength", skills.strength, monster.skills.strength),
+    ] {
+        push_requirement_gap(
+            &mut parts,
+            crate::engine::format_skill_name(skill_id),
+            current,
+            required,
+        );
+    }
+
+    let history = &request.required_work_history_thresholds;
+    let banked = &monster.work_history;
+    for (category, required, current) in [
+        ("scouting_runs", history.scouting_runs, banked.scouting_runs),
+        ("guard_duties", history.guard_duties, banked.guard_duties),
+        (
+            "hospitality_jobs",
+            history.hospitality_jobs,
+            banked.hospitality_jobs,
+        ),
+        ("craft_jobs", history.craft_jobs, banked.craft_jobs),
+        (
+            "contracts_completed",
+            history.contracts_completed,
+            banked.contracts_completed,
+        ),
+        (
+            "recovery_shifts",
+            history.recovery_shifts,
+            banked.recovery_shifts,
+        ),
+        (
+            "hatchery_assists",
+            history.hatchery_assists,
+            banked.hatchery_assists,
+        ),
+    ] {
+        push_requirement_gap(
+            &mut parts,
+            crate::engine::work_history_label(category),
+            current,
+            required,
+        );
+    }
 
     parts.join(" | ")
 }
@@ -700,4 +725,97 @@ pub(super) fn draw_footer_actions(
         layout.content_width,
         Some(UiAction::OpenContractDesk),
     )
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::state::{ContractHistoryRequirementState, ContractSkillRequirementState};
+
+    /// The gap badges must name every requirement that is blocking, not the
+    /// first five skills and first three histories.
+    #[test]
+    fn a_blocked_candidate_shows_every_requirement_she_is_short_of() {
+        let request = ContractState {
+            required_skill_thresholds: ContractSkillRequirementState {
+                charm: 2,
+                arcana: 3,
+                strength: 1,
+                ..ContractSkillRequirementState::default()
+            },
+            required_work_history_thresholds: ContractHistoryRequirementState {
+                hatchery_assists: 3,
+                craft_jobs: 2,
+                contracts_completed: 1,
+                ..ContractHistoryRequirementState::default()
+            },
+            ..ContractState::default()
+        };
+        let monster = CompanionState {
+            quality_rank: 1,
+            ..CompanionState::default()
+        };
+
+        let summary = blocked_candidate_summary(&request, &monster);
+
+        for expected in [
+            "Charm",
+            "Arcana",
+            "Strength",
+            "Hatchery Assists",
+            "Crafting Jobs",
+            "Contracts Completed",
+        ] {
+            assert!(
+                summary.contains(expected),
+                "'{expected}' is blocking her and the desk does not say so: {summary}"
+            );
+        }
+    }
+
+    /// And the labels are the engine's, so a badge cannot call a requirement one
+    /// thing while the refusal reason calls it another.
+    #[test]
+    fn gap_badges_use_the_same_names_as_the_refusal_reasons() {
+        for category in [
+            "scouting_runs",
+            "guard_duties",
+            "hospitality_jobs",
+            "craft_jobs",
+            "contracts_completed",
+            "recovery_shifts",
+            "hatchery_assists",
+        ] {
+            let label = crate::engine::work_history_label(category);
+            let request = ContractState {
+                required_work_history_thresholds: history_requiring(category),
+                ..ContractState::default()
+            };
+            let monster = CompanionState {
+                quality_rank: 1,
+                ..CompanionState::default()
+            };
+
+            let summary = blocked_candidate_summary(&request, &monster);
+            assert!(
+                summary.contains(label),
+                "'{category}' should appear as '{label}': {summary}"
+            );
+        }
+    }
+
+    fn history_requiring(category: &str) -> ContractHistoryRequirementState {
+        let mut history = ContractHistoryRequirementState::default();
+        match category {
+            "scouting_runs" => history.scouting_runs = 1,
+            "guard_duties" => history.guard_duties = 1,
+            "hospitality_jobs" => history.hospitality_jobs = 1,
+            "craft_jobs" => history.craft_jobs = 1,
+            "contracts_completed" => history.contracts_completed = 1,
+            "recovery_shifts" => history.recovery_shifts = 1,
+            "hatchery_assists" => history.hatchery_assists = 1,
+            other => panic!("unknown work-history category '{other}'"),
+        }
+        history
+    }
 }

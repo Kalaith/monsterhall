@@ -320,7 +320,7 @@ pub(super) fn companion_skill_value(skills: &CompanionSkillState, skill_id: &str
     }
 }
 
-pub(super) fn format_skill_name(skill_id: &str) -> &'static str {
+pub fn format_skill_name(skill_id: &str) -> &'static str {
     match skill_id {
         "scouting" => "Scouting",
         "guarding" => "Guarding",

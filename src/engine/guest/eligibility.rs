@@ -191,7 +191,7 @@ pub(super) const WORK_HISTORY_LABELS: [(&str, &str); 7] = [
     ("hatchery_assists", "Hatchery Assists"),
 ];
 
-pub(super) fn work_history_label(category: &str) -> &'static str {
+pub fn work_history_label(category: &str) -> &'static str {
     WORK_HISTORY_LABELS
         .iter()
         .find(|(id, _)| *id == category)

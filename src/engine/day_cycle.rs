@@ -64,6 +64,6 @@ pub use previews::{
     effective_population_cap, preview_expedition_plan, preview_guild_job, preview_upkeep,
 };
 pub(crate) use progression::apply_guild_job_progression;
-pub use progression::charm_training_chance_pct;
+pub use progression::{charm_training_chance_pct, format_skill_name};
 pub use resolution::resolve_day;
 pub use types::{ExpeditionPlanPreview, GuildJobPreview, UpkeepForecast};

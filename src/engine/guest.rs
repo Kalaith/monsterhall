@@ -626,5 +626,5 @@ mod eligibility;
 #[cfg(test)]
 mod tests;
 
-pub use eligibility::evaluate_contract_eligibility;
 use eligibility::*;
+pub use eligibility::{evaluate_contract_eligibility, work_history_label};
