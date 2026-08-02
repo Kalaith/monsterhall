@@ -19,4 +19,4 @@ pub use screens::{
     draw_monster_profile, draw_opening_chapter, draw_settings_modal, draw_town_management,
     draw_town_overview,
 };
-pub use screens::{hatchery_management_layout, journal_log_rect, JOURNAL_VISIBLE_ROWS};
+pub use screens::{hatchery_management_layout, journal_log_rect, journal_visible_rows};

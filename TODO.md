@@ -171,6 +171,54 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, fifteenth pass)
+
+The two screens no pass had read closely, photographed at campaign scale for the
+first time. Both were fine at day one and wrong by day thirty.
+
+- ~~The day's report showed three companions out of twenty and said nothing
+  about the rest.~~ Fixed, and this is the pass's real find. `roster_updates`
+  gets about two lines per working companion, so a full guild produces forty;
+  the panel was a fixed 220px with a 140px text box that holds six, in the top
+  half of a screen whose bottom half is empty backdrop. `draw_wrapped_lines_in_box`
+  clips what runs past, **silently** — no scroll, no pager, no count. And
+  `roster_updates` is never written to `event_log`, so the thirty-odd dropped
+  lines were gone for good rather than findable in the journal.
+
+  `resolve_day`'s own doc comment already described the box as holding "about
+  seven lines" and recorded that a mutation announcement had been "clipped away
+  and then never written down" — the earlier pass moved *mutations* out to
+  survive it and left everything else being dropped. Both panels now take the
+  height that was already on screen (six lines → twenty), and whatever still
+  does not fit is counted out loud: *"… and 19 more, not shown."* Bounding
+  coverage is fine; bounding it without saying so is what turns a full box into
+  a wrong report.
+
+- ~~The journal drew twelve rows into a panel that holds twenty-one.~~ Fixed —
+  the same hardcoded-row-count mistake the hatchery's egg column made with its
+  `4`, on the screen whose entire purpose is reading the log. The count is
+  derived from the panel height now, as the hatchery's is.
+
+- ~~The journal reverse-cloned the entire campaign log every frame.~~ Fixed. The
+  log is never trimmed and grows ~12.5 entries a day — measured at 189 by day
+  30, 912 by day 90, 2,353 by day 180 and **4,586 by day 365** — and the screen
+  allocated all of them each frame to display a dozen. `rev()` on a slice
+  iterator is free, so only what is drawn is built.
+
+- ~~Scrolling the log stepped one entry a wheel tick.~~ Fixed to a page, like
+  every other long list in this game. At 4,586 entries the start of the campaign
+  was 4,574 ticks away on the screen that offers to show it.
+
+- **The capture harness could not photograph either problem.** `_full` crowded
+  the roster, the eggs and the bookings, but left the log at nine entries and
+  every companion idle — so the day-results panels filled with two lines however
+  many companions the guild had. It now pads the log to a year and puts the
+  guild to work. This is the third time the ledger's own note — *every list this
+  fills is one that only misbehaves once it is full* — has paid for itself.
+
+- **Balance byte-identical**; `game/capture.rs` split out of `game/actions.rs`,
+  which the additions pushed to 817 lines.
+
 ### Found by review, not by the audit (2026-08-03, fourteenth pass)
 
 The sibling vocabulary, finished to the same shape as the skills — and it was

@@ -10,6 +10,7 @@ use crate::ui::chrome::{
 };
 use crate::ui::core::{
     draw_body_text, draw_body_text_in_box, draw_wrapped_lines_in_box, primary_button,
+    scaled_font_size, scaled_spacing,
 };
 use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
@@ -105,20 +106,22 @@ pub fn draw_journal(
         false,
     );
 
-    let recent_events = game_state
-        .event_log
-        .iter()
-        .rev()
-        .cloned()
-        .collect::<Vec<_>>();
-    let visible_rows = VISIBLE_ROWS;
-    let max_scroll = recent_events.len().saturating_sub(visible_rows);
+    // Only the rows on screen are built, and this used to reverse-clone the entire
+    // campaign log to find them — every frame the journal was open. The log is
+    // never trimmed and grows about twelve entries a day, so a day-365 save
+    // holds ~4,600 of them: roughly 4,600 string allocations per frame to
+    // display a dozen. `rev()` on a slice iterator is free, so the window is
+    // taken directly and only what is drawn is cloned.
+    let visible_rows = visible_rows();
+    let max_scroll = game_state.event_log.len().saturating_sub(visible_rows);
     let start_index = journal_state.event_log_scroll.min(max_scroll);
-    let visible_events = if recent_events.is_empty() {
+    let visible_events = if game_state.event_log.is_empty() {
         vec![ui.recent_events_empty_message.clone()]
     } else {
-        recent_events
+        game_state
+            .event_log
             .iter()
+            .rev()
             .skip(start_index)
             .take(visible_rows)
             .cloned()
@@ -129,8 +132,8 @@ pub fn draw_journal(
         left_margin + layout::PANEL_PADDING,
         log_y + 52.0,
         content_width - layout::PANEL_PADDING * 2.0,
-        log_h - 92.0,
-        16.0,
+        log_h - LOG_CHROME_H,
+        LOG_FONT_SIZE,
         theme::TEXT_BODY,
     );
 
@@ -170,8 +173,25 @@ pub fn draw_journal(
     None
 }
 
+/// Vertical space the log panel spends on its title and its two scroll hints.
+const LOG_CHROME_H: f32 = 92.0;
+/// Font size and line gap the log is drawn with, which together give a row.
+const LOG_FONT_SIZE: f32 = 16.0;
+const LOG_LINE_GAP: f32 = 6.0;
+
 /// Entries the event log shows at once.
-pub const VISIBLE_ROWS: usize = 12;
+///
+/// Was a hardcoded `12` — the same mistake the hatchery's egg column made with
+/// its hardcoded `4`. The panel's height follows the window, so at 1080p it
+/// drew twelve rows into a band that holds around thirty and left two thirds of
+/// the screen empty, on the screen whose whole purpose is reading the log. That
+/// also tripled how far the player had to scroll through a campaign log that
+/// reaches ~4,600 entries.
+pub fn visible_rows() -> usize {
+    let (_, _, _, log_h) = log_rect();
+    let row_h = scaled_font_size(LOG_FONT_SIZE) + scaled_spacing(LOG_LINE_GAP);
+    (((log_h - LOG_CHROME_H) / row_h).floor() as usize).max(1)
+}
 
 /// Where the event log panel sits. Shared with the mouse-wheel handler, which
 /// used to carry its own fixed copy — 720px tall against a panel that follows

@@ -192,17 +192,24 @@ impl Game {
                     return;
                 }
 
-                let visible_rows = crate::ui::JOURNAL_VISIBLE_ROWS;
+                let visible_rows = crate::ui::journal_visible_rows();
                 let max_scroll = game_state.event_log.len().saturating_sub(visible_rows);
                 if max_scroll == 0 {
                     state.event_log_scroll = 0;
                     return;
                 }
 
+                // A page a tick, like every other long list in this game. The
+                // log is never trimmed and reaches ~4,600 entries by day 365, so
+                // stepping one row meant 4,574 wheel ticks to reach the start of
+                // the campaign on the screen whose subtitle offers to show it.
                 if wheel_y < 0.0 {
-                    state.event_log_scroll = (state.event_log_scroll + 1).min(max_scroll);
+                    state.event_log_scroll = state
+                        .event_log_scroll
+                        .saturating_add(visible_rows)
+                        .min(max_scroll);
                 } else {
-                    state.event_log_scroll = state.event_log_scroll.saturating_sub(1);
+                    state.event_log_scroll = state.event_log_scroll.saturating_sub(visible_rows);
                 }
             }
             _ => {}

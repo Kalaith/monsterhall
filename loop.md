@@ -1195,6 +1195,38 @@ Stop the loop and report if:
   touches a label; (c) untouched surfaces worth the same treatment: the journal and the
   day-results screen, neither of which any pass has read closely.
 
+- **2026-08-03 — fifteenth pass (the day report showed three of twenty).** Read the two
+  screens no pass had opened — journal and day results — and photographed both at
+  campaign scale for the first time. Both were fine at day one and wrong by day thirty.
+  **Day results:** `roster_updates` runs about two lines per working companion, so a
+  full guild produces forty against a fixed 220px panel whose text box holds six, in
+  the top half of a screen whose bottom half is empty backdrop — and
+  `draw_wrapped_lines_in_box` clips the rest *silently*, with `roster_updates` never
+  written to `event_log`, so they were gone for good. `resolve_day`'s own doc comment
+  already described the box as holding "about seven lines" and recorded a mutation
+  announcement being "clipped away and then never written down"; the earlier pass moved
+  mutations out and left the rest dropping. Panels now take the height already on
+  screen (six lines → twenty) and count what still does not fit out loud. **Journal:**
+  a hardcoded twelve rows in a panel that holds twenty-one (the hatchery's hardcoded
+  `4` again), a reverse-clone of the whole campaign log every frame (measured 189
+  entries by day 30, 912 by day 90, 2,353 by day 180, **4,586 by day 365**), and a
+  one-entry scroll step that put the campaign's start 4,574 wheel ticks away.
+  **The harness could not photograph any of it** — `_full` crowded the roster, eggs and
+  bookings but left the log at nine entries and every companion idle, so the
+  day-results panels stayed two lines deep however large the guild got. It pads the log
+  to a year and puts the guild to work now.
+  **Result:** 123 tests, fmt and clippy clean, publish green, `content_version` 1.23.0,
+  `ui_text` 1.3.0, **balance byte-identical**. `game/capture.rs` split out of
+  `game/actions.rs`, which the additions pushed to 817 lines.
+  **Next iteration should know:** (a) *"fine at day one, wrong by day thirty"* is now
+  the sharpest lens this loop has — every screen should be seen at campaign scale
+  before it is called read, and the harness can now produce that state; (b) the event
+  log is **unbounded in the save** (~4,600 entries ≈ 300KB of JSON by day 365, ~6% of a
+  typical localStorage quota) — not a live failure, but the only unbounded structure in
+  the save and a **design call** about discarding history, so it is recorded rather
+  than capped; (c) the town overview and expedition planning are the screens with the
+  most panels and have never been photographed crowded.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

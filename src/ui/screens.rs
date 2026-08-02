@@ -159,4 +159,4 @@ pub fn journal_log_rect() -> (f32, f32, f32, f32) {
     journal::log_rect()
 }
 
-pub use journal::VISIBLE_ROWS as JOURNAL_VISIBLE_ROWS;
+pub use journal::visible_rows as journal_visible_rows;

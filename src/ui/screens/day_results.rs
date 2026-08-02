@@ -1,4 +1,4 @@
-use macroquad::prelude::{draw_rectangle, screen_width, Color};
+use macroquad::prelude::{draw_rectangle, screen_height, screen_width, Color};
 
 use crate::data::GameData;
 use crate::state::DayResultsState;
@@ -6,7 +6,9 @@ use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_backdrop, BackdropKind};
 use crate::ui::chrome::{draw_inline_status, draw_tier_panel, draw_top_utility_bar, PanelTier};
 use crate::ui::core::primary_button;
-use crate::ui::core::{draw_body_text, draw_wrapped_lines, draw_wrapped_lines_in_box};
+use crate::ui::core::{
+    draw_body_text, draw_wrapped_lines, draw_wrapped_lines_in_box, scaled_font_size, scaled_spacing,
+};
 use crate::ui::theme;
 use crate::ui::view_models::fill_template;
 
@@ -213,31 +215,43 @@ pub fn draw_day_results(
     );
 
     let events_y = panel_y + SUMMARY_PANEL_H + 18.0;
+    // Both narrative panels were a fixed 220 tall with a 140px text box, in the
+    // top half of a screen whose bottom half is empty backdrop. A day where the
+    // whole guild works produces two lines per companion, so a roster of twenty
+    // filled six of them and the other thirty-odd were dropped — with nothing on
+    // screen to say they existed. `roster_updates` is not written to the event
+    // log either, so those lines were gone for good. The panels now take the
+    // height that was already there, and whatever still does not fit is counted
+    // out loud below.
+    let events_h = (screen_height() - events_y - CONTINUE_BUTTON_H - 56.0).max(220.0);
+    let panel_w = (content_width - 12.0) / 2.0;
+    let text_h = events_h - EVENTS_PANEL_CHROME_H;
+
     draw_tier_panel(
         left_margin,
         events_y,
-        (content_width - 12.0) / 2.0,
-        220.0,
+        panel_w,
+        events_h,
         Some(&day_results_text.roster_updates_panel_title),
         PanelTier::Primary,
         false,
     );
-    draw_wrapped_lines_in_box(
+    draw_overflow_aware_lines(
         &summary.roster_updates,
         left_margin + 16.0,
         events_y + 56.0,
-        (content_width - 12.0) / 2.0 - 32.0,
-        140.0,
-        18.0,
-        theme::TEXT_BODY,
+        panel_w - 32.0,
+        text_h,
+        events_y + events_h - 18.0,
+        &day_results_text.more_lines_template,
     );
 
-    let event_log_x = left_margin + (content_width - 12.0) / 2.0 + 12.0;
+    let event_log_x = left_margin + panel_w + 12.0;
     draw_tier_panel(
         event_log_x,
         events_y,
-        (content_width - 12.0) / 2.0,
-        220.0,
+        panel_w,
+        events_h,
         Some(&day_results_text.event_log_panel_title),
         PanelTier::Primary,
         false,
@@ -247,7 +261,7 @@ pub fn draw_day_results(
         draw_rectangle(
             event_log_x + 12.0,
             log_y - 18.0,
-            (content_width - 12.0) / 2.0 - 24.0,
+            panel_w - 24.0,
             76.0,
             Color::new(theme::WARNING.r, theme::WARNING.g, theme::WARNING.b, 0.12),
         );
@@ -255,28 +269,28 @@ pub fn draw_day_results(
             &summary.special_event_lines,
             event_log_x + 18.0,
             log_y,
-            (content_width - 12.0) / 2.0 - 36.0,
+            panel_w - 36.0,
             66.0,
             18.0,
             theme::WARNING,
         );
         log_y += 86.0;
     }
-    draw_wrapped_lines_in_box(
+    draw_overflow_aware_lines(
         &summary.event_lines,
         event_log_x + 16.0,
         log_y,
-        (content_width - 12.0) / 2.0 - 32.0,
-        events_y + 210.0 - log_y,
-        18.0,
-        theme::TEXT_BODY,
+        panel_w - 32.0,
+        events_y + 56.0 + text_h - log_y,
+        events_y + events_h - 18.0,
+        &day_results_text.more_lines_template,
     );
 
     if primary_button(
         left_margin,
-        events_y + 238.0,
+        events_y + events_h + 12.0,
         220.0,
-        44.0,
+        CONTINUE_BUTTON_H,
         &day_results_text.continue_button,
     ) {
         return Some(UiAction::ContinueAfterResults);
@@ -285,7 +299,7 @@ pub fn draw_day_results(
     if let Some(error_message) = last_error {
         draw_inline_status(
             left_margin + 246.0,
-            events_y + 247.0,
+            events_y + events_h + 21.0,
             360.0,
             error_message,
             theme::DANGER,
@@ -293,4 +307,66 @@ pub fn draw_day_results(
     }
 
     None
+}
+
+/// Height of the Continue button, and the chrome each narrative panel spends on
+/// its title and its overflow note.
+const CONTINUE_BUTTON_H: f32 = 44.0;
+const EVENTS_PANEL_CHROME_H: f32 = 92.0;
+/// Font size and line gap the narrative panels draw with.
+const EVENTS_FONT_SIZE: f32 = 18.0;
+const EVENTS_LINE_GAP: f32 = 6.0;
+
+/// Draws as many lines as the box holds and says out loud how many it could not.
+///
+/// `draw_wrapped_lines_in_box` clips whatever runs past the bottom, silently. On
+/// a day when the whole guild works that meant the report showed three
+/// companions out of twenty and gave no sign the other seventeen had a day at
+/// all — and `roster_updates` is never written to the event log, so there was
+/// nowhere else to find them. Bounding coverage is fine; bounding it without
+/// saying so is what turns a full box into a wrong report.
+fn draw_overflow_aware_lines(
+    lines: &[String],
+    x: f32,
+    y: f32,
+    width: f32,
+    height: f32,
+    note_y: f32,
+    more_template: &str,
+) {
+    let row_h = scaled_font_size(EVENTS_FONT_SIZE) + scaled_spacing(EVENTS_LINE_GAP);
+    let capacity = ((height / row_h).floor() as usize).max(1);
+
+    if lines.len() <= capacity {
+        draw_wrapped_lines_in_box(
+            lines,
+            x,
+            y,
+            width,
+            height,
+            EVENTS_FONT_SIZE,
+            theme::TEXT_BODY,
+        );
+        return;
+    }
+
+    draw_wrapped_lines_in_box(
+        &lines[..capacity],
+        x,
+        y,
+        width,
+        height,
+        EVENTS_FONT_SIZE,
+        theme::TEXT_BODY,
+    );
+    draw_body_text(
+        &fill_template(
+            more_template,
+            &[("{count}", (lines.len() - capacity).to_string())],
+        ),
+        x,
+        note_y,
+        14.0,
+        theme::TEXT_MUTED,
+    );
 }

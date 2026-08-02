@@ -33,6 +33,7 @@ use crate::ui::{
 };
 
 mod actions;
+mod capture;
 mod input;
 mod navigation;
 mod settings;

@@ -356,6 +356,9 @@ pub struct DayResultsUiText {
     pub guests_panel_title: String,
     pub roster_updates_panel_title: String,
     pub event_log_panel_title: String,
+    /// What the narrative panels say when the day produced more lines than
+    /// they can hold — the alternative is dropping them without a word.
+    pub more_lines_template: String,
     pub continue_button: String,
     pub no_debt_change_message: String,
     pub no_guest_contract_message: String,
