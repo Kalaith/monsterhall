@@ -43,10 +43,10 @@
   "total_expedition_prep_materials": 6,
   "total_expedition_prep_arcane_residue": 0,
   "total_expedition_prep_shortfall": 0,
-  "total_upkeep_wage_gold": 1014,
+  "total_upkeep_wage_gold": 1000,
   "total_upkeep_cleaning_gold": 238,
   "total_upkeep_maintenance_gold": 742,
-  "total_upkeep_gold": 1994,
+  "total_upkeep_gold": 1980,
   "total_upkeep_shortfall": 0,
   "total_special_event_gold_delta": 0,
   "total_special_event_count": 0,
@@ -58,7 +58,7 @@
   "last_expedition_day": 29,
   "total_expedition_eggs": 12,
   "final_resources": {
-    "gold": 66,
+    "gold": 80,
     "tower_materials": 1527,
     "eggs": 6,
     "relics": 0,
@@ -92,20 +92,20 @@
       "arcane_residue": 19
     },
     "ending_resources": {
-      "gold": 66,
+      "gold": 80,
       "tower_materials": 1527,
       "eggs": 6,
       "relics": 0,
       "arcane_residue": 641
     },
     "net_change": {
-      "gold": -77,
+      "gold": -63,
       "tower_materials": 1487,
       "eggs": 6,
       "relics": 0,
       "arcane_residue": 622
     },
-    "debt_gold_gap": -209,
+    "debt_gold_gap": -195,
     "upkeep_shortfall_gold": 0,
     "expedition_prep_shortfall": 0
   },
@@ -121,7 +121,7 @@
       "reputation_proxy": 1,
       "active_contracts": 4,
       "resources": {
-        "gold": 66,
+        "gold": 80,
         "tower_materials": 1527,
         "eggs": 6,
         "relics": 0,
@@ -734,10 +734,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 18,
+      "upkeep_wage_gold": 17,
       "upkeep_cleaning_gold": 0,
       "upkeep_maintenance_gold": 0,
-      "upkeep_gold": 18,
+      "upkeep_gold": 17,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 18,
@@ -795,7 +795,7 @@
         ]
       },
       "resources": {
-        "gold": 198,
+        "gold": 199,
         "tower_materials": 262,
         "eggs": 6,
         "relics": 0,
@@ -809,7 +809,7 @@
         "status_message": "Founding Note Due due in 24 days."
       },
       "day_summary": [
-        "Paid 18 gold in upkeep: 18 wages, 0 supplies, 0 repairs.",
+        "Paid 17 gold in upkeep: 17 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 24 days.",
         "Local Delver Contract completed: +23 gold, +3 residue.",
         "Mira completed a contract for 23 gold.",
@@ -909,7 +909,7 @@
         ]
       },
       "resources": {
-        "gold": 226,
+        "gold": 227,
         "tower_materials": 262,
         "eggs": 6,
         "relics": 0,
@@ -963,10 +963,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 19,
+      "upkeep_wage_gold": 18,
       "upkeep_cleaning_gold": 0,
       "upkeep_maintenance_gold": 0,
-      "upkeep_gold": 19,
+      "upkeep_gold": 18,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 19,
@@ -1024,7 +1024,7 @@
         ]
       },
       "resources": {
-        "gold": 357,
+        "gold": 359,
         "tower_materials": 346,
         "eggs": 6,
         "relics": 0,
@@ -1038,7 +1038,7 @@
         "status_message": "Founding Note Due due in 22 days."
       },
       "day_summary": [
-        "Paid 19 gold in upkeep: 19 wages, 0 supplies, 0 repairs.",
+        "Paid 18 gold in upkeep: 18 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 22 days.",
         "Local Delver Contract completed: +22 gold, +3 residue.",
         "Mira completed a contract for 22 gold.",
@@ -1143,7 +1143,7 @@
         ]
       },
       "resources": {
-        "gold": 304,
+        "gold": 306,
         "tower_materials": 429,
         "eggs": 5,
         "relics": 0,
@@ -1196,10 +1196,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 26,
+      "upkeep_wage_gold": 25,
       "upkeep_cleaning_gold": 0,
       "upkeep_maintenance_gold": 0,
-      "upkeep_gold": 26,
+      "upkeep_gold": 25,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 26,
@@ -1257,7 +1257,7 @@
         ]
       },
       "resources": {
-        "gold": 432,
+        "gold": 435,
         "tower_materials": 513,
         "eggs": 5,
         "relics": 0,
@@ -1271,7 +1271,7 @@
         "status_message": "Founding Note Due due in 20 days."
       },
       "day_summary": [
-        "Paid 26 gold in upkeep: 26 wages, 0 supplies, 0 repairs.",
+        "Paid 25 gold in upkeep: 25 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 20 days.",
         "Local Delver Contract completed: +22 gold, +3 residue.",
         "Local Delver Contract expired: -14 gold.",
@@ -1381,7 +1381,7 @@
         ]
       },
       "resources": {
-        "gold": 403,
+        "gold": 406,
         "tower_materials": 596,
         "eggs": 5,
         "relics": 0,
@@ -1495,7 +1495,7 @@
         ]
       },
       "resources": {
-        "gold": 520,
+        "gold": 523,
         "tower_materials": 680,
         "eggs": 4,
         "relics": 0,
@@ -1618,7 +1618,7 @@
         ]
       },
       "resources": {
-        "gold": 135,
+        "gold": 138,
         "tower_materials": 581,
         "eggs": 4,
         "relics": 0,
@@ -1736,7 +1736,7 @@
         ]
       },
       "resources": {
-        "gold": 228,
+        "gold": 231,
         "tower_materials": 665,
         "eggs": 4,
         "relics": 0,
@@ -1856,7 +1856,7 @@
         ]
       },
       "resources": {
-        "gold": 288,
+        "gold": 291,
         "tower_materials": 749,
         "eggs": 3,
         "relics": 0,
@@ -1916,10 +1916,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 39,
+      "upkeep_wage_gold": 38,
       "upkeep_cleaning_gold": 6,
       "upkeep_maintenance_gold": 19,
-      "upkeep_gold": 64,
+      "upkeep_gold": 63,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 39,
@@ -1977,7 +1977,7 @@
         ]
       },
       "resources": {
-        "gold": 391,
+        "gold": 395,
         "tower_materials": 833,
         "eggs": 3,
         "relics": 0,
@@ -1991,7 +1991,7 @@
         "status_message": "Founding Note Due due in 14 days."
       },
       "day_summary": [
-        "Paid 64 gold in upkeep: 39 wages, 6 supplies, 19 repairs.",
+        "Paid 63 gold in upkeep: 38 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 14 days.",
         "Local Delver Contract completed: +19 gold, +3 residue.",
         "Local Delver Contract completed: +22 gold, +4 residue.",
@@ -2039,10 +2039,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 41,
+      "upkeep_wage_gold": 39,
       "upkeep_cleaning_gold": 6,
       "upkeep_maintenance_gold": 19,
-      "upkeep_gold": 66,
+      "upkeep_gold": 64,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 41,
@@ -2100,7 +2100,7 @@
         ]
       },
       "resources": {
-        "gold": 497,
+        "gold": 503,
         "tower_materials": 917,
         "eggs": 3,
         "relics": 0,
@@ -2114,7 +2114,7 @@
         "status_message": "Founding Note Due due in 13 days."
       },
       "day_summary": [
-        "Paid 66 gold in upkeep: 41 wages, 6 supplies, 19 repairs.",
+        "Paid 64 gold in upkeep: 39 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 13 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
@@ -2224,7 +2224,7 @@
         ]
       },
       "resources": {
-        "gold": 579,
+        "gold": 585,
         "tower_materials": 1001,
         "eggs": 3,
         "relics": 0,
@@ -2345,7 +2345,7 @@
         ]
       },
       "resources": {
-        "gold": 682,
+        "gold": 688,
         "tower_materials": 1083,
         "eggs": 3,
         "relics": 0,
@@ -2407,10 +2407,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 43,
+      "upkeep_wage_gold": 41,
       "upkeep_cleaning_gold": 6,
       "upkeep_maintenance_gold": 19,
-      "upkeep_gold": 68,
+      "upkeep_gold": 66,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 43,
@@ -2468,7 +2468,7 @@
         ]
       },
       "resources": {
-        "gold": 762,
+        "gold": 770,
         "tower_materials": 1167,
         "eggs": 3,
         "relics": 0,
@@ -2482,7 +2482,7 @@
         "status_message": "Founding Note Due due in 10 days."
       },
       "day_summary": [
-        "Paid 68 gold in upkeep: 43 wages, 6 supplies, 19 repairs.",
+        "Paid 66 gold in upkeep: 41 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 10 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Mira completed a contract for 18 gold.",
@@ -2589,7 +2589,7 @@
         ]
       },
       "resources": {
-        "gold": 90,
+        "gold": 98,
         "tower_materials": 1054,
         "eggs": 5,
         "relics": 0,
@@ -2711,7 +2711,7 @@
         ]
       },
       "resources": {
-        "gold": 141,
+        "gold": 149,
         "tower_materials": 1136,
         "eggs": 5,
         "relics": 0,
@@ -2770,10 +2770,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 44,
+      "upkeep_wage_gold": 43,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 106,
+      "upkeep_gold": 105,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 44,
@@ -2831,7 +2831,7 @@
         ]
       },
       "resources": {
-        "gold": 358,
+        "gold": 367,
         "tower_materials": 1219,
         "eggs": 5,
         "relics": 0,
@@ -2845,7 +2845,7 @@
         "status_message": "Founding Note Due due in 7 days."
       },
       "day_summary": [
-        "Paid 106 gold in upkeep: 44 wages, 15 supplies, 47 repairs.",
+        "Paid 105 gold in upkeep: 43 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 7 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Local Delver Contract completed: +22 gold, +3 residue.",
@@ -2956,7 +2956,7 @@
         ]
       },
       "resources": {
-        "gold": 378,
+        "gold": 387,
         "tower_materials": 1303,
         "eggs": 4,
         "relics": 0,
@@ -3017,10 +3017,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 51,
+      "upkeep_wage_gold": 50,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 113,
+      "upkeep_gold": 112,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 51,
@@ -3078,7 +3078,7 @@
         ]
       },
       "resources": {
-        "gold": 591,
+        "gold": 601,
         "tower_materials": 1388,
         "eggs": 4,
         "relics": 0,
@@ -3092,7 +3092,7 @@
         "status_message": "Founding Note Due due in 5 days."
       },
       "day_summary": [
-        "Paid 113 gold in upkeep: 51 wages, 15 supplies, 47 repairs.",
+        "Paid 112 gold in upkeep: 50 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 5 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Local Delver Contract completed: +21 gold, +3 residue.",
@@ -3144,10 +3144,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 53,
+      "upkeep_wage_gold": 51,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 115,
+      "upkeep_gold": 113,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 53,
@@ -3205,7 +3205,7 @@
         ]
       },
       "resources": {
-        "gold": 801,
+        "gold": 813,
         "tower_materials": 1473,
         "eggs": 4,
         "relics": 0,
@@ -3219,7 +3219,7 @@
         "status_message": "Founding Note Due due in 4 days."
       },
       "day_summary": [
-        "Paid 115 gold in upkeep: 53 wages, 15 supplies, 47 repairs.",
+        "Paid 113 gold in upkeep: 51 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 4 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Local Delver Contract completed: +22 gold, +3 residue.",
@@ -3332,7 +3332,7 @@
         ]
       },
       "resources": {
-        "gold": 8,
+        "gold": 20,
         "tower_materials": 1405,
         "eggs": 4,
         "relics": 0,
@@ -3454,7 +3454,7 @@
         ]
       },
       "resources": {
-        "gold": 8,
+        "gold": 20,
         "tower_materials": 1442,
         "eggs": 6,
         "relics": 0,
@@ -3513,10 +3513,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 55,
+      "upkeep_wage_gold": 53,
       "upkeep_cleaning_gold": 25,
       "upkeep_maintenance_gold": 77,
-      "upkeep_gold": 157,
+      "upkeep_gold": 155,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 55,
@@ -3574,7 +3574,7 @@
         ]
       },
       "resources": {
-        "gold": 12,
+        "gold": 26,
         "tower_materials": 1526,
         "eggs": 6,
         "relics": 0,
@@ -3588,7 +3588,7 @@
         "status_message": "Founding Note Due due in 1 days."
       },
       "day_summary": [
-        "Paid 157 gold in upkeep: 55 wages, 25 supplies, 77 repairs.",
+        "Paid 155 gold in upkeep: 53 wages, 25 supplies, 77 repairs.",
         "The creditors stay the blade for now: 250 due in 1 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Mira completed a contract for 18 gold.",
@@ -3696,7 +3696,7 @@
         ]
       },
       "resources": {
-        "gold": 66,
+        "gold": 80,
         "tower_materials": 1527,
         "eggs": 6,
         "relics": 0,

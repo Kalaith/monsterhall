@@ -31,6 +31,9 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         roster_updates: Vec::new(),
     };
 
+    // Quoted to the player on Town Overview before they ended the day, so it is
+    // what they must be charged.
+    let upkeep_forecast = preview_upkeep(data, game_state);
     summary
         .debt_updates
         .extend(tick_town_situations(game_state));
@@ -459,7 +462,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
     summary
         .event_lines
         .extend(unlock_surveyed_floors(data, &mut game_state.town));
-    apply_daily_upkeep(data, game_state, &mut summary);
+    apply_daily_upkeep(game_state, &mut summary, &upkeep_forecast);
     apply_special_day_event(data, game_state, &mut summary);
     resolve_debt_cycle(
         data,
@@ -480,12 +483,17 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
     summary
 }
 
+/// Charges the day's operating costs.
+///
+/// `forecast` is taken before the day resolves, because wages scale with skills
+/// and companions train during resolution — billing afterwards charged the
+/// player for lessons learned the same morning, and the Town Overview had
+/// already quoted the pre-training figure.
 pub(super) fn apply_daily_upkeep(
-    data: &GameData,
     game_state: &mut GameState,
     summary: &mut DayResolutionSummary,
+    forecast: &UpkeepForecast,
 ) {
-    let forecast = preview_upkeep(data, game_state);
     let total_upkeep = forecast.total_gold;
     if total_upkeep == 0 {
         return;

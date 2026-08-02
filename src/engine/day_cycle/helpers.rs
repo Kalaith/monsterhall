@@ -85,11 +85,20 @@ pub(super) fn companion_daily_wage(
         .companion_base_wage_gold
         .saturating_mul(quality_wage_multiplier_pct(day_cycle, monster.quality_rank))
         .div_ceil(100);
+    // Every trained skill, not the five the wage formula was written against.
+    // Wages are the guild's answer to a roster that earns more as it gets
+    // stronger, and recovery and bargaining now feed `guild_job_skill_bonus`
+    // exactly like the original five — leaving them out made training them free.
     let skill_total = monster.skills.scouting
         + monster.skills.guarding
         + monster.skills.hospitality
         + monster.skills.crafting
-        + monster.skills.charm;
+        + monster.skills.charm
+        + monster.skills.recovery
+        + monster.skills.bargaining
+        + monster.skills.navigation
+        + monster.skills.arcana
+        + monster.skills.strength;
     rank_wage.saturating_add(skill_total / day_cycle.skill_wage_divisor.max(1))
 }
 

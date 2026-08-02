@@ -36,16 +36,16 @@
   "total_guest_expirations": 33,
   "total_contracts_generated": 87,
   "total_contracts_rejected": 40,
-  "total_guild_job_gold": 98622,
+  "total_guild_job_gold": 98617,
   "total_expedition_prep_gold": 926,
   "total_expedition_prep_materials": 169,
   "total_expedition_prep_arcane_residue": 202,
   "total_expedition_prep_shortfall": 3,
-  "total_upkeep_wage_gold": 9738,
-  "total_upkeep_cleaning_gold": 9081,
-  "total_upkeep_maintenance_gold": 25651,
-  "total_upkeep_gold": 43952,
-  "total_upkeep_shortfall": 518,
+  "total_upkeep_wage_gold": 10209,
+  "total_upkeep_cleaning_gold": 9139,
+  "total_upkeep_maintenance_gold": 25810,
+  "total_upkeep_gold": 44492,
+  "total_upkeep_shortfall": 666,
   "total_special_event_gold_delta": -780,
   "total_special_event_count": 11,
   "total_expedition_days": 70,
@@ -56,11 +56,11 @@
   "last_expedition_day": 90,
   "total_expedition_eggs": 32,
   "final_resources": {
-    "gold": 38115,
+    "gold": 37570,
     "tower_materials": 3548,
     "eggs": 19,
     "relics": 170,
-    "arcane_residue": 10764
+    "arcane_residue": 10763
   },
   "final_debt": {
     "active_milestone_id": "interest_crush_3",
@@ -70,15 +70,15 @@
     "status_message": "Interest Crush due in 33 days."
   },
   "final_upkeep_forecast": {
-    "wage_gold": 234,
+    "wage_gold": 261,
     "cleaning_gold": 215,
     "maintenance_gold": 601,
-    "total_gold": 1050,
+    "total_gold": 1077,
     "active_band_min_companions": 12,
     "active_band_min_patron_tiers": 3,
-    "next_companion_total_gold": 1056,
+    "next_companion_total_gold": 1083,
     "next_companion_delta_gold": 6,
-    "next_building_total_gold": 1124,
+    "next_building_total_gold": 1151,
     "next_building_delta_gold": 74
   },
   "surplus_summary": {
@@ -90,21 +90,21 @@
       "arcane_residue": 19
     },
     "ending_resources": {
-      "gold": 38115,
+      "gold": 37570,
       "tower_materials": 3548,
       "eggs": 19,
       "relics": 170,
-      "arcane_residue": 10764
+      "arcane_residue": 10763
     },
     "net_change": {
-      "gold": 37972,
+      "gold": 37427,
       "tower_materials": 3508,
       "eggs": 19,
       "relics": 170,
-      "arcane_residue": 10745
+      "arcane_residue": 10744
     },
-    "debt_gold_gap": 3115,
-    "upkeep_shortfall_gold": 518,
+    "debt_gold_gap": 2570,
+    "upkeep_shortfall_gold": 666,
     "expedition_prep_shortfall": 3
   },
   "milestone_snapshots": [
@@ -119,7 +119,7 @@
       "reputation_proxy": 1,
       "active_contracts": 4,
       "resources": {
-        "gold": 491,
+        "gold": 500,
         "tower_materials": 1423,
         "eggs": 8,
         "relics": 5,
@@ -156,11 +156,11 @@
       "reputation_proxy": 3,
       "active_contracts": 6,
       "resources": {
-        "gold": 38115,
+        "gold": 37570,
         "tower_materials": 3548,
         "eggs": 19,
         "relics": 170,
-        "arcane_residue": 10764
+        "arcane_residue": 10763
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -170,15 +170,15 @@
         "status_message": "Interest Crush due in 33 days."
       },
       "upkeep_forecast": {
-        "wage_gold": 234,
+        "wage_gold": 261,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1050,
+        "total_gold": 1077,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1056,
+        "next_companion_total_gold": 1083,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1124,
+        "next_building_total_gold": 1151,
         "next_building_delta_gold": 74
       }
     }
@@ -882,10 +882,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 18,
+      "upkeep_wage_gold": 17,
       "upkeep_cleaning_gold": 0,
       "upkeep_maintenance_gold": 0,
-      "upkeep_gold": 18,
+      "upkeep_gold": 17,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 18,
@@ -943,7 +943,7 @@
         ]
       },
       "resources": {
-        "gold": 324,
+        "gold": 325,
         "tower_materials": 263,
         "eggs": 6,
         "relics": 0,
@@ -957,7 +957,7 @@
         "status_message": "Founding Note Due due in 23 days."
       },
       "day_summary": [
-        "Paid 18 gold in upkeep: 18 wages, 0 supplies, 0 repairs.",
+        "Paid 17 gold in upkeep: 17 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 23 days.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
         "Local Delver Contract expired: -10 gold.",
@@ -1059,7 +1059,7 @@
         ]
       },
       "resources": {
-        "gold": 303,
+        "gold": 304,
         "tower_materials": 346,
         "eggs": 6,
         "relics": 0,
@@ -1173,7 +1173,7 @@
         ]
       },
       "resources": {
-        "gold": 401,
+        "gold": 402,
         "tower_materials": 430,
         "eggs": 5,
         "relics": 0,
@@ -1291,7 +1291,7 @@
         ]
       },
       "resources": {
-        "gold": 523,
+        "gold": 524,
         "tower_materials": 514,
         "eggs": 5,
         "relics": 0,
@@ -1409,7 +1409,7 @@
         ]
       },
       "resources": {
-        "gold": 128,
+        "gold": 129,
         "tower_materials": 415,
         "eggs": 5,
         "relics": 0,
@@ -1463,10 +1463,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 31,
+      "upkeep_wage_gold": 30,
       "upkeep_cleaning_gold": 6,
       "upkeep_maintenance_gold": 19,
-      "upkeep_gold": 56,
+      "upkeep_gold": 55,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 31,
@@ -1524,7 +1524,7 @@
         ]
       },
       "resources": {
-        "gold": 323,
+        "gold": 325,
         "tower_materials": 500,
         "eggs": 4,
         "relics": 0,
@@ -1538,7 +1538,7 @@
         "status_message": "Founding Note Due due in 18 days."
       },
       "day_summary": [
-        "Paid 56 gold in upkeep: 31 wages, 6 supplies, 19 repairs.",
+        "Paid 55 gold in upkeep: 30 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 18 days.",
         "Local Delver Contract completed: +19 gold, +3 residue.",
         "Mira completed a contract for 19 gold.",
@@ -1585,10 +1585,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 32,
+      "upkeep_wage_gold": 31,
       "upkeep_cleaning_gold": 6,
       "upkeep_maintenance_gold": 19,
-      "upkeep_gold": 57,
+      "upkeep_gold": 56,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 32,
@@ -1646,7 +1646,7 @@
         ]
       },
       "resources": {
-        "gold": 416,
+        "gold": 419,
         "tower_materials": 584,
         "eggs": 4,
         "relics": 0,
@@ -1660,7 +1660,7 @@
         "status_message": "Founding Note Due due in 17 days."
       },
       "day_summary": [
-        "Paid 57 gold in upkeep: 32 wages, 6 supplies, 19 repairs.",
+        "Paid 56 gold in upkeep: 31 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 17 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Mira completed a contract for 20 gold.",
@@ -1765,7 +1765,7 @@
         ]
       },
       "resources": {
-        "gold": 506,
+        "gold": 509,
         "tower_materials": 668,
         "eggs": 4,
         "relics": 0,
@@ -1824,10 +1824,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 39,
+      "upkeep_wage_gold": 38,
       "upkeep_cleaning_gold": 6,
       "upkeep_maintenance_gold": 19,
-      "upkeep_gold": 64,
+      "upkeep_gold": 63,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 39,
@@ -1885,7 +1885,7 @@
         ]
       },
       "resources": {
-        "gold": 716,
+        "gold": 720,
         "tower_materials": 753,
         "eggs": 3,
         "relics": 0,
@@ -1899,7 +1899,7 @@
         "status_message": "Founding Note Due due in 15 days."
       },
       "day_summary": [
-        "Paid 64 gold in upkeep: 39 wages, 6 supplies, 19 repairs.",
+        "Paid 63 gold in upkeep: 38 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 15 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
@@ -2011,7 +2011,7 @@
         ]
       },
       "resources": {
-        "gold": 796,
+        "gold": 800,
         "tower_materials": 837,
         "eggs": 3,
         "relics": 0,
@@ -2073,8 +2073,8 @@
       "upkeep_wage_gold": 39,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 41,
-      "upkeep_shortfall": 60,
+      "upkeep_gold": 45,
+      "upkeep_shortfall": 56,
       "upkeep_forecast": {
         "wage_gold": 39,
         "cleaning_gold": 15,
@@ -2145,7 +2145,7 @@
         "status_message": "Founding Note Due due in 13 days."
       },
       "day_summary": [
-        "Upkeep cost 101 gold, but only 41 was paid. Shortfall 60 stressed the roster by 1.",
+        "Upkeep cost 101 gold, but only 45 was paid. Shortfall 56 stressed the roster by 1.",
         "The creditors stay the blade for now: 250 due in 13 days.",
         "Mira rested and came back steadier for tomorrow.",
         "Calia rested and came back steadier for tomorrow.",
@@ -2184,10 +2184,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 40,
+      "upkeep_wage_gold": 39,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 102,
+      "upkeep_gold": 101,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 40,
@@ -2245,7 +2245,7 @@
         ]
       },
       "resources": {
-        "gold": 209,
+        "gold": 210,
         "tower_materials": 808,
         "eggs": 5,
         "relics": 0,
@@ -2259,7 +2259,7 @@
         "status_message": "Founding Note Due due in 12 days."
       },
       "day_summary": [
-        "Paid 102 gold in upkeep: 40 wages, 15 supplies, 47 repairs.",
+        "Paid 101 gold in upkeep: 39 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 12 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Local Delver Contract expired: -14 gold.",
@@ -2312,10 +2312,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 41,
+      "upkeep_wage_gold": 40,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 103,
+      "upkeep_gold": 102,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 41,
@@ -2373,7 +2373,7 @@
         ]
       },
       "resources": {
-        "gold": 266,
+        "gold": 268,
         "tower_materials": 890,
         "eggs": 5,
         "relics": 0,
@@ -2387,7 +2387,7 @@
         "status_message": "Founding Note Due due in 11 days."
       },
       "day_summary": [
-        "Paid 103 gold in upkeep: 41 wages, 15 supplies, 47 repairs.",
+        "Paid 102 gold in upkeep: 40 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 11 days.",
         "Local Delver Contract completed: +21 gold, +4 residue.",
         "Mira completed a contract for 21 gold.",
@@ -2494,7 +2494,7 @@
         ]
       },
       "resources": {
-        "gold": 416,
+        "gold": 418,
         "tower_materials": 1020,
         "eggs": 5,
         "relics": 0,
@@ -2622,7 +2622,7 @@
         ]
       },
       "resources": {
-        "gold": 310,
+        "gold": 312,
         "tower_materials": 1101,
         "eggs": 5,
         "relics": 0,
@@ -2677,10 +2677,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 42,
+      "upkeep_wage_gold": 41,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 104,
+      "upkeep_gold": 103,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 42,
@@ -2738,7 +2738,7 @@
         ]
       },
       "resources": {
-        "gold": 438,
+        "gold": 441,
         "tower_materials": 1102,
         "eggs": 5,
         "relics": 0,
@@ -2752,7 +2752,7 @@
         "status_message": "Founding Note Due due in 8 days."
       },
       "day_summary": [
-        "Paid 104 gold in upkeep: 42 wages, 15 supplies, 47 repairs.",
+        "Paid 103 gold in upkeep: 41 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 8 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
@@ -2863,7 +2863,7 @@
         ]
       },
       "resources": {
-        "gold": 331,
+        "gold": 334,
         "tower_materials": 1183,
         "eggs": 5,
         "relics": 0,
@@ -2918,10 +2918,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 49,
+      "upkeep_wage_gold": 48,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 111,
+      "upkeep_gold": 110,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 49,
@@ -2979,7 +2979,7 @@
         ]
       },
       "resources": {
-        "gold": 526,
+        "gold": 530,
         "tower_materials": 1268,
         "eggs": 4,
         "relics": 0,
@@ -2993,7 +2993,7 @@
         "status_message": "Founding Note Due due in 6 days."
       },
       "day_summary": [
-        "Paid 111 gold in upkeep: 49 wages, 15 supplies, 47 repairs.",
+        "Paid 110 gold in upkeep: 48 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 6 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Local Delver Contract completed: +23 gold, +3 residue.",
@@ -3044,10 +3044,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 50,
+      "upkeep_wage_gold": 49,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 112,
+      "upkeep_gold": 111,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 50,
@@ -3105,7 +3105,7 @@
         ]
       },
       "resources": {
-        "gold": 736,
+        "gold": 741,
         "tower_materials": 1353,
         "eggs": 4,
         "relics": 0,
@@ -3119,7 +3119,7 @@
         "status_message": "Founding Note Due due in 5 days."
       },
       "day_summary": [
-        "Paid 112 gold in upkeep: 50 wages, 15 supplies, 47 repairs.",
+        "Paid 111 gold in upkeep: 49 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 5 days.",
         "Local Delver Contract completed: +21 gold, +4 residue.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
@@ -3231,7 +3231,7 @@
         ]
       },
       "resources": {
-        "gold": 783,
+        "gold": 788,
         "tower_materials": 1437,
         "eggs": 4,
         "relics": 0,
@@ -3291,10 +3291,10 @@
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 51,
+      "upkeep_wage_gold": 50,
       "upkeep_cleaning_gold": 24,
       "upkeep_maintenance_gold": 75,
-      "upkeep_gold": 150,
+      "upkeep_gold": 149,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 51,
@@ -3352,7 +3352,7 @@
         ]
       },
       "resources": {
-        "gold": 360,
+        "gold": 366,
         "tower_materials": 1335,
         "eggs": 6,
         "relics": 1,
@@ -3366,7 +3366,7 @@
         "status_message": "Founding Note Due due in 3 days."
       },
       "day_summary": [
-        "Paid 150 gold in upkeep: 51 wages, 24 supplies, 75 repairs.",
+        "Paid 149 gold in upkeep: 50 wages, 24 supplies, 75 repairs.",
         "The creditors stay the blade for now: 250 due in 3 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
@@ -3425,10 +3425,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 52,
+      "upkeep_wage_gold": 51,
       "upkeep_cleaning_gold": 24,
       "upkeep_maintenance_gold": 75,
-      "upkeep_gold": 151,
+      "upkeep_gold": 150,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 52,
@@ -3486,7 +3486,7 @@
         ]
       },
       "resources": {
-        "gold": 493,
+        "gold": 500,
         "tower_materials": 1338,
         "eggs": 6,
         "relics": 1,
@@ -3500,7 +3500,7 @@
         "status_message": "Founding Note Due due in 2 days."
       },
       "day_summary": [
-        "Paid 151 gold in upkeep: 52 wages, 24 supplies, 75 repairs.",
+        "Paid 150 gold in upkeep: 51 wages, 24 supplies, 75 repairs.",
         "The creditors stay the blade for now: 250 due in 2 days.",
         "Local Delver Contract completed: +17 gold, +3 residue.",
         "Local Delver Contract completed: +22 gold, +3 residue.",
@@ -3612,7 +3612,7 @@
         ]
       },
       "resources": {
-        "gold": 87,
+        "gold": 94,
         "tower_materials": 1381,
         "eggs": 8,
         "relics": 2,
@@ -3674,10 +3674,10 @@
       "expedition_prep_materials": 3,
       "expedition_prep_arcane_residue": 1,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 54,
+      "upkeep_wage_gold": 52,
       "upkeep_cleaning_gold": 24,
       "upkeep_maintenance_gold": 75,
-      "upkeep_gold": 153,
+      "upkeep_gold": 151,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 54,
@@ -3735,7 +3735,7 @@
         ]
       },
       "resources": {
-        "gold": 491,
+        "gold": 500,
         "tower_materials": 1423,
         "eggs": 8,
         "relics": 5,
@@ -3749,7 +3749,7 @@
         "status_message": "Collector At The Gate due in 44 days."
       },
       "day_summary": [
-        "Paid 153 gold in upkeep: 54 wages, 24 supplies, 75 repairs.",
+        "Paid 151 gold in upkeep: 52 wages, 24 supplies, 75 repairs.",
         "The creditors stay the blade for now: 1200 due in 44 days.",
         "Local Delver Contract completed: +21 gold, +4 residue.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
@@ -3869,7 +3869,7 @@
         ]
       },
       "resources": {
-        "gold": 653,
+        "gold": 662,
         "tower_materials": 1462,
         "eggs": 8,
         "relics": 8,
@@ -3994,7 +3994,7 @@
         ]
       },
       "resources": {
-        "gold": 497,
+        "gold": 506,
         "tower_materials": 1586,
         "eggs": 8,
         "relics": 9,
@@ -4113,7 +4113,7 @@
         ]
       },
       "resources": {
-        "gold": 1013,
+        "gold": 1022,
         "tower_materials": 1594,
         "eggs": 8,
         "relics": 9,
@@ -4240,7 +4240,7 @@
         ]
       },
       "resources": {
-        "gold": 335,
+        "gold": 344,
         "tower_materials": 1603,
         "eggs": 8,
         "relics": 10,
@@ -4303,10 +4303,10 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 56,
+      "upkeep_wage_gold": 54,
       "upkeep_cleaning_gold": 34,
       "upkeep_maintenance_gold": 105,
-      "upkeep_gold": 195,
+      "upkeep_gold": 193,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 56,
@@ -4364,7 +4364,7 @@
         ]
       },
       "resources": {
-        "gold": 377,
+        "gold": 388,
         "tower_materials": 1730,
         "eggs": 8,
         "relics": 11,
@@ -4378,7 +4378,7 @@
         "status_message": "Collector At The Gate due in 39 days."
       },
       "day_summary": [
-        "Paid 195 gold in upkeep: 56 wages, 34 supplies, 105 repairs.",
+        "Paid 193 gold in upkeep: 54 wages, 34 supplies, 105 repairs.",
         "The creditors stay the blade for now: 1200 due in 39 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Mira completed a contract for 20 gold.",
@@ -4436,15 +4436,15 @@
       "upkeep_gold": 240,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 78,
+        "wage_gold": 79,
         "cleaning_gold": 41,
         "maintenance_gold": 121,
-        "total_gold": 240,
+        "total_gold": 241,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 245,
+        "next_companion_total_gold": 246,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 299,
+        "next_building_total_gold": 300,
         "next_building_delta_gold": 59
       },
       "special_event_gold_delta": 0,
@@ -4491,7 +4491,7 @@
         ]
       },
       "resources": {
-        "gold": 1292,
+        "gold": 1303,
         "tower_materials": 1900,
         "eggs": 7,
         "relics": 12,
@@ -4575,21 +4575,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 78,
+      "upkeep_wage_gold": 79,
       "upkeep_cleaning_gold": 57,
       "upkeep_maintenance_gold": 164,
-      "upkeep_gold": 289,
-      "upkeep_shortfall": 10,
+      "upkeep_gold": 300,
+      "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 78,
+        "wage_gold": 79,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 299,
+        "total_gold": 300,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 304,
+        "next_companion_total_gold": 305,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 376,
+        "next_building_total_gold": 377,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": 0,
@@ -4650,7 +4650,7 @@
         "status_message": "Collector At The Gate due in 37 days."
       },
       "day_summary": [
-        "Upkeep cost 299 gold, but only 289 was paid. Shortfall 10 stressed the roster by 1.",
+        "Paid 300 gold in upkeep: 79 wages, 57 supplies, 164 repairs.",
         "The creditors stay the blade for now: 1200 due in 37 days.",
         "Mira rested and came back steadier for tomorrow.",
         "Calia rested and came back steadier for tomorrow.",
@@ -4694,21 +4694,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 3,
-      "upkeep_wage_gold": 78,
+      "upkeep_wage_gold": 79,
       "upkeep_cleaning_gold": 57,
       "upkeep_maintenance_gold": 164,
       "upkeep_gold": 0,
-      "upkeep_shortfall": 299,
+      "upkeep_shortfall": 300,
       "upkeep_forecast": {
-        "wage_gold": 78,
+        "wage_gold": 79,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 299,
+        "total_gold": 300,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 304,
+        "next_companion_total_gold": 305,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 376,
+        "next_building_total_gold": 377,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": 0,
@@ -4769,7 +4769,7 @@
         "status_message": "Collector At The Gate due in 36 days."
       },
       "day_summary": [
-        "Upkeep cost 299 gold, but only 0 was paid. Shortfall 299 stressed the roster by 4.",
+        "Upkeep cost 300 gold, but only 0 was paid. Shortfall 300 stressed the roster by 5.",
         "The creditors stay the blade for now: 1200 due in 36 days.",
         "Thin expedition supplies added 1 stress to the tower team.",
         "Mira rested and came back steadier for tomorrow.",
@@ -4813,21 +4813,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 78,
+      "upkeep_wage_gold": 79,
       "upkeep_cleaning_gold": 57,
       "upkeep_maintenance_gold": 164,
-      "upkeep_gold": 299,
+      "upkeep_gold": 300,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 78,
+        "wage_gold": 79,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 299,
+        "total_gold": 300,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 304,
+        "next_companion_total_gold": 305,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 376,
+        "next_building_total_gold": 377,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": 90,
@@ -4874,7 +4874,7 @@
         ]
       },
       "resources": {
-        "gold": 759,
+        "gold": 758,
         "tower_materials": 2152,
         "eggs": 7,
         "relics": 15,
@@ -4888,7 +4888,7 @@
         "status_message": "Collector At The Gate due in 35 days."
       },
       "day_summary": [
-        "Paid 299 gold in upkeep: 78 wages, 57 supplies, 164 repairs.",
+        "Paid 300 gold in upkeep: 79 wages, 57 supplies, 164 repairs.",
         "Special event windfall: +90 gold.",
         "The creditors stay the blade for now: 1200 due in 35 days.",
         "Local Delver Contract completed: +22 gold, +4 residue.",
@@ -4960,21 +4960,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 78,
+      "upkeep_wage_gold": 79,
       "upkeep_cleaning_gold": 57,
       "upkeep_maintenance_gold": 164,
-      "upkeep_gold": 299,
+      "upkeep_gold": 300,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 78,
+        "wage_gold": 79,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 299,
+        "total_gold": 300,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 304,
+        "next_companion_total_gold": 305,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 376,
+        "next_building_total_gold": 377,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": -180,
@@ -5021,7 +5021,7 @@
         ]
       },
       "resources": {
-        "gold": 277,
+        "gold": 275,
         "tower_materials": 2284,
         "eggs": 7,
         "relics": 16,
@@ -5035,7 +5035,7 @@
         "status_message": "Collector At The Gate due in 34 days."
       },
       "day_summary": [
-        "Paid 299 gold in upkeep: 78 wages, 57 supplies, 164 repairs.",
+        "Paid 300 gold in upkeep: 79 wages, 57 supplies, 164 repairs.",
         "Special event expense: -180 gold.",
         "The creditors stay the blade for now: 1200 due in 34 days.",
         "Mira rested and came back steadier for tomorrow.",
@@ -5082,21 +5082,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 78,
+      "upkeep_wage_gold": 79,
       "upkeep_cleaning_gold": 57,
       "upkeep_maintenance_gold": 164,
-      "upkeep_gold": 299,
+      "upkeep_gold": 300,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 78,
+        "wage_gold": 79,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 299,
+        "total_gold": 300,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 304,
+        "next_companion_total_gold": 305,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 376,
+        "next_building_total_gold": 377,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": 0,
@@ -5143,7 +5143,7 @@
         ]
       },
       "resources": {
-        "gold": 297,
+        "gold": 294,
         "tower_materials": 2445,
         "eggs": 7,
         "relics": 17,
@@ -5158,7 +5158,7 @@
       },
       "day_summary": [
         "Grateful Locals has passed.",
-        "Paid 299 gold in upkeep: 78 wages, 57 supplies, 164 repairs.",
+        "Paid 300 gold in upkeep: 79 wages, 57 supplies, 164 repairs.",
         "The creditors stay the blade for now: 1200 due in 33 days.",
         "Local Delver Contract completed: +21 gold, +3 residue.",
         "Mira completed a contract for 21 gold.",
@@ -5207,21 +5207,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 85,
+      "upkeep_wage_gold": 87,
       "upkeep_cleaning_gold": 57,
       "upkeep_maintenance_gold": 164,
-      "upkeep_gold": 306,
+      "upkeep_gold": 308,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 85,
+        "wage_gold": 88,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 306,
+        "total_gold": 309,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 311,
+        "next_companion_total_gold": 314,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 383,
+        "next_building_total_gold": 386,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": 0,
@@ -5268,7 +5268,7 @@
         ]
       },
       "resources": {
-        "gold": 821,
+        "gold": 816,
         "tower_materials": 2613,
         "eggs": 6,
         "relics": 18,
@@ -5282,7 +5282,7 @@
         "status_message": "Collector At The Gate due in 32 days."
       },
       "day_summary": [
-        "Paid 306 gold in upkeep: 85 wages, 57 supplies, 164 repairs.",
+        "Paid 308 gold in upkeep: 87 wages, 57 supplies, 164 repairs.",
         "The creditors stay the blade for now: 1200 due in 32 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Local Delver Contract completed: +26 gold, +5 residue.",
@@ -5347,21 +5347,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 87,
+      "upkeep_wage_gold": 88,
       "upkeep_cleaning_gold": 57,
       "upkeep_maintenance_gold": 164,
-      "upkeep_gold": 308,
+      "upkeep_gold": 309,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 87,
+        "wage_gold": 90,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 308,
+        "total_gold": 311,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 313,
+        "next_companion_total_gold": 316,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 385,
+        "next_building_total_gold": 388,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": 0,
@@ -5408,7 +5408,7 @@
         ]
       },
       "resources": {
-        "gold": 1164,
+        "gold": 1158,
         "tower_materials": 2777,
         "eggs": 6,
         "relics": 19,
@@ -5422,7 +5422,7 @@
         "status_message": "Collector At The Gate due in 31 days."
       },
       "day_summary": [
-        "Paid 308 gold in upkeep: 87 wages, 57 supplies, 164 repairs.",
+        "Paid 309 gold in upkeep: 88 wages, 57 supplies, 164 repairs.",
         "The creditors stay the blade for now: 1200 due in 31 days.",
         "Local Delver Contract completed: +19 gold, +3 residue.",
         "Local Delver Contract completed: +26 gold, +5 residue.",
@@ -5482,21 +5482,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 87,
+      "upkeep_wage_gold": 90,
       "upkeep_cleaning_gold": 57,
       "upkeep_maintenance_gold": 164,
-      "upkeep_gold": 308,
+      "upkeep_gold": 311,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 87,
+        "wage_gold": 90,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 308,
+        "total_gold": 311,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 313,
+        "next_companion_total_gold": 316,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 385,
+        "next_building_total_gold": 388,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": 0,
@@ -5543,7 +5543,7 @@
         ]
       },
       "resources": {
-        "gold": 1173,
+        "gold": 1164,
         "tower_materials": 2939,
         "eggs": 6,
         "relics": 20,
@@ -5557,7 +5557,7 @@
         "status_message": "Collector At The Gate due in 30 days."
       },
       "day_summary": [
-        "Paid 308 gold in upkeep: 87 wages, 57 supplies, 164 repairs.",
+        "Paid 311 gold in upkeep: 90 wages, 57 supplies, 164 repairs.",
         "The creditors stay the blade for now: 1200 due in 30 days.",
         "Local Delver Contract completed: +17 gold, +3 residue.",
         "Mira completed a contract for 17 gold.",
@@ -5615,15 +5615,15 @@
       "upkeep_gold": 311,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 90,
+        "wage_gold": 93,
         "cleaning_gold": 57,
         "maintenance_gold": 164,
-        "total_gold": 311,
+        "total_gold": 314,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 316,
+        "next_companion_total_gold": 319,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 388,
+        "next_building_total_gold": 391,
         "next_building_delta_gold": 77
       },
       "special_event_gold_delta": 0,
@@ -5670,7 +5670,7 @@
         ]
       },
       "resources": {
-        "gold": 1535,
+        "gold": 1526,
         "tower_materials": 3106,
         "eggs": 6,
         "relics": 21,
@@ -5746,21 +5746,21 @@
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 90,
+      "upkeep_wage_gold": 93,
       "upkeep_cleaning_gold": 77,
       "upkeep_maintenance_gold": 221,
-      "upkeep_gold": 388,
+      "upkeep_gold": 391,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 90,
+        "wage_gold": 93,
         "cleaning_gold": 77,
         "maintenance_gold": 221,
-        "total_gold": 388,
+        "total_gold": 391,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 393,
+        "next_companion_total_gold": 396,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 484,
+        "next_building_total_gold": 487,
         "next_building_delta_gold": 96
       },
       "special_event_gold_delta": 0,
@@ -5807,7 +5807,7 @@
         ]
       },
       "resources": {
-        "gold": 235,
+        "gold": 223,
         "tower_materials": 2961,
         "eggs": 9,
         "relics": 21,
@@ -5821,7 +5821,7 @@
         "status_message": "Collector At The Gate due in 28 days."
       },
       "day_summary": [
-        "Paid 388 gold in upkeep: 90 wages, 77 supplies, 221 repairs.",
+        "Paid 391 gold in upkeep: 93 wages, 77 supplies, 221 repairs.",
         "The creditors stay the blade for now: 1200 due in 28 days.",
         "Local Delver Contract completed: +17 gold, +3 residue.",
         "Mira completed a contract for 17 gold.",
@@ -5873,21 +5873,21 @@
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 90,
+      "upkeep_wage_gold": 93,
       "upkeep_cleaning_gold": 77,
       "upkeep_maintenance_gold": 221,
-      "upkeep_gold": 388,
+      "upkeep_gold": 391,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 90,
+        "wage_gold": 94,
         "cleaning_gold": 77,
         "maintenance_gold": 221,
-        "total_gold": 388,
+        "total_gold": 392,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 393,
+        "next_companion_total_gold": 397,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 484,
+        "next_building_total_gold": 488,
         "next_building_delta_gold": 96
       },
       "special_event_gold_delta": 0,
@@ -5934,7 +5934,7 @@
         ]
       },
       "resources": {
-        "gold": 312,
+        "gold": 297,
         "tower_materials": 3016,
         "eggs": 12,
         "relics": 21,
@@ -5948,7 +5948,7 @@
         "status_message": "Collector At The Gate due in 27 days."
       },
       "day_summary": [
-        "Paid 388 gold in upkeep: 90 wages, 77 supplies, 221 repairs.",
+        "Paid 391 gold in upkeep: 93 wages, 77 supplies, 221 repairs.",
         "The creditors stay the blade for now: 1200 due in 27 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
@@ -6008,15 +6008,15 @@
       "upkeep_gold": 400,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 102,
+        "wage_gold": 103,
         "cleaning_gold": 77,
         "maintenance_gold": 221,
-        "total_gold": 400,
+        "total_gold": 401,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 405,
+        "next_companion_total_gold": 406,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 496,
+        "next_building_total_gold": 497,
         "next_building_delta_gold": 96
       },
       "special_event_gold_delta": 0,
@@ -6063,7 +6063,7 @@
         ]
       },
       "resources": {
-        "gold": 1551,
+        "gold": 1536,
         "tower_materials": 3063,
         "eggs": 11,
         "relics": 27,
@@ -6149,21 +6149,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 102,
+      "upkeep_wage_gold": 103,
       "upkeep_cleaning_gold": 77,
       "upkeep_maintenance_gold": 221,
-      "upkeep_gold": 400,
+      "upkeep_gold": 401,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 102,
+        "wage_gold": 103,
         "cleaning_gold": 77,
         "maintenance_gold": 221,
-        "total_gold": 400,
+        "total_gold": 401,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 405,
+        "next_companion_total_gold": 406,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 496,
+        "next_building_total_gold": 497,
         "next_building_delta_gold": 96
       },
       "special_event_gold_delta": 0,
@@ -6210,7 +6210,7 @@
         ]
       },
       "resources": {
-        "gold": 1486,
+        "gold": 1470,
         "tower_materials": 3102,
         "eggs": 11,
         "relics": 33,
@@ -6224,7 +6224,7 @@
         "status_message": "Collector At The Gate due in 25 days."
       },
       "day_summary": [
-        "Paid 400 gold in upkeep: 102 wages, 77 supplies, 221 repairs.",
+        "Paid 401 gold in upkeep: 103 wages, 77 supplies, 221 repairs.",
         "The creditors stay the blade for now: 1200 due in 25 days.",
         "Local Delver Contract completed: +17 gold, +3 residue.",
         "Mira completed a contract for 17 gold.",
@@ -6276,21 +6276,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 104,
+      "upkeep_wage_gold": 103,
       "upkeep_cleaning_gold": 77,
       "upkeep_maintenance_gold": 221,
-      "upkeep_gold": 402,
+      "upkeep_gold": 401,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 104,
+        "wage_gold": 105,
         "cleaning_gold": 77,
         "maintenance_gold": 221,
-        "total_gold": 402,
+        "total_gold": 403,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 407,
+        "next_companion_total_gold": 408,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 498,
+        "next_building_total_gold": 499,
         "next_building_delta_gold": 96
       },
       "special_event_gold_delta": 0,
@@ -6337,7 +6337,7 @@
         ]
       },
       "resources": {
-        "gold": 1553,
+        "gold": 1538,
         "tower_materials": 3143,
         "eggs": 11,
         "relics": 39,
@@ -6351,7 +6351,7 @@
         "status_message": "Collector At The Gate due in 24 days."
       },
       "day_summary": [
-        "Paid 402 gold in upkeep: 104 wages, 77 supplies, 221 repairs.",
+        "Paid 401 gold in upkeep: 103 wages, 77 supplies, 221 repairs.",
         "The creditors stay the blade for now: 1200 due in 24 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
@@ -6416,15 +6416,15 @@
       "upkeep_gold": 403,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 105,
+        "wage_gold": 108,
         "cleaning_gold": 77,
         "maintenance_gold": 221,
-        "total_gold": 403,
+        "total_gold": 406,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 408,
+        "next_companion_total_gold": 411,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 499,
+        "next_building_total_gold": 502,
         "next_building_delta_gold": 96
       },
       "special_event_gold_delta": 0,
@@ -6471,7 +6471,7 @@
         ]
       },
       "resources": {
-        "gold": 2445,
+        "gold": 2430,
         "tower_materials": 3190,
         "eggs": 11,
         "relics": 45,
@@ -6549,21 +6549,21 @@
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 105,
+      "upkeep_wage_gold": 108,
       "upkeep_cleaning_gold": 101,
       "upkeep_maintenance_gold": 293,
-      "upkeep_gold": 499,
+      "upkeep_gold": 502,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 105,
+        "wage_gold": 109,
         "cleaning_gold": 101,
         "maintenance_gold": 293,
-        "total_gold": 499,
+        "total_gold": 503,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 504,
+        "next_companion_total_gold": 508,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 640,
+        "next_building_total_gold": 644,
         "next_building_delta_gold": 141
       },
       "special_event_gold_delta": 0,
@@ -6610,7 +6610,7 @@
         ]
       },
       "resources": {
-        "gold": 1117,
+        "gold": 1099,
         "tower_materials": 3059,
         "eggs": 14,
         "relics": 47,
@@ -6624,7 +6624,7 @@
         "status_message": "Collector At The Gate due in 22 days."
       },
       "day_summary": [
-        "Paid 499 gold in upkeep: 105 wages, 101 supplies, 293 repairs.",
+        "Paid 502 gold in upkeep: 108 wages, 101 supplies, 293 repairs.",
         "The creditors stay the blade for now: 1200 due in 22 days.",
         "Local Delver Contract completed: +17 gold, +3 residue.",
         "Local Delver Contract completed: +22 gold, +3 residue.",
@@ -6685,21 +6685,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 105,
+      "upkeep_wage_gold": 109,
       "upkeep_cleaning_gold": 101,
       "upkeep_maintenance_gold": 293,
-      "upkeep_gold": 499,
+      "upkeep_gold": 503,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 105,
+        "wage_gold": 110,
         "cleaning_gold": 101,
         "maintenance_gold": 293,
-        "total_gold": 499,
+        "total_gold": 504,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 504,
+        "next_companion_total_gold": 509,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 640,
+        "next_building_total_gold": 645,
         "next_building_delta_gold": 141
       },
       "special_event_gold_delta": 0,
@@ -6746,7 +6746,7 @@
         ]
       },
       "resources": {
-        "gold": 1047,
+        "gold": 1025,
         "tower_materials": 3100,
         "eggs": 14,
         "relics": 53,
@@ -6760,7 +6760,7 @@
         "status_message": "Collector At The Gate due in 21 days."
       },
       "day_summary": [
-        "Paid 499 gold in upkeep: 105 wages, 101 supplies, 293 repairs.",
+        "Paid 503 gold in upkeep: 109 wages, 101 supplies, 293 repairs.",
         "The creditors stay the blade for now: 1200 due in 21 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
         "Mira completed a contract for 20 gold.",
@@ -6813,22 +6813,22 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 113,
+      "upkeep_wage_gold": 118,
       "upkeep_cleaning_gold": 101,
       "upkeep_maintenance_gold": 293,
-      "upkeep_gold": 507,
+      "upkeep_gold": 512,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 130,
+        "wage_gold": 136,
         "cleaning_gold": 117,
         "maintenance_gold": 337,
-        "total_gold": 584,
+        "total_gold": 590,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 679,
-        "next_companion_delta_gold": 95,
-        "next_building_total_gold": 746,
-        "next_building_delta_gold": 162
+        "next_companion_total_gold": 686,
+        "next_companion_delta_gold": 96,
+        "next_building_total_gold": 751,
+        "next_building_delta_gold": 161
       },
       "special_event_gold_delta": -130,
       "special_event_count": 1,
@@ -6874,7 +6874,7 @@
         ]
       },
       "resources": {
-        "gold": 1638,
+        "gold": 1611,
         "tower_materials": 3145,
         "eggs": 13,
         "relics": 59,
@@ -6888,7 +6888,7 @@
         "status_message": "Collector At The Gate due in 20 days."
       },
       "day_summary": [
-        "Paid 507 gold in upkeep: 113 wages, 101 supplies, 293 repairs.",
+        "Paid 512 gold in upkeep: 118 wages, 101 supplies, 293 repairs.",
         "Special event expense: -130 gold.",
         "The creditors stay the blade for now: 1200 due in 20 days.",
         "Local Delver Contract completed: +20 gold, +3 residue.",
@@ -6958,21 +6958,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 133,
+      "upkeep_wage_gold": 136,
       "upkeep_cleaning_gold": 117,
       "upkeep_maintenance_gold": 337,
-      "upkeep_gold": 587,
+      "upkeep_gold": 590,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 133,
+        "wage_gold": 141,
         "cleaning_gold": 117,
         "maintenance_gold": 337,
-        "total_gold": 587,
+        "total_gold": 595,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 682,
-        "next_companion_delta_gold": 95,
-        "next_building_total_gold": 748,
+        "next_companion_total_gold": 692,
+        "next_companion_delta_gold": 97,
+        "next_building_total_gold": 756,
         "next_building_delta_gold": 161
       },
       "special_event_gold_delta": 0,
@@ -7019,7 +7019,7 @@
         ]
       },
       "resources": {
-        "gold": 2329,
+        "gold": 2299,
         "tower_materials": 3187,
         "eggs": 13,
         "relics": 65,
@@ -7033,7 +7033,7 @@
         "status_message": "Collector At The Gate due in 19 days."
       },
       "day_summary": [
-        "Paid 587 gold in upkeep: 133 wages, 117 supplies, 337 repairs.",
+        "Paid 590 gold in upkeep: 136 wages, 117 supplies, 337 repairs.",
         "The creditors stay the blade for now: 1200 due in 19 days.",
         "Local Delver Contract completed: +16 gold, +3 residue.",
         "Local Delver Contract completed: +22 gold, +3 residue.",
@@ -7101,21 +7101,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 135,
+      "upkeep_wage_gold": 141,
       "upkeep_cleaning_gold": 117,
       "upkeep_maintenance_gold": 337,
-      "upkeep_gold": 589,
+      "upkeep_gold": 595,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 135,
+        "wage_gold": 143,
         "cleaning_gold": 117,
         "maintenance_gold": 337,
-        "total_gold": 589,
+        "total_gold": 597,
         "active_band_min_companions": 8,
         "active_band_min_patron_tiers": 2,
-        "next_companion_total_gold": 685,
-        "next_companion_delta_gold": 96,
-        "next_building_total_gold": 750,
+        "next_companion_total_gold": 695,
+        "next_companion_delta_gold": 98,
+        "next_building_total_gold": 758,
         "next_building_delta_gold": 161
       },
       "special_event_gold_delta": 0,
@@ -7162,7 +7162,7 @@
         ]
       },
       "resources": {
-        "gold": 2599,
+        "gold": 2563,
         "tower_materials": 3231,
         "eggs": 13,
         "relics": 71,
@@ -7176,7 +7176,7 @@
         "status_message": "Collector At The Gate due in 18 days."
       },
       "day_summary": [
-        "Paid 589 gold in upkeep: 135 wages, 117 supplies, 337 repairs.",
+        "Paid 595 gold in upkeep: 141 wages, 117 supplies, 337 repairs.",
         "The creditors stay the blade for now: 1200 due in 18 days.",
         "Local Delver Contract completed: +19 gold, +3 residue.",
         "Mira completed a contract for 19 gold.",
@@ -7234,21 +7234,21 @@
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 140,
-      "upkeep_cleaning_gold": 161,
-      "upkeep_maintenance_gold": 449,
-      "upkeep_gold": 601,
-      "upkeep_shortfall": 149,
+      "upkeep_wage_gold": 172,
+      "upkeep_cleaning_gold": 186,
+      "upkeep_maintenance_gold": 517,
+      "upkeep_gold": 565,
+      "upkeep_shortfall": 310,
       "upkeep_forecast": {
-        "wage_gold": 140,
+        "wage_gold": 149,
         "cleaning_gold": 161,
         "maintenance_gold": 449,
-        "total_gold": 750,
+        "total_gold": 759,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 756,
+        "next_companion_total_gold": 765,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 956,
+        "next_building_total_gold": 965,
         "next_building_delta_gold": 206
       },
       "special_event_gold_delta": 0,
@@ -7310,7 +7310,7 @@
       },
       "day_summary": [
         "Roof Repair Rush has passed.",
-        "Upkeep cost 750 gold, but only 601 was paid. Shortfall 149 stressed the roster by 2.",
+        "Upkeep cost 875 gold, but only 565 was paid. Shortfall 310 stressed the roster by 5.",
         "The creditors stay the blade for now: 1200 due in 17 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Mira completed a contract for 18 gold.",
@@ -7359,26 +7359,26 @@
       "hatches": 0,
       "buildings_purchased": 0,
       "guild_job_gold": 1331,
-      "guild_job_arcane_residue": 181,
+      "guild_job_arcane_residue": 180,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 144,
+      "upkeep_wage_gold": 149,
       "upkeep_cleaning_gold": 161,
       "upkeep_maintenance_gold": 449,
-      "upkeep_gold": 754,
+      "upkeep_gold": 759,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 144,
+        "wage_gold": 152,
         "cleaning_gold": 161,
         "maintenance_gold": 449,
-        "total_gold": 754,
+        "total_gold": 762,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 760,
+        "next_companion_total_gold": 768,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 960,
+        "next_building_total_gold": 968,
         "next_building_delta_gold": 206
       },
       "special_event_gold_delta": -320,
@@ -7434,11 +7434,11 @@
         ]
       },
       "resources": {
-        "gold": 227,
+        "gold": 222,
         "tower_materials": 3015,
         "eggs": 16,
         "relics": 75,
-        "arcane_residue": 3638
+        "arcane_residue": 3637
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7448,10 +7448,10 @@
         "status_message": "Collector At The Gate due in 16 days."
       },
       "day_summary": [
-        "Paid 754 gold in upkeep: 144 wages, 161 supplies, 449 repairs.",
+        "Paid 759 gold in upkeep: 149 wages, 161 supplies, 449 repairs.",
         "Special event expense: -320 gold.",
         "The creditors stay the blade for now: 1200 due in 16 days.",
-        "Local Delver Contract completed: +16 gold, +3 residue.",
+        "Local Delver Contract completed: +16 gold, +2 residue.",
         "Local Delver Contract completed: +23 gold, +3 residue.",
         "Local Delver Contract completed: +26 gold, +5 residue.",
         "Mira completed a contract for 16 gold.",
@@ -7514,27 +7514,27 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 1405,
+      "guild_job_gold": 1404,
       "guild_job_arcane_residue": 201,
       "expedition_prep_gold": 5,
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 147,
+      "upkeep_wage_gold": 152,
       "upkeep_cleaning_gold": 161,
       "upkeep_maintenance_gold": 449,
-      "upkeep_gold": 757,
+      "upkeep_gold": 762,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 147,
+        "wage_gold": 153,
         "cleaning_gold": 161,
         "maintenance_gold": 449,
-        "total_gold": 757,
+        "total_gold": 763,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 763,
+        "next_companion_total_gold": 769,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 963,
+        "next_building_total_gold": 969,
         "next_building_delta_gold": 206
       },
       "special_event_gold_delta": 0,
@@ -7590,11 +7590,11 @@
         ]
       },
       "resources": {
-        "gold": 870,
+        "gold": 859,
         "tower_materials": 3091,
         "eggs": 19,
         "relics": 77,
-        "arcane_residue": 3866
+        "arcane_residue": 3865
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7604,11 +7604,11 @@
         "status_message": "Collector At The Gate due in 15 days."
       },
       "day_summary": [
-        "Paid 757 gold in upkeep: 147 wages, 161 supplies, 449 repairs.",
+        "Paid 762 gold in upkeep: 152 wages, 161 supplies, 449 repairs.",
         "The creditors stay the blade for now: 1200 due in 15 days.",
-        "Local Delver Contract completed: +19 gold, +3 residue.",
+        "Local Delver Contract completed: +18 gold, +3 residue.",
         "Caravan Captain Contract completed: +63 gold, +9 residue.",
-        "Mira completed a contract for 19 gold.",
+        "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. Skills: Charm +1, Scouting +1. History: scouting runs +1.",
         "Suri completed a contract for 63 gold.",
         "Suri handled Reception Hall work. Skills: Guarding +1, Recovery +1. History: guarding +1, recovery +1.",
@@ -7668,21 +7668,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 162,
+      "upkeep_wage_gold": 167,
       "upkeep_cleaning_gold": 161,
       "upkeep_maintenance_gold": 449,
-      "upkeep_gold": 772,
+      "upkeep_gold": 777,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 162,
+        "wage_gold": 168,
         "cleaning_gold": 161,
         "maintenance_gold": 449,
-        "total_gold": 772,
+        "total_gold": 778,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 778,
+        "next_companion_total_gold": 784,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 978,
+        "next_building_total_gold": 984,
         "next_building_delta_gold": 206
       },
       "special_event_gold_delta": 0,
@@ -7738,11 +7738,11 @@
         ]
       },
       "resources": {
-        "gold": 2474,
+        "gold": 2458,
         "tower_materials": 3129,
         "eggs": 18,
         "relics": 83,
-        "arcane_residue": 4025
+        "arcane_residue": 4024
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7752,7 +7752,7 @@
         "status_message": "Collector At The Gate due in 14 days."
       },
       "day_summary": [
-        "Paid 772 gold in upkeep: 162 wages, 161 supplies, 449 repairs.",
+        "Paid 777 gold in upkeep: 167 wages, 161 supplies, 449 repairs.",
         "The creditors stay the blade for now: 1200 due in 14 days.",
         "Local Delver Contract completed: +17 gold, +2 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
@@ -7811,27 +7811,27 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 2411,
+      "guild_job_gold": 2410,
       "guild_job_arcane_residue": 137,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 164,
+      "upkeep_wage_gold": 168,
       "upkeep_cleaning_gold": 161,
       "upkeep_maintenance_gold": 449,
-      "upkeep_gold": 774,
+      "upkeep_gold": 778,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 164,
+        "wage_gold": 170,
         "cleaning_gold": 161,
         "maintenance_gold": 449,
-        "total_gold": 774,
+        "total_gold": 780,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 780,
+        "next_companion_total_gold": 786,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 980,
+        "next_building_total_gold": 986,
         "next_building_delta_gold": 206
       },
       "special_event_gold_delta": 0,
@@ -7887,11 +7887,11 @@
         ]
       },
       "resources": {
-        "gold": 4081,
+        "gold": 4060,
         "tower_materials": 3170,
         "eggs": 18,
         "relics": 89,
-        "arcane_residue": 4182
+        "arcane_residue": 4181
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -7901,11 +7901,11 @@
         "status_message": "Collector At The Gate due in 13 days."
       },
       "day_summary": [
-        "Paid 774 gold in upkeep: 164 wages, 161 supplies, 449 repairs.",
+        "Paid 778 gold in upkeep: 168 wages, 161 supplies, 449 repairs.",
         "The creditors stay the blade for now: 1200 due in 13 days.",
-        "Local Delver Contract completed: +16 gold, +2 residue.",
+        "Local Delver Contract completed: +15 gold, +2 residue.",
         "Local Delver Contract completed: +25 gold, +4 residue.",
-        "Mira completed a contract for 16 gold.",
+        "Mira completed a contract for 15 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Vela completed a contract for 25 gold.",
         "Calia rested and came back steadier for tomorrow.",
@@ -7961,21 +7961,21 @@
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 165,
+      "upkeep_wage_gold": 170,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 981,
+      "upkeep_gold": 986,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 165,
+        "wage_gold": 171,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 981,
+        "total_gold": 987,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 987,
+        "next_companion_total_gold": 993,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1055,
+        "next_building_total_gold": 1061,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -8031,11 +8031,11 @@
         ]
       },
       "resources": {
-        "gold": 1862,
+        "gold": 1836,
         "tower_materials": 2849,
         "eggs": 21,
         "relics": 86,
-        "arcane_residue": 4275
+        "arcane_residue": 4274
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8045,7 +8045,7 @@
         "status_message": "Collector At The Gate due in 12 days."
       },
       "day_summary": [
-        "Paid 981 gold in upkeep: 165 wages, 215 supplies, 601 repairs.",
+        "Paid 986 gold in upkeep: 170 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 1200 due in 12 days.",
         "Caravan Captain Contract completed: +58 gold, +8 residue.",
         "Local Delver Contract completed: +17 gold, +2 residue.",
@@ -8118,21 +8118,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 165,
+      "upkeep_wage_gold": 171,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 981,
+      "upkeep_gold": 987,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 165,
+        "wage_gold": 171,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 981,
+        "total_gold": 987,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 987,
+        "next_companion_total_gold": 993,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1055,
+        "next_building_total_gold": 1061,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": -120,
@@ -8188,11 +8188,11 @@
         ]
       },
       "resources": {
-        "gold": 1160,
+        "gold": 1128,
         "tower_materials": 2891,
         "eggs": 21,
         "relics": 92,
-        "arcane_residue": 4360
+        "arcane_residue": 4359
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8202,7 +8202,7 @@
         "status_message": "Collector At The Gate due in 11 days."
       },
       "day_summary": [
-        "Paid 981 gold in upkeep: 165 wages, 215 supplies, 601 repairs.",
+        "Paid 987 gold in upkeep: 171 wages, 215 supplies, 601 repairs.",
         "Special event expense: -120 gold.",
         "The creditors stay the blade for now: 1200 due in 11 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -8255,27 +8255,27 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 2455,
+      "guild_job_gold": 2454,
       "guild_job_arcane_residue": 141,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 167,
+      "upkeep_wage_gold": 171,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 983,
+      "upkeep_gold": 987,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 167,
+        "wage_gold": 173,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 983,
+        "total_gold": 989,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 989,
+        "next_companion_total_gold": 995,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1057,
+        "next_building_total_gold": 1063,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -8331,11 +8331,11 @@
         ]
       },
       "resources": {
-        "gold": 2572,
+        "gold": 2535,
         "tower_materials": 2933,
         "eggs": 21,
         "relics": 98,
-        "arcane_residue": 4521
+        "arcane_residue": 4520
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8345,12 +8345,12 @@
         "status_message": "Collector At The Gate due in 10 days."
       },
       "day_summary": [
-        "Paid 983 gold in upkeep: 167 wages, 215 supplies, 601 repairs.",
+        "Paid 987 gold in upkeep: 171 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 1200 due in 10 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Local Delver Contract completed: +17 gold, +2 residue.",
+        "Local Delver Contract completed: +16 gold, +2 residue.",
         "Caravan Captain Contract completed: +57 gold, +8 residue.",
-        "Mira completed a contract for 17 gold.",
+        "Mira completed a contract for 16 gold.",
         "Suri completed a contract for 57 gold.",
         "Suri handled Reception Hall work. Skills: Charm +1. History: scouting runs +1, recovery +1.",
         "Calia returned from Boiler Cathedral with fresh loot.",
@@ -8409,21 +8409,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 170,
+      "upkeep_wage_gold": 173,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 986,
+      "upkeep_gold": 989,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 170,
+        "wage_gold": 177,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 986,
+        "total_gold": 993,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 992,
+        "next_companion_total_gold": 999,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1060,
+        "next_building_total_gold": 1067,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -8479,11 +8479,11 @@
         ]
       },
       "resources": {
-        "gold": 3417,
+        "gold": 3377,
         "tower_materials": 2984,
         "eggs": 21,
         "relics": 104,
-        "arcane_residue": 4807
+        "arcane_residue": 4806
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8493,7 +8493,7 @@
         "status_message": "Collector At The Gate due in 9 days."
       },
       "day_summary": [
-        "Paid 986 gold in upkeep: 170 wages, 215 supplies, 601 repairs.",
+        "Paid 989 gold in upkeep: 173 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 1200 due in 9 days.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
@@ -8565,21 +8565,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 170,
+      "upkeep_wage_gold": 177,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 986,
+      "upkeep_gold": 993,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 170,
+        "wage_gold": 179,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 986,
+        "total_gold": 995,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 992,
+        "next_companion_total_gold": 1001,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1060,
+        "next_building_total_gold": 1069,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -8635,11 +8635,11 @@
         ]
       },
       "resources": {
-        "gold": 2828,
+        "gold": 2781,
         "tower_materials": 3026,
         "eggs": 21,
         "relics": 110,
-        "arcane_residue": 4892
+        "arcane_residue": 4891
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8649,7 +8649,7 @@
         "status_message": "Collector At The Gate due in 8 days."
       },
       "day_summary": [
-        "Paid 986 gold in upkeep: 170 wages, 215 supplies, 601 repairs.",
+        "Paid 993 gold in upkeep: 177 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 1200 due in 8 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract completed: +15 gold, +2 residue.",
@@ -8706,21 +8706,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 171,
+      "upkeep_wage_gold": 179,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 987,
+      "upkeep_gold": 995,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 171,
+        "wage_gold": 179,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 987,
+        "total_gold": 995,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 993,
+        "next_companion_total_gold": 1001,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1061,
+        "next_building_total_gold": 1069,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -8776,11 +8776,11 @@
         ]
       },
       "resources": {
-        "gold": 4270,
+        "gold": 4215,
         "tower_materials": 3069,
         "eggs": 21,
         "relics": 116,
-        "arcane_residue": 5060
+        "arcane_residue": 5059
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8790,7 +8790,7 @@
         "status_message": "Collector At The Gate due in 7 days."
       },
       "day_summary": [
-        "Paid 987 gold in upkeep: 171 wages, 215 supplies, 601 repairs.",
+        "Paid 995 gold in upkeep: 179 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 1200 due in 7 days.",
         "Local Delver Contract completed: +16 gold, +2 residue.",
         "Caravan Captain Contract completed: +57 gold, +8 residue.",
@@ -8850,27 +8850,27 @@
       "guest_bookings_assigned": 3,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 1861,
+      "guild_job_gold": 1860,
       "guild_job_arcane_residue": 265,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 174,
+      "upkeep_wage_gold": 179,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 990,
+      "upkeep_gold": 995,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 174,
+        "wage_gold": 185,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 990,
+        "total_gold": 1001,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 996,
+        "next_companion_total_gold": 1007,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1064,
+        "next_building_total_gold": 1075,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -8926,11 +8926,11 @@
         ]
       },
       "resources": {
-        "gold": 5081,
+        "gold": 5020,
         "tower_materials": 3120,
         "eggs": 21,
         "relics": 122,
-        "arcane_residue": 5345
+        "arcane_residue": 5344
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -8940,13 +8940,13 @@
         "status_message": "Collector At The Gate due in 6 days."
       },
       "day_summary": [
-        "Paid 990 gold in upkeep: 174 wages, 215 supplies, 601 repairs.",
+        "Paid 995 gold in upkeep: 179 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 1200 due in 6 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Local Delver Contract completed: +15 gold, +2 residue.",
+        "Local Delver Contract completed: +14 gold, +2 residue.",
         "Local Delver Contract completed: +23 gold, +3 residue.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
-        "Mira completed a contract for 15 gold.",
+        "Mira completed a contract for 14 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Vela completed a contract for 23 gold.",
         "Vela handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
@@ -9014,21 +9014,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 174,
+      "upkeep_wage_gold": 185,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 990,
+      "upkeep_gold": 1001,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 174,
+        "wage_gold": 185,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 990,
+        "total_gold": 1001,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 996,
+        "next_companion_total_gold": 1007,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1064,
+        "next_building_total_gold": 1075,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": -320,
@@ -9084,11 +9084,11 @@
         ]
       },
       "resources": {
-        "gold": 4170,
+        "gold": 4098,
         "tower_materials": 3132,
         "eggs": 21,
         "relics": 128,
-        "arcane_residue": 5431
+        "arcane_residue": 5430
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9098,7 +9098,7 @@
         "status_message": "Collector At The Gate due in 5 days."
       },
       "day_summary": [
-        "Paid 990 gold in upkeep: 174 wages, 215 supplies, 601 repairs.",
+        "Paid 1001 gold in upkeep: 185 wages, 215 supplies, 601 repairs.",
         "Special event expense: -320 gold.",
         "The creditors stay the blade for now: 1200 due in 5 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -9158,21 +9158,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 174,
+      "upkeep_wage_gold": 185,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 990,
+      "upkeep_gold": 1001,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 201,
+        "wage_gold": 217,
         "cleaning_gold": 248,
         "maintenance_gold": 692,
-        "total_gold": 1141,
+        "total_gold": 1157,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1146,
+        "next_companion_total_gold": 1162,
         "next_companion_delta_gold": 5,
-        "next_building_total_gold": 1224,
+        "next_building_total_gold": 1240,
         "next_building_delta_gold": 83
       },
       "special_event_gold_delta": -130,
@@ -9228,11 +9228,11 @@
         ]
       },
       "resources": {
-        "gold": 5829,
+        "gold": 5746,
         "tower_materials": 3179,
         "eggs": 21,
         "relics": 134,
-        "arcane_residue": 5663
+        "arcane_residue": 5662
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9242,7 +9242,7 @@
         "status_message": "Collector At The Gate due in 4 days."
       },
       "day_summary": [
-        "Paid 990 gold in upkeep: 174 wages, 215 supplies, 601 repairs.",
+        "Paid 1001 gold in upkeep: 185 wages, 215 supplies, 601 repairs.",
         "Special event expense: -130 gold.",
         "The creditors stay the blade for now: 1200 due in 4 days.",
         "Caravan Captain Contract completed: +57 gold, +8 residue.",
@@ -9314,22 +9314,22 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 207,
+      "upkeep_wage_gold": 217,
       "upkeep_cleaning_gold": 248,
       "upkeep_maintenance_gold": 692,
-      "upkeep_gold": 1147,
+      "upkeep_gold": 1157,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 207,
+        "wage_gold": 218,
         "cleaning_gold": 248,
         "maintenance_gold": 692,
-        "total_gold": 1147,
+        "total_gold": 1158,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1153,
-        "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1231,
-        "next_building_delta_gold": 84
+        "next_companion_total_gold": 1163,
+        "next_companion_delta_gold": 5,
+        "next_building_total_gold": 1241,
+        "next_building_delta_gold": 83
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -9384,11 +9384,11 @@
         ]
       },
       "resources": {
-        "gold": 6043,
+        "gold": 5950,
         "tower_materials": 3227,
         "eggs": 21,
         "relics": 140,
-        "arcane_residue": 5886
+        "arcane_residue": 5885
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9398,7 +9398,7 @@
         "status_message": "Collector At The Gate due in 3 days."
       },
       "day_summary": [
-        "Paid 1147 gold in upkeep: 207 wages, 248 supplies, 692 repairs.",
+        "Paid 1157 gold in upkeep: 217 wages, 248 supplies, 692 repairs.",
         "The creditors stay the blade for now: 1200 due in 3 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract completed: +17 gold, +3 residue.",
@@ -9468,22 +9468,22 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 225,
+      "upkeep_wage_gold": 234,
       "upkeep_cleaning_gold": 248,
       "upkeep_maintenance_gold": 692,
-      "upkeep_gold": 1165,
+      "upkeep_gold": 1174,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 225,
+        "wage_gold": 237,
         "cleaning_gold": 248,
         "maintenance_gold": 692,
-        "total_gold": 1165,
+        "total_gold": 1177,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1170,
-        "next_companion_delta_gold": 5,
-        "next_building_total_gold": 1248,
-        "next_building_delta_gold": 83
+        "next_companion_total_gold": 1183,
+        "next_companion_delta_gold": 6,
+        "next_building_total_gold": 1261,
+        "next_building_delta_gold": 84
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -9538,11 +9538,11 @@
         ]
       },
       "resources": {
-        "gold": 7197,
+        "gold": 7095,
         "tower_materials": 3265,
         "eggs": 20,
         "relics": 146,
-        "arcane_residue": 6041
+        "arcane_residue": 6040
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9552,7 +9552,7 @@
         "status_message": "Collector At The Gate due in 2 days."
       },
       "day_summary": [
-        "Paid 1165 gold in upkeep: 225 wages, 248 supplies, 692 repairs.",
+        "Paid 1174 gold in upkeep: 234 wages, 248 supplies, 692 repairs.",
         "The creditors stay the blade for now: 1200 due in 2 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract completed: +15 gold, +2 residue.",
@@ -9611,27 +9611,27 @@
       "guest_bookings_assigned": 3,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 4271,
+      "guild_job_gold": 4270,
       "guild_job_arcane_residue": 219,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 195,
-      "upkeep_cleaning_gold": 215,
-      "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1011,
+      "upkeep_wage_gold": 237,
+      "upkeep_cleaning_gold": 248,
+      "upkeep_maintenance_gold": 692,
+      "upkeep_gold": 1177,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 195,
+        "wage_gold": 207,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1011,
+        "total_gold": 1023,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1017,
+        "next_companion_total_gold": 1029,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1085,
+        "next_building_total_gold": 1097,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -9687,11 +9687,11 @@
         ]
       },
       "resources": {
-        "gold": 9227,
+        "gold": 8958,
         "tower_materials": 3318,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 6282
+        "arcane_residue": 6281
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -9702,13 +9702,13 @@
       },
       "day_summary": [
         "Roof Repair Rush has passed.",
-        "Paid 1011 gold in upkeep: 195 wages, 215 supplies, 601 repairs.",
+        "Paid 1177 gold in upkeep: 237 wages, 248 supplies, 692 repairs.",
         "Paid Collector At The Gate for 1200 gold.",
         "Next due: Interest Crush in 50 days.",
-        "Local Delver Contract completed: +17 gold, +3 residue.",
+        "Local Delver Contract completed: +16 gold, +3 residue.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
         "Local Delver Contract completed: +23 gold, +3 residue.",
-        "Mira completed a contract for 17 gold.",
+        "Mira completed a contract for 16 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Suri completed a contract for 53 gold.",
         "Vela completed a contract for 23 gold.",
@@ -9774,21 +9774,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 197,
+      "upkeep_wage_gold": 207,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1013,
+      "upkeep_gold": 1023,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 197,
+        "wage_gold": 209,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1013,
+        "total_gold": 1025,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1019,
+        "next_companion_total_gold": 1031,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1087,
+        "next_building_total_gold": 1099,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -9844,11 +9844,11 @@
         ]
       },
       "resources": {
-        "gold": 10477,
+        "gold": 10198,
         "tower_materials": 3331,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 6610
+        "arcane_residue": 6609
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -9858,7 +9858,7 @@
         "status_message": "Interest Crush due in 49 days."
       },
       "day_summary": [
-        "Paid 1013 gold in upkeep: 197 wages, 215 supplies, 601 repairs.",
+        "Paid 1023 gold in upkeep: 207 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 49 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract completed: +15 gold, +2 residue.",
@@ -9929,21 +9929,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 197,
+      "upkeep_wage_gold": 209,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1013,
+      "upkeep_gold": 1025,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 197,
+        "wage_gold": 209,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1013,
+        "total_gold": 1025,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1019,
+        "next_companion_total_gold": 1031,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1087,
+        "next_building_total_gold": 1099,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -9999,11 +9999,11 @@
         ]
       },
       "resources": {
-        "gold": 9947,
+        "gold": 9656,
         "tower_materials": 3333,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 6684
+        "arcane_residue": 6683
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10013,7 +10013,7 @@
         "status_message": "Interest Crush due in 48 days."
       },
       "day_summary": [
-        "Paid 1013 gold in upkeep: 197 wages, 215 supplies, 601 repairs.",
+        "Paid 1025 gold in upkeep: 209 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 48 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
@@ -10068,21 +10068,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 200,
+      "upkeep_wage_gold": 209,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1016,
+      "upkeep_gold": 1025,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 200,
+        "wage_gold": 210,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1016,
+        "total_gold": 1026,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1022,
+        "next_companion_total_gold": 1032,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1090,
+        "next_building_total_gold": 1100,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -10138,11 +10138,11 @@
         ]
       },
       "resources": {
-        "gold": 14963,
+        "gold": 14663,
         "tower_materials": 3348,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 7154
+        "arcane_residue": 7153
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10152,7 +10152,7 @@
         "status_message": "Interest Crush due in 47 days."
       },
       "day_summary": [
-        "Paid 1016 gold in upkeep: 200 wages, 215 supplies, 601 repairs.",
+        "Paid 1025 gold in upkeep: 209 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 47 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
@@ -10228,21 +10228,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 200,
+      "upkeep_wage_gold": 210,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1016,
+      "upkeep_gold": 1026,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 200,
+        "wage_gold": 215,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1016,
+        "total_gold": 1031,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1022,
+        "next_companion_total_gold": 1037,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1090,
+        "next_building_total_gold": 1105,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -10298,11 +10298,11 @@
         ]
       },
       "resources": {
-        "gold": 15316,
+        "gold": 15006,
         "tower_materials": 3355,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 7355
+        "arcane_residue": 7354
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10312,7 +10312,7 @@
         "status_message": "Interest Crush due in 46 days."
       },
       "day_summary": [
-        "Paid 1016 gold in upkeep: 200 wages, 215 supplies, 601 repairs.",
+        "Paid 1026 gold in upkeep: 210 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 46 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
@@ -10373,21 +10373,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 200,
+      "upkeep_wage_gold": 215,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1016,
+      "upkeep_gold": 1031,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 200,
+        "wage_gold": 218,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1016,
+        "total_gold": 1034,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1022,
+        "next_companion_total_gold": 1040,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1090,
+        "next_building_total_gold": 1108,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -10443,11 +10443,11 @@
         ]
       },
       "resources": {
-        "gold": 15643,
+        "gold": 15318,
         "tower_materials": 3362,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 7554
+        "arcane_residue": 7553
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10457,7 +10457,7 @@
         "status_message": "Interest Crush due in 45 days."
       },
       "day_summary": [
-        "Paid 1016 gold in upkeep: 200 wages, 215 supplies, 601 repairs.",
+        "Paid 1031 gold in upkeep: 215 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 45 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract expired: -12 gold.",
@@ -10518,21 +10518,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 203,
+      "upkeep_wage_gold": 218,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1019,
+      "upkeep_gold": 1034,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 203,
+        "wage_gold": 222,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1019,
+        "total_gold": 1038,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1025,
+        "next_companion_total_gold": 1044,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1093,
+        "next_building_total_gold": 1112,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -10588,11 +10588,11 @@
         ]
       },
       "resources": {
-        "gold": 19806,
+        "gold": 19466,
         "tower_materials": 3372,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 7902
+        "arcane_residue": 7901
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10602,7 +10602,7 @@
         "status_message": "Interest Crush due in 44 days."
       },
       "day_summary": [
-        "Paid 1019 gold in upkeep: 203 wages, 215 supplies, 601 repairs.",
+        "Paid 1034 gold in upkeep: 218 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 44 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
@@ -10676,21 +10676,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 206,
+      "upkeep_wage_gold": 222,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1022,
+      "upkeep_gold": 1038,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 206,
+        "wage_gold": 222,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1022,
+        "total_gold": 1038,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1028,
+        "next_companion_total_gold": 1044,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1096,
+        "next_building_total_gold": 1112,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -10746,11 +10746,11 @@
         ]
       },
       "resources": {
-        "gold": 20597,
+        "gold": 20241,
         "tower_materials": 3381,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 8167
+        "arcane_residue": 8166
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10760,7 +10760,7 @@
         "status_message": "Interest Crush due in 43 days."
       },
       "day_summary": [
-        "Paid 1022 gold in upkeep: 206 wages, 215 supplies, 601 repairs.",
+        "Paid 1038 gold in upkeep: 222 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 43 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
@@ -10825,21 +10825,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 206,
+      "upkeep_wage_gold": 222,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1022,
+      "upkeep_gold": 1038,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 206,
+        "wage_gold": 225,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1022,
+        "total_gold": 1041,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1028,
+        "next_companion_total_gold": 1047,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1096,
+        "next_building_total_gold": 1115,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -10895,11 +10895,11 @@
         ]
       },
       "resources": {
-        "gold": 20486,
+        "gold": 20114,
         "tower_materials": 3386,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 8302
+        "arcane_residue": 8301
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10909,7 +10909,7 @@
         "status_message": "Interest Crush due in 42 days."
       },
       "day_summary": [
-        "Paid 1022 gold in upkeep: 206 wages, 215 supplies, 601 repairs.",
+        "Paid 1038 gold in upkeep: 222 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 42 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
@@ -10966,21 +10966,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 207,
+      "upkeep_wage_gold": 225,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1023,
+      "upkeep_gold": 1041,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 207,
+        "wage_gold": 228,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1023,
+        "total_gold": 1044,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1029,
+        "next_companion_total_gold": 1050,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1097,
+        "next_building_total_gold": 1118,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": -320,
@@ -11036,11 +11036,11 @@
         ]
       },
       "resources": {
-        "gold": 24180,
+        "gold": 23790,
         "tower_materials": 3368,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 8651
+        "arcane_residue": 8650
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11050,7 +11050,7 @@
         "status_message": "Interest Crush due in 41 days."
       },
       "day_summary": [
-        "Paid 1023 gold in upkeep: 207 wages, 215 supplies, 601 repairs.",
+        "Paid 1041 gold in upkeep: 225 wages, 215 supplies, 601 repairs.",
         "Special event expense: -320 gold.",
         "The creditors stay the blade for now: 35000 due in 41 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -11124,21 +11124,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 212,
+      "upkeep_wage_gold": 228,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1028,
+      "upkeep_gold": 1044,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 212,
+        "wage_gold": 233,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1028,
+        "total_gold": 1049,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1034,
+        "next_companion_total_gold": 1055,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1102,
+        "next_building_total_gold": 1123,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -11194,11 +11194,11 @@
         ]
       },
       "resources": {
-        "gold": 25000,
+        "gold": 24594,
         "tower_materials": 3377,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 8921
+        "arcane_residue": 8920
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11208,7 +11208,7 @@
         "status_message": "Interest Crush due in 40 days."
       },
       "day_summary": [
-        "Paid 1028 gold in upkeep: 212 wages, 215 supplies, 601 repairs.",
+        "Paid 1044 gold in upkeep: 228 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 40 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +53 gold, +7 residue.",
@@ -11276,21 +11276,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 213,
+      "upkeep_wage_gold": 233,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1029,
+      "upkeep_gold": 1049,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 213,
+        "wage_gold": 233,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1029,
+        "total_gold": 1049,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1035,
+        "next_companion_total_gold": 1055,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1103,
+        "next_building_total_gold": 1123,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 360,
@@ -11346,11 +11346,11 @@
         ]
       },
       "resources": {
-        "gold": 27095,
+        "gold": 26669,
         "tower_materials": 3384,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 9150
+        "arcane_residue": 9149
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11360,7 +11360,7 @@
         "status_message": "Interest Crush due in 39 days."
       },
       "day_summary": [
-        "Paid 1029 gold in upkeep: 213 wages, 215 supplies, 601 repairs.",
+        "Paid 1049 gold in upkeep: 233 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +360 gold.",
         "The creditors stay the blade for now: 35000 due in 39 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -11425,21 +11425,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 218,
+      "upkeep_wage_gold": 233,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1034,
+      "upkeep_gold": 1049,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 218,
+        "wage_gold": 236,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1034,
+        "total_gold": 1052,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1040,
+        "next_companion_total_gold": 1058,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1108,
+        "next_building_total_gold": 1126,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -11495,11 +11495,11 @@
         ]
       },
       "resources": {
-        "gold": 29480,
+        "gold": 29039,
         "tower_materials": 3394,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 9476
+        "arcane_residue": 9475
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11509,7 +11509,7 @@
         "status_message": "Interest Crush due in 38 days."
       },
       "day_summary": [
-        "Paid 1034 gold in upkeep: 218 wages, 215 supplies, 601 repairs.",
+        "Paid 1049 gold in upkeep: 233 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 38 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +51 gold, +7 residue.",
@@ -11576,21 +11576,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 218,
+      "upkeep_wage_gold": 236,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1034,
+      "upkeep_gold": 1052,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 218,
+        "wage_gold": 237,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1034,
+        "total_gold": 1053,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1040,
+        "next_companion_total_gold": 1059,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1108,
+        "next_building_total_gold": 1127,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -11646,11 +11646,11 @@
         ]
       },
       "resources": {
-        "gold": 30257,
+        "gold": 29798,
         "tower_materials": 3403,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 9741
+        "arcane_residue": 9740
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11660,7 +11660,7 @@
         "status_message": "Interest Crush due in 37 days."
       },
       "day_summary": [
-        "Paid 1034 gold in upkeep: 218 wages, 215 supplies, 601 repairs.",
+        "Paid 1052 gold in upkeep: 236 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 37 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract expired: -12 gold.",
@@ -11727,21 +11727,21 @@
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 218,
+      "upkeep_wage_gold": 237,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1034,
+      "upkeep_gold": 1053,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 218,
+        "wage_gold": 239,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1034,
+        "total_gold": 1055,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1040,
+        "next_companion_total_gold": 1061,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1108,
+        "next_building_total_gold": 1129,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -11797,11 +11797,11 @@
         ]
       },
       "resources": {
-        "gold": 32014,
+        "gold": 31536,
         "tower_materials": 3410,
         "eggs": 20,
         "relics": 152,
-        "arcane_residue": 9954
+        "arcane_residue": 9953
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11812,7 +11812,7 @@
       },
       "day_summary": [
         "Recovery Reputation has passed.",
-        "Paid 1034 gold in upkeep: 218 wages, 215 supplies, 601 repairs.",
+        "Paid 1053 gold in upkeep: 237 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 36 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +51 gold, +7 residue.",
@@ -11876,21 +11876,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 218,
+      "upkeep_wage_gold": 239,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1034,
+      "upkeep_gold": 1055,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 218,
+        "wage_gold": 242,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1034,
+        "total_gold": 1058,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1040,
+        "next_companion_total_gold": 1064,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1108,
+        "next_building_total_gold": 1132,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -11946,11 +11946,11 @@
         ]
       },
       "resources": {
-        "gold": 33702,
+        "gold": 33203,
         "tower_materials": 3458,
         "eggs": 20,
         "relics": 158,
-        "arcane_residue": 10182
+        "arcane_residue": 10181
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11960,7 +11960,7 @@
         "status_message": "Interest Crush due in 35 days."
       },
       "day_summary": [
-        "Paid 1034 gold in upkeep: 218 wages, 215 supplies, 601 repairs.",
+        "Paid 1055 gold in upkeep: 239 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 35 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +51 gold, +7 residue.",
@@ -12026,21 +12026,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 219,
+      "upkeep_wage_gold": 242,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1035,
+      "upkeep_gold": 1058,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 219,
+        "wage_gold": 243,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1035,
+        "total_gold": 1059,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1041,
+        "next_companion_total_gold": 1065,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1109,
+        "next_building_total_gold": 1133,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -12096,11 +12096,11 @@
         ]
       },
       "resources": {
-        "gold": 34205,
+        "gold": 33683,
         "tower_materials": 3505,
         "eggs": 20,
         "relics": 164,
-        "arcane_residue": 10453
+        "arcane_residue": 10452
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12110,7 +12110,7 @@
         "status_message": "Interest Crush due in 34 days."
       },
       "day_summary": [
-        "Paid 1035 gold in upkeep: 219 wages, 215 supplies, 601 repairs.",
+        "Paid 1058 gold in upkeep: 242 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 34 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +50 gold, +7 residue.",
@@ -12180,21 +12180,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 234,
+      "upkeep_wage_gold": 257,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1050,
+      "upkeep_gold": 1073,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 234,
+        "wage_gold": 261,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1050,
+        "total_gold": 1077,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1056,
+        "next_companion_total_gold": 1083,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1124,
+        "next_building_total_gold": 1151,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 360,
@@ -12250,11 +12250,11 @@
         ]
       },
       "resources": {
-        "gold": 38115,
+        "gold": 37570,
         "tower_materials": 3548,
         "eggs": 19,
         "relics": 170,
-        "arcane_residue": 10764
+        "arcane_residue": 10763
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12264,7 +12264,7 @@
         "status_message": "Interest Crush due in 33 days."
       },
       "day_summary": [
-        "Paid 1050 gold in upkeep: 234 wages, 215 supplies, 601 repairs.",
+        "Paid 1073 gold in upkeep: 257 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +360 gold.",
         "The creditors stay the blade for now: 35000 due in 33 days.",
         "Tower Scholar Contract expired: -30 gold.",

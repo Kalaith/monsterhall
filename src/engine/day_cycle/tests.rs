@@ -591,6 +591,37 @@ fn a_room_can_only_teach_a_skill_its_own_work_feeds() {
     }
 }
 
+#[test]
+fn every_trained_skill_raises_a_companions_wage() {
+    let data = crate::data::test_game_data();
+    let day_cycle = &data.config.day_cycle;
+    let base = companion_daily_wage(day_cycle, &test_monster(Vec::new()));
+
+    // Wages are the guild's answer to a roster that earns more as it gets
+    // stronger. The formula was written against five skills and never revisited
+    // when the other five became trainable, which made training them free.
+    let divisor = day_cycle.skill_wage_divisor.max(1);
+    for skill_id in [
+        "scouting",
+        "guarding",
+        "hospitality",
+        "crafting",
+        "charm",
+        "recovery",
+        "bargaining",
+        "navigation",
+        "arcana",
+        "strength",
+    ] {
+        let mut monster = test_monster(Vec::new());
+        assert!(increment_skill(&mut monster.skills, skill_id, divisor));
+        assert!(
+            companion_daily_wage(day_cycle, &monster) > base,
+            "'{skill_id}' can be trained but does not cost the guild anything"
+        );
+    }
+}
+
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),

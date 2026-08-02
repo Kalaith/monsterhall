@@ -27,6 +27,25 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 - ~~`event_tags` encode intended gating that no code applies.~~ Investigated and resolved differently: the gating **is** applied, just not by the tags. Every one of the 23 tier/late_game-tagged events is already `required_building_ids`-gated (23/23), and the `min_day` bands are tight and monotonic — tier_1 at days 8–20, tier_2 at 20–30, tier_3 at 45–55, late_game at 140–230. You cannot get the archive event without the archive. The tags are a taxonomy describing that gating rather than a second gate, and mapping `tier_N` onto patron tiers was a dead end anyway: only three tiers exist against four tags. So they are now checked documentation — load-time validation rejects a tier/late_game tag on an event nothing gates, and a `late_game` tag on an event that can fire before day 100.
 - ~~Patron archetype `spawn_weight` and `tags` never influence contract generation.~~ Done, though not the way it was first written. `spawn_weight` now scales `request_pressure_priority`, so rarer patrons lose ties and fall off a full board first. The literal reading — weighted random draw without replacement — was built twice and rejected on measurement both times: the campaign is tuned around a best-first board, and flattening it cost enough income that the single-seed run stopped reaching its final debt milestone (only `tribute_cart_5` with flat weighting, `broker_compact_6` with the pressure term squared). Variety in the offer board is worth having, but it needs the economy retuned around it, not bolted on. `tags` now carry a guard: an archetype tagged `special` whose contracts are not `is_special` is rejected at load, because that silently costs the story flag and the priority bonus.
 
+### Found by review, not by the audit (2026-08-02)
+
+- ~~`companion_daily_wage` counted five of the ten skills.~~ Fixed. The wage
+  formula summed scouting/guarding/hospitality/crafting/charm and ignored
+  recovery, bargaining, navigation, arcana and strength — written against the
+  five skills that existed when it was authored and never revisited when the
+  others became trainable. Since recovery and bargaining now feed
+  `guild_job_skill_bonus` exactly like the original five, training them made a
+  companion strictly better at no cost. A test now asserts every trainable skill
+  raises the wage, so the formula cannot fall behind the skill list again.
+- ~~The upkeep preview was quoted before training and charged after.~~ Fixed.
+  Wages scale with skills, companions train during `resolve_day` (line 231), and
+  upkeep was charged afterwards (line 462) — so the guild paid for lessons
+  learned the same morning while Town Overview had already quoted the pre-
+  training figure. The forecast is now taken at the top of `resolve_day` and
+  passed down, so the number the player plans against is the number charged.
+  Same class as the `injury_risk_score` divergence, found by looking for more of
+  it.
+
 ### UI and feedback
 
 - ~~Status messages are computed then discarded on five screens; Ctrl+S saves with zero visible confirmation.~~ Done: all five now render `status_message` (Monster Profile had no draw path for it at all; Town Management and Monster Profile yield the slot to an error when there is one). `persist_game_state` already called `apply_phase_status("Campaign saved")`, so Ctrl+S became visible everywhere for free.
