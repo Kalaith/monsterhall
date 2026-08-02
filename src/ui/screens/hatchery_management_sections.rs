@@ -56,7 +56,8 @@ impl HatcheryManagementLayout {
         let inventory_w = 348.0;
         let detail_x = left_margin + inventory_w + layout::SECTION_GAP;
         let detail_w = content_width - inventory_w - layout::SECTION_GAP;
-        let content_y = 176.0;
+        // Clears the status panel, which closes at 180.
+        let content_y = 192.0;
         let footer_y = screen_height() - layout::FOOTER_BOTTOM_MARGIN - layout::FOOTER_H;
         let content_h = (footer_y - content_y - layout::SECTION_GAP).max(420.0);
 
@@ -95,14 +96,17 @@ pub(super) fn draw_status_panel(
         layout.left_margin,
         92.0,
         layout.content_width,
-        72.0,
+        // The title tab occupies the first ~36px of a panel, so content starts
+        // at 128 and the 44-tall tile needs the panel to reach 180. At 72 tall
+        // the tile started at 112 and drew straight through "Hatchery Status".
+        88.0,
         Some(&chamber_text.status_panel_title),
         PanelTier::Support,
         false,
     );
     draw_metric_tile(
         layout.left_margin + layout::PANEL_PADDING,
-        112.0,
+        128.0,
         96.0,
         44.0,
         &data.ui_text.common.eggs_unit,
@@ -112,7 +116,7 @@ pub(super) fn draw_status_panel(
 
     draw_inline_status(
         layout.left_margin + 128.0,
-        126.0,
+        142.0,
         layout.content_width - 144.0,
         &format!(
             "{} | {}: {}",

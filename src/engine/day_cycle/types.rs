@@ -19,8 +19,9 @@ pub struct ExpeditionPlanPreview {
     pub projected_eggs: u32,
     pub projected_relics: u32,
     /// How far past the injury threshold the most exposed companion is. Above
-    /// zero, somebody comes home hurt.
-    pub injury_risk_score: i32,
+    /// zero, somebody comes home hurt. `None` with no party assigned — there is
+    /// nobody to hurt, so there is no number to give.
+    pub injury_risk_score: Option<i32>,
     /// Average share of full output the assigned party can deliver.
     pub party_effectiveness_pct: u32,
 }

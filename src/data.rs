@@ -10,7 +10,7 @@ mod validation_helpers;
 
 pub use config_types::{
     CompanionSkillProgressionData, CompanionWorkHistoryProgressionData, DayCycleConfigData,
-    UpkeepBandData,
+    ResolutionOptionData, UpkeepBandData,
 };
 pub use loader::load_game_data;
 #[cfg(test)]

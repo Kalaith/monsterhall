@@ -283,6 +283,10 @@ pub(crate) fn calculate_expedition_plan(
     // reports the margin for whoever is most exposed. Quoting a different
     // party-wide formula meant the planning screen could promise safety while
     // the sim maimed somebody. Above zero, someone comes home hurt.
+    // `None` when nobody is assigned: there is no companion to be hurt, and any
+    // number here is a fabrication. It was `i32::MIN / 2`, which the planning
+    // screen printed verbatim as "Injury Risk -1073741824" every time the screen
+    // was opened before a party was picked.
     let injury_risk_score = assigned_monsters
         .iter()
         .map(|monster| {
@@ -296,8 +300,7 @@ pub(crate) fn calculate_expedition_plan(
                     success_score,
                 )
         })
-        .max()
-        .unwrap_or(i32::MIN / 2);
+        .max();
 
     ExpeditionPlanPreview {
         success_score,

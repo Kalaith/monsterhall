@@ -79,8 +79,10 @@ impl ExpeditionLayout {
         let floors_w = 278.0;
         let detail_x = left_margin + floors_w + layout::SECTION_GAP;
         let detail_w = content_width - floors_w - layout::SECTION_GAP;
-        let detail_h = 294.0;
-        let team_y = 406.0;
+        // Tall enough for the prep-cost caption under the metric row: tiles run
+        // 328..378, caption baseline 394, panel closes at 92 + 306 = 398.
+        let detail_h = 306.0;
+        let team_y = 418.0;
         let footer_y = screen_height() - layout::FOOTER_BOTTOM_MARGIN - layout::FOOTER_H;
         let team_h = (footer_y - team_y - layout::SECTION_GAP).max(240.0);
 
@@ -101,7 +103,10 @@ impl ExpeditionLayout {
 /// The score is how far past the injury threshold the most exposed companion
 /// sits, so zero is not "safe enough" — it is the exact point where somebody
 /// comes home hurt. Everything below it is margin.
-fn risk_label(score: i32) -> &'static str {
+fn risk_label(score: Option<i32>) -> &'static str {
+    let Some(score) = score else {
+        return "Risk: no party assigned";
+    };
     if score >= 0 {
         "Risk: Injuries certain"
     } else if score >= -15 {
@@ -111,7 +116,10 @@ fn risk_label(score: i32) -> &'static str {
     }
 }
 
-fn risk_color(score: i32) -> Color {
+fn risk_color(score: Option<i32>) -> Color {
+    let Some(score) = score else {
+        return theme::TEXT_MUTED;
+    };
     if score >= 0 {
         theme::DANGER
     } else if score >= -15 {
@@ -246,16 +254,16 @@ pub fn draw_expedition_planning(
         .iter()
         .filter(|monster| matches!(monster.current_job, CompanionJobState::OnExpedition { .. }))
         .count();
+    // With nobody assigned the risk clause only restates the count, and it is
+    // long enough that the status strip truncated it away mid-word, leaving the
+    // header ending on a bare separator.
     let plan_status = preview
         .as_ref()
-        .map(|preview| {
-            format!(
-                "{} assigned | {}",
-                assigned_count,
-                risk_label(preview.injury_risk_score)
-            )
-        })
-        .unwrap_or_else(|| format!("{} assigned", assigned_count));
+        .and_then(|preview| preview.injury_risk_score)
+        .map_or_else(
+            || format!("{assigned_count} assigned"),
+            |score| format!("{} assigned | {}", assigned_count, risk_label(Some(score))),
+        );
     draw_inline_status(
         layout.detail_x + 252.0,
         160.0,
@@ -404,7 +412,9 @@ pub fn draw_expedition_planning(
             ),
             (
                 "Injury Risk".to_owned(),
-                preview.injury_risk_score.to_string(),
+                preview
+                    .injury_risk_score
+                    .map_or_else(|| "—".to_owned(), |score| score.to_string()),
                 risk_color(preview.injury_risk_score),
             ),
             (
@@ -463,9 +473,12 @@ pub fn draw_expedition_planning(
         }
         if let Some(mission) = selected_mission {
             draw_body_text(
+                // The metric tiles end at 378 and the panel now closes at 398, so
+                // a 13px baseline at 394 clears both. It used to sit at 386,
+                // which drew the caption through the bottom of the Success tile.
                 &expedition_prep_cost_label(mission),
                 layout.detail_x + 16.0,
-                386.0,
+                394.0,
                 13.0,
                 theme::TEXT_MUTED,
             );

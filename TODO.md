@@ -29,6 +29,20 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 
 ### Found by review, not by the audit (2026-08-02)
 
+- ~~Saved display settings were loaded without any validation.~~ Fixed. The
+  default path in `load_or_default_settings` looks `default_resolution_id` up in
+  `available_resolutions` and falls back to the first entry if it is missing —
+  careful work — and `config.rs` validates that id at load time too. The *saved*
+  path returned the deserialized struct verbatim. `AppSettings` is
+  `#[serde(default)]`, so a settings file written before a field existed comes
+  back with `resolution_width: 0, resolution_height: 0`, and
+  `apply_display_settings` hands those straight to `request_new_screen_size`. A
+  resolution dropped from the list in a later patch is quieter: the window still
+  opens, but no button on the settings screen is highlighted, so the player
+  cannot see which mode is live. `reconcile_resolution_against` now looks the
+  saved id up in the list and takes the dimensions from there, or falls back to
+  the configured default when the id is gone. The same constraint, enforced on
+  one path and not its sibling — the shape this project keeps producing.
 - ~~`companion_daily_wage` counted five of the ten skills.~~ Fixed. The wage
   formula summed scouting/guarding/hospitality/crafting/charm and ignored
   recovery, bargaining, navigation, arcana and strength — written against the
@@ -211,6 +225,14 @@ fourteen floors going unwalked by the *simulation*, not the ability to test.
   - **The Contract Desk detail column had three draw calls landing on each other.** The guest name at y=138 is 24px and descends past 150, where the status badge started; the badge is 28 tall and ran into the category line at 180. So the patron tier, preparation quality and room name were all printed through "Pending" and through each other — on the one screen whose whole job is showing a contract's requirements. Respaced as an explicit top-to-bottom column with the intended offsets written down, because the original numbers looked deliberate and were not.
 
     Two smaller ones on that screen are left: the contract list rows draw wider than the panel that holds them, and the thumbnail caption reaches into the text column. Neither obscures information.
+  A fourth pass went back to the images already captured but never opened, and that alone was worth it:
+  - **The Expedition Desk printed "Injury Risk -1073741824"** — `i32::MIN / 2`, the empty-party fallback I added a few passes earlier, rendered raw. An empty party is the state the screen opens in every single time, so this was the default view. `injury_risk_score` is `Option<i32>` now: with nobody assigned there is no companion to hurt and therefore no number, and the tile shows an em dash. The sentinel could never have been caught by a test that did not already know to look for it, because every consumer treated it as an ordinary score.
+  - The same screen's header ended on a bare `|`. The risk clause was long enough that the status strip truncated it away entirely, and with no party it only restated the "0 assigned" beside it. Dropped when there is no party.
+  - "Prep cost: 3g" drew through the bottom of the Success tile: the metric row ends exactly at the panel edge, so there was never room for the caption underneath it. The panel is 12px taller.
+  - **The Hatchery status panel's title was struck through by its own egg counter.** A panel title tab occupies the first ~36px; the tile was placed at +20. "Hatchery Status" was unreadable on every visit to the screen.
+
+  Journal and Settings were clean.
+
   - The worker card's prediction line had grown twice — the condition note and the work-history odds both landed there — and was being cut mid-word. The odds describe the *room*, not the companion, so they moved to the room badge, which was still quoting the bare ceiling: the same "looks guaranteed, is a coin flip" the worker card was fixed for two passes earlier. `GuildJobPreview` lost the two fields that were carrying a per-companion copy of room data.
 
 ## Art

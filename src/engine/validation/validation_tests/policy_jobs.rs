@@ -192,7 +192,11 @@ pub(super) fn expedition_growth_score(
     // most exposed companion: at or above zero somebody is certain to come home
     // hurt, and everything below it is daylight. A guild worth simulating starts
     // paying attention a little before the line rather than after it.
-    let injury_penalty = (preview.injury_risk_score + INJURY_MARGIN_WATCHED).max(0) * 2;
+    // No party assigned means no risk to price. The policy always scores a
+    // one-companion party, so this is a guard rather than a live branch.
+    let injury_penalty = preview
+        .injury_risk_score
+        .map_or(0, |score| (score + INJURY_MARGIN_WATCHED).max(0) * 2);
 
     preview.projected_eggs as i32 * egg_value
         + preview.projected_relics as i32 * relic_value

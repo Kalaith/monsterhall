@@ -85,7 +85,7 @@ fn probe_floor_usage() {
                         p.projected_eggs,
                         p.projected_relics,
                         p.projected_materials,
-                        p.injury_risk_score,
+                        p.injury_risk_score.map_or(-1, |score| score),
                         p.success_score
                     ),
                     Err(e) => println!("SCORE {:<22} {:<14} PREVIEW-ERR {e}", floor.id, mission_id),

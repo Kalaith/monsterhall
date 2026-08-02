@@ -659,6 +659,41 @@ fn egg_star_ratings_span_the_whole_rank_ladder() {
     }
 }
 
+#[test]
+fn an_unassigned_expedition_reports_no_injury_risk_rather_than_a_number() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    game_state.monsters = vec![test_monster(Vec::new())];
+    let floor = data
+        .floors
+        .floors
+        .iter()
+        .find(|floor| game_state.town.unlocked_floor_ids.contains(&floor.id))
+        .expect("a starting floor is unlocked");
+    let mission_id = floor
+        .mission_ids
+        .first()
+        .expect("the starting floor has a mission");
+
+    let preview = preview_expedition_plan(
+        &data,
+        &game_state,
+        &floor.id,
+        mission_id,
+        &ExpeditionPriority::Balanced,
+    )
+    .expect("preview");
+
+    // Nobody assigned means nobody to hurt. This used to fall back to
+    // `i32::MIN / 2`, which the planning screen printed as
+    // "Injury Risk -1073741824" every time it was opened before a party existed.
+    assert!(
+        preview.injury_risk_score.is_none(),
+        "an empty party must not produce an injury number, got {:?}",
+        preview.injury_risk_score
+    );
+}
+
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),
