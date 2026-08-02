@@ -270,18 +270,13 @@ pub fn convert_egg(
         .iter()
         .position(|egg| egg.id == egg_id)
         .ok_or_else(|| format!("Unknown egg id '{egg_id}'."))?;
+    let day_cycle = &data.config.day_cycle;
     let egg = game_state.egg_inventory[egg_index].clone();
-    let quality_rank = egg_quality_rank(&data.config.day_cycle, egg.grade_score);
+    let quality_rank = egg_quality_rank(day_cycle, egg.grade_score);
 
     match conversion {
         EggConversionKind::Sell => {
-            let gold = match quality_rank {
-                1 => 10,
-                2 => 20,
-                3 => 50,
-                4 => 110,
-                _ => 240,
-            };
+            let gold = rank_payout(&day_cycle.egg_sale_gold_by_rank, quality_rank);
             game_state.egg_inventory.remove(egg_index);
             game_state.resources.gold = game_state.resources.gold.saturating_add(gold);
             sync_egg_resource_count(game_state);
@@ -290,14 +285,8 @@ pub fn convert_egg(
             Ok(message)
         }
         EggConversionKind::Dissolve => {
-            let residue = match quality_rank {
-                1 => 8,
-                2 => 18,
-                3 => 35,
-                4 => 68,
-                _ => 130,
-            };
-            let relics = u32::from(quality_rank >= 3);
+            let residue = rank_payout(&day_cycle.egg_dissolve_residue_by_rank, quality_rank);
+            let relics = u32::from(quality_rank >= day_cycle.egg_dissolve_relic_minimum_rank);
             game_state.egg_inventory.remove(egg_index);
             game_state.resources.arcane_residue =
                 game_state.resources.arcane_residue.saturating_add(residue);
@@ -315,7 +304,13 @@ pub fn convert_egg(
             Ok(message)
         }
         EggConversionKind::Refine => {
-            if quality_rank >= 3 {
+            // The ceiling is the top of the authored ladder, not the literal 3
+            // this used to test. The ladder grew to five ranks with the escort
+            // economy and this did not follow, so the refinery refused every
+            // rank-3 egg with a message claiming a ceiling the game had already
+            // moved — and ranks 4 and 5, the two that earn 7x and 10x, could
+            // only ever be found in the tower, never made.
+            if quality_rank >= max_quality_rank(day_cycle) {
                 return Err("This egg is already at the current quality ceiling.".to_owned());
             }
             let Some(other_index) = game_state
@@ -324,8 +319,7 @@ pub fn convert_egg(
                 .enumerate()
                 .find(|(index, candidate)| {
                     *index != egg_index
-                        && egg_quality_rank(&data.config.day_cycle, candidate.grade_score)
-                            == quality_rank
+                        && egg_quality_rank(day_cycle, candidate.grade_score) == quality_rank
                 })
                 .map(|(index, _)| index)
             else {
@@ -338,7 +332,14 @@ pub fn convert_egg(
                     possible_species_ids.push(species_id.clone());
                 }
             }
-            let refined_grade_score = if quality_rank == 1 { 3 } else { 5 };
+            // One rung up, read off the same thresholds `egg_quality_rank` uses,
+            // so refining always lands on exactly the next star and cannot drift
+            // from the ladder the way the old literal 3-or-5 did.
+            let refined_grade_score = day_cycle
+                .egg_quality_rank_thresholds
+                .get(usize::from(quality_rank).saturating_sub(1))
+                .copied()
+                .unwrap_or(egg.grade_score);
             for index in [egg_index, other_index].into_iter().max().into_iter() {
                 game_state.egg_inventory.remove(index);
             }

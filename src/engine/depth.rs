@@ -387,6 +387,31 @@ pub(crate) fn contract_follow_up_request(
     ))
 }
 
+/// What one companion's shift in this room adds to how prepared the hall is.
+///
+/// The single formula, because it existed twice and the two copies had already
+/// drifted: the guild-hall preview scaled it by her condition and the town total
+/// the contract desk actually scores against did not. So the screen told the
+/// player that resting someone before a demanding booking would help, and the
+/// booking was scored as though she were fresh either way.
+pub(crate) fn companion_preparation_quality(
+    data: &GameData,
+    room: &GuildRoomData,
+    monster: &CompanionState,
+) -> u32 {
+    let raw = room
+        .preparation_quality_bonus
+        .saturating_add(monster.skills.scouting / 2)
+        .saturating_add(monster.skills.guarding / 2)
+        .saturating_add(monster.skills.hospitality / 3)
+        .saturating_add(monster.skills.navigation / 2)
+        .saturating_add(monster.skills.arcana / 2);
+    crate::engine::day_cycle::scale_by_effectiveness(
+        raw,
+        crate::engine::day_cycle::companion_effectiveness_pct(&data.config.day_cycle, monster),
+    )
+}
+
 pub(crate) fn town_preparation_quality(data: &GameData, game_state: &GameState) -> u32 {
     let job_quality = game_state
         .monsters
@@ -397,14 +422,7 @@ pub(crate) fn town_preparation_quality(data: &GameData, game_state: &GameState) 
                 .rooms
                 .iter()
                 .find(|room| &room.id == room_id)
-                .map(|room| {
-                    room.preparation_quality_bonus
-                        .saturating_add(monster.skills.scouting / 2)
-                        .saturating_add(monster.skills.guarding / 2)
-                        .saturating_add(monster.skills.hospitality / 3)
-                        .saturating_add(monster.skills.navigation / 2)
-                        .saturating_add(monster.skills.arcana / 2)
-                }),
+                .map(|room| companion_preparation_quality(data, room, monster)),
             _ => None,
         })
         .sum::<u32>();

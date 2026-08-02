@@ -367,13 +367,11 @@ pub(super) fn preview_guild_job_for_town(
         .base_materials_yield
         .saturating_add(stats.power.max(0) as u32 / 4)
         .saturating_add(monster.skills.crafting / 2);
-    let preparation_quality = room
-        .preparation_quality_bonus
-        .saturating_add(monster.skills.scouting / 2)
-        .saturating_add(monster.skills.guarding / 2)
-        .saturating_add(monster.skills.hospitality / 3)
-        .saturating_add(monster.skills.navigation / 2)
-        .saturating_add(monster.skills.arcana / 2);
+    // The engine's own figure, condition included, rather than a second copy of
+    // the same arithmetic — this preview and `town_preparation_quality` are
+    // quoting and scoring the exact same shift.
+    let preparation_quality =
+        crate::engine::depth::companion_preparation_quality(data, room, monster);
 
     // An adventuring party pays for the calibre of escort it gets. Below what
     // the tier expects they still hire, but not at full rate.
@@ -416,7 +414,7 @@ pub(super) fn preview_guild_job_for_town(
             room.reputation_yield + success_score.max(0) / 40,
             effectiveness_pct,
         ),
-        preparation_quality: scale_by_effectiveness(preparation_quality, effectiveness_pct),
+        preparation_quality,
         recovery_bonus: room.recovery_bonus,
         effectiveness_pct,
     })

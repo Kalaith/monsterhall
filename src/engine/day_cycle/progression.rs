@@ -1,16 +1,16 @@
 use super::*;
 
+/// What a day in this room leaves on the companion.
+///
+/// The room's share is authored data now. It used to name `packroom_annex`
+/// outright and give every other tier-3 room 1 by side effect, which meant a
+/// room's exposure to the tower followed its price rather than its purpose, and
+/// a new corruption room would have had to be tier 3 to be dangerous at all.
 pub(super) fn guild_job_instability_gain(
     room: &crate::data::GuildRoomData,
     monster: &CompanionState,
 ) -> u32 {
-    let mut gain = 0;
-
-    if room.id == "packroom_annex" {
-        gain += 2;
-    } else if room.service_tier >= 3 {
-        gain += 1;
-    }
+    let mut gain = room.shift_instability_gain;
 
     if monster
         .trait_ids
@@ -86,6 +86,12 @@ pub(crate) fn apply_guild_job_progression(
 
 /// Whether this shift taught the companion anything about charm.
 ///
+/// The odds live in `guild_rooms.json` now. They used to be a `match` on room id
+/// here — the last of the room-behaviour tables still hardcoded — which meant a
+/// newly authored room got its charm training from whether it happened to name a
+/// required building, and the guild-hall card could not quote a number that was
+/// not data.
+///
 /// `charm_training_flat` is the town's contribution: six buildings advertise it
 /// in their tooltip and the aggregate has always summed it, but nothing read the
 /// sum, so a Nursery Habitat trained exactly as much charm as an empty lot. It
@@ -105,39 +111,25 @@ pub(super) fn should_gain_charm(
         return false;
     }
 
-    let chance_pct = match room.id.as_str() {
-        "common_room" if is_guest_booking => 12,
-        "reception_hall" => {
-            if is_guest_booking {
-                80
-            } else {
-                65
-            }
-        }
-        "packroom_annex" | "nursery_wing" => {
-            if is_guest_booking {
-                45
-            } else {
-                25
-            }
-        }
-        _ if !room.required_building_ids.is_empty() => {
-            if is_guest_booking {
-                35
-            } else {
-                20
-            }
-        }
-        _ => 0,
-    };
+    let chance_pct = charm_training_chance_pct(room, is_guest_booking);
 
     // A room that never teaches charm is not taught it by architecture either —
-    // the town bonus improves lessons that already happen.
-    if chance_pct <= 0 {
+    // the town bonus improves lessons that already happen. This also keeps the
+    // RNG stream exactly the length it was when these odds were a `match`.
+    if chance_pct == 0 {
         return false;
     }
-    let chance_pct = (chance_pct + charm_training_flat).clamp(0, 100);
+    let chance_pct = (chance_pct as i32 + charm_training_flat).clamp(0, 100);
     gen_range(0, 100) < chance_pct
+}
+
+/// A room's authored charm odds for the kind of shift being worked.
+pub fn charm_training_chance_pct(room: &crate::data::GuildRoomData, is_guest_booking: bool) -> u32 {
+    if is_guest_booking {
+        room.charm_training_booking_chance_pct
+    } else {
+        room.charm_training_chance_pct
+    }
 }
 
 pub(super) fn skill_ids_from_work_history_gains(

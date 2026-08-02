@@ -74,6 +74,17 @@ pub(super) fn quality_wage_multiplier_pct(day_cycle: &DayCycleConfigData, qualit
     rank_multiplier_pct(&day_cycle.quality_wage_multipliers_pct, quality_rank)
 }
 
+/// What a rank-indexed payout curve pays this rank, holding at the last entry
+/// rather than falling to zero if the ladder ever outgrows the curve.
+pub(super) fn rank_payout(curve: &[u32], quality_rank: u8) -> u32 {
+    let index = usize::from(quality_rank.max(1)) - 1;
+    curve
+        .get(index)
+        .or_else(|| curve.last())
+        .copied()
+        .unwrap_or(0)
+}
+
 fn rank_multiplier_pct(curve: &[u32], quality_rank: u8) -> u32 {
     let index = usize::from(quality_rank.max(1)) - 1;
     curve

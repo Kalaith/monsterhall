@@ -80,33 +80,39 @@ pub fn work_history_summary(data: &GameData, monster: &crate::state::CompanionSt
     )
 }
 
+/// The badge code for each kind of banked work, in category order.
+///
+/// These read `K`, `O`, `V`, `A`, `C`, `M`, `B` — initials of the premise this
+/// game was reskinned from, with `K` standing for a scouting run and `B` for a
+/// hatchery assist. They are the last of that vocabulary on a player-facing
+/// surface, and being one letter wide is what let them survive the rename pass
+/// unread. Two letters costs a few pixels and says what the work is.
+///
+/// One table, so the plain label and the with-odds label cannot name the same
+/// category two different ways.
+fn work_history_codes(
+    history: &crate::state::CompanionWorkHistoryState,
+) -> [(&'static str, u32); 7] {
+    [
+        ("Sc", history.scouting_runs),
+        ("Gd", history.guard_duties),
+        ("Hs", history.hospitality_jobs),
+        ("Cf", history.craft_jobs),
+        ("Ct", history.contracts_completed),
+        ("Rc", history.recovery_shifts),
+        ("Ht", history.hatchery_assists),
+    ]
+}
+
 pub fn history_gain_label(
     data: &GameData,
     history: &crate::state::CompanionWorkHistoryState,
 ) -> String {
-    let mut parts = Vec::new();
-
-    if history.scouting_runs > 0 {
-        parts.push(format!("K+{}", history.scouting_runs));
-    }
-    if history.guard_duties > 0 {
-        parts.push(format!("O+{}", history.guard_duties));
-    }
-    if history.hospitality_jobs > 0 {
-        parts.push(format!("V+{}", history.hospitality_jobs));
-    }
-    if history.craft_jobs > 0 {
-        parts.push(format!("A+{}", history.craft_jobs));
-    }
-    if history.contracts_completed > 0 {
-        parts.push(format!("C+{}", history.contracts_completed));
-    }
-    if history.recovery_shifts > 0 {
-        parts.push(format!("M+{}", history.recovery_shifts));
-    }
-    if history.hatchery_assists > 0 {
-        parts.push(format!("B+{}", history.hatchery_assists));
-    }
+    let parts = work_history_codes(history)
+        .into_iter()
+        .filter(|(_, gain)| *gain > 0)
+        .map(|(code, gain)| format!("{code}+{gain}"))
+        .collect::<Vec<_>>();
 
     if parts.is_empty() {
         data.ui_text.common.none_label.clone()
@@ -125,25 +131,22 @@ pub fn history_gain_chance_label(
     gains: &crate::state::CompanionWorkHistoryState,
     chance_pct: &crate::data::CompanionWorkHistoryProgressionData,
 ) -> String {
-    let entries = [
-        ("K", gains.scouting_runs, chance_pct.scouting_runs),
-        ("O", gains.guard_duties, chance_pct.guard_duties),
-        ("V", gains.hospitality_jobs, chance_pct.hospitality_jobs),
-        ("A", gains.craft_jobs, chance_pct.craft_jobs),
-        (
-            "C",
-            gains.contracts_completed,
-            chance_pct.contracts_completed,
-        ),
-        ("M", gains.recovery_shifts, chance_pct.recovery_shifts),
-        ("B", gains.hatchery_assists, chance_pct.hatchery_assists),
-    ];
+    let odds = work_history_codes(&crate::state::CompanionWorkHistoryState {
+        scouting_runs: chance_pct.scouting_runs,
+        guard_duties: chance_pct.guard_duties,
+        hospitality_jobs: chance_pct.hospitality_jobs,
+        craft_jobs: chance_pct.craft_jobs,
+        contracts_completed: chance_pct.contracts_completed,
+        recovery_shifts: chance_pct.recovery_shifts,
+        hatchery_assists: chance_pct.hatchery_assists,
+    });
 
-    let parts = entries
-        .iter()
-        .filter(|(_, gain, chance)| *gain > 0 && *chance > 0)
-        .map(|(code, gain, chance)| {
-            if *chance >= 100 {
+    let parts = work_history_codes(gains)
+        .into_iter()
+        .zip(odds)
+        .filter(|((_, gain), (_, chance))| *gain > 0 && *chance > 0)
+        .map(|((code, gain), (_, chance))| {
+            if chance >= 100 {
                 format!("{code}+{gain}")
             } else {
                 format!("{code}+{gain} @{chance}%")
@@ -160,11 +163,17 @@ pub fn history_gain_chance_label(
 
 /// Room-side variant of [`history_gain_chance_label`]: what a shift here can
 /// bank and how often, from the room's own ceilings and odds.
+///
+/// Charm rides along because it is the one lesson with no work-history category
+/// behind it — its odds were a `match` on room id in Rust until they became
+/// authored data, so this badge could not have shown them before. A room that
+/// lists charm and teaches it two days in three is a different proposition from
+/// one that only teaches it while a patron is in the room.
 pub fn history_gain_chance_label_from_progress(
     data: &GameData,
-    gains: &crate::data::CompanionWorkHistoryProgressionData,
-    chance_pct: &crate::data::CompanionWorkHistoryProgressionData,
+    room: &crate::data::GuildRoomData,
 ) -> String {
+    let gains = &room.work_history_gains;
     let state_like = crate::state::CompanionWorkHistoryState {
         scouting_runs: gains.scouting_runs,
         guard_duties: gains.guard_duties,
@@ -174,7 +183,24 @@ pub fn history_gain_chance_label_from_progress(
         recovery_shifts: gains.recovery_shifts,
         hatchery_assists: gains.hatchery_assists,
     };
-    history_gain_chance_label(data, &state_like, chance_pct)
+    let banked = history_gain_chance_label(data, &state_like, &room.work_history_gain_chance_pct);
+
+    let shift = crate::engine::charm_training_chance_pct(room, false);
+    let booking = crate::engine::charm_training_chance_pct(room, true);
+    if shift == 0 && booking == 0 {
+        return banked;
+    }
+    let charm = if shift == booking {
+        format!("Ch @{shift}%")
+    } else {
+        format!("Ch @{shift}/{booking}%")
+    };
+
+    if banked == data.ui_text.common.none_label {
+        charm
+    } else {
+        format!("{banked} {charm}")
+    }
 }
 
 pub fn history_gain_label_from_progress(

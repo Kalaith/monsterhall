@@ -161,6 +161,66 @@ impl GameData {
             );
         }
 
+        self.validate_quality_rank_ladder()?;
+
+        Ok(())
+    }
+
+    /// The star ladder and everything indexed by it.
+    ///
+    /// `egg_quality_rank` reads a rank off `egg_quality_rank_thresholds` by
+    /// counting how many it clears, so an unsorted list silently mis-ranks eggs.
+    /// And every curve indexed by rank holds at its last entry when it runs
+    /// short, so a curve authored for the old three-rank ladder pays ranks 4 and
+    /// 5 whatever rank 3 got, with nothing to say so. Both are the shape that
+    /// left the refinery capped at three stars for a whole escort economy.
+    fn validate_quality_rank_ladder(&self) -> Result<(), String> {
+        let day_cycle = &self.config.day_cycle;
+        let thresholds = &day_cycle.egg_quality_rank_thresholds;
+        if thresholds.is_empty() {
+            return Err(
+                "config.json day_cycle.egg_quality_rank_thresholds must not be empty.".to_owned(),
+            );
+        }
+        if thresholds.windows(2).any(|pair| pair[0] >= pair[1]) {
+            return Err(
+                "config.json day_cycle.egg_quality_rank_thresholds must ascend strictly."
+                    .to_owned(),
+            );
+        }
+
+        let max_rank = thresholds.len() + 1;
+        for (field, curve) in [
+            (
+                "quality_income_multipliers_pct",
+                &day_cycle.quality_income_multipliers_pct,
+            ),
+            (
+                "quality_wage_multipliers_pct",
+                &day_cycle.quality_wage_multipliers_pct,
+            ),
+            ("egg_sale_gold_by_rank", &day_cycle.egg_sale_gold_by_rank),
+            (
+                "egg_dissolve_residue_by_rank",
+                &day_cycle.egg_dissolve_residue_by_rank,
+            ),
+        ] {
+            if curve.len() < max_rank {
+                return Err(format!(
+                    "config.json day_cycle.{field} has {} entries against a {max_rank}-rank ladder.",
+                    curve.len()
+                ));
+            }
+        }
+
+        if day_cycle.egg_dissolve_relic_minimum_rank == 0
+            || usize::from(day_cycle.egg_dissolve_relic_minimum_rank) > max_rank
+        {
+            return Err(format!(
+                "config.json day_cycle.egg_dissolve_relic_minimum_rank must fall inside 1..={max_rank}."
+            ));
+        }
+
         Ok(())
     }
 }

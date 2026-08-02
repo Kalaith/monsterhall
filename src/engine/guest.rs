@@ -148,11 +148,6 @@ pub fn refresh_contracts(
                 || (meets_guest_hard_gates(data, game_state, &candidate_request, monster)
                     && contract_partial_success(data, game_state, &candidate_request, monster))
         });
-        let _total_failure_reasons = candidate_reports
-            .iter()
-            .map(|(_, report)| report.failure_reasons.len())
-            .sum::<usize>();
-
         if !has_eligible_candidate {
             report.rejected += 1;
             continue;

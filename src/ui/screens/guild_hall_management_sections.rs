@@ -274,11 +274,7 @@ pub(super) fn draw_selected_room_panel(
         &format!(
             "History {}",
             compact_sentence(
-                &history_gain_chance_label_from_progress(
-                    data,
-                    &selected_room.work_history_gains,
-                    &selected_room.work_history_gain_chance_pct,
-                ),
+                &history_gain_chance_label_from_progress(data, selected_room),
                 34
             )
         ),

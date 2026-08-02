@@ -659,6 +659,57 @@ Stop the loop and report if:
   unchanged: **guild rooms 4** for a 20-companion roster, **patron tiers 3** with upkeep bands
   already referencing a fourth, and relics still have no patron who asks for one by name.
 
+- **2026-08-03 — five gameplay defects, and the harness was one of them.** Not a
+  content axis: a review pass over `TODO.md`'s gameplay-affecting section, which
+  had nothing left in it but decisions parked for the user. Five landed, and the
+  first one matters more than the other four together.
+  **The star ladder still said three in two places.** Two passes ago the hatchery
+  UI's hardcoded `egg_quality_rank` was fixed; nobody swept for other copies.
+  `convert_egg`'s Refine path refused every rank-3 egg against a ceiling of 5 —
+  so the only way to *make* a good egg rather than find one could not reach the
+  two ranks that earn 7x and 10x — and `policy_eggs.rs` carried a private
+  `egg_quality_rank_for_policy` capped at `_ => 3`, feeding
+  `replacement_plan_for_egg`. **The balance harness was reading every egg above
+  grade 10 as a three** and declining to replace any rank-3-or-better companion
+  with one. Delegating it moved multi-seed 365 gold **684k → 1.07M**, buildings
+  22.3 → 24.2, companions 18.7 → 19.2, expedition days 59.2 → 72.2, debt gap
+  −1.31M → −0.98M; single-seed floors 16 → 19, hatches 33 → 43. Zero missed
+  payments, no assertion touched. **Every balance figure in `TODO.md` and this
+  ledger predating today was measured through that lens.**
+  **The other four moved nothing and all four were player-facing.** The
+  preparation-quality formula existed twice and only the preview scaled it by
+  condition, so the guild-hall card promised that resting someone before a
+  booking would help while the desk scored her as fresh. The contract desk
+  printed **"Kiss Count"** and **"Birth Count"** as refusal reasons — the retired
+  premise's vocabulary, surviving as string arguments rather than content ids,
+  which is exactly why the rename pass missed them; the guild-hall badge codes
+  `K`/`O`/`V`/`A`/`C`/`M`/`B` were the same initials, one letter wide. Charm
+  odds were the last room table hardcoded as a `match` on room id (a new room got
+  its charm training from whether it named a required building), and
+  `guild_job_instability_gain` named `packroom_annex` outright. Both are authored
+  data now, at the exact values the matches produced, so the RNG stream and every
+  seeded report are byte-identical.
+  **One latent trap worth remembering:** `validate_role_or_niche` checked room
+  niches and companion roles against the *union* of both closed sets. A mission
+  authored `preferred_role: "performance"` — a room niche — passes validation and
+  matches no companion, so `role_affinity` charges the **entire party** the
+  off-role penalty instead of rewarding anyone. Split in two, and
+  `COMPANION_ROLES` is now tested by sweeping `monster_role`'s branches rather
+  than by eye. Shipped content was already correct.
+  **Result:** 87 tests (was 79), fmt and clippy clean, publish green. Two new
+  config blocks (`egg_sale_gold_by_rank`, `egg_dissolve_residue_by_rank`,
+  `egg_dissolve_relic_minimum_rank`) and three new room fields. Both new guards
+  verified by planting the bug and watching them fire.
+  **Next iteration should know:** (a) re-measure before trusting any parked
+  balance decision in `TODO.md` — "a competent guild finishes the campaign early"
+  in particular is now measured against a guild with 57% more gold, and the
+  survey-term question may have a different answer; (b) `monster_service_score`
+  in `policy_eggs.rs` still counts five of the ten skills, the same shape as the
+  wage bug, and it decides which companion the policy releases; (c) the thin
+  content axes are unchanged — **guild rooms 4** for a 20-companion roster,
+  **patron tiers 3** with upkeep bands already referencing a fourth, and relics
+  still have no patron who asks for one by name.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

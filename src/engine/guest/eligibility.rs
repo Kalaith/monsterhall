@@ -171,61 +171,79 @@ fn append_skill_requirement_reasons(
     );
 }
 
+/// What the contract desk calls each kind of banked work, in the guild's own
+/// vocabulary.
+///
+/// Two of these read "Kiss Count" and "Birth Count" — leftovers from the premise
+/// this game was reskinned from, printed verbatim onto the desk as the reason a
+/// booking was refused. The rename pass caught ids and display names and never
+/// reached here, because these strings are arguments rather than data.
+///
+/// Kept as one table so the seven categories are named in one place; the day
+/// log's own summary of the same work is checked against it by test.
+pub(super) const WORK_HISTORY_LABELS: [(&str, &str); 7] = [
+    ("scouting_runs", "Scouting Runs"),
+    ("guard_duties", "Guard Duties"),
+    ("hospitality_jobs", "Hospitality Shifts"),
+    ("craft_jobs", "Crafting Jobs"),
+    ("contracts_completed", "Contracts Completed"),
+    ("recovery_shifts", "Recovery Shifts"),
+    ("hatchery_assists", "Hatchery Assists"),
+];
+
+pub(super) fn work_history_label(category: &str) -> &'static str {
+    WORK_HISTORY_LABELS
+        .iter()
+        .find(|(id, _)| *id == category)
+        .map(|(_, label)| *label)
+        .unwrap_or("Work History")
+}
+
 fn append_history_requirement_reasons(
     data: &GameData,
     failure_reasons: &mut Vec<String>,
     request: &ContractState,
     monster: &CompanionState,
 ) {
-    check_history_requirement(
-        data,
-        failure_reasons,
-        "Kiss Count",
-        request.required_work_history_thresholds.scouting_runs,
-        monster.work_history.scouting_runs,
-    );
-    check_history_requirement(
-        data,
-        failure_reasons,
-        "Guarding Count",
-        request.required_work_history_thresholds.guard_duties,
-        monster.work_history.guard_duties,
-    );
-    check_history_requirement(
-        data,
-        failure_reasons,
-        "Hospitality Count",
-        request.required_work_history_thresholds.hospitality_jobs,
-        monster.work_history.hospitality_jobs,
-    );
-    check_history_requirement(
-        data,
-        failure_reasons,
-        "Crafting Count",
-        request.required_work_history_thresholds.craft_jobs,
-        monster.work_history.craft_jobs,
-    );
-    check_history_requirement(
-        data,
-        failure_reasons,
-        "Contracts Completed",
-        request.required_work_history_thresholds.contracts_completed,
-        monster.work_history.contracts_completed,
-    );
-    check_history_requirement(
-        data,
-        failure_reasons,
-        "Recovery Shifts",
-        request.required_work_history_thresholds.recovery_shifts,
-        monster.work_history.recovery_shifts,
-    );
-    check_history_requirement(
-        data,
-        failure_reasons,
-        "Birth Count",
-        request.required_work_history_thresholds.hatchery_assists,
-        monster.work_history.hatchery_assists,
-    );
+    let required = &request.required_work_history_thresholds;
+    let banked = &monster.work_history;
+    for (category, required, current) in [
+        (
+            "scouting_runs",
+            required.scouting_runs,
+            banked.scouting_runs,
+        ),
+        ("guard_duties", required.guard_duties, banked.guard_duties),
+        (
+            "hospitality_jobs",
+            required.hospitality_jobs,
+            banked.hospitality_jobs,
+        ),
+        ("craft_jobs", required.craft_jobs, banked.craft_jobs),
+        (
+            "contracts_completed",
+            required.contracts_completed,
+            banked.contracts_completed,
+        ),
+        (
+            "recovery_shifts",
+            required.recovery_shifts,
+            banked.recovery_shifts,
+        ),
+        (
+            "hatchery_assists",
+            required.hatchery_assists,
+            banked.hatchery_assists,
+        ),
+    ] {
+        check_history_requirement(
+            data,
+            failure_reasons,
+            work_history_label(category),
+            required,
+            current,
+        );
+    }
 }
 
 fn check_skill_requirement(

@@ -129,6 +129,17 @@ pub struct DayCycleConfigData {
     /// What an escort of each rank is paid, indexed rank 1..=5.
     #[serde(default = "default_quality_wage_multipliers_pct")]
     pub quality_wage_multipliers_pct: Vec<u32>,
+    /// Gold a sold egg of each rank fetches, indexed rank 1..=5. These were a
+    /// `match` in `convert_egg`, which put a balance curve in Rust and meant a
+    /// longer ladder silently paid its top two ranks the same.
+    #[serde(default = "default_egg_sale_gold_by_rank")]
+    pub egg_sale_gold_by_rank: Vec<u32>,
+    /// Arcane residue a dissolved egg of each rank yields, indexed rank 1..=5.
+    #[serde(default = "default_egg_dissolve_residue_by_rank")]
+    pub egg_dissolve_residue_by_rank: Vec<u32>,
+    /// Rank at which dissolving an egg also recovers a relic.
+    #[serde(default = "default_egg_dissolve_relic_minimum_rank")]
+    pub egg_dissolve_relic_minimum_rank: u8,
     #[serde(default = "default_skill_wage_divisor")]
     pub skill_wage_divisor: u32,
     /// Divides a species' total base stats into its share of the daily wage.
@@ -325,6 +336,18 @@ fn default_quality_income_multipliers_pct() -> Vec<u32> {
 
 fn default_quality_wage_multipliers_pct() -> Vec<u32> {
     vec![100, 160, 260, 420, 650]
+}
+
+fn default_egg_sale_gold_by_rank() -> Vec<u32> {
+    vec![10, 20, 50, 110, 240]
+}
+
+fn default_egg_dissolve_residue_by_rank() -> Vec<u32> {
+    vec![8, 18, 35, 68, 130]
+}
+
+fn default_egg_dissolve_relic_minimum_rank() -> u8 {
+    3
 }
 
 fn default_species_stat_wage_divisor() -> u32 {

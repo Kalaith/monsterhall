@@ -437,6 +437,27 @@ pub struct GuildRoomData {
     /// 12%-chance contract read exactly like a 70%-chance scouting run.
     #[serde(default = "default_work_history_gain_chance_pct")]
     pub work_history_gain_chance_pct: CompanionWorkHistoryProgressionData,
+    /// Chance an ordinary shift in this room teaches the companion charm.
+    ///
+    /// The last odds still living as a `match` on room id in Rust. A room the
+    /// catalogue had never heard of got 20% or 0% depending only on whether it
+    /// happened to require a building, and the guild-hall preview could not show
+    /// the number at all because it was not data.
+    #[serde(default)]
+    pub charm_training_chance_pct: u32,
+    /// Instability a shift in this room leaves on the companion.
+    ///
+    /// Was `room.id == "packroom_annex"` in Rust, with every other tier-3 room
+    /// getting 1 by accident of its tier — so a newly authored corruption room
+    /// picked up its exposure from how expensive it was rather than from what
+    /// happens in it.
+    #[serde(default)]
+    pub shift_instability_gain: u32,
+    /// The same, for a shift spent closing a booking rather than working the
+    /// room. Serving a patron is where charm is really learned, so every room
+    /// teaches more of it on a contract than on a quiet day.
+    #[serde(default)]
+    pub charm_training_booking_chance_pct: u32,
     pub preferred_trait_ids: Vec<String>,
     pub preferred_species_ids: Vec<String>,
     #[serde(default)]

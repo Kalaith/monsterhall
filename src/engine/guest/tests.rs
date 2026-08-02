@@ -145,3 +145,61 @@ fn guest_eligibility_accepts_trained_matching_specialist() {
     assert!(report.is_eligible);
     assert!(report.failure_reasons.is_empty());
 }
+
+/// Every work-history category the contract desk can refuse a booking over must
+/// name itself in the guild's current vocabulary.
+///
+/// Two of these labels were still "Kiss Count" and "Birth Count" from the
+/// premise this game was reskinned from — the only place the retired wording
+/// survived, and it was on the player's screen. They are string arguments rather
+/// than content ids, so the rename pass and every id validation walked straight
+/// past them.
+#[test]
+fn no_work_history_label_carries_the_retired_vocabulary() {
+    use super::eligibility::WORK_HISTORY_LABELS;
+
+    let retired = ["kiss", "birth", "girl", "client", "guest request"];
+    for (category, label) in WORK_HISTORY_LABELS {
+        let lowered = label.to_lowercase();
+        for word in retired {
+            assert!(
+                !lowered.contains(word),
+                "'{category}' is shown to the player as '{label}', which is retired vocabulary"
+            );
+        }
+        assert!(
+            !label.is_empty(),
+            "'{category}' has no label to show the player"
+        );
+    }
+}
+
+/// And each category must be named after the work it actually counts, so a
+/// refusal reason cannot point at the wrong meter.
+#[test]
+fn a_refused_booking_names_the_work_it_is_short_of() {
+    let data = crate::data::test_game_data();
+    let game_state = crate::engine::create_new_game_state(&data);
+    let request = ContractState {
+        required_work_history_thresholds: ContractHistoryRequirementState {
+            hatchery_assists: 3,
+            ..ContractHistoryRequirementState::default()
+        },
+        ..ContractState::default()
+    };
+    let monster = CompanionState {
+        quality_rank: 1,
+        ..CompanionState::default()
+    };
+
+    let report = evaluate_contract_eligibility(&data, &game_state, &request, &monster);
+
+    assert!(
+        report
+            .failure_reasons
+            .iter()
+            .any(|reason| reason.contains("Hatchery Assists")),
+        "a booking short of hatchery work should say so: {:?}",
+        report.failure_reasons
+    );
+}

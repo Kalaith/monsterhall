@@ -37,6 +37,9 @@
         "recovery_shifts": 0,
         "hatchery_assists": 0
       },
+      "charm_training_chance_pct": 0,
+      "charm_training_booking_chance_pct": 12,
+      "shift_instability_gain": 0,
       "preferred_trait_ids": [
         "eager",
         "calming_presence",
@@ -102,6 +105,9 @@
         "recovery_shifts": 60,
         "hatchery_assists": 0
       },
+      "charm_training_chance_pct": 25,
+      "charm_training_booking_chance_pct": 45,
+      "shift_instability_gain": 2,
       "preferred_trait_ids": [
         "commanding",
         "corruption_tuned",
@@ -171,6 +177,9 @@
         "recovery_shifts": 0,
         "hatchery_assists": 5
       },
+      "charm_training_chance_pct": 25,
+      "charm_training_booking_chance_pct": 45,
+      "shift_instability_gain": 1,
       "preferred_trait_ids": [
         "hatchery_attuned",
         "calming_presence",
@@ -239,6 +248,9 @@
         "recovery_shifts": 65,
         "hatchery_assists": 0
       },
+      "charm_training_chance_pct": 65,
+      "charm_training_booking_chance_pct": 80,
+      "shift_instability_gain": 1,
       "preferred_trait_ids": [
         "commanding",
         "graceful",

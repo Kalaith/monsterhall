@@ -171,6 +171,73 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03)
+
+- ~~The star ladder went 1–5 and three places still said 3.~~ Fixed, and this
+  one was expensive. Two passes ago the hatchery UI's hardcoded `egg_quality_rank`
+  was found and delegated; the sweep did not look for *other* copies of the
+  number 3. Two survived. **The refinery** (`convert_egg`) refused every rank-3
+  egg with "already at the current quality ceiling" against a ceiling of 5, and
+  produced a literal grade of 3-or-5 — so refining, the only way to *make* a
+  better egg rather than find one, could not reach ranks 4 and 5, the two that
+  earn 7x and 10x. The ceiling is `max_quality_rank` now and the output grade is
+  read off `egg_quality_rank_thresholds`, so it climbs exactly one rung whatever
+  the ladder says. **And the validation harness** carried a private
+  `egg_quality_rank_for_policy` capped at `_ => 3` — the same shape as the third
+  copy of the role classifier found in the same place last pass. It fed
+  `replacement_plan_for_egg`, so the simulated guild saw every egg above grade 10
+  as a three and declined to replace any companion of rank 3 or better with one.
+  **That is the yardstick every balance judgement in this file rests on**, and it
+  was systematically undervaluing the tower's best output. Delegating it moved
+  the multi-seed 365-day numbers hard: gold 684k → **1.07M**, buildings 22.3 →
+  24.2, companions 18.7 → 19.2, expedition days 59.2 → 72.2, debt gap −1.31M →
+  −0.98M, single-seed floors 16 → 19, hatches 33 → 43. Missed payments stay at 0
+  and no assertion was touched. Sell and dissolve payouts moved from a `match` in
+  Rust into `config.json`, and load-time validation now rejects any rank-indexed
+  curve shorter than the ladder, plus a non-ascending threshold list.
+  **Read this before trusting any pre-2026-08-03 balance figure in this file.**
+- ~~The preparation-quality formula existed twice and the copies disagreed.~~
+  Fixed. `preview_guild_job_for_town` scaled a companion's contribution by her
+  condition; `town_preparation_quality` — the figure `contract_depth_score`
+  actually scores bookings against — recomputed the same five skill terms and did
+  not. So the guild-hall card told the player that resting someone before a
+  demanding booking would help, and the desk scored her as fresh either way. One
+  `companion_preparation_quality` now, condition included, called by both. Zero
+  balance movement: the simulated guild keeps its hall workers rested, so the
+  divergence only ever misled a human.
+- ~~"Kiss Count" and "Birth Count" were printed on the contract desk.~~ Fixed.
+  The refusal reason for a booking short of scouting work read "Kiss Count", and
+  for hatchery work "Birth Count" — the vocabulary of the premise this game was
+  reskinned from, surviving as string *arguments* rather than content ids, which
+  is why the rename pass and every id validation walked past them. The seven
+  categories are one table now, and the badge codes on the guild-hall screen
+  (`K`, `O`, `V`, `A`, `C`, `M`, `B` — same initials, one letter wide, which is
+  how they went unread) are two-letter codes naming the work. A test rejects any
+  label containing the retired words.
+- ~~Charm training odds were the last room table hardcoded in Rust.~~ Fixed. A
+  `match` on room id gave `reception_hall` 65/80% and everything else its odds
+  from whether it happened to name a required building — so a newly authored room
+  got its charm training from its build requirements. Now
+  `charm_training_chance_pct` / `charm_training_booking_chance_pct` in
+  `guild_rooms.json`, authored to the exact values the match produced, so the RNG
+  stream and every seeded report are unmoved. The guild-hall room badge shows
+  them (`Ch @25/45%`), which it could not do while they were not data. A test
+  asserts a room advertising charm teaches it and vice versa.
+- ~~Room instability keyed on a hardcoded id, and the niche vocabulary was one
+  closed set doing two jobs.~~ Fixed. `guild_job_instability_gain` named
+  `packroom_annex` outright and gave every other tier-3 room 1 by side effect, so
+  a room's exposure to the tower followed its price rather than its purpose;
+  it is `shift_instability_gain` in the room data now, authored to the same
+  values. And `validate_role_or_niche` checked both room niches and companion
+  roles against the union of both vocabularies — so a room authored `delver`
+  passes and silently takes the generic gold bias, and worse, a mission authored
+  `performance` passes and matches **nobody**, charging the whole party the
+  off-role penalty instead of rewarding anyone. Split into two sets, each tested
+  against the code that consumes it: `COMPANION_ROLES` is checked by sweeping
+  `monster_role`'s branches, so a role the validator accepts must be one a
+  companion can actually hold. All shipped content was already correct; this is
+  the trap closed, not a live bug. Verified by planting both.
+
 ### Found by review, not by the audit (2026-08-02)
 
 - ~~A third copy of the role classifier, in the validation harness.~~ Fixed.

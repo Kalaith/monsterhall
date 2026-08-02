@@ -10,7 +10,7 @@ use crate::state::{
 fn golemkin_room_and_trait_add_corruption() {
     let room = GuildRoomData {
         id: "packroom_annex".to_owned(),
-        name: "golemkin Pit".to_owned(),
+        name: "Packroom Annex".to_owned(),
         description: String::new(),
         service_summary: "Test service".to_owned(),
         required_building_ids: Vec::new(),
@@ -31,6 +31,9 @@ fn golemkin_room_and_trait_add_corruption() {
             ..crate::data::CompanionWorkHistoryProgressionData::default()
         },
         work_history_gain_chance_pct: crate::data::CompanionWorkHistoryProgressionData::default(),
+        charm_training_chance_pct: 0,
+        charm_training_booking_chance_pct: 0,
+        shift_instability_gain: 2,
         preferred_trait_ids: Vec::new(),
         preferred_species_ids: Vec::new(),
         strategic_niche: None,
@@ -45,6 +48,7 @@ fn golemkin_room_and_trait_add_corruption() {
     };
     let monster = test_monster(vec!["corruption_tuned".to_owned()]);
 
+    // The room's own exposure plus what the companion's own tuning attracts.
     assert_eq!(guild_job_instability_gain(&room, &monster), 3);
 }
 
@@ -231,6 +235,9 @@ fn trained_room_skills_add_guild_job_bonus() {
             ..crate::data::CompanionWorkHistoryProgressionData::default()
         },
         work_history_gain_chance_pct: crate::data::CompanionWorkHistoryProgressionData::default(),
+        charm_training_chance_pct: 0,
+        charm_training_booking_chance_pct: 0,
+        shift_instability_gain: 0,
         preferred_trait_ids: Vec::new(),
         preferred_species_ids: vec!["slime_companion".to_owned()],
         strategic_niche: None,
@@ -412,6 +419,71 @@ fn a_worn_down_worker_earns_the_guild_less() {
     assert!(worn_preview.preparation_quality <= fresh_preview.preparation_quality);
 }
 
+/// The guild-hall card quotes what a companion's shift adds to the hall's
+/// readiness; the contract desk scores bookings against the town's total. Those
+/// were two copies of one formula and only the preview scaled by condition, so
+/// resting someone before a demanding booking visibly changed the quoted number
+/// and changed nothing that was scored.
+#[test]
+fn the_prep_quality_quoted_is_the_prep_quality_scored() {
+    let data = crate::data::test_game_data();
+    let room = data
+        .guild_rooms
+        .rooms
+        .iter()
+        .find(|room| room.preparation_quality_bonus > 0)
+        .expect("some room must contribute preparation quality");
+
+    let mut worker = test_monster(Vec::new());
+    worker.skills.scouting = 6;
+    worker.skills.guarding = 4;
+    worker.current_job = CompanionJobState::GuildJob {
+        room_id: room.id.clone(),
+    };
+
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    game_state.monsters = vec![worker];
+    game_state.active_contracts.clear();
+    for tier_id in &room.patron_tiers {
+        if !game_state.town.patron_tiers.contains(tier_id) {
+            game_state.town.patron_tiers.push(tier_id.clone());
+        }
+    }
+
+    let building_bonus = collect_building_modifiers(&data, &game_state);
+    let quoted = |game_state: &GameState| {
+        preview_guild_job_for_town(
+            &data,
+            &game_state.town,
+            &building_bonus,
+            &game_state.monsters[0],
+            &room.id,
+        )
+        .expect("preview")
+        .preparation_quality
+    };
+    // The town total carries project and contract bonuses the per-companion
+    // figure does not, so the two are compared by how they *move*, not by value.
+    let rested_quoted = quoted(&game_state);
+    let rested_scored = crate::engine::depth::town_preparation_quality(&data, &game_state);
+    assert!(rested_quoted > 0, "test needs a shift worth quoting");
+
+    game_state.monsters[0].fatigue = 220;
+    game_state.monsters[0].stress = 140;
+    let worn_quoted = quoted(&game_state);
+    let worn_scored = crate::engine::depth::town_preparation_quality(&data, &game_state);
+
+    assert!(
+        worn_quoted < rested_quoted,
+        "wearing a companion down must lower what the hall card quotes"
+    );
+    assert_eq!(
+        rested_quoted - worn_quoted,
+        rested_scored - worn_scored,
+        "the desk must lose exactly what the card said it would"
+    );
+}
+
 #[test]
 fn a_room_only_rolls_the_work_it_can_actually_bank() {
     let data = crate::data::test_game_data();
@@ -591,6 +663,45 @@ fn a_room_can_only_teach_a_skill_its_own_work_feeds() {
     }
 }
 
+/// The same promise, checked on charm's own path.
+///
+/// Charm odds were a `match` on room id in Rust until this pass, so nothing
+/// could line them up against `trained_skill_ids` — a room could advertise charm
+/// and never teach it, or teach it without saying so, and the only way to find
+/// out was to read the match arm.
+#[test]
+fn charm_odds_and_the_advertised_lesson_agree() {
+    let data = crate::data::test_game_data();
+
+    for room in &data.guild_rooms.rooms {
+        let advertised = room.trained_skill_ids.iter().any(|id| id == "charm");
+        let teaches =
+            charm_training_chance_pct(room, false) > 0 || charm_training_chance_pct(room, true) > 0;
+
+        assert_eq!(
+            advertised, teaches,
+            "room '{}' advertises charm: {advertised}, actually teaches it: {teaches}",
+            room.id
+        );
+
+        for is_booking in [false, true] {
+            assert!(
+                charm_training_chance_pct(room, is_booking) <= 100,
+                "room '{}' authors charm odds above certainty",
+                room.id
+            );
+        }
+
+        // Closing a booking is where charm is really learned, so no room may
+        // teach less of it on a contract than on a quiet shift.
+        assert!(
+            charm_training_chance_pct(room, true) >= charm_training_chance_pct(room, false),
+            "room '{}' teaches less charm on a booking than on an ordinary shift",
+            room.id
+        );
+    }
+}
+
 #[test]
 fn every_trained_skill_raises_a_companions_wage() {
     let data = crate::data::test_game_data();
@@ -657,6 +768,94 @@ fn egg_star_ratings_span_the_whole_rank_ladder() {
             "rank {rank} is authored but no grade score produces it"
         );
     }
+}
+
+/// Refining is the only way to *make* a better egg rather than find one, and it
+/// used to stop at rank 3 — a literal left behind when the ladder grew to five.
+/// Ranks 4 and 5 earn 7x and 10x, so the two ranks that matter most were the two
+/// the refinery refused to reach.
+#[test]
+fn refining_climbs_every_rung_of_the_star_ladder() {
+    let data = crate::data::test_game_data();
+    let day_cycle = &data.config.day_cycle;
+    let top_rank = max_quality_rank(day_cycle);
+
+    for rank in 1..top_rank {
+        let mut game_state = crate::engine::create_new_game_state(&data);
+        // Rank 1 is everything below the first threshold; every rank above it
+        // starts exactly at the threshold before it.
+        let grade = if rank == 1 {
+            0
+        } else {
+            day_cycle.egg_quality_rank_thresholds[usize::from(rank) - 2]
+        };
+        assert_eq!(
+            egg_quality_rank(day_cycle, grade),
+            rank,
+            "test setup: grade {grade} should be rank {rank}"
+        );
+
+        game_state.egg_inventory.clear();
+        for index in 0..2u32 {
+            game_state.egg_inventory.push(EggState {
+                id: format!("egg_{index:03}"),
+                source_floor_id: "tower_core".to_owned(),
+                possible_species_ids: vec!["slime_companion".to_owned()],
+                selected_species_id: None,
+                incubation_state: EggIncubationState::Raw,
+                grade_score: grade,
+                preparation_focus: None,
+            });
+        }
+        sync_egg_resource_count(&mut game_state);
+
+        convert_egg(&data, &mut game_state, "egg_000", EggConversionKind::Refine)
+            .unwrap_or_else(|error| panic!("refining two rank-{rank} eggs should work: {error}"));
+
+        let refined = game_state
+            .egg_inventory
+            .first()
+            .expect("refining leaves one egg behind");
+        assert_eq!(
+            egg_quality_rank(day_cycle, refined.grade_score),
+            rank + 1,
+            "two rank-{rank} eggs should refine into exactly one rank-{}",
+            rank + 1
+        );
+    }
+}
+
+/// And it must still refuse at the top, or refining becomes an infinite ladder.
+#[test]
+fn refining_stops_at_the_top_of_the_ladder() {
+    let data = crate::data::test_game_data();
+    let day_cycle = &data.config.day_cycle;
+    let top_grade = day_cycle
+        .egg_quality_rank_thresholds
+        .iter()
+        .copied()
+        .max()
+        .expect("the rank ladder must have thresholds");
+    let mut game_state = crate::engine::create_new_game_state(&data);
+
+    game_state.egg_inventory.clear();
+    for index in 0..2u32 {
+        game_state.egg_inventory.push(EggState {
+            id: format!("egg_{index:03}"),
+            source_floor_id: "tower_core".to_owned(),
+            possible_species_ids: vec!["slime_companion".to_owned()],
+            selected_species_id: None,
+            incubation_state: EggIncubationState::Raw,
+            grade_score: top_grade,
+            preparation_focus: None,
+        });
+    }
+    sync_egg_resource_count(&mut game_state);
+
+    assert!(
+        convert_egg(&data, &mut game_state, "egg_000", EggConversionKind::Refine).is_err(),
+        "two top-rank eggs must not refine into a rank the ladder does not have"
+    );
 }
 
 #[test]

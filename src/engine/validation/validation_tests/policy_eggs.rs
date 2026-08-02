@@ -111,7 +111,7 @@ fn replacement_plan_for_egg(
     game_state: &GameState,
     egg: &crate::state::EggState,
 ) -> Option<(String, String)> {
-    let new_quality = egg_quality_rank_for_policy(egg.grade_score);
+    let new_quality = day_cycle::egg_quality_rank(&data.config.day_cycle, egg.grade_score);
     egg.possible_species_ids
         .iter()
         .filter(|species_id| {
@@ -168,14 +168,6 @@ fn replacement_candidate_for_species<'a>(
     }
 
     None
-}
-
-fn egg_quality_rank_for_policy(grade_score: u32) -> u8 {
-    match grade_score {
-        0..=2 => 1,
-        3..=4 => 2,
-        _ => 3,
-    }
 }
 
 fn species_count(game_state: &GameState, species_id: &str) -> usize {
