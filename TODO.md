@@ -21,7 +21,7 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 - ~~`hatchery_assists` had no source in the entire game.~~ Fixed: all four guild rooms authored a ceiling of 0, so no shift could ever bank one — which made `corekeeper_sending_vigil` (requires 3) permanently unfulfillable and left the `hatchery_specialist` role in `monster_role` reachable only through the `hatchery_attuned` trait. `nursery_wing` already carried the intended 5% odds, so it now has the ceiling to match. A new test asserts no room authors odds for work it cannot bank. Note the contract needs roughly sixty nursery shifts at 5%; whether that is the intended pace is a balance question.
 - ~~`ContractStatus::Completed`/`Failed`/`Declined` are never assigned.~~ Done: resolution now stamps the outcome and moves the contract to a new `GameState.resolved_contracts`, which the desk lists under the live offers so the player can see how yesterday's bookings went. The lingering-status approach was tried first and abandoned — a resolved booking left inside `active_contracts` moves the offer limit, the request-id sequence, `workforce_demand`, the follow-up check and the booking policy, and it shifted the 365-day report by six buildings. A separate list is neutral by construction. `assign_monster_to_contract` and `clear_contract_assignment` now refuse non-live contracts, which is a real guard rather than bookkeeping.
 - `event_tags` in `events.json` (tier_1–tier_4, late_game, crisis, …) encode intended gating that no code applies; event selection filters only on category/phase/required ids/min_day/chance/weight.
-- Patron archetype `spawn_weight` and `tags` never influence contract generation — offers are taken in pressure-priority order only.
+- Patron archetype `spawn_weight` and `tags` never influence contract generation — offers are taken in pressure-priority order only. **Implementation built and reverted; it is blocked by the harness, not by the design.** A weight is a spawn probability, not a sort key, so the fix is to draw candidates without replacement weighted by `archetype.spawn_weight * request_pressure_priority` (one `gen_range` per candidate, in `refresh_contracts`). It works and it does what the Balance section says the late game needs: the multi-seed building spread went from a flat 19-on-every-seed to 38–47. It still cannot land, because moving the simulation trips the knife-edge `final_unlocked_floors == 25` assertion, which only the survey term fixes, and the survey term brings its own two failures. `tags` (`starter`, `escort`, `special`, `high_payout`) remain unused; the obvious use is a load-time guard that a `special`-tagged archetype's contracts are `is_special`.
 
 ### UI and feedback
 
@@ -91,6 +91,37 @@ a design question rather than a tuning one:** the late game needs a genuine
 source of run-to-run divergence before "winning is possible but not a formality"
 can be true. Until then the survey term has to stay out, which leaves the
 harness unable to validate any change that moves the simulation.
+
+**Second attempt (also 2026-08-02): variance was added, and it was not enough.**
+Wiring `spawn_weight` as a real spawn probability (see the patron-archetype item
+above) does produce divergence — the multi-seed building spread went from 19 on
+every single seed to 38–47. With the survey term and the vault also in place,
+sweeping the due again:
+
+| Due | Cleared | Average debt gap |
+| --- | --- | --- |
+| 2.5M | 10/10 | 0 |
+| 3.0M | 10/10 | 0 |
+| 3.5M | 9/10 | +9k |
+| 4.5M | 0/10 | −325k |
+| 6.0M | 0/10 | −1,825k |
+
+`cleared` still falls off a cliff between 3.5M and 4.5M, and in the uncleared
+regime **every seed reports the identical gap** (−324,682 on all ten at 4.5M).
+That is the mechanism, stated exactly: `can_spend_on_late_game_sink` reserves
+the balance, and the vault absorbs everything above it, so end-of-run gold is
+pinned to `balance + reserve` for any guild that can reach it. Income variance
+turns into *buildings bought*, never into gold. `debt_gap` therefore cannot vary
+between seeds no matter how much the economy does.
+
+Relaxing the reserve (invest until the due is within 60 days) was tried too and
+changed nothing material — 9/10 still cleared.
+
+**Conclusion: `debt_gap.average < -500_000` and `cleared > 0` cannot both hold
+while a late-game sink exists to soak up surplus.** Either the assertion should
+measure something the economy can actually vary (buildings, floors, projects
+completed), or the late game needs a cost that scales with how well the run went
+rather than a fixed due. Both are design calls.
 
 - Decide an acceptable target range for day-365 `surplus_summary.debt_gold_gap`.
 - Decide an acceptable target range for final relic and residue stockpiles after project purchases.
