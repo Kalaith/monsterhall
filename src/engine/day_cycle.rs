@@ -11,8 +11,7 @@ use super::{
     start_town_situation_from_event, tick_town_situations, upkeep_pressure_pct,
 };
 use crate::data::{
-    BuildingData, CompanionWorkHistoryProgressionData, DayCycleConfigData, EggSpeciesEntryData,
-    GameData, ResourceAmountData,
+    BuildingData, DayCycleConfigData, EggSpeciesEntryData, GameData, ResourceAmountData,
 };
 use crate::state::{
     CompanionJobState, CompanionSkillState, CompanionState, CompanionWorkHistoryState,

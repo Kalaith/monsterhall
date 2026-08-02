@@ -350,13 +350,22 @@ impl Game {
         if self.last_error.is_some() {
             self.apply_action(UiAction::StartNewGame);
         }
-        for _ in 0..16 {
-            if matches!(self.phase, GamePhase::OpeningChapter(_)) {
-                self.apply_action(UiAction::ContinueOpening);
-            } else if matches!(self.phase, GamePhase::HatchReveal(_)) {
-                self.apply_action(UiAction::ContinueAfterHatch);
-            } else {
-                break;
+        // The opening is not one button: BuildRoom and FirstClient each need
+        // their own action, and the hatch detours through a reveal. Sending
+        // ContinueOpening at every step leaves the campaign stuck on "Make The
+        // Hall Useful", which is where the first round of captures were taken.
+        for _ in 0..24 {
+            match &self.phase {
+                GamePhase::OpeningChapter(state) => match state.step {
+                    OpeningChapterStep::BuildRoom => self.apply_action(UiAction::BuildOpeningRoom),
+                    OpeningChapterStep::FirstClient => {
+                        self.apply_action(UiAction::ResolveOpeningClient)
+                    }
+                    OpeningChapterStep::Complete => break,
+                    _ => self.apply_action(UiAction::ContinueOpening),
+                },
+                GamePhase::HatchReveal(_) => self.apply_action(UiAction::ContinueAfterHatch),
+                _ => break,
             }
         }
 

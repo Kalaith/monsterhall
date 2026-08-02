@@ -17,8 +17,8 @@ use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
 use crate::ui::theme;
 use crate::ui::view_models::{
-    assignment_label, history_gain_chance_label, history_gain_label_from_progress,
-    primary_skill_label, species_name_by_id, trained_skills_label, worker_decision_summary,
+    assignment_label, history_gain_chance_label_from_progress, primary_skill_label,
+    species_name_by_id, trained_skills_label, worker_decision_summary,
 };
 
 pub(super) struct GuildHallManagementLayout {
@@ -40,7 +40,7 @@ impl GuildHallManagementLayout {
         let room_panel_w = 284.0;
         let detail_x = left_margin + room_panel_w + layout::SECTION_GAP;
         let detail_w = content_width - room_panel_w - layout::SECTION_GAP;
-        let roster_y = 304.0;
+        let roster_y = 348.0;
         let footer_y = screen_height() - layout::FOOTER_BOTTOM_MARGIN - layout::FOOTER_H;
         Self {
             left_margin,
@@ -116,7 +116,7 @@ pub(super) fn draw_rooms_panel(
         layout.left_margin,
         layout.room_panel_y,
         layout.room_panel_w,
-        196.0,
+        240.0,
         Some(&data.ui_text.guild_hall_management.rooms_panel_title),
         PanelTier::Support,
         false,
@@ -174,7 +174,7 @@ pub(super) fn draw_selected_room_panel(
         layout.detail_x,
         layout.room_panel_y,
         layout.detail_w,
-        196.0,
+        240.0,
         Some(&data.ui_text.guild_hall_management.selected_room_panel_title),
         PanelTier::Primary,
         true,
@@ -182,7 +182,7 @@ pub(super) fn draw_selected_room_panel(
     draw_room_thumbnail(
         selected_room,
         layout.detail_x + 16.0,
-        layout.room_panel_y + 18.0,
+        layout.room_panel_y + 44.0,
         232.0,
         156.0,
     );
@@ -268,11 +268,18 @@ pub(super) fn draw_selected_room_panel(
         chip_y,
         168.0,
         24.0,
+        // The odds live here now rather than on every worker card: they describe
+        // the room, and this badge had been quoting the bare ceiling — the same
+        // "looks guaranteed, is a coin flip" the worker card was fixed for.
         &format!(
             "History {}",
             compact_sentence(
-                &history_gain_label_from_progress(data, &selected_room.work_history_gains),
-                20
+                &history_gain_chance_label_from_progress(
+                    data,
+                    &selected_room.work_history_gains,
+                    &selected_room.work_history_gain_chance_pct,
+                ),
+                34
             )
         ),
         theme::WARNING,
@@ -363,23 +370,24 @@ fn draw_worker_cards(
                 // Only call out condition when it is actually costing the guild
                 // something, so a healthy roster's card stays quiet.
                 let condition_note = if value.effectiveness_pct < 100 {
-                    format!(" | Worn: {}% output", value.effectiveness_pct)
+                    format!(" | Worn {}%", value.effectiveness_pct)
                 } else {
                     String::new()
                 };
+                // The card is narrow and this line grew twice — the condition
+                // note and the work-history odds both landed here. Shortened so
+                // the tail is not cut off mid-word.
+                // The work-history odds are a property of the room, and the room
+                // panel already shows them — repeating them per companion is
+                // what pushed this line past the card's edge.
                 format!(
-                    "{} gold / {} mat / {} residue | Prep {} | Score {}{} | {}",
+                    "{}g / {}m / {}r | Prep {} | Score {}{}",
                     value.projected_gold,
                     value.projected_materials,
                     value.projected_arcane_residue,
                     value.preparation_quality,
                     value.success_score,
                     condition_note,
-                    history_gain_chance_label(
-                        data,
-                        &value.projected_work_history_gains,
-                        &value.work_history_gain_chance_pct,
-                    )
                 )
             })
             .unwrap_or_else(|| {

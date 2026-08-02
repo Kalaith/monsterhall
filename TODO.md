@@ -205,6 +205,11 @@ fourteen floors going unwalked by the *simulation*, not the ability to test.
   - The condition badges on the roster card took the full card width, so four enormous boxes each held two characters. Capped at 300px.
   - Pre-existing: `built_count_label` rendered as "Bui" — 96px was not enough for the label beside its icon, in both metric rows. Both rows re-flowed.
 
+  A second pass caught more, including a flaw in the harness itself: `seed_capture_scene` only sent `ContinueOpening`, but `BuildRoom` and `FirstClient` each need their own action, so the first round of captures were all taken with the campaign stuck on "Make The Hall Useful". The opening is played out properly now.
+  - **Day Results overflowed both summary panels.** The cost breakdown, prep spend and offer counts took Town Jobs and Expedition from four lines to six while the frames stayed 188 tall, so the last line of each was sliced by the panel edge and spilled into the row beneath. The height is a named constant now and the row below derives from it.
+  - The Guild Jobs room thumbnail was drawn over its own panel title, and the detail panel ended before its last badge, which the roster row then covered. Both panels grown, thumbnail moved below the title band.
+  - The worker card's prediction line had grown twice — the condition note and the work-history odds both landed there — and was being cut mid-word. The odds describe the *room*, not the companion, so they moved to the room badge, which was still quoting the bare ceiling: the same "looks guaranteed, is a coin flip" the worker card was fixed for two passes earlier. `GuildJobPreview` lost the two fields that were carrying a per-companion copy of room data.
+
 ## Art
 
 - Replace the remaining procedural placeholder art with content-specific key art; only backdrops and one icon atlas exist today.

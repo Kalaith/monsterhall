@@ -47,11 +47,16 @@ pub fn draw_day_results(
     );
 
     let panel_y = top_margin + 56.0;
+    // Six lines at roughly 30px from `panel_y + 60`. The panels were 188 tall
+    // for the four lines they carried before the cost breakdown, prep spend and
+    // offer counts were added, so the last line of Town Jobs and Expedition was
+    // sliced by the frame and spilled into the row beneath.
+    const SUMMARY_PANEL_H: f32 = 248.0;
     draw_tier_panel(
         left_margin,
         panel_y,
         panel_width,
-        188.0,
+        SUMMARY_PANEL_H,
         Some(&day_results_text.guild_jobs_panel_title),
         PanelTier::Primary,
         false,
@@ -102,7 +107,7 @@ pub fn draw_day_results(
         expedition_x,
         panel_y,
         panel_width,
-        188.0,
+        SUMMARY_PANEL_H,
         Some(&day_results_text.expedition_panel_title),
         PanelTier::Primary,
         false,
@@ -153,7 +158,7 @@ pub fn draw_day_results(
         debt_x,
         panel_y,
         panel_width,
-        188.0,
+        SUMMARY_PANEL_H,
         Some(&day_results_text.debt_panel_title),
         PanelTier::Support,
         false,
@@ -168,7 +173,7 @@ pub fn draw_day_results(
         debt_x + 16.0,
         panel_y + 60.0,
         panel_width - 32.0,
-        110.0,
+        170.0,
         16.0,
         theme::TEXT_BODY,
     );
@@ -178,7 +183,7 @@ pub fn draw_day_results(
         guest_x,
         panel_y,
         panel_width,
-        188.0,
+        SUMMARY_PANEL_H,
         Some(&day_results_text.guests_panel_title),
         PanelTier::Primary,
         false,
@@ -202,12 +207,12 @@ pub fn draw_day_results(
         guest_x + 16.0,
         panel_y + 60.0,
         panel_width - 32.0,
-        110.0,
+        170.0,
         16.0,
         theme::TEXT_BODY,
     );
 
-    let events_y = panel_y + 206.0;
+    let events_y = panel_y + SUMMARY_PANEL_H + 18.0;
     draw_tier_panel(
         left_margin,
         events_y,

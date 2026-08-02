@@ -416,16 +416,6 @@ pub(super) fn preview_guild_job_for_town(
         preparation_quality: scale_by_effectiveness(preparation_quality, effectiveness_pct),
         recovery_bonus: room.recovery_bonus,
         effectiveness_pct,
-        work_history_gain_chance_pct: room.work_history_gain_chance_pct.clone(),
-        projected_work_history_gains: CompanionWorkHistoryState {
-            scouting_runs: room.work_history_gains.scouting_runs,
-            guard_duties: room.work_history_gains.guard_duties,
-            hospitality_jobs: room.work_history_gains.hospitality_jobs,
-            craft_jobs: room.work_history_gains.craft_jobs,
-            contracts_completed: room.work_history_gains.contracts_completed,
-            recovery_shifts: room.work_history_gains.recovery_shifts,
-            hatchery_assists: room.work_history_gains.hatchery_assists,
-        },
     })
 }
 

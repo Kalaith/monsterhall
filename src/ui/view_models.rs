@@ -47,8 +47,9 @@ pub use decisions::{
     monster_role_summary, projects_status_line, worker_decision_summary,
 };
 pub use progression_labels::{
-    companion_skill_summary, history_gain_chance_label, history_gain_label_from_progress,
-    opening_skill_gain_label, primary_skill_label, trained_skills_label, work_history_summary,
+    companion_skill_summary, history_gain_chance_label_from_progress,
+    history_gain_label_from_progress, opening_skill_gain_label, primary_skill_label,
+    trained_skills_label, work_history_summary,
 };
 
 pub fn fill_template(template: &str, replacements: &[(&str, String)]) -> String {

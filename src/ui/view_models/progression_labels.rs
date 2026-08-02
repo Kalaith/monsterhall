@@ -158,6 +158,25 @@ pub fn history_gain_chance_label(
     }
 }
 
+/// Room-side variant of [`history_gain_chance_label`]: what a shift here can
+/// bank and how often, from the room's own ceilings and odds.
+pub fn history_gain_chance_label_from_progress(
+    data: &GameData,
+    gains: &crate::data::CompanionWorkHistoryProgressionData,
+    chance_pct: &crate::data::CompanionWorkHistoryProgressionData,
+) -> String {
+    let state_like = crate::state::CompanionWorkHistoryState {
+        scouting_runs: gains.scouting_runs,
+        guard_duties: gains.guard_duties,
+        hospitality_jobs: gains.hospitality_jobs,
+        craft_jobs: gains.craft_jobs,
+        contracts_completed: gains.contracts_completed,
+        recovery_shifts: gains.recovery_shifts,
+        hatchery_assists: gains.hatchery_assists,
+    };
+    history_gain_chance_label(data, &state_like, chance_pct)
+}
+
 pub fn history_gain_label_from_progress(
     data: &GameData,
     history: &crate::data::CompanionWorkHistoryProgressionData,
