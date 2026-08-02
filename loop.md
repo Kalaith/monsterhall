@@ -1532,6 +1532,33 @@ Stop the loop and report if:
   never been seen with a **partial** contract completion in it; (c) untaken slices
   unchanged: `ui_text` migration, unbounded event log, corruption's missing relief path.
 
+- **2026-08-03 — twenty-sixth pass (badges that said the same thing at 0 and at 88).**
+  Closed the last harness blind spot the previous note named: every captured companion
+  had zero fatigue, stress, injury and instability, and every booking was one the
+  contract accepted in full. The seeding spreads the three meters and instability across
+  the roster now and books a second contract with a companion the patron would refuse.
+  The find came straight out of it: `draw_condition_badges` drew **one fixed colour per
+  meter**, so a fresh companion and a spent one were identical on the one card the Rest
+  button lives on — the badges exist to inform exactly that decision and could not. They
+  read the authored allowances now (fatigue 30, stress 20, injury 0): muted while a
+  meter costs nothing, the meter's own colour once it is past its allowance, `DANGER` at
+  `max_meter`; instability keeps its colour whenever it has started, because it is not a
+  cost but the meter the tower changes her with. `condition_tone` extracted as a pure
+  function with a test pinning the turn to the authored allowance, verified by planting
+  a flat tone.
+  **Result:** 132 tests (was 131), fmt and clippy clean, publish green, **balance
+  byte-identical** — harness, drawing and one guard, no data file touched. The richer
+  harness also confirmed two earlier passes: the day's report contains a **partial
+  completion** for the first time in the game's life, and four mutation announcements
+  read correctly against the species that produced them.
+  **Next iteration should know:** (a) the harness can now produce a crowded, varied,
+  worn, mutating guild with a half-paid booking — the capture blind spots this loop kept
+  finding defects behind are worked out, so the next lens should probably not be
+  screenshots; (b) three recorded slices remain untaken and all are engine-side: the
+  `ui_text` migration (~40 hardcoded strings, and this pass added two more lines to that
+  debt), the unbounded event log in the save, and corruption's missing relief path,
+  which is the last of the four options `TODO.md` parked for the roster monoculture.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

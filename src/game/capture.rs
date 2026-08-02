@@ -126,6 +126,18 @@ impl Game {
                 copy.stats = species.base_stats.clone();
                 copy.trait_ids = species.starting_traits.clone();
             }
+            // And a guild that has been worked. Every copy carried zero
+            // fatigue, stress, injury and instability, so the condition badges,
+            // the worn notes on the guild-job and expedition cards and anything
+            // instability-gated had never been photographed holding a number —
+            // the three meters only mean something once they are not zero.
+            // Spread across the roster rather than raised uniformly, because
+            // what these screens are for is telling one companion from another.
+            let wear = index as u32 % 5;
+            copy.fatigue = wear * 22;
+            copy.stress = wear * 14;
+            copy.injury = (wear % 3) * 9;
+            copy.corruption = (index as u32 % 7) * 34;
             game_state.monsters.push(copy);
         }
 
@@ -205,6 +217,26 @@ impl Game {
                 .first()
                 .map(|monster| monster.id.clone()),
         ) {
+            let request = &mut game_state.active_contracts[index];
+            request.assigned_monster_id = Some(monster_id);
+            request.status = crate::state::ContractStatus::Accepted;
+        }
+
+        // And a second booking taken by somebody the contract would refuse,
+        // which the engine still accepts and pays half for. That path has
+        // existed for the game's whole life and no capture has ever contained
+        // it, so the day's report has never been read with a partial completion
+        // in it.
+        let half_pay_candidate = game_state
+            .monsters
+            .iter()
+            .find(|monster| monster.skills.scouting == 0 && monster.skills.hospitality == 0)
+            .map(|monster| monster.id.clone());
+        let second_offer = game_state
+            .active_contracts
+            .iter()
+            .position(|request| matches!(request.status, crate::state::ContractStatus::Pending));
+        if let (Some(index), Some(monster_id)) = (second_offer, half_pay_candidate) {
             let request = &mut game_state.active_contracts[index];
             request.assigned_monster_id = Some(monster_id);
             request.status = crate::state::ContractStatus::Accepted;

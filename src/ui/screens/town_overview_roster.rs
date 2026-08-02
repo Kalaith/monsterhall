@@ -155,7 +155,7 @@ fn draw_roster_card_organic(
     if show_condition {
         // Capped: the roster card is full-width, so an uncapped strip gives four
         // enormous boxes holding two characters each.
-        draw_condition_badges(monster, text_x, y + h - 40.0, text_w.min(300.0));
+        draw_condition_badges(data, monster, text_x, y + h - 40.0, text_w.min(300.0));
     }
 
     if secondary_button(

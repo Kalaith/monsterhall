@@ -212,6 +212,41 @@ mutation and the check names golemkin).
   is a `corruption_adept` exactly like the warden she replaces. Variety means a
   different *role*, not a different name.
 
+### Found by review, not by the audit (2026-08-03, twenty-sixth pass)
+
+Last of the harness blind spots: every companion in a capture had zero fatigue,
+stress, injury and instability, and every booking was one the contract accepted
+in full. So the condition badges, the worn notes added two passes ago, the
+mutation announcements and the entire half-pay path had never been photographed
+carrying a value. The seeding now spreads the three meters and instability across
+the roster and books a second contract with a companion the patron would refuse.
+
+- ~~The condition badges answered "who needs resting" the same way at 0 fatigue
+  and at 88.~~ Fixed. `draw_condition_badges` drew one fixed colour per meter, so
+  a fresh companion and a spent one were identical on the **one card the Rest
+  button lives on** — the badges were added specifically to inform that decision
+  and could not. They read the authored allowances now
+  (`condition_effects.fatigue_allowance` 30, `stress_allowance` 20,
+  `injury_allowance` 0): muted while a meter is costing the guild nothing, the
+  meter's own colour once it is past its allowance and taking output off
+  everything she does, and `DANGER` at `max_meter`. Instability keeps its own
+  colour whenever it has started, because it is not a cost — it is the meter the
+  tower changes her with.
+
+  **Guard**: `condition_tone` is a pure function and a test pins the turn to the
+  authored allowance rather than to a number invented in the UI — verified by
+  planting a flat tone.
+
+- **What the richer harness confirmed rather than fixed**: the day's report now
+  contains a **partial completion** for the first time in the game's life
+  (*"Local Delver Contract accepted a partial fulfillment; reputation holds, but
+  the booking paid less"*, beside the full one at +26 gold against its +8), and
+  four mutation announcements read correctly against the species that produced
+  them. Both panels count their overflow and neither clips.
+
+- **Balance byte-identical**; harness, drawing and one guard, no data file
+  touched.
+
 ### Found by review, not by the audit (2026-08-03, twenty-fifth pass)
 
 Took the last pass's own note: the harness cloned **one species** twenty times, so

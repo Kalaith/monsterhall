@@ -615,12 +615,78 @@ pub fn draw_trait_icons(data: &GameData, trait_ids: &[String], x: f32, y: f32, w
 }
 
 #[allow(dead_code)]
-pub fn draw_condition_badges(monster: &CompanionState, x: f32, y: f32, w: f32) {
+/// How hard a condition meter is biting, which is the whole reason the badges
+/// are on the card the Rest button lives on.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub(crate) enum ConditionTone {
+    /// Inside its allowance: costing the guild nothing yet.
+    Calm,
+    /// Past its allowance, so it is taking output off everything she does.
+    Strained,
+    /// At the cap the meters are held to; nothing worse can happen to it.
+    Spent,
+}
+
+/// Read from the authored allowances rather than a threshold invented here, so
+/// the badge turns at exactly the point the engine starts charging her for it.
+pub(crate) fn condition_tone(value: u32, allowance: u32, max_meter: u32) -> ConditionTone {
+    if max_meter > 0 && value >= max_meter {
+        ConditionTone::Spent
+    } else if value > allowance {
+        ConditionTone::Strained
+    } else {
+        ConditionTone::Calm
+    }
+}
+
+pub fn draw_condition_badges(data: &GameData, monster: &CompanionState, x: f32, y: f32, w: f32) {
+    // Every badge used to draw in one fixed colour per meter, so a companion at
+    // 88 fatigue was indistinguishable from one at 0 on the card whose Rest
+    // button is the decision they inform. No capture could show it either,
+    // because until this pass the harness gave every copy a zeroed condition.
+    let effects = &data.config.day_cycle.condition_effects;
+    let max_meter = effects.max_meter;
+    let tone_color = |tone: ConditionTone, accent: Color| match tone {
+        ConditionTone::Calm => theme::TEXT_MUTED,
+        ConditionTone::Strained => accent,
+        ConditionTone::Spent => theme::DANGER,
+    };
     let badges = [
-        ("F", monster.fatigue, color_u8!(205, 175, 90, 255)),
-        ("S", monster.stress, color_u8!(205, 122, 111, 255)),
-        ("I", monster.injury, color_u8!(191, 92, 92, 255)),
-        ("C", monster.corruption, color_u8!(161, 98, 185, 255)),
+        (
+            "F",
+            monster.fatigue,
+            tone_color(
+                condition_tone(monster.fatigue, effects.fatigue_allowance, max_meter),
+                color_u8!(205, 175, 90, 255),
+            ),
+        ),
+        (
+            "S",
+            monster.stress,
+            tone_color(
+                condition_tone(monster.stress, effects.stress_allowance, max_meter),
+                color_u8!(205, 122, 111, 255),
+            ),
+        ),
+        (
+            "I",
+            monster.injury,
+            tone_color(
+                condition_tone(monster.injury, effects.injury_allowance, max_meter),
+                color_u8!(191, 92, 92, 255),
+            ),
+        ),
+        // Instability has no allowance — it is not a cost, it is the meter the
+        // tower changes her with — so it only says whether it has started.
+        (
+            "C",
+            monster.corruption,
+            if monster.corruption > 0 {
+                color_u8!(161, 98, 185, 255)
+            } else {
+                theme::TEXT_MUTED
+            },
+        ),
     ];
     let badge_w = (w - 18.0) / 4.0;
     for (index, (label, value, accent)) in badges.iter().enumerate() {
@@ -650,7 +716,22 @@ pub fn draw_condition_badges(monster: &CompanionState, x: f32, y: f32, w: f32) {
 
 #[cfg(test)]
 mod tests {
-    use super::trailing_limbs;
+    use super::{condition_tone, trailing_limbs, ConditionTone};
+
+    /// The badges exist to answer "who needs resting", and they answered it the
+    /// same way at 0 fatigue and at 88.
+    #[test]
+    fn a_meter_turns_exactly_where_the_engine_starts_charging_for_it() {
+        // Fatigue's authored allowance is 30 and the meters cap at 100.
+        assert_eq!(condition_tone(0, 30, 100), ConditionTone::Calm);
+        assert_eq!(condition_tone(30, 30, 100), ConditionTone::Calm);
+        assert_eq!(condition_tone(31, 30, 100), ConditionTone::Strained);
+        assert_eq!(condition_tone(99, 30, 100), ConditionTone::Strained);
+        assert_eq!(condition_tone(100, 30, 100), ConditionTone::Spent);
+        // Injury is authored with no allowance at all, so any injury bites.
+        assert_eq!(condition_tone(0, 0, 100), ConditionTone::Calm);
+        assert_eq!(condition_tone(1, 0, 100), ConditionTone::Strained);
+    }
 
     /// A portrait must stay inside its own frame at every size a screen draws
     /// it, from the 72-pixel roster card to the profile's large art.
