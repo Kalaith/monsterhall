@@ -17,8 +17,8 @@ use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
 use crate::ui::theme;
 use crate::ui::view_models::{
-    assignment_label, history_gain_label, history_gain_label_from_progress, primary_skill_label,
-    species_name_by_id, trained_skills_label, worker_decision_summary,
+    assignment_label, history_gain_chance_label, history_gain_label_from_progress,
+    primary_skill_label, species_name_by_id, trained_skills_label, worker_decision_summary,
 };
 
 pub(super) struct GuildHallManagementLayout {
@@ -375,7 +375,11 @@ fn draw_worker_cards(
                     value.preparation_quality,
                     value.success_score,
                     condition_note,
-                    history_gain_label(data, &value.projected_work_history_gains)
+                    history_gain_chance_label(
+                        data,
+                        &value.projected_work_history_gains,
+                        &value.work_history_gain_chance_pct,
+                    )
                 )
             })
             .unwrap_or_else(|| {

@@ -28,6 +28,15 @@
         "recovery_shifts": 0,
         "hatchery_assists": 0
       },
+      "work_history_gain_chance_pct": {
+        "scouting_runs": 70,
+        "guard_duties": 0,
+        "hospitality_jobs": 45,
+        "craft_jobs": 0,
+        "contracts_completed": 12,
+        "recovery_shifts": 0,
+        "hatchery_assists": 0
+      },
       "preferred_trait_ids": [
         "eager",
         "calming_presence",
@@ -81,6 +90,15 @@
         "craft_jobs": 1,
         "contracts_completed": 0,
         "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "work_history_gain_chance_pct": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 0,
+        "craft_jobs": 55,
+        "contracts_completed": 0,
+        "recovery_shifts": 60,
         "hatchery_assists": 0
       },
       "preferred_trait_ids": [
@@ -140,7 +158,16 @@
         "craft_jobs": 0,
         "contracts_completed": 1,
         "recovery_shifts": 0,
-        "hatchery_assists": 0
+        "hatchery_assists": 1
+      },
+      "work_history_gain_chance_pct": {
+        "scouting_runs": 0,
+        "guard_duties": 0,
+        "hospitality_jobs": 65,
+        "craft_jobs": 0,
+        "contracts_completed": 30,
+        "recovery_shifts": 0,
+        "hatchery_assists": 5
       },
       "preferred_trait_ids": [
         "hatchery_attuned",
@@ -198,6 +225,15 @@
         "craft_jobs": 0,
         "contracts_completed": 0,
         "recovery_shifts": 1,
+        "hatchery_assists": 0
+      },
+      "work_history_gain_chance_pct": {
+        "scouting_runs": 35,
+        "guard_duties": 55,
+        "hospitality_jobs": 0,
+        "craft_jobs": 0,
+        "contracts_completed": 0,
+        "recovery_shifts": 65,
         "hatchery_assists": 0
       },
       "preferred_trait_ids": [

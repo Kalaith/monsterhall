@@ -30,6 +30,7 @@ fn golemkin_room_and_trait_add_corruption() {
             hatchery_assists: 0,
             ..crate::data::CompanionWorkHistoryProgressionData::default()
         },
+        work_history_gain_chance_pct: crate::data::CompanionWorkHistoryProgressionData::default(),
         preferred_trait_ids: Vec::new(),
         preferred_species_ids: Vec::new(),
         strategic_niche: None,
@@ -231,6 +232,7 @@ fn trained_room_skills_add_guild_job_bonus() {
             hatchery_assists: 0,
             ..crate::data::CompanionWorkHistoryProgressionData::default()
         },
+        work_history_gain_chance_pct: crate::data::CompanionWorkHistoryProgressionData::default(),
         preferred_trait_ids: Vec::new(),
         preferred_species_ids: vec!["slime_companion".to_owned()],
         strategic_niche: None,
@@ -412,6 +414,57 @@ fn a_worn_down_worker_earns_the_guild_less() {
         "a burned-out escort must not earn what a rested one does"
     );
     assert!(worn_preview.preparation_quality <= fresh_preview.preparation_quality);
+}
+
+#[test]
+fn a_room_only_rolls_the_work_it_can_actually_bank() {
+    let data = crate::data::test_game_data();
+
+    for room in &data.guild_rooms.rooms {
+        let max = &room.work_history_gains;
+        let chance = &room.work_history_gain_chance_pct;
+        for (label, max_gain, chance_pct) in [
+            ("scouting_runs", max.scouting_runs, chance.scouting_runs),
+            ("guard_duties", max.guard_duties, chance.guard_duties),
+            (
+                "hospitality_jobs",
+                max.hospitality_jobs,
+                chance.hospitality_jobs,
+            ),
+            ("craft_jobs", max.craft_jobs, chance.craft_jobs),
+            (
+                "contracts_completed",
+                max.contracts_completed,
+                chance.contracts_completed,
+            ),
+            (
+                "recovery_shifts",
+                max.recovery_shifts,
+                chance.recovery_shifts,
+            ),
+            (
+                "hatchery_assists",
+                max.hatchery_assists,
+                chance.hatchery_assists,
+            ),
+        ] {
+            assert!(
+                chance_pct <= 100,
+                "{} authors {label} at {chance_pct}%, which is not a probability",
+                room.id
+            );
+            // A category with odds but no ceiling is a content mistake that reads
+            // as working: the preview would quote odds for work the room can
+            // never bank.
+            if chance_pct > 0 {
+                assert!(
+                    max_gain > 0,
+                    "{} gives {label} a {chance_pct}% chance but banks none of it",
+                    room.id
+                );
+            }
+        }
+    }
 }
 
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {

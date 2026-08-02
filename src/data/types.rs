@@ -1,5 +1,8 @@
 use serde::{Deserialize, Serialize};
 
+use super::config_types::{
+    CompanionSkillProgressionData, CompanionWorkHistoryProgressionData, GameConfigData,
+};
 use super::ui_text::UiTextData;
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -17,250 +20,6 @@ pub struct StatBlockData {
     pub charm: i32,
     pub endurance: i32,
     pub instinct: i32,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct InputConfigData {
-    pub primary_mode: String,
-    pub keyboard_shortcuts_enabled: bool,
-    pub keyboard_shortcuts_visible: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct PersistenceConfigData {
-    pub native_save_path: String,
-    pub web_storage_key: String,
-    pub native_settings_path: String,
-    pub web_settings_key: String,
-    pub autosave_enabled: bool,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct TownUiConfigData {
-    pub target_width: u32,
-    pub target_height: u32,
-    pub town_panels: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct ResolutionOptionData {
-    pub id: String,
-    pub width: u32,
-    pub height: u32,
-    pub label: String,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct DisplayConfigData {
-    pub start_fullscreen: bool,
-    pub default_resolution_id: String,
-    pub available_resolutions: Vec<ResolutionOptionData>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct StarterMonsterData {
-    pub species_id: String,
-    pub name: String,
-    pub extra_traits: Vec<String>,
-    pub stat_bonuses: StatBlockData,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[serde(default)]
-pub struct CompanionSkillProgressionData {
-    #[serde(alias = "scouting")]
-    pub scouting: u32,
-    #[serde(alias = "guarding")]
-    pub guarding: u32,
-    #[serde(alias = "hospitality")]
-    pub hospitality: u32,
-    #[serde(alias = "crafting")]
-    pub crafting: u32,
-    #[serde(alias = "charm")]
-    pub charm: u32,
-    pub recovery: u32,
-    pub bargaining: u32,
-    pub navigation: u32,
-    pub arcana: u32,
-    pub strength: u32,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize, Default)]
-#[serde(default)]
-pub struct CompanionWorkHistoryProgressionData {
-    #[serde(alias = "kiss_count")]
-    pub scouting_runs: u32,
-    pub guard_duties: u32,
-    pub hospitality_jobs: u32,
-    pub craft_jobs: u32,
-    #[serde(alias = "contract_count")]
-    pub contracts_completed: u32,
-    #[serde(alias = "recovery_shift_count")]
-    pub recovery_shifts: u32,
-    #[serde(alias = "birth_count")]
-    pub hatchery_assists: u32,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct NewGameConfigData {
-    pub starting_day: u32,
-    pub starting_resources: ResourceAmountData,
-    pub starting_building_ids: Vec<String>,
-    pub starting_room_ids: Vec<String>,
-    pub starting_floor_ids: Vec<String>,
-    pub starting_species_ids: Vec<String>,
-    pub starter_monsters: Vec<StarterMonsterData>,
-    pub party_size: u8,
-    #[serde(alias = "guild_job_worker_limit")]
-    pub town_job_limit: u8,
-    pub population_cap: u16,
-    pub max_population_cap: u16,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct DayCycleConfigData {
-    pub guild_job_fatigue: u32,
-    pub expedition_fatigue: u32,
-    pub guild_job_stress: u32,
-    pub expedition_stress: u32,
-    pub resting_fatigue_recovery: u32,
-    pub resting_stress_recovery: u32,
-    pub base_injury_recovery: u32,
-    pub base_guild_job_success: i32,
-    pub base_expedition_success: i32,
-    pub preferred_trait_bonus_pct: i32,
-    pub preferred_species_bonus_pct: i32,
-    pub worker_charm_gold_multiplier: u32,
-    pub worker_instinct_residue_multiplier: u32,
-    pub expedition_power_materials_multiplier: u32,
-    pub expedition_instinct_residue_multiplier: u32,
-    pub expedition_endurance_safety_divisor: u32,
-    pub expedition_reward_success_divisor: u32,
-    /// Base daily wage before rank and skill scaling. Wages are the guild's
-    /// answer to a roster that earns more as it gets stronger.
-    pub companion_base_wage_gold: u32,
-    /// Egg grade scores at which a companion reaches rank 2, 3, 4 and 5.
-    #[serde(default = "default_quality_rank_thresholds")]
-    pub egg_quality_rank_thresholds: Vec<u32>,
-    /// What an escort of each rank earns, indexed rank 1..=5.
-    #[serde(default = "default_quality_income_multipliers_pct")]
-    pub quality_income_multipliers_pct: Vec<u32>,
-    /// What an escort of each rank is paid, indexed rank 1..=5.
-    #[serde(default = "default_quality_wage_multipliers_pct")]
-    pub quality_wage_multipliers_pct: Vec<u32>,
-    #[serde(default = "default_skill_wage_divisor")]
-    pub skill_wage_divisor: u32,
-    /// Fee an adventuring party pays when the escort is below the calibre their
-    /// patron tier demands. They still hire, but they do not pay full rate.
-    #[serde(default = "default_understrength_income_pct")]
-    pub understrength_income_pct: u32,
-    pub building_maintenance_cost_divisor: u32,
-    #[serde(default)]
-    pub upkeep_bands: Vec<UpkeepBandData>,
-    /// Hazard added per floor of depth. The primary depth dial is each floor's
-    /// authored `difficulty`; this is the engine's slope on top of it.
-    #[serde(default = "default_depth_hazard_per_floor")]
-    pub depth_hazard_per_floor: i32,
-    #[serde(default = "default_hazard_tag_risk")]
-    pub hazard_tag_risk: i32,
-    /// Hazard removed per survey point banked on the floor being run. Depth is
-    /// meant to be survivable through familiarity, not only through stats.
-    #[serde(default = "default_survey_familiarity_relief")]
-    pub survey_familiarity_relief: i32,
-    #[serde(default = "default_max_survey_familiarity_relief")]
-    pub max_survey_familiarity_relief: i32,
-    /// Difficulty past which a floor cannot be beaten by any realistic party, so
-    /// authoring one is a content error rather than a hard floor.
-    #[serde(default = "default_max_floor_difficulty")]
-    pub max_floor_difficulty: u32,
-    /// Portion of a floor's difficulty taken off the egg and relic reward bars.
-    ///
-    /// `success_score` already has `difficulty` subtracted from it, so a flat
-    /// threshold charges depth twice and deep floors stop yielding eggs at all —
-    /// which severs the one link that lets the tower produce better companions.
-    #[serde(default = "default_reward_threshold_depth_relief_pct")]
-    pub reward_threshold_depth_relief_pct: i32,
-    /// Further portion of a floor's difficulty taken off one reward's bar when
-    /// the mission was chosen to look for exactly that reward.
-    ///
-    /// The same double-charge as above, one level down: a mission's
-    /// `success_bonus_pct` feeds `success_score`, and `success_score` gates the
-    /// payout, so a stance that is deliberately riskier stops paying the thing
-    /// it exists to fetch. Below depth 17 that made Relic Recovery the *worst*
-    /// way to bring back a relic — it yielded none at all while the Egg Hunt's
-    /// +20 success carried off the floor's entire relic pile.
-    ///
-    /// Scaled by difficulty rather than flat, because the gap it closes is a
-    /// depth effect. A flat relief lands hardest on the shallow floors that were
-    /// already clearing their bars, and a safe depth-5 errand paying three
-    /// relics for no injury is enough to keep the guild out of the deep tower
-    /// entirely.
-    #[serde(default = "default_mission_focus_reward_relief_pct")]
-    pub mission_focus_reward_relief_pct: i32,
-    pub expedition_egg_reward_threshold: i32,
-    pub expedition_relic_reward_threshold: i32,
-    pub expedition_injury_threshold: i32,
-    /// How far a worn-down companion's output falls off.
-    #[serde(default = "default_condition_effects")]
-    pub condition_effects: ConditionEffectData,
-}
-
-/// The price of running a companion into the ground.
-///
-/// Fatigue, stress and injury are written by every job, rest, and expedition,
-/// and were read by nothing — a burned-out roster earned exactly what a fresh
-/// one did, which made the whole recovery economy (Resting, `recovery_bonus`,
-/// the stress/injury recovery buildings) decoration. Each point of condition
-/// damage past its allowance now shaves effectiveness off what that companion
-/// contributes, floored so an exhausted worker is weak rather than useless.
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct ConditionEffectData {
-    /// Condition damage a companion carries before it costs anything. A day's
-    /// work should not immediately dent the payout.
-    pub fatigue_allowance: u32,
-    pub stress_allowance: u32,
-    pub injury_allowance: u32,
-    /// Effectiveness lost per ten points past the matching allowance.
-    pub fatigue_penalty_pct_per_ten: u32,
-    pub stress_penalty_pct_per_ten: u32,
-    pub injury_penalty_pct_per_ten: u32,
-    /// Floor on effectiveness — even a wreck still shows up for the shift.
-    pub min_effectiveness_pct: u32,
-}
-
-fn default_condition_effects() -> ConditionEffectData {
-    ConditionEffectData {
-        fatigue_allowance: 20,
-        stress_allowance: 14,
-        injury_allowance: 0,
-        fatigue_penalty_pct_per_ten: 4,
-        stress_penalty_pct_per_ten: 5,
-        injury_penalty_pct_per_ten: 10,
-        min_effectiveness_pct: 40,
-    }
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct UpkeepBandData {
-    pub min_companions: u32,
-    pub min_patron_tiers: u32,
-    #[serde(alias = "food_multiplier_pct")]
-    pub wage_multiplier_pct: u32,
-    pub cleaning_multiplier_pct: u32,
-    pub maintenance_multiplier_pct: u32,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GameConfigData {
-    pub title: String,
-    pub content_version: String,
-    pub save_version: u32,
-    pub input: InputConfigData,
-    pub persistence: PersistenceConfigData,
-    pub display: DisplayConfigData,
-    pub ui: TownUiConfigData,
-    pub new_game: NewGameConfigData,
-    pub day_cycle: DayCycleConfigData,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -559,54 +318,6 @@ fn default_survey_value() -> u32 {
     1
 }
 
-fn default_depth_hazard_per_floor() -> i32 {
-    2
-}
-
-fn default_hazard_tag_risk() -> i32 {
-    3
-}
-
-fn default_survey_familiarity_relief() -> i32 {
-    1
-}
-
-fn default_max_survey_familiarity_relief() -> i32 {
-    6
-}
-
-fn default_max_floor_difficulty() -> u32 {
-    120
-}
-
-fn default_quality_rank_thresholds() -> Vec<u32> {
-    vec![3, 6, 11, 18]
-}
-
-fn default_quality_income_multipliers_pct() -> Vec<u32> {
-    vec![100, 175, 300, 500, 800]
-}
-
-fn default_quality_wage_multipliers_pct() -> Vec<u32> {
-    vec![100, 160, 260, 420, 650]
-}
-
-fn default_skill_wage_divisor() -> u32 {
-    4
-}
-
-fn default_understrength_income_pct() -> u32 {
-    45
-}
-
-fn default_reward_threshold_depth_relief_pct() -> i32 {
-    60
-}
-
-fn default_mission_focus_reward_relief_pct() -> i32 {
-    15
-}
-
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OpeningStoryStepData {
     pub id: String,
@@ -659,6 +370,19 @@ pub struct EggSpeciesEntryData {
     pub weight: u32,
 }
 
+/// Odds for a room that does not author its own — the old catch-all arm.
+fn default_work_history_gain_chance_pct() -> CompanionWorkHistoryProgressionData {
+    CompanionWorkHistoryProgressionData {
+        scouting_runs: 50,
+        guard_duties: 35,
+        hospitality_jobs: 50,
+        craft_jobs: 35,
+        contracts_completed: 15,
+        recovery_shifts: 40,
+        hatchery_assists: 5,
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TraitCatalogData {
     pub version: String,
@@ -704,6 +428,15 @@ pub struct GuildRoomData {
     pub trained_skill_ids: Vec<String>,
     #[serde(alias = "history_gains")]
     pub work_history_gains: CompanionWorkHistoryProgressionData,
+    /// How often a day in this room actually banks each kind of work, in
+    /// percent. `work_history_gains` is the most a shift can bank; this is the
+    /// chance it banks anything at all.
+    ///
+    /// These odds used to be a `match` on room id inside `progression.rs`, which
+    /// meant the guild-hall preview quoted `work_history_gains` verbatim and a
+    /// 12%-chance contract read exactly like a 70%-chance scouting run.
+    #[serde(default = "default_work_history_gain_chance_pct")]
+    pub work_history_gain_chance_pct: CompanionWorkHistoryProgressionData,
     pub preferred_trait_ids: Vec<String>,
     pub preferred_species_ids: Vec<String>,
     #[serde(default)]

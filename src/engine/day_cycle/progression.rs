@@ -163,50 +163,33 @@ pub(super) fn apply_work_history_gains(
         .saturating_add(gains.hatchery_assists);
 }
 
+/// Rolls what a shift in `room` actually banked.
+///
+/// The odds live in `guild_rooms.json` now — they used to be a `match` on room
+/// id here, which is why the guild-hall preview could only quote the ceiling.
+/// Categories are rolled in the field order of `CompanionWorkHistoryProgressionData`.
 pub(super) fn roll_work_history_gains(
     room: &crate::data::GuildRoomData,
 ) -> crate::data::CompanionWorkHistoryProgressionData {
-    let mut gains = crate::data::CompanionWorkHistoryProgressionData::default();
+    let max = &room.work_history_gains;
+    let chance = &room.work_history_gain_chance_pct;
 
-    match room.id.as_str() {
-        "common_room" => {
-            gains.scouting_runs = roll_binary_gain(room.work_history_gains.scouting_runs, 70);
-            gains.hospitality_jobs = roll_binary_gain(room.work_history_gains.hospitality_jobs, 45);
-            gains.contracts_completed =
-                roll_binary_gain(room.work_history_gains.contracts_completed, 12);
-        }
-        "packroom_annex" => {
-            gains.craft_jobs = roll_binary_gain(room.work_history_gains.craft_jobs, 55);
-            gains.recovery_shifts = roll_binary_gain(room.work_history_gains.recovery_shifts, 60);
-        }
-        "nursery_wing" => {
-            gains.hospitality_jobs = roll_binary_gain(room.work_history_gains.hospitality_jobs, 65);
-            gains.contracts_completed =
-                roll_binary_gain(room.work_history_gains.contracts_completed, 30);
-            gains.hatchery_assists = roll_binary_gain(room.work_history_gains.hatchery_assists, 5);
-        }
-        "reception_hall" => {
-            gains.scouting_runs = roll_binary_gain(room.work_history_gains.scouting_runs, 35);
-            gains.guard_duties = roll_binary_gain(room.work_history_gains.guard_duties, 55);
-            gains.recovery_shifts = roll_binary_gain(room.work_history_gains.recovery_shifts, 65);
-        }
-        _ => {
-            gains.scouting_runs = roll_binary_gain(room.work_history_gains.scouting_runs, 50);
-            gains.guard_duties = roll_binary_gain(room.work_history_gains.guard_duties, 35);
-            gains.hospitality_jobs = roll_binary_gain(room.work_history_gains.hospitality_jobs, 50);
-            gains.craft_jobs = roll_binary_gain(room.work_history_gains.craft_jobs, 35);
-            gains.contracts_completed =
-                roll_binary_gain(room.work_history_gains.contracts_completed, 15);
-            gains.recovery_shifts = roll_binary_gain(room.work_history_gains.recovery_shifts, 40);
-            gains.hatchery_assists = roll_binary_gain(room.work_history_gains.hatchery_assists, 5);
-        }
+    crate::data::CompanionWorkHistoryProgressionData {
+        scouting_runs: roll_binary_gain(max.scouting_runs, chance.scouting_runs),
+        guard_duties: roll_binary_gain(max.guard_duties, chance.guard_duties),
+        hospitality_jobs: roll_binary_gain(max.hospitality_jobs, chance.hospitality_jobs),
+        craft_jobs: roll_binary_gain(max.craft_jobs, chance.craft_jobs),
+        contracts_completed: roll_binary_gain(max.contracts_completed, chance.contracts_completed),
+        recovery_shifts: roll_binary_gain(max.recovery_shifts, chance.recovery_shifts),
+        hatchery_assists: roll_binary_gain(max.hatchery_assists, chance.hatchery_assists),
     }
-
-    gains
 }
 
-pub(super) fn roll_binary_gain(max_gain: u32, chance_pct: i32) -> u32 {
-    if max_gain == 0 {
+/// A category the room cannot bank, or never banks, costs no randomness — the
+/// RNG stream has to stay exactly as long as it was when these odds were a
+/// hardcoded `match`, or every seeded simulation shifts underneath us.
+pub(super) fn roll_binary_gain(max_gain: u32, chance_pct: u32) -> u32 {
+    if max_gain == 0 || chance_pct == 0 {
         return 0;
     }
 

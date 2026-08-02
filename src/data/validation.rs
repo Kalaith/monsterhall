@@ -1,5 +1,6 @@
 use std::collections::HashSet;
 
+use super::config_types::*;
 use super::depth_validation::validate_depth_systems;
 use super::types::*;
 

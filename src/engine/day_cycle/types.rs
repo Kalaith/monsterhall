@@ -12,6 +12,9 @@ pub struct GuildJobPreview {
     /// Share of full output this companion delivers given her condition.
     pub effectiveness_pct: u32,
     pub projected_work_history_gains: CompanionWorkHistoryState,
+    /// How often each of those gains actually lands. The gains themselves are
+    /// the ceiling, not a promise.
+    pub work_history_gain_chance_pct: CompanionWorkHistoryProgressionData,
 }
 
 #[derive(Debug, Clone)]

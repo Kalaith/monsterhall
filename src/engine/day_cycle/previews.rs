@@ -414,6 +414,7 @@ pub(super) fn preview_guild_job_for_town(
         preparation_quality: scale_by_effectiveness(preparation_quality, effectiveness_pct),
         recovery_bonus: room.recovery_bonus,
         effectiveness_pct,
+        work_history_gain_chance_pct: room.work_history_gain_chance_pct.clone(),
         projected_work_history_gains: CompanionWorkHistoryState {
             scouting_runs: room.work_history_gains.scouting_runs,
             guard_duties: room.work_history_gains.guard_duties,
