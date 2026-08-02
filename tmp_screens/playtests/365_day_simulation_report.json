@@ -15,6 +15,20 @@
   "final_graded_eggs": 0,
   "final_role_diversity": 1,
   "final_town_projects": 3,
+  "sink_absorbed": {
+    "gold": 44000,
+    "tower_materials": 4800,
+    "eggs": 0,
+    "relics": 142,
+    "arcane_residue": 51200
+  },
+  "sink_capacity": {
+    "gold": 516500,
+    "tower_materials": 34900,
+    "eggs": 0,
+    "relics": 4188,
+    "arcane_residue": 260900
+  },
   "total_hatches": 32,
   "total_buildings_purchased": 14,
   "total_guest_completions": 506,

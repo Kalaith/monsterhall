@@ -1,7 +1,7 @@
 use super::*;
 use crate::state::{CompanionState, GameState};
 
-#[derive(Debug, Serialize, Clone)]
+#[derive(Default, Debug, Serialize, Clone)]
 pub(super) struct SimulationResourcesSnapshot {
     pub(super) gold: u32,
     pub(super) tower_materials: u32,
@@ -176,6 +176,14 @@ pub(super) struct SimulationReport {
     pub(super) final_graded_eggs: usize,
     pub(super) final_role_diversity: usize,
     pub(super) final_town_projects: usize,
+    /// What the repeatable sinks absorbed, against what they could ever absorb.
+    ///
+    /// The relic ceiling was 188 across a whole campaign while deep-tower income
+    /// ran to thousands, and no number in this report said so — the stockpile
+    /// assertion looked like it was measuring conversion when it was measuring
+    /// how deep the guild got. These two make the gap legible.
+    pub(super) sink_absorbed: SimulationResourcesSnapshot,
+    pub(super) sink_capacity: SimulationResourcesSnapshot,
     pub(super) total_hatches: usize,
     pub(super) total_buildings_purchased: usize,
     pub(super) total_guest_completions: usize,

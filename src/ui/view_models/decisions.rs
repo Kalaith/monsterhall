@@ -91,6 +91,64 @@ pub fn worker_decision_summary(
     }
 }
 
+/// One line explaining the repeatable-project sink and what it has absorbed.
+///
+/// A project with a build limit of forty and no unlocks reads as pointless
+/// until the screen says it exists to convert surplus. This is the only place
+/// that says so.
+pub fn projects_status_line(data: &GameData, game_state: &GameState) -> String {
+    let ui = &data.ui_text.town_management;
+    let is_project = |building: &crate::data::BuildingData| {
+        matches!(building.category.as_str(), "project" | "prestige")
+    };
+
+    let mut built = 0usize;
+    let mut spent = crate::data::ResourceAmountData::default();
+    for building_id in &game_state.town.constructed_building_ids {
+        let Some(building) = data
+            .buildings
+            .buildings
+            .iter()
+            .find(|entry| &entry.id == building_id)
+        else {
+            continue;
+        };
+        if !is_project(building) {
+            continue;
+        }
+        built += 1;
+        spent.gold = spent.gold.saturating_add(building.cost.gold);
+        spent.tower_materials = spent
+            .tower_materials
+            .saturating_add(building.cost.tower_materials);
+        spent.relics = spent.relics.saturating_add(building.cost.relics);
+        spent.arcane_residue = spent
+            .arcane_residue
+            .saturating_add(building.cost.arcane_residue);
+    }
+
+    if built == 0 {
+        return ui.projects_none_message.clone();
+    }
+
+    let limit: u32 = data
+        .buildings
+        .buildings
+        .iter()
+        .filter(|building| is_project(building))
+        .map(|building| u32::from(building.build_limit))
+        .sum();
+
+    fill_template(
+        &ui.projects_status_template,
+        &[
+            ("{built}", built.to_string()),
+            ("{limit}", limit.to_string()),
+            ("{spent}", format_resource_cost(&data.ui_text, &spent)),
+        ],
+    )
+}
+
 pub fn building_decision_summary(
     data: &GameData,
     game_state: &GameState,

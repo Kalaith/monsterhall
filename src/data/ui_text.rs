@@ -219,6 +219,11 @@ pub struct MonsterProfileUiText {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TownManagementUiText {
+    /// The repeatable-project sink, which is otherwise invisible: a build limit
+    /// of forty and no unlocks reads as pointless unless the screen says what
+    /// the thing is for.
+    pub projects_status_template: String,
+    pub projects_none_message: String,
     pub title: String,
     pub subtitle: String,
     pub buildings_panel_title: String,

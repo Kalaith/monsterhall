@@ -13,7 +13,9 @@ use crate::ui::core::{draw_body_text, draw_body_text_in_box, primary_button, sec
 use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
 use crate::ui::theme;
-use crate::ui::view_models::{building_decision_summary, format_resource_cost};
+use crate::ui::view_models::{
+    building_decision_summary, format_resource_cost, projects_status_line,
+};
 
 fn compact_text(text: &str, max_len: usize) -> String {
     let compact = text.split_whitespace().collect::<Vec<_>>().join(" ");
@@ -309,6 +311,17 @@ pub fn draw_town_management(
         54.0,
         &ui.category_label,
         &selected_building.category,
+        theme::INFO,
+    );
+
+    // The repeatable-project sink has no other explanation anywhere: a build
+    // limit of forty and no unlocks reads as pointless until something says the
+    // thing exists to convert surplus.
+    draw_inline_status(
+        layout.detail_x,
+        detail_top_y + 194.0,
+        layout.detail_w,
+        &projects_status_line(data, game_state),
         theme::INFO,
     );
 

@@ -44,7 +44,7 @@ mod progression_labels;
 
 pub use decisions::{
     action_from_action_hint, building_decision_summary, daily_priority_summary,
-    monster_role_summary, worker_decision_summary,
+    monster_role_summary, projects_status_line, worker_decision_summary,
 };
 pub use progression_labels::{
     companion_skill_summary, history_gain_chance_label, history_gain_label_from_progress,

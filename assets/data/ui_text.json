@@ -241,7 +241,9 @@
     "next_destination_label": "Next Destination",
     "build_ready_message": "Build now. The cost is covered and the unlock path is ready.",
     "built_out_message": "Built out. Use the linked destination instead of spending here.",
-    "blocked_by_cost_message": "Blocked by cost. Favor the unlock destination or income screens first."
+    "blocked_by_cost_message": "Blocked by cost. Favor the unlock destination or income screens first.",
+    "projects_status_template": "Projects: {built} of {limit} repeatable builds standing. They convert surplus into standing rather than growth - {spent}.",
+    "projects_none_message": "Projects: none yet. Repeatable builds turn late-game surplus into standing when there is nothing left to grow into."
   },
   "guild_hall_management": {
     "title": "Guild Jobs",

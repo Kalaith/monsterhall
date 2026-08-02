@@ -102,15 +102,15 @@ fourteen floors going unwalked by the *simulation*, not the ability to test.
 - Review whether 90-day outcomes run too low when early debt or event rolls are unfavourable.
 - Review whether the 180-day building count reliably opens enough population cap before late catch-up hatching.
 - Tune final debt pressure against averaged multi-seed results rather than one deterministic report. See the blocker above for the measured gap: 1.6M–2.5M gold of slack on every seed.
-- ~~Add late-game project varieties that spend different surplus mixes.~~ Done: `reliquary_vault` is the relic-heavy sink the catalogue lacked. More varieties are still welcome — materials have no dedicated sink at all.
+- ~~Add late-game project varieties that spend different surplus mixes.~~ Done: `reliquary_vault` is the relic-heavy sink the catalogue lacked. Materials were flagged here as having no dedicated sink; measured, they end at 616 against 34,900 of incidental capacity, so there is no runaway to solve.
 - Consider patron satisfaction as explicit state if completions and expirations are not enough pressure.
 - Give the 20-companion cap a clearer replacement/release flow, and a reason to run non-egg missions once capped.
 - Review whether special-event cost should scale from roster, reputation, or project count.
 
 ## UI and reporting
 
-- Add a projects status line to Town Management explaining repeatable project count, cost, and purpose.
-- Add a concise project/sink summary to simulation reports.
+- ~~Add a projects status line to Town Management explaining repeatable project count, cost, and purpose.~~ Done. A build limit of forty with no unlocks reads as pointless until something says the thing exists to convert surplus, and nothing did — `reliquary_vault` shipped invisible. The line reports how many repeatable builds stand against how many could, and what they have absorbed.
+- ~~Add a concise project/sink summary to simulation reports.~~ Done: `sink_absorbed` and `sink_capacity` on every report. This is the pair that would have made the relic ceiling obvious immediately — capacity now reads 4,188 relics against the 188 it was, with 142 absorbed and 6 left standing on the deterministic seed. Gold is the one worth watching: capacity 516,500 against 446,624 still banked, so the sinks are roughly adequate and the guild simply is not spending, which is the reserve behaviour described in the Balance section rather than a missing sink.
 - Capture visual baselines for new screens and modal states before relying on screenshot comparison.
 
 ## Art
