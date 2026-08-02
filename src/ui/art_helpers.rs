@@ -7,7 +7,7 @@ use super::art::{BackdropKind, UiIcon};
 use crate::ui::theme;
 use macroquad_toolkit::ui::draw_ui_text_ex;
 
-const ICON_CELL: f32 = 64.0;
+pub(crate) const ICON_CELL: f32 = 64.0;
 
 pub(super) struct UiTextures {
     pub(super) title_page_backdrop: Texture2D,
@@ -464,7 +464,7 @@ pub(super) fn embedded_texture(bytes: &[u8], filter: FilterMode) -> Texture2D {
     texture
 }
 
-pub(super) fn icon_source(icon: UiIcon) -> Rect {
+pub(crate) fn icon_source(icon: UiIcon) -> Rect {
     let index = icon_index(icon);
     let col = (index % 8) as f32;
     let row = (index / 8) as f32;
@@ -528,5 +528,39 @@ pub(super) fn accent_from_seed(seed: u32) -> Color {
         3 => theme::PRIMARY,
         4 => theme::POSITIVE,
         _ => theme::DANGER,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn every_icon_has_its_own_slot_in_the_sheet() {
+        // `icon_index` is a hand-written arm per variant. A duplicated index
+        // draws one icon in another's place with nothing to notice, and a gap
+        // leaves a blank cell in the sheet that no icon ever reaches.
+        let indices = UiIcon::ALL
+            .iter()
+            .map(|icon| icon_index(*icon))
+            .collect::<Vec<_>>();
+
+        let unique = indices
+            .iter()
+            .copied()
+            .collect::<std::collections::HashSet<_>>();
+        assert_eq!(
+            unique.len(),
+            UiIcon::ALL.len(),
+            "two icons share an atlas slot"
+        );
+
+        let highest = indices.iter().copied().max().unwrap_or_default() as usize;
+        assert_eq!(
+            highest,
+            UiIcon::ALL.len() - 1,
+            "atlas slots are not contiguous — highest index {highest} for {} icons",
+            UiIcon::ALL.len()
+        );
     }
 }

@@ -77,6 +77,64 @@ pub enum UiIcon {
     ActionQuit,
 }
 
+impl UiIcon {
+    /// Every icon in the atlas, in the order they are packed.
+    ///
+    /// `ui_icon_atlas.json` describes the same layout and is checked against
+    /// this — the rects the code derives from an index and the rects the atlas
+    /// file declares were two independent sources of truth, so repacking the
+    /// sheet and updating the JSON changed nothing on screen.
+    ///
+    /// Test-only: nothing at play time needs to walk the set, but the checks
+    /// that keep the two descriptions honest do.
+    #[cfg(test)]
+    pub const ALL: &[UiIcon] = &[
+        UiIcon::ResourceGold,
+        UiIcon::ResourceMaterials,
+        UiIcon::ResourceEgg,
+        UiIcon::ResourceRelic,
+        UiIcon::ResourceResidue,
+        UiIcon::StatPower,
+        UiIcon::StatCharm,
+        UiIcon::StatEndurance,
+        UiIcon::StatInstinct,
+        UiIcon::ConditionFatigue,
+        UiIcon::ConditionStress,
+        UiIcon::ConditionInjury,
+        UiIcon::ConditionCorruption,
+        UiIcon::AssignIdle,
+        UiIcon::AssignGuildJob,
+        UiIcon::AssignResting,
+        UiIcon::AssignExpedition,
+        UiIcon::AssignContract,
+        UiIcon::NavTown,
+        UiIcon::NavPlanner,
+        UiIcon::NavGuildJobs,
+        UiIcon::NavContracts,
+        UiIcon::NavHatchery,
+        UiIcon::NavExpedition,
+        UiIcon::NavJournal,
+        UiIcon::NavSettings,
+        UiIcon::NavEndDay,
+        UiIcon::StatusAvailable,
+        UiIcon::StatusBuilt,
+        UiIcon::StatusLocked,
+        UiIcon::StatusAssigned,
+        UiIcon::StatusBlocked,
+        UiIcon::StatusWarning,
+        UiIcon::StatusAccepted,
+        UiIcon::StatusCompleted,
+        UiIcon::StatusFailed,
+        UiIcon::MissionResourceRun,
+        UiIcon::MissionEggHunt,
+        UiIcon::MissionRelicRaid,
+        UiIcon::MissionScoutRoute,
+        UiIcon::ActionSave,
+        UiIcon::ActionClose,
+        UiIcon::ActionQuit,
+    ];
+}
+
 pub fn draw_backdrop(kind: BackdropKind) {
     let (top, bottom, accent) = match kind {
         BackdropKind::MainMenu => (

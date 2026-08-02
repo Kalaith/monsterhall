@@ -101,6 +101,17 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
   meant to bite and the economy needs headroom for it, or the numbers want
   lowering, or the field should come off the desk. Left for a deliberate call.
 
+- **`hazard_risk_modifier_pct` is added flat, not as a percentage** — and the
+  same is true of `guild_income_pct`, `expedition_success_pct`, `injury_risk_pct`
+  and `success_bonus_pct`, which are all summed into raw scores rather than
+  applied as percentages. Swept all 22 `*_pct` fields; the convention is
+  consistent across the whole scoring system, so this is a naming problem rather
+  than a defect. Worth knowing because it is an authoring trap: on a depth-1
+  floor with two hazard tags the raw hazard is 8, so `hazard_risk_modifier_pct:
+  12` is +150%, while on a deep floor it is +20%. Renaming would need serde
+  aliases on five fields for no behavioural gain, so it is recorded rather than
+  done.
+
 ### UI and feedback
 
 - ~~Status messages are computed then discarded on five screens; Ctrl+S saves with zero visible confirmation.~~ Done: all five now render `status_message` (Monster Profile had no draw path for it at all; Town Management and Monster Profile yield the slot to an error when there is one). `persist_game_state` already called `apply_phase_status("Campaign saved")`, so Ctrl+S became visible everywhere for free.
@@ -108,7 +119,9 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 - ~~Roughly 100 `ui_text.json` fields are orphaned.~~ Measured at **110 dead out of 366** — nearly a third of the catalogue — and deleted. Re-wiring was the other option and it is the wrong one for these: they are leftovers from screens that were rewritten, and `LoadingUiText` was unusable by construction (the loading screen runs before the catalogue it would read has loaded). A dead key is worse than no key, because an author edits the wording, sees no change, and cannot tell whether the screen is hardcoded or they typed the wrong name. `tests/ui_text_catalog.rs` now fails on any field no screen reads, so the catalogue cannot drift back — verified by planting a dead key and watching it fire.
 - ~~`config.json`'s `ui` block is loaded and validated but read by nothing.~~ Deleted. `town_panels` named four panels (`Campaign`, `Resources`, `Catalog Snapshot`, `Roster Preview`) that the rewritten Town Overview does not use even as strings, and `target_width`/`target_height` described a fixed design resolution the responsive layout never consults — stale metadata for a screen that no longer exists in that shape. `content_version` was the other unread config field; rather than delete it, reports now carry it, so every playtest JSON in `tmp_screens/playtests/` names the content catalogue that produced it.
 - ~~`draw_condition_badges` has zero call sites.~~ Done: it draws on the Town Overview roster card, which is where the Rest button lives — the decision to rest someone was being made with no sight of her fatigue, and since the condition wiring landed those numbers cost real output. Gated on card height so the compact layout is unaffected.
-- 17 `UiIcon` entries (assignment, mission-type, and status icons) have atlas rects but no draw path. `ui_icon_atlas.json` and `backdrops.json` are not read by code — icon rects are re-derived in `art_helpers.rs`, leaving two sources of truth.
+- ~~`ui_icon_atlas.json` is not read by code — icon rects are re-derived in `art_helpers.rs`, leaving two sources of truth.~~ Resolved as checked documentation, the same way the text catalogue was. The JSON declares an explicit rect per icon; `icon_source` ignores it and counts out an eight-column grid of `ICON_CELL` squares from the icon's position in the enum. Both are right today by coincidence of authoring order — repack the sheet, update the JSON, and nothing on screen moves. `tests/icon_atlas_layout.rs` now fails if the file's own rects stop matching the grid the code counts, verified by planting a moved rect. A second test asserts `icon_index` gives every icon a distinct, contiguous slot, since a duplicated arm in that 43-way match would draw one icon in another's place silently.
+
+  The 17 unused `UiIcon` entries are left as-is: they are art that exists ahead of the screens that will use it, which is the right order to build in.
 
 ### Write-only state (wire it or delete it)
 
