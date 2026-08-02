@@ -15,6 +15,9 @@ use crate::ui::core::{
 };
 use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
+use crate::ui::screens::roster_window::{
+    draw_roster_pager, roster_panel_height, RosterWindow, ROSTER_COLUMNS,
+};
 use crate::ui::theme;
 use crate::ui::view_models::{
     assignment_label, history_gain_chance_label_from_progress, primary_skill_label,
@@ -319,6 +322,11 @@ pub(super) fn draw_selected_room_panel(
     );
 }
 
+/// Card rows the worker columns can hold before they have to page.
+const WORKER_CARD_H: f32 = 104.0;
+const WORKER_HEADER_H: f32 = 52.0;
+
+#[allow(clippy::too_many_arguments)]
 fn draw_worker_cards(
     data: &GameData,
     game_state: &GameState,
@@ -329,8 +337,18 @@ fn draw_worker_cards(
     w: f32,
     title: &str,
     collapse_empty: bool,
+    roster_page: usize,
+    footer_y: f32,
 ) -> Option<UiAction> {
-    let rows = workers.len().max(1).div_ceil(2) as f32;
+    // The panel used to clamp to 330px while the loop below drew a card for
+    // every worker regardless — so a full guild's Available column ran nine rows
+    // past its own frame, through the footer and off the bottom of the screen,
+    // and the companions on those rows could not be clicked at all. The column
+    // now sizes itself from the space it really has and pages the rest.
+    let row_capacity = (((footer_y - y - WORKER_HEADER_H - layout::SECTION_GAP) / WORKER_CARD_H)
+        .floor() as usize)
+        .max(1);
+    let window = RosterWindow::new(workers.len(), roster_page, row_capacity, ROSTER_COLUMNS);
     let panel_h = if workers.is_empty() {
         if collapse_empty {
             118.0
@@ -338,7 +356,7 @@ fn draw_worker_cards(
             136.0
         }
     } else {
-        (52.0 + rows * 104.0).min(330.0)
+        roster_panel_height(&window, WORKER_HEADER_H, WORKER_CARD_H)
     };
     draw_tier_panel(x, y, w, panel_h, Some(title), PanelTier::Support, false);
     if workers.is_empty() {
@@ -354,9 +372,14 @@ fn draw_worker_cards(
     }
 
     let card_w = (w - layout::PANEL_PADDING * 2.0 - layout::SECTION_GAP) / 2.0;
-    for (index, monster) in workers.iter().enumerate() {
-        let col = index % 2;
-        let row = index / 2;
+    for (index, monster) in workers
+        .iter()
+        .skip(window.first_index)
+        .take(window.visible_count)
+        .enumerate()
+    {
+        let col = index % ROSTER_COLUMNS;
+        let row = index / ROSTER_COLUMNS;
         let card_x = x + layout::PANEL_PADDING + col as f32 * (card_w + layout::SECTION_GAP);
         let card_y = y + 42.0 + row as f32 * 104.0;
         let preview = preview_guild_job(data, game_state, monster, &selected_room.id).ok();
@@ -466,7 +489,15 @@ fn draw_worker_cards(
             return Some(UiAction::AssignMonsterToIdle(monster.id.clone()));
         }
     }
-    None
+
+    draw_roster_pager(
+        &window,
+        workers.len(),
+        x + layout::PANEL_PADDING,
+        y + WORKER_HEADER_H - 10.0 + window.card_rows() as f32 * WORKER_CARD_H,
+        w - layout::PANEL_PADDING * 2.0,
+        UiAction::ShowRosterPage,
+    )
 }
 
 pub(super) fn draw_worker_lists(
@@ -474,6 +505,7 @@ pub(super) fn draw_worker_lists(
     game_state: &GameState,
     selected_room: Option<&crate::data::GuildRoomData>,
     layout: &GuildHallManagementLayout,
+    roster_page: usize,
 ) -> Option<UiAction> {
     let selected_room = selected_room?;
     let assigned = game_state
@@ -488,6 +520,8 @@ pub(super) fn draw_worker_lists(
         .collect::<Vec<_>>();
 
     let column_w = (layout.content_width - layout::SECTION_GAP) / 2.0;
+    // Only the Available column can grow: `town_job_limit` caps Assigned Here at
+    // two, so it never pages and the shared page belongs to the long list.
     if let Some(action) = draw_worker_cards(
         data,
         game_state,
@@ -498,6 +532,8 @@ pub(super) fn draw_worker_lists(
         column_w,
         &data.ui_text.guild_hall_management.assigned_here_panel_title,
         true,
+        0,
+        layout.footer_y,
     ) {
         return Some(action);
     }
@@ -511,6 +547,8 @@ pub(super) fn draw_worker_lists(
         column_w,
         &data.ui_text.guild_hall_management.available_panel_title,
         false,
+        roster_page,
+        layout.footer_y,
     )
 }
 

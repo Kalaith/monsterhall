@@ -33,8 +33,7 @@ pub fn draw_journal(
     let left_panel_w = 448.0;
     let right_panel_w = content_width - left_panel_w - panel_gap;
     let footer_y = screen_height() - layout::FOOTER_BOTTOM_MARGIN - layout::FOOTER_H;
-    let log_y = top_y + upper_panel_h + panel_gap;
-    let log_h = (footer_y - log_y - panel_gap).max(260.0);
+    let (_, log_y, _, log_h) = log_rect();
 
     if let Some(action) = draw_top_utility_bar(&data.ui_text.common.settings_button) {
         return Some(action);
@@ -112,7 +111,7 @@ pub fn draw_journal(
         .rev()
         .cloned()
         .collect::<Vec<_>>();
-    let visible_rows = 12usize;
+    let visible_rows = VISIBLE_ROWS;
     let max_scroll = recent_events.len().saturating_sub(visible_rows);
     let start_index = journal_state.event_log_scroll.min(max_scroll);
     let visible_events = if recent_events.is_empty() {
@@ -169,4 +168,19 @@ pub fn draw_journal(
     }
 
     None
+}
+
+/// Entries the event log shows at once.
+pub const VISIBLE_ROWS: usize = 12;
+
+/// Where the event log panel sits. Shared with the mouse-wheel handler, which
+/// used to carry its own fixed copy — 720px tall against a panel that follows
+/// the window, so the wheel scrolled the log from over the footer.
+pub fn log_rect() -> (f32, f32, f32, f32) {
+    let left_margin = layout::OUTER_MARGIN;
+    let content_width = screen_width() - left_margin * 2.0;
+    let footer_y = screen_height() - layout::FOOTER_BOTTOM_MARGIN - layout::FOOTER_H;
+    let log_y = 92.0 + 212.0 + layout::SECTION_GAP;
+    let log_h = (footer_y - log_y - layout::SECTION_GAP).max(260.0);
+    (left_margin, log_y, content_width, log_h)
 }

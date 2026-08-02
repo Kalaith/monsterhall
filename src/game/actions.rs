@@ -415,10 +415,13 @@ impl Game {
         }
     }
 
-    /// Pads the roster to the population cap so a screenshot shows a crowded
-    /// guild. Capture-only: it copies the starting companion rather than playing
-    /// out a year, because what is being photographed is the panel, not the
-    /// campaign that produced it.
+    /// Pads the roster to the population cap, and the hatchery to more eggs than
+    /// its column can show, so a screenshot shows a crowded guild.
+    ///
+    /// Capture-only: it copies what is already there rather than playing out a
+    /// year, because what is being photographed is the panel, not the campaign
+    /// that produced it. Every list this fills is one that only misbehaves once
+    /// it is full.
     fn fill_roster_for_capture(&mut self) {
         let Some(data) = self.data.as_ref() else {
             return;
@@ -437,6 +440,28 @@ impl Game {
             copy.current_job = crate::state::CompanionJobState::Idle;
             game_state.monsters.push(copy);
         }
+
+        let egg_template = game_state.egg_inventory.first().cloned();
+        for index in game_state.egg_inventory.len()..12 {
+            let egg = match &egg_template {
+                Some(template) => crate::state::EggState {
+                    id: format!("egg_{:03}", index + 1),
+                    grade_score: (index as u32 * 3) % 20,
+                    ..template.clone()
+                },
+                None => crate::state::EggState {
+                    id: format!("egg_{:03}", index + 1),
+                    source_floor_id: "tower_core".to_owned(),
+                    possible_species_ids: vec!["slime_companion".to_owned()],
+                    selected_species_id: None,
+                    incubation_state: crate::state::EggIncubationState::Raw,
+                    grade_score: (index as u32 * 3) % 20,
+                    preparation_focus: None,
+                },
+            };
+            game_state.egg_inventory.push(egg);
+        }
+        game_state.resources.eggs = game_state.egg_inventory.len() as u32;
     }
 
     pub(super) fn start_new_game(&mut self) {
@@ -708,10 +733,13 @@ impl Game {
                         self.phase = GamePhase::Journal(JournalState::new(state.event_log_scroll));
                     }
                     GamePhase::GuildHallManagement(guild_jobs_state) => {
-                        self.phase = GamePhase::GuildHallManagement(GuildHallManagementState::new(
-                            guild_jobs_state.selected_room_id.clone(),
-                            "Guild assignments updated",
-                        ));
+                        self.phase = GamePhase::GuildHallManagement(
+                            GuildHallManagementState::with_roster_page(
+                                guild_jobs_state.selected_room_id.clone(),
+                                "Guild assignments updated",
+                                guild_jobs_state.roster_page,
+                            ),
+                        );
                     }
                     GamePhase::ExpeditionPlanning(expedition_state) => {
                         self.phase = GamePhase::ExpeditionPlanning(

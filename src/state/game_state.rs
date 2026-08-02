@@ -204,13 +204,21 @@ impl JournalState {
 pub struct GuildHallManagementState {
     pub selected_room_id: String,
     pub status_message: String,
+    /// Which page of the Available column is showing. See
+    /// [`ContractDeskState::roster_page`].
+    pub roster_page: usize,
 }
 
 impl GuildHallManagementState {
-    pub fn new(selected_room_id: String, status_message: &str) -> Self {
+    pub fn with_roster_page(
+        selected_room_id: String,
+        status_message: &str,
+        roster_page: usize,
+    ) -> Self {
         Self {
             selected_room_id,
             status_message: status_message.to_owned(),
+            roster_page,
         }
     }
 }

@@ -38,7 +38,12 @@ fn compact_text(text: &str, max_len: usize) -> String {
     }
 }
 
-pub(super) struct HatcheryManagementLayout {
+/// Height of one egg row in the inventory column.
+pub(super) const EGG_ROW_H: f32 = 92.0;
+/// Space above the first egg row, inside the panel.
+pub(super) const EGG_LIST_HEADER_H: f32 = 42.0;
+
+pub struct HatcheryManagementLayout {
     pub left_margin: f32,
     pub content_width: f32,
     pub inventory_w: f32,
@@ -50,7 +55,7 @@ pub(super) struct HatcheryManagementLayout {
 }
 
 impl HatcheryManagementLayout {
-    pub(super) fn new() -> Self {
+    pub fn new() -> Self {
         let left_margin = layout::OUTER_MARGIN;
         let content_width = screen_width() - left_margin * 2.0;
         let inventory_w = 348.0;
@@ -71,6 +76,30 @@ impl HatcheryManagementLayout {
             content_h,
             footer_y,
         }
+    }
+
+    /// Egg rows the inventory column can actually hold.
+    ///
+    /// Was a hardcoded `4` — the number of rows that fit when the panel had a
+    /// fixed height. The panel grew to fill the screen, so on a 1080p display it
+    /// drew four rows into space that holds eight, leaving half the column empty
+    /// and making the player scroll twice as far as the panel needed.
+    pub fn egg_rows_visible(&self) -> usize {
+        (((self.content_h - EGG_LIST_HEADER_H) / EGG_ROW_H).floor() as usize).max(1)
+    }
+
+    /// The inventory column's rectangle, so the mouse-wheel handler scrolls
+    /// where the list actually is. It carried its own copy of these numbers and
+    /// every one of them had gone stale: it claimed the full screen width, so
+    /// hovering the detail panel scrolled the egg list, and a fixed 230..666 band
+    /// that missed the panel's top and most of its bottom.
+    pub fn inventory_rect(&self) -> (f32, f32, f32, f32) {
+        (
+            self.left_margin,
+            self.content_y,
+            self.inventory_w,
+            self.content_h,
+        )
     }
 }
 
@@ -227,8 +256,8 @@ pub(super) fn draw_inventory_panel(
         return None;
     }
 
-    let row_height = 92.0;
-    let visible_rows = 4usize;
+    let row_height = EGG_ROW_H;
+    let visible_rows = layout.egg_rows_visible();
     let max_scroll = game_state.egg_inventory.len().saturating_sub(visible_rows);
     let start_index = chamber_state.inventory_scroll.min(max_scroll);
     let current_selected = selected_egg(chamber_state, game_state).map(|egg| egg.id.as_str());
@@ -240,7 +269,7 @@ pub(super) fn draw_inventory_panel(
         .take(visible_rows)
         .enumerate()
     {
-        let row_y = layout.content_y + 42.0 + visible_index as f32 * row_height;
+        let row_y = layout.content_y + EGG_LIST_HEADER_H + visible_index as f32 * row_height;
         let unlocked_species_ids = unlocked_species_ids_for_egg(game_state, egg);
         let is_selected = current_selected == Some(egg.id.as_str());
         draw_entity_card_frame(

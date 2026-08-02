@@ -29,7 +29,13 @@ pub fn draw_guild_hall_management(
 
     draw_selected_room_panel(data, guild_jobs_state, game_state, selected_room, &layout);
 
-    if let Some(action) = draw_worker_lists(data, game_state, selected_room, &layout) {
+    if let Some(action) = draw_worker_lists(
+        data,
+        game_state,
+        selected_room,
+        &layout,
+        guild_jobs_state.roster_page,
+    ) {
         return Some(action);
     }
     if let Some(action) = draw_footer(data, &layout, last_error) {

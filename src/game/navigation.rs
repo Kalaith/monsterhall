@@ -24,9 +24,14 @@ impl Game {
             return;
         };
 
-        self.phase = GamePhase::GuildHallManagement(GuildHallManagementState::new(
+        let roster_page = match &self.phase {
+            GamePhase::GuildHallManagement(state) => state.roster_page,
+            _ => 0,
+        };
+        self.phase = GamePhase::GuildHallManagement(GuildHallManagementState::with_roster_page(
             selected_room_id,
             "Room plan ready",
+            roster_page,
         ));
         self.last_error = None;
     }
@@ -225,6 +230,7 @@ impl Game {
             GamePhase::ExpeditionPlanning(state) => state.roster_page = page,
             GamePhase::ContractDesk(state) => state.roster_page = page,
             GamePhase::TownOverview(state) => state.roster_page = page,
+            GamePhase::GuildHallManagement(state) => state.roster_page = page,
             _ => {}
         }
     }
@@ -444,9 +450,13 @@ impl Game {
                 ))
             }
             GamePhase::Journal(state) => GamePhase::Journal(state.clone()),
-            GamePhase::GuildHallManagement(state) => GamePhase::GuildHallManagement(
-                GuildHallManagementState::new(state.selected_room_id.clone(), status_message),
-            ),
+            GamePhase::GuildHallManagement(state) => {
+                GamePhase::GuildHallManagement(GuildHallManagementState::with_roster_page(
+                    state.selected_room_id.clone(),
+                    status_message,
+                    state.roster_page,
+                ))
+            }
             GamePhase::ExpeditionPlanning(state) => {
                 GamePhase::ExpeditionPlanning(ExpeditionPlanningState::with_roster_page(
                     state.selected_floor_id.clone(),

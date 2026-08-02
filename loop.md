@@ -762,6 +762,45 @@ Stop the loop and report if:
   are unchanged — **guild rooms 4**, **patron tiers 3**, and relics still have no
   patron who asks for one by name.
 
+- **2026-08-03 — the fourth roster panel, and the geometry nobody was measuring
+  against.** Last pass fixed three panels that hid companions behind a `.take(6)`.
+  The Guild Jobs screen had the same six-companion assumption and failed the
+  *other* way: `draw_worker_cards` clamped its panel to `.min(330.0)` while the
+  loop below drew a card for **every** worker. A full guild's Available column ran
+  nine rows past its own frame, through the footer and off the bottom of the
+  window — companions 13–20 drawn where nothing can be clicked. 330px only ever
+  held three rows, so it already overflowed at six. It derives its capacity from
+  the space to the footer now and pages with the same `RosterWindow`.
+  **Then the same shape twice more, in geometry rather than counts.** The Hatchery
+  drew a hardcoded four egg rows into a panel that grew to hold eight, so half the
+  column sat empty and the player scrolled twice as far as needed. And both
+  mouse-wheel handlers carried their own stale copies of the panels they scroll:
+  the Hatchery's claimed the **full screen width** (hovering the detail panel
+  scrolled the egg list) over a fixed `230..666` band that missed the panel's top
+  and most of its bottom; the Journal's was 720px tall against a log panel that
+  follows the window — 60px too tall at 1080p, 420px too tall at 720p, so the
+  wheel scrolled the log from over the footer. Both read the screen's own layout
+  now, and the row count is one constant instead of one per file.
+  **And the last recorded overlap, fixed at its source.** `draw_text_center`
+  centred text without ever measuring it against the box width, so a caption wider
+  than its box spilled out of *both* sides. Every thumbnail caption in the game
+  goes through it. On the Contract Desk the guest name reached far enough right to
+  print through the room name, reward, penalty and deadline — the one screen whose
+  job is showing a contract's requirements. Captions ellipsise to fit; anything
+  that already fitted is untouched.
+  **Result:** 94 tests, balance byte-identical (no engine arithmetic moved), fmt
+  and clippy clean, publish green. `_full` captures now crowd the egg inventory as
+  well as the roster, because every list fixed across these two passes is one that
+  only misbehaves when it is full.
+  **Next iteration should know:** (a) this closes the panel-capacity class — every
+  list that renders game entities now derives its capacity from the panel it draws
+  into, except `town_management.rs:144`, which still takes 10 against 9 core and 4
+  project buildings and so cannot bite yet; (b) the contract list rows still draw
+  a few pixels wider than their panel, which is genuinely cosmetic; (c) the thin
+  content axes are untouched and are the honest next slice — **guild rooms 4** for
+  a 20-companion roster, **patron tiers 3** with upkeep bands already referencing
+  a fourth, and relics still have no patron who asks for one by name.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

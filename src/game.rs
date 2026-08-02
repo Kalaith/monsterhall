@@ -2,8 +2,8 @@
 
 use macroquad::{
     prelude::{
-        is_key_down, is_key_pressed, is_mouse_button_pressed, mouse_position, mouse_wheel,
-        screen_width, KeyCode, MouseButton,
+        is_key_down, is_key_pressed, is_mouse_button_pressed, mouse_position, mouse_wheel, KeyCode,
+        MouseButton,
     },
     window::{request_new_screen_size, set_fullscreen},
 };

@@ -171,6 +171,46 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, third pass)
+
+- ~~The Guild Jobs worker column drew off the bottom of the screen.~~ Fixed, and
+  it was the third assignment surface with the same six-companion assumption —
+  but failing the other way. `draw_worker_cards` clamped its panel to
+  `.min(330.0)` while the loop below drew a card for **every** worker, so a full
+  guild's Available column ran nine rows past its own frame, straight through the
+  footer and off the bottom of the window. The capture shows companions 13–20
+  drawn where nothing can be clicked. 330px was only ever enough for three rows,
+  so this already overflowed at six workers. The column now derives its row
+  capacity from the space between itself and the footer and pages the rest with
+  the same `RosterWindow` the other three panels use. Assigned Here never pages —
+  `town_job_limit` caps it at two.
+- ~~The Hatchery drew four egg rows into a panel that holds eight.~~ Fixed. The
+  row count was a hardcoded `4` from when the panel had a fixed height; the panel
+  now fills the screen, so at 1080p half the inventory column was empty and the
+  player scrolled twice as far as the panel needed. `egg_rows_visible()` derives
+  it from `content_h`.
+- ~~Both mouse-wheel hit-boxes were stale copies of geometry the screens
+  compute.~~ Fixed. The Hatchery handler claimed the **full screen width**, so
+  hovering the detail panel scrolled the egg list, and a fixed `230..666` band
+  that missed the panel's top and most of its bottom. The Journal handler carried
+  a fixed 720px height against a log panel that follows the window — 60px too
+  tall at 1080p and 420px too tall at 720p, so the wheel scrolled the log from
+  over the footer. Both now read the screen's own layout, and the visible-row
+  count is a single constant rather than one per file.
+- ~~A thumbnail caption could print through the panel beside it.~~ Fixed at the
+  shared helper. `draw_text_center` centred text without ever measuring it
+  against the box width, so a caption wider than its box spilled out of **both**
+  sides. Every thumbnail caption in the game goes through it. The Contract Desk
+  showed the cost: the guest name under the silhouette reached far enough right
+  to print through the room name, reward, penalty and deadline in the detail
+  column — on the one screen whose whole job is showing a contract's
+  requirements, and the last of the overlaps recorded as "left" from the
+  2026-08-02 capture pass. Captions are ellipsised to fit now; anything that
+  already fitted is unchanged.
+- **The capture harness now crowds the egg inventory as well as the roster.**
+  `_full` fills both, because every list fixed in the last two passes is one that
+  only misbehaves once it is full.
+
 ### Found by review, not by the audit (2026-08-03, second pass)
 
 - ~~Fourteen of twenty companions could not be assigned to anything.~~ Fixed, and
@@ -515,7 +555,14 @@ fourteen floors going unwalked by the *simulation*, not the ability to test.
   - The Guild Jobs room thumbnail was drawn over its own panel title, and the detail panel ended before its last badge, which the roster row then covered. Both panels grown, thumbnail moved below the title band.
   - **The Contract Desk detail column had three draw calls landing on each other.** The guest name at y=138 is 24px and descends past 150, where the status badge started; the badge is 28 tall and ran into the category line at 180. So the patron tier, preparation quality and room name were all printed through "Pending" and through each other — on the one screen whose whole job is showing a contract's requirements. Respaced as an explicit top-to-bottom column with the intended offsets written down, because the original numbers looked deliberate and were not.
 
-    Two smaller ones on that screen are left: the contract list rows draw wider than the panel that holds them, and the thumbnail caption reaches into the text column. Neither obscures information.
+    Two smaller ones on that screen were left, and one of them turned out to
+    obscure information after all. ~~The thumbnail caption reaching into the text
+    column~~ was fixed on 2026-08-03: `draw_text_center` never measured against
+    its box, so the guest name spilled both ways and printed through the room
+    name, reward, penalty and deadline once the name was long enough. Captions
+    ellipsise to fit now, at the shared helper, so every thumbnail in the game is
+    covered. The contract list rows still draw slightly wider than the panel that
+    holds them; that one really is cosmetic.
   A fourth pass went back to the images already captured but never opened, and that alone was worth it:
   - **The Expedition Desk printed "Injury Risk -1073741824"** — `i32::MIN / 2`, the empty-party fallback I added a few passes earlier, rendered raw. An empty party is the state the screen opens in every single time, so this was the default view. `injury_risk_score` is `Option<i32>` now: with nobody assigned there is no companion to hurt and therefore no number, and the tile shows an em dash. The sentinel could never have been caught by a test that did not already know to look for it, because every consumer treated it as an ordinary score.
   - The same screen's header ended on a bare `|`. The risk clause was long enough that the status strip truncated it away entirely, and with no party it only restated the "0 assigned" beside it. Dropped when there is no party.

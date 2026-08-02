@@ -347,6 +347,14 @@ pub(super) fn draw_round_panel(x: f32, y: f32, w: f32, h: f32, fill: Color, bord
     );
 }
 
+/// Draws `text` centred in the box, shortened until it fits.
+///
+/// It used to centre without measuring against `w`, so a caption wider than its
+/// box spilled out of *both* sides. Every thumbnail caption in the game goes
+/// through here, and the Contract Desk showed what that costs: the guest name
+/// under the silhouette reached far enough right to print through the room name
+/// and penalty in the detail column beside it — on the one screen whose job is
+/// showing a contract's requirements.
 pub(super) fn draw_text_center(
     text: &str,
     x: f32,
@@ -357,10 +365,31 @@ pub(super) fn draw_text_center(
     color: Color,
 ) {
     let style = TextStyle::new(size, color);
-    let dims = measure_text_size(text, style);
+    let fitted = fit_text_to_width(text, style, w);
+    let dims = measure_text_size(&fitted, style);
     let text_x = x + (w - dims.width) * 0.5;
     let text_y = y + (h + dims.height) * 0.5 - 4.0;
-    draw_ui_text_ex(text, text_x, text_y, style.params());
+    draw_ui_text_ex(&fitted, text_x, text_y, style.params());
+}
+
+/// Longest leading slice of `text` that fits `max_width`, ellipsised when it had
+/// to be cut. Returns the original when it already fits, so nothing that fits
+/// today changes.
+fn fit_text_to_width(text: &str, style: TextStyle, max_width: f32) -> String {
+    if max_width <= 0.0 || measure_text_size(text, style).width <= max_width {
+        return text.to_owned();
+    }
+
+    let characters = text.chars().collect::<Vec<_>>();
+    let mut fitted = String::new();
+    for take in (1..characters.len()).rev() {
+        let candidate = characters[..take].iter().collect::<String>() + "...";
+        if measure_text_size(&candidate, style).width <= max_width {
+            fitted = candidate;
+            break;
+        }
+    }
+    fitted
 }
 
 pub(super) fn draw_backdrop_texture(kind: BackdropKind, w: f32, h: f32) -> bool {

@@ -144,12 +144,15 @@ impl Game {
 
         match &mut self.phase {
             GamePhase::HatcheryManagement(state) => {
-                let left_margin = 24.0;
-                let content_width = screen_width() - left_margin * 2.0;
-                let inventory_x = left_margin;
-                let inventory_width = content_width;
-                let inventory_y = 24.0 + 206.0;
-                let inventory_height = 436.0;
+                // Geometry from the screen's own layout rather than a second
+                // copy. Every number in the old copy had gone stale: it claimed
+                // the full screen width, so hovering the detail panel scrolled
+                // the egg list, and its fixed vertical band missed the panel's
+                // top and most of its bottom. The visible row count was a
+                // hardcoded 4 against a panel that now holds eight.
+                let layout = crate::ui::hatchery_management_layout();
+                let (inventory_x, inventory_y, inventory_width, inventory_height) =
+                    layout.inventory_rect();
                 let (mouse_x, mouse_y) = mouse_position();
 
                 if mouse_x < inventory_x
@@ -160,7 +163,7 @@ impl Game {
                     return;
                 }
 
-                let visible_rows = 4usize;
+                let visible_rows = layout.egg_rows_visible();
                 let max_scroll = game_state.egg_inventory.len().saturating_sub(visible_rows);
                 if max_scroll == 0 {
                     state.inventory_scroll = 0;
@@ -174,22 +177,22 @@ impl Game {
                 }
             }
             GamePhase::Journal(state) => {
-                let left_margin = 24.0;
-                let content_width = screen_width() - left_margin * 2.0;
-                let log_x = left_margin;
-                let log_y = 320.0;
-                let log_height = 720.0;
+                // Same treatment: the log panel's height follows the window, and
+                // this carried a fixed 720 that overshot it by 60px at 1080p and
+                // by 420px at 720p, so the wheel scrolled the log while the
+                // cursor was over the footer.
+                let (log_x, log_y, log_width, log_height) = crate::ui::journal_log_rect();
                 let (mouse_x, mouse_y) = mouse_position();
 
                 if mouse_x < log_x
-                    || mouse_x > log_x + content_width
+                    || mouse_x > log_x + log_width
                     || mouse_y < log_y
                     || mouse_y > log_y + log_height
                 {
                     return;
                 }
 
-                let visible_rows = 12usize;
+                let visible_rows = crate::ui::JOURNAL_VISIBLE_ROWS;
                 let max_scroll = game_state.event_log.len().saturating_sub(visible_rows);
                 if max_scroll == 0 {
                     state.event_log_scroll = 0;

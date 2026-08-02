@@ -148,3 +148,15 @@ pub fn draw_settings_modal(
         status_is_error,
     )
 }
+
+/// The Hatchery inventory column's geometry, for the mouse-wheel handler.
+pub fn hatchery_management_layout() -> hatchery_management_sections::HatcheryManagementLayout {
+    hatchery_management_sections::HatcheryManagementLayout::new()
+}
+
+/// The Journal event log's geometry and row count, for the mouse-wheel handler.
+pub fn journal_log_rect() -> (f32, f32, f32, f32) {
+    journal::log_rect()
+}
+
+pub use journal::VISIBLE_ROWS as JOURNAL_VISIBLE_ROWS;
