@@ -480,7 +480,10 @@ pub(super) fn draw_selected_request_panel(
         214.0,
         116.0,
         22.0,
-        &format!("Min {}", quality_label(request.minimum_quality_rank.max(1))),
+        &format!(
+            "Min {}",
+            quality_label(data, request.minimum_quality_rank.max(1))
+        ),
         theme::WARNING,
     );
     draw_badge(
@@ -642,7 +645,7 @@ pub(super) fn draw_eligible_panel(
         let species_label = format!(
             "{} | {}",
             species_name_by_id(data, &monster.species_id),
-            monster_quality_label(monster)
+            monster_quality_label(data, monster)
         );
         let state_label = if report.is_eligible {
             &data.ui_text.contract_desk.eligible_label

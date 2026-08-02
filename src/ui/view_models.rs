@@ -346,12 +346,26 @@ pub fn evaluate_guest_candidate(
     evaluate_contract_eligibility(data, game_state, request, monster)
 }
 
-pub fn quality_label(quality_rank: u8) -> String {
-    format!("{} star", quality_rank.clamp(1, 3))
+/// The star rating shown wherever the game names a companion's or an egg's
+/// calibre.
+///
+/// Clamped to the authored ladder rather than to a hardcoded three. The escort
+/// economy stretched the ladder to five ranks — a rank-5 escort earns ten times
+/// a rank-1 and costs the guild accordingly — and this label kept saying three,
+/// so the contract desk's "Min 3 star" could mean a requirement of three, four
+/// or five, and a grade-17 egg looked exactly like a middling one on the screen
+/// where the player decides whether to hatch it, sell it or refine it. That is
+/// the third copy of the three-star ladder found in this codebase, and the
+/// first one on the player's side of it.
+pub fn quality_label(data: &GameData, quality_rank: u8) -> String {
+    format!(
+        "{} star",
+        quality_rank.clamp(1, crate::engine::max_quality_rank(&data.config.day_cycle))
+    )
 }
 
-pub fn monster_quality_label(monster: &crate::state::CompanionState) -> String {
-    quality_label(monster.quality_rank)
+pub fn monster_quality_label(data: &GameData, monster: &crate::state::CompanionState) -> String {
+    quality_label(data, monster.quality_rank)
 }
 
 /// The star rating this egg will actually hatch into.
@@ -366,7 +380,7 @@ pub fn egg_quality_rank(data: &GameData, egg: &crate::state::EggState) -> u8 {
 }
 
 pub fn egg_quality_label(data: &GameData, egg: &crate::state::EggState) -> String {
-    quality_label(egg_quality_rank(data, egg))
+    quality_label(data, egg_quality_rank(data, egg))
 }
 
 pub fn egg_grade_label<'a>(egg: &crate::state::EggState, data: &'a GameData) -> &'a str {
@@ -565,4 +579,30 @@ pub fn onboarding_lines(data: &GameData, game_state: &GameState) -> Vec<String> 
         .town_overview
         .onboarding_active_roster_lines
         .clone()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::data::test_game_data;
+
+    /// The star ladder runs to five and this label capped it at three, so a
+    /// rank-4 and a rank-5 companion both read "3 star" — on the contract desk,
+    /// the hatchery, the profile and the hatch reveal, which is every place the
+    /// game names a calibre. A grade-17 egg that hatches an escort earning ten
+    /// times a rank-1 looked exactly like a middling one on the screen where
+    /// the player chooses whether to hatch it, sell it or refine it.
+    #[test]
+    fn every_rank_the_ladder_can_reach_names_itself() {
+        let data = test_game_data();
+        let top = crate::engine::max_quality_rank(&data.config.day_cycle);
+
+        for rank in 1..=top {
+            assert_eq!(
+                quality_label(&data, rank),
+                format!("{rank} star"),
+                "rank {rank} of {top} should name itself"
+            );
+        }
+    }
 }

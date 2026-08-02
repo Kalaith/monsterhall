@@ -1,6 +1,6 @@
 {
   "title": "Monsterhall",
-  "content_version": "1.27.0",
+  "content_version": "1.28.0",
   "save_version": 10,
   "input": {
     "primary_mode": "mouse",
@@ -118,6 +118,7 @@
     "expedition_injury_amount": 6,
     "skill_wage_divisor": 4,
     "species_stat_wage_divisor": 4,
+    "contract_preparation_score_cap": 10,
     "understrength_income_pct": 70,
     "building_maintenance_cost_divisor": 20,
     "upkeep_bands": [

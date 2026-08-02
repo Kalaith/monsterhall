@@ -563,7 +563,7 @@ pub(super) fn draw_selected_egg_panel(
                         "At cap: replaces {} ({}, {})",
                         replacement.name,
                         species_name_by_id(data, &replacement.species_id),
-                        monster_quality_label(replacement)
+                        monster_quality_label(data, replacement)
                     ),
                     theme::WARNING,
                 );

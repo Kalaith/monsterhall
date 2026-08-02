@@ -425,7 +425,7 @@ fn outcome_lines(
                 egg_grade_label(egg, data)
             ),
             format!("Species: {}", species_name_by_id(data, &monster.species_id)),
-            format!("Quality: {}", monster_quality_label(monster)),
+            format!("Quality: {}", monster_quality_label(data, monster)),
             format!("Bond {} / Reputation {}", monster.bond, monster.reputation),
             format!("Traits: {}", trait_names_for_monster(data, monster)),
         ]

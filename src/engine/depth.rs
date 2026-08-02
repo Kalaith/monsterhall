@@ -257,11 +257,14 @@ pub(crate) fn contract_depth_score(
         .map(|room| room_depth_profile(data, game_state, room).guest_appeal)
         .unwrap_or_default();
     let relationship_score = monster.bond.min(12) + monster.reputation.max(0) as u32;
-    trait_score
-        + role_score
-        + room_score
-        + relationship_score
-        + town_preparation_quality(data, game_state)
+    // Capped, and read from the hall rather than the town: the town figure
+    // includes every accepted booking's own `preparation_quality_bonus`, so a
+    // busy desk was voting on whether a marginal companion could scrape through
+    // — and at a median of 51 against partial bars of 16-52 it was deciding it
+    // outright, with the four companion terms above along for the ride.
+    let preparation_score = hall_preparation_quality(data, game_state)
+        .min(data.config.day_cycle.contract_preparation_score_cap);
+    trait_score + role_score + room_score + relationship_score + preparation_score
 }
 
 pub(crate) fn contract_partial_success(
@@ -368,32 +371,6 @@ pub fn hall_preparation_quality(data: &GameData, game_state: &GameState) -> u32 
         })
         .sum::<u32>();
     job_quality.saturating_add(town_project_count(data, game_state))
-}
-
-pub(crate) fn town_preparation_quality(data: &GameData, game_state: &GameState) -> u32 {
-    let job_quality = game_state
-        .monsters
-        .iter()
-        .filter_map(|monster| match &monster.current_job {
-            CompanionJobState::GuildJob { room_id } => data
-                .guild_rooms
-                .rooms
-                .iter()
-                .find(|room| &room.id == room_id)
-                .map(|room| companion_preparation_quality(data, room, monster)),
-            _ => None,
-        })
-        .sum::<u32>();
-    let accepted_contract_bonus = game_state
-        .active_contracts
-        .iter()
-        .filter(|request| matches!(request.status, ContractStatus::Accepted))
-        .map(|request| request.preparation_quality_bonus)
-        .sum::<u32>();
-    let project_bonus = town_project_count(data, game_state);
-    job_quality
-        .saturating_add(accepted_contract_bonus)
-        .saturating_add(project_bonus)
 }
 
 pub(crate) fn apply_monster_relationship_gain(
@@ -809,5 +786,63 @@ mod tests {
         );
 
         assert_eq!(profile.relic_bonus, 0);
+    }
+    /// Whether a companion the booking refused can still scrape a half payment
+    /// must be a fact about her, not about how busy the desk is.
+    ///
+    /// `contract_depth_score` took the whole town preparation figure, which
+    /// includes every accepted booking's own `preparation_quality_bonus` — so a
+    /// contract voted on its own fallback, and with the figure running to a
+    /// median of 51 across a campaign against partial bars of 16-52, the guild's
+    /// busyness cleared every bar in the game on its own.
+    #[test]
+    fn a_busy_desk_does_not_decide_whether_a_companion_scrapes_through() {
+        let data = test_game_data();
+        let template = data
+            .contracts
+            .requests
+            .iter()
+            .find(|template| template.id == "corekeeper_sending_vigil")
+            .expect("the deepest contract should exist");
+        let request = ContractState {
+            request_id: "contract_001".to_owned(),
+            template_id: template.id.clone(),
+            requested_room_id: template.requested_room_id.clone(),
+            preparation_quality_required: template.preparation_quality_required,
+            preparation_quality_bonus: template.preparation_quality_bonus,
+            status: ContractStatus::Accepted,
+            ..ContractState::default()
+        };
+        let monster = CompanionState {
+            id: "monster_001".to_owned(),
+            species_id: "slime_companion".to_owned(),
+            name: "Mira".to_owned(),
+            quality_rank: 1,
+            ..CompanionState::default()
+        };
+
+        let mut quiet = crate::engine::create_new_game_state(&data);
+        quiet.monsters = vec![monster.clone()];
+        quiet.active_contracts = vec![request.clone()];
+        let quiet_score = contract_depth_score(&data, &quiet, &request, &monster);
+
+        let mut busy = quiet.clone();
+        for index in 0..5 {
+            busy.active_contracts.push(ContractState {
+                request_id: format!("contract_{index:03}"),
+                ..request.clone()
+            });
+        }
+        let busy_score = contract_depth_score(&data, &busy, &request, &monster);
+
+        assert_eq!(
+            quiet_score, busy_score,
+            "five more bookings on the desk changed the score of this one"
+        );
+        assert!(
+            !contract_partial_success(&data, &busy, &request, &monster),
+            "a companion with none of the contract's traits, no bond and no reputation should not clear a partial bar of {} on the desk's busyness alone",
+            template.partial_success_score
+        );
     }
 }

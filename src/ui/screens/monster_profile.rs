@@ -220,7 +220,7 @@ fn draw_profile_summary(
         quality_w,
         chip_h,
         "Quality",
-        &monster_quality_label(monster),
+        &monster_quality_label(data, monster),
         theme::WARNING,
     );
 }

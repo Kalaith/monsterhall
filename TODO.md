@@ -212,6 +212,57 @@ mutation and the check names golemkin).
   is a `corruption_adept` exactly like the warden she replaces. Variety means a
   different *role*, not a different name.
 
+### Found by review, not by the audit (2026-08-03, twenty-second pass)
+
+Followed the previous pass's own note — *`town_preparation_quality` still feeds
+`contract_depth_score`, and nobody has asked whether a full desk should make a
+companion more eligible* — and the answer was worse than the note suspected.
+
+- ~~A busy desk decided whether a companion nobody wanted could still be paid.~~
+  Fixed. `contract_depth_score` is what `contract_partial_success` reads, and it
+  summed the **whole town preparation figure**, which includes every accepted
+  booking's own `preparation_quality_bonus`. Partial bars run **16–52**; the town
+  figure runs to a **median of 51** across a campaign before the bookings are
+  added. So from mid-campaign the guild's busyness cleared every bar in the game
+  on its own, and the four terms that describe the *companion* — preferred
+  traits, role affinity, room appeal, bond and reputation — decided nothing.
+
+  Measured on the fixture: a slime with none of the contract's traits, no bond
+  and no reputation scored **34 against `corekeeper_sending_vigil`'s bar of 52**
+  — and **84** once five other bookings sat on the desk beside it. The deepest
+  contract in the game, taken by a starter companion, because the desk was busy.
+
+  The term is now `hall_preparation_quality` capped by a new authored
+  `day_cycle.contract_preparation_score_cap` (10). The hall should help; it must
+  not answer the question. **`town_preparation_quality` had no other consumer and
+  is deleted** — the figure that counts the bookings existed only to be misread.
+
+- ~~Every star rating in the game capped at three.~~ Fixed, and this is the
+  **fourth** copy of the retired three-star ladder — after the hatchery's
+  hardcoded rank, `convert_egg`'s Refine path and `policy_eggs`' private copy —
+  but the first one on the player's side. `quality_label` clamped to `1..3`
+  against a ladder that runs to five, so:
+  - the contract desk's "Min 3 star" badge could mean a requirement of three,
+    four or five, on the screen where the player picks who to send;
+  - a grade-17 egg — which hatches an escort earning **ten times** a rank-1 —
+    read exactly like a middling one in the hatchery, where the choice is hatch,
+    sell or refine;
+  - the profile, the hatch reveal and the at-cap replacement line all showed the
+    same flattened number.
+
+  It reads the authored ladder now (`max_quality_rank`), so a longer ladder
+  cannot silently flatten again. Guard verified by planting the `clamp(1, 3)`.
+
+- **Balance byte-identical.** The simulated policy only ever books companions who
+  are outright eligible, so the partial path it never takes could not move a
+  number — which is exactly why nine passes of balance-measured hunting walked
+  past both of these.
+
+- **Left for a following pass, found while reading the desk:** a companion who
+  will serve at half pay is drawn as plain **"Blocked"**, with the Assign button
+  live beside her. The player books her, the assignment succeeds, and the half
+  payment is only discovered at resolution. The desk wants a third state.
+
 ### Found by review, not by the audit (2026-08-03, nineteenth pass)
 
 Took the design call the last pass parked, because it was the most

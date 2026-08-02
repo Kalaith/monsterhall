@@ -56,7 +56,7 @@ pub fn egg_quality_rank(day_cycle: &DayCycleConfigData, grade_score: u32) -> u8 
     rank.min(max_quality_rank(day_cycle) as usize) as u8
 }
 
-pub(super) fn max_quality_rank(day_cycle: &DayCycleConfigData) -> u8 {
+pub fn max_quality_rank(day_cycle: &DayCycleConfigData) -> u8 {
     (day_cycle.egg_quality_rank_thresholds.len() + 1).max(1) as u8
 }
 

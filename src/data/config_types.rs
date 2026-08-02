@@ -154,6 +154,17 @@ pub struct DayCycleConfigData {
     /// Divides a species' total base stats into its share of the daily wage.
     #[serde(default = "default_species_stat_wage_divisor")]
     pub species_stat_wage_divisor: u32,
+    /// Most a prepared hall may contribute to `contract_depth_score`, which is
+    /// what decides whether a companion the booking refused can still scrape a
+    /// half payment.
+    ///
+    /// That score used to take the whole town preparation figure, which runs to
+    /// a median of 51 across a campaign against partial bars of 16-52 — so from
+    /// mid-campaign the guild's own busyness cleared every bar in the game and
+    /// the companion's traits, role and bond decided nothing. The hall should
+    /// help; it must not answer the question.
+    #[serde(default = "default_contract_preparation_score_cap")]
+    pub contract_preparation_score_cap: u32,
     /// Fee an adventuring party pays when the escort is below the calibre their
     /// patron tier demands. They still hire, but they do not pay full rate.
     #[serde(default = "default_understrength_income_pct")]
@@ -423,6 +434,10 @@ fn default_expedition_injury_amount() -> u32 {
 
 fn default_species_stat_wage_divisor() -> u32 {
     4
+}
+
+fn default_contract_preparation_score_cap() -> u32 {
+    10
 }
 
 fn default_skill_wage_divisor() -> u32 {

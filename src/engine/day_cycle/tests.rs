@@ -462,16 +462,16 @@ fn the_prep_quality_quoted_is_the_prep_quality_scored() {
         .expect("preview")
         .preparation_quality
     };
-    // The town total carries project and contract bonuses the per-companion
-    // figure does not, so the two are compared by how they *move*, not by value.
+    // The hall total carries project bonuses the per-companion figure does not,
+    // so the two are compared by how they *move*, not by value.
     let rested_quoted = quoted(&game_state);
-    let rested_scored = crate::engine::depth::town_preparation_quality(&data, &game_state);
+    let rested_scored = crate::engine::hall_preparation_quality(&data, &game_state);
     assert!(rested_quoted > 0, "test needs a shift worth quoting");
 
     game_state.monsters[0].fatigue = 220;
     game_state.monsters[0].stress = 140;
     let worn_quoted = quoted(&game_state);
-    let worn_scored = crate::engine::depth::town_preparation_quality(&data, &game_state);
+    let worn_scored = crate::engine::hall_preparation_quality(&data, &game_state);
 
     assert!(
         worn_quoted < rested_quoted,

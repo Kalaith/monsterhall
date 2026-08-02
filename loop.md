@@ -1413,6 +1413,38 @@ Stop the loop and report if:
   unchanged: the `ui_text` migration (~40 hardcoded strings), the unbounded event log,
   and corruption's missing relief path.
 
+- **2026-08-03 — twenty-second pass (the desk voted on its own bookings, and every
+  star capped at three).** Took the previous pass's own open question and it was worse
+  than the note guessed. `contract_depth_score` — the score that decides whether a
+  companion the contract refused can still scrape a **half payment** — summed the whole
+  `town_preparation_quality`, bookings included. Partial bars run 16–52; the town figure
+  runs to a median of 51 before the bookings are added. Measured on a fixture: a slime
+  with none of the contract's traits, no bond and no reputation scores **34 against the
+  deepest contract's bar of 52, and 84 once five other bookings sit on the desk**. The
+  guild's busyness was answering a question about a companion, and the four terms that
+  actually describe her were along for the ride. Now `hall_preparation_quality` capped
+  by an authored `day_cycle.contract_preparation_score_cap` (10), and
+  `town_preparation_quality` — which had no other consumer once the previous pass
+  repointed resolution — is **deleted**.
+  **And the fourth copy of the three-star ladder, the first on the player's side.**
+  `quality_label` clamped to `1..3` against a five-rank ladder, so the contract desk's
+  "Min 3 star" could mean three, four or five; a grade-17 egg that hatches an escort
+  earning **ten times** a rank-1 read like a middling one on the hatchery screen where
+  the player chooses hatch/sell/refine; and the profile, hatch reveal and at-cap
+  replacement line all showed the flattened number. It reads `max_quality_rank` now.
+  **Result:** 129 tests (was 127), fmt and clippy clean, publish green,
+  `content_version` 1.28.0, **balance byte-identical** — the simulated policy only books
+  outright-eligible companions, so the partial path it never takes cannot move a number,
+  which is precisely why nine passes of balance-measured hunting walked past both. Both
+  guards verified by planting (the town figure; the `clamp(1, 3)`).
+  **Next iteration should know:** (a) the desk still draws a companion who would serve
+  at **half pay** as plain "Blocked" with a live Assign button, so the player finds out
+  at resolution — a third candidate state is the obvious next slice and it is written up
+  in `TODO.md`; (b) *"a number the player reads that the engine derives differently"* is
+  the seam that produced both of this pass's finds, and it is not swept — the
+  three-star ladder has now appeared four times, so assume a fifth; (c) untaken slices
+  unchanged: `ui_text` migration, unbounded event log, corruption's missing relief path.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and
