@@ -207,35 +207,9 @@ fn append_history_requirement_reasons(
 ) {
     let required = &request.required_work_history_thresholds;
     let banked = &monster.work_history;
-    for (category, required, current) in [
-        (
-            "scouting_runs",
-            required.scouting_runs,
-            banked.scouting_runs,
-        ),
-        ("guard_duties", required.guard_duties, banked.guard_duties),
-        (
-            "hospitality_jobs",
-            required.hospitality_jobs,
-            banked.hospitality_jobs,
-        ),
-        ("craft_jobs", required.craft_jobs, banked.craft_jobs),
-        (
-            "contracts_completed",
-            required.contracts_completed,
-            banked.contracts_completed,
-        ),
-        (
-            "recovery_shifts",
-            required.recovery_shifts,
-            banked.recovery_shifts,
-        ),
-        (
-            "hatchery_assists",
-            required.hatchery_assists,
-            banked.hatchery_assists,
-        ),
-    ] {
+    for category in crate::engine::WORK_HISTORY_IDS {
+        let required = crate::engine::required_work_history_value(required, category);
+        let current = crate::engine::work_history_value(banked, category);
         check_history_requirement(
             data,
             failure_reasons,

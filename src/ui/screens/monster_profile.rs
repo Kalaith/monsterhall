@@ -658,6 +658,47 @@ mod tests {
         }
     }
 
+    /// Every kind of banked work must have authored text, and the engine's own
+    /// label table must name the same seven.
+    ///
+    /// This vocabulary lived in four copies. Two are gone; the engine's
+    /// `work_history_label` stays because the refusal reasons that read it have
+    /// no `GameData` in hand. Two copies that must agree is exactly how the
+    /// summary template ended up five long, so they are checked against each
+    /// other here rather than by hand.
+    #[test]
+    fn every_kind_of_banked_work_has_authored_text() {
+        let data = test_game_data();
+        for category_id in crate::engine::WORK_HISTORY_IDS {
+            let entry = data
+                .ui_text
+                .common
+                .work_history
+                .iter()
+                .find(|entry| entry.id == category_id)
+                .unwrap_or_else(|| {
+                    panic!("'{category_id}' has no entry in ui_text.common.work_history")
+                });
+            assert!(
+                !entry.label.trim().is_empty() && !entry.code.trim().is_empty(),
+                "'{category_id}' is authored with a blank label or code."
+            );
+            assert_eq!(
+                entry.label,
+                crate::engine::work_history_label(category_id),
+                "the authored label for '{category_id}' and the engine's own table disagree."
+            );
+        }
+
+        for entry in &data.ui_text.common.work_history {
+            assert!(
+                crate::engine::WORK_HISTORY_IDS.contains(&entry.id.as_str()),
+                "ui_text.common.work_history names '{}', which the engine does not know.",
+                entry.id
+            );
+        }
+    }
+
     /// The skill band is two fixed rows, and the panel below it starts at a
     /// fixed offset, so the chips have to fit rather than run into the tower
     /// stats.

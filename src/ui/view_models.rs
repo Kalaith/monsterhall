@@ -49,7 +49,7 @@ pub use decisions::{
 pub use progression_labels::{
     companion_skill_summary, history_gain_chance_label_from_progress,
     history_gain_label_from_progress, opening_skill_gain_label, primary_skill_label, skill_code,
-    skill_label, trained_skill_codes_label, work_history_summary,
+    skill_label, trained_skill_codes_label, work_history_summary, work_history_text_label,
 };
 
 pub fn fill_template(template: &str, replacements: &[(&str, String)]) -> String {
@@ -317,52 +317,21 @@ pub fn guest_history_requirement_label(
     data: &GameData,
     history: &crate::state::ContractHistoryRequirementState,
 ) -> String {
-    let common_text = &data.ui_text.common;
-    let mut parts = Vec::new();
-    if history.scouting_runs > 0 {
-        parts.push(format!(
-            "{} {}",
-            common_text.work_history_label_scouting, history.scouting_runs
-        ));
-    }
-    if history.guard_duties > 0 {
-        parts.push(format!(
-            "{} {}",
-            common_text.work_history_label_guarding, history.guard_duties
-        ));
-    }
-    if history.hospitality_jobs > 0 {
-        parts.push(format!(
-            "{} {}",
-            common_text.work_history_label_hospitality, history.hospitality_jobs
-        ));
-    }
-    if history.craft_jobs > 0 {
-        parts.push(format!(
-            "{} {}",
-            common_text.work_history_label_crafting, history.craft_jobs
-        ));
-    }
-    if history.contracts_completed > 0 {
-        parts.push(format!(
-            "{} {}",
-            common_text.work_history_label_contracts, history.contracts_completed
-        ));
-    }
-    if history.recovery_shifts > 0 {
-        parts.push(format!(
-            "{} {}",
-            common_text.work_history_label_recovery, history.recovery_shifts
-        ));
-    }
-    if history.hatchery_assists > 0 {
-        parts.push(format!(
-            "{} {}",
-            common_text.work_history_label_hatchery, history.hatchery_assists
-        ));
-    }
+    let parts = crate::engine::WORK_HISTORY_IDS
+        .iter()
+        .filter_map(|category_id| {
+            let required = crate::engine::required_work_history_value(history, category_id);
+            (required > 0).then(|| {
+                format!(
+                    "{} {required}",
+                    crate::ui::view_models::work_history_text_label(data, category_id)
+                )
+            })
+        })
+        .collect::<Vec<_>>();
+
     if parts.is_empty() {
-        common_text.none_label.clone()
+        data.ui_text.common.none_label.clone()
     } else {
         parts.join(" / ")
     }

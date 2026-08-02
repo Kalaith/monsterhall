@@ -12,8 +12,9 @@ mod validation;
 pub use bootstrap::create_new_game_state;
 pub use companion::{
     companion_effectiveness, companion_skill_total, companion_skill_value, effective_stats,
-    progression_skill_value, required_skill_value, species_of, species_stat_total,
-    trait_stat_bonus, SKILL_IDS,
+    progression_skill_value, progression_work_history_value, required_skill_value,
+    required_work_history_value, species_of, species_stat_total, trait_stat_bonus,
+    work_history_value, SKILL_IDS, WORK_HISTORY_IDS,
 };
 pub use day_cycle::{
     assign_monster_to_expedition, assign_monster_to_idle, assign_monster_to_rest,

@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "common": {
     "settings_button": "Settings",
     "return_to_town_button": "Guild Hall",
@@ -89,13 +89,43 @@
       }
     ],
     "bond_label": "Bond",
-    "work_history_label_scouting": "Scouting Runs",
-    "work_history_label_guarding": "Guard Duties",
-    "work_history_label_hospitality": "Hospitality Jobs",
-    "work_history_label_crafting": "Crafting Jobs",
-    "work_history_label_contracts": "Contracts",
-    "work_history_label_recovery": "Support Shifts",
-    "work_history_label_hatchery": "Rescues",
+    "work_history": [
+      {
+        "id": "scouting_runs",
+        "label": "Scouting Runs",
+        "code": "Sc"
+      },
+      {
+        "id": "guard_duties",
+        "label": "Guard Duties",
+        "code": "Gd"
+      },
+      {
+        "id": "hospitality_jobs",
+        "label": "Hospitality Shifts",
+        "code": "Hs"
+      },
+      {
+        "id": "craft_jobs",
+        "label": "Crafting Jobs",
+        "code": "Cf"
+      },
+      {
+        "id": "contracts_completed",
+        "label": "Contracts Completed",
+        "code": "Ct"
+      },
+      {
+        "id": "recovery_shifts",
+        "label": "Recovery Shifts",
+        "code": "Rc"
+      },
+      {
+        "id": "hatchery_assists",
+        "label": "Hatchery Assists",
+        "code": "Ht"
+      }
+    ],
     "egg_grade_origin_label": "Origin",
     "egg_grade_common_label": "Common",
     "egg_grade_unusual_label": "Unusual",
@@ -104,7 +134,6 @@
     "egg_locked_outcome_message": "Locked to one hatchery outcome",
     "egg_possible_species_template": "{count} possible species",
     "egg_prepared_for_template": "Prepared for {species}",
-    "work_history_summary_template": "{scouting runs} scouting / {guarding} guard / {hospitality} hospitality / {crafting} craft / {completed contracts} contracts",
     "building_guild_income_template": "Guild service income +{value}%",
     "building_expedition_success_template": "Expedition success +{value}%",
     "building_egg_discovery_template": "Egg discovery +{value}",

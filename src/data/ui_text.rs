@@ -18,6 +18,14 @@ pub struct UiTextData {
     pub settings: SettingsUiText,
 }
 
+/// A kind of banked work: its player-facing name and compact badge code.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct WorkHistoryUiText {
+    pub id: String,
+    pub label: String,
+    pub code: String,
+}
+
 /// A skill's player-facing name and the short code compact lines use.
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SkillUiText {
@@ -80,13 +88,14 @@ pub struct CommonUiText {
     pub skills: Vec<SkillUiText>,
     /// The bond chip on the profile panel, which sits alongside the skills.
     pub bond_label: String,
-    pub work_history_label_scouting: String,
-    pub work_history_label_guarding: String,
-    pub work_history_label_hospitality: String,
-    pub work_history_label_crafting: String,
-    pub work_history_label_contracts: String,
-    pub work_history_label_recovery: String,
-    pub work_history_label_hatchery: String,
+    /// One entry per kind of banked work, in listing order.
+    ///
+    /// The sibling of [`CommonUiText::skills`], consolidated for the same
+    /// reason: this vocabulary lived in four places at once and the shortest
+    /// copy — a summary template with five placeholders against seven
+    /// categories — was the one on the line that reports a companion's banked
+    /// work.
+    pub work_history: Vec<WorkHistoryUiText>,
     pub egg_grade_origin_label: String,
     pub egg_grade_common_label: String,
     pub egg_grade_unusual_label: String,
@@ -95,7 +104,6 @@ pub struct CommonUiText {
     pub egg_locked_outcome_message: String,
     pub egg_possible_species_template: String,
     pub egg_prepared_for_template: String,
-    pub work_history_summary_template: String,
     pub building_guild_income_template: String,
     pub building_expedition_success_template: String,
     pub building_egg_discovery_template: String,

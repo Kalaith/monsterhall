@@ -89,31 +89,9 @@ fn blocked_candidate_summary(request: &ContractState, monster: &CompanionState) 
 
     let history = &request.required_work_history_thresholds;
     let banked = &monster.work_history;
-    for (category, required, current) in [
-        ("scouting_runs", history.scouting_runs, banked.scouting_runs),
-        ("guard_duties", history.guard_duties, banked.guard_duties),
-        (
-            "hospitality_jobs",
-            history.hospitality_jobs,
-            banked.hospitality_jobs,
-        ),
-        ("craft_jobs", history.craft_jobs, banked.craft_jobs),
-        (
-            "contracts_completed",
-            history.contracts_completed,
-            banked.contracts_completed,
-        ),
-        (
-            "recovery_shifts",
-            history.recovery_shifts,
-            banked.recovery_shifts,
-        ),
-        (
-            "hatchery_assists",
-            history.hatchery_assists,
-            banked.hatchery_assists,
-        ),
-    ] {
+    for category in crate::engine::WORK_HISTORY_IDS {
+        let required = crate::engine::required_work_history_value(history, category);
+        let current = crate::engine::work_history_value(banked, category);
         push_requirement_gap(
             &mut parts,
             crate::engine::work_history_label(category),
@@ -777,15 +755,7 @@ mod tests {
     /// thing while the refusal reason calls it another.
     #[test]
     fn gap_badges_use_the_same_names_as_the_refusal_reasons() {
-        for category in [
-            "scouting_runs",
-            "guard_duties",
-            "hospitality_jobs",
-            "craft_jobs",
-            "contracts_completed",
-            "recovery_shifts",
-            "hatchery_assists",
-        ] {
+        for category in crate::engine::WORK_HISTORY_IDS {
             let label = crate::engine::work_history_label(category);
             let request = ContractState {
                 required_work_history_thresholds: history_requiring(category),

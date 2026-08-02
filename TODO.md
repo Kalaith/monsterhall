@@ -171,6 +171,53 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, fourteenth pass)
+
+The sibling vocabulary, finished to the same shape as the skills — and it was
+worse than the note recorded.
+
+- ~~A companion's banked work was reported five categories out of seven.~~ Fixed.
+  `work_history_summary_template` had five placeholders, so `recovery_shifts`
+  and `hatchery_assists` never appeared on the one line that reports what a
+  companion has done. Both are banked in play — the packroom and reception hall
+  bank recovery shifts at 65%, the nursery banks hatchery assists at 5% — and
+  **`hatchery_assists` is the counter that turns a companion into a
+  `hatchery_specialist`**, so the number that silently changed her role was the
+  number the screen would not show. It also spelled its five category names
+  inline while seven authored labels sat unused beside it.
+
+- **The vocabulary existed four times over**: seven authored `work_history_label_*`
+  keys, seven hardcoded English labels in `guest::eligibility`, seven hardcoded
+  badge codes in `view_models`, and the five-placeholder template. Consolidated
+  to one authored list (`common.work_history` of `{id, label, code}`) plus
+  `WORK_HISTORY_IDS` and three by-id accessors in the engine. The engine's own
+  table survives because the refusal reasons that read it have no `GameData` in
+  hand — so a test now asserts the two agree, since two copies that must match
+  is exactly how the template ended up five long.
+
+- **Four hand-listed seven-tuples deleted** — in `append_history_requirement_reasons`,
+  `blocked_candidate_summary`, `guest_history_requirement_label`, and a test —
+  each replaced by iterating the canonical list. Hand-listing is the failure
+  mode itself, not an incidental style: it is what produced five every time.
+  Two state-shaped conversions built only to reach a function with the wrong
+  parameter type went with them.
+
+- ~~The contract desk's candidate line was clipping mid-entry.~~ Found in a
+  capture, not by reasoning. With full names the line ran off the card and left
+  a dangling `/ 1` — which reads as a companion with fewer banked shifts than
+  she has, on the screen where banked shifts are what qualify her. It now uses
+  the compact codes, matching the skill half of the same line, and reads
+  `History Sc1 Hs1 Ct1` complete. Full names stay on the requirement badge,
+  where there is room.
+
+- **Two guards, each verified by planting**: `WORK_HISTORY_IDS` reaches every
+  field of both work-history structs (powers of two, so an eighth category
+  cannot hide), and every category has authored text whose label matches the
+  engine's table (planted: dropping the two late categories, then drifting a
+  label).
+
+- **Balance byte-identical** — again only `content_version` moved.
+
 ### Found by review, not by the audit (2026-08-03, thirteenth pass)
 
 Followed the twelfth pass's note to the other monotonic meters. `bond`,

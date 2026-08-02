@@ -1169,6 +1169,32 @@ Stop the loop and report if:
   shape in the sibling vocabulary and the obvious next target; (c) captures earn their
   cost on any layout change — this pass found a real clipped badge that no test saw.
 
+- **2026-08-03 — fourteenth pass (banked work, five of seven).** Finished the sibling
+  vocabulary the thirteenth pass flagged, and it was worse than the note said.
+  `work_history_summary_template` carried five placeholders against seven categories,
+  so `recovery_shifts` and `hatchery_assists` never appeared on the one line reporting
+  what a companion has done — and `hatchery_assists` is the counter that turns her into
+  a `hatchery_specialist`, so the number that silently changed her role was the number
+  the screen would not show. The vocabulary existed **four times over** (authored
+  labels, hardcoded English in `guest::eligibility`, hardcoded codes in `view_models`,
+  and the short template); consolidated to one authored list plus `WORK_HISTORY_IDS`
+  and three by-id accessors, with a test pinning the engine's surviving table to the
+  authored one because it has no `GameData` to read. **Four hand-listed seven-tuples
+  deleted** along with two state-shaped conversions that existed only to reach a
+  function with the wrong parameter type. A capture then caught the contract desk's
+  candidate line clipping mid-entry with full names — a dangling `/ 1` reads as fewer
+  banked shifts than she has, on the screen where banked shifts qualify her — so that
+  line uses codes now, matching its own skill half: `History Sc1 Hs1 Ct1`.
+  **Result:** 123 tests (was 120), fmt and clippy clean, publish green,
+  `content_version` 1.22.0, `ui_text` 1.2.0, **balance byte-identical**. Guards verified
+  by planting the five-category shape and a drifted label.
+  **Next iteration should know:** (a) both closed-set vocabularies are now single,
+  canonical and guarded — if a five-of-N ever appears again it is a new list, so look
+  for one rather than re-checking these; (b) **captures have now caught two clipped
+  player-facing lines in two passes** that no test saw, so run them on any pass that
+  touches a label; (c) untouched surfaces worth the same treatment: the journal and the
+  day-results screen, neither of which any pass has read closely.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

@@ -108,6 +108,75 @@ pub const SKILL_IDS: [&str; 10] = [
     "strength",
 ];
 
+/// The seven kinds of banked work, in the order a screen should list them.
+///
+/// The sibling of [`SKILL_IDS`], and the same story: the vocabulary existed in
+/// four places — seven authored labels, seven hardcoded English labels in
+/// `guest::eligibility`, seven hardcoded codes in `view_models`, and a summary
+/// template with **five** placeholders. The template is the one that was wrong,
+/// which is how the two categories added later stayed invisible on the one line
+/// that reports banked work.
+pub const WORK_HISTORY_IDS: [&str; 7] = [
+    "scouting_runs",
+    "guard_duties",
+    "hospitality_jobs",
+    "craft_jobs",
+    "contracts_completed",
+    "recovery_shifts",
+    "hatchery_assists",
+];
+
+/// One banked-work count off a companion, by id. Unknown ids read as zero.
+pub fn work_history_value(
+    history: &crate::state::CompanionWorkHistoryState,
+    category_id: &str,
+) -> u32 {
+    match category_id {
+        "scouting_runs" => history.scouting_runs,
+        "guard_duties" => history.guard_duties,
+        "hospitality_jobs" => history.hospitality_jobs,
+        "craft_jobs" => history.craft_jobs,
+        "contracts_completed" => history.contracts_completed,
+        "recovery_shifts" => history.recovery_shifts,
+        "hatchery_assists" => history.hatchery_assists,
+        _ => 0,
+    }
+}
+
+/// The same lookup against a contract's required banked work.
+pub fn required_work_history_value(
+    history: &crate::state::ContractHistoryRequirementState,
+    category_id: &str,
+) -> u32 {
+    match category_id {
+        "scouting_runs" => history.scouting_runs,
+        "guard_duties" => history.guard_duties,
+        "hospitality_jobs" => history.hospitality_jobs,
+        "craft_jobs" => history.craft_jobs,
+        "contracts_completed" => history.contracts_completed,
+        "recovery_shifts" => history.recovery_shifts,
+        "hatchery_assists" => history.hatchery_assists,
+        _ => 0,
+    }
+}
+
+/// The same lookup against an authored work-history gain or chance.
+pub fn progression_work_history_value(
+    history: &crate::data::CompanionWorkHistoryProgressionData,
+    category_id: &str,
+) -> u32 {
+    match category_id {
+        "scouting_runs" => history.scouting_runs,
+        "guard_duties" => history.guard_duties,
+        "hospitality_jobs" => history.hospitality_jobs,
+        "craft_jobs" => history.craft_jobs,
+        "contracts_completed" => history.contracts_completed,
+        "recovery_shifts" => history.recovery_shifts,
+        "hatchery_assists" => history.hatchery_assists,
+        _ => 0,
+    }
+}
+
 /// One skill off a companion, by id. Unknown ids read as zero.
 pub fn companion_skill_value(skills: &crate::state::CompanionSkillState, skill_id: &str) -> u32 {
     match skill_id {
@@ -179,8 +248,14 @@ pub fn companion_effectiveness(data: &GameData, monster: &CompanionState) -> u32
 
 #[cfg(test)]
 mod tests {
-    use super::{companion_skill_value, required_skill_value, SKILL_IDS};
-    use crate::state::{CompanionSkillState, ContractSkillRequirementState};
+    use super::{
+        companion_skill_value, required_skill_value, required_work_history_value,
+        work_history_value, SKILL_IDS, WORK_HISTORY_IDS,
+    };
+    use crate::state::{
+        CompanionSkillState, CompanionWorkHistoryState, ContractHistoryRequirementState,
+        ContractSkillRequirementState,
+    };
 
     /// [`SKILL_IDS`] has to stay the whole list, not most of it.
     ///
@@ -235,6 +310,53 @@ mod tests {
         assert_eq!(
             seen, 1023,
             "SKILL_IDS does not name every field on ContractSkillRequirementState."
+        );
+    }
+
+    /// [`WORK_HISTORY_IDS`] has to stay the whole list too.
+    ///
+    /// Same guard as the skills, for the sibling vocabulary that shipped a
+    /// five-placeholder summary against seven categories.
+    #[test]
+    fn the_work_history_list_reaches_every_field_a_companion_banks() {
+        let history = CompanionWorkHistoryState {
+            scouting_runs: 1,
+            guard_duties: 2,
+            hospitality_jobs: 4,
+            craft_jobs: 8,
+            contracts_completed: 16,
+            recovery_shifts: 32,
+            hatchery_assists: 64,
+        };
+        let seen: u32 = WORK_HISTORY_IDS
+            .iter()
+            .map(|category_id| work_history_value(&history, category_id))
+            .sum();
+        assert_eq!(
+            seen, 127,
+            "WORK_HISTORY_IDS does not name every field on CompanionWorkHistoryState."
+        );
+    }
+
+    /// The same, for the requirement side the contract desk reads.
+    #[test]
+    fn the_work_history_list_reaches_every_field_a_contract_requires() {
+        let required = ContractHistoryRequirementState {
+            scouting_runs: 1,
+            guard_duties: 2,
+            hospitality_jobs: 4,
+            craft_jobs: 8,
+            contracts_completed: 16,
+            recovery_shifts: 32,
+            hatchery_assists: 64,
+        };
+        let seen: u32 = WORK_HISTORY_IDS
+            .iter()
+            .map(|category_id| required_work_history_value(&required, category_id))
+            .sum();
+        assert_eq!(
+            seen, 127,
+            "WORK_HISTORY_IDS does not name every field on ContractHistoryRequirementState."
         );
     }
 }
