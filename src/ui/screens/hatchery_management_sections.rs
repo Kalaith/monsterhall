@@ -420,7 +420,7 @@ pub(super) fn draw_selected_egg_panel(
         top_section_y + 112.0,
         116.0,
         24.0,
-        &egg_quality_label(egg),
+        &egg_quality_label(data, egg),
         theme::WARNING,
     );
 
@@ -502,7 +502,7 @@ pub(super) fn draw_selected_egg_panel(
             };
             let at_cap = is_roster_at_cap(data, game_state);
             let replacement = if at_cap {
-                recommended_replacement(data, game_state, species_id, egg_quality_rank(egg))
+                recommended_replacement(data, game_state, species_id, egg_quality_rank(data, egg))
             } else {
                 None
             };
@@ -615,7 +615,7 @@ pub(super) fn draw_selected_egg_panel(
             };
             let at_cap = is_roster_at_cap(data, game_state);
             let replacement = if at_cap {
-                recommended_replacement(data, game_state, species_id, egg_quality_rank(egg))
+                recommended_replacement(data, game_state, species_id, egg_quality_rank(data, egg))
             } else {
                 None
             };

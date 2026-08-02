@@ -424,16 +424,19 @@ pub fn monster_quality_label(monster: &crate::state::CompanionState) -> String {
     quality_label(monster.quality_rank)
 }
 
-pub fn egg_quality_rank(egg: &crate::state::EggState) -> u8 {
-    match egg.grade_score {
-        0..=2 => 1,
-        3..=4 => 2,
-        _ => 3,
-    }
+/// The star rating this egg will actually hatch into.
+///
+/// Delegates to the engine, which reads `egg_quality_rank_thresholds` from
+/// config. This screen used to carry its own copy that capped at three stars
+/// against a five-rank ladder, so every egg at grade 10 or better was displayed
+/// worse than it was — a grade-17 egg hatches a rank-5 companion who earns ten
+/// times a rank-1 and was shown as a three.
+pub fn egg_quality_rank(data: &GameData, egg: &crate::state::EggState) -> u8 {
+    crate::engine::egg_quality_rank(&data.config.day_cycle, egg.grade_score)
 }
 
-pub fn egg_quality_label(egg: &crate::state::EggState) -> String {
-    quality_label(egg_quality_rank(egg))
+pub fn egg_quality_label(data: &GameData, egg: &crate::state::EggState) -> String {
+    quality_label(egg_quality_rank(data, egg))
 }
 
 pub fn egg_grade_label<'a>(egg: &crate::state::EggState, data: &'a GameData) -> &'a str {

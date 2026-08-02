@@ -622,6 +622,43 @@ fn every_trained_skill_raises_a_companions_wage() {
     }
 }
 
+#[test]
+fn egg_star_ratings_span_the_whole_rank_ladder() {
+    let data = crate::data::test_game_data();
+    let day_cycle = &data.config.day_cycle;
+    let top_rank = max_quality_rank(day_cycle);
+
+    // The hatchery screen carried a hardcoded copy of this that capped at three
+    // against a five-rank ladder, so every egg at grade 10 or better was shown
+    // worse than it was — and rank drives `quality_income_multipliers_pct`, where
+    // rank 5 earns ten times rank 1. Anything that recomputes a rating instead of
+    // asking the config will drift the same way.
+    let highest_threshold = day_cycle
+        .egg_quality_rank_thresholds
+        .iter()
+        .copied()
+        .max()
+        .expect("the rank ladder must have thresholds");
+    assert_eq!(
+        egg_quality_rank(day_cycle, highest_threshold),
+        top_rank,
+        "an egg at the top authored threshold must hatch the top rank"
+    );
+    assert_eq!(egg_quality_rank(day_cycle, 0), 1);
+
+    // Every rank on the ladder has to be reachable by some grade, or the
+    // thresholds describe ranks the game can never hand out.
+    let reachable = (0..=highest_threshold + 1)
+        .map(|grade| egg_quality_rank(day_cycle, grade))
+        .collect::<std::collections::HashSet<_>>();
+    for rank in 1..=top_rank {
+        assert!(
+            reachable.contains(&rank),
+            "rank {rank} is authored but no grade score produces it"
+        );
+    }
+}
+
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),

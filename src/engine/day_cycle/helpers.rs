@@ -38,7 +38,14 @@ pub(super) fn spend_resources(
 /// The ladder is data so the tower can keep producing better companions all the
 /// way down. It used to top out at rank 3, which a depth-3 floor already
 /// reached — every floor below that added nothing to the roster.
-pub(super) fn egg_quality_rank(day_cycle: &DayCycleConfigData, grade_score: u32) -> u8 {
+/// Star rating an egg of this grade will hatch into.
+///
+/// Config-driven, and the only correct answer. The hatchery screen carried its
+/// own hardcoded copy that capped at three stars, so a grade-17 egg — which
+/// hatches a rank-5 companion earning ten times a rank-1 — was displayed as a
+/// three, and the at-cap replacement suggestion was computed against the wrong
+/// number too.
+pub fn egg_quality_rank(day_cycle: &DayCycleConfigData, grade_score: u32) -> u8 {
     let rank = day_cycle
         .egg_quality_rank_thresholds
         .iter()

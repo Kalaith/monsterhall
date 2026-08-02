@@ -46,6 +46,18 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
   Same class as the `injury_risk_score` divergence, found by looking for more of
   it.
 
+- ~~The hatchery displayed the wrong star rating on every good egg.~~ Fixed.
+  There were two `egg_quality_rank` functions: the engine's reads
+  `egg_quality_rank_thresholds` from config (`[3, 5, 10, 17]` → ranks 1–5), and
+  the hatchery screen carried a hardcoded copy that capped at three. So every
+  egg at grade 10 or better was shown worse than it was, and a grade-17 egg —
+  which hatches a rank-5 companion earning **ten times** a rank-1 against
+  `quality_income_multipliers_pct` — was displayed as a three. The at-cap
+  replacement suggestion was computed against the same wrong number, so it could
+  decline to recommend swapping a rank-4 companion for a rank-5 egg. The UI
+  delegates to the engine now, and a test asserts every authored rank is
+  reachable and the top threshold hatches the top rank.
+
 ### UI and feedback
 
 - ~~Status messages are computed then discarded on five screens; Ctrl+S saves with zero visible confirmation.~~ Done: all five now render `status_message` (Monster Profile had no draw path for it at all; Town Management and Monster Profile yield the slot to an error when there is one). `persist_game_state` already called `apply_phase_status("Campaign saved")`, so Ctrl+S became visible everywhere for free.
