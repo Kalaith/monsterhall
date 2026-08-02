@@ -1,11 +1,11 @@
 {
-  "content_version": "1.25.0",
+  "content_version": "1.26.0",
   "rng_seed": 6840157140829518564,
   "simulation_days": 90,
   "starting_day": 1,
   "ending_day": 91,
   "opening_event_log_entries": 9,
-  "final_event_log_entries": 929,
+  "final_event_log_entries": 930,
   "final_roster_size": 14,
   "final_buildings": 9,
   "final_unlocked_floors": 11,
@@ -16,8 +16,9 @@
   "final_graded_eggs": 21,
   "final_role_diversity": 2,
   "final_species_counts": {
-    "golemkin_warden": 12,
+    "golemkin_warden": 11,
     "residue_slime": 1,
+    "salamander_corekeeper": 1,
     "slime_companion": 1
   },
   "final_corruption_max": 208,
@@ -41,16 +42,16 @@
   "total_guest_completions": 144,
   "total_guest_expirations": 40,
   "total_contracts_generated": 98,
-  "total_contracts_rejected": 6,
+  "total_contracts_rejected": 7,
   "total_guild_job_gold": 108674,
   "total_expedition_prep_gold": 1057,
   "total_expedition_prep_materials": 194,
   "total_expedition_prep_arcane_residue": 240,
   "total_expedition_prep_shortfall": 0,
-  "total_upkeep_wage_gold": 15082,
+  "total_upkeep_wage_gold": 15101,
   "total_upkeep_cleaning_gold": 9396,
   "total_upkeep_maintenance_gold": 26524,
-  "total_upkeep_gold": 51002,
+  "total_upkeep_gold": 51021,
   "total_upkeep_shortfall": 0,
   "total_special_event_gold_delta": 1050,
   "total_special_event_count": 19,
@@ -62,11 +63,11 @@
   "last_expedition_day": 90,
   "total_expedition_eggs": 34,
   "final_resources": {
-    "gold": 42646,
-    "tower_materials": 3866,
+    "gold": 42627,
+    "tower_materials": 3876,
     "eggs": 21,
     "relics": 195,
-    "arcane_residue": 11653
+    "arcane_residue": 11669
   },
   "final_debt": {
     "active_milestone_id": "interest_crush_3",
@@ -76,15 +77,15 @@
     "status_message": "Interest Crush due in 33 days."
   },
   "final_upkeep_forecast": {
-    "wage_gold": 354,
+    "wage_gold": 359,
     "cleaning_gold": 215,
     "maintenance_gold": 601,
-    "total_gold": 1170,
+    "total_gold": 1175,
     "active_band_min_companions": 12,
     "active_band_min_patron_tiers": 3,
-    "next_companion_total_gold": 1176,
+    "next_companion_total_gold": 1181,
     "next_companion_delta_gold": 6,
-    "next_building_total_gold": 1244,
+    "next_building_total_gold": 1249,
     "next_building_delta_gold": 74
   },
   "surplus_summary": {
@@ -96,20 +97,20 @@
       "arcane_residue": 19
     },
     "ending_resources": {
-      "gold": 42646,
-      "tower_materials": 3866,
+      "gold": 42627,
+      "tower_materials": 3876,
       "eggs": 21,
       "relics": 195,
-      "arcane_residue": 11653
+      "arcane_residue": 11669
     },
     "net_change": {
-      "gold": 42503,
-      "tower_materials": 3826,
+      "gold": 42484,
+      "tower_materials": 3836,
       "eggs": 21,
       "relics": 195,
-      "arcane_residue": 11634
+      "arcane_residue": 11650
     },
-    "debt_gold_gap": 7646,
+    "debt_gold_gap": 7627,
     "upkeep_shortfall_gold": 0,
     "expedition_prep_shortfall": 0
   },
@@ -162,11 +163,11 @@
       "reputation_proxy": 3,
       "active_contracts": 6,
       "resources": {
-        "gold": 42646,
-        "tower_materials": 3866,
+        "gold": 42627,
+        "tower_materials": 3876,
         "eggs": 21,
         "relics": 195,
-        "arcane_residue": 11653
+        "arcane_residue": 11669
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -176,15 +177,15 @@
         "status_message": "Interest Crush due in 33 days."
       },
       "upkeep_forecast": {
-        "wage_gold": 354,
+        "wage_gold": 359,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1170,
+        "total_gold": 1175,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1176,
+        "next_companion_total_gold": 1181,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1244,
+        "next_building_total_gold": 1249,
         "next_building_delta_gold": 74
       }
     }
@@ -11768,15 +11769,15 @@
       "upkeep_gold": 1140,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 327,
+        "wage_gold": 332,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1143,
+        "total_gold": 1148,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1149,
+        "next_companion_total_gold": 1154,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1217,
+        "next_building_total_gold": 1222,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -11882,6 +11883,7 @@
         "Prepared Sealed Extraction for 30 gold, 6 materials, and 8 arcane residue.",
         "A pressure seal is worked loose without venting what it held.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
+        "Calia has carried the tower's heat so long that the stone starts giving it back. She goes down to the clutches without being asked and turns them the way a Salamander Corekeeper does, because that is what she has become.",
         "Far down the service shaft a steady light is burning that nobody lit this century, and the residue on the walls runs towards it.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
@@ -11922,21 +11924,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 327,
+      "upkeep_wage_gold": 332,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1143,
+      "upkeep_gold": 1148,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 327,
+        "wage_gold": 332,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1143,
+        "total_gold": 1148,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1149,
+        "next_companion_total_gold": 1154,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1217,
+        "next_building_total_gold": 1222,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -11992,7 +11994,7 @@
         ]
       },
       "resources": {
-        "gold": 36539,
+        "gold": 36534,
         "tower_materials": 3757,
         "eggs": 22,
         "relics": 177,
@@ -12006,7 +12008,7 @@
         "status_message": "Interest Crush due in 36 days."
       },
       "day_summary": [
-        "Paid 1143 gold in upkeep: 327 wages, 215 supplies, 601 repairs.",
+        "Paid 1148 gold in upkeep: 332 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 36 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Caravan Captain Contract completed: +51 gold, +7 residue.",
@@ -12072,27 +12074,27 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 327,
+      "upkeep_wage_gold": 332,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1143,
+      "upkeep_gold": 1148,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 330,
+        "wage_gold": 335,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1146,
+        "total_gold": 1151,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1152,
+        "next_companion_total_gold": 1157,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1220,
+        "next_building_total_gold": 1225,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": -180,
       "special_event_count": 1,
-      "expedition_materials": 46,
-      "expedition_arcane_residue": 28,
+      "expedition_materials": 51,
+      "expedition_arcane_residue": 36,
       "expedition_eggs": 0,
       "expedition_relics": 6,
       "expedition_opportunity": {
@@ -12142,11 +12144,11 @@
         ]
       },
       "resources": {
-        "gold": 37353,
-        "tower_materials": 3774,
+        "gold": 37343,
+        "tower_materials": 3779,
         "eggs": 22,
         "relics": 183,
-        "arcane_residue": 10951
+        "arcane_residue": 10959
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12156,7 +12158,7 @@
         "status_message": "Interest Crush due in 35 days."
       },
       "day_summary": [
-        "Paid 1143 gold in upkeep: 327 wages, 215 supplies, 601 repairs.",
+        "Paid 1148 gold in upkeep: 332 wages, 215 supplies, 601 repairs.",
         "Special event expense: -180 gold.",
         "The creditors stay the blade for now: 35000 due in 35 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -12221,21 +12223,21 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 330,
+      "upkeep_wage_gold": 335,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1146,
+      "upkeep_gold": 1151,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 332,
+        "wage_gold": 336,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1148,
+        "total_gold": 1152,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1154,
+        "next_companion_total_gold": 1158,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1222,
+        "next_building_total_gold": 1226,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 0,
@@ -12267,7 +12269,7 @@
         "generated": 2,
         "completed": 1,
         "expired": 1,
-        "rejected": 0,
+        "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
           {
@@ -12291,11 +12293,11 @@
         ]
       },
       "resources": {
-        "gold": 38263,
-        "tower_materials": 3822,
+        "gold": 38248,
+        "tower_materials": 3827,
         "eggs": 22,
         "relics": 189,
-        "arcane_residue": 11262
+        "arcane_residue": 11270
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12305,7 +12307,7 @@
         "status_message": "Interest Crush due in 34 days."
       },
       "day_summary": [
-        "Paid 1146 gold in upkeep: 330 wages, 215 supplies, 601 repairs.",
+        "Paid 1151 gold in upkeep: 335 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 34 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract expired: -12 gold.",
@@ -12377,27 +12379,27 @@
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
       "expedition_prep_shortfall": 0,
-      "upkeep_wage_gold": 353,
+      "upkeep_wage_gold": 357,
       "upkeep_cleaning_gold": 215,
       "upkeep_maintenance_gold": 601,
-      "upkeep_gold": 1169,
+      "upkeep_gold": 1173,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
-        "wage_gold": 354,
+        "wage_gold": 359,
         "cleaning_gold": 215,
         "maintenance_gold": 601,
-        "total_gold": 1170,
+        "total_gold": 1175,
         "active_band_min_companions": 12,
         "active_band_min_patron_tiers": 3,
-        "next_companion_total_gold": 1176,
+        "next_companion_total_gold": 1181,
         "next_companion_delta_gold": 6,
-        "next_building_total_gold": 1244,
+        "next_building_total_gold": 1249,
         "next_building_delta_gold": 74
       },
       "special_event_gold_delta": 90,
       "special_event_count": 1,
-      "expedition_materials": 46,
-      "expedition_arcane_residue": 28,
+      "expedition_materials": 51,
+      "expedition_arcane_residue": 36,
       "expedition_eggs": 0,
       "expedition_relics": 6,
       "expedition_opportunity": {
@@ -12447,11 +12449,11 @@
         ]
       },
       "resources": {
-        "gold": 42646,
-        "tower_materials": 3866,
+        "gold": 42627,
+        "tower_materials": 3876,
         "eggs": 21,
         "relics": 195,
-        "arcane_residue": 11653
+        "arcane_residue": 11669
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12461,7 +12463,7 @@
         "status_message": "Interest Crush due in 33 days."
       },
       "day_summary": [
-        "Paid 1169 gold in upkeep: 353 wages, 215 supplies, 601 repairs.",
+        "Paid 1173 gold in upkeep: 357 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +90 gold.",
         "The creditors stay the blade for now: 35000 due in 33 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -12502,7 +12504,7 @@
         "Prepared Sealed Extraction for 30 gold, 6 materials, and 8 arcane residue.",
         "A pressure seal is worked loose without venting what it held.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
-        "In the warm room the clutches are turned, evenly, on a schedule. Nobody sees who does it, but the ash is worn into a path around every nest.",
+        "Something in the pens is still calling on a four-day-old schedule, patient and unhurried, as though it fully expects an answer. A retrieval would be a different kind of run from a nest sweep.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",

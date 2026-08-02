@@ -62,7 +62,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 | **Tower floors** | **25** ✅ | **25** | **Target met.** All five bands authored, depths 1–25, difficulty 20→104 against a ceiling of 120. Every floor unlocks and is reached in a 365-day campaign; the guild's preferred destination is the Tower Core at the bottom. |
 | Missions | **7** | 8–10 | The GDD's six are all written, plus `sealed_extraction`. **The harness cannot measure a mission** — see the ledger for 2026-08-02; mission work is verified by reading the probe's SCORE table, not by balance movement. |
 | Species | **12** | 14–18 | Four now hatch only below depth 16 (`wyrm_registrar`, `gargoyle_stairwarden`, `revenant_chorister`, `salamander_corekeeper`). Bands 1–3 still share the original eight. |
-| Mutations | **8** | 10+ | Five chains, terminating in three of the four deep species. `salamander_corekeeper` is the only species that is neither a source nor a target. **Read the mutation warning below before adding a ninth.** |
+| Mutations | **9** | 10+ | Five chains, terminating in all four deep species since `golemkin_warden -> salamander_corekeeper` landed. **Read the mutation warning below before adding a tenth**, and note the new load-time rule: every route into a species with exits must be able to take one of them. |
 | Buildings | 12 | 20+ | Buildings are the only species/floor gate today, and **a new one is very hard to land** — see the ledger for 2026-08-02. |
 | Guild rooms | 4 | 7–8 | Four rooms for a 20-companion roster. |
 | Traits | **13** | 16+ | Traits drive contract fit and role assignment. |
@@ -121,6 +121,9 @@ with it **eleven floors**, because the survey chain is serial.
 
 - **Check `required_roster` against the mutation's source before writing it.** If the source gates a
   floor, the threshold must sit far above where that floor gets run — 90, not 40.
+  `golemkin_warden -> salamander_corekeeper` (190) consumes the species `threshold_ward` (d24) gates
+  on, and is safe only because golemkin is the roster's most common form and keeps hatching; a
+  threshold low enough to convert the whole cohort would not be.
 - Supply is the real variable. `slime_companion` has mutated away since the first commit and gates
   d6 harmlessly, because slimes keep hatching. `minotaur_porter` ends a campaign at a roster count
   of **one**; anything that consumes it consumes the only one.
@@ -1331,6 +1334,47 @@ Stop the loop and report if:
   outcomes should improve with guild standing, that wants its own honest source rather
   than a leak from an income modifier; (c) one recorded design call remains, the
   unbounded event log, plus the `ui_text` migration.
+
+- **2026-08-03 — twentieth pass (the tower stopped changing the companions it had
+  changed most).** Content rather than another defect hunt, as the last note asked,
+  and it took the second of the four options `TODO.md` parked under *mutation
+  collapses the roster onto one species*. `golemkin_warden` had exactly one exit,
+  needing `commanding` **and** `resilient`, and `resilient` arrives with a
+  `minotaur_porter` and nothing else — so of the three routes into a golemkin (egg,
+  slime chain, porter) only the rarest could ever mutate again. The other two, which
+  are most of the roster, stood at a species the game visibly still changes while
+  corruption climbed to 500 and meant nothing above 100. New
+  `golemkin_warden -> salamander_corekeeper` at **190**, requiring the two traits
+  every golemkin starts with, granting `hatchery_attuned`; mutations 8 → 9, and
+  `salamander_corekeeper` stops being the one species that is neither a source nor a
+  target. **New load-time validation:** every route into a species with exits must be
+  able to take one of them — a terminal species is fine, a dead end inside a mutating
+  one is not. Verified by planting (drop the mutation, the check names golemkin).
+  **The threshold is the whole design decision and it was measured, not guessed.**
+  Below the corruption a campaign produces the entire cohort converts, which moves the
+  monoculture rather than breaking it: at 140 the roster reads **salamander 11 of 20**
+  with role diversity 3 → **2** and a guild 43% richer. 190 sits inside the spread.
+  `golemkin -> revenant_chorister` was also built and measured and is worse on the
+  stated intent — species 4, roles 2 — because a revenant is a `corruption_adept`
+  exactly like the warden she replaces. **Variety means a different role, not a
+  different name.**
+  **Result:** 126 tests (was 125), fmt and clippy clean, publish green,
+  `content_version` 1.26.0, `mutations` 1.4.0. **Ten seeds at day 365:** gold 1.333M →
+  1.196M (−10.3%), buildings 25.6 → 22.9 (−10.5%), relics +64%, residue +60%, debt gap
+  −1.134M → −1.358M, cleared 3/10 unchanged, zero missed payments. The guild gets
+  poorer as its companions get stronger, which is `companion_daily_wage`'s species term
+  doing its job — a corekeeper is 34 stat points against a warden's 22, so growing up
+  the tree is no longer free. Single seed: species 5 → 6, golemkin 11 → 3, roles 3 held,
+  corruption max 480 → 542, but gold 1.32M → 511k and **floors walked 17 → 11**.
+  **Next iteration should know:** (a) that single seed moved six times further than the
+  ten-seed mean and the tower is being walked less — `stranded_floor_ids` is empty
+  either way, so nothing fails, but if a pass wants the simulated guild back down to
+  band 4 it is buildings, not floors, that gate it; (b) the funnel is untouched and is
+  an **egg-supply** question, not a mutation-tree one — the guild almost only hatches
+  slimes, so every lineage still ends in the same place one step further along;
+  (c) corruption above 190 is inert again and still has no relief path anywhere in the
+  codebase, which is the third of the four parked options; (d) `ui_text` migration
+  (~40 hardcoded strings) and the unbounded event log remain the two untaken slices.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

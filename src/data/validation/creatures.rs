@@ -142,6 +142,7 @@ impl GameData {
         self.validate_mutation_chains()?;
         let reachable = self.reachable_trait_states();
         self.validate_mutation_traits_are_reachable(&reachable)?;
+        self.validate_mutation_exits_are_satisfiable(&reachable)?;
         self.validate_every_trait_is_reachable(&reachable)
     }
 
@@ -264,6 +265,51 @@ impl GameData {
         Ok(())
     }
 
+    /// A species that can mutate must let *every* route into it mutate.
+    ///
+    /// [`Self::validate_mutation_traits_are_reachable`] asks whether some
+    /// lineage can take a given exit; this asks the other half, and it is the
+    /// half that goes wrong. `golemkin_warden` had exactly one exit, needing
+    /// `commanding` **and** `resilient`, which only the `minotaur_porter` route
+    /// supplies — so the two other ways of becoming a golemkin (hatched from an
+    /// egg, or grown up the slime/residue chain, which is most of the roster)
+    /// stood at a species the game visibly mutates and could never mutate
+    /// again. Corruption kept climbing for the rest of the campaign and nothing
+    /// above 100 meant anything to them, which is how a day-365 roster came to
+    /// read 18 golemkin out of 20.
+    ///
+    /// A species with no exits at all is fine — that is a terminal form, and
+    /// four of them are deliberate.
+    fn validate_mutation_exits_are_satisfiable(
+        &self,
+        reachable: &[(String, Vec<String>)],
+    ) -> Result<(), String> {
+        for (species_id, traits) in reachable {
+            let exits: Vec<_> = self
+                .mutations
+                .mutations
+                .iter()
+                .filter(|mutation| &mutation.source_species_id == species_id)
+                .collect();
+            if exits.is_empty() {
+                continue;
+            }
+            if exits.iter().any(|mutation| {
+                mutation
+                    .required_trait_ids
+                    .iter()
+                    .all(|trait_id| traits.contains(trait_id))
+            }) {
+                continue;
+            }
+            let exit_ids: Vec<&str> = exits.iter().map(|mutation| mutation.id.as_str()).collect();
+            return Err(format!(
+                "a companion who reaches '{species_id}' holding {traits:?} can take none of its mutations {exit_ids:?}, so the tower is finished with her while it is still changing everyone else."
+            ));
+        }
+        Ok(())
+    }
+
     /// Corruption only ever climbs, and `try_apply_mutation` runs every day, so
     /// the mutation graph has to be a strictly ascending tree.
     ///
@@ -357,5 +403,34 @@ mod tests {
                 );
             }
         }
+    }
+
+    /// `golemkin_warden` mutates, and for most of the game's life only one of
+    /// the three routes into it could: the exit to `gargoyle_stairwarden` needs
+    /// `resilient`, which arrives with a `minotaur_porter` and with nothing
+    /// else. A hatched golemkin and a grown-up slime both stood at a species
+    /// the tower was visibly still changing, and were never changed again.
+    #[test]
+    fn every_route_into_a_mutating_species_can_mutate() {
+        let data = test_game_data();
+        let reachable = data.reachable_trait_states();
+        data.validate_mutation_exits_are_satisfiable(&reachable)
+            .expect("the shipped catalogue should leave every lineage a way on");
+
+        let mut planted = test_game_data();
+        planted
+            .mutations
+            .mutations
+            .retain(|mutation| mutation.id != "golemkin_warden_to_salamander_corekeeper");
+        let reachable = planted.reachable_trait_states();
+        let error = planted
+            .validate_mutation_exits_are_satisfiable(&reachable)
+            .expect_err(
+                "without the corekeeper exit a golemkin who never carried `resilient` is stuck",
+            );
+        assert!(
+            error.contains("golemkin_warden"),
+            "the error should name the species with the unreachable exit: {error}"
+        );
     }
 }

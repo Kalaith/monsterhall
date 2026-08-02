@@ -168,8 +168,49 @@ reduction path anywhere in the codebase — resting recovers fatigue, stress and
 injury but not this); or accept that the tower turns everyone to stone and say so
 in the spec.
 
-What was fixed this pass is the measurement, not the balance: the collapse is
+What was fixed in that pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
+
+**Second option taken, 2026-08-03 (twentieth pass): golemkin has an exit its own
+lineage can satisfy.** `golemkin_warden -> salamander_corekeeper` at 190
+corruption, requiring `commanding` and `corruption_tuned` — the two traits every
+golemkin starts with, so all three routes into the species can take it, where the
+gargoyle exit could only ever be taken by the one route that carried a
+`minotaur_porter`'s `resilient`. A hatched golemkin and a grown-up slime both
+stood at a species the game visibly still changes and were never changed again.
+Load-time validation now rejects that shape: **every route into a species with
+exits must be able to take one of them**, verified by planting (drop the new
+mutation and the check names golemkin).
+
+- **Why 190 and not lower.** The whole cohort converts at any threshold below the
+  corruption a campaign produces, so a low bar moves the monoculture rather than
+  breaking it. Measured at 140: golemkin 0, **salamander 11 of 20**, role
+  diversity 3 → **2**, and a guild 43% richer. 190 sits inside the spread, so the
+  companions the tower has really had at turn and the rest stay wardens.
+- **Measured, ten seeds at day 365** — baseline → now: gold 1.333M → 1.196M
+  (−10.3%), buildings 25.6 → 22.9 (−10.5%), relics 99 → 163 (+64%), residue 60.7k
+  → 97.4k (+60%), debt gap −1.134M → −1.358M, seeds clearing Founder's Due 3/10
+  unchanged, zero missed payments. **The guild gets poorer as its companions get
+  stronger, and that is the wage mechanic working**: `companion_daily_wage`
+  carries a species term read from `base_stats`, and a corekeeper is 34 stat
+  points against a warden's 22. Growing up the tree is no longer free.
+- **Single-seed day 365**: species on the roster 5 → 6 (golemkin 11 → 3,
+  salamander 0 → 9), role diversity 3 (held), corruption max 480 → 542, gold
+  1.32M → 511k and floors walked 17 → 11. That seed moved six times further than
+  the ten-seed mean; it is one sample of a chaotic policy, and `stranded_floor_ids`
+  is empty either way, but the tower being walked less is worth watching.
+- **Still open, and unchanged by this**: the funnel itself. Every slime still ends
+  at the same place, one step further along, because the guild almost only hatches
+  slimes — that is the egg-supply question in the roster-variety section above,
+  not a mutation-tree question. And corruption still has no relief path, so the
+  range above 190 is once again inert.
+- **A target that is not the strongest species was tried and measured worse.**
+  `golemkin_warden -> revenant_chorister` at 140 reads better as fiction (the
+  rhythm she hardened around finally asks her something) and leaves the deepest
+  species something you must go to the bottom of the tower for. It fails a
+  campaign assertion and lands **role diversity 2, species 4**, because a revenant
+  is a `corruption_adept` exactly like the warden she replaces. Variety means a
+  different *role*, not a different name.
 
 ### Found by review, not by the audit (2026-08-03, nineteenth pass)
 

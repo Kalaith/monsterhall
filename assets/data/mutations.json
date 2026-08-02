@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "mutations": [
     {
       "id": "slime_to_residue_slime",
@@ -90,6 +90,20 @@
         "stonebound"
       ],
       "event_text": "The stone {name} wears stops being armour some time in the night. In the morning she is sitting on the stair counting, a {target_species}, and she will not say what the count is for."
+    },
+    {
+      "id": "golemkin_warden_to_salamander_corekeeper",
+      "source_species_id": "golemkin_warden",
+      "target_species_id": "salamander_corekeeper",
+      "minimum_corruption": 190,
+      "required_trait_ids": [
+        "commanding",
+        "corruption_tuned"
+      ],
+      "granted_trait_ids": [
+        "hatchery_attuned"
+      ],
+      "event_text": "{name} has carried the tower's heat so long that the stone starts giving it back. She goes down to the clutches without being asked and turns them the way a {target_species} does, because that is what she has become."
     },
     {
       "id": "lamia_routekeeper_to_revenant_chorister",
