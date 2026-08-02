@@ -215,6 +215,20 @@ impl Game {
         self.last_error = None;
     }
 
+    /// Moves whichever roster card grid is on screen to `page`.
+    ///
+    /// Both screens carry their own page, so the active phase decides which one
+    /// moves. Out-of-range pages are clamped where the window is built rather
+    /// than here, so a roster that shrank under the player still shows cards.
+    pub(super) fn show_roster_page(&mut self, page: usize) {
+        match &mut self.phase {
+            GamePhase::ExpeditionPlanning(state) => state.roster_page = page,
+            GamePhase::ContractDesk(state) => state.roster_page = page,
+            GamePhase::TownOverview(state) => state.roster_page = page,
+            _ => {}
+        }
+    }
+
     pub(super) fn open_contract_desk(&mut self, request_override: Option<String>) {
         let Some(game_state) = self.game_state.as_ref() else {
             self.last_error = Some("No campaign is active.".to_owned());
@@ -233,9 +247,14 @@ impl Game {
                     .map(|request| request.request_id.clone())
             });
 
-        self.phase = GamePhase::ContractDesk(ContractDeskState::new(
+        let roster_page = match &self.phase {
+            GamePhase::ContractDesk(state) => state.roster_page,
+            _ => 0,
+        };
+        self.phase = GamePhase::ContractDesk(ContractDeskState::with_roster_page(
             selected_request_id,
             "Contract desk ready",
+            roster_page,
         ));
         self.last_error = None;
     }
@@ -311,11 +330,16 @@ impl Game {
             }
         }
 
-        self.phase = GamePhase::ExpeditionPlanning(ExpeditionPlanningState::new(
+        let roster_page = match &self.phase {
+            GamePhase::ExpeditionPlanning(state) => state.roster_page,
+            _ => 0,
+        };
+        self.phase = GamePhase::ExpeditionPlanning(ExpeditionPlanningState::with_roster_page(
             selected_floor_id,
             selected_mission_id,
             priority,
             "Plan expedition",
+            roster_page,
         ));
         self.last_error = None;
     }
@@ -392,9 +416,9 @@ impl Game {
             GamePhase::Loading(state) => GamePhase::Loading(state.clone()),
             GamePhase::MainMenu(state) => GamePhase::MainMenu(state.clone()),
             GamePhase::OpeningChapter(state) => GamePhase::OpeningChapter(state.clone()),
-            GamePhase::TownOverview(_) => {
-                GamePhase::TownOverview(TownOverviewState::new(status_message))
-            }
+            GamePhase::TownOverview(state) => GamePhase::TownOverview(
+                TownOverviewState::with_roster_page(status_message, state.roster_page),
+            ),
             GamePhase::MonsterProfile(state) => GamePhase::MonsterProfile(
                 MonsterProfileState::new(state.selected_monster_id.clone(), status_message),
             ),
@@ -405,10 +429,13 @@ impl Game {
                     status_message,
                 ))
             }
-            GamePhase::ContractDesk(state) => GamePhase::ContractDesk(ContractDeskState::new(
-                state.selected_request_id.clone(),
-                status_message,
-            )),
+            GamePhase::ContractDesk(state) => {
+                GamePhase::ContractDesk(ContractDeskState::with_roster_page(
+                    state.selected_request_id.clone(),
+                    status_message,
+                    state.roster_page,
+                ))
+            }
             GamePhase::HatcheryManagement(state) => {
                 GamePhase::HatcheryManagement(HatcheryManagementState::with_scroll(
                     state.selected_egg_id.clone(),
@@ -421,11 +448,12 @@ impl Game {
                 GuildHallManagementState::new(state.selected_room_id.clone(), status_message),
             ),
             GamePhase::ExpeditionPlanning(state) => {
-                GamePhase::ExpeditionPlanning(ExpeditionPlanningState::new(
+                GamePhase::ExpeditionPlanning(ExpeditionPlanningState::with_roster_page(
                     state.selected_floor_id.clone(),
                     state.selected_mission_id.clone(),
                     state.priority.clone(),
                     status_message,
+                    state.roster_page,
                 ))
             }
             GamePhase::HatchReveal(state) => GamePhase::HatchReveal(state.clone()),

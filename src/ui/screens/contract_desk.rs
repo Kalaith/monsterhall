@@ -52,7 +52,13 @@ pub fn draw_contract_desk(
         return Some(action);
     }
 
-    if let Some(action) = draw_eligible_panel(data, game_state, selected_request, &layout) {
+    if let Some(action) = draw_eligible_panel(
+        data,
+        game_state,
+        selected_request,
+        &layout,
+        guest_state.roster_page,
+    ) {
         return Some(action);
     }
     if let Some(action) = draw_footer_actions(data, &layout) {

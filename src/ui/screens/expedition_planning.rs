@@ -19,6 +19,9 @@ use crate::ui::layout;
 use crate::ui::screens::expedition_planning_sections::{
     draw_floor_list, floor_row_capacity, FloorListWindow, MissionGrid, MISSION_BUTTON_H,
 };
+use crate::ui::screens::roster_window::{
+    draw_roster_pager, roster_panel_height, RosterWindow, ROSTER_COLUMNS,
+};
 use crate::ui::theme;
 use crate::ui::view_models::{assignment_label, species_name_by_id};
 
@@ -493,12 +496,19 @@ pub fn draw_expedition_planning(
         );
     }
 
-    let visible_members = game_state.monsters.len().min(6);
-    let team_rows = visible_members.max(1).div_ceil(2) as f32;
+    // How many card rows the panel can physically hold, which is what decides
+    // whether the roster needs paging at all.
+    let row_capacity = (((layout.team_h - 58.0) / 104.0).floor() as usize).max(1);
+    let roster = RosterWindow::new(
+        game_state.monsters.len(),
+        expedition_state.roster_page,
+        row_capacity,
+        ROSTER_COLUMNS,
+    );
     let visible_team_h = if game_state.monsters.is_empty() {
         150.0
     } else {
-        (58.0 + team_rows * 104.0).min(layout.team_h)
+        roster_panel_height(&roster, 58.0, 104.0).min(layout.team_h)
     };
     draw_tier_panel(
         layout.left_margin,
@@ -522,9 +532,15 @@ pub fn draw_expedition_planning(
     } else {
         let card_w =
             (layout.content_width - layout::PANEL_PADDING * 2.0 - layout::SECTION_GAP) / 2.0;
-        for (index, monster) in game_state.monsters.iter().take(6).enumerate() {
-            let col = index % 2;
-            let row = index / 2;
+        for (index, monster) in game_state
+            .monsters
+            .iter()
+            .skip(roster.first_index)
+            .take(roster.visible_count)
+            .enumerate()
+        {
+            let col = index % ROSTER_COLUMNS;
+            let row = index / ROSTER_COLUMNS;
             let x = layout.left_margin
                 + layout::PANEL_PADDING
                 + col as f32 * (card_w + layout::SECTION_GAP);
@@ -602,6 +618,17 @@ pub fn draw_expedition_planning(
             {
                 return Some(UiAction::AssignMonsterToIdle(monster.id.clone()));
             }
+        }
+
+        if let Some(action) = draw_roster_pager(
+            &roster,
+            game_state.monsters.len(),
+            layout.left_margin + layout::PANEL_PADDING,
+            layout.team_y + 46.0 + roster.card_rows() as f32 * 104.0,
+            layout.content_width - layout::PANEL_PADDING * 2.0,
+            UiAction::ShowRosterPage,
+        ) {
+            return Some(action);
         }
     }
 

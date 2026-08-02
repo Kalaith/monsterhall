@@ -31,6 +31,10 @@ pub enum UiAction {
     SelectExpeditionFloor(String),
     SelectExpeditionMission(String),
     SetExpeditionPriority(ExpeditionPriority),
+    /// Page the roster card grid on whichever screen is showing one. Both the
+    /// Expedition Desk and the Contract Desk carry their own page, so the active
+    /// phase decides which one this moves.
+    ShowRosterPage(usize),
     OpenSettings,
     CloseSettings,
     ToggleFullscreen(bool),

@@ -2,20 +2,15 @@ use macroquad::prelude::*;
 
 use crate::data::GameData;
 use crate::engine::preview_upkeep;
-use crate::state::{CompanionJobState, CompanionState, GameState, TownOverviewState};
+use crate::state::{GameState, TownOverviewState};
 use crate::ui::actions::UiAction;
-use crate::ui::art::{
-    draw_condition_badges, draw_species_portrait, draw_ui_icon, icon_for_metric_label,
-};
+use crate::ui::art::{draw_ui_icon, icon_for_metric_label};
 use crate::ui::chrome::{draw_screen_title, draw_top_utility_bar};
-use crate::ui::core::{draw_body_text, draw_body_text_in_box, secondary_button, utility_button};
+use crate::ui::core::{draw_body_text, draw_body_text_in_box};
 use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
 use crate::ui::theme;
-use crate::ui::view_models::{
-    action_from_action_hint, assignment_label, companion_skill_summary, daily_priority_summary,
-    species_name_by_id,
-};
+use crate::ui::view_models::{action_from_action_hint, daily_priority_summary};
 
 use super::town_overview_footer::{draw_town_overview_footer, icon_for_footer_action};
 
@@ -151,7 +146,7 @@ pub(super) fn draw_organic_panel(
     }
 }
 
-fn draw_organic_stage_panel(x: f32, y: f32, w: f32, h: f32, title: &str, accent: Color) {
+pub(super) fn draw_organic_stage_panel(x: f32, y: f32, w: f32, h: f32, title: &str, accent: Color) {
     let fill = Color::new(theme::PANEL_0.r, theme::PANEL_0.g, theme::PANEL_0.b, 0.56);
     let shadow = Color::new(0.02, 0.01, 0.025, 0.46);
     let border = Color::new(accent.r, accent.g, accent.b, 0.64);
@@ -232,7 +227,7 @@ fn draw_banner_label(x: f32, y: f32, max_w: f32, label: &str, accent: Color) {
     draw_body_text(label, x + 26.0, y + 17.0, 13.0, theme::TEXT_MUTED);
 }
 
-fn draw_organic_status(x: f32, y: f32, w: f32, h: f32, text: &str, accent: Color) {
+pub(super) fn draw_organic_status(x: f32, y: f32, w: f32, h: f32, text: &str, accent: Color) {
     let fill = Color::new(theme::PANEL_1.r, theme::PANEL_1.g, theme::PANEL_1.b, 0.72);
     draw_rectangle(x + 6.0, y, w - 12.0, h, fill);
     draw_triangle(
@@ -314,7 +309,7 @@ fn draw_resource_cell(x: f32, y: f32, w: f32, h: f32, label: &str, value: &str, 
     draw_body_text(value, x + 50.0, y + 40.0, 20.0, theme::TEXT_STRONG);
 }
 
-fn draw_organic_button(
+pub(super) fn draw_organic_button(
     x: f32,
     y: f32,
     w: f32,
@@ -622,138 +617,6 @@ pub(super) fn draw_summary_strip(
     }
 
     None
-}
-
-pub(super) fn draw_monster_roster(
-    data: &GameData,
-    game_state: &GameState,
-    layout: &TownOverviewLayout,
-) -> Option<UiAction> {
-    if game_state.monsters.is_empty() || layout.compact_height {
-        return None;
-    }
-
-    draw_organic_stage_panel(
-        layout.left_margin,
-        layout.roster_y,
-        layout.content_width,
-        layout.roster_h,
-        &data.ui_text.town_overview.roster_panel_title,
-        theme::GOLD,
-    );
-
-    let visible_count = game_state.monsters.len().min(3);
-    let card_width = if visible_count <= 1 {
-        layout.content_width - layout::PANEL_PADDING * 2.0
-    } else {
-        let total_gap = layout::SECTION_GAP * (visible_count as f32 - 1.0);
-        (layout.content_width - layout::PANEL_PADDING * 2.0 - total_gap) / visible_count as f32
-    };
-
-    for (index, monster) in game_state.monsters.iter().take(visible_count).enumerate() {
-        let card_x = layout.left_margin
-            + layout::PANEL_PADDING
-            + index as f32 * (card_width + layout::SECTION_GAP);
-        let card_y = layout.roster_y + 44.0;
-        let card_h = 162.0_f32.min((layout.roster_h - 62.0).max(132.0));
-        if let Some(action) =
-            draw_roster_card_organic(data, monster, card_x, card_y, card_width, card_h)
-        {
-            return Some(action);
-        }
-    }
-
-    None
-}
-
-fn draw_roster_card_organic(
-    data: &GameData,
-    monster: &CompanionState,
-    x: f32,
-    y: f32,
-    w: f32,
-    h: f32,
-) -> Option<UiAction> {
-    let state_label = assignment_label(data, &monster.current_job);
-    let species_label = species_name_by_id(data, &monster.species_id);
-    let key_value = format!("Skills {}", companion_skill_summary(data, monster));
-    let accent = job_color(&monster.current_job);
-
-    draw_organic_panel(x, y, w, h, None, accent, false);
-
-    let portrait_w = 76.0_f32.min((w * 0.22).max(64.0));
-    let portrait_h = (h - 28.0).max(92.0);
-    draw_species_portrait(data, monster, x + 14.0, y + 14.0, portrait_w, portrait_h);
-
-    let action_w = 88.0_f32.min((w * 0.25).max(76.0));
-    let action_x = x + w - action_w - 14.0;
-    let action_y = y + 18.0;
-    let text_x = x + portrait_w + 30.0;
-    let text_w = (action_x - text_x - 14.0).max(90.0);
-
-    // This card carries the Rest button, so it is where the decision to rest
-    // someone is actually made — and until now it said nothing about her
-    // condition. Fatigue and stress cost real output since the condition wiring
-    // landed, so the numbers belong next to the button that fixes them.
-    let show_condition = h >= 150.0;
-    draw_body_text(&monster.name, text_x, y + 30.0, 20.0, theme::TEXT_STRONG);
-    draw_body_text(&species_label, text_x, y + 52.0, 13.0, theme::TEXT_BODY);
-    draw_organic_status(text_x, y + 66.0, text_w, 28.0, state_label, accent);
-    draw_body_text_in_box(
-        &key_value,
-        text_x,
-        if show_condition { y + 98.0 } else { y + 106.0 },
-        text_w,
-        24.0,
-        12.0,
-        theme::TEXT_MUTED,
-    );
-    if show_condition {
-        // Capped: the roster card is full-width, so an uncapped strip gives four
-        // enormous boxes holding two characters each.
-        draw_condition_badges(monster, text_x, y + h - 40.0, text_w.min(300.0));
-    }
-
-    if secondary_button(
-        action_x,
-        action_y,
-        action_w,
-        24.0,
-        &data.ui_text.town_overview.monster_profile_button,
-    ) {
-        return Some(UiAction::OpenMonsterProfile(monster.id.clone()));
-    }
-    if secondary_button(
-        action_x,
-        action_y + 30.0,
-        action_w,
-        24.0,
-        &data.ui_text.common.rest_button,
-    ) {
-        return Some(UiAction::AssignMonsterToRest(monster.id.clone()));
-    }
-    if !matches!(monster.current_job, CompanionJobState::Idle)
-        && utility_button(
-            action_x,
-            action_y + 60.0,
-            action_w,
-            24.0,
-            &data.ui_text.common.idle_button,
-        )
-    {
-        return Some(UiAction::AssignMonsterToIdle(monster.id.clone()));
-    }
-
-    None
-}
-
-fn job_color(job: &CompanionJobState) -> Color {
-    match job {
-        CompanionJobState::Idle => theme::TEXT_MUTED,
-        CompanionJobState::GuildJob { .. } => theme::ROSE,
-        CompanionJobState::Resting => theme::INFO,
-        CompanionJobState::OnExpedition { .. } => theme::WARNING,
-    }
 }
 
 pub(super) fn draw_footer_actions(

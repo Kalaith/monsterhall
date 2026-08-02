@@ -164,13 +164,16 @@ fn species_count(game_state: &GameState, species_id: &str) -> usize {
         .count()
 }
 
+/// How much the guild would lose by releasing this companion. The hatchery
+/// recommends replacing whoever scores lowest.
+///
+/// Counts every skill, not the five that existed when this was written. Recovery
+/// and bargaining are trainable and feed both `guild_job_skill_bonus` and the
+/// wage bill, so leaving them out made the game recommend releasing the very
+/// companion the player had spent the most shifts training.
 fn replacement_score(data: &GameData, monster: &CompanionState) -> u32 {
     monster.quality_rank as u32 * 100
-        + monster.skills.scouting
-        + monster.skills.guarding
-        + monster.skills.hospitality
-        + monster.skills.crafting
-        + monster.skills.charm
+        + crate::engine::companion_skill_total(&monster.skills)
         + crate::engine::effective_stats(data, monster).charm.max(0) as u32
 }
 

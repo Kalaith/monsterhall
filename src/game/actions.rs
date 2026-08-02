@@ -66,6 +66,7 @@ impl Game {
             UiAction::SelectExpeditionMission(mission_id) => {
                 self.open_expedition_planning(None, Some(mission_id), None)
             }
+            UiAction::ShowRosterPage(page) => self.show_roster_page(page),
             UiAction::SetExpeditionPriority(priority) => {
                 self.open_expedition_planning(None, None, Some(priority))
             }
@@ -139,7 +140,18 @@ impl Game {
                     release_monster(game_state, &monster_id).map(|_| ())
                 });
                 if self.last_error.is_none() {
-                    self.phase = GamePhase::TownOverview(TownOverviewState::new("Roster updated"));
+                    // Stay on the page the released companion was on. The window
+                    // clamps a page the shrunken roster no longer reaches, so
+                    // releasing the last companion on the last page lands on the
+                    // new last page rather than an empty panel.
+                    let roster_page = match &self.phase {
+                        GamePhase::TownOverview(state) => state.roster_page,
+                        _ => 0,
+                    };
+                    self.phase = GamePhase::TownOverview(TownOverviewState::with_roster_page(
+                        "Roster updated",
+                        roster_page,
+                    ));
                 }
             }
             UiAction::PurchaseBuilding(building_id) => {
@@ -369,6 +381,18 @@ impl Game {
             }
         }
 
+        // A `_full` suffix fills the guild to its population cap first. The
+        // roster panels only misbehave once the guild is crowded, and a fresh
+        // campaign has one companion — so without this the harness can only ever
+        // photograph the state where the bug is invisible.
+        let scene = match scene.strip_suffix("_full") {
+            Some(base) => {
+                self.fill_roster_for_capture();
+                base
+            }
+            None => scene,
+        };
+
         let action = match scene {
             "town" | "townoverview" => Some(UiAction::ReturnToTownOverview),
             "townmanagement" | "planner" => Some(UiAction::OpenTownManagement),
@@ -388,6 +412,30 @@ impl Game {
         };
         if let Some(action) = action {
             self.apply_action(action);
+        }
+    }
+
+    /// Pads the roster to the population cap so a screenshot shows a crowded
+    /// guild. Capture-only: it copies the starting companion rather than playing
+    /// out a year, because what is being photographed is the panel, not the
+    /// campaign that produced it.
+    fn fill_roster_for_capture(&mut self) {
+        let Some(data) = self.data.as_ref() else {
+            return;
+        };
+        let Some(game_state) = self.game_state.as_mut() else {
+            return;
+        };
+        let Some(template) = game_state.monsters.first().cloned() else {
+            return;
+        };
+        let cap = usize::from(data.config.new_game.max_population_cap);
+        for index in game_state.monsters.len()..cap {
+            let mut copy = template.clone();
+            copy.id = format!("monster_{:03}", index + 1);
+            copy.name = format!("{} {}", template.name, index + 1);
+            copy.current_job = crate::state::CompanionJobState::Idle;
+            game_state.monsters.push(copy);
         }
     }
 
@@ -588,9 +636,11 @@ impl Game {
             Ok(()) => {
                 self.last_error = None;
                 match &self.phase {
-                    GamePhase::TownOverview(_) => {
-                        self.phase =
-                            GamePhase::TownOverview(TownOverviewState::new("Assignments updated"));
+                    GamePhase::TownOverview(state) => {
+                        self.phase = GamePhase::TownOverview(TownOverviewState::with_roster_page(
+                            "Assignments updated",
+                            state.roster_page,
+                        ));
                     }
                     GamePhase::TownManagement(town_state) => {
                         self.phase = GamePhase::TownManagement(TownManagementState::with_group(
@@ -619,9 +669,14 @@ impl Game {
                                         .map(|request| request.request_id.clone())
                                 })
                             });
-                        self.phase = GamePhase::ContractDesk(ContractDeskState::new(
+                        let roster_page = match &self.phase {
+                            GamePhase::ContractDesk(state) => state.roster_page,
+                            _ => 0,
+                        };
+                        self.phase = GamePhase::ContractDesk(ContractDeskState::with_roster_page(
                             selected_request_id,
                             "Contract assignments updated",
+                            roster_page,
                         ));
                     }
                     GamePhase::HatcheryManagement(_) => {
@@ -659,12 +714,15 @@ impl Game {
                         ));
                     }
                     GamePhase::ExpeditionPlanning(expedition_state) => {
-                        self.phase = GamePhase::ExpeditionPlanning(ExpeditionPlanningState::new(
-                            expedition_state.selected_floor_id.clone(),
-                            expedition_state.selected_mission_id.clone(),
-                            expedition_state.priority.clone(),
-                            "Expedition team updated",
-                        ));
+                        self.phase = GamePhase::ExpeditionPlanning(
+                            ExpeditionPlanningState::with_roster_page(
+                                expedition_state.selected_floor_id.clone(),
+                                expedition_state.selected_mission_id.clone(),
+                                expedition_state.priority.clone(),
+                                "Expedition team updated",
+                                expedition_state.roster_page,
+                            ),
+                        );
                     }
                     _ => {}
                 }

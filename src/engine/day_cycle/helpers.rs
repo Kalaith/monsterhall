@@ -116,16 +116,7 @@ pub(super) fn companion_daily_wage(
     // Wages are the guild's answer to a roster that earns more as it gets
     // stronger, and recovery and bargaining now feed `guild_job_skill_bonus`
     // exactly like the original five — leaving them out made training them free.
-    let skill_total = monster.skills.scouting
-        + monster.skills.guarding
-        + monster.skills.hospitality
-        + monster.skills.crafting
-        + monster.skills.charm
-        + monster.skills.recovery
-        + monster.skills.bargaining
-        + monster.skills.navigation
-        + monster.skills.arcana
-        + monster.skills.strength;
+    let skill_total = crate::engine::companion_skill_total(&monster.skills);
     // Base stats are already the game's measure of how capable a species is, so
     // the tier term reads them rather than adding a second authored ranking that
     // could drift from them.

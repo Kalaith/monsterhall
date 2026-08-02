@@ -95,12 +95,21 @@ pub struct StoryProgressState {
 #[derive(Debug, Clone)]
 pub struct TownOverviewState {
     pub status_message: String,
+    /// Which page of the roster strip is showing. See
+    /// [`ContractDeskState::roster_page`] — this one matters most, because the
+    /// strip is the only route to a companion's profile and so to releasing her.
+    pub roster_page: usize,
 }
 
 impl TownOverviewState {
     pub fn new(status_message: &str) -> Self {
+        Self::with_roster_page(status_message, 0)
+    }
+
+    pub fn with_roster_page(status_message: &str, roster_page: usize) -> Self {
         Self {
             status_message: status_message.to_owned(),
+            roster_page,
         }
     }
 }
@@ -231,13 +240,26 @@ impl TownManagementState {
 pub struct ContractDeskState {
     pub selected_request_id: Option<String>,
     pub status_message: String,
+    /// Which page of the roster the candidate panel is showing.
+    ///
+    /// Both roster panels drew a flat `.take(6)` against a population cap of 20,
+    /// so fourteen companions could not be assigned to anything at all once the
+    /// guild filled up. This is phase state like `inventory_scroll` — never
+    /// persisted, and carried across a phase rebuild so assigning somebody does
+    /// not throw the player back to page one.
+    pub roster_page: usize,
 }
 
 impl ContractDeskState {
-    pub fn new(selected_request_id: Option<String>, status_message: &str) -> Self {
+    pub fn with_roster_page(
+        selected_request_id: Option<String>,
+        status_message: &str,
+        roster_page: usize,
+    ) -> Self {
         Self {
             selected_request_id,
             status_message: status_message.to_owned(),
+            roster_page,
         }
     }
 }
@@ -248,20 +270,25 @@ pub struct ExpeditionPlanningState {
     pub selected_mission_id: String,
     pub priority: ExpeditionPriority,
     pub status_message: String,
+    /// Which page of the roster the team panel is showing. See
+    /// [`ContractDeskState::roster_page`].
+    pub roster_page: usize,
 }
 
 impl ExpeditionPlanningState {
-    pub fn new(
+    pub fn with_roster_page(
         selected_floor_id: String,
         selected_mission_id: String,
         priority: ExpeditionPriority,
         status_message: &str,
+        roster_page: usize,
     ) -> Self {
         Self {
             selected_floor_id,
             selected_mission_id,
             priority,
             status_message: status_message.to_owned(),
+            roster_page,
         }
     }
 }

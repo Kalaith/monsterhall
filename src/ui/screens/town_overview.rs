@@ -2,10 +2,11 @@ use crate::data::GameData;
 use crate::state::{GameState, TownOverviewState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::draw_town_overview_backdrop;
+use crate::ui::screens::town_overview_roster::draw_monster_roster;
 
 use super::town_overview_sections::{
-    draw_error_panel, draw_footer_actions, draw_header, draw_monster_roster, draw_priority_panel,
-    draw_summary_strip, TownOverviewLayout,
+    draw_error_panel, draw_footer_actions, draw_header, draw_priority_panel, draw_summary_strip,
+    TownOverviewLayout,
 };
 
 pub fn draw_town_overview(
@@ -29,7 +30,7 @@ pub fn draw_town_overview(
         return Some(action);
     }
 
-    if let Some(action) = draw_monster_roster(data, game_state, &layout) {
+    if let Some(action) = draw_monster_roster(data, game_state, &layout, town_state.roster_page) {
         return Some(action);
     }
 

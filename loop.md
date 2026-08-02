@@ -155,12 +155,14 @@ produces an unplayable game and a balance harness that fails for the wrong reaso
 These are the known hard blockers. Each is one iteration or less.
 
 1. ~~**Floor list is capped at four.**~~ **Done 2026-08-01** — paged window in
-   `expedition_planning_sections.rs`, see Ledger. Still open, and the natural next slice: the
-   **roster lists**. `expedition_planning.rs` team panel and `contract_desk_sections.rs:556` both
-   `.take(6)` against a 20-companion population cap, so most of a late-game roster cannot be
-   assigned; `town_management.rs:142` takes 10 of the buildings, which will bite as buildings grow
-   past 20. The team panel is height-bounded 2-column cards, so it needs paging of its own shape
-   rather than a copy of the floor list.
+   `expedition_planning_sections.rs`. ~~**Roster lists capped at six.**~~ **Done 2026-08-03** —
+   `ui/screens/roster_window.rs` pages the Expedition Desk team panel, the Contract Desk candidate
+   panel and the Town Overview roster strip. The last of those was the serious one: it is the only
+   route to a companion's profile, and the profile is the only place she can be released, so
+   seventeen of twenty companions could never be let go. See the Ledger.
+   Still open but **latent, not live**: `town_management.rs:144` takes 10 of the buildings against
+   9 core and 4 projects today, and the panel only fits about nine rows — so the tenth already
+   draws past the panel edge if a group ever reaches it.
 2. ~~**Floors can only be unlocked by buildings.**~~ **Done 2026-08-01** — survey chain in
    `day_cycle/surveys.rs`. Floors declare `requires_surveyed_floor_ids` + `required_surveys`;
    expeditions bank survey points on the floor they ran (missions carry `survey_value`, scout route
@@ -709,6 +711,56 @@ Stop the loop and report if:
   content axes are unchanged — **guild rooms 4** for a 20-companion roster,
   **patron tiers 3** with upkeep bands already referencing a fourth, and relics
   still have no patron who asks for one by name.
+
+- **2026-08-03 — the roster lists, and the last of phase 0.** Blocker 1's leftover
+  had been open since the first iteration and turned out to be the biggest live
+  gameplay defect in the game. Both assignment panels drew
+  `game_state.monsters.iter().take(6)` against a population cap of **20**: six was
+  never a layout measurement, it was the roster size when those panels were
+  written. **Fourteen companions could not be sent on an expedition or offered to
+  a contract at all**, and nothing on either screen said they existed.
+  **The Town Overview strip was worse.** `OpenMonsterProfile` has exactly one call
+  site — that strip, capped at three — and `ReleaseMonster` exists **only** on the
+  profile screen. So a guild at its cap could only ever release one of the first
+  three companions in roster order, and hatching at cap *requires* releasing or
+  replacing. The late game was gated on a button seventeen companions did not have.
+  New `ui/screens/roster_window.rs` pages all three grids. The floor list stayed
+  stateless by deriving its page from the selected floor; that does not transfer,
+  because a roster panel has no selection to follow — so the page lives in phase
+  state beside `inventory_scroll` (transient, never saved) and survives a phase
+  rebuild, so assigning somebody does not throw the player back to page one.
+  Deliberately **unsorted**: ordering by availability would put the useful cards
+  first, but assignments change as the player works, so cards would reshuffle
+  under the cursor between clicks. `town_overview_sections.rs` crossed 800 lines
+  as a result and the roster panel was extracted to `town_overview_roster.rs`.
+  **The harness could not photograph any of this**, because `seed_capture_scene`
+  starts a fresh campaign with one companion — the panels only misbehave when the
+  guild is crowded. A `_full` scene suffix now fills the roster to the cap first;
+  `ui_town_full.png`, `ui_expedition_full.png`, `ui_contracts_full.png` are the
+  new baselines, and all three show a working pager.
+  **Also: a third and fourth copy of the skill sum.** `companion_daily_wage` was
+  fixed two passes ago; the hatchery's `replacement_score` — which picks the
+  companion the game *recommends you sacrifice* — was still counting five of ten,
+  so training recovery or bargaining made a companion cheaper to discard and more
+  expensive to keep at once. One `engine::companion_skill_total` now.
+  **One thing measured and deliberately not taken.** `monster_service_score` in
+  `policy_eggs.rs` has the same incompleteness and picks who the *simulated* guild
+  releases. Completing it moved multi-seed gold **1.07M → 851k** and buildings
+  **24.2 → 17.3** with every assertion green. It is a policy heuristic standing in
+  for player judgement rather than a formula the game defines, and taking it would
+  re-base every parked balance question for the second time in two passes — so it
+  is written into the function's own doc comment and `TODO.md` for a deliberate
+  call rather than shipped.
+  **Result:** 94 tests (was 87), balance byte-identical, fmt and clippy clean,
+  publish green. **Phase 0 is now fully closed.**
+  **Next iteration should know:** (a) `town_management.rs:144` still takes 10 of
+  the buildings — latent, not live, since core holds 9 and projects 4, but the
+  panel only fits ~9 rows so the tenth already overflows; (b) the Contract Desk
+  detail column's two known overlaps are still there (list rows wider than their
+  panel, thumbnail caption reaching into the text column) and the crowded capture
+  shows the caption now colliding with the room name; (c) the thin content axes
+  are unchanged — **guild rooms 4**, **patron tiers 3**, and relics still have no
+  patron who asks for one by name.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

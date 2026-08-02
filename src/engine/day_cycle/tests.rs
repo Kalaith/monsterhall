@@ -702,6 +702,46 @@ fn charm_odds_and_the_advertised_lesson_agree() {
     }
 }
 
+/// Every skill has to count towards what a companion is worth keeping.
+///
+/// This sum was written out longhand in three places against the five skills
+/// that existed at the time. The wage was fixed once; the hatchery's release
+/// recommendation and the validation policy's service score were still counting
+/// five, and both of those choose **who gets released** — so training recovery
+/// or bargaining made a companion cheaper to throw away and more expensive to
+/// keep at the same time.
+#[test]
+fn every_skill_counts_towards_what_a_companion_is_worth() {
+    use crate::engine::companion_skill_total;
+
+    let base = CompanionSkillState::default();
+    assert_eq!(companion_skill_total(&base), 0);
+
+    for skill_id in [
+        "scouting",
+        "guarding",
+        "hospitality",
+        "crafting",
+        "charm",
+        "recovery",
+        "bargaining",
+        "navigation",
+        "arcana",
+        "strength",
+    ] {
+        let mut skills = CompanionSkillState::default();
+        assert!(
+            increment_skill(&mut skills, skill_id, 5),
+            "'{skill_id}' should be a real skill"
+        );
+        assert_eq!(
+            companion_skill_total(&skills),
+            5,
+            "'{skill_id}' is trainable but does not count towards a companion's worth"
+        );
+    }
+}
+
 #[test]
 fn every_trained_skill_raises_a_companions_wage() {
     let data = crate::data::test_game_data();

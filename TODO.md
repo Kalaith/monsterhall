@@ -171,6 +171,58 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, second pass)
+
+- ~~Fourteen of twenty companions could not be assigned to anything.~~ Fixed, and
+  this was the largest live gameplay defect left in the game. The Expedition Desk
+  team panel and the Contract Desk candidate panel both drew
+  `game_state.monsters.iter().take(6)` against a population cap of **20**. Six was
+  never a layout measurement — it was the roster size when those panels were
+  written. Once the guild filled up, fourteen companions could not be sent on an
+  expedition or offered to a contract at all, and nothing on either screen said
+  they existed. New `ui/screens/roster_window.rs` pages both grids, with the page
+  carried in phase state beside `inventory_scroll` (transient, never saved) and
+  preserved across a phase rebuild so assigning somebody does not throw the player
+  back to page one. Deliberately unsorted: ordering by availability would put the
+  useful cards first, but assignments change as the player works, so the cards
+  would reshuffle under the cursor between clicks.
+- ~~Seventeen of twenty companions had no profile screen, and so could never be
+  released.~~ Fixed, and it is the same cap with worse consequences.
+  `OpenMonsterProfile` had **exactly one call site** — the Town Overview roster
+  strip, capped at `.min(3)` — and `ReleaseMonster` exists **only** on the profile
+  screen. So a guild at its population cap could only ever release one of the
+  first three companions in roster order, which is the wall the whole late game is
+  gated on: hatching at cap requires releasing or replacing. The strip pages now
+  too, taking the pager out of the card height rather than a row of its own since
+  it is a single row. `town_overview_sections.rs` crossed the 800-line limit as a
+  result, so the roster panel was extracted to `town_overview_roster.rs` — the
+  natural seam, since that panel is the guild's roster view.
+- **The capture harness could only ever photograph a one-companion guild**, so
+  the state all three defects live in was unphotographable. `seed_capture_scene`
+  now accepts a `_full` scene suffix that fills the roster to the population cap
+  first; `ui_town_full.png`, `ui_expedition_full.png` and `ui_contracts_full.png`
+  are the baselines that actually show the pagers.
+- ~~A third and fourth copy of "what a companion's training is worth", both
+  counting five of the ten skills.~~ Half fixed, half deliberately parked.
+  `companion_daily_wage` was fixed for this two passes ago; the sum was written
+  out longhand in two more places and both were still counting five. **The
+  hatchery's `replacement_score`** — which picks the companion the game
+  *recommends you sacrifice* at capacity — is fixed: training recovery or
+  bargaining made a companion cheaper to throw away and more expensive to keep at
+  the same time. There is one `engine::companion_skill_total` now, used by the
+  wage and the recommendation, and a test asserts every trainable skill counts.
+
+  **The fourth copy is a balance decision, left for a deliberate call.**
+  `monster_service_score` in `policy_eggs.rs` picks who the *simulated* guild
+  releases, and counts five of ten skills plus five of seven work-history
+  categories. Completing it was built and measured: multi-seed 365-day gold
+  **1.07M → 851k** and buildings **24.2 → 17.3**, companions unchanged at 19.2,
+  zero missed payments, every assertion still green. Unlike the rank bug last
+  pass, this is a policy heuristic standing in for player judgement rather than a
+  formula the game itself defines — and taking it would re-base every parked
+  balance question here for the second time in two passes. The measurement is
+  recorded in the function's own doc comment so it is not re-derived blind.
+
 ### Found by review, not by the audit (2026-08-03)
 
 - ~~The star ladder went 1–5 and three places still said 3.~~ Fixed, and this
@@ -439,7 +491,12 @@ fourteen floors going unwalked by the *simulation*, not the ability to test.
 - Tune final debt pressure against averaged multi-seed results rather than one deterministic report. See the blocker above for the measured gap: 1.6M–2.5M gold of slack on every seed.
 - ~~Add late-game project varieties that spend different surplus mixes.~~ Done: `reliquary_vault` is the relic-heavy sink the catalogue lacked. Materials were flagged here as having no dedicated sink; measured, they end at 616 against 34,900 of incidental capacity, so there is no runaway to solve.
 - Consider patron satisfaction as explicit state if completions and expirations are not enough pressure.
-- Give the 20-companion cap a clearer replacement/release flow, and a reason to run non-egg missions once capped.
+- ~~Give the 20-companion cap a clearer replacement *reach*.~~ Half done: every
+  companion now has a reachable profile, and therefore a release button, which
+  she did not before (see the roster paging entries above). The remaining half is
+  a genuine *flow* — a screen that compares a pending egg against the roster and
+  makes the swap in one step, rather than profile-by-profile — plus a reason to
+  run non-egg missions once capped.
 - Review whether special-event cost should scale from roster, reputation, or project count.
 
 ## UI and reporting

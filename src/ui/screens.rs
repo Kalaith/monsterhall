@@ -23,10 +23,12 @@ mod loading;
 mod main_menu;
 mod monster_profile;
 mod opening;
+mod roster_window;
 mod settings;
 mod town_management;
 mod town_overview;
 mod town_overview_footer;
+mod town_overview_roster;
 mod town_overview_sections;
 
 pub use day_results::draw_day_results;

@@ -14,6 +14,7 @@ use crate::ui::components::{
 use crate::ui::core::{draw_body_text, primary_button, secondary_button, utility_button};
 use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
+use crate::ui::screens::roster_window::{draw_roster_pager, RosterWindow, ROSTER_COLUMNS};
 use crate::ui::theme;
 use crate::ui::view_models::{
     companion_skill_summary, evaluate_guest_candidate, fill_template, format_resources_state,
@@ -547,12 +548,24 @@ pub(super) fn draw_eligible_panel(
     game_state: &GameState,
     request: Option<&crate::state::ContractState>,
     layout: &ContractDeskLayout,
+    roster_page: usize,
 ) -> Option<UiAction> {
+    let panel_h = (layout.footer_y - layout.candidates_y - layout::SECTION_GAP).max(238.0);
+    // Rows of cards the panel can hold, which is what decides whether the roster
+    // needs paging. The panel keeps its full height either way — it is anchored
+    // to the footer — so the pager sits under the cards rather than growing it.
+    let row_capacity = (((panel_h - 42.0) / 100.0).floor() as usize).max(1);
+    let roster = RosterWindow::new(
+        game_state.monsters.len(),
+        roster_page,
+        row_capacity,
+        ROSTER_COLUMNS,
+    );
     draw_tier_panel(
         layout.left_margin,
         layout.candidates_y,
         layout.content_width,
-        (layout.footer_y - layout.candidates_y - layout::SECTION_GAP).max(238.0),
+        panel_h,
         Some(&data.ui_text.contract_desk.eligible_companions_panel_title),
         PanelTier::Support,
         false,
@@ -583,9 +596,15 @@ pub(super) fn draw_eligible_panel(
     }
 
     let card_w = (layout.content_width - layout::PANEL_PADDING * 2.0 - layout::SECTION_GAP) / 2.0;
-    for (index, monster) in game_state.monsters.iter().take(6).enumerate() {
-        let col = index % 2;
-        let row = index / 2;
+    for (index, monster) in game_state
+        .monsters
+        .iter()
+        .skip(roster.first_index)
+        .take(roster.visible_count)
+        .enumerate()
+    {
+        let col = index % ROSTER_COLUMNS;
+        let row = index / ROSTER_COLUMNS;
         let x = layout.left_margin
             + layout::PANEL_PADDING
             + col as f32 * (card_w + layout::SECTION_GAP);
@@ -660,7 +679,14 @@ pub(super) fn draw_eligible_panel(
         }
     }
 
-    None
+    draw_roster_pager(
+        &roster,
+        game_state.monsters.len(),
+        layout.left_margin + layout::PANEL_PADDING,
+        layout.candidates_y + 42.0 + roster.card_rows() as f32 * 100.0,
+        layout.content_width - layout::PANEL_PADDING * 2.0,
+        UiAction::ShowRosterPage,
+    )
 }
 
 pub(super) fn draw_footer_actions(

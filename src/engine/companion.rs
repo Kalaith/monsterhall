@@ -70,3 +70,25 @@ pub fn species_stat_total(species: &crate::data::SpeciesData) -> u32 {
         + species.base_stats.instinct)
         .max(0) as u32
 }
+
+/// Everything a companion has been taught, across all ten skills.
+///
+/// The single sum, because it had already been written out longhand three times
+/// and every copy was authored against the five skills that existed at the time.
+/// `companion_daily_wage` was fixed once; `replacement_score` on the hatchery
+/// screen and `monster_service_score` in the validation policy were still
+/// counting five, and both of those decide **which companion gets released** —
+/// so a companion who trained recovery or bargaining read as more expendable
+/// than an identical one who had learned nothing, while costing more to keep.
+pub fn companion_skill_total(skills: &crate::state::CompanionSkillState) -> u32 {
+    skills.scouting
+        + skills.guarding
+        + skills.hospitality
+        + skills.crafting
+        + skills.charm
+        + skills.recovery
+        + skills.bargaining
+        + skills.navigation
+        + skills.arcana
+        + skills.strength
+}

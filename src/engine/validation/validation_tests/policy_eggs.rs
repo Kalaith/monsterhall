@@ -233,6 +233,19 @@ pub(super) fn cheapest_unlocked_species_option<'a>(
         .map(|(species_id, _)| species_id)
 }
 
+/// How much service a companion has already given, used to pick who the policy
+/// releases when the guild is at its cap.
+///
+/// Deliberately still counting five of the ten skills and five of the seven
+/// work-history categories, which is the same incompleteness as the wage bug and
+/// the hatchery's own recommendation — both of which were fixed. Completing it
+/// here was built and measured, and it is **left out as a balance decision**:
+/// this is a policy heuristic standing in for player judgement rather than a
+/// formula the game defines, and making it complete moved the multi-seed 365-day
+/// baseline from 1.07M gold and 24.2 buildings to 851k and 17.3 with every
+/// assertion still green. That re-bases every parked balance question in
+/// `TODO.md` for the second time in two passes, so it wants a deliberate call
+/// rather than a drive-by. See `TODO.md`.
 pub(super) fn monster_service_score(monster: &crate::state::CompanionState) -> u32 {
     monster.skills.scouting
         + monster.skills.guarding
