@@ -1387,3 +1387,50 @@ fn a_stronger_species_is_less_flexible_outside_its_role() {
         "a gargoyle ({gargoyle_off}) should lose more off-role than a slime ({slime_off})"
     );
 }
+
+/// Instability had three writers, all `saturating_add`, and no reduction path
+/// anywhere in the game — so every mutation threshold was a latch and the range
+/// above the deepest one was inert. A deliberate day of rest settles some of it,
+/// and settles it *before* the day's mutation check, so resting her is how a
+/// player holds a companion back from changing species.
+///
+/// Idling deliberately does not: standing around the hall recovers fatigue and
+/// stress, but what the tower put in her costs a day of her work to undo.
+#[test]
+fn resting_settles_instability_and_idling_does_not() {
+    let data = crate::data::test_game_data();
+    let relief = data
+        .config
+        .day_cycle
+        .condition_effects
+        .resting_corruption_recovery;
+    assert!(
+        relief > 0,
+        "this test is about the relief the catalogue authors"
+    );
+
+    let resolve_with = |job: CompanionJobState| {
+        let mut game_state = crate::engine::create_new_game_state(&data);
+        let mut companion = test_monster(Vec::new());
+        companion.id = "monster_001".to_owned();
+        // Well above every mutation threshold in the catalogue, so the day's
+        // mutation check cannot be what moves this number.
+        companion.species_id = "gargoyle_stairwarden".to_owned();
+        companion.corruption = 400;
+        companion.current_job = job;
+        game_state.monsters = vec![companion];
+        let _ = resolve_day(&data, &mut game_state);
+        game_state.monsters[0].corruption
+    };
+
+    assert_eq!(
+        resolve_with(CompanionJobState::Resting),
+        400 - relief,
+        "a rested companion should settle exactly the authored relief"
+    );
+    assert_eq!(
+        resolve_with(CompanionJobState::Idle),
+        400,
+        "idling must not settle instability, or holding her back costs nothing"
+    );
+}

@@ -171,6 +171,39 @@ in the spec.
 What was fixed in that pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+**Third option taken, 2026-08-03 (twenty-seventh pass): instability has a
+relief path.** `condition_effects.resting_corruption_recovery` (3) is the first
+reduction of that meter anywhere in the game, applied on a **deliberate day of
+rest** and *before* the day's mutation check — so resting a companion is how a
+player holds her back from changing species. Idling deliberately does not pay it:
+standing around the hall recovers fatigue and stress, but what the tower put in
+her costs a day of her work to undo, or the lever is free and nobody decides
+anything.
+
+- **Measured, and this is the roster-variety intent finally landing.** Single
+  seed at day 365: **species on the roster 6 → 11**, the largest share 9/20 →
+  6/20, floors walked **11 → 23**, hatches 29 → 53. Ten seeds: gold 1.290M →
+  1.171M (−9.2%), buildings 22.9 → 21.6, relics −33%, residue −23% (both spent on
+  the extra hatching), contract expirations −16%, companions 19.8 → 20.0, three
+  seeds clearing Founder's Due either way, zero missed payments. No assertion
+  touched.
+- **The honest trade, stated rather than buried**: a guild that rests keeps
+  instability around 35, so the *deep* mutations (60 and up) no longer fire for
+  it and the deep species arrive by **hatching from deep floors** — which it now
+  reaches — instead of by transformation. Mutation past the early rungs became a
+  thing a player pays for by not resting. That is a real choice where there was a
+  latch, but it does mean the late tree is unexercised by the harness.
+- **Value chosen by measurement, not taste**: at 5 the meter flattens entirely
+  (`final_corruption_max` 529 → **5**) and nothing mutates at all; at 1 a campaign
+  assertion fires. 3 is the value that leaves the early tree alive
+  (`golemkin_warden` 6 on the roster) and the deep tree a choice.
+- The Journal's own guidance said *"Rest clears fatigue, stress, and injury"* and
+  is corrected, because a mechanic the game denies having is worse than one it
+  lacks.
+- **Guard**: a resting companion sheds exactly the authored relief and an idling
+  one sheds none, at a corruption well above every threshold so the mutation
+  check cannot be what moved the number. Verified by planting.
+
 **Second option taken, 2026-08-03 (twentieth pass): golemkin has an exit its own
 lineage can satisfy.** `golemkin_warden -> salamander_corekeeper` at 190
 corruption, requiring `commanding` and `corruption_tuned` — the two traits every

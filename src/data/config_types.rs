@@ -291,6 +291,21 @@ pub struct ConditionEffectData {
     /// without it the meters are a one-way ratchet.
     pub idle_fatigue_recovery: u32,
     pub idle_stress_recovery: u32,
+    /// Instability a **deliberate** day of rest settles.
+    ///
+    /// Instability had three writers, all `saturating_add`, and no reduction
+    /// path anywhere in the game: resting recovered fatigue, stress and injury
+    /// and left this climbing forever. That made every mutation threshold a
+    /// latch — the only question was which day it shut — and left the range
+    /// above the deepest threshold inert, several hundred points of a meter
+    /// doing nothing.
+    ///
+    /// Deliberately *not* paid by idling: standing around the hall does not
+    /// settle what the tower put in her, so holding a companion back from
+    /// changing species costs the player a day of her work rather than
+    /// happening by default.
+    #[serde(default)]
+    pub resting_corruption_recovery: u32,
 }
 
 /// How much a companion's role matters, and how much slack she has outside it.
@@ -347,6 +362,7 @@ fn default_condition_effects() -> ConditionEffectData {
         min_effectiveness_pct: 40,
         max_meter: 100,
         idle_fatigue_recovery: 6,
+        resting_corruption_recovery: 0,
         idle_stress_recovery: 4,
     }
 }

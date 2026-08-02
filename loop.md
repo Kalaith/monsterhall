@@ -1559,6 +1559,34 @@ Stop the loop and report if:
   debt), the unbounded event log in the save, and corruption's missing relief path,
   which is the last of the four options `TODO.md` parked for the roster monoculture.
 
+- **2026-08-03 — twenty-seventh pass (instability stops being a one-way meter).** Took
+  the third of the four options `TODO.md` parked for the roster monoculture, and the
+  last one nobody had tried: instability had three writers, all `saturating_add`, and no
+  reduction path anywhere in the game. New `condition_effects.resting_corruption_recovery`
+  (3) settles some on a **deliberate day of rest**, before that day's mutation check, so
+  resting her is how a player holds a companion back from changing species. Idling does
+  not pay it — standing around the hall recovers fatigue and stress, but what the tower
+  put in her costs a day of her work, or the lever is free.
+  **The value was measured, not chosen**: at 5 the meter flattens entirely
+  (`final_corruption_max` 529 → 5) and nothing mutates at all; at 1 a campaign assertion
+  fires; 3 keeps the early tree alive and makes the deep tree a choice.
+  **Result:** 133 tests (was 132), fmt and clippy clean, publish green,
+  `content_version` 1.30.0, `ui_text` 1.6.0. Single seed at day 365: **species on the
+  roster 6 → 11**, largest share 9/20 → 6/20, **floors walked 11 → 23**, hatches 29 →
+  53. Ten seeds: gold 1.290M → 1.171M (−9.2%), buildings 22.9 → 21.6, relics −33% and
+  residue −23% (both spent on the extra hatching), expirations −16%, companions 19.8 →
+  20.0, three seeds clearing Founder's Due either way, zero missed payments, no
+  assertion touched. Guard verified by planting.
+  **Next iteration should know:** (a) **the deep mutation tree is now unexercised by the
+  harness** — a resting guild sits around 35 instability, so everything authored at 60
+  and above (including the golemkin exit added in the twentieth pass) only fires for a
+  player who deliberately does not rest; that is the intended shape but it means the
+  late tree has no automated coverage, and a unit test per deep mutation would be worth
+  more than a balance run; (b) the deep species now reach the roster by **hatching**
+  rather than by transformation, so egg-pool weights matter more than they did — the
+  lineage-funnel table in `TODO.md` was measured under the old regime; (c) two recorded
+  slices remain, both engine-side: the `ui_text` migration and the unbounded event log.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

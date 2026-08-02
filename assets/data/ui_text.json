@@ -1,5 +1,5 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "common": {
     "settings_button": "Settings",
     "return_to_town_button": "Guild Hall",
@@ -204,7 +204,7 @@
     "onboarding_active_roster_lines": [
       "Guild jobs build companion skills and work history while tower stats still drive expedition success.",
       "Use Guild Hall for steady income and training, and Expedition Desk for eggs, materials, relics, and discoveries.",
-      "Rest clears fatigue, stress, and injury. Instability can open strange species paths over time."
+      "Rest clears fatigue, stress and injury, and settles a little instability. Left to climb, instability opens strange species paths - resting her is how you hold one back."
     ],
     "resources_eggs_label": "Eggs",
     "resources_relics_label": "Relics",

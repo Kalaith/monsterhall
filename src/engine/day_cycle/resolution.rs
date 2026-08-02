@@ -309,6 +309,15 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     data.config.day_cycle.base_injury_recovery
                         + building_bonus.injury_recovery_flat.max(0) as u32,
                 );
+                // The one path in the game that takes instability *off* a
+                // companion, and it runs before the mutation check below so a
+                // day spent resting her is a day she does not change species.
+                monster.corruption = monster.corruption.saturating_sub(
+                    data.config
+                        .day_cycle
+                        .condition_effects
+                        .resting_corruption_recovery,
+                );
                 monster.current_job = CompanionJobState::Idle;
 
                 summary.roster_updates.push(format!(

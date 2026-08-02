@@ -1,6 +1,6 @@
 {
   "title": "Monsterhall",
-  "content_version": "1.29.0",
+  "content_version": "1.30.0",
   "save_version": 10,
   "input": {
     "primary_mode": "mouse",
@@ -184,6 +184,7 @@
       "min_effectiveness_pct": 65,
       "max_meter": 100,
       "idle_fatigue_recovery": 6,
+      "resting_corruption_recovery": 3,
       "idle_stress_recovery": 4
     }
   }
