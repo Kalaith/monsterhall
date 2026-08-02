@@ -434,6 +434,18 @@ pub enum ContractStatus {
     Declined,
 }
 
+impl ContractStatus {
+    /// True while the contract is still part of the guild's workload — it can be
+    /// assigned, it counts against the offer limit, and it can still resolve.
+    ///
+    /// A resolved contract lingers for one turn so the player can read how it
+    /// went before it is swept up, and must be excluded everywhere the live
+    /// count matters.
+    pub fn is_live(&self) -> bool {
+        matches!(self, ContractStatus::Pending | ContractStatus::Accepted)
+    }
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(default)]
 pub struct ContractState {
@@ -596,6 +608,15 @@ pub struct GameState {
     pub active_contracts: Vec<ContractState>,
     pub monsters: Vec<CompanionState>,
     pub active_expedition: Option<ExpeditionState>,
+    /// Contracts that finished on the most recent resolved day, kept so the
+    /// desk can show how each one went.
+    ///
+    /// Deliberately a separate list rather than a lingering status inside
+    /// `active_contracts`: everything from the offer limit to the request-id
+    /// sequence to the guest-booking policy counts that vector, and a resolved
+    /// booking sitting in it changes all of them.
+    #[serde(default)]
+    pub resolved_contracts: Vec<ContractState>,
     pub story_progress: StoryProgressState,
     pub event_log: Vec<String>,
 }
@@ -613,5 +634,20 @@ impl SaveData {
             version,
             game_state,
         }
+    }
+}
+
+impl GameState {
+    /// Contracts that still count as workload. Resolved ones linger for a turn
+    /// so the desk can show their outcome, and must never inflate the offer
+    /// limit or the request-id sequence.
+    pub fn live_contracts(&self) -> impl Iterator<Item = &ContractState> {
+        self.active_contracts
+            .iter()
+            .filter(|request| request.status.is_live())
+    }
+
+    pub fn live_contract_count(&self) -> usize {
+        self.live_contracts().count()
     }
 }

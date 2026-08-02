@@ -505,7 +505,9 @@ fn remove_monster_for_roster_change(
     }
 
     for request in &mut game_state.active_contracts {
-        if request.assigned_monster_id.as_deref() == Some(monster_id) {
+        // A contract that already resolved keeps its outcome — releasing the
+        // companion afterwards must not put a finished booking back on the desk.
+        if request.status.is_live() && request.assigned_monster_id.as_deref() == Some(monster_id) {
             request.assigned_monster_id = None;
             request.status = crate::state::ContractStatus::Pending;
         }

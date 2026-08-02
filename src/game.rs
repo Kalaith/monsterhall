@@ -262,6 +262,8 @@ impl Game {
                     data,
                     app_settings,
                     cfg!(not(target_arch = "wasm32")),
+                    self.game_state.is_some()
+                        && !matches!(self.phase, GamePhase::MainMenu(_) | GamePhase::Loading(_)),
                     status_message,
                     self.last_error.is_some(),
                 )

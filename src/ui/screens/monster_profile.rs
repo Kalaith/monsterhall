@@ -5,8 +5,8 @@ use crate::state::{CompanionState, GameState, MonsterProfileState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_backdrop, draw_species_portrait, draw_trait_icons, BackdropKind};
 use crate::ui::chrome::{
-    draw_screen_header, draw_standard_gameplay_footer, draw_tier_panel, draw_top_utility_bar,
-    PanelTier,
+    draw_inline_status, draw_screen_header, draw_standard_gameplay_footer, draw_tier_panel,
+    draw_top_utility_bar, PanelTier,
 };
 use crate::ui::components::draw_metric_tile;
 use crate::ui::core::{draw_body_text, draw_body_text_in_box, utility_button};
@@ -134,12 +134,19 @@ pub fn draw_monster_profile(
         lower_h,
     );
 
+    // The profile carried a status message that no draw path ever read, so an
+    // assignment made from here reported nothing back. An error still wins the
+    // slot when there is one.
+    let status_y = (layout.footer_y - 34.0).max(lower_y + lower_h - 28.0);
     if let Some(error_message) = last_error {
-        draw_inline_error(
+        draw_inline_error(right_x, status_y, right_w, error_message);
+    } else {
+        draw_inline_status(
             right_x,
-            (layout.footer_y - 34.0).max(lower_y + lower_h - 28.0),
+            status_y,
             right_w,
-            error_message,
+            &profile_state.status_message,
+            theme::PRIMARY,
         );
     }
 

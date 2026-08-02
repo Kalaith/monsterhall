@@ -71,6 +71,7 @@ pub fn create_new_game_state(data: &GameData) -> GameState {
         active_contracts: Vec::new(),
         monsters,
         active_expedition: None,
+        resolved_contracts: Vec::new(),
         story_progress: StoryProgressState {
             opening_step: OpeningChapterStep::Camp,
             tower_hole_discovered: false,

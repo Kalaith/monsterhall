@@ -401,13 +401,23 @@ pub fn draw_town_management(
         theme::INFO,
     );
 
-    let _status_message = &town_state.status_message;
+    // An error is the more urgent thing to say, so it takes the slot when there
+    // is one. Otherwise the screen reports what the last action actually did —
+    // this message was being computed and thrown away.
     if let Some(error_message) = last_error {
         draw_inline_error(
             layout.detail_x + 260.0,
             338.0,
             layout.detail_w - 276.0,
             error_message,
+        );
+    } else {
+        draw_inline_status(
+            layout.detail_x + 260.0,
+            338.0,
+            layout.detail_w - 276.0,
+            &town_state.status_message,
+            theme::PRIMARY,
         );
     }
 

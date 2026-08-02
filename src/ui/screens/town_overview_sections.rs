@@ -431,13 +431,15 @@ pub(super) fn draw_priority_panel(
         16.0,
         theme::TEXT_BODY,
     );
-    let _status_message = &town_state.status_message;
     draw_organic_status(
         layout.left_margin + layout::PANEL_PADDING,
         layout.priority_y + 142.0,
         layout.priority_width - layout::PANEL_PADDING * 2.0,
         30.0,
-        &format!("Priority route: {}", priority.action_hint),
+        &format!(
+            "{} | Priority route: {}",
+            town_state.status_message, priority.action_hint
+        ),
         priority.color,
     );
     None

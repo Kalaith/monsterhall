@@ -32,7 +32,13 @@ pub fn draw_contract_desk(
         return None;
     }
 
-    if let Some(action) = draw_requests_panel(data, guest_state, &requests, &layout) {
+    if let Some(action) = draw_requests_panel(
+        data,
+        guest_state,
+        &requests,
+        &game_state.resolved_contracts,
+        &layout,
+    ) {
         return Some(action);
     }
     if let Some(action) = draw_selected_request_panel(

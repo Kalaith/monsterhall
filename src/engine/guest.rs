@@ -40,12 +40,9 @@ pub fn refresh_contracts(
     data: &GameData,
     game_state: &mut GameState,
 ) -> Result<ContractRefreshReport, String> {
-    game_state.active_contracts.retain(|request| {
-        matches!(
-            request.status,
-            ContractStatus::Pending | ContractStatus::Accepted
-        )
-    });
+    game_state
+        .active_contracts
+        .retain(|request| request.status.is_live());
 
     let mut candidate_templates = data
         .contracts
@@ -53,8 +50,7 @@ pub fn refresh_contracts(
         .iter()
         .filter(|template| {
             !game_state
-                .active_contracts
-                .iter()
+                .live_contracts()
                 .any(|request| request.template_id == template.id)
                 && request_template_available(data, game_state, template)
         })
@@ -66,9 +62,9 @@ pub fn refresh_contracts(
 
     let active_request_limit = active_contract_limit(game_state);
     let mut report = ContractRefreshReport::default();
-    let mut next_sequence = game_state.active_contracts.len() + 1;
+    let mut next_sequence = game_state.live_contract_count() + 1;
     for template in candidate_templates {
-        if game_state.active_contracts.len() >= active_request_limit {
+        if game_state.live_contract_count() >= active_request_limit {
             break;
         }
         let archetype = data
@@ -273,6 +269,9 @@ pub fn assign_monster_to_contract(
     if !report.is_eligible && !partial_success {
         return Err(report.failure_reasons.join(" "));
     }
+    if !game_state.active_contracts[request_index].status.is_live() {
+        return Err("That contract has already been resolved.".to_owned());
+    }
     if game_state.active_contracts.iter().any(|request| {
         request.request_id != request_id
             && request.assigned_monster_id.as_deref() == Some(monster_id)
@@ -297,6 +296,9 @@ pub fn clear_contract_assignment(
         .iter_mut()
         .find(|request| request.request_id == request_id)
         .ok_or_else(|| format!("Unknown contract id '{request_id}'."))?;
+    if !request.status.is_live() {
+        return Err("That contract has already been resolved.".to_owned());
+    }
     request.assigned_monster_id = None;
     request.status = ContractStatus::Pending;
     Ok(())
@@ -315,6 +317,7 @@ pub fn resolve_contracts(
     let mut serviced_monster_ids = HashSet::new();
     let mut remaining_requests = Vec::new();
     let mut follow_up_requests = Vec::new();
+    let mut resolved_contracts = Vec::new();
     let requests = std::mem::take(&mut game_state.active_contracts);
 
     for mut request in requests {
@@ -337,6 +340,8 @@ pub fn resolve_contracts(
                             .guest_missing_assigned_companion_event_template,
                         &[("{guest}", request.guest_name.clone())],
                     ));
+                    request.status = ContractStatus::Failed;
+                    resolved_contracts.push(request);
                     continue;
                 };
 
@@ -371,6 +376,8 @@ pub fn resolve_contracts(
                         .resources
                         .gold
                         .saturating_sub(request.penalty_gold);
+                    request.status = ContractStatus::Failed;
+                    resolved_contracts.push(request);
                     continue;
                 }
 
@@ -453,6 +460,8 @@ pub fn resolve_contracts(
                         follow_up_requests.push(follow_up);
                     }
                 }
+                request.status = ContractStatus::Completed;
+                resolved_contracts.push(request);
             }
             ContractStatus::Pending if request.deadline_day <= resolved_day => {
                 game_state.resources.gold = game_state
@@ -473,14 +482,19 @@ pub fn resolve_contracts(
                         ("{gold}", request.penalty_gold.to_string()),
                     ],
                 ));
+                request.status = ContractStatus::Failed;
+                resolved_contracts.push(request);
             }
             ContractStatus::Pending => remaining_requests.push(request),
+            // Swept a day after they resolved, which is what gives the player a
+            // turn to read the outcome on the contract desk.
             ContractStatus::Completed | ContractStatus::Failed | ContractStatus::Declined => {}
         }
     }
 
     remaining_requests.extend(follow_up_requests);
     game_state.active_contracts = remaining_requests;
+    game_state.resolved_contracts = resolved_contracts;
     serviced_monster_ids
 }
 

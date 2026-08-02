@@ -69,6 +69,7 @@ impl Game {
             UiAction::SetExpeditionPriority(priority) => {
                 self.open_expedition_planning(None, None, Some(priority))
             }
+            UiAction::ReturnToMainMenu => self.return_to_main_menu(),
             UiAction::OpenSettings => {
                 self.is_settings_open = true;
                 self.settings_status = None;
@@ -440,6 +441,22 @@ impl Game {
                 self.last_error = Some(message);
             }
         }
+    }
+
+    /// Leaves a running campaign for the main menu.
+    ///
+    /// Saves on the way out — a player who walks out of a campaign through a
+    /// settings panel is not asking to throw the day away, and there is no
+    /// confirmation prompt in front of this.
+    pub(super) fn return_to_main_menu(&mut self) {
+        self.persist_game_state();
+        if self.last_error.is_some() {
+            return;
+        }
+
+        self.is_settings_open = false;
+        self.settings_status = None;
+        self.phase = GamePhase::MainMenu(MainMenuState::new(save_exists(self.save_identifier())));
     }
 
     pub(super) fn autosave_game_state(&mut self) {

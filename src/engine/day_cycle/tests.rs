@@ -125,6 +125,7 @@ fn removing_last_monster_clears_expedition() {
             assigned_monster_ids: vec!["monster_001".to_owned()],
             started_day: 1,
         }),
+        resolved_contracts: Vec::new(),
         story_progress: StoryProgressState {
             opening_step: OpeningChapterStep::Complete,
             tower_hole_discovered: true,
@@ -187,6 +188,7 @@ fn release_monster_clears_assignments_without_emptying_roster() {
             assigned_monster_ids: vec!["monster_002".to_owned()],
             started_day: 1,
         }),
+        resolved_contracts: Vec::new(),
         story_progress: StoryProgressState::default(),
         event_log: Vec::new(),
     };
@@ -284,6 +286,7 @@ fn incubating_and_hatching_use_egg_inventory() {
         active_contracts: Vec::new(),
         monsters: Vec::new(),
         active_expedition: None,
+        resolved_contracts: Vec::new(),
         story_progress: StoryProgressState {
             opening_step: OpeningChapterStep::Complete,
             tower_hole_discovered: true,
@@ -465,6 +468,46 @@ fn a_room_only_rolls_the_work_it_can_actually_bank() {
             }
         }
     }
+}
+
+#[test]
+fn a_resolved_contract_never_re_enters_the_workload() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut monster = test_monster(Vec::new());
+    monster.id = "monster_001".to_owned();
+    let mut keeper = test_monster(Vec::new());
+    keeper.id = "monster_002".to_owned();
+    game_state.monsters = vec![monster, keeper];
+    game_state.resolved_contracts = vec![ContractState {
+        request_id: "contract_done".to_owned(),
+        status: ContractStatus::Completed,
+        assigned_monster_id: Some("monster_001".to_owned()),
+        ..ContractState::default()
+    }];
+
+    // The whole reason resolved contracts live in their own list: the offer
+    // limit, the request-id sequence and the booking policy all count
+    // `active_contracts`, and a finished booking sitting in it moves every one
+    // of them.
+    assert!(
+        game_state
+            .active_contracts
+            .iter()
+            .all(|request| request.status.is_live()),
+        "active_contracts must only ever hold live work"
+    );
+    assert_eq!(
+        game_state.live_contract_count(),
+        game_state.active_contracts.len()
+    );
+
+    // And releasing the companion afterwards must not put it back on the desk.
+    release_monster(&mut game_state, "monster_001").expect("release should work");
+    assert!(matches!(
+        game_state.resolved_contracts[0].status,
+        ContractStatus::Completed
+    ));
 }
 
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {

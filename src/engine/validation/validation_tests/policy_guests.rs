@@ -5,8 +5,7 @@ use super::*;
 
 pub(super) fn assign_guest_bookings(data: &GameData, game_state: &mut GameState) {
     let pending_request_ids = game_state
-        .active_contracts
-        .iter()
+        .live_contracts()
         .filter(|request| request.assigned_monster_id.is_none())
         .map(|request| request.request_id.clone())
         .collect::<Vec<_>>();

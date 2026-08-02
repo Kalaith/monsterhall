@@ -253,14 +253,16 @@ pub fn draw_expedition_planning(
             )
         })
         .unwrap_or_else(|| format!("{} assigned", assigned_count));
-    let _status_message = &expedition_state.status_message;
     draw_inline_status(
         layout.detail_x + 252.0,
         160.0,
         (layout.detail_w - 268.0).min(360.0),
         &format!(
-            "{} {} | {}",
-            expedition_text.difficulty_label, selected_floor.difficulty, plan_status
+            "{} | {} {} | {}",
+            expedition_state.status_message,
+            expedition_text.difficulty_label,
+            selected_floor.difficulty,
+            plan_status
         ),
         preview
             .as_ref()

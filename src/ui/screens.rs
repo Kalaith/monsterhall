@@ -128,10 +128,12 @@ pub fn draw_journal(
     journal::draw_journal(data, journal_state, game_state, last_error)
 }
 
+#[allow(clippy::too_many_arguments)]
 pub fn draw_settings_modal(
     data: &GameData,
     app_settings: &AppSettings,
     can_quit: bool,
+    can_return_to_main_menu: bool,
     status_message: Option<&str>,
     status_is_error: bool,
 ) -> Option<UiAction> {
@@ -139,6 +141,7 @@ pub fn draw_settings_modal(
         data,
         app_settings,
         can_quit,
+        can_return_to_main_menu,
         status_message,
         status_is_error,
     )

@@ -177,6 +177,7 @@ pub(super) fn draw_requests_panel(
     data: &GameData,
     guest_state: &ContractDeskState,
     requests: &[&crate::state::ContractState],
+    resolved: &[crate::state::ContractState],
     layout: &ContractDeskLayout,
 ) -> Option<UiAction> {
     draw_tier_panel(
@@ -199,7 +200,13 @@ pub(super) fn draw_requests_panel(
         theme::PRIMARY,
     );
 
+    // Yesterday's outcomes sit under the live offers rather than vanishing at
+    // day roll-over. `ContractStatus::Completed`/`Failed` had labels and colours
+    // that nothing could ever display until now.
     let max_visible_requests = ((layout.requests_h - 74.0) / 36.0).floor().max(1.0) as usize;
+    let resolved_rows = resolved.len().min(max_visible_requests.saturating_sub(1));
+    let max_visible_requests = max_visible_requests - resolved_rows;
+
     for (index, request) in requests.iter().take(max_visible_requests).enumerate() {
         let y = 166.0 + index as f32 * 36.0;
         let label = format!(
@@ -231,6 +238,24 @@ pub(super) fn draw_requests_panel(
         if pressed {
             return Some(UiAction::SelectContractRequest(request.request_id.clone()));
         }
+    }
+
+    for (index, request) in resolved.iter().take(resolved_rows).enumerate() {
+        let y = 166.0 + (requests.len().min(max_visible_requests) + index) as f32 * 36.0;
+        draw_inline_status(
+            layout.left_margin + 12.0,
+            y,
+            layout.requests_w - 24.0,
+            &format!(
+                "{} | {}",
+                request.guest_name,
+                guest_status_label(data, &request.status)
+            ),
+            match request.status {
+                ContractStatus::Completed => theme::POSITIVE,
+                _ => theme::DANGER,
+            },
+        );
     }
 
     None

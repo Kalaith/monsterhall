@@ -16,6 +16,7 @@ pub fn draw_settings_modal(
     data: &GameData,
     app_settings: &AppSettings,
     can_quit: bool,
+    can_return_to_main_menu: bool,
     status_message: Option<&str>,
     status_is_error: bool,
 ) -> Option<UiAction> {
@@ -25,7 +26,10 @@ pub fn draw_settings_modal(
     let settings_text = &data.ui_text.settings;
 
     let panel_width = 560.0;
-    let panel_height = if can_quit { 514.0 } else { 474.0 };
+    let mut panel_height = if can_quit { 514.0 } else { 474.0 };
+    if can_return_to_main_menu {
+        panel_height += 40.0;
+    }
     let panel_x = screen_width() * 0.5 - panel_width * 0.5;
     let panel_y = screen_height() * 0.5 - panel_height * 0.5;
 
@@ -160,16 +164,35 @@ pub fn draw_settings_modal(
         return Some(UiAction::CloseSettings);
     }
 
+    // Escape opens this modal from anywhere, which makes it the one place a
+    // player can reliably reach from a running campaign. The route back to the
+    // menu belongs here; `main_menu_button` was authored and never drawn.
+    let mut bottom_y = panel_y + panel_height - 42.0;
     if can_quit
         && utility_button(
             panel_x + layout::PANEL_PADDING,
-            panel_y + panel_height - 42.0,
+            bottom_y,
             panel_width - layout::PANEL_PADDING * 2.0,
             layout::UTILITY_BUTTON_H,
             &common_text.quit_game_button,
         )
     {
         return Some(UiAction::QuitGame);
+    }
+    if can_quit {
+        bottom_y -= 40.0;
+    }
+
+    if can_return_to_main_menu
+        && utility_button(
+            panel_x + layout::PANEL_PADDING,
+            bottom_y,
+            panel_width - layout::PANEL_PADDING * 2.0,
+            layout::UTILITY_BUTTON_H,
+            &common_text.main_menu_button,
+        )
+    {
+        return Some(UiAction::ReturnToMainMenu);
     }
 
     None

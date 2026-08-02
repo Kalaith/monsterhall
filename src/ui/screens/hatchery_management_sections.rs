@@ -100,8 +100,6 @@ pub(super) fn draw_status_panel(
         PanelTier::Support,
         false,
     );
-    let _status_message = &chamber_state.status_message;
-
     draw_metric_tile(
         layout.left_margin + layout::PANEL_PADDING,
         112.0,
@@ -117,7 +115,8 @@ pub(super) fn draw_status_panel(
         126.0,
         layout.content_width - 144.0,
         &format!(
-            "{}: {}",
+            "{} | {}: {}",
+            chamber_state.status_message,
             chamber_text.sources_label,
             egg_origin_summary(game_state, data)
         ),

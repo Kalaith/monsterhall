@@ -323,8 +323,7 @@ pub(crate) fn contract_follow_up_request(
         .find(|template| template.id == completed_request.template_id)?;
     let follow_up_id = completed_template.follow_up_request_id.as_deref()?;
     if game_state
-        .active_contracts
-        .iter()
+        .live_contracts()
         .any(|request| request.template_id == follow_up_id)
     {
         return None;
@@ -542,7 +541,7 @@ fn request_from_template(
     ContractState {
         request_id: format!(
             "contract_{:03}_chain_{chain_depth}",
-            game_state.current_day as usize * 10 + game_state.active_contracts.len() + 1
+            game_state.current_day as usize * 10 + game_state.live_contract_count() + 1
         ),
         template_id: template.id.clone(),
         category: template.category.clone(),

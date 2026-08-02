@@ -112,7 +112,7 @@ pub(super) fn pending_eggs_cover_workforce_demand(game_state: &GameState) -> boo
 }
 
 pub(super) fn workforce_demand(game_state: &GameState) -> usize {
-    let guest_coverage = game_state.active_contracts.len();
+    let guest_coverage = game_state.live_contract_count();
     let room_coverage = usize::from(game_state.town.town_job_limit);
     let expedition_coverage = if game_state.town.unlocked_floor_ids.is_empty() {
         0

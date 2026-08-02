@@ -10,6 +10,8 @@ pub enum UiAction {
     BuildOpeningRoom,
     ResolveOpeningClient,
     QuitGame,
+    /// Leave a running campaign for the main menu. Saves on the way out.
+    ReturnToMainMenu,
     SaveGame,
     OpenGuildHallManagement,
     OpenContractDesk,
