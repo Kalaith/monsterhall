@@ -1503,6 +1503,35 @@ Stop the loop and report if:
   recorded `ui_text` migration; (c) the day-results screen has still never been
   photographed with a **partial** contract completion in it.
 
+- **2026-08-03 — twenty-fifth pass (a portrait that drew across the card).** Followed
+  the last note: the capture harness cloned one species twenty times, so wage, role,
+  stats, portrait and every floor's `required_roster` photographed identical.
+  `fill_roster_for_capture` cycles the species catalogue now, carrying each species'
+  stat block and starting traits, because a companion wears the block she hatched with.
+  The first mixed capture showed the find at once: `draw_species_portrait`'s four
+  trailing limbs — drawn for lamia and golemkin only — were authored in **absolute
+  pixels** (18 apart, 28 at the bottom, ±12 of sway) while every other shape in that
+  portrait is a fraction of its box. That fits the profile's large art and runs ~40px
+  past the right edge of the 72px roster-card portrait, straight through her own skills
+  and bond on the main screen. Two of twelve species carry those limbs, so no capture
+  could show it while the roster held one kind of creature. Scaled and clamped now, with
+  `trailing_limbs` extracted as a pure function and a test asserting every coordinate
+  stays inside the frame from width 48 to 220 — verified by planting the pixel offsets,
+  which fires at 48.
+  **Result:** 131 tests (was 130), fmt and clippy clean, publish green, **balance
+  byte-identical** — capture harness and drawing only, no data file touched. The varied
+  roster also *confirmed* the two previous passes: the expedition card now reads
+  `delver | Pow 9 End 9 Ins 6` beside `instability adept | Pow 4 End 4 Ins 11`, and
+  guild-job scores spread 91–127 with wages moving by species for the first time in a
+  capture.
+  **Next iteration should know:** (a) the harness now varies rank, training, standing
+  and species — what it still cannot produce is a **damaged or mutated** roster
+  (fatigue, stress, injury and corruption are all zero on every copy), so the condition
+  badges, the worn notes added in the last two passes and anything corruption-gated have
+  still never been photographed carrying a number; (b) the day-results screen has still
+  never been seen with a **partial** contract completion in it; (c) untaken slices
+  unchanged: `ui_text` migration, unbounded event log, corruption's missing relief path.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

@@ -212,6 +212,39 @@ mutation and the check names golemkin).
   is a `corruption_adept` exactly like the warden she replaces. Variety means a
   different *role*, not a different name.
 
+### Found by review, not by the audit (2026-08-03, twenty-fifth pass)
+
+Took the last pass's own note: the harness cloned **one species** twenty times, so
+everything that keys off species — wage, role, stats, portrait, every floor's
+`required_roster` — photographed identical. `fill_roster_for_capture` now cycles
+the species catalogue and carries each one's stat block and starting traits,
+because a companion wears the block she hatched with and a slime with a
+gargoyle's name is a creature the game cannot produce.
+
+- ~~Every golemkin and lamia on the Town Overview drew a line straight through
+  her own skills and bond.~~ Fixed, and the first mixed-species capture showed it
+  immediately. `draw_species_portrait`'s four trailing limbs were authored in
+  **absolute pixels** — 18 apart at the top, 28 at the bottom, ±12 of sway —
+  while every other shape in that portrait is a fraction of its box. That fits
+  the profile screen's large art and runs about **forty pixels past the right
+  edge** of the 72-pixel portrait on a roster card, across the text beside it.
+  Two of the twelve species carry those limbs, so a capture could only ever show
+  it once the roster held more than one kind of creature.
+
+  They scale with the portrait now and are clamped inside it. **Guard**:
+  `trailing_limbs` is a pure function and a test asserts every coordinate stays
+  inside the frame at widths from 48 to 220 and across seeds — verified by
+  planting the pixel offsets back, which fires at width 48.
+
+- **What the varied roster confirms rather than fixes**: the Expedition Desk card
+  added last pass now reads `delver | Pow 9 End 9 Ins 6` against
+  `instability adept | Pow 4 End 4 Ins 11` — a real choice where there were
+  twenty identical cards. Guild Jobs scores spread 91–127 and wages moved with
+  species, which is the wage mechanic showing up in a capture for the first time.
+
+- **Balance byte-identical**; capture-harness and drawing only, no data file
+  touched.
+
 ### Found by review, not by the audit (2026-08-03, twenty-fourth pass)
 
 Re-read the crowded screens now that the harness fills the roster with a *varied*

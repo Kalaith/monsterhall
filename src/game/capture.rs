@@ -114,6 +114,18 @@ impl Game {
             copy.work_history.scouting_runs = template.work_history.scouting_runs * step;
             copy.work_history.hospitality_jobs = template.work_history.hospitality_jobs * step;
             copy.work_history.contracts_completed = step;
+            // And one species twenty times over is the same blindness one level
+            // down: wage, role, stats, portrait and every floor's
+            // `required_roster` all key off species, and a capture of twenty
+            // slimes cannot show any of it. The stats and traits come with the
+            // species, because a companion carries the block she hatched with —
+            // a slime wearing a gargoyle's name would photograph a creature the
+            // game cannot produce.
+            if let Some(species) = data.species.species.get(index % data.species.species.len()) {
+                copy.species_id = species.id.clone();
+                copy.stats = species.base_stats.clone();
+                copy.trait_ids = species.starting_traits.clone();
+            }
             game_state.monsters.push(copy);
         }
 

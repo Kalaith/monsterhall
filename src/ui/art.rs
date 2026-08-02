@@ -429,18 +429,51 @@ pub fn draw_species_portrait(
         );
     }
     if monster.species_id.contains("lamia") || monster.species_id.contains("golemkin") {
-        for i in 0..4 {
-            let sway = (i as f32 * 31.0 + (seed % 17) as f32).sin() * 12.0;
+        for limb in trailing_limbs(x, y, w, h, seed) {
             draw_line(
-                x + w * 0.42 + i as f32 * 18.0,
-                y + h * 0.62,
-                x + w * 0.28 + i as f32 * 28.0 + sway,
-                y + h * 0.9,
-                6.0,
+                limb.start_x,
+                limb.start_y,
+                limb.end_x,
+                limb.end_y,
+                limb.thickness,
                 Color::new(accent.r, accent.g, accent.b, 0.68),
             );
         }
     }
+}
+
+/// One of the four trailing limbs a lamia or golemkin portrait draws.
+pub(crate) struct PortraitLimb {
+    pub start_x: f32,
+    pub start_y: f32,
+    pub end_x: f32,
+    pub end_y: f32,
+    pub thickness: f32,
+}
+
+/// Where those limbs go, as fractions of the portrait rather than in pixels.
+///
+/// They were authored in absolute pixels — 18 apart at the top, 28 at the
+/// bottom, with 12 of sway — which fits the profile screen's large portrait and
+/// runs roughly forty pixels past the right edge of the 72-pixel portrait on a
+/// roster card. Every golemkin and lamia on the Town Overview drew a line
+/// straight through her own skills and bond. No capture could show it until the
+/// harness stopped filling the roster with twenty of one species.
+pub(crate) fn trailing_limbs(x: f32, y: f32, w: f32, h: f32, seed: u32) -> Vec<PortraitLimb> {
+    let inset = w * 0.08;
+    let inside = |value: f32| value.clamp(x + inset, x + w - inset);
+    (0..4)
+        .map(|index| {
+            let sway = (index as f32 * 31.0 + (seed % 17) as f32).sin() * w * 0.08;
+            PortraitLimb {
+                start_x: inside(x + w * 0.42 + index as f32 * w * 0.12),
+                start_y: y + h * 0.62,
+                end_x: inside(x + w * 0.28 + index as f32 * w * 0.19 + sway),
+                end_y: y + h * 0.9,
+                thickness: (w * 0.04).clamp(2.0, 6.0),
+            }
+        })
+        .collect()
 }
 
 pub fn draw_guest_silhouette(request: &ContractState, x: f32, y: f32, w: f32, h: f32) {
@@ -612,5 +645,36 @@ pub fn draw_condition_badges(monster: &CompanionState, x: f32, y: f32, w: f32) {
             y + 19.0,
             TextStyle::new(18.0, theme::TEXT_BODY).params(),
         );
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::trailing_limbs;
+
+    /// A portrait must stay inside its own frame at every size a screen draws
+    /// it, from the 72-pixel roster card to the profile's large art.
+    #[test]
+    fn trailing_limbs_stay_inside_the_portrait() {
+        for width in [48.0_f32, 60.0, 72.0, 96.0, 150.0, 220.0] {
+            let height = width * 1.2;
+            for seed in [0_u32, 3, 7, 11, 16, 99] {
+                for limb in trailing_limbs(10.0, 20.0, width, height, seed) {
+                    for value in [limb.start_x, limb.end_x] {
+                        assert!(
+                            value >= 10.0 && value <= 10.0 + width,
+                            "limb at x={value} left a portrait of width {width} spanning 10..{}",
+                            10.0 + width
+                        );
+                    }
+                    for value in [limb.start_y, limb.end_y] {
+                        assert!(
+                            value >= 20.0 && value <= 20.0 + height,
+                            "limb at y={value} left a portrait of height {height}"
+                        );
+                    }
+                }
+            }
+        }
     }
 }
