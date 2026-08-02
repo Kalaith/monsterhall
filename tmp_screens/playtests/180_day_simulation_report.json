@@ -15,6 +15,12 @@
   "final_average_reputation": 236.47368421052633,
   "final_graded_eggs": 15,
   "final_role_diversity": 2,
+  "final_species_counts": {
+    "golemkin_warden": 17,
+    "harpy_lookout": 1,
+    "moth_archivist": 1
+  },
+  "final_corruption_max": 457,
   "final_town_projects": 0,
   "sink_absorbed": {
     "gold": 0,

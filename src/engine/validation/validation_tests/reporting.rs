@@ -1,5 +1,7 @@
+use std::collections::BTreeMap;
+
 use super::*;
-use crate::state::{CompanionState, GameState};
+use crate::state::GameState;
 
 #[derive(Default, Debug, Serialize, Clone)]
 pub(super) struct SimulationResourcesSnapshot {
@@ -180,6 +182,17 @@ pub(super) struct SimulationReport {
     pub(super) final_average_reputation: f64,
     pub(super) final_graded_eggs: usize,
     pub(super) final_role_diversity: usize,
+    /// What the roster is actually made of, and how far corruption ran.
+    ///
+    /// Mutation rewrites a companion's species mid-campaign, so the roster the
+    /// player ends with is not the roster they hatched, and nothing in these
+    /// reports showed that. On the deterministic seed 18 of 20 companions end
+    /// as `golemkin_warden` while ten unlocked species hold nobody at all —
+    /// visible only by running the probe by hand. `final_corruption_max` is the
+    /// companion piece: the highest mutation threshold in the catalogue is 100
+    /// and the campaign reaches several hundred, so most of that range is inert.
+    pub(super) final_species_counts: BTreeMap<String, usize>,
+    pub(super) final_corruption_max: u32,
     pub(super) final_town_projects: usize,
     /// What the repeatable sinks absorbed, against what they could ever absorb.
     ///
@@ -314,33 +327,41 @@ pub(super) fn graded_egg_count(game_state: &GameState) -> usize {
         .count()
 }
 
-pub(super) fn role_diversity(game_state: &GameState) -> usize {
+/// Delegates to `engine::monster_role` rather than classifying again.
+///
+/// This module used to carry its own copy of that branching — the third in the
+/// codebase, after the engine's and the profile screen's. It had already
+/// drifted: the engine scores on `effective_stats`, which includes trait
+/// `stat_modifiers`, and this copy read the raw `monster.stats` those modifiers
+/// adjust. So a companion whose traits pushed charm past power was a performer
+/// in play and a delver in every report — the harness measuring role diversity
+/// with arithmetic the game does not use.
+pub(super) fn species_counts(game_state: &GameState) -> BTreeMap<String, usize> {
+    let mut counts = BTreeMap::new();
+    for monster in &game_state.monsters {
+        *counts.entry(monster.species_id.clone()).or_insert(0) += 1;
+    }
+    counts
+}
+
+pub(super) fn corruption_max(game_state: &GameState) -> u32 {
+    game_state
+        .monsters
+        .iter()
+        .map(|monster| monster.corruption)
+        .max()
+        .unwrap_or(0)
+}
+
+pub(super) fn role_diversity(data: &GameData, game_state: &GameState) -> usize {
     let mut roles = game_state
         .monsters
         .iter()
-        .map(monster_validation_role)
+        .map(|monster| crate::engine::monster_role(data, monster))
         .collect::<Vec<_>>();
     roles.sort_unstable();
     roles.dedup();
     roles.len()
-}
-
-fn monster_validation_role(monster: &CompanionState) -> &'static str {
-    if monster.corruption >= 10 || monster.trait_ids.iter().any(|id| id == "corruption_tuned") {
-        "corruption"
-    } else if monster.work_history.hatchery_assists > 0
-        || monster.trait_ids.iter().any(|id| id == "hatchery_attuned")
-    {
-        "hatchery"
-    } else if monster.skills.charm >= 2 || monster.stats.charm >= monster.stats.power + 2 {
-        "performer"
-    } else if monster.stats.power >= monster.stats.charm + 2 {
-        "delver"
-    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "calming_presence") {
-        "comfort"
-    } else {
-        "versatile"
-    }
 }
 
 pub(super) fn max_active_contracts(report: &SimulationReport) -> usize {
@@ -416,7 +437,7 @@ pub(super) fn build_day_report(
         average_bond: average_bond(game_state),
         average_reputation: average_reputation(game_state),
         graded_eggs: graded_egg_count(game_state),
-        role_diversity: role_diversity(game_state),
+        role_diversity: role_diversity(data, game_state),
         town_projects: game_state.town.completed_project_ids.len(),
         active_situations: game_state.town.active_situations.len(),
         guild_job_workers_assigned: policy_metrics.guild_job_workers_assigned,

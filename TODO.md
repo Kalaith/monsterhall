@@ -27,7 +27,79 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 - ~~`event_tags` encode intended gating that no code applies.~~ Investigated and resolved differently: the gating **is** applied, just not by the tags. Every one of the 23 tier/late_game-tagged events is already `required_building_ids`-gated (23/23), and the `min_day` bands are tight and monotonic — tier_1 at days 8–20, tier_2 at 20–30, tier_3 at 45–55, late_game at 140–230. You cannot get the archive event without the archive. The tags are a taxonomy describing that gating rather than a second gate, and mapping `tier_N` onto patron tiers was a dead end anyway: only three tiers exist against four tags. So they are now checked documentation — load-time validation rejects a tier/late_game tag on an event nothing gates, and a `late_game` tag on an event that can fire before day 100.
 - ~~Patron archetype `spawn_weight` and `tags` never influence contract generation.~~ Done, though not the way it was first written. `spawn_weight` now scales `request_pressure_priority`, so rarer patrons lose ties and fall off a full board first. The literal reading — weighted random draw without replacement — was built twice and rejected on measurement both times: the campaign is tuned around a best-first board, and flattening it cost enough income that the single-seed run stopped reaching its final debt milestone (only `tribute_cart_5` with flat weighting, `broker_compact_6` with the pressure term squared). Variety in the offer board is worth having, but it needs the economy retuned around it, not bolted on. `tags` now carry a guard: an archetype tagged `special` whose contracts are not `is_special` is rejected at load, because that silently costs the story flag and the priority bonus.
 
+### Open design question: mutation collapses the roster onto one species
+
+Measured, not guessed. Every simulation report now carries
+`final_species_counts` and `final_corruption_max`, because the newest gameplay
+system — corruption rewriting a companion's species mid-campaign — was the one
+thing the reports did not track at all. What they show:
+
+| Day | Roster | Composition | Corruption max |
+| --- | --- | --- | --- |
+| 90 | 14 | **golemkin_warden 12**, residue_slime 1, slime_companion 1 | 169 |
+| 180 | 19 | **golemkin_warden 17**, harpy_lookout 1, moth_archivist 1 | 457 |
+| 365 | 20 | **golemkin_warden 18**, minotaur_porter 1, wyrm_registrar 1 | 494 |
+
+`final_role_diversity` has read **1** on the 365-day report all along — the
+report was already saying the roster had collapsed to a single role and nothing
+asserted on it.
+
+Two mechanical causes, both visible in the data:
+
+- **The entry thresholds are trivial against the corruption a campaign
+  reaches.** `slime -> residue_slime` at 8 and `residue_slime -> golemkin` at 16,
+  against a corruption max of 169 by day 90. Every slime becomes a golemkin
+  almost immediately.
+- **Golemkin is terminal for that route.** Its only exit,
+  `golemkin_warden -> gargoyle_stairwarden` at 100, requires `commanding` *and*
+  `resilient`. The slime/residue lineage accumulates
+  `{stretchy, eager, corruption_tuned, commanding}` — never `resilient`. Only
+  the `minotaur_porter` route supplies it, and that mutation needs 90 corruption
+  of its own.
+
+Consequences worth weighing: ten unlocked species hold nobody at day 365, so the
+ten contracts requiring a specific species are unfulfillable in practice even
+though every one passes the static reachability check. Corruption above 100 does
+nothing at all — the highest threshold in the catalogue — so roughly 400 points
+of its range are inert, the same runaway that `max_meter` was added to stop for
+fatigue and stress.
+
+**This is a balance decision, not a bug fix, so it is left for a deliberate
+call.** The options measurement cannot choose between: raise the early
+thresholds so the first two steps are a mid-campaign event rather than a
+formality; give golemkin an exit its own lineage can satisfy; give corruption a
+relief mechanism (it currently has *three* writers, all `saturating_add`, and no
+reduction path anywhere in the codebase — resting recovers fatigue, stress and
+injury but not this); or accept that the tower turns everyone to stone and say so
+in the spec.
+
+What was fixed this pass is the measurement, not the balance: the collapse is
+now in every report instead of only visible by running the probe by hand.
+
 ### Found by review, not by the audit (2026-08-02)
+
+- ~~A third copy of the role classifier, in the validation harness.~~ Fixed.
+  Two passes ago `monster_depth_role_label` was folded into `engine::monster_role`
+  and a sweep declared the shape gone; that sweep compared `src/ui` against
+  `src/engine` and this copy lives *inside* `src/engine/validation`, so it never
+  appeared. It had already drifted in the way that matters: the engine scores on
+  `effective_stats`, which includes trait `stat_modifiers`, and
+  `monster_validation_role` read the raw `monster.stats` those modifiers adjust.
+  So the harness computed `final_role_diversity` — the metric every balance
+  judgement here rests on — with arithmetic the game does not use. It delegates
+  now.
+- ~~A mutation could require traits no companion reaching it can hold.~~ Guarded.
+  `try_apply_mutation` adds the target species' `starting_traits` *and* the
+  mutation's `granted_trait_ids`, so a companion's traits depend on her whole
+  lineage rather than her current species — which makes the requirement easy to
+  author against the wrong set. `validate_mutation_traits_are_reachable` walks
+  the lineage graph from every hatchable species and rejects a requirement no
+  reachable trait set satisfies. It passes today, but only just:
+  `golemkin_warden -> gargoyle_stairwarden` is reachable solely through the
+  `minotaur_porter` route, and deleting or retargeting that one entry would
+  silently strand it. Verified by planting exactly that edit and watching the
+  guard name the mutation and the two traits.
+
 
 - ~~Saved display settings were loaded without any validation.~~ Fixed. The
   default path in `load_or_default_settings` looks `default_resolution_id` up in

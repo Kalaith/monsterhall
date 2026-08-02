@@ -15,6 +15,12 @@
   "final_average_reputation": 576.9,
   "final_graded_eggs": 0,
   "final_role_diversity": 1,
+  "final_species_counts": {
+    "golemkin_warden": 18,
+    "minotaur_porter": 1,
+    "wyrm_registrar": 1
+  },
+  "final_corruption_max": 494,
   "final_town_projects": 0,
   "sink_absorbed": {
     "gold": 0,

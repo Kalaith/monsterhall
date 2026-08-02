@@ -139,7 +139,85 @@ impl GameData {
                 ));
             }
         }
-        self.validate_mutation_chains()
+        self.validate_mutation_chains()?;
+        self.validate_mutation_traits_are_reachable()
+    }
+
+    /// A mutation may only require traits a companion standing at its source
+    /// species could actually be holding.
+    ///
+    /// `try_apply_mutation` adds the target species' `starting_traits` *and* the
+    /// mutation's `granted_trait_ids`, so which traits a companion carries
+    /// depends on the whole lineage that brought her there, not on her current
+    /// species alone. That makes the requirement easy to author against the
+    /// wrong set: `golemkin_warden -> gargoyle_stairwarden` needs `commanding`
+    /// and `resilient`, and of the two ways to become a golemkin only the
+    /// `minotaur_porter` route supplies `resilient` — the common
+    /// slime/residue route never does. The mutation is one edit away from being
+    /// unreachable with nothing to say so, which is how
+    /// `corekeeper_sending_vigil` shipped permanently unfulfillable.
+    ///
+    /// Walks the lineage graph from every hatchable species and fails if no
+    /// reachable trait set satisfies a mutation's requirement.
+    fn validate_mutation_traits_are_reachable(&self) -> Result<(), String> {
+        let mut reachable: Vec<(String, Vec<String>)> = self
+            .species
+            .species
+            .iter()
+            .map(|species| (species.id.clone(), sorted(&species.starting_traits)))
+            .collect();
+
+        // Each mutation adds at most one new state per existing state, and the
+        // graph is a strictly ascending tree (checked above), so this settles.
+        let mut index = 0;
+        while index < reachable.len() {
+            let (species_id, traits) = reachable[index].clone();
+            index += 1;
+            for mutation in &self.mutations.mutations {
+                if mutation.source_species_id != species_id
+                    || !mutation
+                        .required_trait_ids
+                        .iter()
+                        .all(|trait_id| traits.contains(trait_id))
+                {
+                    continue;
+                }
+                let Some(target) = self
+                    .species
+                    .species
+                    .iter()
+                    .find(|species| species.id == mutation.target_species_id)
+                else {
+                    continue;
+                };
+                let mut next = traits.clone();
+                next.extend(target.starting_traits.iter().cloned());
+                next.extend(mutation.granted_trait_ids.iter().cloned());
+                next.sort();
+                next.dedup();
+                let state = (target.id.clone(), next);
+                if !reachable.contains(&state) {
+                    reachable.push(state);
+                }
+            }
+        }
+
+        for mutation in &self.mutations.mutations {
+            let satisfiable = reachable.iter().any(|(species_id, traits)| {
+                species_id == &mutation.source_species_id
+                    && mutation
+                        .required_trait_ids
+                        .iter()
+                        .all(|trait_id| traits.contains(trait_id))
+            });
+            if !satisfiable {
+                return Err(format!(
+                    "mutation '{}' requires {:?}, which no companion who has become '{}' can ever hold.",
+                    mutation.id, mutation.required_trait_ids, mutation.source_species_id
+                ));
+            }
+        }
+        Ok(())
     }
 
     /// Corruption only ever climbs, and `try_apply_mutation` runs every day, so
@@ -171,4 +249,11 @@ impl GameData {
         }
         Ok(())
     }
+}
+
+fn sorted(traits: &[String]) -> Vec<String> {
+    let mut sorted = traits.to_vec();
+    sorted.sort();
+    sorted.dedup();
+    sorted
 }

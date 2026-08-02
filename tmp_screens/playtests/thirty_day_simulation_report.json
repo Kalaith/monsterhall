@@ -17,6 +17,10 @@
   "final_average_reputation": 28.142857142857142,
   "final_graded_eggs": 6,
   "final_role_diversity": 2,
+  "final_species_counts": {
+    "slime_companion": 7
+  },
+  "final_corruption_max": 5,
   "final_town_projects": 0,
   "sink_absorbed": {
     "gold": 0,
