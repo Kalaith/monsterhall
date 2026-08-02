@@ -424,11 +424,26 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                 monster.injury = monster
                     .injury
                     .saturating_sub(data.config.day_cycle.base_injury_recovery);
+                // A companion with nothing booked still spends the day off her
+                // feet. Slower than the Resting assignment, but it stops the
+                // meters being a one-way ratchet for anyone the player never
+                // explicitly parks.
+                let condition = &data.config.day_cycle.condition_effects;
+                monster.fatigue = monster
+                    .fatigue
+                    .saturating_sub(condition.idle_fatigue_recovery);
+                monster.stress = monster
+                    .stress
+                    .saturating_sub(condition.idle_stress_recovery);
                 if let Some(mutation_text) = try_apply_mutation(data, monster) {
                     summary.roster_updates.push(mutation_text);
                 }
             }
         }
+    }
+
+    for monster in &mut game_state.monsters {
+        clamp_condition_meters(&data.config.day_cycle, monster);
     }
 
     for (floor_id, egg_species_entries, egg_gain, grade_score) in pending_egg_rewards {

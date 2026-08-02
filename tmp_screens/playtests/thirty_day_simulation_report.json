@@ -23,7 +23,7 @@
   "total_guest_expirations": 2,
   "total_contracts_generated": 21,
   "total_contracts_rejected": 0,
-  "total_guild_job_gold": 4372,
+  "total_guild_job_gold": 4256,
   "total_expedition_prep_gold": 90,
   "total_expedition_prep_materials": 6,
   "total_expedition_prep_arcane_residue": 0,
@@ -43,11 +43,11 @@
   "last_expedition_day": 29,
   "total_expedition_eggs": 12,
   "final_resources": {
-    "gold": 182,
+    "gold": 66,
     "tower_materials": 1527,
     "eggs": 6,
     "relics": 0,
-    "arcane_residue": 674
+    "arcane_residue": 641
   },
   "final_debt": {
     "active_milestone_id": "scrap_note_1",
@@ -77,20 +77,20 @@
       "arcane_residue": 19
     },
     "ending_resources": {
-      "gold": 182,
+      "gold": 66,
       "tower_materials": 1527,
       "eggs": 6,
       "relics": 0,
-      "arcane_residue": 674
+      "arcane_residue": 641
     },
     "net_change": {
-      "gold": 39,
+      "gold": -77,
       "tower_materials": 1487,
       "eggs": 6,
       "relics": 0,
-      "arcane_residue": 655
+      "arcane_residue": 622
     },
-    "debt_gold_gap": -93,
+    "debt_gold_gap": -209,
     "upkeep_shortfall_gold": 0,
     "expedition_prep_shortfall": 0
   },
@@ -106,11 +106,11 @@
       "reputation_proxy": 1,
       "active_contracts": 4,
       "resources": {
-        "gold": 182,
+        "gold": 66,
         "tower_materials": 1527,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 674
+        "arcane_residue": 641
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -488,8 +488,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 24,
-      "guild_job_arcane_residue": 4,
+      "guild_job_gold": 23,
+      "guild_job_arcane_residue": 3,
       "expedition_prep_gold": 5,
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
@@ -555,11 +555,11 @@
         ]
       },
       "resources": {
-        "gold": 106,
+        "gold": 105,
         "tower_materials": 178,
         "eggs": 7,
         "relics": 0,
-        "arcane_residue": 53
+        "arcane_residue": 52
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -571,8 +571,8 @@
       "day_summary": [
         "Paid 11 gold in upkeep: 11 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 26 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Local Delver Contract completed: +23 gold, +3 residue.",
+        "Mira completed a contract for 23 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: hospitality +1, completed contracts +1.",
         "Nessa returned from Slick Cellars with fresh loot.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
@@ -668,11 +668,11 @@
         ]
       },
       "resources": {
-        "gold": 92,
+        "gold": 91,
         "tower_materials": 261,
         "eggs": 7,
         "relics": 0,
-        "arcane_residue": 58
+        "arcane_residue": 57
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -713,8 +713,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 151,
-      "guild_job_arcane_residue": 23,
+      "guild_job_gold": 150,
+      "guild_job_arcane_residue": 22,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -780,11 +780,11 @@
         ]
       },
       "resources": {
-        "gold": 200,
+        "gold": 198,
         "tower_materials": 262,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 78
+        "arcane_residue": 76
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -796,8 +796,8 @@
       "day_summary": [
         "Paid 18 gold in upkeep: 18 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 24 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Local Delver Contract completed: +23 gold, +3 residue.",
+        "Mira completed a contract for 23 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1, Scouting +1. History: scouting runs +1, hospitality +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Zia worked the Common Room as a hospitality job for 127 gold, 1 materials, 19 arcane residue, and 1 prep quality.",
@@ -827,8 +827,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 48,
-      "guild_job_arcane_residue": 9,
+      "guild_job_gold": 46,
+      "guild_job_arcane_residue": 8,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -894,11 +894,11 @@
         ]
       },
       "resources": {
-        "gold": 230,
+        "gold": 226,
         "tower_materials": 262,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 87
+        "arcane_residue": 84
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -910,9 +910,9 @@
       "day_summary": [
         "Paid 18 gold in upkeep: 18 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 23 days.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
+        "Local Delver Contract completed: +24 gold, +4 residue.",
         "Local Delver Contract completed: +22 gold, +4 residue.",
-        "Mira completed a contract for 26 gold.",
+        "Mira completed a contract for 24 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1, hospitality +1.",
         "Zia completed a contract for 22 gold.",
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
@@ -942,8 +942,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 155,
-      "guild_job_arcane_residue": 24,
+      "guild_job_gold": 153,
+      "guild_job_arcane_residue": 23,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1009,11 +1009,11 @@
         ]
       },
       "resources": {
-        "gold": 363,
+        "gold": 357,
         "tower_materials": 346,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 116
+        "arcane_residue": 112
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1025,8 +1025,8 @@
       "day_summary": [
         "Paid 19 gold in upkeep: 19 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 22 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Local Delver Contract completed: +22 gold, +3 residue.",
+        "Mira completed a contract for 22 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
@@ -1128,11 +1128,11 @@
         ]
       },
       "resources": {
-        "gold": 310,
+        "gold": 304,
         "tower_materials": 429,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 118
+        "arcane_residue": 114
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1175,8 +1175,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 173,
-      "guild_job_arcane_residue": 27,
+      "guild_job_gold": 171,
+      "guild_job_arcane_residue": 26,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1242,11 +1242,11 @@
         ]
       },
       "resources": {
-        "gold": 440,
+        "gold": 432,
         "tower_materials": 513,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 150
+        "arcane_residue": 145
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1258,10 +1258,10 @@
       "day_summary": [
         "Paid 26 gold in upkeep: 26 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 20 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
+        "Local Delver Contract completed: +22 gold, +3 residue.",
         "Local Delver Contract expired: -14 gold.",
         "Local Delver Contract completed: +22 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Mira completed a contract for 22 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Zia completed a contract for 22 gold.",
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1, hospitality +1.",
@@ -1366,11 +1366,11 @@
         ]
       },
       "resources": {
-        "gold": 411,
+        "gold": 403,
         "tower_materials": 596,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 155
+        "arcane_residue": 150
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1413,8 +1413,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 179,
-      "guild_job_arcane_residue": 29,
+      "guild_job_gold": 177,
+      "guild_job_arcane_residue": 28,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1480,11 +1480,11 @@
         ]
       },
       "resources": {
-        "gold": 530,
+        "gold": 520,
         "tower_materials": 680,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 186
+        "arcane_residue": 180
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1496,9 +1496,9 @@
       "day_summary": [
         "Paid 32 gold in upkeep: 32 wages, 0 supplies, 0 repairs.",
         "The creditors stay the blade for now: 250 due in 18 days.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 26 gold.",
+        "Local Delver Contract completed: +24 gold, +4 residue.",
+        "Mira completed a contract for 24 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Zia completed a contract for 24 gold.",
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
@@ -1536,8 +1536,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 1,
-      "guild_job_gold": 175,
-      "guild_job_arcane_residue": 28,
+      "guild_job_gold": 172,
+      "guild_job_arcane_residue": 26,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1603,11 +1603,11 @@
         ]
       },
       "resources": {
-        "gold": 148,
+        "gold": 135,
         "tower_materials": 581,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 164
+        "arcane_residue": 156
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1619,10 +1619,10 @@
       "day_summary": [
         "Paid 57 gold in upkeep: 32 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 17 days.",
-        "Local Delver Contract completed: +22 gold, +4 residue.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 22 gold.",
-        "Zia completed a contract for 24 gold.",
+        "Local Delver Contract completed: +20 gold, +3 residue.",
+        "Local Delver Contract completed: +23 gold, +3 residue.",
+        "Mira completed a contract for 20 gold.",
+        "Zia completed a contract for 23 gold.",
         "Zia handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Melle rested and came back steadier for tomorrow.",
@@ -1654,8 +1654,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 157,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 153,
+      "guild_job_arcane_residue": 24,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1721,11 +1721,11 @@
         ]
       },
       "resources": {
-        "gold": 245,
+        "gold": 228,
         "tower_materials": 665,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 194
+        "arcane_residue": 185
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1737,8 +1737,8 @@
       "day_summary": [
         "Paid 57 gold in upkeep: 32 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 16 days.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Mira completed a contract for 26 gold.",
+        "Local Delver Contract completed: +22 gold, +4 residue.",
+        "Mira completed a contract for 22 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa worked the Common Room as a hospitality job for 131 gold, 1 materials, 20 arcane residue, and 2 prep quality.",
         "Nessa handled Common Room work. Skills: Hospitality +1. History: scouting runs +1, hospitality +1.",
@@ -1774,8 +1774,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 155,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 151,
+      "guild_job_arcane_residue": 24,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1841,11 +1841,11 @@
         ]
       },
       "resources": {
-        "gold": 309,
+        "gold": 288,
         "tower_materials": 749,
         "eggs": 3,
         "relics": 0,
-        "arcane_residue": 221
+        "arcane_residue": 211
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1857,8 +1857,8 @@
       "day_summary": [
         "Paid 63 gold in upkeep: 38 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 15 days.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Mira completed a contract for 26 gold.",
+        "Local Delver Contract completed: +22 gold, +4 residue.",
+        "Mira completed a contract for 22 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Zia rested and came back steadier for tomorrow.",
@@ -1895,8 +1895,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 175,
-      "guild_job_arcane_residue": 28,
+      "guild_job_gold": 170,
+      "guild_job_arcane_residue": 27,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1962,11 +1962,11 @@
         ]
       },
       "resources": {
-        "gold": 417,
+        "gold": 391,
         "tower_materials": 833,
         "eggs": 3,
         "relics": 0,
-        "arcane_residue": 254
+        "arcane_residue": 243
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1978,9 +1978,9 @@
       "day_summary": [
         "Paid 64 gold in upkeep: 39 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 14 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
+        "Local Delver Contract completed: +19 gold, +3 residue.",
         "Local Delver Contract completed: +22 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Mira completed a contract for 19 gold.",
         "Zia completed a contract for 22 gold.",
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1, hospitality +1.",
         "Nessa rested and came back steadier for tomorrow.",
@@ -2018,8 +2018,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 181,
-      "guild_job_arcane_residue": 28,
+      "guild_job_gold": 175,
+      "guild_job_arcane_residue": 27,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -2085,11 +2085,11 @@
         ]
       },
       "resources": {
-        "gold": 529,
+        "gold": 497,
         "tower_materials": 917,
         "eggs": 3,
         "relics": 0,
-        "arcane_residue": 287
+        "arcane_residue": 275
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2101,9 +2101,9 @@
       "day_summary": [
         "Paid 66 gold in upkeep: 41 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 13 days.",
+        "Local Delver Contract completed: +18 gold, +3 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Zia completed a contract for 24 gold.",
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
@@ -2142,8 +2142,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 157,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 151,
+      "guild_job_arcane_residue": 23,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -2209,11 +2209,11 @@
         ]
       },
       "resources": {
-        "gold": 617,
+        "gold": 579,
         "tower_materials": 1001,
         "eggs": 3,
         "relics": 0,
-        "arcane_residue": 317
+        "arcane_residue": 303
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2225,8 +2225,8 @@
       "day_summary": [
         "Paid 66 gold in upkeep: 41 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 12 days.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Mira completed a contract for 26 gold.",
+        "Local Delver Contract completed: +20 gold, +3 residue.",
+        "Mira completed a contract for 20 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Zia rested and came back steadier for tomorrow.",
@@ -2263,8 +2263,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 177,
-      "guild_job_arcane_residue": 28,
+      "guild_job_gold": 172,
+      "guild_job_arcane_residue": 27,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -2330,11 +2330,11 @@
         ]
       },
       "resources": {
-        "gold": 725,
+        "gold": 682,
         "tower_materials": 1083,
         "eggs": 3,
         "relics": 0,
-        "arcane_residue": 350
+        "arcane_residue": 335
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2346,9 +2346,9 @@
       "day_summary": [
         "Paid 66 gold in upkeep: 41 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 11 days.",
-        "Local Delver Contract completed: +22 gold, +4 residue.",
+        "Local Delver Contract completed: +17 gold, +3 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 22 gold.",
+        "Mira completed a contract for 17 gold.",
         "Mira handled Common Room work. Skills: Charm +1, Scouting +1. History: scouting runs +1.",
         "Zia completed a contract for 24 gold.",
         "Nessa returned from Drowned Larder with fresh loot.",
@@ -2386,8 +2386,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 157,
-      "guild_job_arcane_residue": 24,
+      "guild_job_gold": 151,
+      "guild_job_arcane_residue": 23,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -2453,11 +2453,11 @@
         ]
       },
       "resources": {
-        "gold": 811,
+        "gold": 762,
         "tower_materials": 1167,
         "eggs": 3,
         "relics": 0,
-        "arcane_residue": 379
+        "arcane_residue": 363
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2469,8 +2469,8 @@
       "day_summary": [
         "Paid 68 gold in upkeep: 43 wages, 6 supplies, 19 repairs.",
         "The creditors stay the blade for now: 250 due in 10 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Local Delver Contract completed: +18 gold, +3 residue.",
+        "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Zia rested and came back steadier for tomorrow.",
@@ -2507,8 +2507,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 1,
-      "guild_job_gold": 194,
-      "guild_job_arcane_residue": 31,
+      "guild_job_gold": 188,
+      "guild_job_arcane_residue": 29,
       "expedition_prep_gold": 5,
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
@@ -2574,11 +2574,11 @@
         ]
       },
       "resources": {
-        "gold": 145,
+        "gold": 90,
         "tower_materials": 1054,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 368
+        "arcane_residue": 350
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2590,9 +2590,9 @@
       "day_summary": [
         "Paid 105 gold in upkeep: 43 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 9 days.",
+        "Local Delver Contract completed: +20 gold, +3 residue.",
         "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Mira completed a contract for 26 gold.",
+        "Mira completed a contract for 20 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Zia completed a contract for 26 gold.",
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
@@ -2629,8 +2629,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 164,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 159,
+      "guild_job_arcane_residue": 24,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -2696,11 +2696,11 @@
         ]
       },
       "resources": {
-        "gold": 201,
+        "gold": 141,
         "tower_materials": 1136,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 398
+        "arcane_residue": 379
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2712,8 +2712,8 @@
       "day_summary": [
         "Paid 105 gold in upkeep: 43 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 8 days.",
-        "Local Delver Contract completed: +22 gold, +4 residue.",
-        "Mira completed a contract for 22 gold.",
+        "Local Delver Contract completed: +17 gold, +3 residue.",
+        "Mira completed a contract for 17 gold.",
         "Nessa rested and came back steadier for tomorrow.",
         "Zia returned from Drowned Larder with fresh loot.",
         "Zia came back carrying 1 instability from Drowned Larder.",
@@ -2749,8 +2749,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 334,
-      "guild_job_arcane_residue": 50,
+      "guild_job_gold": 326,
+      "guild_job_arcane_residue": 48,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -2816,11 +2816,11 @@
         ]
       },
       "resources": {
-        "gold": 426,
+        "gold": 358,
         "tower_materials": 1219,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 453
+        "arcane_residue": 432
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2832,11 +2832,11 @@
       "day_summary": [
         "Paid 106 gold in upkeep: 44 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 7 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Local Delver Contract completed: +18 gold, +3 residue.",
+        "Local Delver Contract completed: +22 gold, +3 residue.",
+        "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. History: completed contracts +1.",
-        "Zia completed a contract for 24 gold.",
+        "Zia completed a contract for 22 gold.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
         "Melle worked the Common Room as a hospitality tier 1 job for 144 gold, 1 materials, 21 arcane residue, and 2 prep quality.",
@@ -2874,8 +2874,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 166,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 160,
+      "guild_job_arcane_residue": 24,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -2941,11 +2941,11 @@
         ]
       },
       "resources": {
-        "gold": 452,
+        "gold": 378,
         "tower_materials": 1303,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 480
+        "arcane_residue": 458
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2957,8 +2957,8 @@
       "day_summary": [
         "Paid 112 gold in upkeep: 50 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 6 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Local Delver Contract completed: +18 gold, +3 residue.",
+        "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: hospitality +1, completed contracts +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Zia rested and came back steadier for tomorrow.",
@@ -2996,8 +2996,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 336,
-      "guild_job_arcane_residue": 51,
+      "guild_job_gold": 329,
+      "guild_job_arcane_residue": 48,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -3063,11 +3063,11 @@
         ]
       },
       "resources": {
-        "gold": 672,
+        "gold": 591,
         "tower_materials": 1388,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 536
+        "arcane_residue": 511
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3079,11 +3079,11 @@
       "day_summary": [
         "Paid 113 gold in upkeep: 51 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 5 days.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Local Delver Contract completed: +22 gold, +4 residue.",
-        "Mira completed a contract for 26 gold.",
+        "Local Delver Contract completed: +20 gold, +3 residue.",
+        "Local Delver Contract completed: +21 gold, +3 residue.",
+        "Mira completed a contract for 20 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
-        "Zia completed a contract for 22 gold.",
+        "Zia completed a contract for 21 gold.",
         "Zia handled Common Room work. Skills: Scouting +1, Hospitality +1. History: scouting runs +1, hospitality +1.",
         "Nessa worked the Common Room as a hospitality tier 1 job for 144 gold, 1 materials, 21 arcane residue, and 2 prep quality.",
         "Nessa handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
@@ -3123,8 +3123,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 336,
-      "guild_job_arcane_residue": 50,
+      "guild_job_gold": 328,
+      "guild_job_arcane_residue": 48,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -3190,11 +3190,11 @@
         ]
       },
       "resources": {
-        "gold": 890,
+        "gold": 801,
         "tower_materials": 1473,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 591
+        "arcane_residue": 564
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3206,11 +3206,11 @@
       "day_summary": [
         "Paid 115 gold in upkeep: 53 wages, 15 supplies, 47 repairs.",
         "The creditors stay the blade for now: 250 due in 4 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Local Delver Contract completed: +18 gold, +3 residue.",
+        "Local Delver Contract completed: +22 gold, +3 residue.",
+        "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. Skills: Charm +1. History: hospitality +1.",
-        "Zia completed a contract for 24 gold.",
+        "Zia completed a contract for 22 gold.",
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Melle rested and came back steadier for tomorrow.",
@@ -3250,8 +3250,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 1,
-      "guild_job_gold": 172,
-      "guild_job_arcane_residue": 26,
+      "guild_job_gold": 165,
+      "guild_job_arcane_residue": 24,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -3317,11 +3317,11 @@
         ]
       },
       "resources": {
-        "gold": 104,
+        "gold": 8,
         "tower_materials": 1405,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 572
+        "arcane_residue": 543
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3333,8 +3333,8 @@
       "day_summary": [
         "Paid 155 gold in upkeep: 53 wages, 25 supplies, 77 repairs.",
         "The creditors stay the blade for now: 250 due in 3 days.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Mira completed a contract for 26 gold.",
+        "Local Delver Contract completed: +19 gold, +3 residue.",
+        "Mira completed a contract for 19 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
@@ -3372,8 +3372,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 166,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 160,
+      "guild_job_arcane_residue": 24,
       "expedition_prep_gold": 5,
       "expedition_prep_materials": 1,
       "expedition_prep_arcane_residue": 0,
@@ -3439,11 +3439,11 @@
         ]
       },
       "resources": {
-        "gold": 110,
+        "gold": 8,
         "tower_materials": 1442,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 605
+        "arcane_residue": 575
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3455,8 +3455,8 @@
       "day_summary": [
         "Paid 155 gold in upkeep: 53 wages, 25 supplies, 77 repairs.",
         "The creditors stay the blade for now: 250 due in 2 days.",
-        "Local Delver Contract completed: +22 gold, +4 residue.",
-        "Mira completed a contract for 22 gold.",
+        "Local Delver Contract completed: +16 gold, +3 residue.",
+        "Mira completed a contract for 16 gold.",
         "Mira handled Common Room work. Skills: Scouting +1, Hospitality +1. History: scouting runs +1, hospitality +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Zia rested and came back steadier for tomorrow.",
@@ -3492,8 +3492,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 170,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 164,
+      "guild_job_arcane_residue": 24,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -3559,11 +3559,11 @@
         ]
       },
       "resources": {
-        "gold": 120,
+        "gold": 12,
         "tower_materials": 1526,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 635
+        "arcane_residue": 604
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3575,8 +3575,8 @@
       "day_summary": [
         "Paid 157 gold in upkeep: 55 wages, 25 supplies, 77 repairs.",
         "The creditors stay the blade for now: 250 due in 1 days.",
-        "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Local Delver Contract completed: +18 gold, +3 residue.",
+        "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Zia rested and came back steadier for tomorrow.",
@@ -3614,8 +3614,8 @@
       "guest_bookings_assigned": 4,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 244,
-      "guild_job_arcane_residue": 39,
+      "guild_job_gold": 236,
+      "guild_job_arcane_residue": 37,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -3681,11 +3681,11 @@
         ]
       },
       "resources": {
-        "gold": 182,
+        "gold": 66,
         "tower_materials": 1527,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 674
+        "arcane_residue": 641
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3697,15 +3697,15 @@
       "day_summary": [
         "Paid 157 gold in upkeep: 55 wages, 25 supplies, 77 repairs.",
         "Missed Founding Note Due. New balance 275 gold, due in 2 days.",
+        "Local Delver Contract completed: +18 gold, +3 residue.",
+        "Local Delver Contract completed: +26 gold, +5 residue.",
         "Local Delver Contract completed: +24 gold, +4 residue.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Local Delver Contract completed: +26 gold, +5 residue.",
         "Local Delver Contract completed: +22 gold, +4 residue.",
-        "Mira completed a contract for 24 gold.",
+        "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Zia completed a contract for 26 gold.",
         "Zia handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
-        "Melle completed a contract for 26 gold.",
+        "Melle completed a contract for 24 gold.",
         "Melle handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Vela completed a contract for 22 gold.",
         "Vela handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",

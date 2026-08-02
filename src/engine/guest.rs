@@ -2,7 +2,10 @@
 
 use std::collections::HashSet;
 
-use super::day_cycle::{apply_guild_job_progression, charm_training_bonus};
+use super::day_cycle::{
+    apply_guild_job_progression, charm_training_bonus, companion_effectiveness_pct,
+    scale_by_effectiveness,
+};
 use super::{
     active_situation_guest_bonus, apply_monster_relationship_gain, contract_follow_up_request,
     contract_partial_success,
@@ -409,13 +412,21 @@ pub fn resolve_contracts(
                 };
 
                 let monster = &mut game_state.monsters[monster_index];
+                // Contracts were the last place the condition meters were
+                // ignored: a companion the guild had run into the ground served
+                // a booking exactly as well as a rested one, while the same
+                // exhaustion visibly cut her guild-job and expedition output.
+                let effectiveness_pct =
+                    companion_effectiveness_pct(&data.config.day_cycle, monster);
                 let reward_divisor = if partial_success { 2 } else { 1 };
-                let gold_reward = request.reward.gold / reward_divisor;
-                let residue_reward = request.reward.arcane_residue / reward_divisor;
+                let scaled = |amount: u32| {
+                    scale_by_effectiveness(amount / reward_divisor, effectiveness_pct)
+                };
+                let gold_reward = scaled(request.reward.gold);
+                let residue_reward = scaled(request.reward.arcane_residue);
                 game_state.resources.gold += gold_reward;
-                game_state.resources.tower_materials +=
-                    request.reward.tower_materials / reward_divisor;
-                game_state.resources.relics += request.reward.relics / reward_divisor;
+                game_state.resources.tower_materials += scaled(request.reward.tower_materials);
+                game_state.resources.relics += scaled(request.reward.relics);
                 game_state.resources.arcane_residue += residue_reward;
                 *guild_job_gold += gold_reward;
                 *guild_job_arcane_residue += residue_reward;

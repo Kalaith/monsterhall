@@ -214,6 +214,18 @@ pub struct ConditionEffectData {
     pub injury_penalty_pct_per_ten: u32,
     /// Floor on effectiveness — even a wreck still shows up for the shift.
     pub min_effectiveness_pct: u32,
+    /// Ceiling on every condition meter.
+    ///
+    /// Without one the meters only climb for anyone the player never explicitly
+    /// parks, so a companion who worked a hundred straight days would need a
+    /// month of rest before she was worth anything again. A cap keeps the worst
+    /// case recoverable and bounds the penalty.
+    pub max_meter: u32,
+    /// Fatigue and stress an unassigned companion sheds each day. Standing
+    /// around the hall is rest, just poorer rest than the Resting assignment —
+    /// without it the meters are a one-way ratchet.
+    pub idle_fatigue_recovery: u32,
+    pub idle_stress_recovery: u32,
 }
 
 fn default_condition_effects() -> ConditionEffectData {
@@ -225,6 +237,9 @@ fn default_condition_effects() -> ConditionEffectData {
         stress_penalty_pct_per_ten: 5,
         injury_penalty_pct_per_ten: 10,
         min_effectiveness_pct: 40,
+        max_meter: 100,
+        idle_fatigue_recovery: 6,
+        idle_stress_recovery: 4,
     }
 }
 

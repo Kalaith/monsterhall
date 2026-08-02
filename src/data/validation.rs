@@ -95,6 +95,7 @@ impl GameData {
         self.validate_floors(&ids)?;
         self.validate_relics()?;
         self.validate_events(&ids)?;
+        events::validate_event_tag_gating(self)?;
         self.validate_references(&ids)?;
         self.validate_new_game(&ids)?;
 

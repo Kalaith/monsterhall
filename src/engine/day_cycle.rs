@@ -54,6 +54,7 @@ pub use actions::{
     assign_monster_to_room, configure_expedition_plan, convert_egg, hatch_selected_egg,
     hatch_species, purchase_building, release_monster, replace_monster_with_selected_egg,
 };
+pub(crate) use condition::{companion_effectiveness_pct, scale_by_effectiveness};
 pub use eggs::{create_opening_egg, sync_egg_resource_count};
 #[cfg(test)]
 pub use eggs::{raw_egg_count_for_species, ready_egg_count_for_species};

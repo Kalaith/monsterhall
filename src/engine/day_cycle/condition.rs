@@ -64,6 +64,18 @@ pub(crate) fn scale_signed_by_effectiveness(value: i32, effectiveness_pct: u32) 
     i32::try_from(i64::from(value) * i64::from(effectiveness_pct) / 100).unwrap_or(value)
 }
 
+/// Holds every condition meter under its ceiling.
+///
+/// Fatigue and stress used to climb without limit because only the Resting
+/// assignment took them down. Now that the meters are read, an unbounded one
+/// means a companion is written off permanently by a bad fortnight.
+pub(crate) fn clamp_condition_meters(config: &DayCycleConfigData, monster: &mut CompanionState) {
+    let ceiling = config.condition_effects.max_meter;
+    monster.fatigue = monster.fatigue.min(ceiling);
+    monster.stress = monster.stress.min(ceiling);
+    monster.injury = monster.injury.min(ceiling);
+}
+
 fn penalty_pct(value: u32, allowance: u32, penalty_per_ten: u32) -> u32 {
     value.saturating_sub(allowance) * penalty_per_ten / 10
 }

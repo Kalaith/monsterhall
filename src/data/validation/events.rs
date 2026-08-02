@@ -88,3 +88,34 @@ impl GameData {
         Ok(())
     }
 }
+/// `event_tags` are a taxonomy, not a second gate — the progression they name is
+/// delivered by `required_building_ids` and `min_day`. That only stays true if
+/// the two agree, so a tag claiming lateness on an event nothing gates is a
+/// content mistake that reads as working.
+pub(super) fn validate_event_tag_gating(data: &GameData) -> Result<(), String> {
+    for event in &data.events.events {
+        let claims_progression = event
+            .event_tags
+            .iter()
+            .any(|tag| tag.starts_with("tier_") || tag == "late_game");
+        if !claims_progression {
+            continue;
+        }
+        if event.required_building_ids.is_empty() {
+            return Err(format!(
+                "event '{}' is tagged for a progression tier but requires no building - nothing actually gates it.",
+                event.id
+            ));
+        }
+        if event.event_tags.iter().any(|tag| tag == "late_game")
+            && event.min_day.is_none_or(|min_day| min_day < 100)
+        {
+            return Err(format!(
+                "event '{}' is tagged late_game but can fire before day 100.",
+                event.id
+            ));
+        }
+    }
+
+    Ok(())
+}

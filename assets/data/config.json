@@ -160,7 +160,10 @@
       "fatigue_penalty_pct_per_ten": 3,
       "stress_penalty_pct_per_ten": 3,
       "injury_penalty_pct_per_ten": 6,
-      "min_effectiveness_pct": 65
+      "min_effectiveness_pct": 65,
+      "max_meter": 100,
+      "idle_fatigue_recovery": 6,
+      "idle_stress_recovery": 4
     }
   }
 }
