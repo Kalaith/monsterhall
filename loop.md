@@ -924,6 +924,48 @@ Stop the loop and report if:
   with upkeep bands already referencing a fourth, and relics with no patron who
   asks for one by name.
 
+- **2026-08-03 — the save path, which six passes had never looked at.** Last
+  pass's ledger said the code-defect well was running dry. It was running dry in
+  the places that had been swept; the load path had not been one of them, and it
+  held the worst bug found in this whole run.
+  **A save missing `party_size` and `town_job_limit` loads, passes
+  `validate_game_state_references`, and kills both of the game's verbs.** Both
+  gates read `count >= limit`, so a defaulted **zero does not mean "no limit"** —
+  it means nobody may ever be sent on an expedition or given a guild-room shift
+  again. Measured on a real `save_version: 9` payload: parses, validates clean,
+  and then every assignment refuses forever with no error that explains why. The
+  campaign can end days and nothing else.
+  `#[serde(default)]` is on every saved struct, correctly — it is what keeps old
+  saves loading — and it is exactly how a save arrives structurally valid and
+  functionally dead. **This is the display-settings bug one layer down**: that one
+  was repaired at load by `reconcile_resolution_against` and the game state never
+  got the same treatment. New `engine::reconcile_game_state_after_load` restores
+  the configured baseline when either limit reads zero, called *before*
+  validation, since the reference check is what waves the broken save through.
+  Anything non-zero is left alone — `town_job_limit` grows past its baseline
+  through `town_job_limit_flat`, and clamping would demolish every worker-limit
+  building bought.
+  **The same trap one level down:** a companion loaded at rank zero, which the
+  game can never produce and a pre-field save always yields. She fails *every*
+  contract (`rank < minimum.max(1)`, even one asking for nothing), satisfies no
+  floor's roster gate, and is paid the understrength rate on every shift for the
+  rest of the campaign. Repaired in the same pass.
+  **And there was no save round-trip test at all** — added, running a campaign
+  twelve days then comparing a save/load field for field. Lossless today; it is
+  the guard that would notice a future state field arriving without serde wiring,
+  which is a hard constraint in this file that nothing was checking.
+  **Result:** 106 tests (was 102), balance byte-identical, fmt and clippy clean,
+  publish green. Both repairs verified by planting the regression.
+  **Next iteration should know:** (a) the reason six balance-measured passes
+  missed this is structural — **the harness builds its state rather than loading
+  it**, so nothing on the save path is exercised by any simulation; if more bugs
+  of this class exist they will not show up as moved numbers; (b) the remaining
+  `#[serde(default)]` fields were checked and their zeros are benign (resources,
+  grade scores, empty id lists all mean "poor" or "early", not "disabled");
+  (c) the honest next slice is still content — **guild rooms 4** for a
+  20-companion roster, **patron tiers 3** with upkeep bands already referencing a
+  fourth, and relics with no patron who asks for one by name.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

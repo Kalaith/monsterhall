@@ -630,6 +630,169 @@ fn a_mutation_is_recorded_in_the_permanent_event_log() {
     );
 }
 
+/// A save written before `party_size` and `town_job_limit` existed loads with
+/// both at zero, and zero does not mean "no limit" — both gates read
+/// `count >= limit`, so it means *nobody may ever be sent on an expedition or
+/// given a guild-room shift again*. The save is structurally valid, so the
+/// reference check waves it through, and the campaign is left able to end days
+/// and nothing else.
+///
+/// Same shape as the saved display resolution that came back as `0x0`: a
+/// `#[serde(default)]` field trusted verbatim. That one was repaired at load and
+/// this one was not.
+#[test]
+fn an_old_save_without_assignment_limits_is_repaired_on_load() {
+    let data = crate::data::test_game_data();
+    let json = r#"{
+      "version": 9,
+      "game_state": {
+        "current_day": 40,
+        "resources": { "gold": 500, "tower_materials": 50, "eggs": 0, "relics": 0, "arcane_residue": 20 },
+        "town": {
+          "unlocked_room_ids": ["common_room"],
+          "unlocked_floor_ids": ["floor_1_slick_cellars"],
+          "unlocked_species_ids": ["slime_companion"],
+          "patron_tiers": ["local_delvers"]
+        },
+        "monsters": [
+          { "id": "monster_001", "species_id": "slime_companion", "name": "Mira", "quality_rank": 1 }
+        ],
+        "story_progress": { "opening_step": "Complete", "first_client_completed": true }
+      }
+    }"#;
+    let save: crate::state::SaveData = serde_json::from_str(json).expect("old save should parse");
+    let mut game_state = save.game_state;
+
+    // The state the save really arrives in: valid by every reference check, and
+    // unable to do either of the things the game is about.
+    assert_eq!(game_state.town.party_size, 0);
+    assert_eq!(game_state.town.town_job_limit, 0);
+    assert!(crate::engine::validate_game_state_references(&data, &game_state).is_ok());
+
+    crate::engine::reconcile_game_state_after_load(&data, &mut game_state);
+
+    assert_eq!(game_state.town.party_size, data.config.new_game.party_size);
+    assert_eq!(
+        game_state.town.town_job_limit,
+        data.config.new_game.town_job_limit
+    );
+    assign_monster_to_room(&mut game_state, "monster_001", "common_room")
+        .expect("the hall must work again");
+    assign_monster_to_expedition(
+        &data,
+        &mut game_state,
+        "monster_001",
+        "floor_1_slick_cellars",
+    )
+    .expect("the tower must work again");
+}
+
+/// The same trap one level down: a companion loaded at rank zero.
+///
+/// Rank 0 is not a rank the game can produce, but it is what a save predating
+/// the field deserializes to — and it is quietly ruinous. She fails every
+/// contract, satisfies no floor's roster gate, and is paid the understrength
+/// rate on every shift she works, for the rest of the campaign.
+#[test]
+fn a_companion_loaded_at_rank_zero_is_repaired_on_load() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut companion = test_monster(Vec::new());
+    companion.id = "monster_001".to_owned();
+    companion.quality_rank = 0;
+    game_state.monsters = vec![companion];
+
+    let bare_contract = ContractState {
+        request_id: "contract_001".to_owned(),
+        requested_room_id: data.guild_rooms.rooms[0].id.clone(),
+        ..ContractState::default()
+    };
+    if !game_state
+        .town
+        .unlocked_room_ids
+        .contains(&bare_contract.requested_room_id)
+    {
+        game_state
+            .town
+            .unlocked_room_ids
+            .push(bare_contract.requested_room_id.clone());
+    }
+    assert!(
+        !crate::engine::evaluate_contract_eligibility(
+            &data,
+            &game_state,
+            &bare_contract,
+            &game_state.monsters[0]
+        )
+        .is_eligible,
+        "test premise: rank zero should fail even a contract that asks for nothing"
+    );
+
+    crate::engine::reconcile_game_state_after_load(&data, &mut game_state);
+
+    assert_eq!(game_state.monsters[0].quality_rank, 1);
+    assert!(
+        crate::engine::evaluate_contract_eligibility(
+            &data,
+            &game_state,
+            &bare_contract,
+            &game_state.monsters[0]
+        )
+        .is_eligible,
+        "after repair she should be bookable again"
+    );
+}
+
+/// A limit the guild has *grown* past its baseline must survive the repair.
+/// `town_job_limit` climbs through `passive_modifiers.town_job_limit_flat`, so
+/// clamping it back to the configured value would quietly demolish every
+/// worker-limit building the player bought.
+#[test]
+fn reconciling_never_claws_back_a_limit_the_guild_earned() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    game_state.town.town_job_limit = data.config.new_game.town_job_limit + 4;
+    game_state.town.party_size = data.config.new_game.party_size + 2;
+
+    crate::engine::reconcile_game_state_after_load(&data, &mut game_state);
+
+    assert_eq!(
+        game_state.town.town_job_limit,
+        data.config.new_game.town_job_limit + 4
+    );
+    assert_eq!(
+        game_state.town.party_size,
+        data.config.new_game.party_size + 2
+    );
+}
+
+/// Saving and loading a campaign in progress must not quietly drop anything.
+/// There was no round-trip guard at all; this is the one that would notice a new
+/// state field arriving without its serde wiring.
+#[test]
+fn a_campaign_survives_a_save_and_load_unchanged() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut companion = test_monster(Vec::new());
+    companion.id = "monster_001".to_owned();
+    game_state.monsters = vec![companion];
+    crate::engine::initialize_first_debt(&data, &mut game_state).expect("debt should initialize");
+    for _ in 0..12 {
+        let _ = resolve_day(&data, &mut game_state);
+    }
+
+    let save = crate::state::SaveData::new(data.config.save_version, game_state.clone());
+    let json = serde_json::to_string(&save).expect("a campaign should serialize");
+    let restored: crate::state::SaveData =
+        serde_json::from_str(&json).expect("a campaign should deserialize");
+
+    assert_eq!(
+        format!("{:?}", game_state),
+        format!("{:?}", restored.game_state),
+        "a saved campaign came back different from the one that was saved"
+    );
+}
+
 #[test]
 fn a_pending_offer_does_not_reserve_a_companion() {
     let data = crate::data::test_game_data();

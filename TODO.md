@@ -171,6 +171,52 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, seventh pass)
+
+This pass swept the **save path**, which six passes of screen-and-engine hunting
+had never touched. `#[serde(default)]` is on every saved struct — correctly, so
+old saves keep loading — and that is exactly how a save arrives holding a value
+that is structurally valid and functionally fatal. It is the display-settings bug
+again, one layer down, and this time it kills the game rather than a highlight.
+
+- ~~A save missing `party_size` and `town_job_limit` loaded fine and killed both
+  of the game's verbs.~~ Fixed. Both gates read `count >= limit`, so a defaulted
+  **zero does not mean "no limit"** — it means *nobody may ever be sent on an
+  expedition or given a guild-room shift again*. Measured on a real
+  `save_version: 9` payload: the save parses, `validate_game_state_references`
+  **passes it**, and then `assign_monster_to_room` and
+  `assign_monster_to_expedition` both refuse forever. The campaign is left able
+  to end days and nothing else, with no error to explain it.
+
+  New `engine::reconcile_game_state_after_load` restores the configured baseline
+  when either reads zero, and `continue_game` calls it *before* validating —
+  after would be useless, because the reference check is what waves the broken
+  save through. Zero is never legitimate for either, and anything non-zero is
+  left exactly as found: `town_job_limit` grows past its baseline through
+  `passive_modifiers.town_job_limit_flat`, and clamping it back would demolish
+  every worker-limit building the player bought. A test covers that too.
+
+- ~~The same trap one level down: a companion loaded at rank zero.~~ Fixed. Rank
+  0 is not a rank the game can produce — `egg_quality_rank` never returns below 1
+  and a new companion is created at 1 — but it is what a save predating the field
+  deserializes to, and it is quietly ruinous for that companion for the rest of
+  the campaign. `evaluate_contract_eligibility` compares
+  `rank < minimum.max(1)`, so she fails **every** contract including one that
+  asks for nothing; the same comparison in `floor_roster_gate_report` means she
+  satisfies no floor's roster gate; and `active_patron_tier_for_room` finds no
+  tier she qualifies for, so every shift she works is paid at the understrength
+  rate. Repaired in the same pass over the loaded state.
+
+- **There was no save round-trip test at all.** Added: a campaign is run twelve
+  days, saved, loaded and compared field for field. It is lossless today — this
+  is the guard that would notice a future state field arriving without its serde
+  wiring, which is the hard constraint `loop.md` names and nothing was checking.
+
+Both repairs verified by planting the regression. Balance byte-identical: the
+simulation builds its state rather than loading it, so none of this is on the
+harness's path — which is precisely why six passes of balance-measured hunting
+never found it.
+
 ### Found by review, not by the audit (2026-08-03, sixth pass)
 
 - ~~The double-booking fix only covered one order.~~ Fixed. Last pass made

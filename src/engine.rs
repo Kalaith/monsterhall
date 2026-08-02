@@ -35,4 +35,4 @@ pub use guest::{
     refresh_contracts, ContractEligibilityReport,
 };
 pub use opening::{advance_opening_step, build_first_room, resolve_first_client};
-pub use validation::validate_game_state_references;
+pub use validation::{reconcile_game_state_after_load, validate_game_state_references};

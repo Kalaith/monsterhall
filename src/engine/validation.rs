@@ -5,6 +5,50 @@ use std::collections::HashSet;
 use crate::data::GameData;
 use crate::state::{CompanionJobState, EggState, GameState};
 
+/// Repairs a loaded save whose `#[serde(default)]` fields came back as zero.
+///
+/// Every state struct is `#[serde(default)]` so an older save keeps loading —
+/// which is right, and is also how a save can arrive holding a value that is
+/// structurally valid and functionally fatal. `party_size` and `town_job_limit`
+/// are the two that matter: both gate an assignment with `count >= limit`, so a
+/// defaulted **zero** does not mean "no limit", it means *nobody may ever be
+/// sent on an expedition or given a guild-room shift again*. The save loads,
+/// `validate_game_state_references` passes it, and the campaign is left able to
+/// end days and nothing else.
+///
+/// Zero is never a legitimate value for either — `config.new_game` authors both
+/// — so a zero is read as "this save predates the field" and the configured
+/// baseline is restored. Anything non-zero is left exactly as it is, because
+/// `town_job_limit` grows past its baseline through
+/// `passive_modifiers.town_job_limit_flat` and must not be clamped back down.
+///
+/// This is the same shape as `reconcile_resolution_against` in
+/// `game/settings.rs`, which repairs a saved display mode for exactly the same
+/// reason. The constraint was enforced on the settings file and not on the save.
+pub fn reconcile_game_state_after_load(data: &GameData, game_state: &mut GameState) {
+    let new_game = &data.config.new_game;
+    if game_state.town.party_size == 0 {
+        game_state.town.party_size = new_game.party_size;
+    }
+    if game_state.town.town_job_limit == 0 {
+        game_state.town.town_job_limit = new_game.town_job_limit;
+    }
+
+    // The same trap one level down. `egg_quality_rank` never returns below 1 and
+    // a new companion is created at 1, so rank zero is not a rank the game can
+    // produce — it is a save that predates the field. Left alone it is quietly
+    // ruinous for that companion: `evaluate_contract_eligibility` compares
+    // `rank < minimum.max(1)`, so she fails **every** contract; the same
+    // comparison in `floor_roster_gate_report` means she satisfies no floor's
+    // roster gate; and `active_patron_tier_for_room` finds no tier she qualifies
+    // for, so every shift she works is paid at the understrength rate.
+    for monster in &mut game_state.monsters {
+        if monster.quality_rank == 0 {
+            monster.quality_rank = 1;
+        }
+    }
+}
+
 pub fn validate_game_state_references(
     data: &GameData,
     game_state: &GameState,

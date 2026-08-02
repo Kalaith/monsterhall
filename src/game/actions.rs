@@ -523,7 +523,11 @@ impl Game {
                 let opening_step = save_data.game_state.story_progress.opening_step;
                 let first_client_completed =
                     save_data.game_state.story_progress.first_client_completed;
-                let loaded_game_state = save_data.game_state;
+                let mut loaded_game_state = save_data.game_state;
+                // Before validating, not after: a save from before these fields
+                // existed is structurally valid and functionally dead, so the
+                // reference check would wave it through unrepaired.
+                reconcile_game_state_after_load(data, &mut loaded_game_state);
                 if let Err(message) = validate_game_state_references(data, &loaded_game_state) {
                     self.last_error = Some(format!("Save data is no longer compatible: {message}"));
                     return;
