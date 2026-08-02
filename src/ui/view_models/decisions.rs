@@ -370,4 +370,62 @@ mod tests {
             .any(|entry| entry.contains("proved Monsterhall can pay the debt")));
         assert!(game_state.event_log.len() >= 6);
     }
+
+    #[test]
+    fn every_role_the_engine_assigns_has_its_own_label() {
+        let data = crate::data::test_game_data();
+
+        // `monster_depth_role_label` maps over `monster_role` and falls through to
+        // "versatile". A role added to the engine without a label would take that
+        // fallback silently, so the profile screen would call a specialist a
+        // generalist while `role_affinity` paid her the specialist bonus — the same
+        // shape as the two copies this replaced.
+        let mut seen = std::collections::HashMap::new();
+        for (traits, corruption, bond, charm_skill) in [
+            (vec![], 0u32, 0u32, 0u32),
+            (vec!["corruption_tuned".to_owned()], 0, 0, 0),
+            (vec!["hatchery_attuned".to_owned()], 0, 0, 0),
+            (vec!["calming_presence".to_owned()], 0, 0, 0),
+            (vec![], 10, 0, 0),
+            (vec![], 0, 8, 0),
+            (vec![], 0, 0, 2),
+        ] {
+            let mut monster = crate::state::CompanionState {
+                id: "monster_001".to_owned(),
+                species_id: "slime_companion".to_owned(),
+                name: "Mira".to_owned(),
+                quality_rank: 1,
+                stats: crate::data::StatBlockData {
+                    power: 3,
+                    charm: 3,
+                    endurance: 5,
+                    instinct: 4,
+                },
+                trait_ids: traits,
+                ..Default::default()
+            };
+            monster.corruption = corruption;
+            monster.bond = bond;
+            monster.skills.charm = charm_skill;
+            let role = crate::engine::monster_role(&data, &monster);
+            let label = monster_depth_role_label(&data, &monster);
+            if let Some(previous) = seen.insert(role, label) {
+                assert_eq!(
+                    previous, label,
+                    "role '{role}' produced two different labels"
+                );
+            }
+            if role != "versatile" {
+                assert_ne!(
+                    label, "versatile",
+                    "role '{role}' fell through to the generalist label"
+                );
+            }
+        }
+        assert!(
+            seen.len() >= 5,
+            "the fixtures should exercise most roles, only reached {:?}",
+            seen.keys().collect::<Vec<_>>()
+        );
+    }
 }

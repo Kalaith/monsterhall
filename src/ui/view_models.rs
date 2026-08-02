@@ -464,25 +464,22 @@ pub fn egg_grade_label<'a>(egg: &crate::state::EggState, data: &'a GameData) -> 
     }
 }
 
+/// The player-facing name for a companion's role.
+///
+/// A pure mapping over `engine::monster_role`, never a second copy of its
+/// thresholds — that duplication is how a screen ends up disagreeing with the
+/// simulation about what somebody is.
 pub fn monster_depth_role_label(
     data: &GameData,
     monster: &crate::state::CompanionState,
 ) -> &'static str {
-    let stats = crate::engine::effective_stats(data, monster);
-    if monster.corruption >= 10 || monster.trait_ids.iter().any(|id| id == "corruption_tuned") {
-        "instability adept"
-    } else if monster.work_history.hatchery_assists > 0
-        || monster.trait_ids.iter().any(|id| id == "hatchery_attuned")
-    {
-        "hatchery specialist"
-    } else if monster.skills.charm >= 2 || stats.charm >= stats.power + 2 {
-        "performer"
-    } else if stats.power >= stats.charm + 2 {
-        "delver"
-    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "calming_presence") {
-        "comfort specialist"
-    } else {
-        "versatile"
+    match crate::engine::monster_role(data, monster) {
+        "corruption_adept" => "instability adept",
+        "hatchery_specialist" => "hatchery specialist",
+        "performer" => "performer",
+        "delver" => "delver",
+        "comfort" => "comfort specialist",
+        _ => "versatile",
     }
 }
 

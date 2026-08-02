@@ -30,7 +30,14 @@ pub(crate) struct ExpeditionDepthProfile {
     pub(crate) corruption_pressure: u32,
 }
 
-pub(crate) fn monster_role(data: &GameData, monster: &CompanionState) -> &'static str {
+/// How this companion reads to the tower: the single classifier behind both
+/// `role_affinity`'s mission bonus and the label the profile screen shows.
+///
+/// The UI carried an independent copy of this branching with different label
+/// strings. They agreed only by hand — updating one and not the other would have
+/// told the player she is a performer while the engine scored her a delver and
+/// quietly withheld the mission role bonus.
+pub fn monster_role(data: &GameData, monster: &CompanionState) -> &'static str {
     let stats = crate::engine::effective_stats(data, monster);
     if monster.corruption >= 10 || monster.trait_ids.iter().any(|id| id == "corruption_tuned") {
         "corruption_adept"

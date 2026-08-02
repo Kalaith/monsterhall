@@ -58,6 +58,20 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
   delegates to the engine now, and a test asserts every authored rank is
   reachable and the top threshold hatches the top rank.
 
+- ~~Two independent copies of the companion role classifier.~~ Fixed before it
+  bit. `engine::monster_role` and `view_models::monster_depth_role_label` carried
+  byte-identical branching — corruption, hatchery history, charm-vs-power,
+  bond — differing only in the label strings they returned. They agreed only
+  because both happened to get updated when `effective_stats` was wired in; miss
+  one and the profile screen calls a companion a performer while `role_affinity`
+  scores her a delver and quietly withholds the mission role bonus. The label is
+  now a pure mapping over the engine's role, and a test asserts no engine role
+  falls through to the generalist label.
+
+  A systematic sweep for this shape (function names defined in both `src/ui` and
+  `src/engine`) turns up nothing else: `room_name_by_id` and `species_name_by_id`
+  are trivial id lookups, and `egg_quality_rank` is already a delegate.
+
 ### UI and feedback
 
 - ~~Status messages are computed then discarded on five screens; Ctrl+S saves with zero visible confirmation.~~ Done: all five now render `status_message` (Monster Profile had no draw path for it at all; Town Management and Monster Profile yield the slot to an error when there is one). `persist_game_state` already called `apply_phase_status("Campaign saved")`, so Ctrl+S became visible everywhere for free.
