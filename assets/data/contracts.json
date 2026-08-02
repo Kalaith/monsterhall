@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "requests": [
     {
       "id": "starter_slime_bedding",
@@ -187,7 +187,7 @@
       "reputation_reward": 2,
       "category": "escort_preparation",
       "patron_tier_id": "local_delvers",
-      "preparation_quality_required": 2,
+      "preparation_quality_required": 12,
       "preparation_quality_bonus": 3
     },
     {
@@ -236,7 +236,7 @@
       "reputation_reward": 2,
       "category": "guild_service",
       "patron_tier_id": "frontier_factions",
-      "preparation_quality_required": 2,
+      "preparation_quality_required": 12,
       "preparation_quality_bonus": 3
     },
     {
@@ -284,7 +284,7 @@
       "reputation_reward": 2,
       "category": "guild_service",
       "patron_tier_id": "local_delvers",
-      "preparation_quality_required": 2,
+      "preparation_quality_required": 12,
       "preparation_quality_bonus": 3
     },
     {
@@ -332,7 +332,7 @@
       "reputation_reward": 3,
       "category": "guild_service",
       "patron_tier_id": "guild_sponsors",
-      "preparation_quality_required": 4,
+      "preparation_quality_required": 30,
       "preparation_quality_bonus": 6
     },
     {
@@ -380,7 +380,7 @@
       "reputation_reward": 2,
       "category": "escort_preparation",
       "patron_tier_id": "frontier_factions",
-      "preparation_quality_required": 2,
+      "preparation_quality_required": 12,
       "preparation_quality_bonus": 3
     },
     {
@@ -428,7 +428,7 @@
       "reputation_reward": 3,
       "category": "guild_service",
       "patron_tier_id": "guild_sponsors",
-      "preparation_quality_required": 2,
+      "preparation_quality_required": 12,
       "preparation_quality_bonus": 6
     },
     {
@@ -476,7 +476,7 @@
       "reputation_reward": 3,
       "category": "hazard_handling",
       "patron_tier_id": "guild_sponsors",
-      "preparation_quality_required": 4,
+      "preparation_quality_required": 30,
       "preparation_quality_bonus": 6
     },
     {
@@ -524,7 +524,7 @@
       "reputation_reward": 4,
       "category": "relic_research",
       "patron_tier_id": "guild_sponsors",
-      "preparation_quality_required": 4,
+      "preparation_quality_required": 30,
       "preparation_quality_bonus": 7
     },
     {
@@ -570,7 +570,7 @@
       "reputation_reward": 2,
       "category": "lodging_support",
       "patron_tier_id": "guild_sponsors",
-      "preparation_quality_required": 2,
+      "preparation_quality_required": 12,
       "preparation_quality_bonus": 5
     },
     {
@@ -618,7 +618,7 @@
       "reputation_reward": 4,
       "category": "relic_research",
       "patron_tier_id": "guild_sponsors",
-      "preparation_quality_required": 4,
+      "preparation_quality_required": 30,
       "preparation_quality_bonus": 7
     },
     {
@@ -666,7 +666,7 @@
       "reputation_reward": 4,
       "category": "escort_preparation",
       "patron_tier_id": "frontier_factions",
-      "preparation_quality_required": 5,
+      "preparation_quality_required": 45,
       "preparation_quality_bonus": 8
     },
     {
@@ -714,7 +714,7 @@
       "reputation_reward": 5,
       "category": "hazard_handling",
       "patron_tier_id": "frontier_factions",
-      "preparation_quality_required": 6,
+      "preparation_quality_required": 60,
       "preparation_quality_bonus": 9
     },
     {
@@ -762,7 +762,7 @@
       "reputation_reward": 6,
       "category": "relic_research",
       "patron_tier_id": "frontier_factions",
-      "preparation_quality_required": 6,
+      "preparation_quality_required": 60,
       "preparation_quality_bonus": 10
     }
   ]

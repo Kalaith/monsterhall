@@ -411,14 +411,19 @@ pub(super) fn draw_selected_request_panel(
         .patron_tier_id
         .as_deref()
         .unwrap_or(&data.ui_text.common.none_label);
+    // Both halves of the preparation figure, because the requirement now costs
+    // the guild half the booking when the hall falls short of it, and a bare
+    // "6" cannot tell the player whether they are short.
+    let hall_preparation = crate::engine::hall_preparation_quality(data, game_state);
     draw_body_text(
         &format!(
-            "{}: {} | {}: {} | {}: {}",
+            "{}: {} | {}: {} | {}: {}/{}",
             data.ui_text.contract_desk.category_label,
             request.category,
             data.ui_text.contract_desk.patron_tier_label,
             patron_tier,
             data.ui_text.contract_desk.preparation_quality_label,
+            hall_preparation,
             request.preparation_quality_required
         ),
         layout.detail_x + 150.0,

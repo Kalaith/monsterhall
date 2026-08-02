@@ -342,6 +342,34 @@ pub(crate) fn companion_preparation_quality(
     )
 }
 
+/// What the hall itself brings to a booking: the shifts being worked in guild
+/// rooms, plus the standing projects.
+///
+/// Deliberately *excludes* the bookings on the desk, which
+/// [`town_preparation_quality`] adds. Every contract in the catalogue carries a
+/// `preparation_quality_bonus` larger than its own
+/// `preparation_quality_required` — 3 against 2, 10 against 6 — so a bar
+/// measured against the full town figure is one the booking pays for itself,
+/// and it could never be missed by anybody. What the requirement is asking is
+/// whether the guild staffed up for the work, so that is what it is measured
+/// against.
+pub fn hall_preparation_quality(data: &GameData, game_state: &GameState) -> u32 {
+    let job_quality = game_state
+        .monsters
+        .iter()
+        .filter_map(|monster| match &monster.current_job {
+            CompanionJobState::GuildJob { room_id } => data
+                .guild_rooms
+                .rooms
+                .iter()
+                .find(|room| &room.id == room_id)
+                .map(|room| companion_preparation_quality(data, room, monster)),
+            _ => None,
+        })
+        .sum::<u32>();
+    job_quality.saturating_add(town_project_count(data, game_state))
+}
+
 pub(crate) fn town_preparation_quality(data: &GameData, game_state: &GameState) -> u32 {
     let job_quality = game_state
         .monsters

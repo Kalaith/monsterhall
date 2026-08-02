@@ -1,5 +1,5 @@
 {
-  "content_version": "1.26.0",
+  "content_version": "1.27.0",
   "rng_seed": 6840157140829518346,
   "simulation_days": 180,
   "starting_day": 1,
@@ -44,7 +44,7 @@
   "total_guest_expirations": 157,
   "total_contracts_generated": 213,
   "total_contracts_rejected": 39,
-  "total_guild_job_gold": 556081,
+  "total_guild_job_gold": 555803,
   "total_expedition_prep_gold": 3701,
   "total_expedition_prep_materials": 721,
   "total_expedition_prep_arcane_residue": 944,
@@ -64,11 +64,11 @@
   "last_expedition_day": 180,
   "total_expedition_eggs": 32,
   "final_resources": {
-    "gold": 249109,
+    "gold": 248831,
     "tower_materials": 8996,
     "eggs": 14,
     "relics": 729,
-    "arcane_residue": 44951
+    "arcane_residue": 44909
   },
   "final_debt": {
     "active_milestone_id": "tribute_cart_5",
@@ -98,20 +98,20 @@
       "arcane_residue": 19
     },
     "ending_resources": {
-      "gold": 249109,
+      "gold": 248831,
       "tower_materials": 8996,
       "eggs": 14,
       "relics": 729,
-      "arcane_residue": 44951
+      "arcane_residue": 44909
     },
     "net_change": {
-      "gold": 248966,
+      "gold": 248688,
       "tower_materials": 8956,
       "eggs": 14,
       "relics": 729,
-      "arcane_residue": 44932
+      "arcane_residue": 44890
     },
-    "debt_gold_gap": 99109,
+    "debt_gold_gap": 98831,
     "upkeep_shortfall_gold": 430,
     "expedition_prep_shortfall": 0
   },
@@ -164,11 +164,11 @@
       "reputation_proxy": 3,
       "active_contracts": 6,
       "resources": {
-        "gold": 37127,
+        "gold": 36954,
         "tower_materials": 4040,
         "eggs": 19,
         "relics": 186,
-        "arcane_residue": 11242
+        "arcane_residue": 11216
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -201,11 +201,11 @@
       "reputation_proxy": 3,
       "active_contracts": 6,
       "resources": {
-        "gold": 249109,
+        "gold": 248831,
         "tower_materials": 8996,
         "eggs": 14,
         "relics": 729,
-        "arcane_residue": 44951
+        "arcane_residue": 44909
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -9378,8 +9378,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 2491,
-      "guild_job_arcane_residue": 156,
+      "guild_job_gold": 2460,
+      "guild_job_arcane_residue": 151,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
@@ -9454,11 +9454,11 @@
         ]
       },
       "resources": {
-        "gold": 6380,
+        "gold": 6349,
         "tower_materials": 3529,
         "eggs": 21,
         "relics": 138,
-        "arcane_residue": 6106
+        "arcane_residue": 6101
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9473,9 +9473,10 @@
         "Special event windfall: +90 gold.",
         "The creditors stay the blade for now: 1200 due in 4 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Caravan Captain Contract completed: +61 gold, +9 residue.",
+        "Caravan Captain Contract completed: +30 gold, +4 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (7/12) and paid half.",
         "Local Delver Contract completed: +18 gold, +3 residue.",
-        "Iria completed a contract for 61 gold.",
+        "Iria completed a contract for 30 gold.",
         "Iria handled Reception Hall work. Skills: Charm +1, Guarding +1. History: guarding +1.",
         "Mira completed a contract for 18 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
@@ -9606,11 +9607,11 @@
         ]
       },
       "resources": {
-        "gold": 7408,
+        "gold": 7377,
         "tower_materials": 3579,
         "eggs": 21,
         "relics": 144,
-        "arcane_residue": 6420
+        "arcane_residue": 6415
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9762,11 +9763,11 @@
         ]
       },
       "resources": {
-        "gold": 8780,
+        "gold": 8749,
         "tower_materials": 3618,
         "eggs": 20,
         "relics": 150,
-        "arcane_residue": 6586
+        "arcane_residue": 6581
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -9836,8 +9837,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 3971,
-      "guild_job_arcane_residue": 158,
+      "guild_job_gold": 3940,
+      "guild_job_arcane_residue": 153,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
@@ -9912,11 +9913,11 @@
         ]
       },
       "resources": {
-        "gold": 10394,
+        "gold": 10332,
         "tower_materials": 3669,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 6766
+        "arcane_residue": 6756
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -9931,10 +9932,11 @@
         "Next due: Interest Crush in 50 days.",
         "Local Delver Contract expired: -12 gold.",
         "Local Delver Contract completed: +16 gold, +2 residue.",
-        "Caravan Captain Contract completed: +62 gold, +9 residue.",
+        "Caravan Captain Contract completed: +31 gold, +4 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (6/12) and paid half.",
         "Mira completed a contract for 16 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
-        "Rielle completed a contract for 62 gold.",
+        "Rielle completed a contract for 31 gold.",
         "Rielle handled Reception Hall work. Skills: Recovery +1, Charm +1. History: recovery +1.",
         "Lira rested and came back steadier for tomorrow.",
         "Mina rested and came back steadier for tomorrow.",
@@ -10064,11 +10066,11 @@
         ]
       },
       "resources": {
-        "gold": 11877,
+        "gold": 11815,
         "tower_materials": 3681,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 7126
+        "arcane_residue": 7116
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10143,8 +10145,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 559,
-      "guild_job_arcane_residue": 77,
+      "guild_job_gold": 532,
+      "guild_job_arcane_residue": 73,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -10219,11 +10221,11 @@
         ]
       },
       "resources": {
-        "gold": 11290,
+        "gold": 11201,
         "tower_materials": 3683,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 7203
+        "arcane_residue": 7189
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10236,8 +10238,9 @@
         "Paid 1116 gold in upkeep: 300 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 48 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Caravan Captain Contract completed: +54 gold, +8 residue.",
-        "Rielle completed a contract for 54 gold.",
+        "Caravan Captain Contract completed: +27 gold, +4 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (4/12) and paid half.",
+        "Rielle completed a contract for 27 gold.",
         "Rielle handled Reception Hall work. Skills: Scouting +1. History: scouting runs +1, guarding +1, recovery +1.",
         "Mira rested and came back steadier for tomorrow.",
         "Lira rested and came back steadier for tomorrow.",
@@ -10356,11 +10359,11 @@
         ]
       },
       "resources": {
-        "gold": 15694,
+        "gold": 15605,
         "tower_materials": 3693,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 7568
+        "arcane_residue": 7554
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10508,11 +10511,11 @@
         ]
       },
       "resources": {
-        "gold": 17139,
+        "gold": 17050,
         "tower_materials": 3704,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 7925
+        "arcane_residue": 7911
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10588,8 +10591,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 585,
-      "guild_job_arcane_residue": 80,
+      "guild_job_gold": 558,
+      "guild_job_arcane_residue": 76,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -10664,11 +10667,11 @@
         ]
       },
       "resources": {
-        "gold": 16434,
+        "gold": 16318,
         "tower_materials": 3706,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 8005
+        "arcane_residue": 7987
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10682,9 +10685,10 @@
         "Special event expense: -130 gold.",
         "The creditors stay the blade for now: 35000 due in 45 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Caravan Captain Contract completed: +53 gold, +7 residue.",
+        "Caravan Captain Contract completed: +26 gold, +3 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (4/12) and paid half.",
         "Local Delver Contract completed: +23 gold, +4 residue.",
-        "Rielle completed a contract for 53 gold.",
+        "Rielle completed a contract for 26 gold.",
         "Rielle handled Reception Hall work. Skills: Guarding +1. History: guarding +1, recovery +1.",
         "Mira completed a contract for 23 gold.",
         "Mira handled Common Room work. History: completed contracts +1.",
@@ -10808,11 +10812,11 @@
         ]
       },
       "resources": {
-        "gold": 21181,
+        "gold": 21065,
         "tower_materials": 3718,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 8443
+        "arcane_residue": 8425
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -10967,11 +10971,11 @@
         ]
       },
       "resources": {
-        "gold": 22086,
+        "gold": 21970,
         "tower_materials": 3727,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 8747
+        "arcane_residue": 8729
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11040,8 +11044,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 562,
-      "guild_job_arcane_residue": 76,
+      "guild_job_gold": 535,
+      "guild_job_arcane_residue": 72,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -11116,11 +11120,11 @@
         ]
       },
       "resources": {
-        "gold": 21296,
+        "gold": 21153,
         "tower_materials": 3729,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 8823
+        "arcane_residue": 8801
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11135,8 +11139,9 @@
         "The creditors stay the blade for now: 35000 due in 42 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract expired: -12 gold.",
-        "Caravan Captain Contract completed: +53 gold, +7 residue.",
-        "Rielle completed a contract for 53 gold.",
+        "Caravan Captain Contract completed: +26 gold, +3 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (5/12) and paid half.",
+        "Rielle completed a contract for 26 gold.",
         "Mira rested and came back steadier for tomorrow.",
         "Lira rested and came back steadier for tomorrow.",
         "Mina rested and came back steadier for tomorrow.",
@@ -11255,11 +11260,11 @@
         ]
       },
       "resources": {
-        "gold": 26123,
+        "gold": 25980,
         "tower_materials": 3743,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 9272
+        "arcane_residue": 9250
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11412,11 +11417,11 @@
         ]
       },
       "resources": {
-        "gold": 27205,
+        "gold": 27062,
         "tower_materials": 3752,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 9576
+        "arcane_residue": 9554
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11561,11 +11566,11 @@
         ]
       },
       "resources": {
-        "gold": 28741,
+        "gold": 28598,
         "tower_materials": 3756,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 9781
+        "arcane_residue": 9759
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11706,11 +11711,11 @@
         ]
       },
       "resources": {
-        "gold": 31610,
+        "gold": 31467,
         "tower_materials": 3768,
         "eggs": 20,
         "relics": 156,
-        "arcane_residue": 10148
+        "arcane_residue": 10126
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -11860,11 +11865,11 @@
         ]
       },
       "resources": {
-        "gold": 32849,
+        "gold": 32706,
         "tower_materials": 3857,
         "eggs": 20,
         "relics": 162,
-        "arcane_residue": 10469
+        "arcane_residue": 10447
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12020,11 +12025,11 @@
         ]
       },
       "resources": {
-        "gold": 31641,
+        "gold": 31498,
         "tower_materials": 3896,
         "eggs": 20,
         "relics": 168,
-        "arcane_residue": 10489
+        "arcane_residue": 10467
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12155,11 +12160,11 @@
         ]
       },
       "resources": {
-        "gold": 34010,
+        "gold": 33867,
         "tower_materials": 3951,
         "eggs": 20,
         "relics": 174,
-        "arcane_residue": 10821
+        "arcane_residue": 10799
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12312,11 +12317,11 @@
         ]
       },
       "resources": {
-        "gold": 34395,
+        "gold": 34252,
         "tower_materials": 3997,
         "eggs": 20,
         "relics": 180,
-        "arcane_residue": 11060
+        "arcane_residue": 11038
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12388,8 +12393,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 4005,
-      "guild_job_arcane_residue": 162,
+      "guild_job_gold": 3975,
+      "guild_job_arcane_residue": 158,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
@@ -12464,11 +12469,11 @@
         ]
       },
       "resources": {
-        "gold": 37127,
+        "gold": 36954,
         "tower_materials": 4040,
         "eggs": 19,
         "relics": 186,
-        "arcane_residue": 11242
+        "arcane_residue": 11216
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12481,9 +12486,10 @@
         "Paid 1173 gold in upkeep: 357 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 33 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Caravan Captain Contract completed: +60 gold, +8 residue.",
+        "Caravan Captain Contract completed: +30 gold, +4 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (7/12) and paid half.",
         "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Mina completed a contract for 60 gold.",
+        "Mina completed a contract for 30 gold.",
         "Mina handled Reception Hall work. Skills: Recovery +1, Charm +1. History: recovery +1.",
         "Mira completed a contract for 26 gold.",
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1, hospitality +1.",
@@ -12614,11 +12620,11 @@
         ]
       },
       "resources": {
-        "gold": 41959,
+        "gold": 41786,
         "tower_materials": 4092,
         "eggs": 19,
         "relics": 193,
-        "arcane_residue": 11634
+        "arcane_residue": 11608
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12775,11 +12781,11 @@
         ]
       },
       "resources": {
-        "gold": 44478,
+        "gold": 44305,
         "tower_materials": 4145,
         "eggs": 19,
         "relics": 199,
-        "arcane_residue": 12009
+        "arcane_residue": 11983
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -12933,11 +12939,11 @@
         ]
       },
       "resources": {
-        "gold": 44069,
+        "gold": 43896,
         "tower_materials": 4190,
         "eggs": 19,
         "relics": 205,
-        "arcane_residue": 12181
+        "arcane_residue": 12155
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13085,11 +13091,11 @@
         ]
       },
       "resources": {
-        "gold": 47743,
+        "gold": 47570,
         "tower_materials": 4244,
         "eggs": 19,
         "relics": 211,
-        "arcane_residue": 12512
+        "arcane_residue": 12486
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13243,11 +13249,11 @@
         ]
       },
       "resources": {
-        "gold": 49794,
+        "gold": 49621,
         "tower_materials": 4292,
         "eggs": 19,
         "relics": 217,
-        "arcane_residue": 12826
+        "arcane_residue": 12800
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13403,11 +13409,11 @@
         ]
       },
       "resources": {
-        "gold": 51505,
+        "gold": 51332,
         "tower_materials": 4344,
         "eggs": 19,
         "relics": 223,
-        "arcane_residue": 13136
+        "arcane_residue": 13110
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13482,8 +13488,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 2570,
-      "guild_job_arcane_residue": 149,
+      "guild_job_gold": 2543,
+      "guild_job_arcane_residue": 145,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
@@ -13558,11 +13564,11 @@
         ]
       },
       "resources": {
-        "gold": 52502,
+        "gold": 52302,
         "tower_materials": 4388,
         "eggs": 19,
         "relics": 229,
-        "arcane_residue": 13305
+        "arcane_residue": 13275
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13577,8 +13583,9 @@
         "The creditors stay the blade for now: 35000 due in 26 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Local Delver Contract expired: -12 gold.",
-        "Caravan Captain Contract completed: +53 gold, +7 residue.",
-        "Mina completed a contract for 53 gold.",
+        "Caravan Captain Contract completed: +26 gold, +3 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (10/12) and paid half.",
+        "Mina completed a contract for 26 gold.",
         "Mina handled Reception Hall work. Skills: Guarding +1, Scouting +1. History: scouting runs +1, guarding +1.",
         "Mira rested and came back steadier for tomorrow.",
         "Lira rested and came back steadier for tomorrow.",
@@ -13709,11 +13716,11 @@
         ]
       },
       "resources": {
-        "gold": 54724,
+        "gold": 54524,
         "tower_materials": 4441,
         "eggs": 19,
         "relics": 235,
-        "arcane_residue": 13637
+        "arcane_residue": 13607
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13871,11 +13878,11 @@
         ]
       },
       "resources": {
-        "gold": 57033,
+        "gold": 56833,
         "tower_materials": 4496,
         "eggs": 19,
         "relics": 241,
-        "arcane_residue": 13967
+        "arcane_residue": 13937
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -13948,8 +13955,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 2478,
-      "guild_job_arcane_residue": 152,
+      "guild_job_gold": 2451,
+      "guild_job_arcane_residue": 148,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
@@ -14024,11 +14031,11 @@
         ]
       },
       "resources": {
-        "gold": 58245,
+        "gold": 58018,
         "tower_materials": 4546,
         "eggs": 19,
         "relics": 247,
-        "arcane_residue": 14147
+        "arcane_residue": 14113
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14042,8 +14049,9 @@
         "Paid 1206 gold in upkeep: 390 wages, 215 supplies, 601 repairs.",
         "The creditors stay the blade for now: 35000 due in 23 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Caravan Captain Contract completed: +53 gold, +7 residue.",
-        "Mina completed a contract for 53 gold.",
+        "Caravan Captain Contract completed: +26 gold, +3 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (10/12) and paid half.",
+        "Mina completed a contract for 26 gold.",
         "Mina handled Reception Hall work. Skills: Charm +1. History: guarding +1, recovery +1.",
         "Mira rested and came back steadier for tomorrow.",
         "Lira rested and came back steadier for tomorrow.",
@@ -14172,11 +14180,11 @@
         ]
       },
       "resources": {
-        "gold": 60805,
+        "gold": 60578,
         "tower_materials": 4599,
         "eggs": 19,
         "relics": 253,
-        "arcane_residue": 14543
+        "arcane_residue": 14509
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14331,11 +14339,11 @@
         ]
       },
       "resources": {
-        "gold": 63150,
+        "gold": 62923,
         "tower_materials": 4654,
         "eggs": 19,
         "relics": 259,
-        "arcane_residue": 14877
+        "arcane_residue": 14843
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14412,8 +14420,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 2479,
-      "guild_job_arcane_residue": 154,
+      "guild_job_gold": 2453,
+      "guild_job_arcane_residue": 150,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
@@ -14488,11 +14496,11 @@
         ]
       },
       "resources": {
-        "gold": 64620,
+        "gold": 64367,
         "tower_materials": 4724,
         "eggs": 19,
         "relics": 265,
-        "arcane_residue": 15059
+        "arcane_residue": 15021
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14506,8 +14514,9 @@
         "Special event windfall: +260 gold.",
         "The creditors stay the blade for now: 35000 due in 20 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Caravan Captain Contract completed: +51 gold, +7 residue.",
-        "Mina completed a contract for 51 gold.",
+        "Caravan Captain Contract completed: +25 gold, +3 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (10/12) and paid half.",
+        "Mina completed a contract for 25 gold.",
         "Mina handled Reception Hall work. Skills: Charm +1. History: recovery +1.",
         "Mira rested and came back steadier for tomorrow.",
         "Lira returned from Boiler Cathedral with fresh loot.",
@@ -14637,11 +14646,11 @@
         ]
       },
       "resources": {
-        "gold": 66907,
+        "gold": 66654,
         "tower_materials": 4777,
         "eggs": 19,
         "relics": 271,
-        "arcane_residue": 15385
+        "arcane_residue": 15347
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14792,11 +14801,11 @@
         ]
       },
       "resources": {
-        "gold": 69735,
+        "gold": 69482,
         "tower_materials": 4835,
         "eggs": 19,
         "relics": 277,
-        "arcane_residue": 15787
+        "arcane_residue": 15749
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14877,8 +14886,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 1983,
-      "guild_job_arcane_residue": 87,
+      "guild_job_gold": 1958,
+      "guild_job_arcane_residue": 83,
       "expedition_prep_gold": 30,
       "expedition_prep_materials": 6,
       "expedition_prep_arcane_residue": 8,
@@ -14953,11 +14962,11 @@
         ]
       },
       "resources": {
-        "gold": 70701,
+        "gold": 70423,
         "tower_materials": 4902,
         "eggs": 19,
         "relics": 283,
-        "arcane_residue": 15902
+        "arcane_residue": 15860
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -14971,9 +14980,10 @@
         "Special event windfall: +260 gold.",
         "The creditors stay the blade for now: 35000 due in 17 days.",
         "Tower Scholar Contract expired: -30 gold.",
-        "Caravan Captain Contract completed: +50 gold, +7 residue.",
+        "Caravan Captain Contract completed: +25 gold, +3 residue.",
+        "Caravan Captain Contract was served by an under-prepared hall (3/12) and paid half.",
         "Local Delver Contract completed: +26 gold, +5 residue.",
-        "Mina completed a contract for 50 gold.",
+        "Mina completed a contract for 25 gold.",
         "Mina handled Reception Hall work. Skills: Recovery +1, Guarding +1. History: guarding +1, recovery +1.",
         "Mira completed a contract for 26 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1. History: scouting runs +1, hospitality +1.",
@@ -15102,11 +15112,11 @@
         ]
       },
       "resources": {
-        "gold": 73279,
+        "gold": 73001,
         "tower_materials": 4955,
         "eggs": 19,
         "relics": 289,
-        "arcane_residue": 16303
+        "arcane_residue": 16261
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15262,11 +15272,11 @@
         ]
       },
       "resources": {
-        "gold": 78037,
+        "gold": 77759,
         "tower_materials": 5009,
         "eggs": 18,
         "relics": 295,
-        "arcane_residue": 16769
+        "arcane_residue": 16727
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15425,11 +15435,11 @@
         ]
       },
       "resources": {
-        "gold": 81538,
+        "gold": 81260,
         "tower_materials": 5036,
         "eggs": 18,
         "relics": 301,
-        "arcane_residue": 17082
+        "arcane_residue": 17040
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15585,11 +15595,11 @@
         ]
       },
       "resources": {
-        "gold": 82797,
+        "gold": 82519,
         "tower_materials": 5085,
         "eggs": 18,
         "relics": 307,
-        "arcane_residue": 17272
+        "arcane_residue": 17230
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15736,11 +15746,11 @@
         ]
       },
       "resources": {
-        "gold": 85871,
+        "gold": 85593,
         "tower_materials": 5163,
         "eggs": 18,
         "relics": 313,
-        "arcane_residue": 17675
+        "arcane_residue": 17633
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -15899,11 +15909,11 @@
         ]
       },
       "resources": {
-        "gold": 89315,
+        "gold": 89037,
         "tower_materials": 5210,
         "eggs": 18,
         "relics": 319,
-        "arcane_residue": 17998
+        "arcane_residue": 17956
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16055,11 +16065,11 @@
         ]
       },
       "resources": {
-        "gold": 90348,
+        "gold": 90070,
         "tower_materials": 5234,
         "eggs": 18,
         "relics": 325,
-        "arcane_residue": 18168
+        "arcane_residue": 18126
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16207,11 +16217,11 @@
         ]
       },
       "resources": {
-        "gold": 94866,
+        "gold": 94588,
         "tower_materials": 5294,
         "eggs": 18,
         "relics": 331,
-        "arcane_residue": 18653
+        "arcane_residue": 18611
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16378,11 +16388,11 @@
         ]
       },
       "resources": {
-        "gold": 96512,
+        "gold": 96234,
         "tower_materials": 5344,
         "eggs": 18,
         "relics": 337,
-        "arcane_residue": 18903
+        "arcane_residue": 18861
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16531,11 +16541,11 @@
         ]
       },
       "resources": {
-        "gold": 97615,
+        "gold": 97337,
         "tower_materials": 5393,
         "eggs": 18,
         "relics": 343,
-        "arcane_residue": 19087
+        "arcane_residue": 19045
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16679,11 +16689,11 @@
         ]
       },
       "resources": {
-        "gold": 103023,
+        "gold": 102745,
         "tower_materials": 5457,
         "eggs": 18,
         "relics": 349,
-        "arcane_residue": 19717
+        "arcane_residue": 19675
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -16852,11 +16862,11 @@
         ]
       },
       "resources": {
-        "gold": 104066,
+        "gold": 103788,
         "tower_materials": 5506,
         "eggs": 18,
         "relics": 355,
-        "arcane_residue": 19902
+        "arcane_residue": 19860
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -17003,11 +17013,11 @@
         ]
       },
       "resources": {
-        "gold": 105829,
+        "gold": 105551,
         "tower_materials": 5557,
         "eggs": 18,
         "relics": 361,
-        "arcane_residue": 20161
+        "arcane_residue": 20119
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -17155,11 +17165,11 @@
         ]
       },
       "resources": {
-        "gold": 110861,
+        "gold": 110583,
         "tower_materials": 5652,
         "eggs": 18,
         "relics": 367,
-        "arcane_residue": 20642
+        "arcane_residue": 20600
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -17322,11 +17332,11 @@
         ]
       },
       "resources": {
-        "gold": 112282,
+        "gold": 112004,
         "tower_materials": 5703,
         "eggs": 18,
         "relics": 373,
-        "arcane_residue": 20901
+        "arcane_residue": 20859
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
@@ -17475,11 +17485,11 @@
         ]
       },
       "resources": {
-        "gold": 79151,
+        "gold": 78873,
         "tower_materials": 5764,
         "eggs": 18,
         "relics": 379,
-        "arcane_residue": 21174
+        "arcane_residue": 21132
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -17635,11 +17645,11 @@
         ]
       },
       "resources": {
-        "gold": 83779,
+        "gold": 83501,
         "tower_materials": 5824,
         "eggs": 18,
         "relics": 385,
-        "arcane_residue": 21655
+        "arcane_residue": 21613
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -17802,11 +17812,11 @@
         ]
       },
       "resources": {
-        "gold": 84523,
+        "gold": 84245,
         "tower_materials": 5853,
         "eggs": 18,
         "relics": 391,
-        "arcane_residue": 21838
+        "arcane_residue": 21796
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -17953,11 +17963,11 @@
         ]
       },
       "resources": {
-        "gold": 86600,
+        "gold": 86322,
         "tower_materials": 5904,
         "eggs": 18,
         "relics": 398,
-        "arcane_residue": 22099
+        "arcane_residue": 22057
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18110,11 +18120,11 @@
         ]
       },
       "resources": {
-        "gold": 92878,
+        "gold": 92600,
         "tower_materials": 5950,
         "eggs": 17,
         "relics": 404,
-        "arcane_residue": 22649
+        "arcane_residue": 22607
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18280,11 +18290,11 @@
         ]
       },
       "resources": {
-        "gold": 95827,
+        "gold": 95549,
         "tower_materials": 5995,
         "eggs": 17,
         "relics": 410,
-        "arcane_residue": 22897
+        "arcane_residue": 22855
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18432,11 +18442,11 @@
         ]
       },
       "resources": {
-        "gold": 97090,
+        "gold": 96812,
         "tower_materials": 6046,
         "eggs": 17,
         "relics": 416,
-        "arcane_residue": 23162
+        "arcane_residue": 23120
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18585,11 +18595,11 @@
         ]
       },
       "resources": {
-        "gold": 102199,
+        "gold": 101921,
         "tower_materials": 6108,
         "eggs": 17,
         "relics": 422,
-        "arcane_residue": 23722
+        "arcane_residue": 23680
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18760,11 +18770,11 @@
         ]
       },
       "resources": {
-        "gold": 105174,
+        "gold": 104896,
         "tower_materials": 6158,
         "eggs": 17,
         "relics": 428,
-        "arcane_residue": 23982
+        "arcane_residue": 23940
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -18915,11 +18925,11 @@
         ]
       },
       "resources": {
-        "gold": 106698,
+        "gold": 106420,
         "tower_materials": 6210,
         "eggs": 17,
         "relics": 434,
-        "arcane_residue": 24246
+        "arcane_residue": 24204
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19068,11 +19078,11 @@
         ]
       },
       "resources": {
-        "gold": 113390,
+        "gold": 113112,
         "tower_materials": 6273,
         "eggs": 17,
         "relics": 440,
-        "arcane_residue": 24879
+        "arcane_residue": 24837
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19242,11 +19252,11 @@
         ]
       },
       "resources": {
-        "gold": 116659,
+        "gold": 116381,
         "tower_materials": 6343,
         "eggs": 17,
         "relics": 446,
-        "arcane_residue": 25140
+        "arcane_residue": 25098
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19399,11 +19409,11 @@
         ]
       },
       "resources": {
-        "gold": 116756,
+        "gold": 116478,
         "tower_materials": 6396,
         "eggs": 17,
         "relics": 452,
-        "arcane_residue": 25420
+        "arcane_residue": 25378
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19558,11 +19568,11 @@
         ]
       },
       "resources": {
-        "gold": 122275,
+        "gold": 121997,
         "tower_materials": 6454,
         "eggs": 17,
         "relics": 458,
-        "arcane_residue": 25905
+        "arcane_residue": 25863
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19725,11 +19735,11 @@
         ]
       },
       "resources": {
-        "gold": 125054,
+        "gold": 124776,
         "tower_materials": 6504,
         "eggs": 17,
         "relics": 464,
-        "arcane_residue": 26167
+        "arcane_residue": 26125
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -19877,11 +19887,11 @@
         ]
       },
       "resources": {
-        "gold": 127361,
+        "gold": 127083,
         "tower_materials": 6561,
         "eggs": 17,
         "relics": 470,
-        "arcane_residue": 26604
+        "arcane_residue": 26562
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20045,11 +20055,11 @@
         ]
       },
       "resources": {
-        "gold": 131293,
+        "gold": 131015,
         "tower_materials": 6617,
         "eggs": 17,
         "relics": 476,
-        "arcane_residue": 27016
+        "arcane_residue": 26974
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20207,11 +20217,11 @@
         ]
       },
       "resources": {
-        "gold": 134312,
+        "gold": 134034,
         "tower_materials": 6667,
         "eggs": 17,
         "relics": 482,
-        "arcane_residue": 27278
+        "arcane_residue": 27236
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20361,11 +20371,11 @@
         ]
       },
       "resources": {
-        "gold": 136492,
+        "gold": 136214,
         "tower_materials": 6722,
         "eggs": 17,
         "relics": 488,
-        "arcane_residue": 27635
+        "arcane_residue": 27593
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20516,11 +20526,11 @@
         ]
       },
       "resources": {
-        "gold": 140379,
+        "gold": 140101,
         "tower_materials": 6778,
         "eggs": 17,
         "relics": 494,
-        "arcane_residue": 28043
+        "arcane_residue": 28001
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20679,11 +20689,11 @@
         ]
       },
       "resources": {
-        "gold": 143116,
+        "gold": 142838,
         "tower_materials": 6821,
         "eggs": 17,
         "relics": 500,
-        "arcane_residue": 28272
+        "arcane_residue": 28230
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20833,11 +20843,11 @@
         ]
       },
       "resources": {
-        "gold": 145585,
+        "gold": 145307,
         "tower_materials": 6878,
         "eggs": 17,
         "relics": 506,
-        "arcane_residue": 28708
+        "arcane_residue": 28666
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -20993,11 +21003,11 @@
         ]
       },
       "resources": {
-        "gold": 152002,
+        "gold": 151724,
         "tower_materials": 6922,
         "eggs": 16,
         "relics": 512,
-        "arcane_residue": 29254
+        "arcane_residue": 29212
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21161,11 +21171,11 @@
         ]
       },
       "resources": {
-        "gold": 156507,
+        "gold": 156229,
         "tower_materials": 6971,
         "eggs": 16,
         "relics": 518,
-        "arcane_residue": 29530
+        "arcane_residue": 29488
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21316,11 +21326,11 @@
         ]
       },
       "resources": {
-        "gold": 159221,
+        "gold": 158943,
         "tower_materials": 7029,
         "eggs": 16,
         "relics": 524,
-        "arcane_residue": 29967
+        "arcane_residue": 29925
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21480,11 +21490,11 @@
         ]
       },
       "resources": {
-        "gold": 163107,
+        "gold": 162829,
         "tower_materials": 7084,
         "eggs": 16,
         "relics": 530,
-        "arcane_residue": 30376
+        "arcane_residue": 30334
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21642,11 +21652,11 @@
         ]
       },
       "resources": {
-        "gold": 167894,
+        "gold": 167616,
         "tower_materials": 7135,
         "eggs": 16,
         "relics": 536,
-        "arcane_residue": 30729
+        "arcane_residue": 30687
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21799,11 +21809,11 @@
         ]
       },
       "resources": {
-        "gold": 170716,
+        "gold": 170438,
         "tower_materials": 7193,
         "eggs": 16,
         "relics": 542,
-        "arcane_residue": 31180
+        "arcane_residue": 31138
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -21963,11 +21973,11 @@
         ]
       },
       "resources": {
-        "gold": 176715,
+        "gold": 176437,
         "tower_materials": 7249,
         "eggs": 16,
         "relics": 548,
-        "arcane_residue": 31681
+        "arcane_residue": 31639
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22131,11 +22141,11 @@
         ]
       },
       "resources": {
-        "gold": 179133,
+        "gold": 178855,
         "tower_materials": 7297,
         "eggs": 16,
         "relics": 554,
-        "arcane_residue": 31869
+        "arcane_residue": 31827
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22280,11 +22290,11 @@
         ]
       },
       "resources": {
-        "gold": 182124,
+        "gold": 181846,
         "tower_materials": 7355,
         "eggs": 16,
         "relics": 560,
-        "arcane_residue": 32339
+        "arcane_residue": 32297
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22442,11 +22452,11 @@
         ]
       },
       "resources": {
-        "gold": 189225,
+        "gold": 188947,
         "tower_materials": 7473,
         "eggs": 16,
         "relics": 566,
-        "arcane_residue": 32963
+        "arcane_residue": 32921
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22616,11 +22626,11 @@
         ]
       },
       "resources": {
-        "gold": 191679,
+        "gold": 191401,
         "tower_materials": 7521,
         "eggs": 16,
         "relics": 572,
-        "arcane_residue": 33157
+        "arcane_residue": 33115
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22768,11 +22778,11 @@
         ]
       },
       "resources": {
-        "gold": 197160,
+        "gold": 196882,
         "tower_materials": 7581,
         "eggs": 16,
         "relics": 579,
-        "arcane_residue": 33705
+        "arcane_residue": 33663
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -22937,11 +22947,11 @@
         ]
       },
       "resources": {
-        "gold": 201151,
+        "gold": 200873,
         "tower_materials": 7635,
         "eggs": 16,
         "relics": 585,
-        "arcane_residue": 34128
+        "arcane_residue": 34086
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23098,11 +23108,11 @@
         ]
       },
       "resources": {
-        "gold": 201801,
+        "gold": 201523,
         "tower_materials": 7677,
         "eggs": 16,
         "relics": 591,
-        "arcane_residue": 34306
+        "arcane_residue": 34264
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23250,11 +23260,11 @@
         ]
       },
       "resources": {
-        "gold": 208239,
+        "gold": 207961,
         "tower_materials": 7741,
         "eggs": 16,
         "relics": 597,
-        "arcane_residue": 35028
+        "arcane_residue": 34986
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23431,11 +23441,11 @@
         ]
       },
       "resources": {
-        "gold": 213200,
+        "gold": 212922,
         "tower_materials": 7793,
         "eggs": 16,
         "relics": 603,
-        "arcane_residue": 35382
+        "arcane_residue": 35340
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23589,11 +23599,11 @@
         ]
       },
       "resources": {
-        "gold": 214123,
+        "gold": 213845,
         "tower_materials": 7841,
         "eggs": 16,
         "relics": 609,
-        "arcane_residue": 35580
+        "arcane_residue": 35538
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23738,11 +23748,11 @@
         ]
       },
       "resources": {
-        "gold": 219625,
+        "gold": 219347,
         "tower_materials": 7903,
         "eggs": 16,
         "relics": 615,
-        "arcane_residue": 36206
+        "arcane_residue": 36164
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -23910,11 +23920,11 @@
         ]
       },
       "resources": {
-        "gold": 226874,
+        "gold": 226596,
         "tower_materials": 7976,
         "eggs": 15,
         "relics": 621,
-        "arcane_residue": 36630
+        "arcane_residue": 36588
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24077,11 +24087,11 @@
         ]
       },
       "resources": {
-        "gold": 229802,
+        "gold": 229524,
         "tower_materials": 8025,
         "eggs": 15,
         "relics": 627,
-        "arcane_residue": 36901
+        "arcane_residue": 36859
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24231,11 +24241,11 @@
         ]
       },
       "resources": {
-        "gold": 235739,
+        "gold": 235461,
         "tower_materials": 8089,
         "eggs": 15,
         "relics": 633,
-        "arcane_residue": 37627
+        "arcane_residue": 37585
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24405,11 +24415,11 @@
         ]
       },
       "resources": {
-        "gold": 240655,
+        "gold": 240377,
         "tower_materials": 8141,
         "eggs": 15,
         "relics": 639,
-        "arcane_residue": 37984
+        "arcane_residue": 37942
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24566,11 +24576,11 @@
         ]
       },
       "resources": {
-        "gold": 243482,
+        "gold": 243204,
         "tower_materials": 8190,
         "eggs": 15,
         "relics": 645,
-        "arcane_residue": 38260
+        "arcane_residue": 38218
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24726,11 +24736,11 @@
         ]
       },
       "resources": {
-        "gold": 249146,
+        "gold": 248868,
         "tower_materials": 8252,
         "eggs": 15,
         "relics": 651,
-        "arcane_residue": 38907
+        "arcane_residue": 38865
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -24895,11 +24905,11 @@
         ]
       },
       "resources": {
-        "gold": 256434,
+        "gold": 256156,
         "tower_materials": 8307,
         "eggs": 15,
         "relics": 657,
-        "arcane_residue": 39431
+        "arcane_residue": 39389
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25061,11 +25071,11 @@
         ]
       },
       "resources": {
-        "gold": 257154,
+        "gold": 256876,
         "tower_materials": 8355,
         "eggs": 15,
         "relics": 663,
-        "arcane_residue": 39615
+        "arcane_residue": 39573
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25217,11 +25227,11 @@
         ]
       },
       "resources": {
-        "gold": 263128,
+        "gold": 262850,
         "tower_materials": 8452,
         "eggs": 15,
         "relics": 669,
-        "arcane_residue": 40266
+        "arcane_residue": 40224
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25393,11 +25403,11 @@
         ]
       },
       "resources": {
-        "gold": 270127,
+        "gold": 269849,
         "tower_materials": 8505,
         "eggs": 15,
         "relics": 675,
-        "arcane_residue": 40713
+        "arcane_residue": 40671
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25557,11 +25567,11 @@
         ]
       },
       "resources": {
-        "gold": 271130,
+        "gold": 270852,
         "tower_materials": 8554,
         "eggs": 15,
         "relics": 681,
-        "arcane_residue": 40918
+        "arcane_residue": 40876
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25707,11 +25717,11 @@
         ]
       },
       "resources": {
-        "gold": 278347,
+        "gold": 278069,
         "tower_materials": 8617,
         "eggs": 15,
         "relics": 687,
-        "arcane_residue": 41628
+        "arcane_residue": 41586
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -25883,11 +25893,11 @@
         ]
       },
       "resources": {
-        "gold": 284360,
+        "gold": 284082,
         "tower_materials": 8670,
         "eggs": 15,
         "relics": 693,
-        "arcane_residue": 42106
+        "arcane_residue": 42064
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -26049,11 +26059,11 @@
         ]
       },
       "resources": {
-        "gold": 286061,
+        "gold": 285783,
         "tower_materials": 8722,
         "eggs": 15,
         "relics": 699,
-        "arcane_residue": 42406
+        "arcane_residue": 42364
       },
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
@@ -26202,11 +26212,11 @@
         ]
       },
       "resources": {
-        "gold": 227583,
+        "gold": 227305,
         "tower_materials": 8794,
         "eggs": 15,
         "relics": 705,
-        "arcane_residue": 43025
+        "arcane_residue": 42983
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26380,11 +26390,11 @@
         ]
       },
       "resources": {
-        "gold": 232840,
+        "gold": 232562,
         "tower_materials": 8845,
         "eggs": 15,
         "relics": 711,
-        "arcane_residue": 43424
+        "arcane_residue": 43382
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26541,11 +26551,11 @@
         ]
       },
       "resources": {
-        "gold": 236805,
+        "gold": 236527,
         "tower_materials": 8899,
         "eggs": 15,
         "relics": 717,
-        "arcane_residue": 43843
+        "arcane_residue": 43801
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26707,11 +26717,11 @@
         ]
       },
       "resources": {
-        "gold": 241649,
+        "gold": 241371,
         "tower_materials": 8959,
         "eggs": 15,
         "relics": 723,
-        "arcane_residue": 44455
+        "arcane_residue": 44413
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",
@@ -26878,11 +26888,11 @@
         ]
       },
       "resources": {
-        "gold": 249109,
+        "gold": 248831,
         "tower_materials": 8996,
         "eggs": 14,
         "relics": 729,
-        "arcane_residue": 44951
+        "arcane_residue": 44909
       },
       "debt": {
         "active_milestone_id": "tribute_cart_5",

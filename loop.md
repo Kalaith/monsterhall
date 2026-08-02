@@ -1376,6 +1376,43 @@ Stop the loop and report if:
   codebase, which is the third of the four parked options; (d) `ui_text` migration
   (~40 hardcoded strings) and the unbounded event log remain the two untaken slices.
 
+- **2026-08-03 — twenty-first pass (a requirement the booking paid for itself).**
+  Gameplay slice from `TODO.md`: `preparation_quality_required` is authored on 13 of
+  16 contracts, printed on the contract desk, and for the game's whole life nothing
+  read it. The parked note said enforcing it cost a debt milestone — that attempt put
+  it in `evaluate_contract_eligibility`, which cannot work, because a guild books its
+  contracts before it staffs its rooms (policy `:22` then `:24`, and a player in the
+  same order), so the figure reads 0 at booking time and every demanding contract is
+  refused outright. It belongs at **resolution**: the hall that did not staff up still
+  delivers, and is paid **half**. That reading costs the ten-seed campaign nothing
+  outside the noise the policy's own rerouting produces, with every assertion green.
+  **Two things only measurement could have told me.** First, the bar was being paid by
+  the thing it measures: `town_preparation_quality` includes every accepted booking's
+  `preparation_quality_bonus`, and every contract carries a bonus larger than its own
+  requirement (3 against 2, 10 against 6), so judged against the town figure the
+  requirement is unfailable by construction. New `hall_preparation_quality` — shifts
+  plus projects, no bookings — read once before the bookings leave state and before
+  guild jobs send their companions back to Idle, which is the hall as the player last
+  saw it. Second, the authored numbers were an order of magnitude low: the probe now
+  samples the staffed hall every day of a 365-day campaign and it runs **median 51, max
+  241** against requirements of 2–6, so only the opening days could ever miss one.
+  Re-authored to the tier of the work — 12 / 30 / 45 / 60, starters left at 0.
+  **Result:** 127 tests (was 126), fmt and clippy clean, publish green,
+  `content_version` 1.27.0, `contracts` 1.1.0, `story_events` 1.1.0. Ten seeds at day
+  365: buildings 22.9 unchanged, cleared 3/10 unchanged, zero missed payments,
+  expirations +0.6%, gold +7.8% — chaos rather than signal, since halving a booking
+  reroutes every decision after it. Guard: one fixture resolved twice, staffed and
+  unstaffed, asserting half pay and that the day's report names the shortfall; verified
+  by planting. The desk prints current/required now, verified in a capture.
+  **Next iteration should know:** (a) `town_preparation_quality` still feeds
+  `contract_depth_score` with the bookings included — that is a *score*, so it is
+  defensible, but it is the same "one number feeding two systems" shape and nobody has
+  asked whether a full desk should make a companion more eligible; (b) the probe's new
+  `PREPARATION staffed_hall min/median/max` line is the instrument for any future bar
+  authored against the hall — read it before picking numbers; (c) untaken slices are
+  unchanged: the `ui_text` migration (~40 hardcoded strings), the unbounded event log,
+  and corruption's missing relief path.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

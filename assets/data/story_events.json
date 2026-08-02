@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "opening_steps": [
     {
       "id": "camp",
@@ -121,6 +121,7 @@
   "guest_satisfied_event_template": "{guest} was fulfilled by {companion} through the {room}.",
   "guest_completed_update_template": "{guest} completed: +{gold} gold, +{residue} residue.",
   "guest_completed_roster_template": "{companion} completed a contract for {gold} gold.",
+  "guest_under_prepared_update_template": "{guest} was served by an under-prepared hall ({quality}/{required}) and paid half.",
   "guest_expired_update_template": "{guest} expired: -{gold} gold.",
   "guest_expired_event_template": "{guest} expired unmet and cost the guild {gold} gold.",
   "guest_requires_template": "Requires {value}.",

@@ -203,3 +203,119 @@ fn a_refused_booking_names_the_work_it_is_short_of() {
         report.failure_reasons
     );
 }
+
+/// `preparation_quality_required` is authored on 13 of 16 contracts and printed
+/// on the desk, and for the game's whole life nothing read it. It cannot gate
+/// the booking — a guild books before it staffs, so the figure is zero at that
+/// moment — so it settles at resolution: the hall that did not staff up still
+/// delivers, for half.
+#[test]
+fn a_hall_that_did_not_staff_up_delivers_the_booking_for_half() {
+    let data = test_game_data();
+    let room = data
+        .guild_rooms
+        .rooms
+        .iter()
+        .max_by_key(|room| room.preparation_quality_bonus)
+        .expect("the catalogue has rooms");
+    let required = room.preparation_quality_bonus;
+    assert!(
+        required > 0,
+        "this test needs a room that contributes preparation quality"
+    );
+
+    let resolve = |staffed: bool| {
+        let mut game_state = GameState {
+            current_day: 4,
+            town: PlayerTownState {
+                unlocked_room_ids: vec![room.id.clone()],
+                unlocked_species_ids: vec!["slime_companion".to_owned()],
+                ..PlayerTownState::default()
+            },
+            story_progress: StoryProgressState {
+                opening_step: OpeningChapterStep::Complete,
+                first_client_completed: true,
+                ..StoryProgressState::default()
+            },
+            ..GameState::default()
+        };
+        game_state.monsters = vec![
+            CompanionState {
+                id: "monster_001".to_owned(),
+                species_id: "slime_companion".to_owned(),
+                name: "Mira".to_owned(),
+                quality_rank: 1,
+                ..CompanionState::default()
+            },
+            CompanionState {
+                id: "monster_002".to_owned(),
+                species_id: "slime_companion".to_owned(),
+                name: "Tess".to_owned(),
+                quality_rank: 1,
+                current_job: if staffed {
+                    CompanionJobState::GuildJob {
+                        room_id: room.id.clone(),
+                    }
+                } else {
+                    CompanionJobState::Idle
+                },
+                ..CompanionState::default()
+            },
+        ];
+        game_state.active_contracts = vec![ContractState {
+            request_id: "contract_001".to_owned(),
+            template_id: "starter_slime_bedding".to_owned(),
+            guest_name: "Veiled Patron".to_owned(),
+            archetype_id: "tower_scholar".to_owned(),
+            requested_room_id: room.id.clone(),
+            minimum_quality_rank: 1,
+            reward: ResourcesState {
+                gold: 100,
+                ..ResourcesState::default()
+            },
+            deadline_day: 6,
+            preparation_quality_required: required,
+            status: ContractStatus::Accepted,
+            assigned_monster_id: Some("monster_001".to_owned()),
+            ..ContractState::default()
+        }];
+
+        let mut gold = 0;
+        let mut residue = 0;
+        let (mut updates, mut events, mut roster) = (Vec::new(), Vec::new(), Vec::new());
+        resolve_contracts(
+            &data,
+            &mut game_state,
+            &mut gold,
+            &mut residue,
+            &mut updates,
+            &mut events,
+            &mut roster,
+        );
+        (gold, updates)
+    };
+
+    let (prepared_gold, prepared_updates) = resolve(true);
+    let (short_gold, short_updates) = resolve(false);
+
+    assert!(prepared_gold > 0, "a staffed hall should be paid in full");
+    assert_eq!(
+        short_gold,
+        prepared_gold / 2,
+        "an under-prepared hall should be paid half"
+    );
+    // And it must say so, because a booking that quietly pays half reads as a
+    // reward that was authored lower.
+    assert!(
+        short_updates
+            .iter()
+            .any(|line| line.contains("under-prepared")),
+        "the day's contract updates should name the shortfall: {short_updates:?}"
+    );
+    assert!(
+        !prepared_updates
+            .iter()
+            .any(|line| line.contains("under-prepared")),
+        "a prepared hall should not be told it fell short: {prepared_updates:?}"
+    );
+}

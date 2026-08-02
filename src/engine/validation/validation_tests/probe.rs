@@ -25,8 +25,15 @@ fn probe_floor_usage() {
     // The day a species unlocks is the whole story for a deep one: unlocked on
     // day 324 of 365 is not content, however good the entry reads.
     let mut unlock_day: std::collections::HashMap<String, u32> = std::collections::HashMap::new();
+    // Sampled after the policy has staffed the hall and before the day is
+    // resolved, which is the moment a contract is judged against it.
+    let mut staffed_preparation: Vec<u32> = Vec::new();
     for day in 0..365u32 {
         run_daily_policy(&data, &mut game_state);
+        staffed_preparation.push(crate::engine::depth::hall_preparation_quality(
+            &data,
+            &game_state,
+        ));
         resolve_day(&data, &mut game_state);
         for species_id in &game_state.town.unlocked_species_ids {
             unlock_day.entry(species_id.clone()).or_insert(day);
@@ -130,6 +137,25 @@ fn probe_floor_usage() {
     println!(
         "BUILDINGS {:?}",
         game_state.town.constructed_building_ids.clone()
+    );
+
+    // A contract pays half when the hall is under-prepared for it, so the
+    // authored requirements only mean anything if they sit near what a guild
+    // can actually field. Print both, because a bar every hall clears is the
+    // same as no bar.
+    let mut requirements = data
+        .contracts
+        .requests
+        .iter()
+        .map(|template| template.preparation_quality_required)
+        .collect::<Vec<_>>();
+    requirements.sort_unstable();
+    staffed_preparation.sort_unstable();
+    println!(
+        "PREPARATION staffed_hall min={} median={} max={} requirements={requirements:?}",
+        staffed_preparation.first().copied().unwrap_or_default(),
+        staffed_preparation[staffed_preparation.len() / 2],
+        staffed_preparation.last().copied().unwrap_or_default(),
     );
 
     for floor in &data.floors.floors {

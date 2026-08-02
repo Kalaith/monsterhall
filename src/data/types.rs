@@ -231,6 +231,7 @@ pub struct StoryEventCatalogData {
     pub guest_satisfied_event_template: String,
     pub guest_completed_update_template: String,
     pub guest_completed_roster_template: String,
+    pub guest_under_prepared_update_template: String,
     pub guest_expired_update_template: String,
     pub guest_expired_event_template: String,
     pub guest_requires_template: String,

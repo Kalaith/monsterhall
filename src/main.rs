@@ -36,6 +36,10 @@ struct StartupResolutionOption {
 }
 
 fn window_conf() -> Conf {
+    // Hand-built Conf means no automatic arming: without this the capture run
+    // puts a full game window on the desktop for its whole duration.
+    capture::headless::arm("MONSTERHALL");
+
     let startup_config =
         serde_json::from_str::<StartupConfig>(include_str!("../assets/data/config.json")).ok();
     let title = startup_config

@@ -25,13 +25,13 @@ pub use day_cycle::{
     replace_monster_with_selected_egg, resolve_day,
 };
 pub use debt::{debt_intro_status, initialize_first_debt, pay_debt_now};
-pub use depth::monster_role;
 pub(crate) use depth::{
     active_situation_guest_bonus, apply_monster_relationship_gain, complete_town_project_if_needed,
     contract_follow_up_request, contract_partial_success, expedition_depth_profile,
     floor_roster_gate_report, room_depth_profile_for_town, start_town_situation_from_event,
     tick_town_situations, upkeep_pressure_pct,
 };
+pub use depth::{hall_preparation_quality, monster_role};
 pub use guest::{
     assign_monster_to_contract, clear_contract_assignment, evaluate_contract_eligibility,
     refresh_contracts, work_history_label, ContractEligibilityReport,

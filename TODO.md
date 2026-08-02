@@ -1202,8 +1202,37 @@ The panel-capacity class is closed, so this pass swept the two surfaces that
   falls back from. Preparation quality no longer gates the partial path, so an
   under-prepared guild can still scrape a half payment.
 
-- **`preparation_quality_required` is authored on 13 of 16 contracts, displayed
-  on the contract desk, and enforced nowhere.** Requirements run 2–6. Guild rooms
+- ~~`preparation_quality_required` is authored on 13 of 16 contracts, displayed
+  on the contract desk, and enforced nowhere.~~ **Done 2026-08-03 (twenty-first
+  pass), and the earlier revert below was right about the mechanism but wrong
+  about where to put it.** It bites at **resolution**, not at booking: a hall
+  that did not staff up still delivers the contract and is paid **half**.
+  Booking-time enforcement is what failed before, and it could not have worked —
+  the guild books before it staffs, so the figure reads 0 at that moment.
+
+  - **The bar was being paid by the thing it measured.** `town_preparation_quality`
+    includes every accepted booking's own `preparation_quality_bonus`, and every
+    contract in the catalogue carries a bonus larger than its own requirement
+    (3 against 2, 10 against 6). Judged against that figure the requirement is
+    unfailable by construction. New `hall_preparation_quality` — guild-room
+    shifts plus standing projects, no bookings — is what the requirement is
+    actually asking about, and it is read **before** the day's bookings are taken
+    out of state and before guild jobs send their companions back to Idle, so it
+    is the hall as the player last saw it.
+  - **The authored numbers were an order of magnitude low, so they were
+    re-authored.** The probe now samples the staffed hall every day of a 365-day
+    campaign: **median 51, max 241**, against requirements of 2–6 — a bar only
+    the opening days could miss. Scaled to the tier of the work (12 / 30 / 45 /
+    60, starters left at 0), which puts the deep contracts inside the range a
+    guild has to invest to reach. Measured at ten seeds: every campaign
+    assertion holds, buildings and cleared-milestone counts unmoved, gold inside
+    the noise the policy's own rerouting produces.
+  - **Guard**: the same fixture resolved twice, staffed and unstaffed, asserting
+    half pay and that the day's report says which — verified by planting.
+  - The desk now prints **current/required**, because a bare "6" cannot tell the
+    player whether they are short of it.
+
+- **The reverted first attempt, kept for the record.** Requirements run 2–6. Guild rooms
   contribute `preparation_quality_bonus` of 1–3 each and only `town_job_limit`
   (2) companions can be on guild jobs at once, so the figure is genuinely
   contested — companions on contracts and expeditions do not contribute to it.

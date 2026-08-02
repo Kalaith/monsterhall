@@ -356,6 +356,12 @@ pub fn resolve_contracts(
     let mut follow_up_requests = Vec::new();
     let mut resolved_contracts = Vec::new();
     let charm_training_flat = charm_training_bonus(data, game_state);
+    // Read before the bookings are taken out of the state, and before guild
+    // jobs are resolved and their companions sent back to Idle: this is the
+    // hall as it stood when the player ended the day, which is the figure the
+    // contract desk showed them. Computing it per request inside the loop
+    // reads a hall that has already been partly dismantled.
+    let town_preparation = crate::engine::depth::hall_preparation_quality(data, game_state);
     let requests = std::mem::take(&mut game_state.active_contracts);
 
     for mut request in requests {
@@ -402,6 +408,17 @@ pub fn resolve_contracts(
                         &request,
                         &game_state.monsters[monster_index],
                     );
+                // `preparation_quality_required` is authored on 13 of 16
+                // contracts and printed on the desk, and until now nothing read
+                // it. It cannot gate the *booking*: a guild books its contracts
+                // before it staffs its rooms — the policy at `policy.rs:22`
+                // then `:24`, and a player in the same order — so the figure
+                // reads zero at that moment and every demanding contract would
+                // be refused outright. It bites here instead, on the day the
+                // work is done, where the hall either was ready for it or was
+                // not. Delivering under-prepared is a completion, not a
+                // failure; it is worth half.
+                let under_prepared = town_preparation < request.preparation_quality_required;
                 if !report.is_eligible && !partial_success {
                     event_lines.push(story_text(
                         &data.story_events.guest_failed_event_template,
@@ -436,7 +453,11 @@ pub fn resolve_contracts(
                 // exhaustion visibly cut her guild-job and expedition output.
                 let effectiveness_pct =
                     companion_effectiveness_pct(&data.config.day_cycle, monster);
-                let reward_divisor = if partial_success { 2 } else { 1 };
+                let reward_divisor = if partial_success || under_prepared {
+                    2
+                } else {
+                    1
+                };
                 let scaled = |amount: u32| {
                     scale_by_effectiveness(amount / reward_divisor, effectiveness_pct)
                 };
@@ -496,6 +517,18 @@ pub fn resolve_contracts(
                     contract_updates.push(format!(
                         "{} accepted a partial fulfillment; reputation holds, but the booking paid less.",
                         request.guest_name
+                    ));
+                } else if under_prepared {
+                    contract_updates.push(story_text(
+                        &data.story_events.guest_under_prepared_update_template,
+                        &[
+                            ("{guest}", request.guest_name.clone()),
+                            ("{quality}", town_preparation.to_string()),
+                            (
+                                "{required}",
+                                request.preparation_quality_required.to_string(),
+                            ),
+                        ],
                     ));
                 }
                 if let Some(progression_update) = progression_update {
