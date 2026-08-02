@@ -1106,6 +1106,37 @@ Stop the loop and report if:
   measurement above as its evidence; (c) the `ui_text` migration (~40 hardcoded
   strings) is still the largest scoped slice nobody has taken.
 
+- **2026-08-03 — twelfth pass (a role every companion lost by day ten).** Pointed the
+  reachability heuristic at the axes left over — relics, events, missions. Events came
+  back clean (all eighteen species/trait-gated events name a combination
+  `reachable_trait_states()` says is reachable). Missions did not, and the reason was
+  **temporal, not static**: `monster_role`'s first rung was `corruption >= 10`, and
+  corruption is only ever `saturating_add`ed — nothing in the game reduces it. At 1–2 a
+  shift, every working companion latched to `corruption_adept` inside a fortnight of a
+  365-day campaign and never read as anything else, killing the five rungs below it —
+  including `versatile`, which is the whole mechanism the roster-variety slice added to
+  keep low tiers worth owning, and which had been authored, measured and unreachable
+  ever since. On five of seven missions every companion ate `-off_role_penalty`, high
+  tiers hardest. Fixed by removing the meter from the ladder rather than raising it —
+  any threshold on a monotonic meter is a latch — leaving corruption to reach roles
+  through mutation, which is the game's own statement that the tower has changed a
+  companion. All six rungs are now authorable (`day_cycle.role_thresholds`), the
+  ladder moved to `engine/depth/roles.rs` (`depth.rs` was 855 lines), and
+  `corruption_adept_minimum` is `Option<u32>` omitted from the catalogue.
+  **Result:** 116 tests (was 114), fmt and clippy clean, publish green,
+  `content_version` 1.20.0. **`final_role_diversity` 1 → 3** — the roster-variety intent
+  reaching a report for the first time — with the economy nearly still (ten-seed gold
+  +4.3%, buildings 31.5 → 31.9), because the dominant golemkin line is correctly adept
+  by trait and it is the porter, imp and routekeeper who got their roles back. Both
+  guards verified by planting `10`: the unit test (role stable to `u32::MAX` corruption)
+  and load-time validation (a threshold at or below the last mutation is rejected).
+  **Next iteration should know:** (a) the heuristic has a temporal form now — *what is
+  reachable on day 1 and unreachable by day 30?* — and monotonic meters (corruption,
+  bond, work history, reputation) are where to look; (b) role diversity 3 is bounded by
+  **species** diversity, still the parked mutation item, and this pass removed the
+  defect that would have defeated fixing it; (c) the `ui_text` migration (~40 hardcoded
+  strings) remains the largest untaken slice.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

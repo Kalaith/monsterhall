@@ -143,6 +143,7 @@ impl GameData {
         }
 
         self.validate_upkeep_bands()?;
+        self.validate_role_thresholds()?;
 
         if self.config.day_cycle.expedition_egg_reward_threshold <= 0
             || self.config.day_cycle.expedition_relic_reward_threshold <= 0
@@ -205,6 +206,60 @@ impl GameData {
             if required_tiers > patron_tier_count {
                 return Err(format!(
                     "config.json day_cycle.upkeep_bands[{index}].min_patron_tiers is                      {required_tiers} against {patron_tier_count} authored patron tiers, so that                      axis can never fire. Omit the field, or author the tier."
+                ));
+            }
+        }
+
+        Ok(())
+    }
+
+    /// The rungs of `monster_role`'s ladder.
+    ///
+    /// The ladder is ordered, so a rung that catches everybody makes every rung
+    /// below it dead. `corruption_adept_minimum` is the dangerous one, because
+    /// corruption is only ever added to: a threshold there is a latch, and the
+    /// question is only how many days it takes to close. The shipped value was
+    /// `10` against rooms that add 1–2 a shift, so it closed inside a fortnight
+    /// and `hatchery_specialist`, `performer`, `delver`, `comfort` and
+    /// `versatile` were unreachable for the other 350 days of a campaign.
+    ///
+    /// No magnitude is *safe* — corruption only climbs, so every value is a
+    /// latch and the only question is which day it shuts. What can be checked
+    /// is whether the meter is pre-empting the mechanism that is supposed to do
+    /// this job. Mutation is the game's own statement that corruption has
+    /// changed what a companion is, and it carries `corruption_tuned` along
+    /// most of its routes. While a companion still has any mutation ahead of
+    /// her, the tower has not finished with her, and a raw meter reading must
+    /// not overrule that. So a threshold is only accepted above the *last*
+    /// mutation, where the meter is the only thing left that can say anything.
+    fn validate_role_thresholds(&self) -> Result<(), String> {
+        let thresholds = &self.config.day_cycle.role_thresholds;
+
+        if thresholds.hatchery_assist_minimum == 0
+            || thresholds.performer_charm_skill_minimum == 0
+            || thresholds.performer_charm_margin == 0
+            || thresholds.delver_power_margin == 0
+            || thresholds.comfort_bond_minimum == 0
+        {
+            return Err(
+                "config.json day_cycle.role_thresholds entries must be greater than zero, or the rung catches every companion and every rung below it is dead."
+                    .to_owned(),
+            );
+        }
+
+        let Some(minimum) = thresholds.corruption_adept_minimum else {
+            return Ok(());
+        };
+        let last_mutation = self
+            .mutations
+            .mutations
+            .iter()
+            .map(|mutation| mutation.minimum_corruption)
+            .max();
+        if let Some(last) = last_mutation {
+            if minimum <= last {
+                return Err(format!(
+                    "config.json day_cycle.role_thresholds.corruption_adept_minimum is {minimum}, at or below the last mutation at {last}. Corruption only ever climbs, so this latches every companion as an adept while the tower still has mutations left to change her by — and every rung below corruption_adept becomes unreachable. Omit the field to leave roles to traits and mutation."
                 ));
             }
         }

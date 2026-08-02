@@ -1,6 +1,6 @@
 {
   "title": "Monsterhall",
-  "content_version": "1.19.0",
+  "content_version": "1.20.0",
   "save_version": 10,
   "input": {
     "primary_mode": "mouse",
@@ -165,6 +165,13 @@
       "off_role_penalty_max": 6,
       "flexibility_stat_floor": 12,
       "flexibility_stat_ceiling": 30
+    },
+    "role_thresholds": {
+      "hatchery_assist_minimum": 1,
+      "performer_charm_skill_minimum": 2,
+      "performer_charm_margin": 2,
+      "delver_power_margin": 2,
+      "comfort_bond_minimum": 8
     },
     "condition_effects": {
       "fatigue_allowance": 30,

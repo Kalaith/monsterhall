@@ -304,7 +304,7 @@ fn sorted(traits: &[String]) -> Vec<String> {
 
 #[cfg(test)]
 mod tests {
-    use crate::data::loader::test_game_data;
+    use crate::data::test_game_data;
 
     /// `calming_presence` was authored with a description, stat block and icon,
     /// listed as preferred by `common_room` and `nursery_wing`, wanted by three

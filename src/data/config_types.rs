@@ -209,6 +209,42 @@ pub struct DayCycleConfigData {
     pub condition_effects: ConditionEffectData,
     #[serde(default = "default_role_affinity")]
     pub role_affinity: RoleAffinityData,
+    #[serde(default = "default_role_thresholds")]
+    pub role_thresholds: RoleThresholdsData,
+}
+
+/// Where each rung of `monster_role`'s ladder sits.
+///
+/// These were six literals inside the classifier, which put the game's whole
+/// answer to *what is this companion for* out of the authors' reach. The
+/// corruption rung is the one that mattered: at a hardcoded `10` on a meter
+/// that only ever climbs and runs past 400 in a long campaign, it caught every
+/// companion within about ten working days and made the five rungs below it
+/// unreachable for the rest of the run.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct RoleThresholdsData {
+    /// Corruption at which the meter alone makes a companion an adept, or
+    /// `None` when it never does.
+    ///
+    /// **Prefer `None`.** Corruption is only ever added to, so any value here
+    /// is a latch: every companion crosses it eventually and no companion ever
+    /// reads as anything else again. Corruption already reaches the role system
+    /// by the route that can express change rather than accumulation —
+    /// mutation, which rewrites the species and carries `corruption_tuned`
+    /// along most of its branches.
+    #[serde(default)]
+    pub corruption_adept_minimum: Option<u32>,
+    /// Banked hatchery shifts that mark a companion as hatchery staff.
+    pub hatchery_assist_minimum: u32,
+    /// Trained charm at which a companion reads as a performer regardless of
+    /// her stat spread.
+    pub performer_charm_skill_minimum: u32,
+    /// How far charm must lead power for a performer.
+    pub performer_charm_margin: u32,
+    /// How far power must lead charm for a delver.
+    pub delver_power_margin: u32,
+    /// Bond at which a companion reads as comfort staff.
+    pub comfort_bond_minimum: u32,
 }
 
 /// The price of running a companion into the ground.
@@ -275,6 +311,17 @@ fn default_role_affinity() -> RoleAffinityData {
         off_role_penalty_max: 6,
         flexibility_stat_floor: 12,
         flexibility_stat_ceiling: 30,
+    }
+}
+
+fn default_role_thresholds() -> RoleThresholdsData {
+    RoleThresholdsData {
+        corruption_adept_minimum: None,
+        hatchery_assist_minimum: 1,
+        performer_charm_skill_minimum: 2,
+        performer_charm_margin: 2,
+        delver_power_margin: 2,
+        comfort_bond_minimum: 8,
     }
 }
 

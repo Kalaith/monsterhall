@@ -183,12 +183,16 @@ mod tests {
 
         let mut inferable = std::collections::HashSet::new();
         // Sweep the branches of `monster_role` by driving the inputs it reads.
-        for corruption in [0, 20] {
+        // Traits are one of those inputs: `corruption_adept` is reached by
+        // carrying `corruption_tuned`, not by a meter reading, because
+        // corruption only ever climbs and a threshold on it latches the whole
+        // roster into one role for the rest of the campaign.
+        for trait_ids in [vec![], vec!["corruption_tuned".to_owned()]] {
             for hatchery_assists in [0, 1] {
                 for charm_skill in [0, 3] {
                     for (power, charm) in [(1, 1), (9, 1), (1, 9)] {
                         for bond in [0, 9] {
-                            monster.corruption = corruption;
+                            monster.trait_ids.clone_from(&trait_ids);
                             monster.work_history.hatchery_assists = hatchery_assists;
                             monster.skills.charm = charm_skill;
                             monster.stats.power = power;

@@ -5,6 +5,11 @@ use crate::state::{
     ResourcesState, TownSituationState,
 };
 
+mod roles;
+
+pub use roles::monster_role;
+pub(crate) use roles::role_affinity;
+
 #[derive(Debug, Clone)]
 pub(crate) struct RoomDepthProfile {
     pub(crate) niche: String,
@@ -28,81 +33,6 @@ pub(crate) struct ExpeditionDepthProfile {
     pub(crate) relic_bonus: u32,
     pub(crate) egg_grade_score: u32,
     pub(crate) corruption_pressure: u32,
-}
-
-/// How this companion reads to the tower: the single classifier behind both
-/// `role_affinity`'s mission bonus and the label the profile screen shows.
-///
-/// The UI carried an independent copy of this branching with different label
-/// strings. They agreed only by hand — updating one and not the other would have
-/// told the player she is a performer while the engine scored her a delver and
-/// quietly withheld the mission role bonus.
-pub fn monster_role(data: &GameData, monster: &CompanionState) -> &'static str {
-    let stats = crate::engine::effective_stats(data, monster);
-    if monster.corruption >= 10 || monster.trait_ids.iter().any(|id| id == "corruption_tuned") {
-        "corruption_adept"
-    } else if monster.work_history.hatchery_assists > 0
-        || monster.trait_ids.iter().any(|id| id == "hatchery_attuned")
-    {
-        "hatchery_specialist"
-    } else if monster.skills.charm >= 2 || stats.charm >= stats.power + 2 {
-        "performer"
-    } else if stats.power >= stats.charm + 2 {
-        "delver"
-    } else if monster.bond >= 8 || monster.trait_ids.iter().any(|id| id == "calming_presence") {
-        "comfort"
-    } else {
-        "versatile"
-    }
-}
-
-pub(crate) fn role_affinity(data: &GameData, monster: &CompanionState, role: &str) -> i32 {
-    if role.is_empty() {
-        return 0;
-    }
-
-    let affinity = &data.config.day_cycle.role_affinity;
-    let role_of_monster = monster_role(data, monster);
-    if role_of_monster == role {
-        affinity.matched_bonus
-    } else if role_of_monster == "versatile" {
-        affinity.versatile_bonus
-    } else {
-        -off_role_penalty(data, monster)
-    }
-}
-
-/// What working outside her role costs a companion.
-///
-/// Off-role used to be a flat zero for everybody, which made a species' tier
-/// pure upside: a `gargoyle_stairwarden` was exactly as flexible as a
-/// `slime_companion` and strictly stronger, so there was never a reason to keep
-/// a low tier once a high one was available. Capability is now paid for with
-/// narrowness — the weakest species work anywhere for free, the strongest are
-/// specialists who lose ground on unfamiliar work.
-///
-/// Expressed as a penalty on the strong rather than a bonus to the weak on
-/// purpose: crediting low tiers off-role inflated their apparent value and the
-/// policy started staffing them onto work they were bad at, which cost the
-/// deterministic campaign a building tier and eleven debt payments.
-fn off_role_penalty(data: &GameData, monster: &CompanionState) -> i32 {
-    let affinity = &data.config.day_cycle.role_affinity;
-    let Some(species) = crate::engine::species_of(data, monster) else {
-        return 0;
-    };
-    let stat_total = crate::engine::species_stat_total(species);
-    let floor = affinity.flexibility_stat_floor;
-    let ceiling = affinity.flexibility_stat_ceiling.max(floor + 1);
-
-    if stat_total <= floor {
-        return 0;
-    }
-    if stat_total >= ceiling {
-        return affinity.off_role_penalty_max;
-    }
-    let above_floor = stat_total - floor;
-    let span = ceiling - floor;
-    affinity.off_role_penalty_max * above_floor as i32 / span as i32
 }
 
 pub(crate) fn room_depth_profile(

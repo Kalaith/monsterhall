@@ -171,6 +171,73 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, twelfth pass)
+
+Swept the remaining axes the reachability heuristic had not been pointed at —
+relics, events, missions. Event gates came back clean: all eighteen
+species/trait-gated events name a combination some companion can reach, checked
+against `reachable_trait_states()`. The mission axis did not, and the reason was
+temporal rather than static.
+
+- ~~Every companion became a `corruption_adept` around day 10 and stayed one for
+  the rest of the campaign.~~ Fixed. `monster_role` is an ordered ladder, and
+  its first rung was `monster.corruption >= 10`. **Corruption is only ever
+  `saturating_add`ed — there is no path in the game that reduces it.** The
+  reception hall adds 1 an occupied shift and the packroom 2, so a working
+  companion crossed 10 inside a fortnight of a 365-day run and could never read
+  as anything else again, whatever her stats, skills, traits or bond said.
+
+  Everything below that rung was therefore dead in play from about day 10:
+  `hatchery_specialist`, `performer`, `delver`, `comfort` and — the expensive
+  one — **`versatile`**, which is the entire mechanism the roster-variety slice
+  added so that low-tier companions stay worth keeping. `versatile_bonus: 4` was
+  authored, measured, and unreachable. Of the seven missions, only
+  `scout_route` and `sealed_extraction` prefer `corruption_adept`; on the other
+  five every companion took `-off_role_penalty`, scaled by species stat total,
+  so the high tiers paid the most for a role nobody could avoid.
+
+  **The fix is not a bigger number.** Any threshold on a monotonic meter is a
+  latch and the only question is which day it shuts. Corruption already reaches
+  the role system by the route that can express change rather than accumulation
+  — mutation, which rewrites the species and carries `corruption_tuned` along
+  most of its branches, and which deliberately does *not* on others
+  (`imp_runner → lamia_routekeeper` produces a changed companion who is not an
+  adept). So `corruption_adept_minimum` is `Option<u32>` and the catalogue omits
+  it, the same idiom the upkeep band established for distinguishing "no axis"
+  from zero.
+
+  **All six rungs are authorable now** (`day_cycle.role_thresholds`); they were
+  literals inside the classifier, which put the game's answer to *what is this
+  companion for* out of the authors' reach. The role ladder moved to
+  `engine/depth/roles.rs` — `depth.rs` was at 855 lines and the standards
+  require the restructure to happen in the pass that touches it.
+
+  **Two guards, both verified by planting `10` back.** A unit test asserts a
+  companion keeps her role at corruption 8, 10, 16, 100, 488 and `u32::MAX`
+  (this is the property that was violated, and it is temporal, so no static
+  check could have caught it). Load-time validation rejects a threshold at or
+  below the *last* mutation: while a companion still has any mutation ahead of
+  her the tower has not finished with her, and a raw meter reading must not
+  overrule the mechanism that is supposed to be doing this. A third test — every
+  role a mission prefers is one some companion reads as — was added alongside,
+  and immediately caught a bad fixture rather than a bad game: companion stats
+  live on `CompanionState`, written from the species at hatch, so a fixture
+  leaving them zero is testing a companion who does not exist.
+
+- **Measured: `final_role_diversity` 1 → 3.** The day-365 roster shows three
+  distinct roles where it showed one, which is the stated roster-variety intent
+  reaching the report for the first time. The economy barely moves — ten-seed
+  gold 1.26M → 1.32M (+4.3%), buildings 31.5 → 31.9 — because the dominant
+  golemkin line carries `corruption_tuned` as a starting trait and is *correctly*
+  adept; what changed is that the porter, the imp and the routekeeper get their
+  own roles back.
+
+- **The species monoculture is still the ceiling on this.** Role diversity 3
+  against a roster of 20 is bounded by species diversity, which remains the
+  parked mutation item. What this pass removed was a defect that would have
+  defeated that fix too: with the latch in place, fixing species variety would
+  have produced twenty different creatures all reading as the same role.
+
 ### Found by review, not by the audit (2026-08-03, eleventh pass)
 
 The tenth pass's heuristic — *a number that cannot be reached* — kept pointing at
