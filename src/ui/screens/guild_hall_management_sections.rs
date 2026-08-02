@@ -418,6 +418,11 @@ fn draw_worker_cards(
         let summary = worker_decision_summary(data, monster, prediction);
 
         let species_label = species_name_by_id(data, &monster.species_id);
+        // A companion already committed to a contract cannot take a shift: the
+        // day cycle resolves the booking first and discards whatever else she
+        // was rostered for. The card says so rather than offering a button that
+        // errors, and greys out so the eye skips her.
+        let is_booked = crate::engine::is_booked_for_contract(game_state, &monster.id);
         let card = draw_character_card(
             data,
             monster,
@@ -428,17 +433,26 @@ fn draw_worker_cards(
             CharacterCardSpec {
                 name: &monster.name,
                 species: &species_label,
-                state: assignment_label(data, &monster.current_job),
+                state: if is_booked {
+                    &data.ui_text.common.assignment_booked_label
+                } else {
+                    assignment_label(data, &monster.current_job)
+                },
                 key_value: &summary.prediction_line,
                 color: summary.highlight,
-                state_color: summary.highlight,
+                state_color: if is_booked {
+                    theme::WARNING
+                } else {
+                    summary.highlight
+                },
                 selected: false,
-                disabled: false,
+                disabled: is_booked,
             },
         );
 
         let assigned_to_selected = matches!(&monster.current_job, CompanionJobState::GuildJob { room_id } if room_id == &selected_room.id);
         if !assigned_to_selected
+            && !is_booked
             && primary_button(
                 card.action_x,
                 card.action_y,
@@ -457,7 +471,12 @@ fn draw_worker_cards(
         } else {
             card.action_y + 24.0
         };
+        // Rest is as futile as a shift for a booked companion: day resolution
+        // settles the contract and skips her, so the rest never runs and her
+        // fatigue never comes down. Offering the button would be the same lie in
+        // a quieter place.
         if !matches!(monster.current_job, CompanionJobState::Resting)
+            && !is_booked
             && secondary_button(
                 card.action_x,
                 support_y,

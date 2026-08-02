@@ -29,6 +29,7 @@
     "assignment_guild_job_label": "Town Job",
     "assignment_resting_label": "Resting",
     "assignment_expedition_label": "Tower Support",
+    "assignment_booked_label": "On Contract",
     "guest_status_pending_label": "Pending",
     "guest_status_accepted_label": "Accepted",
     "guest_status_completed_label": "Completed",

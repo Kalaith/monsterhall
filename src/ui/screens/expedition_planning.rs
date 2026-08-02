@@ -546,7 +546,15 @@ pub fn draw_expedition_planning(
                 + col as f32 * (card_w + layout::SECTION_GAP);
             let y = layout.team_y + 46.0 + row as f32 * 104.0;
             let assigned = matches!(monster.current_job, CompanionJobState::OnExpedition { .. });
-            let state_label = assignment_label(data, &monster.current_job);
+            // Booked companions cannot join a run — day resolution settles the
+            // contract first — so the party preview must not invite the player
+            // to count her stats into it.
+            let is_booked = crate::engine::is_booked_for_contract(game_state, &monster.id);
+            let state_label = if is_booked {
+                &data.ui_text.common.assignment_booked_label
+            } else {
+                assignment_label(data, &monster.current_job)
+            };
             let species_label = compact_text(&species_name_by_id(data, &monster.species_id), 18);
             let key_value = format!("Instability {}", monster.corruption);
             let card = draw_character_card(
@@ -577,6 +585,7 @@ pub fn draw_expedition_planning(
             );
             let mut action_y = card.action_y;
             if !assigned
+                && !is_booked
                 && primary_button(
                     card.action_x,
                     action_y,
@@ -593,7 +602,10 @@ pub fn draw_expedition_planning(
             if !assigned {
                 action_y += 24.0;
             }
+            // Same reason as the Assign button above: a booked companion is
+            // skipped by day resolution, so resting her recovers nothing.
             if !matches!(monster.current_job, CompanionJobState::Resting)
+                && !is_booked
                 && secondary_button(
                     card.action_x,
                     action_y,

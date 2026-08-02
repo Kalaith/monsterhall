@@ -842,6 +842,48 @@ Stop the loop and report if:
   3** with upkeep bands already referencing a fourth, and relics still have no
   patron who asks for one by name.
 
+- **2026-08-03 — a companion could work two jobs a day and one was thrown away.**
+  `resolve_contracts` runs before the job loop and skips everyone it serviced, so
+  a companion **accepted onto a contract** *and* **rostered to a guild room** did
+  the contract and had her shift silently discarded. Nothing stopped it:
+  `evaluate_contract_eligibility` rejects `OnExpedition` and says nothing about a
+  guild job, and `assign_monster_to_room` never looked at contracts. Both
+  assignment screens lied — the Guild Hall quoted her projected gold, the
+  Expedition Desk counted her stats into the party preview — for work that would
+  never run. With `town_job_limit` at **2**, a burned slot is half the hall's
+  income for the day.
+  **The harness was doing it too, and had the answer in scope.**
+  `assign_daily_jobs` computes `reserved_guest_monster_ids`, honours it for
+  expedition selection, and never checks it in the guild-job loop. The engine
+  refuses the assignment now (`is_booked_for_contract`); the policy check was
+  added beside it so the intent reads on the page rather than arriving as an
+  error, and it is pure documentation — identical numbers with and without it.
+  **This re-bases the balance baseline, so the measurement matters.** Direct
+  effect on the deterministic seed is exactly the predicted direction:
+  `total_guild_job_gold` **1,813,165 → 1,834,424**, the recovered slot. The
+  multi-seed aggregate moved **1.07M → 855k gold**, **24.2 → 18.4 buildings** —
+  but per seed it goes *both ways* (three up, three down hard), which is chaotic
+  divergence rather than a cost: changing who works which day reshuffles the
+  campaign from day one. Zero missed payments, no assertion touched.
+  **Followed through in the UI**, because a rule the player cannot see is still a
+  trap: a booked companion shows **"On Contract"**, greys out, and loses both her
+  Assign and her Rest button on the Guild Hall and Expedition Desk. Rest was as
+  futile as a shift — day resolution skips her, so her fatigue never came down
+  either. `_full` capture scenes book the first companion so the state is
+  photographable.
+  **Result:** 100 tests (was 98), fmt and clippy clean, publish green,
+  `content_version` 1.17.0. Guard verified by planting the double booking.
+  **Next iteration should know:** (a) **any balance figure in `TODO.md` older
+  than this pass was measured with a wasted guild-job slot** — the third re-base
+  in five passes, and the last one that should come from a correctness fix, since
+  the exclusivity rule is now enforced at the only two places that set it;
+  (b) `assign_monster_to_idle` deliberately still works on a booked companion —
+  it is the escape hatch, and clearing the booking itself lives on the contract
+  desk; (c) the thin content axes are untouched and remain the honest next slice
+  — **guild rooms 4** for a 20-companion roster, **patron tiers 3** with upkeep
+  bands already referencing a fourth, and relics still have no patron who asks
+  for one by name.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

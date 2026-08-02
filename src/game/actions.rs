@@ -462,6 +462,25 @@ impl Game {
             game_state.egg_inventory.push(egg);
         }
         game_state.resources.eggs = game_state.egg_inventory.len() as u32;
+
+        // Book the first companion onto the first live offer, so the crowded
+        // captures show the "On Contract" state the assignment panels grew. A
+        // companion who cannot be rostered is only visible once somebody is.
+        let booking = game_state
+            .active_contracts
+            .iter()
+            .position(|request| request.status.is_live());
+        if let (Some(index), Some(monster_id)) = (
+            booking,
+            game_state
+                .monsters
+                .first()
+                .map(|monster| monster.id.clone()),
+        ) {
+            let request = &mut game_state.active_contracts[index];
+            request.assigned_monster_id = Some(monster_id);
+            request.status = crate::state::ContractStatus::Accepted;
+        }
     }
 
     pub(super) fn start_new_game(&mut self) {

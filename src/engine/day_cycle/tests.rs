@@ -484,6 +484,72 @@ fn the_prep_quality_quoted_is_the_prep_quality_scored() {
     );
 }
 
+/// A companion booked onto a contract cannot also be rostered elsewhere.
+///
+/// `resolve_contracts` runs first and skips everyone it serviced in the job
+/// loop, so a double-booked companion did the contract and her other assignment
+/// was silently thrown away — while the Guild Hall kept quoting her projected
+/// gold and the Expedition Desk kept counting her stats into the party preview.
+/// With only two guild-job slots, burning one on work the day cycle discards is
+/// half the hall's income for that day.
+#[test]
+fn a_booked_companion_cannot_be_rostered_for_other_work() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut worker = test_monster(Vec::new());
+    worker.id = "monster_001".to_owned();
+    game_state.monsters = vec![worker];
+    let room_id = data.guild_rooms.rooms[0].id.clone();
+    let floor_id = game_state.town.unlocked_floor_ids[0].clone();
+
+    // Free: both assignments are available.
+    assert!(assign_monster_to_room(&mut game_state, "monster_001", &room_id).is_ok());
+    assign_monster_to_idle(&mut game_state, "monster_001").expect("idle should clear the room");
+
+    game_state.active_contracts = vec![ContractState {
+        request_id: "contract_001".to_owned(),
+        status: ContractStatus::Accepted,
+        assigned_monster_id: Some("monster_001".to_owned()),
+        ..ContractState::default()
+    }];
+
+    let room_error = assign_monster_to_room(&mut game_state, "monster_001", &room_id)
+        .expect_err("a booked companion must not take a room shift");
+    assert!(
+        room_error.contains("booked"),
+        "the refusal should say why: {room_error}"
+    );
+    assert!(
+        assign_monster_to_expedition(&data, &mut game_state, "monster_001", &floor_id).is_err(),
+        "a booked companion must not join an expedition either"
+    );
+
+    // Clearing the booking releases her again.
+    crate::engine::clear_contract_assignment(&mut game_state, "contract_001")
+        .expect("clearing should work");
+    assert!(assign_monster_to_room(&mut game_state, "monster_001", &room_id).is_ok());
+}
+
+/// Only an *accepted* booking reserves her. A pending offer she has merely been
+/// pencilled against must not lock her out of the hall.
+#[test]
+fn a_pending_offer_does_not_reserve_a_companion() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut worker = test_monster(Vec::new());
+    worker.id = "monster_001".to_owned();
+    game_state.monsters = vec![worker];
+    game_state.active_contracts = vec![ContractState {
+        request_id: "contract_001".to_owned(),
+        status: ContractStatus::Pending,
+        assigned_monster_id: Some("monster_001".to_owned()),
+        ..ContractState::default()
+    }];
+
+    let room_id = data.guild_rooms.rooms[0].id.clone();
+    assert!(assign_monster_to_room(&mut game_state, "monster_001", &room_id).is_ok());
+}
+
 #[test]
 fn a_room_only_rolls_the_work_it_can_actually_bank() {
     let data = crate::data::test_game_data();

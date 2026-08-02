@@ -1,10 +1,35 @@
 use super::*;
 
+/// Whether this companion is already committed to a booking that resolves today.
+///
+/// `resolve_contracts` runs before the job loop and adds everyone it serviced to
+/// a skip set, so a companion who is both booked and rostered does the contract
+/// and her other assignment is silently discarded. That is not a tie the player
+/// can see: the Guild Hall keeps showing her projected gold, and the Expedition
+/// Desk keeps counting her stats into the party preview, for work the day cycle
+/// will never run.
+pub fn is_booked_for_contract(game_state: &GameState, monster_id: &str) -> bool {
+    game_state.active_contracts.iter().any(|request| {
+        request.status.is_live()
+            && matches!(request.status, crate::state::ContractStatus::Accepted)
+            && request.assigned_monster_id.as_deref() == Some(monster_id)
+    })
+}
+
+/// The error both work assignments give when she is already booked. Clearing the
+/// booking is a button on the contract desk, so this names the way out.
+const ALREADY_BOOKED_ERROR: &str =
+    "That companion is already booked for a contract today. Clear the booking first.";
+
 pub fn assign_monster_to_room(
     game_state: &mut GameState,
     monster_id: &str,
     room_id: &str,
 ) -> Result<(), String> {
+    if is_booked_for_contract(game_state, monster_id) {
+        return Err(ALREADY_BOOKED_ERROR.to_owned());
+    }
+
     let worker_count = game_state
         .monsters
         .iter()
@@ -51,6 +76,10 @@ pub fn assign_monster_to_expedition(
     monster_id: &str,
     floor_id: &str,
 ) -> Result<(), String> {
+    if is_booked_for_contract(game_state, monster_id) {
+        return Err(ALREADY_BOOKED_ERROR.to_owned());
+    }
+
     let floor = data
         .floors
         .floors

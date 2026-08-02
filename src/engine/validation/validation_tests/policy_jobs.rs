@@ -54,6 +54,16 @@ pub(super) fn assign_daily_jobs(data: &GameData, game_state: &mut GameState) -> 
             continue;
         }
 
+        // The reservation this function already computes, finally honoured here
+        // too. It was applied to expedition selection and not to guild jobs, so
+        // the policy handed contract-booked companions a room shift that
+        // `resolve_day` then discarded — burning one of only two guild-job slots
+        // on work that never happened. The engine refuses the assignment now, so
+        // this is the policy saying why rather than learning it from an error.
+        if reserved_guest_monster_ids.contains(&monster_id) {
+            continue;
+        }
+
         if guild_job_workers < guild_job_limit {
             if let Some(room_id) = &room_id {
                 if assign_monster_to_room(game_state, &monster_id, room_id).is_ok() {

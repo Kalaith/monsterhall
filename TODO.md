@@ -171,6 +171,49 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, fifth pass)
+
+- ~~A companion could be booked for two jobs on the same day, and one of them was
+  silently thrown away.~~ Fixed, and this one moves the balance baseline — read
+  the measurement below before trusting a pre-fifth-pass figure.
+
+  `resolve_contracts` runs before the job loop and adds everyone it serviced to a
+  skip set, so a companion who was both **accepted onto a contract** and
+  **rostered to a guild room** did the contract and had her shift discarded.
+  Nothing stopped the double booking: `evaluate_contract_eligibility` rejects a
+  companion who is `OnExpedition` but says nothing about a guild job, and
+  `assign_monster_to_room` never looked at contracts at all. Two screens lied
+  about it — the Guild Hall kept quoting her projected gold, and the Expedition
+  Desk kept counting her stats into the party preview — for work the day cycle
+  would never run. With `town_job_limit` at **2**, burning one slot on a
+  discarded shift is half the hall's income for that day.
+
+  **The simulation was doing it too.** `assign_daily_jobs` computes
+  `reserved_guest_monster_ids`, applies it to expedition selection, and then
+  never checks it in the guild-job loop — so the policy reserved contract workers
+  away from the tower and handed them to the hall anyway. The engine refuses the
+  assignment now (`is_booked_for_contract`), and the policy check was added
+  alongside so the intent is visible rather than learned from an error; the
+  policy line is documentation, verified by measuring identical numbers with and
+  without it.
+
+  **Measured.** Direct effect on the deterministic seed:
+  `total_guild_job_gold` **1,813,165 → 1,834,424** (+21k — the recovered slot,
+  exactly the predicted direction). The multi-seed aggregate moved
+  **1.07M → 855k gold** and **24.2 → 18.4 buildings**, but that is *chaotic
+  divergence, not a cost*: per seed it goes both ways (1.78M→1.93M, 951k→958k and
+  103k→109k up; 1.60M→713k, 1.22M→609k and 923k→226k down). Changing which
+  companion works which day reshuffles the whole campaign path from day one.
+  Zero missed payments, no assertion touched, 100 tests green.
+
+- ~~The two assignment screens still offered buttons that could only error.~~
+  Followed through. A booked companion now shows **"On Contract"** in place of
+  her job state, greys out, and loses both her Assign and her Rest button on the
+  Guild Hall and the Expedition Desk. Rest was as futile as a shift — day
+  resolution skips her entirely, so her fatigue never came down either. The
+  `_full` capture scenes book the first companion so the state is
+  photographable; `ui_guildhall_full.png` is the baseline.
+
 ### Found by review, not by the audit (2026-08-03, fourth pass)
 
 The panel-capacity class is closed, so this pass swept the two surfaces that

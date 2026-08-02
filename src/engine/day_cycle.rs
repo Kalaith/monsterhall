@@ -48,6 +48,7 @@ use resolution::*;
 use surveys::*;
 use upkeep::*;
 
+pub use actions::is_booked_for_contract;
 pub use actions::{
     assign_monster_to_expedition, assign_monster_to_idle, assign_monster_to_rest,
     assign_monster_to_room, configure_expedition_plan, convert_egg, hatch_selected_egg,

@@ -48,6 +48,10 @@ pub struct CommonUiText {
     pub assignment_guild_job_label: String,
     pub assignment_resting_label: String,
     pub assignment_expedition_label: String,
+    /// Shown instead of a job state when a companion is already committed to a
+    /// contract that resolves today, so the card explains why she cannot be
+    /// rostered rather than offering a button that errors.
+    pub assignment_booked_label: String,
     pub guest_status_pending_label: String,
     pub guest_status_accepted_label: String,
     pub guest_status_completed_label: String,
