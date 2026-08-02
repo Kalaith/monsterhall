@@ -591,7 +591,6 @@ fn request_from_template(
         status: ContractStatus::Pending,
         assigned_monster_id: None,
         chain_depth,
-        partial_progress: 0,
     }
 }
 

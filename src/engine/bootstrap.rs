@@ -74,8 +74,6 @@ pub fn create_new_game_state(data: &GameData) -> GameState {
         resolved_contracts: Vec::new(),
         story_progress: StoryProgressState {
             opening_step: OpeningChapterStep::Camp,
-            tower_hole_discovered: false,
-            first_egg_created: false,
             first_companion_hatched: false,
             hatched_species_ids: Vec::new(),
             first_room_built: false,

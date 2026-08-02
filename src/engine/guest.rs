@@ -4,8 +4,8 @@ use std::collections::HashSet;
 
 use super::day_cycle::apply_guild_job_progression;
 use super::{
-    active_situation_guest_bonus, apply_monster_relationship_gain, contract_depth_score,
-    contract_follow_up_request, contract_partial_success,
+    active_situation_guest_bonus, apply_monster_relationship_gain, contract_follow_up_request,
+    contract_partial_success,
 };
 use crate::data::{ContractData, GameData};
 use crate::state::{
@@ -137,7 +137,6 @@ pub fn refresh_contracts(
             status: ContractStatus::Pending,
             assigned_monster_id: None,
             chain_depth: 0,
-            partial_progress: 0,
         };
 
         let candidate_reports = request_candidates(data, game_state, &candidate_request);
@@ -247,12 +246,6 @@ pub fn assign_monster_to_contract(
         &game_state.active_contracts[request_index],
         monster,
     );
-    let depth_score = contract_depth_score(
-        data,
-        game_state,
-        &game_state.active_contracts[request_index],
-        monster,
-    );
     let partial_success = !report.is_eligible
         && meets_guest_hard_gates(
             data,
@@ -283,7 +276,6 @@ pub fn assign_monster_to_contract(
     let request = &mut game_state.active_contracts[request_index];
     request.assigned_monster_id = Some(monster_id.to_owned());
     request.status = ContractStatus::Accepted;
-    request.partial_progress = depth_score;
     Ok(())
 }
 

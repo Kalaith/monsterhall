@@ -568,7 +568,6 @@ pub(super) fn ensure_active_expedition(game_state: &mut GameState, floor_id: &st
             mission_id: "resource_run".to_owned(),
             priority: ExpeditionPriority::Balanced,
             assigned_monster_ids: Vec::new(),
-            started_day: game_state.current_day,
         });
     }
 }

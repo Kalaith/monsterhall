@@ -336,6 +336,12 @@ pub struct ContractDeskUiText {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HatcheryManagementUiText {
+    /// Where an egg came from. A refined egg was indistinguishable from a wild
+    /// find in the inventory — same card, same everything but a higher grade,
+    /// with nothing saying two eggs had been spent to make it.
+    pub egg_origin_wild_label: String,
+    pub egg_origin_refined_label: String,
+    pub egg_origin_prepared_label: String,
     pub title: String,
     pub subtitle: String,
     pub status_panel_title: String,

@@ -353,9 +353,7 @@ pub fn convert_egg(
                 selected_species_id: None,
                 incubation_state: EggIncubationState::Raw,
                 grade_score: refined_grade_score,
-                preparation_focus: Some("refined_lineage".to_owned()),
-                loyalty_imprinted: false,
-                secrecy_locked: true,
+                preparation_focus: Some(crate::state::PREPARATION_FOCUS_REFINED_LINEAGE.to_owned()),
             });
             sync_egg_resource_count(game_state);
             let message = format!("Refined {} and {} into {}.", egg.id, other.id, refined_id);

@@ -8,7 +8,6 @@ use super::{create_opening_egg, hatch_species};
 pub fn advance_opening_step(data: &GameData, game_state: &mut GameState) -> Result<(), String> {
     match game_state.story_progress.opening_step {
         OpeningChapterStep::Camp => {
-            game_state.story_progress.tower_hole_discovered = true;
             game_state.story_progress.opening_step = OpeningChapterStep::Discovery;
             game_state
                 .event_log
@@ -16,7 +15,6 @@ pub fn advance_opening_step(data: &GameData, game_state: &mut GameState) -> Resu
             Ok(())
         }
         OpeningChapterStep::Discovery => {
-            game_state.story_progress.first_egg_created = true;
             create_opening_egg(game_state, "slime_companion");
             game_state.story_progress.opening_step = OpeningChapterStep::Incubation;
             game_state

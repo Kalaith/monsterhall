@@ -350,7 +350,10 @@
     "review_required_message": "Review required before hatch",
     "scroll_up_message": "Scroll up for earlier eggs.",
     "scroll_down_message": "Scroll down for more eggs.",
-    "unknown_outcome_message": "Outcome stays unidentified until this species has hatched at least once."
+    "unknown_outcome_message": "Outcome stays unidentified until this species has hatched at least once.",
+    "egg_origin_wild_label": "Tower find",
+    "egg_origin_refined_label": "Refined lineage",
+    "egg_origin_prepared_label": "Lineage set"
   },
   "journal": {
     "title": "Journal",

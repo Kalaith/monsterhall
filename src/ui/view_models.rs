@@ -537,6 +537,16 @@ pub fn egg_outcome_preview_label(
         .join(" / ")
 }
 
+/// What made this egg what it is, for the inventory card.
+pub fn egg_provenance_label<'a>(data: &'a GameData, egg: &crate::state::EggState) -> &'a str {
+    let text = &data.ui_text.hatchery_management;
+    match egg.preparation_focus.as_deref() {
+        Some(crate::state::PREPARATION_FOCUS_REFINED_LINEAGE) => &text.egg_origin_refined_label,
+        Some(crate::state::PREPARATION_FOCUS_LINEAGE_CONTROL) => &text.egg_origin_prepared_label,
+        _ => &text.egg_origin_wild_label,
+    }
+}
+
 pub fn egg_origin_summary(game_state: &GameState, data: &GameData) -> String {
     let mut origins = game_state
         .egg_inventory

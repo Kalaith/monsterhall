@@ -10,7 +10,6 @@ fn invalid_expedition_mission_is_rejected_before_runtime_resolution() {
         mission_id: "missing_mission".to_owned(),
         priority: crate::state::ExpeditionPriority::Balanced,
         assigned_monster_ids: vec![],
-        started_day: 1,
     });
 
     let error = validate_game_state_references(&data, &game_state)

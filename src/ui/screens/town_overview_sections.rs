@@ -578,6 +578,35 @@ pub(super) fn draw_summary_strip(
         13.0,
         theme::TEXT_MUTED,
     );
+    // The debt engine writes a narrative status line on every resolution and
+    // records whether the last payment landed on time, late or not at all.
+    // Neither had ever been shown, so the one number the campaign is built
+    // around arrived with no account of how it got there.
+    if let Some(debt) = game_state.debt.as_ref() {
+        let history = match debt.last_resolution {
+            Some(crate::state::DebtResolution::PaidOnTime) => " (last payment on time)",
+            Some(crate::state::DebtResolution::PaidLate) => " (last payment late)",
+            Some(crate::state::DebtResolution::Missed) => " (last payment missed)",
+            None => "",
+        };
+        draw_body_text_in_box(
+            &format!("{}{}", debt.status_message, history),
+            layout.summary_x + layout::PANEL_PADDING,
+            layout.priority_y + 192.0,
+            layout.summary_width - layout::PANEL_PADDING * 2.0,
+            18.0,
+            13.0,
+            if matches!(
+                debt.last_resolution,
+                Some(crate::state::DebtResolution::Missed)
+            ) {
+                theme::DANGER
+            } else {
+                theme::TEXT_MUTED
+            },
+        );
+    }
+
     if can_pay_debt
         && draw_organic_button(
             layout.summary_x + layout.summary_width - layout::PANEL_PADDING - debt_button_w,

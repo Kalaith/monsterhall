@@ -123,13 +123,10 @@ fn removing_last_monster_clears_expedition() {
             mission_id: "resource_run".to_owned(),
             priority: ExpeditionPriority::Balanced,
             assigned_monster_ids: vec!["monster_001".to_owned()],
-            started_day: 1,
         }),
         resolved_contracts: Vec::new(),
         story_progress: StoryProgressState {
             opening_step: OpeningChapterStep::Complete,
-            tower_hole_discovered: true,
-            first_egg_created: true,
             first_companion_hatched: true,
             hatched_species_ids: Vec::new(),
             first_room_built: true,
@@ -186,7 +183,6 @@ fn release_monster_clears_assignments_without_emptying_roster() {
             mission_id: "resource_run".to_owned(),
             priority: ExpeditionPriority::Balanced,
             assigned_monster_ids: vec!["monster_002".to_owned()],
-            started_day: 1,
         }),
         resolved_contracts: Vec::new(),
         story_progress: StoryProgressState::default(),
@@ -289,8 +285,6 @@ fn incubating_and_hatching_use_egg_inventory() {
         resolved_contracts: Vec::new(),
         story_progress: StoryProgressState {
             opening_step: OpeningChapterStep::Complete,
-            tower_hole_discovered: true,
-            first_egg_created: true,
             first_companion_hatched: false,
             hatched_species_ids: Vec::new(),
             first_room_built: false,
@@ -308,7 +302,6 @@ fn incubating_and_hatching_use_egg_inventory() {
     let mut egg = game_state.egg_inventory[0].clone();
     egg.selected_species_id = Some("slime_companion".to_owned());
     egg.incubation_state = EggIncubationState::ReadyToHatch;
-    egg.loyalty_imprinted = true;
     game_state.egg_inventory[0] = egg;
 
     assert_eq!(

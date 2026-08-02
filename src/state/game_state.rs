@@ -84,8 +84,6 @@ pub enum OpeningChapterStep {
 #[serde(default)]
 pub struct StoryProgressState {
     pub opening_step: OpeningChapterStep,
-    pub tower_hole_discovered: bool,
-    pub first_egg_created: bool,
     pub first_companion_hatched: bool,
     pub hatched_species_ids: Vec<String>,
     pub first_room_built: bool,
@@ -359,10 +357,20 @@ pub struct EggState {
     pub selected_species_id: Option<String>,
     pub incubation_state: EggIncubationState,
     pub grade_score: u32,
+    /// How this egg came to be what it is: `None` for a wild find,
+    /// `PREPARATION_FOCUS_LINEAGE_CONTROL` once a species has been chosen for
+    /// it, `PREPARATION_FOCUS_REFINED_LINEAGE` when two eggs were merged.
+    ///
+    /// The refined case is the only one not derivable from `incubation_state`,
+    /// and it was invisible: a refined egg sat in the inventory looking exactly
+    /// like something the tower coughed up.
     pub preparation_focus: Option<String>,
-    pub loyalty_imprinted: bool,
-    pub secrecy_locked: bool,
 }
+
+/// Set when a species has been chosen for an egg.
+pub const PREPARATION_FOCUS_LINEAGE_CONTROL: &str = "lineage_control";
+/// Set when two eggs of matching quality were merged into one.
+pub const PREPARATION_FOCUS_REFINED_LINEAGE: &str = "refined_lineage";
 
 fn default_quality_rank() -> u8 {
     1
@@ -469,7 +477,6 @@ pub struct ContractState {
     pub status: ContractStatus,
     pub assigned_monster_id: Option<String>,
     pub chain_depth: u32,
-    pub partial_progress: u32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
@@ -564,7 +571,6 @@ pub struct ExpeditionState {
     pub mission_id: String,
     pub priority: ExpeditionPriority,
     pub assigned_monster_ids: Vec<String>,
-    pub started_day: u32,
 }
 
 #[derive(Debug, Clone)]

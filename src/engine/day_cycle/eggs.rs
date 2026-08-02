@@ -10,8 +10,6 @@ pub fn create_opening_egg(game_state: &mut GameState, species_id: &str) {
         incubation_state: EggIncubationState::Raw,
         grade_score: 0,
         preparation_focus: None,
-        loyalty_imprinted: false,
-        secrecy_locked: true,
     });
     sync_egg_resource_count(game_state);
 }
@@ -79,8 +77,6 @@ pub(super) fn add_floor_egg_rewards(
             incubation_state: EggIncubationState::Raw,
             grade_score,
             preparation_focus: None,
-            loyalty_imprinted: false,
-            secrecy_locked: true,
         });
     }
     sync_egg_resource_count(game_state);
@@ -122,9 +118,7 @@ pub(super) fn prepare_raw_egg_for_species(
     }
     egg.selected_species_id = Some(species_id.to_owned());
     egg.incubation_state = EggIncubationState::ReadyToHatch;
-    egg.preparation_focus = Some("lineage_control".to_owned());
-    egg.loyalty_imprinted = true;
-    egg.secrecy_locked = true;
+    egg.preparation_focus = Some(crate::state::PREPARATION_FOCUS_LINEAGE_CONTROL.to_owned());
     Ok(())
 }
 

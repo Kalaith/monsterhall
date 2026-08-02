@@ -21,8 +21,8 @@ use crate::ui::layout;
 use crate::ui::theme;
 use crate::ui::view_models::{
     egg_grade_label, egg_origin_summary, egg_outcome_count_label, egg_outcome_preview_label,
-    egg_quality_label, egg_quality_rank, format_resource_cost, known_species_name_by_id,
-    monster_quality_label, species_name_by_id,
+    egg_provenance_label, egg_quality_label, egg_quality_rank, format_resource_cost,
+    known_species_name_by_id, monster_quality_label, species_name_by_id,
 };
 
 fn compact_text(text: &str, max_len: usize) -> String {
@@ -257,7 +257,11 @@ pub(super) fn draw_inventory_panel(
             theme::TEXT_STRONG,
         );
         draw_body_text(
-            egg_grade_label(egg, data),
+            &format!(
+                "{} | {}",
+                egg_grade_label(egg, data),
+                egg_provenance_label(data, egg)
+            ),
             layout.left_margin + 108.0,
             row_y + 40.0,
             13.0,

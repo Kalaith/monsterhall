@@ -46,7 +46,6 @@ fn guest_eligibility_rejects_wrong_species_and_missing_room() {
         status: ContractStatus::Pending,
         assigned_monster_id: None,
         chain_depth: 0,
-        partial_progress: 0,
     };
     let monster = CompanionState {
         id: "monster_001".to_owned(),
@@ -120,7 +119,6 @@ fn guest_eligibility_accepts_trained_matching_specialist() {
         status: ContractStatus::Pending,
         assigned_monster_id: None,
         chain_depth: 0,
-        partial_progress: 0,
     };
     let monster = CompanionState {
         id: "monster_001".to_owned(),
