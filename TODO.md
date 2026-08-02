@@ -171,6 +171,46 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, seventeenth pass)
+
+**A thinner pass than the last four, and worth saying so plainly.** The last two
+screens were photographed crowded, several suspected problems were checked and
+found clean, and one real defect came out of it.
+
+- ~~Every row of the egg list lost the end of both its lines.~~ Fixed. The
+  hatchery's inventory rows read *"Origin | Tower fin"* and *"Slime"* — a
+  provenance cut mid-word and a species name reduced to its first word. Two
+  causes in the same row: the grade/provenance line was an unbounded
+  `draw_body_text` running underneath the Review button, and the outcome line
+  below it was correctly boxed but into the 110px sliver left beside that button.
+  The button is lifted up beside the egg id now and both lines take the column's
+  full width: **"Origin | Tower find"** and **"Slime Companion"**.
+
+  Worth recording that the first fix made it worse. Boxing the line at its old
+  `y` collided it with the line below, because `draw_body_text` takes a baseline
+  and `draw_body_text_in_box` takes a block top — an 18px difference. The capture
+  caught it immediately; reasoning about it had not.
+
+- **The harness now photographs a late-campaign purse.** Every capture until now
+  showed a day-one economy — three-digit gold against a game that reaches seven —
+  so a number too wide for its tile could never have appeared in one. Set to the
+  ten-seed day-365 maxima (2,050,396 gold, 120,248 residue, 292 relics). The
+  resource tiles hold seven digits without complaint, and it surfaced a **"Pay
+  Debt" button no capture had ever contained**, because it only exists when the
+  guild can afford the payment in full.
+
+- **Checked and clean**, so the next pass does not repeat them: the egg outcome
+  list derives its row height from the panel and clamps sensibly against the real
+  maximum of five species per floor; the hatchery's roster-cap check and the
+  engine's are one shared function, not two copies; the replacement the screen
+  names is the id the engine is handed, so they cannot disagree; the buildings
+  list fits its column; the settings screen renders clean; and the town roster
+  card's unbounded name and species draws do not overflow, since names run to 8
+  characters and species to 21 against 154px at the narrowest supported
+  resolution — latent, not live.
+
+- **Balance untouched**; no report file changed.
+
 ### Found by review, not by the audit (2026-08-03, sixteenth pass)
 
 The last two screens never photographed crowded, and the lens that has now

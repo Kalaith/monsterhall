@@ -293,14 +293,22 @@ pub(super) fn draw_inventory_panel(
             16.0,
             theme::TEXT_STRONG,
         );
-        draw_body_text(
+        // Both text lines take the column's full width, with the Review button
+        // lifted up beside the egg id. This line was an unbounded
+        // `draw_body_text` running underneath that button — "Origin | Tower fin",
+        // a word short with nothing to say it had been cut — while the outcome
+        // line below it squeezed into the 110px sliver left over and lost the
+        // species name, showing "Slime" for a Slime Companion.
+        draw_body_text_in_box(
             &format!(
                 "{} | {}",
                 egg_grade_label(egg, data),
                 egg_provenance_label(data, egg)
             ),
             layout.left_margin + 108.0,
-            row_y + 40.0,
+            row_y + 32.0,
+            layout.inventory_w - 132.0,
+            18.0,
             13.0,
             theme::TEXT_BODY,
         );
@@ -315,11 +323,15 @@ pub(super) fn draw_inventory_panel(
         } else {
             chamber_text.review_required_message.clone()
         };
+        // Below the Review button rather than beside it, which is where the row
+        // has its full width. The button occupies row_y+24..48 on the right; a
+        // line under it can use the whole column instead of the 110px sliver
+        // left over, which is what was cutting "Tower find" to "Tower".
         draw_body_text_in_box(
             &preview_text,
             layout.left_margin + 108.0,
-            row_y + 42.0,
-            layout.inventory_w - 238.0,
+            row_y + 52.0,
+            layout.inventory_w - 132.0,
             22.0,
             12.0,
             theme::TEXT_MUTED,
@@ -327,7 +339,7 @@ pub(super) fn draw_inventory_panel(
         if !is_selected
             && secondary_button(
                 layout.left_margin + layout.inventory_w - 118.0,
-                row_y + 24.0,
+                row_y + 8.0,
                 94.0,
                 24.0,
                 &chamber_text.select_button,

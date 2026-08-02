@@ -122,6 +122,15 @@ impl Game {
         }
         game_state.resources.eggs = game_state.egg_inventory.len() as u32;
 
+        // A late-campaign purse. Every capture so far has photographed a day-one
+        // economy — three-digit gold against a game that reaches seven — so a
+        // number too wide for its tile would never have shown up in one. These
+        // are the ten-seed day-365 maxima from the balance reports.
+        game_state.resources.gold = 2_050_396;
+        game_state.resources.arcane_residue = 120_248;
+        game_state.resources.relics = 292;
+        game_state.resources.tower_materials = 48_610;
+
         // And the campaign log, which is the list in this game that grows
         // largest and was the last one no capture had ever seen full. It gains
         // about twelve entries a day and is never trimmed, so a day-365 save

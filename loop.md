@@ -1252,6 +1252,33 @@ Stop the loop and report if:
   survivor; (c) still open and untouched: the `ui_text` migration (~40 hardcoded
   strings) and the unbounded event log in the save.
 
+- **2026-08-03 — seventeenth pass (a thinner one, and it says so).** Photographed the
+  last two screens never seen crowded — hatchery and buildings — and found **one** real
+  defect rather than the four the last pass turned up. The hatchery's egg rows lost the
+  end of both their lines: *"Origin | Tower fin"* (an unbounded `draw_body_text`
+  running under the Review button) and *"Slime"* for a Slime Companion (correctly
+  boxed, but into the 110px sliver beside that button). Button lifted beside the egg
+  id, both lines given the column's full width. The first attempt made it worse —
+  boxing the line at its old `y` collided it with the line below, because
+  `draw_body_text` takes a baseline and `draw_body_text_in_box` takes a block top, an
+  18px difference the capture caught instantly and reasoning had not. Also taught the
+  harness a **late-campaign purse** (ten-seed day-365 maxima: 2.05M gold, 120k residue,
+  292 relics), since every capture so far showed three-digit gold against a game that
+  reaches seven — the tiles hold it, and it surfaced a **"Pay Debt" button no capture
+  had ever contained**, because it only exists when the guild can pay in full.
+  **Result:** 124 tests, fmt and clippy clean, publish green, **balance untouched** —
+  no report file changed.
+  **Next iteration should know:** (a) the *fine at day one, wrong by day thirty* seam
+  is close to worked out — every screen has now been captured crowded, and this pass's
+  yield dropped sharply, so the next one should probably change lens rather than press
+  this one; (b) **checked and clean this pass, do not re-check**: egg outcome list
+  sizing, the shared roster-cap function, the replacement id the hatchery hands the
+  engine, the buildings list, the settings screen, and the town roster card's unbounded
+  name/species draws (latent at 8- and 21-character content against 154px, not live);
+  (c) the two largest untaken slices are unchanged — the `ui_text` migration (~40
+  hardcoded strings) and the **unbounded event log in the save**, which is a design
+  call about discarding history rather than a bug.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and
