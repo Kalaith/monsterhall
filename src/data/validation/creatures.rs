@@ -110,6 +110,42 @@ impl GameData {
                     mutation.id
                 ));
             }
+            if mutation.source_species_id == mutation.target_species_id {
+                return Err(format!(
+                    "mutation '{}' turns '{}' into itself.",
+                    mutation.id, mutation.source_species_id
+                ));
+            }
+        }
+        self.validate_mutation_chains()
+    }
+
+    /// Corruption only ever climbs, and `try_apply_mutation` runs every day, so
+    /// the mutation graph has to be a strictly ascending tree.
+    ///
+    /// A cycle would flip a companion between two species forever. A step that
+    /// costs no more corruption than the step feeding it fires on the same day
+    /// as its own source, so the species in between never exists in play — the
+    /// chain reads as three forms in the data and shows the player one.
+    fn validate_mutation_chains(&self) -> Result<(), String> {
+        for mutation in &self.mutations.mutations {
+            for feeder in &self.mutations.mutations {
+                if feeder.target_species_id != mutation.source_species_id {
+                    continue;
+                }
+                if feeder.source_species_id == mutation.target_species_id {
+                    return Err(format!(
+                        "mutations '{}' and '{}' form a cycle between '{}' and '{}'.",
+                        feeder.id, mutation.id, feeder.source_species_id, feeder.target_species_id
+                    ));
+                }
+                if mutation.minimum_corruption <= feeder.minimum_corruption {
+                    return Err(format!(
+                        "mutation '{}' needs more corruption than '{}' that feeds it, or '{}' never exists in play.",
+                        mutation.id, feeder.id, mutation.source_species_id
+                    ));
+                }
+            }
         }
         Ok(())
     }

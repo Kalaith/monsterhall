@@ -116,6 +116,17 @@ fn probe_floor_usage() {
             None => println!("SPECIES {:<24} never unlocked", species.id),
         }
     }
+    // Corruption only climbs, so mutation thresholds have to be read against
+    // what a campaign actually reaches rather than guessed. The first tree was
+    // authored at 8/16/18 against a roster that ends between 45 and 144.
+    let mut corruption = game_state
+        .monsters
+        .iter()
+        .map(|monster| (monster.corruption, monster.species_id.clone()))
+        .collect::<Vec<_>>();
+    corruption.sort();
+    println!("CORRUPTION {corruption:?}");
+
     println!(
         "BUILDINGS {:?}",
         game_state.town.constructed_building_ids.clone()

@@ -62,7 +62,7 @@ Re-count these from the JSON each iteration rather than trusting the table.
 | **Tower floors** | **25** ✅ | **25** | **Target met.** All five bands authored, depths 1–25, difficulty 20→104 against a ceiling of 120. Every floor unlocks and is reached in a 365-day campaign; the guild's preferred destination is the Tower Core at the bottom. |
 | Missions | **7** | 8–10 | The GDD's six are all written, plus `sealed_extraction`. **The harness cannot measure a mission** — see the ledger for 2026-08-02; mission work is verified by reading the probe's SCORE table, not by balance movement. |
 | Species | **12** | 14–18 | Four now hatch only below depth 16 (`wyrm_registrar`, `gargoyle_stairwarden`, `revenant_chorister`, `salamander_corekeeper`). Bands 1–3 still share the original eight. |
-| Mutations | 3 | 10+ | The corruption payoff. One mutation per four species is now thin. |
+| Mutations | **8** | 10+ | Five chains, terminating in three of the four deep species. `salamander_corekeeper` is the only species that is neither a source nor a target. **Read the mutation warning below before adding a ninth.** |
 | Buildings | 12 | 20+ | Buildings are the only species/floor gate today, and **a new one is very hard to land** — see the ledger for 2026-08-02. |
 | Guild rooms | 4 | 7–8 | Four rooms for a 20-companion roster. |
 | Traits | **13** | 16+ | Traits drive contract fit and role assignment. |
@@ -109,6 +109,24 @@ and adding a mission changes the balance reports by exactly zero unless it beats
 which case it becomes the new monoculture. **Do not tune a mission until the balance numbers move.**
 Judge missions by the probe's `SCORE` table, which prints every mission of every unlocked floor
 side by side; that is where a stance being strictly dominated is visible.
+
+### A mutation can close the tower — read this before authoring one
+
+Five floors gate on a **named species at a named rank** (`required_roster`: slime at d6, Minotaur
+Porter at d11 and d14, Moth Archivist at d18, Golemkin Warden at d24). A mutation **removes** its
+source from the roster, and rank climbs with the same deep running that drives corruption — so a
+mutation off a gate species races the very companion the gate is waiting for. Authoring
+`minotaur_porter -> golemkin_warden` at 30 corruption stranded `broodpens` for a whole campaign and
+with it **eleven floors**, because the survey chain is serial.
+
+- **Check `required_roster` against the mutation's source before writing it.** If the source gates a
+  floor, the threshold must sit far above where that floor gets run — 90, not 40.
+- Supply is the real variable. `slime_companion` has mutated away since the first commit and gates
+  d6 harmlessly, because slimes keep hatching. `minotaur_porter` ends a campaign at a roster count
+  of **one**; anything that consumes it consumes the only one.
+- `long_campaign_simulation_reports_stay_valid` now asserts the 365-day campaign opens **all** 25
+  floors. Before that assertion existed this failure was completely silent: gold, roster, buildings
+  and debt all stayed inside their bands while half the tower was unreachable.
 
 ### Standing themes, several iterations each
 
@@ -601,6 +619,45 @@ Stop the loop and report if:
   push `corruption_pressure` up to 8 and almost nothing comes of it — this is the most obvious gap
   left), **guild rooms 4** for a 20-companion roster, **patron tiers 3** with upkeep bands already
   referencing a fourth, and relics still have no patron who asks for one by name.
+
+- **2026-08-02 — phase 2, corruption starts changing who the guild has.** Deep floors push
+  `corruption_pressure` up to 8 and the mutation table had three entries, every one of them
+  authored at 8/16/18 — so every mutation the game had fired in the opening weeks and the stat did
+  nothing for the remaining eleven months. Five more, forming five chains that terminate in three of
+  the four deep species: **Imp Runner → Lamia Routekeeper** (30, has run the passages so often she
+  has stopped running them), **Minotaur Porter → Golemkin Warden** (90, the load stops being
+  something she carries), **Moth Archivist → Wyrm Registrar** (60, closes the guild's ledger and
+  starts a different one in a hand nobody taught her), **Golemkin Warden → Gargoyle Stairwarden**
+  (100, the stone stops being armour), **Lamia Routekeeper → Revenant Chorister** (80, answered by
+  the tower too often to keep only asking). **Thresholds were read off the campaign, not guessed** —
+  the probe now prints every companion's corruption, and a finished roster runs 45 to 199.
+  **Two routes into Golemkin Warden, only one that continues.** Gargoyle needs `commanding` *and*
+  `resilient`; the residue-slime line grants `commanding` but has no `resilient`, so it stalls at
+  Golemkin, and only the Minotaur-descended line walks on to the stair. The deep species now arrive
+  two ways — hatched below depth 16, or grown into — and Wyrm Registrar reaches the roster long
+  before floor 16 opens.
+  **The regression this iteration nearly shipped is the real content here, and it is written up in
+  full above.** At the authored 40 corruption, `minotaur_porter_to_golemkin_warden` consumed the
+  guild's only Minotaur Porter, `broodpens` (d14) requires one at rank 3, and the serial survey
+  chain stranded **eleven floors** — the campaign ended at depth 14 having never seen bands 4 or 5,
+  **with every balance assertion green**. Only `probe_floor_usage` showed it. Fixed by moving the
+  threshold to 90 (and Gargoyle to 100 to keep the chain ascending), which lets a porter serve the
+  floors that name her and turn afterwards.
+  **New load-time validation, all three of which the first draft could have broken:** a mutation may
+  not turn a species into itself; the graph may not contain a cycle (a companion flipping between two
+  forms forever); and a step must cost **strictly more** corruption than the step feeding it, or the
+  two fire on the same day and the species in between never exists in play. **New balance
+  assertion:** the 365-day campaign must open all 25 floors — verified to fail on the 40-corruption
+  version before being kept.
+  **Result:** multi-seed gold 274k → 338k average, relics floor 8 → 36, companions 19.5 → 19.6,
+  buildings 13.6 → 13.7, zero missed payments; single-seed 365 gold 846k → 880k with all 25 floors
+  still reached and ranks unchanged at [0,1,2,3,14]. 60 tests green, no assertion loosened, publish
+  green.
+  **Next iteration should know:** mutations are 8 against a target of 10+, and the two obvious gaps
+  are a Harpy Lookout line that goes somewhere other than the archive, and `salamander_corekeeper`,
+  the only species that is neither a source nor a target of anything. Beyond that the thin axes are
+  unchanged: **guild rooms 4** for a 20-companion roster, **patron tiers 3** with upkeep bands
+  already referencing a fourth, and relics still have no patron who asks for one by name.
 
 ## Deferred (needs a new system or a decision; not for this loop)
 

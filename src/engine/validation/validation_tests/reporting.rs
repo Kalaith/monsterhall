@@ -166,6 +166,7 @@ pub(super) struct SimulationReport {
     pub(super) final_event_log_entries: usize,
     pub(super) final_roster_size: usize,
     pub(super) final_buildings: usize,
+    pub(super) final_unlocked_floors: usize,
     pub(super) final_active_contracts: usize,
     pub(super) final_average_bond: f64,
     pub(super) final_average_reputation: f64,

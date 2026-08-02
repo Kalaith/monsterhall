@@ -188,6 +188,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         final_event_log_entries: game_state.event_log.len(),
         final_roster_size: game_state.monsters.len(),
         final_buildings: game_state.town.constructed_building_ids.len(),
+        final_unlocked_floors: game_state.town.unlocked_floor_ids.len(),
         final_active_contracts: game_state.active_contracts.len(),
         final_average_bond: average_bond(&game_state),
         final_average_reputation: average_reputation(&game_state),
@@ -409,6 +410,19 @@ fn long_campaign_simulation_reports_stay_valid() {
                     report.final_buildings >= 9,
                     "365-day simulation should unlock the current three-floor support chain, got {} buildings",
                     report.final_buildings
+                );
+                // The survey chain is serial, so anything that makes one link
+                // unrunnable strands every floor beneath it — and nothing else
+                // in this report notices, because a floor nobody enters changes
+                // no number here. A mutation that consumed the last Minotaur
+                // Porter closed `broodpens` and with it eleven floors, with
+                // every other assertion in this test still green.
+                assert_eq!(
+                    report.final_unlocked_floors,
+                    data.floors.floors.len(),
+                    "365-day simulation should open the whole tower, got {} of {} floors",
+                    report.final_unlocked_floors,
+                    data.floors.floors.len()
                 );
                 assert!(
                     report.final_resources.arcane_residue < 150_000
@@ -693,6 +707,7 @@ fn run_simulation_report(data: &GameData, simulation_days: u32, rng_seed: u64) -
         final_event_log_entries: game_state.event_log.len(),
         final_roster_size: game_state.monsters.len(),
         final_buildings: game_state.town.constructed_building_ids.len(),
+        final_unlocked_floors: game_state.town.unlocked_floor_ids.len(),
         final_active_contracts: game_state.active_contracts.len(),
         final_average_bond: average_bond(&game_state),
         final_average_reputation: average_reputation(&game_state),

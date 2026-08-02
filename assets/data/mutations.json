@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "mutations": [
     {
       "id": "slime_to_residue_slime",
@@ -37,6 +37,72 @@
         "corruption_tuned"
       ],
       "event_text": "{name}'s feathers dim into luminous dust as she reforms into a {target_species}, ready for archive work."
+    },
+    {
+      "id": "imp_runner_to_lamia_routekeeper",
+      "source_species_id": "imp_runner",
+      "target_species_id": "lamia_routekeeper",
+      "minimum_corruption": 30,
+      "required_trait_ids": [
+        "opportunistic"
+      ],
+      "granted_trait_ids": [
+        "commanding"
+      ],
+      "event_text": "{name} has run the same passages often enough that she has stopped running them. She comes back up longer, slower, and certain of the way, a {target_species} now."
+    },
+    {
+      "id": "minotaur_porter_to_golemkin_warden",
+      "source_species_id": "minotaur_porter",
+      "target_species_id": "golemkin_warden",
+      "minimum_corruption": 90,
+      "required_trait_ids": [
+        "resilient"
+      ],
+      "granted_trait_ids": [
+        "corruption_tuned"
+      ],
+      "event_text": "The load {name} has carried up out of the tower stops being something she carries. She sets nothing down and stands like a {target_species}, because that is what she is."
+    },
+    {
+      "id": "moth_archivist_to_wyrm_registrar",
+      "source_species_id": "moth_archivist",
+      "target_species_id": "wyrm_registrar",
+      "minimum_corruption": 60,
+      "required_trait_ids": [
+        "corruption_tuned"
+      ],
+      "granted_trait_ids": [
+        "meticulous"
+      ],
+      "event_text": "{name} finishes the guild's ledger, closes it, and begins a different one in a hand nobody taught her. The tower has a {target_species} again, and the guild has lost an archivist."
+    },
+    {
+      "id": "golemkin_warden_to_gargoyle_stairwarden",
+      "source_species_id": "golemkin_warden",
+      "target_species_id": "gargoyle_stairwarden",
+      "minimum_corruption": 100,
+      "required_trait_ids": [
+        "commanding",
+        "resilient"
+      ],
+      "granted_trait_ids": [
+        "stonebound"
+      ],
+      "event_text": "The stone {name} wears stops being armour some time in the night. In the morning she is sitting on the stair counting, a {target_species}, and she will not say what the count is for."
+    },
+    {
+      "id": "lamia_routekeeper_to_revenant_chorister",
+      "source_species_id": "lamia_routekeeper",
+      "target_species_id": "revenant_chorister",
+      "minimum_corruption": 80,
+      "required_trait_ids": [
+        "commanding"
+      ],
+      "granted_trait_ids": [
+        "long_patience"
+      ],
+      "event_text": "{name} has been answered by the tower too many times to keep only asking. She replies to something in the dark, at length, and comes back a {target_species}."
     }
   ]
 }
