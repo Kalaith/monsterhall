@@ -131,6 +131,9 @@ pub struct DayCycleConfigData {
     pub quality_wage_multipliers_pct: Vec<u32>,
     #[serde(default = "default_skill_wage_divisor")]
     pub skill_wage_divisor: u32,
+    /// Divides a species' total base stats into its share of the daily wage.
+    #[serde(default = "default_species_stat_wage_divisor")]
+    pub species_stat_wage_divisor: u32,
     /// Fee an adventuring party pays when the escort is below the calibre their
     /// patron tier demands. They still hire, but they do not pay full rate.
     #[serde(default = "default_understrength_income_pct")]
@@ -288,6 +291,10 @@ fn default_quality_income_multipliers_pct() -> Vec<u32> {
 
 fn default_quality_wage_multipliers_pct() -> Vec<u32> {
     vec![100, 160, 260, 420, 650]
+}
+
+fn default_species_stat_wage_divisor() -> u32 {
+    4
 }
 
 fn default_skill_wage_divisor() -> u32 {

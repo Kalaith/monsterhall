@@ -15,7 +15,9 @@ use super::*;
 pub(super) fn roster_wage_bill(data: &GameData, monsters: &[CompanionState]) -> u32 {
     monsters
         .iter()
-        .map(|monster| companion_daily_wage(&data.config.day_cycle, monster))
+        .map(|monster| {
+            companion_daily_wage(&data.config.day_cycle, species_of(data, monster), monster)
+        })
         .fold(0u32, |total, wage| total.saturating_add(wage))
 }
 
@@ -232,8 +234,8 @@ mod tests {
         let data = test_game_data();
         let day_cycle = &data.config.day_cycle;
 
-        let entry = companion_daily_wage(day_cycle, &companion(1, 0));
-        let veteran = companion_daily_wage(day_cycle, &companion(5, 0));
+        let entry = companion_daily_wage(day_cycle, None, &companion(1, 0));
+        let veteran = companion_daily_wage(day_cycle, None, &companion(5, 0));
 
         // The shipped curve settles around fourfold. What matters is that the
         // climb is material rather than decorative — a top-rank escort must
@@ -249,8 +251,8 @@ mod tests {
         let data = test_game_data();
         let day_cycle = &data.config.day_cycle;
 
-        let green = companion_daily_wage(day_cycle, &companion(2, 0));
-        let skilled = companion_daily_wage(day_cycle, &companion(2, 20));
+        let green = companion_daily_wage(day_cycle, None, &companion(2, 0));
+        let skilled = companion_daily_wage(day_cycle, None, &companion(2, 20));
 
         assert!(skilled > green, "accumulated skill should be paid for");
     }
@@ -277,7 +279,9 @@ mod tests {
         let roster = vec![companion(1, 0), companion(3, 0), companion(5, 12)];
         let expected: u32 = roster
             .iter()
-            .map(|monster| companion_daily_wage(&data.config.day_cycle, monster))
+            .map(|monster| {
+                companion_daily_wage(&data.config.day_cycle, species_of(&data, monster), monster)
+            })
             .sum();
 
         assert_eq!(roster_wage_bill(&data, &roster), expected);

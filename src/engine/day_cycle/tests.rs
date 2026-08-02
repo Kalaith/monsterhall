@@ -595,7 +595,7 @@ fn a_room_can_only_teach_a_skill_its_own_work_feeds() {
 fn every_trained_skill_raises_a_companions_wage() {
     let data = crate::data::test_game_data();
     let day_cycle = &data.config.day_cycle;
-    let base = companion_daily_wage(day_cycle, &test_monster(Vec::new()));
+    let base = companion_daily_wage(day_cycle, None, &test_monster(Vec::new()));
 
     // Wages are the guild's answer to a roster that earns more as it gets
     // stronger. The formula was written against five skills and never revisited
@@ -616,7 +616,7 @@ fn every_trained_skill_raises_a_companions_wage() {
         let mut monster = test_monster(Vec::new());
         assert!(increment_skill(&mut monster.skills, skill_id, divisor));
         assert!(
-            companion_daily_wage(day_cycle, &monster) > base,
+            companion_daily_wage(day_cycle, None, &monster) > base,
             "'{skill_id}' can be trained but does not cost the guild anything"
         );
     }
@@ -716,5 +716,61 @@ fn test_monster(trait_ids: Vec<String>) -> CompanionState {
         corruption: 0,
         bond: 0,
         reputation: 0,
+    }
+}
+
+/// A companion who mutates into a stronger species has to become more expensive
+/// to keep, or climbing the mutation tree is free power.
+///
+/// Wages were `quality_rank` plus skills — both properties of the egg she
+/// hatched from — so a `gargoyle_stairwarden` at 10/4/10/6 cost exactly what a
+/// `slime_companion` at 3/2/5/2 cost. The simulated guild funnelled 18 of 20
+/// companions into one late species and never wanted a low tier again; nothing
+/// on the ledger said the strong ones were expensive.
+#[test]
+fn a_stronger_species_costs_more_to_keep() {
+    let data = crate::data::test_game_data();
+    let day_cycle = &data.config.day_cycle;
+    let monster = test_monster(Vec::new());
+
+    let species_by_id = |id: &str| {
+        data.species
+            .species
+            .iter()
+            .find(|species| species.id == id)
+            .expect("species should exist")
+    };
+    let slime = species_by_id("slime_companion");
+    let gargoyle = species_by_id("gargoyle_stairwarden");
+
+    let slime_wage = companion_daily_wage(day_cycle, Some(slime), &monster);
+    let gargoyle_wage = companion_daily_wage(day_cycle, Some(gargoyle), &monster);
+
+    assert!(
+        gargoyle_wage > slime_wage,
+        "the same companion should cost more as a gargoyle ({gargoyle_wage}) than as a slime ({slime_wage})"
+    );
+
+    // Every species with better total stats than another must cost at least as
+    // much, so a future species cannot be authored as strictly free power.
+    let stat_total = |species: &crate::data::SpeciesData| {
+        species.base_stats.power
+            + species.base_stats.charm
+            + species.base_stats.endurance
+            + species.base_stats.instinct
+    };
+    for stronger in &data.species.species {
+        for weaker in &data.species.species {
+            if stat_total(stronger) <= stat_total(weaker) {
+                continue;
+            }
+            assert!(
+                companion_daily_wage(day_cycle, Some(stronger), &monster)
+                    >= companion_daily_wage(day_cycle, Some(weaker), &monster),
+                "'{}' outclasses '{}' but does not cost more to keep",
+                stronger.id,
+                weaker.id
+            );
+        }
     }
 }

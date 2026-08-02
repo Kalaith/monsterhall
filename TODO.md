@@ -27,6 +27,62 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 - ~~`event_tags` encode intended gating that no code applies.~~ Investigated and resolved differently: the gating **is** applied, just not by the tags. Every one of the 23 tier/late_game-tagged events is already `required_building_ids`-gated (23/23), and the `min_day` bands are tight and monotonic — tier_1 at days 8–20, tier_2 at 20–30, tier_3 at 45–55, late_game at 140–230. You cannot get the archive event without the archive. The tags are a taxonomy describing that gating rather than a second gate, and mapping `tier_N` onto patron tiers was a dead end anyway: only three tiers exist against four tags. So they are now checked documentation — load-time validation rejects a tier/late_game tag on an event nothing gates, and a `late_game` tag on an event that can fire before day 100.
 - ~~Patron archetype `spawn_weight` and `tags` never influence contract generation.~~ Done, though not the way it was first written. `spawn_weight` now scales `request_pressure_priority`, so rarer patrons lose ties and fall off a full board first. The literal reading — weighted random draw without replacement — was built twice and rejected on measurement both times: the campaign is tuned around a best-first board, and flattening it cost enough income that the single-seed run stopped reaching its final debt milestone (only `tribute_cart_5` with flat weighting, `broker_compact_6` with the pressure term squared). Variety in the offer board is worth having, but it needs the economy retuned around it, not bolted on. `tags` now carry a guard: an archetype tagged `special` whose contracts are not `is_special` is rejected at load, because that silently costs the story flag and the priority bonus.
 
+### Roster variety — design direction given 2026-08-02
+
+**Stated intent:** a day-365 roster should show variety in creatures. Lower-tier
+monsters cannot do higher-tier work (a slime cannot explore the deep floors), but
+it should not be all high tier either — high tiers cost more and are less
+flexible across roles.
+
+Against that, one of the three mechanics was simply absent:
+
+- ~~High tiers did not cost more.~~ Fixed. `companion_daily_wage` was
+  `quality_rank` plus skills — both properties of the *egg a companion hatched
+  from*. Mutation rewrites `species_id` mid-campaign and every step up the tree
+  raises base stats, so a `gargoyle_stairwarden` at 10/4/10/6 cost exactly what a
+  `slime_companion` at 3/2/5/2 cost: climbing the tree was free power, and
+  nothing on the ledger said otherwise. The wage now carries a species term read
+  from `base_stats` (so it cannot drift from a second authored ranking), divided
+  by `day_cycle.species_stat_wage_divisor`. Measured on the 365-day report:
+  **3 species → 6, and golemkin 18/20 → 12/20**, with a `revenant_chorister`
+  appearing for the first time. A test asserts any species that outclasses
+  another costs at least as much, so a future species cannot be authored as free
+  power.
+- **Low tiers cannot do high-tier work** — already true: floors gate on
+  `required_roster` species and depth scoring reads stats.
+- **High tiers are less flexible across roles** — not implemented. `role_affinity`
+  gives a flat 12 for a matching role and 4 for `versatile` regardless of tier,
+  so a gargoyle is exactly as flexible as a slime. This is the remaining half of
+  the stated intent.
+
+Two levers were tried against the funnel and **rejected on measurement**, which
+is worth recording so they are not retried blind:
+
+- Raising the entry thresholds (`slime -> residue` 8→40, `residue -> golemkin`
+  16→70) produced **77 missed debt payments**. Keeping the roster low-tier that
+  long starves the economy — the mutation upgrade is currently load-bearing for
+  debt service.
+- A moderate version (20/38) still failed the building-chain assertion (8 against
+  9 required) and did not improve composition, because delaying the funnel does
+  not break it: `golemkin_warden` is *terminal* for the slime lineage, so
+  everything still arrives there, just later.
+
+**The structural reason is not the thresholds.** The mutation tree already has
+four distinct endpoints — `gargoyle_stairwarden`, `revenant_chorister`,
+`wyrm_registrar`, `salamander_corekeeper`. Variety is designed in. The roster
+goes monoculture because the guild almost only ever hatches slimes, and every
+other lineage begins at a species whose eggs come from deeper floors. The
+simulated guild stops running expeditions at day 76 on the 365-day seed
+(`expedition_days_after_day_90 = 0`), and `egg_reward_days_after_day_90` is **0
+on all three seeds** — even the 180-day run, which does 90 expedition days after
+day 90 and gets no eggs from any of them, because `expedition_growth_score`
+drops egg value to 15 against relics at 70 once `pending_eggs_cover_workforce_demand`.
+
+So roster variety is gated on the same question as the survey chain below: what
+makes a well-resourced guild keep going down the tower instead of settling into
+contract work. Fixing egg supply is likely worth more to variety than any
+further mutation tuning.
+
 ### Open design question: mutation collapses the roster onto one species
 
 Measured, not guessed. Every simulation report now carries

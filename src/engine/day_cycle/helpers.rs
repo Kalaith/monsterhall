@@ -1,4 +1,5 @@
 use super::*;
+use crate::data::SpeciesData;
 
 pub(super) fn find_monster_mut<'a>(
     game_state: &'a mut GameState,
@@ -82,10 +83,18 @@ fn rank_multiplier_pct(curve: &[u32], quality_rank: u8) -> u32 {
         .unwrap_or(100)
 }
 
-/// A single companion's daily wage: a base rate scaled by rank, plus a little
-/// for the skills they have accumulated.
+/// What a companion costs to keep, from what she is rather than only what she
+/// hatched as.
+///
+/// `species` is the species she is *now*. Mutation rewrites that mid-campaign
+/// and every step up the tree raises her base stats, so without this term a
+/// `gargoyle_stairwarden` at 10/4/10/6 cost exactly what a `slime_companion` at
+/// 3/2/5/2 cost — mutating up was free power. That is why the simulated guild
+/// funnelled almost its whole roster into one late species and never wanted a
+/// low tier again: nothing on the ledger said the strong ones were expensive.
 pub(super) fn companion_daily_wage(
     day_cycle: &DayCycleConfigData,
+    species: Option<&SpeciesData>,
     monster: &CompanionState,
 ) -> u32 {
     let rank_wage = day_cycle
@@ -106,7 +115,19 @@ pub(super) fn companion_daily_wage(
         + monster.skills.navigation
         + monster.skills.arcana
         + monster.skills.strength;
-    rank_wage.saturating_add(skill_total / day_cycle.skill_wage_divisor.max(1))
+    // Base stats are already the game's measure of how capable a species is, so
+    // the tier term reads them rather than adding a second authored ranking that
+    // could drift from them.
+    let species_wage = species.map_or(0, |species| {
+        let stat_total = species.base_stats.power
+            + species.base_stats.charm
+            + species.base_stats.endurance
+            + species.base_stats.instinct;
+        stat_total.max(0) as u32 / day_cycle.species_stat_wage_divisor.max(1)
+    });
+    rank_wage
+        .saturating_add(skill_total / day_cycle.skill_wage_divisor.max(1))
+        .saturating_add(species_wage)
 }
 
 pub(super) fn next_monster_id(game_state: &GameState) -> String {
@@ -157,4 +178,16 @@ pub(super) fn add_missing_ids(target: &mut Vec<String>, source: &[String]) {
             target.push(value.clone());
         }
     }
+}
+
+/// The species a companion is right now. Mutation rewrites `species_id`, so
+/// this is deliberately looked up per call rather than cached at hatch.
+pub(super) fn species_of<'a>(
+    data: &'a GameData,
+    monster: &CompanionState,
+) -> Option<&'a SpeciesData> {
+    data.species
+        .species
+        .iter()
+        .find(|species| species.id == monster.species_id)
 }
