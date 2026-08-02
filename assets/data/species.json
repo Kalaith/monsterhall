@@ -16,8 +16,7 @@
         "stretchy"
       ],
       "preferred_room_ids": [
-        "common_room",
-        "packroom_annex"
+        "common_room"
       ],
       "hatching_cost": {
         "gold": 25,
@@ -178,8 +177,7 @@
         "sharp_instinct"
       ],
       "preferred_room_ids": [
-        "packroom_annex",
-        "reception_hall"
+        "packroom_annex"
       ],
       "hatching_cost": {
         "gold": 65,
@@ -232,8 +230,7 @@
         "graceful"
       ],
       "preferred_room_ids": [
-        "reception_hall",
-        "nursery_wing"
+        "reception_hall"
       ],
       "hatching_cost": {
         "gold": 120,
@@ -259,8 +256,7 @@
         "resilient"
       ],
       "preferred_room_ids": [
-        "packroom_annex",
-        "common_room"
+        "packroom_annex"
       ],
       "hatching_cost": {
         "gold": 140,
@@ -286,8 +282,7 @@
         "long_patience"
       ],
       "preferred_room_ids": [
-        "reception_hall",
-        "packroom_annex"
+        "reception_hall"
       ],
       "hatching_cost": {
         "gold": 180,
@@ -313,8 +308,7 @@
         "long_patience"
       ],
       "preferred_room_ids": [
-        "nursery_wing",
-        "packroom_annex"
+        "nursery_wing"
       ],
       "hatching_cost": {
         "gold": 220,

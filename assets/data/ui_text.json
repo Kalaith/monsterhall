@@ -418,7 +418,12 @@
     "materials_label": "Materials",
     "arcane_residue_label": "Arcane Residue",
     "eggs_label": "Eggs",
-    "relics_label": "Relics"
+    "relics_label": "Relics",
+    "upkeep_breakdown_template": "  Wages {wages} / Cleaning {cleaning} / Maintenance {maintenance}",
+    "expedition_prep_template": "Prep Spent: {gold} gold, {materials} materials, {residue} residue",
+    "expedition_prep_shortfall_label": "Prep Shortfall",
+    "special_events_template": "Special Events: {count} ({gold} gold)",
+    "contract_offers_template": "Offers: {generated} received, {rejected} turned away"
   },
   "settings": {
     "panel_title": "Settings",

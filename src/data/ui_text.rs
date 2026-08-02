@@ -440,6 +440,14 @@ pub struct DayResultsUiText {
     pub arcane_residue_label: String,
     pub eggs_label: String,
     pub relics_label: String,
+    /// Where the day's operating costs actually went. The summary has carried
+    /// the wage/cleaning/maintenance split all along and only ever showed the
+    /// total, which is the one number a player cannot act on.
+    pub upkeep_breakdown_template: String,
+    pub expedition_prep_template: String,
+    pub expedition_prep_shortfall_label: String,
+    pub special_events_template: String,
+    pub contract_offers_template: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

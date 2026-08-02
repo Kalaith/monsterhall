@@ -4,7 +4,9 @@ use crate::data::GameData;
 use crate::engine::preview_upkeep;
 use crate::state::{CompanionJobState, CompanionState, GameState, TownOverviewState};
 use crate::ui::actions::UiAction;
-use crate::ui::art::{draw_species_portrait, draw_ui_icon, icon_for_metric_label};
+use crate::ui::art::{
+    draw_condition_badges, draw_species_portrait, draw_ui_icon, icon_for_metric_label,
+};
 use crate::ui::chrome::{draw_screen_title, draw_top_utility_bar};
 use crate::ui::core::{draw_body_text, draw_body_text_in_box, secondary_button, utility_button};
 use crate::ui::feedback::draw_inline_error;
@@ -660,18 +662,26 @@ fn draw_roster_card_organic(
     let text_x = x + portrait_w + 30.0;
     let text_w = (action_x - text_x - 14.0).max(90.0);
 
+    // This card carries the Rest button, so it is where the decision to rest
+    // someone is actually made — and until now it said nothing about her
+    // condition. Fatigue and stress cost real output since the condition wiring
+    // landed, so the numbers belong next to the button that fixes them.
+    let show_condition = h >= 150.0;
     draw_body_text(&monster.name, text_x, y + 30.0, 20.0, theme::TEXT_STRONG);
     draw_body_text(&species_label, text_x, y + 52.0, 13.0, theme::TEXT_BODY);
     draw_organic_status(text_x, y + 66.0, text_w, 28.0, state_label, accent);
     draw_body_text_in_box(
         &key_value,
         text_x,
-        y + 106.0,
+        if show_condition { y + 98.0 } else { y + 106.0 },
         text_w,
         24.0,
         12.0,
         theme::TEXT_MUTED,
     );
+    if show_condition {
+        draw_condition_badges(monster, text_x, y + h - 40.0, text_w);
+    }
 
     if secondary_button(
         action_x,

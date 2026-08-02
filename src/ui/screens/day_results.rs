@@ -8,6 +8,7 @@ use crate::ui::chrome::{draw_inline_status, draw_tier_panel, draw_top_utility_ba
 use crate::ui::core::primary_button;
 use crate::ui::core::{draw_body_text, draw_wrapped_lines, draw_wrapped_lines_in_box};
 use crate::ui::theme;
+use crate::ui::view_models::fill_template;
 
 pub fn draw_day_results(
     data: &GameData,
@@ -64,6 +65,14 @@ pub fn draw_day_results(
             "{}: {}",
             day_results_text.upkeep_paid_label, summary.upkeep_gold
         ),
+        fill_template(
+            &day_results_text.upkeep_breakdown_template,
+            &[
+                ("{wages}", summary.upkeep_wage_gold.to_string()),
+                ("{cleaning}", summary.upkeep_cleaning_gold.to_string()),
+                ("{maintenance}", summary.upkeep_maintenance_gold.to_string()),
+            ],
+        ),
         format!(
             "{}: {}",
             day_results_text.upkeep_shortfall_label, summary.upkeep_shortfall
@@ -71,6 +80,13 @@ pub fn draw_day_results(
         format!(
             "{}: {}",
             day_results_text.arcane_residue_earned_label, summary.guild_job_arcane_residue
+        ),
+        fill_template(
+            &day_results_text.special_events_template,
+            &[
+                ("{count}", summary.special_event_count.to_string()),
+                ("{gold}", summary.special_event_gold_delta.to_string()),
+            ],
         ),
     ];
     draw_wrapped_lines(
@@ -107,6 +123,21 @@ pub fn draw_day_results(
         format!(
             "{}: {}",
             day_results_text.relics_label, summary.expedition_relics
+        ),
+        fill_template(
+            &day_results_text.expedition_prep_template,
+            &[
+                ("{gold}", summary.expedition_prep_gold.to_string()),
+                ("{materials}", summary.expedition_prep_materials.to_string()),
+                (
+                    "{residue}",
+                    summary.expedition_prep_arcane_residue.to_string(),
+                ),
+            ],
+        ),
+        format!(
+            "{}: {}",
+            day_results_text.expedition_prep_shortfall_label, summary.expedition_prep_shortfall
         ),
     ];
     draw_wrapped_lines(
@@ -152,11 +183,20 @@ pub fn draw_day_results(
         PanelTier::Primary,
         false,
     );
-    let guest_lines = if summary.contract_updates.is_empty() {
+    // The offer flow was entirely invisible: the desk shows what is on it, and
+    // nothing said how many came in or how many the guild had no room for.
+    let mut guest_lines = if summary.contract_updates.is_empty() {
         vec![day_results_text.no_guest_contract_message.clone()]
     } else {
         summary.contract_updates.clone()
     };
+    guest_lines.push(fill_template(
+        &day_results_text.contract_offers_template,
+        &[
+            ("{generated}", summary.contracts_generated.to_string()),
+            ("{rejected}", summary.contracts_rejected.to_string()),
+        ],
+    ));
     draw_wrapped_lines_in_box(
         &guest_lines,
         guest_x + 16.0,

@@ -22,6 +22,28 @@ impl GameData {
                 room_ids,
                 &format!("species '{}'.preferred_room_ids", species.id),
             )?;
+            // `preferred_room_ids` is the decorative half of this relation —
+            // only the room's `preferred_species_ids` earns
+            // `preferred_species_bonus_pct`. Six species used to claim an
+            // affinity the room did not grant, which reads as a working bonus
+            // and is not one. Either side may be edited; they just have to
+            // agree, so the mismatch is caught at load instead of never.
+            for room_id in &species.preferred_room_ids {
+                let Some(room) = self
+                    .guild_rooms
+                    .rooms
+                    .iter()
+                    .find(|room| &room.id == room_id)
+                else {
+                    continue;
+                };
+                if !room.preferred_species_ids.contains(&species.id) {
+                    return Err(format!(
+                        "species '{}' prefers room '{}', but that room does not list it in preferred_species_ids - only the room side grants the bonus.",
+                        species.id, room_id
+                    ));
+                }
+            }
             if !self
                 .monster_names
                 .name_pools
