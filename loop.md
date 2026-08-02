@@ -1587,6 +1587,35 @@ Stop the loop and report if:
   lineage-funnel table in `TODO.md` was measured under the old regime; (c) two recorded
   slices remain, both engine-side: the `ui_text` migration and the unbounded event log.
 
+- **2026-08-03 — twenty-eighth pass (covering the tree the harness stopped walking).**
+  The previous pass gave instability a relief path, which is what a resting guild wants
+  and also what stopped the balance run from ever reaching the five mutations authored
+  at 60 and above. Covered directly instead: **every authored mutation must now fire in
+  play** — a companion at its source, with its traits and exactly its instability, is a
+  different species after one resolved day. Then the ordering trap behind it:
+  `try_apply_mutation` takes the **first** match in list order, so a dearer exit above a
+  cheaper one kills the cheaper one for everybody who can take both, and
+  `golemkin_warden` has exactly that shape (stair 100, warm room 190) with a
+  porter-descended golemkin qualifying for both. New load-time rule, checked against
+  `reachable_trait_states` because neither trait list is a subset of the other and only
+  a real lineage shows the overlap; verified by swapping the two inside the test.
+  **And the same defect as last pass, one screen over**: the profile's condition tiles
+  turned amber above **2** against authored allowances of 30 and 20, so from her first
+  day of work the profile flagged a companion delivering exactly 100% — on the screen
+  the Rest and Release buttons live on. It shares `condition_tone` with the roster
+  badges now, and `condition_color` looks the allowance up from a **named meter**
+  instead of taking a number, so a future tile cannot bring its own threshold back.
+  **Result:** 136 tests (was 133), fmt and clippy clean, publish green, **balance
+  byte-identical**, no data file touched.
+  **Next iteration should know:** (a) *a screen that invents a threshold the engine
+  already authors* has now produced three finds in three passes (roster badges, profile
+  tiles, and the readiness line before them) — the remaining screens with any
+  conditional colouring are worth one sweep; (b) `salamander_corekeeper` currently
+  reaches the roster by neither route in a simulated campaign — its eggs are depth 24–25
+  and its mutation is 190 instability — so the deepest species is content only a
+  deliberate player sees, which is defensible but worth a decision; (c) two recorded
+  slices remain: the `ui_text` migration and the unbounded event log.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

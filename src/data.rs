@@ -9,8 +9,8 @@ mod validation;
 mod validation_helpers;
 
 pub use config_types::{
-    CompanionSkillProgressionData, CompanionWorkHistoryProgressionData, DayCycleConfigData,
-    ResolutionOptionData, UpkeepBandData,
+    CompanionSkillProgressionData, CompanionWorkHistoryProgressionData, ConditionEffectData,
+    DayCycleConfigData, ResolutionOptionData, UpkeepBandData,
 };
 pub use loader::load_game_data;
 #[cfg(test)]

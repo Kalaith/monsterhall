@@ -245,6 +245,39 @@ mutation and the check names golemkin).
   is a `corruption_adept` exactly like the warden she replaces. Variety means a
   different *role*, not a different name.
 
+### Found by review, not by the audit (2026-08-03, twenty-eighth pass)
+
+Took the previous pass's own note — *the deep mutation tree is now unexercised by
+the harness* — and covered it directly instead of hoping a balance run would.
+
+- **Every authored mutation is now asserted to fire in play**, not merely to
+  validate: a companion standing at each mutation's source, with its traits and
+  exactly its instability, must be a different species after one resolved day.
+  Five of the nine are authored at 60 and above, which a resting guild never
+  reaches, so the balance harness stopped walking them the moment instability got
+  a relief path.
+
+- **New load-time rule: a species' cheaper exit must be authored first.**
+  `try_apply_mutation` takes the **first** match in list order, so a dearer exit
+  above a cheaper one makes the cheaper one dead for everybody who can take both
+  — and nothing in the data said so. `golemkin_warden` has exactly that shape
+  (the stair at 100, the warm room at 190) and a porter-descended golemkin
+  carries the traits for both. Checked against `reachable_trait_states` rather
+  than against the authored trait lists, because neither list is a subset of the
+  other and only a real lineage shows the overlap. Verified by swapping the two
+  inside the test.
+
+- ~~The profile's condition tiles turned amber above 2.~~ Fixed, and it is the
+  same defect as last pass's badges one screen over. The authored allowances are
+  fatigue **30**, stress **20**; a single guild shift adds ten fatigue, so from
+  her first day of work the profile flagged a companion who was delivering
+  exactly 100%, on the screen where the Rest and Release buttons live. It shares
+  `condition_tone` with the roster badges now, and `condition_color` looks the
+  allowance up from a named meter rather than taking a number, so a future tile
+  cannot bring its own threshold back.
+
+- **Balance byte-identical.**
+
 ### Found by review, not by the audit (2026-08-03, twenty-sixth pass)
 
 Last of the harness blind spots: every companion in a capture had zero fatigue,

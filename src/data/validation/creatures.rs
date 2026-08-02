@@ -143,6 +143,7 @@ impl GameData {
         let reachable = self.reachable_trait_states();
         self.validate_mutation_traits_are_reachable(&reachable)?;
         self.validate_mutation_exits_are_satisfiable(&reachable)?;
+        self.validate_mutation_exits_are_ordered(&reachable)?;
         self.validate_every_trait_is_reachable(&reachable)
     }
 
@@ -310,6 +311,52 @@ impl GameData {
         Ok(())
     }
 
+    /// When a companion qualifies for more than one exit, `try_apply_mutation`
+    /// takes the **first in list order** — so a dearer exit listed above a
+    /// cheaper one makes the cheaper one dead for everybody who can take both,
+    /// and nothing else in the data says so.
+    ///
+    /// `golemkin_warden` has two: the stair at 100 corruption and the warm room
+    /// at 190. A porter-descended golemkin carries the traits for both, so the
+    /// order they are authored in is the whole difference between her turning to
+    /// stone and her going down to the clutches.
+    fn validate_mutation_exits_are_ordered(
+        &self,
+        reachable: &[(String, Vec<String>)],
+    ) -> Result<(), String> {
+        for (species_id, traits) in reachable {
+            let qualifying: Vec<_> = self
+                .mutations
+                .mutations
+                .iter()
+                .filter(|mutation| {
+                    &mutation.source_species_id == species_id
+                        && mutation
+                            .required_trait_ids
+                            .iter()
+                            .all(|trait_id| traits.contains(trait_id))
+                })
+                .collect();
+            let Some(first) = qualifying.first() else {
+                continue;
+            };
+            if let Some(cheaper) = qualifying
+                .iter()
+                .find(|mutation| mutation.minimum_corruption < first.minimum_corruption)
+            {
+                return Err(format!(
+                    "mutation '{}' costs {} and is authored above '{}' at {}, so a companion at '{}' who qualifies for both can never take the cheaper one.",
+                    first.id,
+                    first.minimum_corruption,
+                    cheaper.id,
+                    cheaper.minimum_corruption,
+                    species_id
+                ));
+            }
+        }
+        Ok(())
+    }
+
     /// Corruption only ever climbs, and `try_apply_mutation` runs every day, so
     /// the mutation graph has to be a strictly ascending tree.
     ///
@@ -431,6 +478,40 @@ mod tests {
         assert!(
             error.contains("golemkin_warden"),
             "the error should name the species with the unreachable exit: {error}"
+        );
+    }
+    /// Two exits from one species are chosen by list order, not by cost, so the
+    /// cheaper one has to be authored first or it is dead for anybody who
+    /// qualifies for both.
+    #[test]
+    fn a_species_with_two_exits_offers_the_cheaper_one_first() {
+        let data = test_game_data();
+        let reachable = data.reachable_trait_states();
+        data.validate_mutation_exits_are_ordered(&reachable)
+            .expect("the shipped catalogue should offer the cheaper exit first");
+
+        let mut planted = test_game_data();
+        let stair = planted
+            .mutations
+            .mutations
+            .iter()
+            .position(|mutation| mutation.id == "golemkin_warden_to_gargoyle_stairwarden")
+            .expect("the stair exit should exist");
+        let warm_room = planted
+            .mutations
+            .mutations
+            .iter()
+            .position(|mutation| mutation.id == "golemkin_warden_to_salamander_corekeeper")
+            .expect("the warm room exit should exist");
+        planted.mutations.mutations.swap(stair, warm_room);
+
+        let reachable = planted.reachable_trait_states();
+        let error = planted
+            .validate_mutation_exits_are_ordered(&reachable)
+            .expect_err("the dearer exit listed first should be rejected");
+        assert!(
+            error.contains("golemkin_warden"),
+            "the error should name the species holding both exits: {error}"
         );
     }
 }

@@ -1,6 +1,6 @@
 use macroquad::prelude::*;
 
-use crate::data::GameData;
+use crate::data::{ConditionEffectData, GameData};
 use crate::state::{CompanionState, GameState, MonsterProfileState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_backdrop, draw_species_portrait, draw_trait_icons, BackdropKind};
@@ -326,6 +326,7 @@ fn draw_best_use_panel(
     role_summary: &crate::ui::view_models::MonsterRoleSummary,
 ) {
     let ui = &data.ui_text.monster_profile;
+    let effects = &data.config.day_cycle.condition_effects;
     draw_tier_panel(
         x,
         y,
@@ -363,7 +364,7 @@ fn draw_best_use_panel(
         58.0,
         &ui.fatigue_label,
         &monster.fatigue.to_string(),
-        condition_color(monster.fatigue, 2, false),
+        condition_color(effects, ConditionMeter::Fatigue, monster.fatigue),
     );
     draw_metric_tile(
         tile_x + tile_w + 6.0,
@@ -372,7 +373,7 @@ fn draw_best_use_panel(
         58.0,
         &ui.stress_label,
         &monster.stress.to_string(),
-        condition_color(monster.stress, 2, false),
+        condition_color(effects, ConditionMeter::Stress, monster.stress),
     );
     draw_metric_tile(
         tile_x + (tile_w + 6.0) * 2.0,
@@ -381,7 +382,7 @@ fn draw_best_use_panel(
         58.0,
         &ui.injury_label,
         &monster.injury.to_string(),
-        condition_color(monster.injury, 0, true),
+        condition_color(effects, ConditionMeter::Injury, monster.injury),
     );
     draw_metric_tile(
         tile_x + (tile_w + 6.0) * 3.0,
@@ -608,13 +609,37 @@ fn draw_profile_chip(x: f32, y: f32, w: f32, h: f32, label: &str, value: &str, c
     );
 }
 
-fn condition_color(value: u32, warning_threshold: u32, any_is_danger: bool) -> Color {
-    if any_is_danger && value > 0 {
-        theme::DANGER
-    } else if value > warning_threshold {
-        theme::WARNING
-    } else {
-        theme::POSITIVE
+/// Which meter a tile is showing, so a call site names the meter instead of
+/// passing a number.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum ConditionMeter {
+    Fatigue,
+    Stress,
+    Injury,
+}
+
+/// The colour a condition meter wears on the profile.
+///
+/// Delegates to the same `condition_tone` the roster badges use, against the
+/// same authored allowances, because this screen was inventing its own: fatigue
+/// and stress turned amber above **2** against allowances of 30 and 20. A single
+/// guild shift adds ten fatigue, so from her first day of work the profile
+/// warned about a companion delivering exactly 100% — the same
+/// pre-condition-system threshold that once made her read as "hurt", fixed in
+/// the readiness line and left standing in the tiles beside it.
+///
+/// The allowance is looked up from the meter rather than passed in, so a future
+/// tile cannot quietly bring its own number back.
+fn condition_color(effects: &ConditionEffectData, meter: ConditionMeter, value: u32) -> Color {
+    let allowance = match meter {
+        ConditionMeter::Fatigue => effects.fatigue_allowance,
+        ConditionMeter::Stress => effects.stress_allowance,
+        ConditionMeter::Injury => effects.injury_allowance,
+    };
+    match crate::ui::art::condition_tone(value, allowance, effects.max_meter) {
+        crate::ui::art::ConditionTone::Calm => theme::POSITIVE,
+        crate::ui::art::ConditionTone::Strained => theme::WARNING,
+        crate::ui::art::ConditionTone::Spent => theme::DANGER,
     }
 }
 
@@ -725,5 +750,36 @@ mod tests {
             "{} trainable skills plus bond need {chips} chips, but the profile band holds {SKILL_CHIP_SLOTS}. Widen the band or give it a pager — do not let it truncate.",
             trainable.len()
         );
+    }
+    /// The profile's condition tiles turned amber above 2 while the engine's
+    /// authored allowances are 30 and 20, so a companion one third of a single
+    /// shift into her first day of work was flagged as worn while delivering
+    /// exactly 100%.
+    #[test]
+    fn every_tile_turns_where_the_engine_starts_charging_for_that_meter() {
+        let data = test_game_data();
+        let effects = &data.config.day_cycle.condition_effects;
+
+        for (meter, allowance) in [
+            (super::ConditionMeter::Fatigue, effects.fatigue_allowance),
+            (super::ConditionMeter::Stress, effects.stress_allowance),
+            (super::ConditionMeter::Injury, effects.injury_allowance),
+        ] {
+            assert_eq!(
+                super::condition_color(effects, meter, allowance),
+                crate::ui::theme::POSITIVE,
+                "{meter:?} inside its allowance costs the guild nothing and must not be flagged"
+            );
+            assert_eq!(
+                super::condition_color(effects, meter, allowance + 1),
+                crate::ui::theme::WARNING,
+                "{meter:?} past its allowance is taking output off everything she does"
+            );
+            assert_eq!(
+                super::condition_color(effects, meter, effects.max_meter),
+                crate::ui::theme::DANGER,
+                "{meter:?} at the cap is as bad as it gets"
+            );
+        }
     }
 }

@@ -1434,3 +1434,41 @@ fn resting_settles_instability_and_idling_does_not() {
         "idling must not settle instability, or holding her back costs nothing"
     );
 }
+
+/// Every authored mutation must actually fire in play, not merely validate.
+///
+/// The balance harness used to walk the whole tree by accident, because
+/// instability only ever climbed. Now that a resting guild settles it, a
+/// campaign tops out around 35 and everything authored at 60 and above — five of
+/// the nine mutations, including both deep-species exits — is reached only by a
+/// player who deliberately does not rest. That is the intended shape, and it
+/// leaves the late tree with no coverage at all unless it is asked directly.
+#[test]
+fn every_authored_mutation_fires_when_its_conditions_are_met() {
+    let data = crate::data::test_game_data();
+    assert!(
+        !data.mutations.mutations.is_empty(),
+        "the catalogue should author mutations"
+    );
+
+    for mutation in &data.mutations.mutations {
+        let mut game_state = crate::engine::create_new_game_state(&data);
+        let mut companion = test_monster(Vec::new());
+        companion.id = "monster_001".to_owned();
+        companion.species_id = mutation.source_species_id.clone();
+        companion.trait_ids = mutation.required_trait_ids.clone();
+        companion.corruption = mutation.minimum_corruption;
+        // Idle rather than Resting: resting settles instability first, which is
+        // the whole point of the relief, and would hold her under the bar.
+        companion.current_job = CompanionJobState::Idle;
+        game_state.monsters = vec![companion];
+
+        let _ = resolve_day(&data, &mut game_state);
+
+        assert_eq!(
+            game_state.monsters[0].species_id, mutation.target_species_id,
+            "mutation '{}' did not fire for a companion standing at its source with its traits and exactly its instability",
+            mutation.id
+        );
+    }
+}
