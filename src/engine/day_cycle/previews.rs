@@ -348,6 +348,18 @@ pub(super) fn preview_guild_job_for_town(
 
     let stats = effective_stats(data, monster);
 
+    // `guild_income_pct` lands here, on the guild job's Score, which the worker
+    // card shows the player. It is *not* a percentage of the fee, despite its
+    // name and despite the building card having advertised it as one: Score
+    // becomes gold at `success_score / 4`, so a building sold as "+4%" adds a
+    // single point of base gold.
+    //
+    // Applying it as the percentage it claims to be was built and measured, and
+    // it is too strong for this economy: buildings alone sum to 55%, and with it
+    // every one of the ten seeds cleared the Founder's Due, which the campaign
+    // spec forbids. The mechanic stays; the building card no longer calls it a
+    // percentage. See TODO.md — making it faithful is a balance change that
+    // needs the economy retuned around it.
     let success_score = data.config.day_cycle.base_guild_job_success
         + stats.charm * 3
         + skill_bonus

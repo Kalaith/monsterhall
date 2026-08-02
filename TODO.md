@@ -171,6 +171,47 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, eighteenth pass)
+
+Changed lens, as the last pass's note asked: from *what breaks at scale* to
+**what the arithmetic quietly does with an authored number**.
+
+- ~~The building card promised a percentage the game does not pay.~~ Fixed, but
+  not the way it first looked. `passive_modifiers.guild_income_pct` is authored
+  as a percentage, named as one, and the card read *"Guild service income +4%"* —
+  and its single consumer adds it to a guild job's **Score**, which is not a
+  percentage of anything. Score becomes gold at `success_score / 4`, so a
+  building sold as +4% buys **one point of base gold**: about 1.3% of a
+  seventy-five gold shift, a third of what the card promised, and the shortfall
+  widens as the other multipliers scale the rest of the fee.
+
+  Its sibling `expedition_success_pct` does the same thing and is *right* to —
+  an expedition's success score really is a percentage, so a point there is a
+  point of success chance. Guild jobs have no such scale, which is what makes
+  this one the odd rung.
+
+- **Applying it as a true percentage was built, measured, and rejected — by the
+  harness, not by taste.** Buildings alone sum to 55% and traits add up to 15
+  each, and with the faithful reading the campaign assertions fired immediately:
+  *"clearing Founder's Due should not be guaranteed, but all 10 seeds managed
+  it"*. That is the spec's own line about the campaign's difficulty, so the
+  change is a balance retune rather than a bug fix, and it is left as a **design
+  call with the measurement attached**. What shipped is the honest label —
+  "Guild job score +4" — plus doc comments on both `guild_income_pct` fields so
+  the next author does not re-lay the trap.
+
+  Worth noting the harness caught this in one run. The Founder's Due assertions
+  are doing exactly the job they were written for.
+
+- **Checked and clean**: every percentage in the engine is applied against a
+  base wide enough not to truncate to zero; the only unguarded unsigned
+  subtraction is protected by the branch above it; and `town_job_limit_flat as
+  u8` — which would wrap a negative to 255, where its sibling
+  `population_cap_flat` is guarded with `.max(0)` — is protected by a `> 0` test
+  before the cast. Latent asymmetry, not a live bug.
+
+- **Balance untouched**; only the version stamp moved.
+
 ### Found by review, not by the audit (2026-08-03, seventeenth pass)
 
 **A thinner pass than the last four, and worth saying so plainly.** The last two

@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.3.1",
   "common": {
     "settings_button": "Settings",
     "return_to_town_button": "Guild Hall",
@@ -134,7 +134,7 @@
     "egg_locked_outcome_message": "Locked to one hatchery outcome",
     "egg_possible_species_template": "{count} possible species",
     "egg_prepared_for_template": "Prepared for {species}",
-    "building_guild_income_template": "Guild service income +{value}%",
+    "building_guild_income_template": "Guild job score +{value}",
     "building_expedition_success_template": "Expedition success +{value}%",
     "building_egg_discovery_template": "Egg discovery +{value}",
     "building_injury_recovery_template": "Injury recovery +{value}",

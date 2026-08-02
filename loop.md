@@ -1279,6 +1279,31 @@ Stop the loop and report if:
   hardcoded strings) and the **unbounded event log in the save**, which is a design
   call about discarding history rather than a bug.
 
+- **2026-08-03 — eighteenth pass (a percentage that was never a percentage).** Changed
+  lens as the last note asked, from *what breaks at scale* to *what the arithmetic
+  does with an authored number*. `passive_modifiers.guild_income_pct` is authored,
+  named and displayed as a percentage — the building card read "Guild service income
+  +4%" — and its one consumer adds it to a guild job's **Score**, which is not a
+  percentage of anything. Score becomes gold at `success_score / 4`, so a building sold
+  as +4% buys one point of base gold: ~1.3% of a 75-gold shift. Its sibling
+  `expedition_success_pct` does the same and is right to, because an expedition's
+  success score genuinely is a percentage. **Applying it faithfully was built and
+  measured, then rejected by the harness in one run** — buildings sum to 55%, and the
+  campaign assertion fired: *"clearing Founder's Due should not be guaranteed, but all
+  10 seeds managed it"*. So it is a balance retune, not a bug fix, and it is recorded
+  as a design call with the measurement. What shipped is the honest label ("Guild job
+  score +4") and doc comments on both fields.
+  **Result:** 124 tests, fmt and clippy clean, publish green, `content_version` 1.24.0,
+  `ui_text` 1.3.1, balance untouched apart from the stamp.
+  **Next iteration should know:** (a) the arithmetic lens is now largely swept —
+  percentages, unsigned subtraction and narrowing casts all came back clean or latent —
+  so it is probably spent too; (b) the last two passes have each produced one fix
+  against several clean checks, which is what a codebase looks like when the cheap
+  seams are worked out — **the honest next move is content or the two recorded design
+  calls, not another defect hunt**: making `guild_income_pct` a real percentage with
+  the economy retuned around it, and the unbounded event log; (c) the `ui_text`
+  migration (~40 hardcoded strings) remains the largest mechanical slice.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and
