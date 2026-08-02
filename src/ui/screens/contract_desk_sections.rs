@@ -1,6 +1,7 @@
 use macroquad::prelude::{screen_height, screen_width};
 
 use crate::data::GameData;
+use crate::engine::ContractServiceOutcome;
 use crate::state::{CompanionState, ContractDeskState, ContractState, ContractStatus, GameState};
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_guest_silhouette, draw_room_thumbnail};
@@ -429,7 +430,13 @@ pub(super) fn draw_selected_request_panel(
         layout.detail_x + 150.0,
         196.0,
         13.0,
-        theme::TEXT_MUTED,
+        // A hall under the bar costs the guild half the booking, so the line
+        // that says so should not read like the rest of the metadata.
+        if hall_preparation < request.preparation_quality_required {
+            theme::WARNING
+        } else {
+            theme::TEXT_MUTED
+        },
     );
     draw_body_text(
         &format_resources_state(data, &request.reward),
@@ -621,20 +628,17 @@ pub(super) fn draw_eligible_panel(
             + col as f32 * (card_w + layout::SECTION_GAP);
         let y = layout.candidates_y + 42.0 + row as f32 * 100.0;
         let report = evaluate_guest_candidate(data, game_state, request, monster);
-        let state_color = if report.is_eligible {
-            theme::POSITIVE
-        } else {
-            theme::WARNING
+        // Three states, not two. A companion the booking refuses may still be
+        // close enough to send for half, and drawing her as "Blocked" beside a
+        // live Assign button meant the player found the halving out a day later
+        // in the report. The engine's own answer, so the two cannot disagree.
+        let outcome = crate::engine::contract_service_outcome(data, game_state, request, monster);
+        let state_color = match outcome {
+            ContractServiceOutcome::Full => theme::POSITIVE,
+            ContractServiceOutcome::Partial => theme::WARNING,
+            ContractServiceOutcome::Refused => theme::DANGER,
         };
-        let detail = if report.is_eligible {
-            fill_template(
-                &data.ui_text.contract_desk.eligible_summary_template,
-                &[
-                    ("{skills}", companion_skill_summary(data, monster)),
-                    ("{history}", work_history_summary(data, monster)),
-                ],
-            )
-        } else {
+        let gap_summary = || {
             let blocked_summary = blocked_candidate_summary(request, monster);
             if blocked_summary.is_empty() {
                 compact_text(&report.failure_reasons.join(" | "), 54)
@@ -642,15 +646,30 @@ pub(super) fn draw_eligible_panel(
                 blocked_summary
             }
         };
+        let detail = match outcome {
+            ContractServiceOutcome::Full => fill_template(
+                &data.ui_text.contract_desk.eligible_summary_template,
+                &[
+                    ("{skills}", companion_skill_summary(data, monster)),
+                    ("{history}", work_history_summary(data, monster)),
+                ],
+            ),
+            // Both short states show the same thing — what she is short of.
+            // The badge above is what separates them, because a sentence
+            // explaining half pay costs the whole line: at the card's width it
+            // truncated to "Short of the terms, but close enough to send l..."
+            // and the gaps, which are the actionable half, never appeared.
+            ContractServiceOutcome::Partial | ContractServiceOutcome::Refused => gap_summary(),
+        };
         let species_label = format!(
             "{} | {}",
             species_name_by_id(data, &monster.species_id),
             monster_quality_label(data, monster)
         );
-        let state_label = if report.is_eligible {
-            &data.ui_text.contract_desk.eligible_label
-        } else {
-            &data.ui_text.contract_desk.blocked_label
+        let state_label = match outcome {
+            ContractServiceOutcome::Full => &data.ui_text.contract_desk.eligible_label,
+            ContractServiceOutcome::Partial => &data.ui_text.contract_desk.half_pay_label,
+            ContractServiceOutcome::Refused => &data.ui_text.contract_desk.blocked_label,
         };
         let card = draw_character_card(
             data,

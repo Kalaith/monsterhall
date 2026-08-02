@@ -319,3 +319,135 @@ fn a_hall_that_did_not_staff_up_delivers_the_booking_for_half() {
         "a prepared hall should not be told it fell short: {prepared_updates:?}"
     );
 }
+
+/// The contract desk and the assignment must agree about what a booking is
+/// worth, because the desk draws the answer and the engine enforces it.
+///
+/// The desk knew two states, eligible and blocked, against an engine that has
+/// always had three: a companion the booking refuses can still be close enough
+/// to send for **half**. She was drawn as "Blocked" with a live Assign button
+/// beside her, the assignment then succeeded, and the halving showed up a day
+/// later in the report.
+#[test]
+fn the_desk_and_the_assignment_agree_on_what_a_booking_is_worth() {
+    let data = test_game_data();
+    let mut game_state = GameState {
+        current_day: 4,
+        town: PlayerTownState {
+            unlocked_room_ids: vec!["common_room".to_owned()],
+            unlocked_species_ids: vec!["slime_companion".to_owned(), "residue_slime".to_owned()],
+            ..PlayerTownState::default()
+        },
+        story_progress: StoryProgressState {
+            opening_step: OpeningChapterStep::Complete,
+            first_client_completed: true,
+            ..StoryProgressState::default()
+        },
+        ..GameState::default()
+    };
+    let qualified = CompanionState {
+        id: "monster_qualified".to_owned(),
+        species_id: "residue_slime".to_owned(),
+        name: "Sesh".to_owned(),
+        quality_rank: 2,
+        skills: CompanionSkillState {
+            scouting: 2,
+            guarding: 1,
+            hospitality: 2,
+            charm: 2,
+            ..CompanionSkillState::default()
+        },
+        work_history: CompanionWorkHistoryState {
+            scouting_runs: 1,
+            hospitality_jobs: 2,
+            recovery_shifts: 1,
+            ..CompanionWorkHistoryState::default()
+        },
+        trait_ids: vec!["corruption_tuned".to_owned(), "eager".to_owned()],
+        ..CompanionState::default()
+    };
+    // Right species, none of the training — but she carries both traits the
+    // patron prefers, which is what "close enough to send" means.
+    let marginal = CompanionState {
+        id: "monster_marginal".to_owned(),
+        species_id: "residue_slime".to_owned(),
+        name: "Ola".to_owned(),
+        quality_rank: 2,
+        bond: 12,
+        reputation: 8,
+        trait_ids: vec!["corruption_tuned".to_owned(), "eager".to_owned()],
+        ..CompanionState::default()
+    };
+    // Wrong species: a hard gate, so no amount of merit reaches this booking.
+    let wrong = CompanionState {
+        id: "monster_wrong".to_owned(),
+        species_id: "slime_companion".to_owned(),
+        name: "Mira".to_owned(),
+        quality_rank: 2,
+        ..CompanionState::default()
+    };
+    game_state.monsters = vec![qualified, marginal, wrong];
+    game_state.active_contracts = vec![ContractState {
+        request_id: "contract_001".to_owned(),
+        template_id: "residue_consultation".to_owned(),
+        guest_name: "Veiled Patron".to_owned(),
+        archetype_id: "tower_scholar".to_owned(),
+        requested_room_id: "common_room".to_owned(),
+        required_species_ids: vec!["residue_slime".to_owned()],
+        minimum_quality_rank: 2,
+        required_skill_thresholds: ContractSkillRequirementState {
+            scouting: 2,
+            guarding: 1,
+            hospitality: 2,
+            charm: 2,
+            ..ContractSkillRequirementState::default()
+        },
+        required_work_history_thresholds: ContractHistoryRequirementState {
+            scouting_runs: 1,
+            hospitality_jobs: 2,
+            recovery_shifts: 1,
+            ..ContractHistoryRequirementState::default()
+        },
+        deadline_day: 8,
+        status: ContractStatus::Pending,
+        ..ContractState::default()
+    }];
+
+    let mut seen = Vec::new();
+    for monster in game_state.monsters.clone() {
+        let outcome = contract_service_outcome(
+            &data,
+            &game_state,
+            &game_state.active_contracts[0],
+            &monster,
+        );
+        seen.push(outcome);
+
+        let mut trial = game_state.clone();
+        let assigned = assign_monster_to_contract(&data, &mut trial, "contract_001", &monster.id);
+        match outcome {
+            ContractServiceOutcome::Refused => assert!(
+                assigned.is_err(),
+                "the desk refused {} and the engine took her anyway",
+                monster.name
+            ),
+            _ => assert!(
+                assigned.is_ok(),
+                "the desk offered {} and the engine refused her: {assigned:?}",
+                monster.name
+            ),
+        }
+    }
+
+    // A test that only ever saw one outcome would prove nothing.
+    for expected in [
+        ContractServiceOutcome::Full,
+        ContractServiceOutcome::Partial,
+        ContractServiceOutcome::Refused,
+    ] {
+        assert!(
+            seen.contains(&expected),
+            "the fixture should cover every outcome, saw {seen:?}"
+        );
+    }
+}

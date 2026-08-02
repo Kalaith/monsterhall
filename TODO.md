@@ -212,6 +212,49 @@ mutation and the check names golemkin).
   is a `corruption_adept` exactly like the warden she replaces. Variety means a
   different *role*, not a different name.
 
+### Found by review, not by the audit (2026-08-03, twenty-third pass)
+
+Took the slice the last pass wrote down, and the harness turned out to be half
+the problem.
+
+- ~~A companion who would serve at half pay was drawn as "Blocked", with a live
+  Assign button beside her.~~ Fixed. The desk knew two states against an engine
+  that has always had three, so the player booked her, the assignment
+  *succeeded*, and the halving surfaced a day later in the report. The three-line
+  expression behind the third state existed in **three** places — the assignment,
+  the day's resolution, and the check that decides whether a contract is worth
+  offering at all — and the desk had a fourth, shorter answer of its own. One
+  `contract_service_outcome` now (`Full` / `Partial` / `Refused`), used by all
+  four, so the screen and the engine cannot disagree about what a booking is
+  worth.
+
+  **Guard**: every companion in a fixture that covers all three outcomes is
+  offered to `assign_monster_to_contract`, asserting the desk's answer and the
+  engine's are the same — plus that the fixture really does produce all three, so
+  a test that only ever saw one outcome cannot pass quietly. Verified by planting
+  a two-state outcome.
+
+- **The half-pay card first shipped saying nothing useful**, and only the capture
+  showed it: *"Short of the terms, but close enough to send l…"*, truncated
+  before the gaps. The badge already carries the meaning, so the line now shows
+  what she is short of — `Scouting 0/1 | Hospitality 0/2 | Scouting Runs 0/1` —
+  the same actionable half the blocked card gets.
+
+- ~~The capture harness filled the roster with twenty identical companions.~~
+  Fixed, and it is why none of this could be photographed. Every screen that
+  *discriminates* between companions — the contract desk above all — drew twenty
+  identical "Eligible" cards, so its refusals, its half-pay candidates and its
+  star ladder were all invisible to the harness. `fill_roster_for_capture` now
+  spreads rank, training, bond and standing across the copies. The first capture
+  after the change immediately showed both the new state and last pass's star
+  fix (1★ through 5★ on one screen, where every card used to read the same).
+
+- The candidates panel was titled **"Eligible Companions"** while listing blocked
+  ones too; it is "Companions" now.
+
+- **Balance byte-identical**: the simulated policy only books outright-eligible
+  companions, so none of this is on its path.
+
 ### Found by review, not by the audit (2026-08-03, twenty-second pass)
 
 Followed the previous pass's own note — *`town_preparation_quality` still feeds

@@ -1,5 +1,5 @@
 {
-  "version": "1.4.0",
+  "version": "1.5.0",
   "common": {
     "settings_button": "Settings",
     "return_to_town_button": "Guild Hall",
@@ -285,7 +285,7 @@
     "subtitle": "Review active contracts, inspect exact requirements, and assign the right companion before the deadline expires.",
     "active_requests_panel_title": "Active Contracts",
     "selected_request_panel_title": "Selected Contract",
-    "eligible_companions_panel_title": "Eligible Companions",
+    "eligible_companions_panel_title": "Companions",
     "no_active_requests_message": "Check again tomorrow or build contract sources in town.",
     "no_selected_request_message": "No active request selected.",
     "no_requests_title": "No Active Contracts Today",
@@ -303,6 +303,7 @@
     "eligible_summary_template": "Eligible | Skills {skills} | History {history}",
     "eligible_label": "Eligible",
     "blocked_label": "Blocked",
+    "half_pay_label": "Half pay",
     "no_roster_title": "No Roster",
     "category_label": "Category",
     "patron_tier_label": "Patron Tier",

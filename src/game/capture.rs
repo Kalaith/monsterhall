@@ -92,11 +92,28 @@ impl Game {
             return;
         };
         let cap = usize::from(data.config.new_game.max_population_cap);
+        let max_rank = crate::engine::max_quality_rank(&data.config.day_cycle);
         for index in game_state.monsters.len()..cap {
             let mut copy = template.clone();
             copy.id = format!("monster_{:03}", index + 1);
             copy.name = format!("{} {}", template.name, index + 1);
             copy.current_job = crate::state::CompanionJobState::Idle;
+            // Twenty copies of one companion photograph every screen that
+            // discriminates between them as though it held a single opinion:
+            // the contract desk drew twenty identical "Eligible" cards, so its
+            // refusals, its half-pay candidates and its star ladder could not
+            // appear in a capture at all. Spread rank, training and standing.
+            copy.quality_rank = (index as u8 % max_rank) + 1;
+            let step = index as u32 % 4;
+            copy.bond = step * 4;
+            copy.reputation = step as i32 * 3;
+            copy.skills.scouting = template.skills.scouting * step;
+            copy.skills.guarding = template.skills.guarding * step;
+            copy.skills.hospitality = template.skills.hospitality * step;
+            copy.skills.charm = template.skills.charm * step;
+            copy.work_history.scouting_runs = template.work_history.scouting_runs * step;
+            copy.work_history.hospitality_jobs = template.work_history.hospitality_jobs * step;
+            copy.work_history.contracts_completed = step;
             game_state.monsters.push(copy);
         }
 

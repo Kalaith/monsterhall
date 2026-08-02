@@ -273,6 +273,8 @@ pub struct ContractDeskUiText {
     pub eligible_summary_template: String,
     pub eligible_label: String,
     pub blocked_label: String,
+    /// A companion the booking would refuse but take anyway, for half.
+    pub half_pay_label: String,
     pub no_roster_title: String,
 }
 

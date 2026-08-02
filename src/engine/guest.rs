@@ -143,10 +143,9 @@ pub fn refresh_contracts(
         };
 
         let candidate_reports = request_candidates(data, game_state, &candidate_request);
-        let has_eligible_candidate = candidate_reports.iter().any(|(monster, report)| {
-            report.is_eligible
-                || (meets_guest_hard_gates(data, game_state, &candidate_request, monster)
-                    && contract_partial_success(data, game_state, &candidate_request, monster))
+        let has_eligible_candidate = candidate_reports.iter().any(|(monster, _)| {
+            contract_service_outcome(data, game_state, &candidate_request, monster)
+                != ContractServiceOutcome::Refused
         });
         if !has_eligible_candidate {
             report.rejected += 1;
@@ -246,6 +245,44 @@ fn request_room_tier(data: &GameData, room_id: &str) -> u32 {
         .unwrap_or(1)
 }
 
+/// What sending this companion to this booking would come to.
+///
+/// The three-line expression behind this existed in three places — the
+/// assignment, the day's resolution, and the check that decides whether a
+/// contract is worth offering at all — and the contract desk had a fourth,
+/// shorter answer: eligible or blocked. So a companion who would have been
+/// accepted and paid **half** was drawn as "Blocked" with a live Assign button
+/// beside her, the assignment then succeeded, and the halving was discovered a
+/// day later in the report. One function now, so the screen and the engine
+/// cannot disagree about what a booking is worth.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ContractServiceOutcome {
+    /// She meets the booking's terms. It pays in full, unless the hall itself
+    /// falls short of `preparation_quality_required` on the day.
+    Full,
+    /// She does not meet them, but she is close enough to be sent for half.
+    Partial,
+    /// The booking would refuse her.
+    Refused,
+}
+
+pub fn contract_service_outcome(
+    data: &GameData,
+    game_state: &GameState,
+    request: &ContractState,
+    monster: &CompanionState,
+) -> ContractServiceOutcome {
+    if evaluate_contract_eligibility(data, game_state, request, monster).is_eligible {
+        return ContractServiceOutcome::Full;
+    }
+    if meets_guest_hard_gates(data, game_state, request, monster)
+        && contract_partial_success(data, game_state, request, monster)
+    {
+        return ContractServiceOutcome::Partial;
+    }
+    ContractServiceOutcome::Refused
+}
+
 pub fn assign_monster_to_contract(
     data: &GameData,
     game_state: &mut GameState,
@@ -262,27 +299,21 @@ pub fn assign_monster_to_contract(
         .iter()
         .find(|monster| monster.id == monster_id)
         .ok_or_else(|| format!("Unknown monster id '{monster_id}'."))?;
-    let report = evaluate_contract_eligibility(
+    if contract_service_outcome(
         data,
         game_state,
         &game_state.active_contracts[request_index],
         monster,
-    );
-    let partial_success = !report.is_eligible
-        && meets_guest_hard_gates(
+    ) == ContractServiceOutcome::Refused
+    {
+        return Err(evaluate_contract_eligibility(
             data,
             game_state,
             &game_state.active_contracts[request_index],
             monster,
         )
-        && contract_partial_success(
-            data,
-            game_state,
-            &game_state.active_contracts[request_index],
-            monster,
-        );
-    if !report.is_eligible && !partial_success {
-        return Err(report.failure_reasons.join(" "));
+        .failure_reasons
+        .join(" "));
     }
     if !game_state.active_contracts[request_index].status.is_live() {
         return Err("That contract has already been resolved.".to_owned());
@@ -389,25 +420,19 @@ pub fn resolve_contracts(
                     continue;
                 };
 
+                let outcome = contract_service_outcome(
+                    data,
+                    game_state,
+                    &request,
+                    &game_state.monsters[monster_index],
+                );
+                let partial_success = outcome == ContractServiceOutcome::Partial;
                 let report = evaluate_contract_eligibility(
                     data,
                     game_state,
                     &request,
                     &game_state.monsters[monster_index],
                 );
-                let partial_success = !report.is_eligible
-                    && meets_guest_hard_gates(
-                        data,
-                        game_state,
-                        &request,
-                        &game_state.monsters[monster_index],
-                    )
-                    && contract_partial_success(
-                        data,
-                        game_state,
-                        &request,
-                        &game_state.monsters[monster_index],
-                    );
                 // `preparation_quality_required` is authored on 13 of 16
                 // contracts and printed on the desk, and until now nothing read
                 // it. It cannot gate the *booking*: a guild books its contracts

@@ -1445,6 +1445,38 @@ Stop the loop and report if:
   three-star ladder has now appeared four times, so assume a fifth; (c) untaken slices
   unchanged: `ui_text` migration, unbounded event log, corruption's missing relief path.
 
+- **2026-08-03 — twenty-third pass (the desk knew two states and the engine had
+  three).** Took the slice the last pass wrote down. A companion the booking refuses
+  but would still take **for half** was drawn as "Blocked" with a live Assign button
+  beside her; the player booked her, the assignment succeeded, and the halving showed
+  up a day later in the report. The expression behind that third state existed in three
+  places — assignment, resolution, and the check that decides whether a contract is
+  worth offering — and the desk had a fourth, shorter answer of its own. One
+  `contract_service_outcome` (`Full`/`Partial`/`Refused`) now serves all four.
+  **The harness was half the problem.** `fill_roster_for_capture` padded the guild with
+  twenty *identical* companions, so every screen that discriminates between them
+  photographed as though it held one opinion — twenty "Eligible" cards, no refusals, no
+  half-pay, and the star ladder the previous pass fixed showing 1★ twenty times. It
+  spreads rank, training, bond and standing now, and the first capture after the change
+  showed both the new state and 1★–5★ on one screen. It also caught the half-pay card
+  shipping useless: *"Short of the terms, but close enough to send l…"*, truncated
+  before the gaps — the badge already carries the meaning, so the line shows what she is
+  short of, like the blocked card.
+  **Result:** 130 tests (was 129), fmt and clippy clean, publish green,
+  `content_version` 1.29.0, `ui_text` 1.5.0, **balance byte-identical** — the simulated
+  policy only books outright-eligible companions, so none of this is on its path. Guard:
+  every companion in a fixture covering all three outcomes is offered to
+  `assign_monster_to_contract` and the desk's answer must match the engine's, with an
+  assertion that the fixture really produces all three; verified by planting a two-state
+  outcome.
+  **Next iteration should know:** (a) *a screen that summarises a companion is a screen
+  the old harness could not test* — with a varied roster the crowded captures are worth
+  re-reading, because until today every one of them was photographed with twenty clones;
+  (b) the desk still cannot say **why** a half-pay booking pays half in the day's report
+  beyond one line, and the day-results screen has never been read with a partial
+  completion in it; (c) untaken slices unchanged: `ui_text` migration, unbounded event
+  log, corruption's missing relief path.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and
