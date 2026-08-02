@@ -11,11 +11,14 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 - ~~Fix expedition priority/mission selection reaching game state.~~ Done: `open_expedition_planning` (`game/navigation.rs`) now pushes floor/mission/stance into an already-formed `active_expedition`, so what the preview shows is what day resolution runs.
 - ~~Apply `TraitData.stat_modifiers`.~~ Done, after three iterations parked. `engine/companion.rs` sums the bonuses on demand rather than baking them in at hatch, because mutations grant traits after a companion exists. Wired into both expedition stat totals and the endurance term in `previews.rs`, the whole guild-job yield chain, `monster_role`/`role_affinity` in `depth.rs`, `monster_depth_role_label`, `replacement_score`, and the profile screen, which shows the trait share as `12 (+2)`. It only became landable once `final_unlocked_floors == 25` was replaced by the stranded-floor check — that assertion, not this change, was what blocked it.
 - ~~Consume `charm_training_flat`.~~ Done: it is percentage points on `should_gain_charm`'s per-room odds, so a Nursery Habitat now trains more charm than an empty lot. A room that never teaches charm is still not taught it by architecture — the town bonus improves lessons that already happen rather than inventing them.
-- Second half of the skill system: **mechanism done, content is one data edit.** `increment_skill`, `companion_skill_value`, `format_skill_name` and `append_skill_requirement_reasons` now handle all ten skills, `skill_ids_from_work_history_gains` maps `recovery_shifts` → recovery and `contracts_completed` → bargaining, and `is_valid_companion_skill_id` accepts all ten so a room may list them. All of it is simulation-neutral because that map's output is filtered by `room.trained_skill_ids` and no room opts in yet — the reports are byte-identical.
+- ~~Second half of the skill system.~~ Done. The mechanism landed earlier (all ten skills survive increment/name/score, `recovery_shifts` → recovery and `contracts_completed` → bargaining, two guards against unqualifiable contracts and unteachable rooms). This pass switched two on in `guild_rooms.json`: `packroom_annex` and `reception_hall` teach **recovery**, `nursery_wing` teaches **bargaining**.
 
-  Two guards close the trap that made this invisible: load-time validation rejects a contract requiring a skill no guild room trains (an unqualifiable booking), and a test asserts every id a room claims to teach survives increment/name/score rather than silently training nothing and displaying "Unknown".
+  Which rooms was measured, not guessed. Turning bargaining on at `common_room` as well — the starter room, which the guild works most — compounds `guild_job_skill_bonus` enough that the deterministic campaign finishes the Founder's Due before day 365, which the spec forbids. `nursery_wing` alone lands green. That leaves bargaining a specialist's skill taught where contract work is the focus rather than on the room everybody starts with, which is a defensible shape as well as the one the numbers allow.
 
-  **To turn a skill on, add it to a room's `trained_skill_ids` in `guild_rooms.json`.** `packroom_annex` and `reception_hall` already bank `recovery_shifts`, and `common_room`/`nursery_wing` already bank `contracts_completed`, so recovery and bargaining are one word each away. That is a balance change — it adds a skill gain roll per shift and feeds `guild_job_skill_bonus` — so it is left for a deliberate decision. Navigation, arcana and strength additionally have no work-history category feeding them; they need a new gain source before a room can teach them. Navigation/arcana are still read by `preparation_quality` and depth scoring and still permanently zero until then.
+  A new test enforces the pairing: a room may only teach a skill its own banked work can feed, so a `trained_skill_ids` entry can never again be an empty promise that quietly inflates `guild_job_skill_bonus`. Note the simulation never exercises bargaining, because `best_unlocked_room_id` always takes the highest gold yield and `nursery_wing` (72) loses to `reception_hall` (86) — that is a real player tradeoff rather than a gap, but it does mean the skill is unproven in the long-campaign reports.
+
+  Navigation, arcana and strength still have no work-history category feeding them, so no room may teach them yet — the new test would reject it. They need a gain source first, and `preparation_quality` and depth scoring still read them as zero.
+
 - ~~Align the planning preview's `injury_risk_score` with the actual injury roll.~~ Done. The preview now runs `expedition_safety_score` — resolution's own arithmetic — and reports the margin for whoever is most exposed, so zero means somebody is certain to come home hurt and everything below it is daylight. `risk_label`/`risk_color` re-banded to match, and `expedition_growth_score` updated to the new scale with a stated margin rather than a bare `.max(0)` that the rescale would have silently turned into a no-op.
 - ~~Guild-job preview shows `work_history_gains` verbatim while resolution rolls per-room probabilities.~~ Done: the odds were a `match` on room id inside `progression.rs`, so the preview could only quote the ceiling. They now live in `guild_rooms.json` as `work_history_gain_chance_pct`, `roll_work_history_gains` reads them, and the guild-hall card renders `C+1 @12%` instead of a bare `C+1`. The refactor is RNG-identical — every room's categories already rolled in the field order of `CompanionWorkHistoryProgressionData`, and a zero chance skips the roll exactly as a zero ceiling always did, so the simulation reports are byte-for-byte unchanged.
 - ~~`hatchery_assists` had no source in the entire game.~~ Fixed: all four guild rooms authored a ceiling of 0, so no shift could ever bank one — which made `corekeeper_sending_vigil` (requires 3) permanently unfulfillable and left the `hatchery_specialist` role in `monster_role` reachable only through the `hatchery_attuned` trait. `nursery_wing` already carried the intended 5% odds, so it now has the ceiling to match. A new test asserts no room authors odds for work it cannot bank. Note the contract needs roughly sixty nursery shifts at 5%; whether that is the intended pace is a balance question.
@@ -43,86 +46,55 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 
 ## Balance
 
-### Blocker: a competent guild finishes the campaign early (measured 2026-08-02)
+### Open design question: a competent guild finishes the campaign early
 
-Half of this is now fixed. The relic half is gone; the debt half is a design
-decision, and the measurements below say tuning cannot reach it.
+Re-measured after the harness fix, because most of what was written here as a
+blocker turned out to be the harness rather than the game.
 
-**Fixed — the relic sink.** Total sink capacity used to be 188 relics across an
-entire campaign, against deep-tower income in the thousands, so the
-`relics < 260` assertion measured how deep the guild got rather than whether
-surplus was converted. `reliquary_vault` (project, build limit 40, 100 relics
-and 9,000 gold each) is the relic-heavy counterpart to the residue-heavy
-condenser, and it moved the multi-seed relic stockpiles from 55–500 down to
-15–86 with the whole suite green. It is deliberately cheap in gold: priced at
-26,000 it drained so much coin that **no** seed could clear the Founder's Due.
+**Two of the three symptoms are gone.** `relics < 260` was unreachable because
+total sink capacity was 188 relics across a whole campaign; `reliquary_vault`
+(project, build limit 40, 100 relics and 9,000 gold each) fixed that and holds
+multi-seed stockpiles in the 15–86 band. And `final_unlocked_floors == 25` was
+never measuring a defect at all — it pinned the simulated guild's route, and
+replacing it with `stranded_floor_ids` let seven simulation-moving changes land
+that had been written off as balance-gated. **The harness validates
+simulation-moving changes fine now.**
 
-**Not fixed — `expedition_growth_score` still has no survey-progress term.** The
-survey chain is serial, so the simulated guild wanders off it whenever anything
-changes which floor looks richest, and every floor beneath the stalled link goes
-unrun. That is why `final_unlocked_floors == 25` is knife-edge, and why four
-separate correct gameplay changes each collapsed it to 10–15 floors.
+**What is actually left is one question.** Adding the missing survey-progress
+term to `expedition_growth_score` — gate on "does another locked floor still
+name this one in `requires_surveyed_floor_ids`", worth `mission.survey_value *
+90` — makes the simulated guild finish the survey chain. Measured against the
+current build it opens all 25 floors and buys 51 buildings, and **all ten seeds
+clear the Founder's Due**, failing both `cleared < 10` and the single-seed
+"should leave Founder's Due active for future floors".
 
-Adding the term (gate on "does another locked floor still name this one in
-`requires_surveyed_floor_ids`", worth `mission.survey_value * 90`) opens the
-tower — and then the campaign is simply won. Two assertions fail:
-`long_campaign_..._stay_valid` at "should leave Founder's Due active for future
-floors", and the multi-seed variance test.
-
-**Tuning cannot reconcile them.** With the survey term and the vault in place,
-sweeping `founders_due_7.amount_due`:
-
-| Due | Cleared | Average debt gap |
-| --- | --- | --- |
-| 2.5M | 10/10 | +40k |
-| 4.0M | 1/10 | +216k |
-| 5.5M | 0/10 | −1,236k |
-
-`cleared > 0` and `debt_gap.average < -500_000` never hold together. The reason
-is structural: end-state gold is bimodal. A guild either clears the due (gap 0
-by definition) or stops spending and sits on exactly the reserve
-`can_spend_on_late_game_sink` protects, which is the balance itself (gap ≈ 0).
-Nothing lands in between, because the ten seeds finish within a few percent of
-each other — 19 buildings on every one of them, where the pre-survey-term spread
-was 8–20.
-
-So the multi-seed test is named `..._reports_variance` and the campaign has
-almost none once it is played competently. **That is the real finding, and it is
-a design question rather than a tuning one:** the late game needs a genuine
-source of run-to-run divergence before "winning is possible but not a formality"
-can be true. Until then the survey term has to stay out, which leaves the
-harness unable to validate any change that moves the simulation.
-
-**Second attempt (also 2026-08-02): variance was added, and it was not enough.**
-Wiring `spawn_weight` as a real spawn probability (see the patron-archetype item
-above) does produce divergence — the multi-seed building spread went from 19 on
-every single seed to 38–47. With the survey term and the vault also in place,
-sweeping the due again:
+Tuning does not reach it, and the reason is mechanical rather than a matter of
+finding the right number. Sweeping the due:
 
 | Due | Cleared | Average debt gap |
 | --- | --- | --- |
 | 2.5M | 10/10 | 0 |
-| 3.0M | 10/10 | 0 |
 | 3.5M | 9/10 | +9k |
 | 4.5M | 0/10 | −325k |
 | 6.0M | 0/10 | −1,825k |
 
-`cleared` still falls off a cliff between 3.5M and 4.5M, and in the uncleared
-regime **every seed reports the identical gap** (−324,682 on all ten at 4.5M).
-That is the mechanism, stated exactly: `can_spend_on_late_game_sink` reserves
-the balance, and the vault absorbs everything above it, so end-of-run gold is
-pinned to `balance + reserve` for any guild that can reach it. Income variance
-turns into *buildings bought*, never into gold. `debt_gap` therefore cannot vary
-between seeds no matter how much the economy does.
+`cleared` falls off a cliff, and in the uncleared regime every seed reports the
+*identical* gap (−324,682 on all ten at 4.5M). `can_spend_on_late_game_sink`
+reserves the balance and the vault absorbs everything above it, so end-of-run
+gold is pinned to `balance + reserve` for any guild that can reach it. Income
+variance becomes buildings bought, never coin, so `debt_gap` cannot vary between
+seeds however much the economy does. Wiring `spawn_weight` as a true random draw
+was tried as a variance source and does widen the building spread (19-on-every-
+seed → 38–47) but costs enough income that the campaign stops reaching its final
+milestone; relaxing the reserve changed nothing (9/10 still cleared).
 
-Relaxing the reserve (invest until the due is within 60 days) was tried too and
-changed nothing material — 9/10 still cleared.
-
-**Conclusion: `debt_gap.average < -500_000` and `cleared > 0` cannot both hold
-while a late-game sink exists to soak up surplus.** Either the assertion should
-measure something the economy can actually vary (buildings, floors, projects
-completed), or the late game needs a cost that scales with how well the run went
-rather than a fixed due. Both are design calls.
+**So the decision is: what should stop a well-played guild finishing early?**
+The options measurement can no longer choose between are a late-game cost that
+scales with how well the run went rather than a fixed due, an assertion that
+measures something the economy can actually vary (buildings, floors, projects),
+or accepting that a good run wins and saying so in the spec. Until one is
+chosen the survey term stays out — which now costs only the tower's last
+fourteen floors going unwalked by the *simulation*, not the ability to test.
 
 - Decide an acceptable target range for day-365 `surplus_summary.debt_gold_gap`.
 - Decide an acceptable target range for final relic and residue stockpiles after project purchases.

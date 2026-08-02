@@ -81,7 +81,8 @@
       ],
       "trained_skill_ids": [
         "crafting",
-        "charm"
+        "charm",
+        "recovery"
       ],
       "work_history_gains": {
         "scouting_runs": 0,
@@ -149,7 +150,8 @@
       ],
       "trained_skill_ids": [
         "hospitality",
-        "charm"
+        "charm",
+        "bargaining"
       ],
       "work_history_gains": {
         "scouting_runs": 0,
@@ -216,7 +218,8 @@
       "trained_skill_ids": [
         "scouting",
         "guarding",
-        "charm"
+        "charm",
+        "recovery"
       ],
       "work_history_gains": {
         "scouting_runs": 1,

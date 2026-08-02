@@ -555,6 +555,42 @@ fn traits_change_what_a_companion_is_worth() {
     );
 }
 
+#[test]
+fn a_room_can_only_teach_a_skill_its_own_work_feeds() {
+    let data = crate::data::test_game_data();
+
+    // `skill_ids_from_work_history_gains` maps banked work to skills, and
+    // `apply_guild_job_progression` filters that against the room's
+    // `trained_skill_ids`. A room listing a skill no shift there can bank
+    // advertises a lesson it never gives — the intersection is empty and the
+    // entry does nothing but inflate `guild_job_skill_bonus`.
+    for room in &data.guild_rooms.rooms {
+        let bankable =
+            skill_ids_from_work_history_gains(&crate::data::CompanionWorkHistoryProgressionData {
+                scouting_runs: room.work_history_gains.scouting_runs,
+                guard_duties: room.work_history_gains.guard_duties,
+                hospitality_jobs: room.work_history_gains.hospitality_jobs,
+                craft_jobs: room.work_history_gains.craft_jobs,
+                contracts_completed: room.work_history_gains.contracts_completed,
+                recovery_shifts: room.work_history_gains.recovery_shifts,
+                hatchery_assists: room.work_history_gains.hatchery_assists,
+            });
+
+        for skill_id in &room.trained_skill_ids {
+            // Charm has its own path through `should_gain_charm` and is not fed
+            // by a work-history category.
+            if skill_id == "charm" {
+                continue;
+            }
+            assert!(
+                bankable.iter().any(|id| id == skill_id),
+                "room '{}' trains '{skill_id}' but banks no work that teaches it; it can bank {bankable:?}",
+                room.id
+            );
+        }
+    }
+}
+
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),
