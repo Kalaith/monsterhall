@@ -42,46 +42,55 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
 
 ## Balance
 
-### Blocker: the late game has no teeth once the tower actually opens (found 2026-08-02)
+### Blocker: a competent guild finishes the campaign early (measured 2026-08-02)
 
-This is now the gate on several other items, so it comes first.
+Half of this is now fixed. The relic half is gone; the debt half is a design
+decision, and the measurements below say tuning cannot reach it.
 
-`expedition_growth_score` (`validation_tests/policy_jobs.rs`) scores a run by its
-immediate haul — eggs, relics, materials, residue, success — and has **no term for
-survey progress**. The survey chain is serial, so the simulated guild wanders off
-it the moment anything changes which floor looks richest, and every floor beneath
-the stalled link goes unrun for the rest of the campaign. That is why
-`final_unlocked_floors == 25` is knife-edge: three separate, correct gameplay
-changes (condition wiring, the honest injury preview, trait stat bonuses) each
-collapsed it to 10–15 floors without touching the tower's own rules.
+**Fixed — the relic sink.** Total sink capacity used to be 188 relics across an
+entire campaign, against deep-tower income in the thousands, so the
+`relics < 260` assertion measured how deep the guild got rather than whether
+surplus was converted. `reliquary_vault` (project, build limit 40, 100 relics
+and 9,000 gold each) is the relic-heavy counterpart to the residue-heavy
+condenser, and it moved the multi-seed relic stockpiles from 55–500 down to
+15–86 with the whole suite green. It is deliberately cheap in gold: priced at
+26,000 it drained so much coin that **no** seed could clear the Founder's Due.
 
-Adding the missing term fixes it — gate on "does another locked floor still name
-this one in `requires_surveyed_floor_ids`", worth `mission.survey_value * 90`
-against an egg at 120–180. The tower then opens fully and the guild buys 3 town
-projects, where it previously bought none. **But it also shows the late game is
-hollow:**
+**Not fixed — `expedition_growth_score` still has no survey-progress term.** The
+survey chain is serial, so the simulated guild wanders off it whenever anything
+changes which floor looks richest, and every floor beneath the stalled link goes
+unrun. That is why `final_unlocked_floors == 25` is knife-edge, and why four
+separate correct gameplay changes each collapsed it to 10–15 floors.
 
-- All 10 multi-seed samples clear the Founder's Due, with 1.6M–2.5M gold spare.
-  `multi_seed_365_simulation_summary_reports_variance` asserts clearing must *not*
-  be guaranteed, and it fails.
-- All 10 samples land on exactly 19 buildings. The baseline spread was 8–20, so
-  the variance that assertion is named for came from the bot failing, not from
-  the seeds.
-- Total relic sink capacity is **188 relics** — every `project`/`prestige`
-  building in `buildings.json` bought to its full build limit. Deep-tower income
-  runs to thousands, so the existing `relics < 260` assertion measures how deep
-  the guild got, not whether surplus was converted. Replace it with
-  `final_town_projects > 0` (residue keeps a stockpile bound; its sink capacity
-  is 252,900 and is genuinely adequate).
+Adding the term (gate on "does another locked floor still name this one in
+`requires_surveyed_floor_ids`", worth `mission.survey_value * 90`) opens the
+tower — and then the campaign is simply won. Two assertions fail:
+`long_campaign_..._stay_valid` at "should leave Founder's Due active for future
+floors", and the multi-seed variance test.
 
-Verified independent of any gameplay change: with all `stat_modifiers` zeroed in
-`traits.json`, the survey term alone still fails both debt assertions. So this is
-a pre-existing hole that the bot's incompetence was hiding, not a regression.
+**Tuning cannot reconcile them.** With the survey term and the vault in place,
+sweeping `founders_due_7.amount_due`:
 
-Doing this properly is one pass: land the survey term, rebalance late-game debt
-pressure and relic sinks against the multi-seed harness, then land trait
-`stat_modifiers` on top. Piecemeal does not work — trait stats alone strand the
-survey chain, and the survey term alone unmasks the debt hole.
+| Due | Cleared | Average debt gap |
+| --- | --- | --- |
+| 2.5M | 10/10 | +40k |
+| 4.0M | 1/10 | +216k |
+| 5.5M | 0/10 | −1,236k |
+
+`cleared > 0` and `debt_gap.average < -500_000` never hold together. The reason
+is structural: end-state gold is bimodal. A guild either clears the due (gap 0
+by definition) or stops spending and sits on exactly the reserve
+`can_spend_on_late_game_sink` protects, which is the balance itself (gap ≈ 0).
+Nothing lands in between, because the ten seeds finish within a few percent of
+each other — 19 buildings on every one of them, where the pre-survey-term spread
+was 8–20.
+
+So the multi-seed test is named `..._reports_variance` and the campaign has
+almost none once it is played competently. **That is the real finding, and it is
+a design question rather than a tuning one:** the late game needs a genuine
+source of run-to-run divergence before "winning is possible but not a formality"
+can be true. Until then the survey term has to stay out, which leaves the
+harness unable to validate any change that moves the simulation.
 
 - Decide an acceptable target range for day-365 `surplus_summary.debt_gold_gap`.
 - Decide an acceptable target range for final relic and residue stockpiles after project purchases.
@@ -89,7 +98,7 @@ survey chain, and the survey term alone unmasks the debt hole.
 - Review whether 90-day outcomes run too low when early debt or event rolls are unfavourable.
 - Review whether the 180-day building count reliably opens enough population cap before late catch-up hatching.
 - Tune final debt pressure against averaged multi-seed results rather than one deterministic report. See the blocker above for the measured gap: 1.6M–2.5M gold of slack on every seed.
-- Add late-game project varieties that spend different surplus mixes. Concretely: relic sinks cap at 188 across the whole game, against multi-thousand deep-tower income.
+- ~~Add late-game project varieties that spend different surplus mixes.~~ Done: `reliquary_vault` is the relic-heavy sink the catalogue lacked. More varieties are still welcome — materials have no dedicated sink at all.
 - Consider patron satisfaction as explicit state if completions and expirations are not enough pressure.
 - Give the 20-companion cap a clearer replacement/release flow, and a reason to run non-egg missions once capped.
 - Review whether special-event cost should scale from roster, reputation, or project count.

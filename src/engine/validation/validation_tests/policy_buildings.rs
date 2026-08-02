@@ -14,6 +14,7 @@ pub(super) fn purchase_priority_buildings(data: &GameData, game_state: &mut Game
         "species_archive",
         "tower_route_cartography",
         "relic_residue_condenser",
+        "reliquary_vault",
         "guild_room_renovation",
         "prestige_hospitality_wing",
     ];

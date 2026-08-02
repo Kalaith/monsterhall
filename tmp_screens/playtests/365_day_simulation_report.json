@@ -4,18 +4,18 @@
   "starting_day": 1,
   "ending_day": 366,
   "opening_event_log_entries": 9,
-  "final_event_log_entries": 4594,
+  "final_event_log_entries": 4595,
   "final_roster_size": 20,
-  "final_buildings": 16,
+  "final_buildings": 17,
   "final_unlocked_floors": 25,
   "final_active_contracts": 6,
   "final_average_bond": 41.2,
   "final_average_reputation": 166.4,
   "final_graded_eggs": 0,
   "final_role_diversity": 2,
-  "final_town_projects": 3,
+  "final_town_projects": 4,
   "total_hatches": 37,
-  "total_buildings_purchased": 16,
+  "total_buildings_purchased": 17,
   "total_guest_completions": 643,
   "total_guest_expirations": 324,
   "total_contracts_generated": 629,
@@ -26,9 +26,9 @@
   "total_expedition_prep_arcane_residue": 0,
   "total_expedition_prep_shortfall": 0,
   "total_upkeep_wage_gold": 172887,
-  "total_upkeep_cleaning_gold": 81893,
-  "total_upkeep_maintenance_gold": 226750,
-  "total_upkeep_gold": 481456,
+  "total_upkeep_cleaning_gold": 83017,
+  "total_upkeep_maintenance_gold": 229827,
+  "total_upkeep_gold": 485657,
   "total_upkeep_shortfall": 74,
   "total_special_event_gold_delta": 7231,
   "total_special_event_count": 122,
@@ -40,11 +40,11 @@
   "last_expedition_day": 346,
   "total_expedition_eggs": 123,
   "final_resources": {
-    "gold": 880374,
-    "tower_materials": 1407,
+    "gold": 867173,
+    "tower_materials": 1009,
     "eggs": 0,
-    "relics": 198,
-    "arcane_residue": 50310
+    "relics": 98,
+    "arcane_residue": 50110
   },
   "final_debt": {
     "active_milestone_id": "founders_due_7",
@@ -55,15 +55,15 @@
   },
   "final_upkeep_forecast": {
     "wage_gold": 975,
-    "cleaning_gold": 666,
-    "maintenance_gold": 1814,
-    "total_gold": 3455,
+    "cleaning_gold": 724,
+    "maintenance_gold": 1974,
+    "total_gold": 3673,
     "active_band_min_companions": 16,
     "active_band_min_patron_tiers": 4,
-    "next_companion_total_gold": 3463,
+    "next_companion_total_gold": 3681,
     "next_companion_delta_gold": 8,
-    "next_building_total_gold": 3770,
-    "next_building_delta_gold": 315
+    "next_building_total_gold": 3891,
+    "next_building_delta_gold": 218
   },
   "surplus_summary": {
     "starting_resources": {
@@ -74,20 +74,20 @@
       "arcane_residue": 19
     },
     "ending_resources": {
-      "gold": 880374,
-      "tower_materials": 1407,
+      "gold": 867173,
+      "tower_materials": 1009,
       "eggs": 0,
-      "relics": 198,
-      "arcane_residue": 50310
+      "relics": 98,
+      "arcane_residue": 50110
     },
     "net_change": {
-      "gold": 880231,
-      "tower_materials": 1367,
+      "gold": 867030,
+      "tower_materials": 969,
       "eggs": 0,
-      "relics": 198,
-      "arcane_residue": 50291
+      "relics": 98,
+      "arcane_residue": 50091
     },
-    "debt_gold_gap": -1619626,
+    "debt_gold_gap": -1632827,
     "upkeep_shortfall_gold": 74,
     "expedition_prep_shortfall": 0
   },
@@ -208,17 +208,17 @@
       "companions": 20,
       "population_cap": 20,
       "town_job_limit": 18,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "reputation_proxy": 3,
       "active_contracts": 6,
       "resources": {
-        "gold": 880374,
-        "tower_materials": 1407,
+        "gold": 867173,
+        "tower_materials": 1009,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 50310
+        "relics": 98,
+        "arcane_residue": 50110
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -229,15 +229,15 @@
       },
       "upkeep_forecast": {
         "wage_gold": 975,
-        "cleaning_gold": 666,
-        "maintenance_gold": 1814,
-        "total_gold": 3455,
+        "cleaning_gold": 724,
+        "maintenance_gold": 1974,
+        "total_gold": 3673,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 3463,
+        "next_companion_total_gold": 3681,
         "next_companion_delta_gold": 8,
-        "next_building_total_gold": 3770,
-        "next_building_delta_gold": 315
+        "next_building_total_gold": 3891,
+        "next_building_delta_gold": 218
       }
     }
   ],
@@ -49653,8 +49653,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2338,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2580,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2503,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 180,
       "special_event_count": 1,
@@ -49820,8 +49820,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2470,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2712,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2635,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -49994,8 +49994,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2611,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2853,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2776,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -50162,8 +50162,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2613,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2855,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2778,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -50310,8 +50310,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2617,
         "next_companion_delta_gold": 8,
-        "next_building_total_gold": 2858,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2781,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -50473,8 +50473,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2618,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2860,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2783,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -50641,8 +50641,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2629,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2871,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2794,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 260,
       "special_event_count": 1,
@@ -50808,8 +50808,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2638,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2880,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2803,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": -120,
       "special_event_count": 1,
@@ -50980,8 +50980,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2642,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2884,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2807,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": -700,
       "special_event_count": 1,
@@ -51132,8 +51132,8 @@
         "active_band_min_patron_tiers": 4,
         "next_companion_total_gold": 2647,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2889,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2812,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -51258,7 +51258,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 6,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -51266,13 +51266,13 @@
       "average_reputation": 121.25,
       "graded_eggs": 6,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 5,
       "expedition_members_assigned": 1,
       "guest_bookings_assigned": 0,
       "hatches": 0,
-      "buildings_purchased": 0,
+      "buildings_purchased": 1,
       "guild_job_gold": 23566,
       "guild_job_arcane_residue": 389,
       "expedition_prep_gold": 5,
@@ -51280,25 +51280,25 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 690,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2642,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2814,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 690,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2642,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2814,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2649,
+        "next_companion_total_gold": 2821,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2891,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2986,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
-      "expedition_materials": 96,
+      "expedition_materials": 97,
       "expedition_arcane_residue": 45,
       "expedition_eggs": 6,
       "expedition_relics": 17,
@@ -51340,11 +51340,11 @@
         ]
       },
       "resources": {
-        "gold": 428020,
-        "tower_materials": 1069,
+        "gold": 418848,
+        "tower_materials": 670,
         "eggs": 6,
-        "relics": 125,
-        "arcane_residue": 37531
+        "relics": 25,
+        "arcane_residue": 37331
       },
       "debt": {
         "active_milestone_id": "broker_compact_6",
@@ -51354,7 +51354,7 @@
         "status_message": "Broker Compact due in 5 days."
       },
       "day_summary": [
-        "Paid 2642 gold in upkeep: 690 wages, 524 supplies, 1428 repairs.",
+        "Paid 2814 gold in upkeep: 690 wages, 570 supplies, 1554 repairs.",
         "The creditors stay the blade for now: 180000 due in 5 days.",
         "Tower Scholar Contract expired: -48 gold.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -51414,7 +51414,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 7,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -51422,7 +51422,7 @@
       "average_reputation": 112.8,
       "graded_eggs": 7,
       "role_diversity": 3,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 6,
       "expedition_members_assigned": 1,
@@ -51436,21 +51436,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 690,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2642,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2814,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 690,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2642,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2814,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2649,
+        "next_companion_total_gold": 2821,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2891,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2986,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 90,
       "special_event_count": 1,
@@ -51496,11 +51496,11 @@
         ]
       },
       "resources": {
-        "gold": 451939,
-        "tower_materials": 1101,
+        "gold": 442595,
+        "tower_materials": 702,
         "eggs": 7,
-        "relics": 141,
-        "arcane_residue": 38042
+        "relics": 41,
+        "arcane_residue": 37842
       },
       "debt": {
         "active_milestone_id": "broker_compact_6",
@@ -51510,7 +51510,7 @@
         "status_message": "Broker Compact due in 4 days."
       },
       "day_summary": [
-        "Paid 2642 gold in upkeep: 690 wages, 524 supplies, 1428 repairs.",
+        "Paid 2814 gold in upkeep: 690 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +90 gold.",
         "The creditors stay the blade for now: 180000 due in 4 days.",
         "Rielle rested and came back steadier for tomorrow.",
@@ -51569,7 +51569,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 7,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -51577,7 +51577,7 @@
       "average_reputation": 115.9,
       "graded_eggs": 7,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 8,
       "expedition_members_assigned": 1,
@@ -51591,21 +51591,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 690,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2642,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2814,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 690,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2642,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2814,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2649,
+        "next_companion_total_gold": 2821,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2891,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2986,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -51651,11 +51651,11 @@
         ]
       },
       "resources": {
-        "gold": 484589,
-        "tower_materials": 1215,
+        "gold": 475073,
+        "tower_materials": 816,
         "eggs": 7,
-        "relics": 161,
-        "arcane_residue": 38755
+        "relics": 61,
+        "arcane_residue": 38555
       },
       "debt": {
         "active_milestone_id": "broker_compact_6",
@@ -51665,7 +51665,7 @@
         "status_message": "Broker Compact due in 3 days."
       },
       "day_summary": [
-        "Paid 2642 gold in upkeep: 690 wages, 524 supplies, 1428 repairs.",
+        "Paid 2814 gold in upkeep: 690 wages, 570 supplies, 1554 repairs.",
         "The creditors stay the blade for now: 180000 due in 3 days.",
         "Tower Scholar Contract expired: -30 gold.",
         "Tower Scholar Contract expired: -42 gold.",
@@ -51734,7 +51734,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 7,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -51742,7 +51742,7 @@
       "average_reputation": 114.2,
       "graded_eggs": 7,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 5,
       "expedition_members_assigned": 1,
@@ -51756,21 +51756,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 699,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2651,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2823,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 699,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2651,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2823,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2658,
+        "next_companion_total_gold": 2830,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2900,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2995,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": -700,
       "special_event_count": 1,
@@ -51816,11 +51816,11 @@
         ]
       },
       "resources": {
-        "gold": 506051,
-        "tower_materials": 1208,
+        "gold": 496363,
+        "tower_materials": 809,
         "eggs": 7,
-        "relics": 179,
-        "arcane_residue": 38964
+        "relics": 79,
+        "arcane_residue": 38764
       },
       "debt": {
         "active_milestone_id": "broker_compact_6",
@@ -51831,7 +51831,7 @@
       },
       "day_summary": [
         "Grateful Locals has passed.",
-        "Paid 2651 gold in upkeep: 699 wages, 524 supplies, 1428 repairs.",
+        "Paid 2823 gold in upkeep: 699 wages, 570 supplies, 1554 repairs.",
         "Special event expense: -700 gold.",
         "The creditors stay the blade for now: 180000 due in 2 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -51896,7 +51896,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 7,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -51904,7 +51904,7 @@
       "average_reputation": 117.4,
       "graded_eggs": 7,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 8,
       "expedition_members_assigned": 1,
@@ -51918,25 +51918,25 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 702,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2654,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2826,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 702,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2654,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2826,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2662,
+        "next_companion_total_gold": 2834,
         "next_companion_delta_gold": 8,
-        "next_building_total_gold": 2903,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 2998,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 360,
       "special_event_count": 1,
-      "expedition_materials": 106,
+      "expedition_materials": 107,
       "expedition_arcane_residue": 45,
       "expedition_eggs": 7,
       "expedition_relics": 20,
@@ -51978,11 +51978,11 @@
         ]
       },
       "resources": {
-        "gold": 363055,
-        "tower_materials": 1339,
+        "gold": 353195,
+        "tower_materials": 941,
         "eggs": 7,
-        "relics": 200,
-        "arcane_residue": 39694
+        "relics": 100,
+        "arcane_residue": 39494
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -51992,7 +51992,7 @@
         "status_message": "Founder's Due due in 180 days."
       },
       "day_summary": [
-        "Paid 2654 gold in upkeep: 702 wages, 524 supplies, 1428 repairs.",
+        "Paid 2826 gold in upkeep: 702 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +360 gold.",
         "Paid Broker Compact for 180000 gold.",
         "Next due: Founder's Due in 180 days.",
@@ -52064,7 +52064,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -52072,7 +52072,7 @@
       "average_reputation": 120.65,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 9,
       "expedition_members_assigned": 0,
@@ -52086,21 +52086,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 708,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2660,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2832,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 708,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2660,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2832,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2667,
+        "next_companion_total_gold": 2839,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2909,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3004,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": -700,
       "special_event_count": 1,
@@ -52146,11 +52146,11 @@
         ]
       },
       "resources": {
-        "gold": 400204,
-        "tower_materials": 1229,
+        "gold": 390172,
+        "tower_materials": 831,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 40212
+        "relics": 98,
+        "arcane_residue": 40012
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -52160,7 +52160,7 @@
         "status_message": "Founder's Due due in 179 days."
       },
       "day_summary": [
-        "Paid 2660 gold in upkeep: 708 wages, 524 supplies, 1428 repairs.",
+        "Paid 2832 gold in upkeep: 708 wages, 570 supplies, 1554 repairs.",
         "Special event expense: -700 gold.",
         "The creditors stay the blade for now: 2500000 due in 179 days.",
         "Tower Scholar Contract expired: -42 gold.",
@@ -52231,7 +52231,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -52239,7 +52239,7 @@
       "average_reputation": 121.8,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 3,
       "expedition_members_assigned": 0,
@@ -52253,21 +52253,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 710,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2662,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2834,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 710,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2662,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2834,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2669,
+        "next_companion_total_gold": 2841,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2911,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3006,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 300,
       "special_event_count": 1,
@@ -52313,11 +52313,11 @@
         ]
       },
       "resources": {
-        "gold": 410719,
-        "tower_materials": 1268,
+        "gold": 400515,
+        "tower_materials": 870,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 40458
+        "relics": 98,
+        "arcane_residue": 40258
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -52327,7 +52327,7 @@
         "status_message": "Founder's Due due in 178 days."
       },
       "day_summary": [
-        "Paid 2662 gold in upkeep: 710 wages, 524 supplies, 1428 repairs.",
+        "Paid 2834 gold in upkeep: 710 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +300 gold.",
         "The creditors stay the blade for now: 2500000 due in 178 days.",
         "Tower Scholar Contract expired: -48 gold.",
@@ -52375,7 +52375,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -52383,7 +52383,7 @@
       "average_reputation": 124.35,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 7,
       "expedition_members_assigned": 0,
@@ -52397,21 +52397,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 710,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2662,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2834,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 710,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2662,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2834,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2669,
+        "next_companion_total_gold": 2841,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2911,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3006,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 220,
       "special_event_count": 1,
@@ -52457,11 +52457,11 @@
         ]
       },
       "resources": {
-        "gold": 441187,
-        "tower_materials": 1275,
+        "gold": 430811,
+        "tower_materials": 877,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 41057
+        "relics": 98,
+        "arcane_residue": 40857
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -52472,7 +52472,7 @@
       },
       "day_summary": [
         "Recovery Reputation has passed.",
-        "Paid 2662 gold in upkeep: 710 wages, 524 supplies, 1428 repairs.",
+        "Paid 2834 gold in upkeep: 710 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +220 gold.",
         "The creditors stay the blade for now: 2500000 due in 177 days.",
         "Tower Scholar Contract expired: -84 gold.",
@@ -52534,7 +52534,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -52542,7 +52542,7 @@
       "average_reputation": 127.25,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 8,
       "expedition_members_assigned": 0,
@@ -52556,21 +52556,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 717,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2669,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2841,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 717,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2669,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2841,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2676,
+        "next_companion_total_gold": 2848,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2918,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3013,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 90,
       "special_event_count": 1,
@@ -52616,11 +52616,11 @@
         ]
       },
       "resources": {
-        "gold": 472142,
-        "tower_materials": 1284,
+        "gold": 461594,
+        "tower_materials": 886,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 41711
+        "relics": 98,
+        "arcane_residue": 41511
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -52630,7 +52630,7 @@
         "status_message": "Founder's Due due in 176 days."
       },
       "day_summary": [
-        "Paid 2669 gold in upkeep: 717 wages, 524 supplies, 1428 repairs.",
+        "Paid 2841 gold in upkeep: 717 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +90 gold.",
         "The creditors stay the blade for now: 2500000 due in 176 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -52698,7 +52698,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -52706,7 +52706,7 @@
       "average_reputation": 129.25,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 6,
       "expedition_members_assigned": 0,
@@ -52720,21 +52720,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 722,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2674,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2846,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 722,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2674,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2846,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2681,
+        "next_companion_total_gold": 2853,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2923,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3018,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -52780,11 +52780,11 @@
         ]
       },
       "resources": {
-        "gold": 492583,
-        "tower_materials": 1290,
+        "gold": 481863,
+        "tower_materials": 892,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 42130
+        "relics": 98,
+        "arcane_residue": 41930
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -52794,7 +52794,7 @@
         "status_message": "Founder's Due due in 175 days."
       },
       "day_summary": [
-        "Paid 2674 gold in upkeep: 722 wages, 524 supplies, 1428 repairs.",
+        "Paid 2846 gold in upkeep: 722 wages, 570 supplies, 1554 repairs.",
         "The creditors stay the blade for now: 2500000 due in 175 days.",
         "Tower Scholar Contract expired: -48 gold.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -52851,7 +52851,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -52859,7 +52859,7 @@
       "average_reputation": 132.65,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 9,
       "expedition_members_assigned": 0,
@@ -52873,21 +52873,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 728,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2680,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2852,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 728,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2680,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2852,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2687,
+        "next_companion_total_gold": 2859,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2929,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3024,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -52933,11 +52933,11 @@
         ]
       },
       "resources": {
-        "gold": 527794,
-        "tower_materials": 1300,
+        "gold": 516902,
+        "tower_materials": 902,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 42876
+        "relics": 98,
+        "arcane_residue": 42676
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -52948,7 +52948,7 @@
       },
       "day_summary": [
         "Grateful Locals has passed.",
-        "Paid 2680 gold in upkeep: 728 wages, 524 supplies, 1428 repairs.",
+        "Paid 2852 gold in upkeep: 728 wages, 570 supplies, 1554 repairs.",
         "The creditors stay the blade for now: 2500000 due in 174 days.",
         "Rielle rested and came back steadier for tomorrow.",
         "Nerra rested and came back steadier for tomorrow.",
@@ -53011,7 +53011,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -53019,7 +53019,7 @@
       "average_reputation": 134.85,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 6,
       "expedition_members_assigned": 0,
@@ -53033,21 +53033,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 728,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2680,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2852,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 728,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2680,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2852,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2687,
+        "next_companion_total_gold": 2859,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2929,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3024,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 150,
       "special_event_count": 1,
@@ -53093,11 +53093,11 @@
         ]
       },
       "resources": {
-        "gold": 549322,
-        "tower_materials": 1307,
+        "gold": 538258,
+        "tower_materials": 909,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 43364
+        "relics": 98,
+        "arcane_residue": 43164
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -53107,7 +53107,7 @@
         "status_message": "Founder's Due due in 173 days."
       },
       "day_summary": [
-        "Paid 2680 gold in upkeep: 728 wages, 524 supplies, 1428 repairs.",
+        "Paid 2852 gold in upkeep: 728 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +150 gold.",
         "The creditors stay the blade for now: 2500000 due in 173 days.",
         "Tower Scholar Contract expired: -68 gold.",
@@ -53167,7 +53167,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -53175,7 +53175,7 @@
       "average_reputation": 136.4,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 4,
       "expedition_members_assigned": 0,
@@ -53189,21 +53189,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 729,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2681,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2853,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 729,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2681,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2853,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2689,
+        "next_companion_total_gold": 2861,
         "next_companion_delta_gold": 8,
-        "next_building_total_gold": 2930,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3025,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 520,
       "special_event_count": 1,
@@ -53249,11 +53249,11 @@
         ]
       },
       "resources": {
-        "gold": 566981,
-        "tower_materials": 1312,
+        "gold": 555745,
+        "tower_materials": 914,
         "eggs": 0,
-        "relics": 199,
-        "arcane_residue": 43698
+        "relics": 99,
+        "arcane_residue": 43498
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -53263,7 +53263,7 @@
         "status_message": "Founder's Due due in 172 days."
       },
       "day_summary": [
-        "Paid 2681 gold in upkeep: 729 wages, 524 supplies, 1428 repairs.",
+        "Paid 2853 gold in upkeep: 729 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +520 gold.",
         "The creditors stay the blade for now: 2500000 due in 172 days.",
         "Tower Scholar Contract expired: -84 gold.",
@@ -53316,7 +53316,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -53324,7 +53324,7 @@
       "average_reputation": 139.85,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 9,
       "expedition_members_assigned": 0,
@@ -53338,21 +53338,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 737,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2689,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2861,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 737,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2689,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2861,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2696,
+        "next_companion_total_gold": 2868,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2938,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3033,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 360,
       "special_event_count": 1,
@@ -53398,11 +53398,11 @@
         ]
       },
       "resources": {
-        "gold": 602591,
-        "tower_materials": 1322,
+        "gold": 591183,
+        "tower_materials": 924,
         "eggs": 0,
-        "relics": 199,
-        "arcane_residue": 44465
+        "relics": 99,
+        "arcane_residue": 44265
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -53412,7 +53412,7 @@
         "status_message": "Founder's Due due in 171 days."
       },
       "day_summary": [
-        "Paid 2689 gold in upkeep: 737 wages, 524 supplies, 1428 repairs.",
+        "Paid 2861 gold in upkeep: 737 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +360 gold.",
         "The creditors stay the blade for now: 2500000 due in 171 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -53482,7 +53482,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -53490,7 +53490,7 @@
       "average_reputation": 141.75,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 6,
       "expedition_members_assigned": 0,
@@ -53504,21 +53504,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 737,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2689,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2861,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 737,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2689,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2861,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2696,
+        "next_companion_total_gold": 2868,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2938,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3033,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 300,
       "special_event_count": 1,
@@ -53564,11 +53564,11 @@
         ]
       },
       "resources": {
-        "gold": 622141,
-        "tower_materials": 1363,
+        "gold": 610561,
+        "tower_materials": 965,
         "eggs": 0,
-        "relics": 199,
-        "arcane_residue": 44869
+        "relics": 99,
+        "arcane_residue": 44669
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -53578,7 +53578,7 @@
         "status_message": "Founder's Due due in 170 days."
       },
       "day_summary": [
-        "Paid 2689 gold in upkeep: 737 wages, 524 supplies, 1428 repairs.",
+        "Paid 2861 gold in upkeep: 737 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +300 gold.",
         "The creditors stay the blade for now: 2500000 due in 170 days.",
         "Tower Scholar Contract expired: -42 gold.",
@@ -53635,7 +53635,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -53643,7 +53643,7 @@
       "average_reputation": 144.8,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 2,
       "guild_job_workers_assigned": 8,
       "expedition_members_assigned": 0,
@@ -53657,21 +53657,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 737,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2689,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2861,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 848,
-        "cleaning_gold": 603,
-        "maintenance_gold": 1643,
-        "total_gold": 3094,
+        "cleaning_gold": 656,
+        "maintenance_gold": 1788,
+        "total_gold": 3292,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 3101,
+        "next_companion_total_gold": 3299,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 3379,
-        "next_building_delta_gold": 285
+        "next_building_total_gold": 3488,
+        "next_building_delta_gold": 196
       },
       "special_event_gold_delta": -130,
       "special_event_count": 1,
@@ -53717,11 +53717,11 @@
         ]
       },
       "resources": {
-        "gold": 656941,
-        "tower_materials": 1372,
+        "gold": 645189,
+        "tower_materials": 974,
         "eggs": 0,
-        "relics": 199,
-        "arcane_residue": 45524
+        "relics": 99,
+        "arcane_residue": 45324
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -53731,7 +53731,7 @@
         "status_message": "Founder's Due due in 169 days."
       },
       "day_summary": [
-        "Paid 2689 gold in upkeep: 737 wages, 524 supplies, 1428 repairs.",
+        "Paid 2861 gold in upkeep: 737 wages, 570 supplies, 1554 repairs.",
         "Special event expense: -130 gold.",
         "The creditors stay the blade for now: 2500000 due in 169 days.",
         "Tower Scholar Contract expired: -68 gold.",
@@ -53800,7 +53800,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -53808,7 +53808,7 @@
       "average_reputation": 148.6,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 10,
       "expedition_members_assigned": 0,
@@ -53822,21 +53822,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 854,
-      "upkeep_cleaning_gold": 603,
-      "upkeep_maintenance_gold": 1643,
-      "upkeep_gold": 3100,
+      "upkeep_cleaning_gold": 656,
+      "upkeep_maintenance_gold": 1788,
+      "upkeep_gold": 3298,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 854,
-        "cleaning_gold": 603,
-        "maintenance_gold": 1643,
-        "total_gold": 3100,
+        "cleaning_gold": 656,
+        "maintenance_gold": 1788,
+        "total_gold": 3298,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 3107,
-        "next_companion_delta_gold": 7,
-        "next_building_total_gold": 3385,
-        "next_building_delta_gold": 285
+        "next_companion_total_gold": 3304,
+        "next_companion_delta_gold": 6,
+        "next_building_total_gold": 3494,
+        "next_building_delta_gold": 196
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -53882,11 +53882,11 @@
         ]
       },
       "resources": {
-        "gold": 695284,
-        "tower_materials": 1383,
+        "gold": 683334,
+        "tower_materials": 985,
         "eggs": 0,
-        "relics": 199,
-        "arcane_residue": 46356
+        "relics": 99,
+        "arcane_residue": 46156
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -53897,7 +53897,7 @@
       },
       "day_summary": [
         "Recovery Reputation has passed.",
-        "Paid 3100 gold in upkeep: 854 wages, 603 supplies, 1643 repairs.",
+        "Paid 3298 gold in upkeep: 854 wages, 656 supplies, 1788 repairs.",
         "The creditors stay the blade for now: 2500000 due in 168 days.",
         "Rielle rested and came back steadier for tomorrow.",
         "Nerra absorbed 2 instability from the Reception Hall.",
@@ -53963,7 +53963,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -53971,7 +53971,7 @@
       "average_reputation": 150.15,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 2,
       "guild_job_workers_assigned": 4,
       "expedition_members_assigned": 0,
@@ -53985,21 +53985,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 860,
-      "upkeep_cleaning_gold": 603,
-      "upkeep_maintenance_gold": 1643,
-      "upkeep_gold": 3106,
+      "upkeep_cleaning_gold": 656,
+      "upkeep_maintenance_gold": 1788,
+      "upkeep_gold": 3304,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 860,
-        "cleaning_gold": 603,
-        "maintenance_gold": 1643,
-        "total_gold": 3106,
+        "cleaning_gold": 656,
+        "maintenance_gold": 1788,
+        "total_gold": 3304,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 3114,
-        "next_companion_delta_gold": 8,
-        "next_building_total_gold": 3391,
-        "next_building_delta_gold": 285
+        "next_companion_total_gold": 3311,
+        "next_companion_delta_gold": 7,
+        "next_building_total_gold": 3500,
+        "next_building_delta_gold": 196
       },
       "special_event_gold_delta": 90,
       "special_event_count": 1,
@@ -54045,11 +54045,11 @@
         ]
       },
       "resources": {
-        "gold": 710076,
-        "tower_materials": 1388,
+        "gold": 697928,
+        "tower_materials": 990,
         "eggs": 0,
-        "relics": 199,
-        "arcane_residue": 46689
+        "relics": 99,
+        "arcane_residue": 46489
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -54059,7 +54059,7 @@
         "status_message": "Founder's Due due in 167 days."
       },
       "day_summary": [
-        "Paid 3106 gold in upkeep: 860 wages, 603 supplies, 1643 repairs.",
+        "Paid 3304 gold in upkeep: 860 wages, 656 supplies, 1788 repairs.",
         "Special event windfall: +90 gold.",
         "The creditors stay the blade for now: 2500000 due in 167 days.",
         "Tower Scholar Contract expired: -84 gold.",
@@ -54112,7 +54112,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -54120,7 +54120,7 @@
       "average_reputation": 153.25,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 8,
       "expedition_members_assigned": 0,
@@ -54134,21 +54134,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 749,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2701,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2873,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 749,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2701,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2873,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2708,
+        "next_companion_total_gold": 2880,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2950,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3045,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": -1200,
       "special_event_count": 1,
@@ -54194,11 +54194,11 @@
         ]
       },
       "resources": {
-        "gold": 741239,
-        "tower_materials": 1308,
+        "gold": 728919,
+        "tower_materials": 910,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 47285
+        "relics": 98,
+        "arcane_residue": 47085
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -54209,7 +54209,7 @@
       },
       "day_summary": [
         "Roof Repair Rush has passed.",
-        "Paid 2701 gold in upkeep: 749 wages, 524 supplies, 1428 repairs.",
+        "Paid 2873 gold in upkeep: 749 wages, 570 supplies, 1554 repairs.",
         "Special event expense: -1200 gold.",
         "The creditors stay the blade for now: 2500000 due in 166 days.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -54276,7 +54276,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -54284,7 +54284,7 @@
       "average_reputation": 155.55,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 7,
       "expedition_members_assigned": 0,
@@ -54298,21 +54298,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 755,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2707,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2879,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 755,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2707,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2879,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2714,
+        "next_companion_total_gold": 2886,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2956,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3051,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -54358,11 +54358,11 @@
         ]
       },
       "resources": {
-        "gold": 765556,
-        "tower_materials": 1314,
+        "gold": 753064,
+        "tower_materials": 916,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 47776
+        "relics": 98,
+        "arcane_residue": 47576
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -54373,7 +54373,7 @@
       },
       "day_summary": [
         "Grateful Locals has passed.",
-        "Paid 2707 gold in upkeep: 755 wages, 524 supplies, 1428 repairs.",
+        "Paid 2879 gold in upkeep: 755 wages, 570 supplies, 1554 repairs.",
         "The creditors stay the blade for now: 2500000 due in 165 days.",
         "Tower Scholar Contract expired: -68 gold.",
         "Caravan Captain Contract completed: +68 gold, +10 residue.",
@@ -54432,7 +54432,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -54440,7 +54440,7 @@
       "average_reputation": 157.55,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 5,
       "expedition_members_assigned": 0,
@@ -54454,21 +54454,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 756,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2708,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2880,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 756,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2708,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2880,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2716,
+        "next_companion_total_gold": 2888,
         "next_companion_delta_gold": 8,
-        "next_building_total_gold": 2957,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3052,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 850,
       "special_event_count": 1,
@@ -54514,11 +54514,11 @@
         ]
       },
       "resources": {
-        "gold": 786883,
-        "tower_materials": 1381,
+        "gold": 774219,
+        "tower_materials": 983,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 48242
+        "relics": 98,
+        "arcane_residue": 48042
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -54528,7 +54528,7 @@
         "status_message": "Founder's Due due in 164 days."
       },
       "day_summary": [
-        "Paid 2708 gold in upkeep: 756 wages, 524 supplies, 1428 repairs.",
+        "Paid 2880 gold in upkeep: 756 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +850 gold.",
         "The creditors stay the blade for now: 2500000 due in 164 days.",
         "Tower Scholar Contract expired: -42 gold.",
@@ -54580,7 +54580,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -54588,7 +54588,7 @@
       "average_reputation": 161.45,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 0,
       "guild_job_workers_assigned": 10,
       "expedition_members_assigned": 0,
@@ -54602,21 +54602,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 764,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2716,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2888,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 764,
-        "cleaning_gold": 524,
-        "maintenance_gold": 1428,
-        "total_gold": 2716,
+        "cleaning_gold": 570,
+        "maintenance_gold": 1554,
+        "total_gold": 2888,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 2723,
+        "next_companion_total_gold": 2895,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 2965,
-        "next_building_delta_gold": 249
+        "next_building_total_gold": 3060,
+        "next_building_delta_gold": 172
       },
       "special_event_gold_delta": 0,
       "special_event_count": 0,
@@ -54662,11 +54662,11 @@
         ]
       },
       "resources": {
-        "gold": 824550,
-        "tower_materials": 1392,
+        "gold": 811714,
+        "tower_materials": 994,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 49081
+        "relics": 98,
+        "arcane_residue": 48881
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -54676,7 +54676,7 @@
         "status_message": "Founder's Due due in 163 days."
       },
       "day_summary": [
-        "Paid 2716 gold in upkeep: 764 wages, 524 supplies, 1428 repairs.",
+        "Paid 2888 gold in upkeep: 764 wages, 570 supplies, 1554 repairs.",
         "The creditors stay the blade for now: 2500000 due in 163 days.",
         "Tower Scholar Contract expired: -48 gold.",
         "Tower Scholar Contract expired: -30 gold.",
@@ -54748,7 +54748,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -54756,7 +54756,7 @@
       "average_reputation": 163.2,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 1,
       "guild_job_workers_assigned": 5,
       "expedition_members_assigned": 0,
@@ -54770,21 +54770,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 764,
-      "upkeep_cleaning_gold": 524,
-      "upkeep_maintenance_gold": 1428,
-      "upkeep_gold": 2716,
+      "upkeep_cleaning_gold": 570,
+      "upkeep_maintenance_gold": 1554,
+      "upkeep_gold": 2888,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 856,
-        "cleaning_gold": 587,
-        "maintenance_gold": 1600,
-        "total_gold": 3043,
+        "cleaning_gold": 639,
+        "maintenance_gold": 1741,
+        "total_gold": 3236,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 3050,
+        "next_companion_total_gold": 3243,
         "next_companion_delta_gold": 7,
-        "next_building_total_gold": 3321,
-        "next_building_delta_gold": 278
+        "next_building_total_gold": 3428,
+        "next_building_delta_gold": 192
       },
       "special_event_gold_delta": 1400,
       "special_event_count": 1,
@@ -54830,11 +54830,11 @@
         ]
       },
       "resources": {
-        "gold": 845219,
-        "tower_materials": 1398,
+        "gold": 832211,
+        "tower_materials": 1000,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 49629
+        "relics": 98,
+        "arcane_residue": 49429
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -54844,7 +54844,7 @@
         "status_message": "Founder's Due due in 162 days."
       },
       "day_summary": [
-        "Paid 2716 gold in upkeep: 764 wages, 524 supplies, 1428 repairs.",
+        "Paid 2888 gold in upkeep: 764 wages, 570 supplies, 1554 repairs.",
         "Special event windfall: +1400 gold.",
         "The creditors stay the blade for now: 2500000 due in 162 days.",
         "Tower Scholar Contract expired: -84 gold.",
@@ -54900,7 +54900,7 @@
       "companions": 20,
       "population_cap": 20,
       "eggs_in_inventory": 0,
-      "buildings": 16,
+      "buildings": 17,
       "rooms": 4,
       "patron_tiers": 3,
       "active_contracts": 6,
@@ -54908,7 +54908,7 @@
       "average_reputation": 166.4,
       "graded_eggs": 0,
       "role_diversity": 2,
-      "town_projects": 3,
+      "town_projects": 4,
       "active_situations": 2,
       "guild_job_workers_assigned": 8,
       "expedition_members_assigned": 0,
@@ -54922,21 +54922,21 @@
       "expedition_prep_arcane_residue": 0,
       "expedition_prep_shortfall": 0,
       "upkeep_wage_gold": 860,
-      "upkeep_cleaning_gold": 587,
-      "upkeep_maintenance_gold": 1600,
-      "upkeep_gold": 3047,
+      "upkeep_cleaning_gold": 639,
+      "upkeep_maintenance_gold": 1741,
+      "upkeep_gold": 3240,
       "upkeep_shortfall": 0,
       "upkeep_forecast": {
         "wage_gold": 975,
-        "cleaning_gold": 666,
-        "maintenance_gold": 1814,
-        "total_gold": 3455,
+        "cleaning_gold": 724,
+        "maintenance_gold": 1974,
+        "total_gold": 3673,
         "active_band_min_companions": 16,
         "active_band_min_patron_tiers": 4,
-        "next_companion_total_gold": 3463,
+        "next_companion_total_gold": 3681,
         "next_companion_delta_gold": 8,
-        "next_building_total_gold": 3770,
-        "next_building_delta_gold": 315
+        "next_building_total_gold": 3891,
+        "next_building_delta_gold": 218
       },
       "special_event_gold_delta": -130,
       "special_event_count": 1,
@@ -54991,11 +54991,11 @@
         ]
       },
       "resources": {
-        "gold": 880374,
-        "tower_materials": 1407,
+        "gold": 867173,
+        "tower_materials": 1009,
         "eggs": 0,
-        "relics": 198,
-        "arcane_residue": 50310
+        "relics": 98,
+        "arcane_residue": 50110
       },
       "debt": {
         "active_milestone_id": "founders_due_7",
@@ -55005,7 +55005,7 @@
         "status_message": "Founder's Due due in 161 days."
       },
       "day_summary": [
-        "Paid 3047 gold in upkeep: 860 wages, 587 supplies, 1600 repairs.",
+        "Paid 3240 gold in upkeep: 860 wages, 639 supplies, 1741 repairs.",
         "Special event expense: -130 gold.",
         "The creditors stay the blade for now: 2500000 due in 161 days.",
         "Tower Scholar Contract expired: -30 gold.",

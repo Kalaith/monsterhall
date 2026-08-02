@@ -395,6 +395,36 @@
         "population_cap_flat": 0,
         "town_job_limit_flat": 1
       }
+    },
+    {
+      "id": "reliquary_vault",
+      "name": "Reliquary Vault",
+      "category": "project",
+      "description": "Sealed shelving for what the deep tower gives up. Relics logged here stop being loose treasure and start being the guild's standing claim on the stair.",
+      "build_limit": 40,
+      "cost": {
+        "gold": 9000,
+        "tower_materials": 400,
+        "eggs": 0,
+        "relics": 100,
+        "arcane_residue": 200
+      },
+      "unlocks": {
+        "room_ids": [],
+        "floor_ids": [],
+        "species_ids": [],
+        "patron_tiers": []
+      },
+      "passive_modifiers": {
+        "guild_income_pct": 0,
+        "expedition_success_pct": 1,
+        "egg_discovery_flat": 0,
+        "injury_recovery_flat": 0,
+        "stress_recovery_flat": 0,
+        "charm_training_flat": 0,
+        "population_cap_flat": 0,
+        "town_job_limit_flat": 0
+      }
     }
   ]
 }
