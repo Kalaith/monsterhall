@@ -278,25 +278,26 @@ pub(crate) fn calculate_expedition_plan(
     // somebody, so the preview now runs resolution's own arithmetic and
     // reports the margin for whoever is most exposed. Above zero, somebody
     // comes home hurt.
-    // NOTE: this is *not* the arithmetic day resolution rolls — see the TODO
-    // entry on aligning it. `expedition_safety_score` below is the real
-    // decision, and swapping this figure for it changes the scale of a number
-    // the long-campaign simulation policy steers on, which needs recalibrating
-    // against the multi-seed harness rather than one deterministic report.
-    let total_trait_risk = assigned_monsters
+    // Day resolution decides injuries per companion by comparing a safety score
+    // against a threshold, so the preview runs resolution's own arithmetic and
+    // reports the margin for whoever is most exposed. Quoting a different
+    // party-wide formula meant the planning screen could promise safety while
+    // the sim maimed somebody. Above zero, someone comes home hurt.
+    let injury_risk_score = assigned_monsters
         .iter()
-        .map(|monster| collect_trait_modifiers(data, monster).injury_risk_pct)
-        .sum::<i32>();
-    let total_endurance = assigned_monsters
-        .iter()
-        .map(|monster| condition_weighted(monster, effective_stats(data, monster).endurance))
-        .sum::<u32>();
-    let injury_risk_score = floor.difficulty as i32
-        + mission.injury_risk_pct
-        + priority_injury_risk
-        + total_trait_risk
-        + depth_profile.injury_risk_delta
-        - total_endurance as i32 * 3;
+        .map(|monster| {
+            day_cycle.expedition_injury_threshold
+                - expedition_safety_score(
+                    data,
+                    monster,
+                    mission,
+                    depth_profile.injury_risk_delta,
+                    priority_injury_risk,
+                    success_score,
+                )
+        })
+        .max()
+        .unwrap_or(i32::MIN / 2);
 
     ExpeditionPlanPreview {
         success_score,

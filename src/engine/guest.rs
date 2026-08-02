@@ -2,7 +2,7 @@
 
 use std::collections::HashSet;
 
-use super::day_cycle::apply_guild_job_progression;
+use super::day_cycle::{apply_guild_job_progression, charm_training_bonus};
 use super::{
     active_situation_guest_bonus, apply_monster_relationship_gain, contract_follow_up_request,
     contract_partial_success,
@@ -207,13 +207,37 @@ fn request_pressure_priority(
     let special_bonus = if template.is_special { 18 } else { 0 };
     let pressure_bonus = active_contract_limit(game_state) as u32 * 3;
 
-    room_tier
+    let base = room_tier
         .saturating_mul(35)
         .saturating_add(tier_fit_bonus)
         .saturating_add(reward_score)
         .saturating_add(special_bonus)
-        .saturating_add(pressure_bonus)
+        .saturating_add(pressure_bonus);
+
+    // How often this patron shows up at all. `spawn_weight` is authored on every
+    // archetype and validated to be positive, and until now decided nothing —
+    // a Tower Scholar at weight 3 crowded onto the board exactly as readily as a
+    // Curious Local at 10. Scaling the priority is the deterministic reading of
+    // the field: rarer patrons lose ties and drop off a full board first.
+    //
+    // A weighted random draw was tried instead and rejected. It is the more
+    // literal reading of "spawn weight", but the campaign is tuned around a
+    // best-first board, and flattening it cost enough income that the guild
+    // stopped reaching its final debt milestone at all.
+    let spawn_weight = data
+        .patron_archetypes
+        .archetypes
+        .iter()
+        .find(|entry| entry.id == template.archetype_id)
+        .map(|archetype| archetype.spawn_weight)
+        .unwrap_or(DEFAULT_SPAWN_WEIGHT);
+
+    base.saturating_mul(spawn_weight) / DEFAULT_SPAWN_WEIGHT
 }
+
+/// The weight a patron carries when the catalogue is silent, and the divisor
+/// that keeps a common patron's priority unchanged.
+const DEFAULT_SPAWN_WEIGHT: u32 = 10;
 
 fn request_room_tier(data: &GameData, room_id: &str) -> u32 {
     data.guild_rooms
@@ -310,6 +334,7 @@ pub fn resolve_contracts(
     let mut remaining_requests = Vec::new();
     let mut follow_up_requests = Vec::new();
     let mut resolved_contracts = Vec::new();
+    let charm_training_flat = charm_training_bonus(data, game_state);
     let requests = std::mem::take(&mut game_state.active_contracts);
 
     for mut request in requests {
@@ -398,7 +423,8 @@ pub fn resolve_contracts(
                 monster.stress = monster
                     .stress
                     .saturating_add(if partial_success { 4 } else { 2 });
-                let progression_update = apply_guild_job_progression(monster, room, true);
+                let progression_update =
+                    apply_guild_job_progression(monster, room, true, charm_training_flat);
                 let relationship_request = if partial_success {
                     None
                 } else {

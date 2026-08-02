@@ -57,6 +57,7 @@ pub use actions::{
 pub use eggs::{create_opening_egg, sync_egg_resource_count};
 #[cfg(test)]
 pub use eggs::{raw_egg_count_for_species, ready_egg_count_for_species};
+pub(crate) use modifiers::charm_training_bonus;
 pub use previews::{
     effective_population_cap, preview_expedition_plan, preview_guild_job, preview_upkeep,
 };

@@ -98,20 +98,23 @@ impl ExpeditionLayout {
     }
 }
 
+/// The score is how far past the injury threshold the most exposed companion
+/// sits, so zero is not "safe enough" — it is the exact point where somebody
+/// comes home hurt. Everything below it is margin.
 fn risk_label(score: i32) -> &'static str {
-    if score >= 12 {
-        "Risk: High"
-    } else if score >= 6 {
-        "Risk: Medium"
+    if score >= 0 {
+        "Risk: Injuries certain"
+    } else if score >= -15 {
+        "Risk: Narrow margin"
     } else {
         "Risk: Low"
     }
 }
 
 fn risk_color(score: i32) -> Color {
-    if score >= 12 {
+    if score >= 0 {
         theme::DANGER
-    } else if score >= 6 {
+    } else if score >= -15 {
         theme::WARNING
     } else {
         theme::POSITIVE

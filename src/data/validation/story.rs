@@ -128,6 +128,23 @@ impl GameData {
                     archetype.id
                 ));
             }
+            // `tags` are prose today, but a `special` archetype whose contracts
+            // are not `is_special` is a content mistake that reads as working:
+            // the special-guest story flag never fires and the offer never gets
+            // its priority bonus.
+            if archetype.tags.iter().any(|tag| tag == "special") {
+                let has_special_contract = self
+                    .contracts
+                    .requests
+                    .iter()
+                    .any(|request| request.archetype_id == archetype.id && request.is_special);
+                if !has_special_contract {
+                    return Err(format!(
+                        "guest archetype '{}' is tagged special but none of its contracts set is_special.",
+                        archetype.id
+                    ));
+                }
+            }
             if archetype.spawn_weight == 0 {
                 return Err(format!(
                     "guest archetype '{}' must define a positive spawn_weight.",

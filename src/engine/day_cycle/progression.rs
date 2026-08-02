@@ -27,6 +27,7 @@ pub(crate) fn apply_guild_job_progression(
     monster: &mut CompanionState,
     room: &crate::data::GuildRoomData,
     is_guest_booking: bool,
+    charm_training_flat: i32,
 ) -> Option<String> {
     let actual_work_history_gains = roll_work_history_gains(room);
     let mut eligible_skill_ids = skill_ids_from_work_history_gains(&actual_work_history_gains)
@@ -37,7 +38,12 @@ pub(crate) fn apply_guild_job_progression(
                 .any(|trained| trained == skill_id)
         })
         .collect::<Vec<_>>();
-    if should_gain_charm(room, &actual_work_history_gains, is_guest_booking) {
+    if should_gain_charm(
+        room,
+        &actual_work_history_gains,
+        is_guest_booking,
+        charm_training_flat,
+    ) {
         eligible_skill_ids.push("charm".to_owned());
     }
     let mut gained_skills = Vec::new();
@@ -78,10 +84,17 @@ pub(crate) fn apply_guild_job_progression(
     }
 }
 
+/// Whether this shift taught the companion anything about charm.
+///
+/// `charm_training_flat` is the town's contribution: six buildings advertise it
+/// in their tooltip and the aggregate has always summed it, but nothing read the
+/// sum, so a Nursery Habitat trained exactly as much charm as an empty lot. It
+/// is percentage points on the room's own odds.
 pub(super) fn should_gain_charm(
     room: &crate::data::GuildRoomData,
     gains: &crate::data::CompanionWorkHistoryProgressionData,
     is_guest_booking: bool,
+    charm_training_flat: i32,
 ) -> bool {
     let has_tracked_history = gains.scouting_runs > 0
         || gains.guard_duties > 0
@@ -118,7 +131,13 @@ pub(super) fn should_gain_charm(
         _ => 0,
     };
 
-    chance_pct > 0 && gen_range(0, 100) < chance_pct
+    // A room that never teaches charm is not taught it by architecture either —
+    // the town bonus improves lessons that already happen.
+    if chance_pct <= 0 {
+        return false;
+    }
+    let chance_pct = (chance_pct + charm_training_flat).clamp(0, 100);
+    gen_range(0, 100) < chance_pct
 }
 
 pub(super) fn skill_ids_from_work_history_gains(

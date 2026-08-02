@@ -170,6 +170,10 @@ pub(super) fn best_growth_expedition_assignment(
     best_assignment.map(|(monster_id, floor_id, mission_id, _)| (monster_id, floor_id, mission_id))
 }
 
+/// How much daylight above the injury threshold the simulated guild insists on
+/// before it stops discounting a run.
+const INJURY_MARGIN_WATCHED: i32 = 20;
+
 pub(super) fn expedition_growth_score(
     game_state: &GameState,
     preview: &crate::engine::day_cycle::ExpeditionPlanPreview,
@@ -184,7 +188,11 @@ pub(super) fn expedition_growth_score(
     let relic_value = 70;
     let material_value = 2;
     let residue_value = 1;
-    let injury_penalty = preview.injury_risk_score.max(0) * 2;
+    // `injury_risk_score` is now the margin past the injury threshold for the
+    // most exposed companion: at or above zero somebody is certain to come home
+    // hurt, and everything below it is daylight. A guild worth simulating starts
+    // paying attention a little before the line rather than after it.
+    let injury_penalty = (preview.injury_risk_score + INJURY_MARGIN_WATCHED).max(0) * 2;
 
     preview.projected_eggs as i32 * egg_value
         + preview.projected_relics as i32 * relic_value

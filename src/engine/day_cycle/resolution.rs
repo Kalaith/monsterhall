@@ -228,7 +228,12 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                 monster.reputation = monster
                     .reputation
                     .saturating_add(preview.projected_reputation);
-                let progression_update = apply_guild_job_progression(monster, room, false);
+                let progression_update = apply_guild_job_progression(
+                    monster,
+                    room,
+                    false,
+                    building_bonus.charm_training_flat,
+                );
                 let corruption_gain = guild_job_instability_gain(room, monster);
                 if corruption_gain > 0 {
                     monster.corruption = monster.corruption.saturating_add(corruption_gain);

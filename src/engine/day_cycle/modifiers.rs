@@ -26,6 +26,12 @@ pub(super) fn collect_building_modifiers(
     combined
 }
 
+/// The town's standing contribution to charm lessons, for callers outside this
+/// module that cannot cheaply build the whole aggregate.
+pub(crate) fn charm_training_bonus(data: &GameData, game_state: &GameState) -> i32 {
+    collect_building_modifiers(data, game_state).charm_training_flat
+}
+
 pub(super) fn collect_trait_modifiers(data: &GameData, monster: &CompanionState) -> TraitAggregate {
     let mut aggregate = TraitAggregate::default();
 
