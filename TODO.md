@@ -72,6 +72,35 @@ Systems that exist in data/state/UI but never affect the simulation, or vice ver
   `src/engine`) turns up nothing else: `room_name_by_id` and `species_name_by_id`
   are trivial id lookups, and `egg_quality_rank` is already a delegate.
 
+- ~~The partial-success fallback carried a stricter gate than full success.~~
+  Fixed. `contract_partial_success` required `town_preparation_quality >=
+  preparation_quality_required`, while the full-success path never checked
+  preparation quality at all. So a guild below the preparation bar was paid in
+  full if the companion was otherwise eligible, and paid *nothing* if she also
+  missed any other check — the fallback was harder to reach than the thing it
+  falls back from. Preparation quality no longer gates the partial path, so an
+  under-prepared guild can still scrape a half payment.
+
+- **`preparation_quality_required` is authored on 13 of 16 contracts, displayed
+  on the contract desk, and enforced nowhere.** Requirements run 2–6. Guild rooms
+  contribute `preparation_quality_bonus` of 1–3 each and only `town_job_limit`
+  (2) companions can be on guild jobs at once, so the figure is genuinely
+  contested — companions on contracts and expeditions do not contribute to it.
+
+  Enforcing it was built and reverted, with numbers. Adding it to
+  `evaluate_contract_eligibility` is wrong on its own: the policy books contracts
+  *before* staffing guild jobs (`policy.rs:22` then `:24`), and a player does the
+  same, so preparation quality reads 0 at booking time and every demanding
+  contract is refused outright. Treating a shortfall as partial pay instead is
+  coherent — full pay for meeting the bar, half for delivering under-prepared —
+  but it costs the deterministic campaign a whole debt milestone
+  (`broker_compact_6` with 34 days left, against reaching `founders_due_7`),
+  because most of the guild's income is contract work.
+
+  **That is a real balance decision, not a bug fix**: either the requirement is
+  meant to bite and the economy needs headroom for it, or the numbers want
+  lowering, or the field should come off the desk. Left for a deliberate call.
+
 ### UI and feedback
 
 - ~~Status messages are computed then discarded on five screens; Ctrl+S saves with zero visible confirmation.~~ Done: all five now render `status_message` (Monster Profile had no draw path for it at all; Town Management and Monster Profile yield the slot to an error when there is one). `persist_game_state` already called `apply_phase_status("Campaign saved")`, so Ctrl+S became visible everywhere for free.

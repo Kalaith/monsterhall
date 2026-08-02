@@ -314,8 +314,11 @@ pub(crate) fn contract_partial_success(
     else {
         return false;
     };
+    // Preparation quality deliberately does *not* gate the partial path. It is
+    // what separates full pay from half: a guild that did not staff up still
+    // delivers, just not to the standard the booking asked for. Requiring it
+    // here as well made the fallback stricter than the main path.
     template.partial_success_score > 0
-        && town_preparation_quality(data, game_state) >= request.preparation_quality_required
         && contract_depth_score(data, game_state, request, monster)
             >= template.partial_success_score
 }
