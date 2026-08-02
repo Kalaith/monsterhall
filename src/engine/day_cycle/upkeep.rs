@@ -166,13 +166,15 @@ pub(super) fn active_upkeep_band(
         .iter()
         .filter(|band| {
             companion_count >= band.min_companions as usize
-                || patron_tier_count >= band.min_patron_tiers as usize
+                || band
+                    .min_patron_tiers
+                    .is_some_and(|required| patron_tier_count >= required as usize)
         })
-        .max_by_key(|band| band.min_companions.max(band.min_patron_tiers))
+        .max_by_key(|band| band.min_companions.max(band.min_patron_tiers.unwrap_or(0)))
         .cloned()
         .unwrap_or(crate::data::UpkeepBandData {
             min_companions: 0,
-            min_patron_tiers: 0,
+            min_patron_tiers: None,
             wage_multiplier_pct: 100,
             cleaning_multiplier_pct: 100,
             maintenance_multiplier_pct: 100,
@@ -233,6 +235,59 @@ mod tests {
     }
 
     /// The whole point of the rework: a strong companion is not free.
+    /// A band's tier axis is optional, and `0` is not how you switch it off.
+    ///
+    /// `active_upkeep_band` filters on `count >= threshold`, so a zero is
+    /// *always* satisfied — authoring one would pin the guild to that band's
+    /// multipliers from its first day. `None` is the way to say the axis does
+    /// not apply, and the top shipped band uses it.
+    #[test]
+    fn a_band_without_a_tier_axis_never_fires_on_tiers_alone() {
+        let data = test_game_data();
+        let top = data
+            .config
+            .day_cycle
+            .upkeep_bands
+            .iter()
+            .max_by_key(|band| band.min_companions)
+            .expect("there should be upkeep bands");
+        assert!(
+            top.min_patron_tiers.is_none(),
+            "the top band escalates on roster size only"
+        );
+
+        // Every patron tier in the game, but a small guild: the top band must
+        // not be selected on the tier axis it does not have.
+        let tier_count = data.patron_tiers.patron_tiers.len();
+        let band = active_upkeep_band(&data, 1, tier_count);
+        assert!(
+            band.min_companions < top.min_companions,
+            "a one-companion guild should not be paying the top band's wages"
+        );
+
+        // And the roster axis still reaches it.
+        let band = active_upkeep_band(&data, top.min_companions as usize, tier_count);
+        assert_eq!(band.min_companions, top.min_companions);
+    }
+
+    /// Every band that *does* use the tier axis must ask for a number the
+    /// catalogue can supply. The top band asked for four against three.
+    #[test]
+    fn every_tier_threshold_is_one_the_catalogue_can_reach() {
+        let data = test_game_data();
+        let tier_count = data.patron_tiers.patron_tiers.len() as u32;
+
+        for (index, band) in data.config.day_cycle.upkeep_bands.iter().enumerate() {
+            let Some(required) = band.min_patron_tiers else {
+                continue;
+            };
+            assert!(
+                required >= 1 && required <= tier_count,
+                "upkeep band {index} needs {required} patron tiers against {tier_count} authored"
+            );
+        }
+    }
+
     #[test]
     fn wages_climb_with_rank() {
         let data = test_game_data();

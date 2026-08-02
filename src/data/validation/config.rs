@@ -142,16 +142,7 @@ impl GameData {
             );
         }
 
-        for (index, band) in self.config.day_cycle.upkeep_bands.iter().enumerate() {
-            if band.wage_multiplier_pct == 0
-                || band.cleaning_multiplier_pct == 0
-                || band.maintenance_multiplier_pct == 0
-            {
-                return Err(format!(
-                    "config.json day_cycle.upkeep_bands[{index}] multipliers must be greater than zero."
-                ));
-            }
-        }
+        self.validate_upkeep_bands()?;
 
         if self.config.day_cycle.expedition_egg_reward_threshold <= 0
             || self.config.day_cycle.expedition_relic_reward_threshold <= 0
@@ -162,6 +153,61 @@ impl GameData {
         }
 
         self.validate_quality_rank_ladder()?;
+
+        Ok(())
+    }
+
+    /// The two axes an upkeep band escalates on, checked against what the game
+    /// can actually supply.
+    ///
+    /// `active_upkeep_band` selects with `count >= threshold` on both axes, so a
+    /// threshold of **zero is always satisfied** — it reads like "ignore this
+    /// axis" and behaves like "this band is always active", which would pin the
+    /// guild to its multipliers from day one. The opposite mistake is just as
+    /// quiet: the top band asked for four patron tiers against a catalogue
+    /// holding three, so that axis could never fire and the band ran on its
+    /// companion count alone with nothing saying so. A band that does not use
+    /// the tier axis says `None` now, and both mistakes are rejected here.
+    fn validate_upkeep_bands(&self) -> Result<(), String> {
+        let patron_tier_count = self.patron_tiers.patron_tiers.len() as u32;
+        let max_population_cap = u32::from(self.config.new_game.max_population_cap);
+
+        for (index, band) in self.config.day_cycle.upkeep_bands.iter().enumerate() {
+            if band.wage_multiplier_pct == 0
+                || band.cleaning_multiplier_pct == 0
+                || band.maintenance_multiplier_pct == 0
+            {
+                return Err(format!(
+                    "config.json day_cycle.upkeep_bands[{index}] multipliers must be greater than zero."
+                ));
+            }
+
+            if band.min_companions == 0 {
+                return Err(format!(
+                    "config.json day_cycle.upkeep_bands[{index}].min_companions is 0, which is                      always satisfied and would make this band permanently active."
+                ));
+            }
+            if band.min_companions > max_population_cap {
+                return Err(format!(
+                    "config.json day_cycle.upkeep_bands[{index}].min_companions is {} against a                      population cap of {max_population_cap}, so it can never be reached.",
+                    band.min_companions
+                ));
+            }
+
+            let Some(required_tiers) = band.min_patron_tiers else {
+                continue;
+            };
+            if required_tiers == 0 {
+                return Err(format!(
+                    "config.json day_cycle.upkeep_bands[{index}].min_patron_tiers is 0, which is                      always satisfied. Omit the field to switch the axis off."
+                ));
+            }
+            if required_tiers > patron_tier_count {
+                return Err(format!(
+                    "config.json day_cycle.upkeep_bands[{index}].min_patron_tiers is                      {required_tiers} against {patron_tier_count} authored patron tiers, so that                      axis can never fire. Omit the field, or author the tier."
+                ));
+            }
+        }
 
         Ok(())
     }

@@ -33,7 +33,11 @@ pub struct UpkeepForecast {
     pub maintenance_gold: u32,
     pub total_gold: u32,
     pub active_band_min_companions: u32,
-    pub active_band_min_patron_tiers: u32,
+    /// Patron tiers the active band needs, or `None` when it does not escalate
+    /// on that axis. The Town Overview drops the clause entirely rather than
+    /// printing a threshold — the top band advertised "4 patron tiers" against a
+    /// catalogue holding three, which the player could never reach.
+    pub active_band_min_patron_tiers: Option<u32>,
     pub next_companion_total_gold: u32,
     pub next_companion_delta_gold: u32,
     pub next_building_total_gold: u32,

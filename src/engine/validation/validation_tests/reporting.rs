@@ -634,7 +634,7 @@ pub(super) fn upkeep_forecast_snapshot(
         maintenance_gold: forecast.maintenance_gold,
         total_gold: forecast.total_gold,
         active_band_min_companions: forecast.active_band_min_companions,
-        active_band_min_patron_tiers: forecast.active_band_min_patron_tiers,
+        active_band_min_patron_tiers: forecast.active_band_min_patron_tiers.unwrap_or(0),
         next_companion_total_gold: forecast.next_companion_total_gold,
         next_companion_delta_gold: forecast.next_companion_delta_gold,
         next_building_total_gold: forecast.next_building_total_gold,

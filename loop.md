@@ -1041,6 +1041,42 @@ Stop the loop and report if:
   bands already referencing a fourth, relics with no patron who asks for one by
   name). A tenth bug-hunting pass is not the best use of the next iteration.
 
+- **2026-08-03 — the thin-axes note was hiding a live bug.** Nine passes ended
+  recommending content over bug-hunting, and the content note itself —
+  "**patron tiers 3** with upkeep bands already referencing a fourth" — turned
+  out to name an unconnected system rather than a wish.
+  **The top upkeep band asked for four patron tiers against three, and the Town
+  Overview printed that number at the player.** `active_upkeep_band` ORs two axes
+  with `count >= threshold`, so band 3's tier axis could never fire; it ran on
+  `min_companions: 16` alone with nothing saying so, while the upkeep line read
+  *"Band 16 companions / 4 patron tiers"* — a threshold the game cannot reach,
+  shown as though planning around it were possible.
+  **`0` could not express "this axis is off"** — that is the `party_size` trap
+  from the seventh pass again, since `count >= 0` is always true and a zero would
+  have pinned the guild to 180% wages from day one. `min_patron_tiers` is
+  `Option<u32>`; the top band omits it, which is behaviour-identical
+  (`companions >= 16 || tiers >= 4` and `companions >= 16` agree at every
+  reachable tier count), and the Town Overview drops the clause instead of
+  printing a number. Load-time validation rejects a tier threshold above the
+  authored count *and* a zero on either axis, with the error naming the
+  distinction because `None` and `0` read the same to an author and behave as
+  opposites. Both verified by planting.
+  **A sweep of every authored threshold against catalogue capacity found nothing
+  else** — band companion counts sit under the population cap, every patron tier
+  is served by a room and unlocked by a building, and every tier's rank
+  requirement is inside the star ladder.
+  **Result:** 112 tests (was 110), balance byte-identical — the only line that
+  moved in any report is `active_band_min_patron_tiers` 4 → 0, the reported
+  threshold changing from a lie to "no axis". fmt and clippy clean, publish
+  green, `content_version` 1.18.0.
+  **Next iteration should know:** (a) the lesson that keeps paying is *look for
+  the number that cannot be reached, and for the zero that means "always" rather
+  than "never"* — that single shape has now produced the `party_size` save bug,
+  the rank-zero companion and this band; (b) authoring a **fourth patron tier**
+  remains a real content slice and a balance change, needing a room to serve it
+  and a building to unlock it; (c) the other scoped slice is still the `ui_text`
+  migration (~40 hardcoded strings, eighth-pass entry in `TODO.md`).
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

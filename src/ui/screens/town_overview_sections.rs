@@ -552,15 +552,24 @@ pub(super) fn draw_summary_strip(
     } else {
         layout.summary_width - layout::PANEL_PADDING * 2.0
     };
+    // The band's tier axis is optional, and the top band does not use it. It
+    // used to print "4 patron tiers" there against a catalogue holding three, so
+    // the player was reading a threshold they could never reach.
+    let band_clause = match upkeep.active_band_min_patron_tiers {
+        Some(tiers) => format!(
+            "Band {} companions / {tiers} patron tiers",
+            upkeep.active_band_min_companions
+        ),
+        None => format!("Band {} companions", upkeep.active_band_min_companions),
+    };
     draw_body_text_in_box(
         &format!(
-            "Next upkeep {}g: wages {}, supplies {}, repairs {}. Band {} companions / {} patron tiers. Companion {}g (+{}), building {}g (+{}).",
+            "Next upkeep {}g: wages {}, supplies {}, repairs {}. {}. Companion {}g (+{}), building {}g (+{}).",
             upkeep.total_gold,
             upkeep.wage_gold,
             upkeep.cleaning_gold,
             upkeep.maintenance_gold,
-            upkeep.active_band_min_companions,
-            upkeep.active_band_min_patron_tiers,
+            band_clause,
             upkeep.next_companion_total_gold,
             upkeep.next_companion_delta_gold,
             upkeep.next_building_total_gold,

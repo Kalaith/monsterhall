@@ -171,6 +171,50 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, tenth pass)
+
+The ledger's own "thin axes" note turned out to name a live unconnected system
+rather than a content wish: **patron tiers 3, with upkeep bands already
+referencing a fourth**.
+
+- ~~The top upkeep band asked for four patron tiers against a catalogue holding
+  three, and the Town Overview printed that number at the player.~~ Fixed.
+  `active_upkeep_band` selects with `count >= threshold` on two axes joined by
+  OR, so band 3's tier axis could never fire — the band ran on `min_companions:
+  16` alone, with nothing saying so. Worse, the Town Overview's upkeep line read
+  *"Band 16 companions / 4 patron tiers"*: a threshold the game cannot reach,
+  shown to the player as though planning around it were possible.
+
+  The fix had to say what the band actually does, and **`0` could not say it** —
+  that is the `party_size` trap again, because `count >= 0` is always true, so a
+  zero would have pinned the guild to the top band's 180% wages from day one.
+  `min_patron_tiers` is `Option<u32>` now: the top band omits it, which is
+  behaviour-identical (`companions >= 16 || tiers >= 4` and `companions >= 16`
+  agree at every reachable tier count), and the Town Overview drops the clause
+  rather than printing a number.
+
+  **Load-time validation rejects both mistakes**: a tier threshold above the
+  authored tier count, and a zero on either axis — with the error naming the
+  distinction, since `None` and `0` read the same to an author and behave as
+  opposites. Verified by planting each.
+
+- **A sweep of every authored threshold against what the catalogue can supply
+  found nothing else.** Band companion counts sit under the population cap, every
+  patron tier is both served by a room and unlocked by a building, and every
+  tier's `minimum_quality_rank` is inside the star ladder.
+
+**Balance byte-identical.** The only line that moved in any report is
+`active_band_min_patron_tiers`, 4 → 0, which is the reported threshold changing
+from a lie to "no axis" — not one economic number shifted, because the band
+selection was already behaving this way.
+
+**The content question is unchanged and still open.** Authoring a fourth patron
+tier would make that axis live and raise upkeep earlier for a guild that unlocks
+it; that is a balance change needing a room to serve it and a building to unlock
+it, and `loop.md` records that a new one-off building is very hard to land. What
+this pass fixed is the game telling the player a tier that does not exist is
+worth reaching.
+
 ### Found by review, not by the audit (2026-08-03, ninth pass)
 
 **This pass found no defect.** After eight passes that each found several, that is

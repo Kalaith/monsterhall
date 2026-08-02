@@ -296,7 +296,18 @@ fn default_condition_effects() -> ConditionEffectData {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct UpkeepBandData {
     pub min_companions: u32,
-    pub min_patron_tiers: u32,
+    /// Patron tiers this band needs, or `None` when the band does not escalate
+    /// on that axis at all.
+    ///
+    /// `active_upkeep_band` selects with `count >= threshold`, so a plain `0`
+    /// does **not** mean "ignore this axis" — it means *always active*, which
+    /// would silently pin the guild to this band's multipliers from day one.
+    /// The top band was authored `4` against a catalogue holding three tiers,
+    /// which is the same thing said the other way: an axis that can never fire,
+    /// written as though it could. `None` says it outright, and load-time
+    /// validation now rejects both the unreachable threshold and the zero.
+    #[serde(default)]
+    pub min_patron_tiers: Option<u32>,
     #[serde(alias = "food_multiplier_pct")]
     pub wage_multiplier_pct: u32,
     pub cleaning_multiplier_pct: u32,
