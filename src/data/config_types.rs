@@ -24,13 +24,6 @@ pub struct PersistenceConfigData {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct TownUiConfigData {
-    pub target_width: u32,
-    pub target_height: u32,
-    pub town_panels: Vec<String>,
-}
-
-#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ResolutionOptionData {
     pub id: String,
     pub width: u32,
@@ -261,7 +254,6 @@ pub struct GameConfigData {
     pub input: InputConfigData,
     pub persistence: PersistenceConfigData,
     pub display: DisplayConfigData,
-    pub ui: TownUiConfigData,
     pub new_game: NewGameConfigData,
     pub day_cycle: DayCycleConfigData,
 }

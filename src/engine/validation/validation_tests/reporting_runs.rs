@@ -175,6 +175,7 @@ pub(super) fn run_simulation_report(
     }
 
     SimulationReport {
+        content_version: data.config.content_version.clone(),
         rng_seed,
         simulation_days,
         starting_day,

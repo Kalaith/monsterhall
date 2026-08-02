@@ -38,16 +38,6 @@
       }
     ]
   },
-  "ui": {
-    "target_width": 1280,
-    "target_height": 720,
-    "town_panels": [
-      "Campaign",
-      "Resources",
-      "Catalog Snapshot",
-      "Roster Preview"
-    ]
-  },
   "new_game": {
     "starting_day": 1,
     "starting_resources": {

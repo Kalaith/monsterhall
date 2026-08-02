@@ -158,6 +158,11 @@ pub(super) struct SimulationDayReport {
 
 #[derive(Debug, Serialize)]
 pub(super) struct SimulationReport {
+    /// Which content catalogue produced this report. Every playtest report in
+    /// `tmp_screens/playtests/` is read long after the run, and `content_version`
+    /// was the one field in `config.json` that named the data behind it while
+    /// being read by nothing.
+    pub(super) content_version: String,
     pub(super) rng_seed: u64,
     pub(super) simulation_days: u32,
     pub(super) starting_day: u32,

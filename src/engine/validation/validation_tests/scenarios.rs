@@ -179,6 +179,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         "debt flow should remain active in the simulation"
     );
     let report = SimulationReport {
+        content_version: data.config.content_version.clone(),
         rng_seed: SIMULATION_BASE_SEED ^ 30,
         simulation_days: 30,
         starting_day,
