@@ -1,6 +1,6 @@
 {
   "title": "Monsterhall",
-  "content_version": "1.15.0",
+  "content_version": "1.16.0",
   "save_version": 10,
   "input": {
     "primary_mode": "mouse",
@@ -115,6 +115,7 @@
       130
     ],
     "egg_dissolve_relic_minimum_rank": 3,
+    "expedition_injury_amount": 6,
     "skill_wage_divisor": 4,
     "species_stat_wage_divisor": 4,
     "understrength_income_pct": 70,

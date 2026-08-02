@@ -140,6 +140,15 @@ pub struct DayCycleConfigData {
     /// Rank at which dissolving an egg also recovers a relic.
     #[serde(default = "default_egg_dissolve_relic_minimum_rank")]
     pub egg_dissolve_relic_minimum_rank: u8,
+    /// Injury a companion takes when she comes back from a run hurt.
+    ///
+    /// It was a bare `6` in `resolve_day` — the last balance number left in the
+    /// day cycle's Rust. Every other side of this exchange is authored:
+    /// `base_injury_recovery`, `injury_allowance`, `injury_penalty_pct_per_ten`
+    /// and `expedition_injury_threshold` all live here, so how hard a bad run
+    /// hits was the one term nobody could tune.
+    #[serde(default = "default_expedition_injury_amount")]
+    pub expedition_injury_amount: u32,
     #[serde(default = "default_skill_wage_divisor")]
     pub skill_wage_divisor: u32,
     /// Divides a species' total base stats into its share of the daily wage.
@@ -348,6 +357,10 @@ fn default_egg_dissolve_residue_by_rank() -> Vec<u32> {
 
 fn default_egg_dissolve_relic_minimum_rank() -> u8 {
     3
+}
+
+fn default_expedition_injury_amount() -> u32 {
+    6
 }
 
 fn default_species_stat_wage_divisor() -> u32 {

@@ -171,6 +171,53 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, fourth pass)
+
+The panel-capacity class is closed, so this pass swept the two surfaces that
+**advise** the player. Both were giving advice the engine contradicts.
+
+- ~~The profile screen called a companion "hurt" after one day's work.~~ Fixed,
+  and this is the sharpest of the frozen-threshold bugs so far because it cost
+  the player *days*. `monster_role_summary` read
+  `injury > 0 || stress >= 3 || fatigue >= 3` — written before the condition
+  system existed and never revisited against it. One guild shift adds **10
+  fatigue and 4 stress**; the allowances are **30 and 20**. So from her very
+  first shift every companion showed "hurt" with "best next use: rest", while
+  `companion_effectiveness_pct` — the function that actually decides her output —
+  still returned exactly **100**. The player was being told to spend a rest day
+  recovering nothing, permanently, for the whole roster. Readiness now asks the
+  engine: she needs rest when her condition is genuinely costing output and not a
+  day before. New `engine::companion_effectiveness` is that one answer, exposed
+  so screens stop inventing their own.
+
+  The same function also carried a **partial fourth copy of the role
+  classifier** — it re-tested `power >= charm + 2` and a couple of skill
+  thresholds to pick a recommendation, so it could disagree with the role printed
+  in the same sentence. It maps over `monster_role` now.
+
+- ~~"Today's Priority" hid the debt window behind any egg, and told a full guild
+  to grow its roster.~~ Fixed, two orderings in one branch chain.
+  `daily_priority_summary` ranked eggs **above** the debt warning, so a single
+  egg in the inventory meant the debt panel never appeared — and the debt copy's
+  own words are *"favour reliable guild work and contract fulfilment over
+  speculative tower work"*, which is exactly the call it was being prevented from
+  making. Missing a payment costs gold and stresses the whole roster; an egg
+  keeps. Debt outranks eggs now.
+
+  And the eggs branch reads "grow the roster before the day ends", which at the
+  population cap is the one thing hatching cannot do — the egg needs a companion
+  released first. The guild fills its cap by mid-campaign, so the panel stuck on
+  impossible advice for the entire late game and never mentioned contracts or
+  growth again. It is gated on being below the cap. Both verified by planting the
+  regression.
+
+- ~~The expedition injury amount was the last balance number in the day cycle's
+  Rust.~~ Moved to `config.json` as `expedition_injury_amount`. Every other side
+  of that exchange was already authored — `base_injury_recovery`,
+  `injury_allowance`, `injury_penalty_pct_per_ten`, `expedition_injury_threshold`
+  — so how hard a bad run hits was the one term nobody could tune. Authored at
+  the same 6, so nothing moves.
+
 ### Found by review, not by the audit (2026-08-03, third pass)
 
 - ~~The Guild Jobs worker column drew off the bottom of the screen.~~ Fixed, and

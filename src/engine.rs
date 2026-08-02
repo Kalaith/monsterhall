@@ -11,7 +11,8 @@ mod validation;
 
 pub use bootstrap::create_new_game_state;
 pub use companion::{
-    companion_skill_total, effective_stats, species_of, species_stat_total, trait_stat_bonus,
+    companion_effectiveness, companion_skill_total, effective_stats, species_of,
+    species_stat_total, trait_stat_bonus,
 };
 pub use day_cycle::{
     assign_monster_to_expedition, assign_monster_to_idle, assign_monster_to_rest,

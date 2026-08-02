@@ -92,3 +92,15 @@ pub fn companion_skill_total(skills: &crate::state::CompanionSkillState) -> u32 
         + skills.arcana
         + skills.strength
 }
+
+/// Share of full output this companion delivers today, 100 when rested.
+///
+/// The engine's own answer, exposed so screens stop inventing their own. The
+/// profile screen called a companion "hurt" at `fatigue >= 3` — a threshold from
+/// before the condition system existed. A single guild shift adds ten fatigue
+/// and four stress, and the allowances are thirty and twenty, so from her first
+/// day of work every companion read as hurt while delivering exactly 100%, and
+/// the screen advised resting her for a day at no benefit.
+pub fn companion_effectiveness(data: &GameData, monster: &CompanionState) -> u32 {
+    crate::engine::day_cycle::companion_effectiveness_pct(&data.config.day_cycle, monster)
+}

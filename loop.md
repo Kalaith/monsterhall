@@ -801,6 +801,47 @@ Stop the loop and report if:
   a 20-companion roster, **patron tiers 3** with upkeep bands already referencing
   a fourth, and relics still have no patron who asks for one by name.
 
+- **2026-08-03 — the two screens that give advice were both giving wrong advice.**
+  The panel-capacity class closed last pass, so this one swept the surfaces that
+  *tell the player what to do*. Both contradicted the engine underneath them.
+  **The profile screen called every companion "hurt" after one day's work.**
+  `monster_role_summary` tested `injury > 0 || stress >= 3 || fatigue >= 3`, a
+  threshold written before the condition system existed. One guild shift adds
+  **10 fatigue and 4 stress** against allowances of **30 and 20** — so from her
+  first shift every companion read "hurt, best next use: rest" while
+  `companion_effectiveness_pct` still returned exactly **100**. The game was
+  telling the player to spend a rest day recovering nothing, for the whole
+  roster, forever. It asks the engine now, via a new public
+  `engine::companion_effectiveness`. The same function also held a partial fourth
+  copy of the role classifier (`power >= charm + 2` plus two skill thresholds),
+  which could disagree with the role printed in the same sentence; it maps over
+  `monster_role` instead.
+  **"Today's Priority" hid the debt window behind any egg.** Eggs ranked above
+  the debt warning, so one egg in the inventory meant the debt panel never
+  appeared — and the debt copy's own words are "favour reliable guild work and
+  contract fulfilment over speculative tower work", the exact call it was being
+  prevented from making. And the eggs branch says "grow the roster before the day
+  ends", which at the population cap is the one thing hatching cannot do; the
+  guild fills its cap by mid-campaign, so the panel stuck on impossible advice
+  for the whole late game. Debt outranks eggs, and eggs are gated on being below
+  the cap. Both verified by planting the regression and watching the guard fire.
+  **Also:** `expedition_injury_amount` moved from a bare `6` in `resolve_day`
+  into `config.json`. Every other side of that exchange was already authored, so
+  how hard a bad run hits was the one term nobody could tune. Same value, nothing
+  moves.
+  **Result:** 98 tests (was 94), balance byte-identical, fmt and clippy clean,
+  publish green, `content_version` 1.16.0.
+  **Next iteration should know:** (a) the frozen-threshold sweep is now clean —
+  no raw `fatigue`/`stress`/`injury` comparison survives outside
+  `condition.rs`, and no balance literal survives in `day_cycle`; (b) all three advice surfaces have now been
+  re-read against the systems they describe — `onboarding_lines` orders eggs
+  before debt like the priority panel did, but that is teaching order rather than
+  urgency ranking and its copy stays accurate at the population cap, so it was
+  deliberately left alone; (c) the thin content axes are still untouched and remain the
+  honest next slice — **guild rooms 4** for a 20-companion roster, **patron tiers
+  3** with upkeep bands already referencing a fourth, and relics still have no
+  patron who asks for one by name.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

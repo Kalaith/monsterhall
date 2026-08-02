@@ -378,7 +378,9 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                             + trait_modifier.stress_change_flat.max(0) as u32,
                     );
                     if safety_score < data.config.day_cycle.expedition_injury_threshold {
-                        monster.injury = monster.injury.saturating_add(6);
+                        monster.injury = monster
+                            .injury
+                            .saturating_add(data.config.day_cycle.expedition_injury_amount);
                         summary.roster_updates.push(format!(
                             "{} returned from {} banged up.",
                             monster.name, floor.name
