@@ -119,7 +119,12 @@ pub(super) fn projected_building_growth_units(building: &crate::data::BuildingDa
         !building.unlocks.room_ids.is_empty()
             || !building.unlocks.species_ids.is_empty()
             || !building.unlocks.patron_tiers.is_empty()
-            || building.passive_modifiers.guild_income_pct >= 6
+            // Two, not six: `guild_income_pct` used to be a score term worth a
+            // quarter-gold a point and was authored at four to nine. It is a real
+            // percentage of the fee now and re-authored at a quarter of those
+            // numbers, so a threshold left at six would rate every building in
+            // the catalogue as growing the guild by nothing.
+            || building.passive_modifiers.guild_income_pct >= 2
             || building.passive_modifiers.egg_discovery_flat > 0,
     );
 

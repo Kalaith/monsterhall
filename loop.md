@@ -1304,6 +1304,34 @@ Stop the loop and report if:
   the economy retuned around it, and the unbounded event log; (c) the `ui_text`
   migration (~40 hardcoded strings) remains the largest mechanical slice.
 
+- **2026-08-03 — nineteenth pass (the retune the last pass parked).** Took the design
+  call rather than leave it: every building card overstated its building by ~3×.
+  `guild_income_pct` now multiplies what a shift returns — fee *and* residue — and the
+  card reads "+{value}%" again because the number finally is one. **The catalogue was
+  re-authored to a quarter of its old values** (buildings 4–9 → 1–2, traits 2–15 → 1–4);
+  those numbers read as percentages but had been chosen against a quarter-gold scale,
+  and at face value the last pass measured all ten seeds clearing the Founder's Due.
+  Two things only measurement could have told me: **residue had to ride the multiplier**
+  (coin alone held gold at parity but cut residue 16% and buildings 21%, because the
+  replaced score term fed `base_residue`), and **the reputation coupling could not be
+  reconstructed** — `success_score` also feeds `projected_reputation` → `relationship_score`
+  → `contract_depth_score`, so a *building's* income percentage was raising a
+  *companion's* reputation and her contract outcomes. That is the recurring "one number
+  feeding three systems" shape, and dropping it is the cause of the residual fall.
+  **Result:** 125 tests (was 124), fmt and clippy clean, publish green,
+  `content_version` 1.25.0, `ui_text` 1.4.0. **Ten seeds at day 365:** gold 1.315M →
+  1.333M (+1.4%), residue +9.6%, **buildings 31.9 → 25.6**, **relics 138 → 99**, debt
+  gap 22.9% more surplus, expirations −3.2%. Guard: a preview driven twice over one
+  fixture, asserting the fee moves by the percentage and the Score does not move at all
+  — verified by planting the old mechanic.
+  **Next iteration should know:** (a) **`git checkout` to undo a planted regression
+  reverted the whole pass's work on that file — third time in this loop.** Undo a plant
+  the way it was applied, never with `checkout`; (b) the buildings/relics fall is the
+  reputation coupling coming out and is worth a look on its own terms — if contract
+  outcomes should improve with guild standing, that wants its own honest source rather
+  than a leak from an income modifier; (c) one recorded design call remains, the
+  unbounded event log, plus the `ui_text` migration.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

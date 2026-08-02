@@ -88,15 +88,16 @@ pub struct BuildingUnlocksData {
 
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 pub struct BuildingModifierData {
-    /// Points added to a guild job's **Score**, not a percentage of the fee.
+    /// A true percentage of what a guild shift returns — its fee and its
+    /// residue both.
     ///
-    /// The name is a survival from an earlier reading and the building card used
-    /// to repeat it as "+4%". Score becomes gold at `success_score / 4`, so four
-    /// of these buy one point of base gold. Applying it as a true percentage was
-    /// built and measured: buildings alone sum to 55%, and with it every one of
-    /// the ten campaign seeds cleared the Founder's Due, which the spec forbids.
-    /// Making it faithful is a balance change that needs the economy retuned
-    /// around it — see TODO.md.
+    /// It was a term inside `success_score` for most of this game's life, worth
+    /// a quarter-gold a point, while the building card advertised it as a
+    /// percentage: a building sold as "+4%" paid about 1.3%. Made faithful and
+    /// the catalogue re-authored to a quarter of its old numbers, because the
+    /// old ones read as percentages but had been chosen against a quarter-gold
+    /// scale — at face value they summed to 55% and every campaign seed cleared
+    /// the Founder's Due, which the spec forbids.
     pub guild_income_pct: i32,
     pub expedition_success_pct: i32,
     #[serde(default)]
@@ -406,7 +407,7 @@ pub struct TraitData {
     pub icon_key: String,
     pub description: String,
     pub stat_modifiers: StatBlockData,
-    /// Points on a guild job's Score, as on buildings — not a percentage.
+    /// A true percentage of what a shift returns, as on buildings.
     pub guild_income_pct: i32,
     pub expedition_success_pct: i32,
     pub injury_risk_pct: i32,

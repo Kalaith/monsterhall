@@ -171,6 +171,54 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, nineteenth pass)
+
+Took the design call the last pass parked, because it was the most
+gameplay-affecting thing left: **every building card in the game overstated what
+the building does by roughly three times.**
+
+- ~~`guild_income_pct` was a score term wearing a percentage's name.~~ Fixed
+  properly this time. It now multiplies what a guild shift returns — the escort
+  fee *and* the residue — and the card says "Guild service income +{value}%"
+  again because the number finally is one.
+
+  **The catalogue was re-authored to a quarter of its old values** (buildings
+  4–9 → 1–2, traits 2–15 → 1–4). Those old numbers read as percentages but had
+  been chosen against a quarter-gold-per-point scale; at face value they summed
+  to 55% and the last pass measured every campaign seed clearing the Founder's
+  Due, which the spec forbids. A quarter lands the campaign back inside spec
+  with all 125 tests green.
+
+- **Residue had to ride along, and finding that out took a second measurement.**
+  Applying the multiplier to coin alone held gold at parity but cut residue 16%
+  and buildings 21% — because the score term it replaced fed `base_residue` too.
+  A labelling fix that quietly took a sixth of the guild's residue would have
+  been a balance change smuggled in under a bug fix.
+
+- **What did not survive, deliberately: the reputation coupling.**
+  `success_score` also feeds `projected_reputation`, which feeds
+  `relationship_score` in `contract_depth_score` — so a *building's income
+  percentage* was raising a *companion's personal reputation* and through it her
+  contract outcomes. That is the same "one number secretly feeding three
+  systems" shape this loop keeps turning up, and it is not reconstructible under
+  an honest reading. It is the cause of the residual drop below.
+
+- **Measured, ten seeds at day 365** — baseline → retuned: gold 1.315M → 1.333M
+  (+1.4%), residue 55.4k → 60.7k (+9.6%), **buildings 31.9 → 25.6 (−19.7%)**,
+  **relics 138 → 99 (−28.0%)**, debt gap −923k → −1134k (22.9% more surplus),
+  contract expirations 383 → 371 (−3.2%). Debt is cleared more comfortably and
+  fewer contracts expire unfilled; the guild builds less and banks fewer relics,
+  which is the reputation coupling coming out. Every campaign assertion holds.
+
+- **Guard**: a preview driven twice over the same fixture, changing nothing but
+  one building's percentage, asserting the fee moves by that percentage and the
+  job Score does not move at all. Verified by planting the old mechanic.
+
+- **My own error, recorded because it cost the pass time:** I ran
+  `git checkout -- previews.rs` to undo a planted regression and reverted the
+  entire pass's work on that file with it. Third time in this loop. The planted
+  regression must be undone the same way it was applied, never with `checkout`.
+
 ### Found by review, not by the audit (2026-08-03, eighteenth pass)
 
 Changed lens, as the last pass's note asked: from *what breaks at scale* to

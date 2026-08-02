@@ -1,5 +1,5 @@
 {
-  "content_version": "1.24.0",
+  "content_version": "1.25.0",
   "rng_seed": 6840157140829518496,
   "simulation_days": 30,
   "starting_day": 1,
@@ -14,7 +14,7 @@
   ],
   "final_active_contracts": 3,
   "final_average_bond": 21.428571428571427,
-  "final_average_reputation": 31.571428571428573,
+  "final_average_reputation": 28.142857142857142,
   "final_graded_eggs": 6,
   "final_role_diversity": 3,
   "final_species_counts": {
@@ -43,7 +43,7 @@
   "total_guest_expirations": 3,
   "total_contracts_generated": 20,
   "total_contracts_rejected": 0,
-  "total_guild_job_gold": 5225,
+  "total_guild_job_gold": 5157,
   "total_expedition_prep_gold": 87,
   "total_expedition_prep_materials": 6,
   "total_expedition_prep_arcane_residue": 0,
@@ -51,8 +51,8 @@
   "total_upkeep_wage_gold": 1465,
   "total_upkeep_cleaning_gold": 284,
   "total_upkeep_maintenance_gold": 884,
-  "total_upkeep_gold": 2578,
-  "total_upkeep_shortfall": 55,
+  "total_upkeep_gold": 2558,
+  "total_upkeep_shortfall": 75,
   "total_special_event_gold_delta": 0,
   "total_special_event_count": 0,
   "total_expedition_days": 25,
@@ -63,11 +63,11 @@
   "last_expedition_day": 29,
   "total_expedition_eggs": 12,
   "final_resources": {
-    "gold": 215,
+    "gold": 167,
     "tower_materials": 1433,
     "eggs": 6,
     "relics": 0,
-    "arcane_residue": 739
+    "arcane_residue": 731
   },
   "final_debt": {
     "active_milestone_id": "collector_visit_2",
@@ -97,21 +97,21 @@
       "arcane_residue": 19
     },
     "ending_resources": {
-      "gold": 215,
+      "gold": 167,
       "tower_materials": 1433,
       "eggs": 6,
       "relics": 0,
-      "arcane_residue": 739
+      "arcane_residue": 731
     },
     "net_change": {
-      "gold": 72,
+      "gold": 24,
       "tower_materials": 1393,
       "eggs": 6,
       "relics": 0,
-      "arcane_residue": 720
+      "arcane_residue": 712
     },
-    "debt_gold_gap": -985,
-    "upkeep_shortfall_gold": 55,
+    "debt_gold_gap": -1033,
+    "upkeep_shortfall_gold": 75,
     "expedition_prep_shortfall": 0
   },
   "milestone_snapshots": [
@@ -126,11 +126,11 @@
       "reputation_proxy": 1,
       "active_contracts": 3,
       "resources": {
-        "gold": 215,
+        "gold": 167,
         "tower_materials": 1433,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 739
+        "arcane_residue": 731
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -723,7 +723,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 7.0,
-      "average_reputation": 7.0,
+      "average_reputation": 6.666666666666667,
       "graded_eggs": 6,
       "role_diversity": 1,
       "town_projects": 0,
@@ -733,8 +733,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 182,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 180,
+      "guild_job_arcane_residue": 23,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -800,11 +800,11 @@
         ]
       },
       "resources": {
-        "gold": 198,
+        "gold": 196,
         "tower_materials": 256,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 79
+        "arcane_residue": 77
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -820,7 +820,7 @@
         "Mira completed a contract for 23 gold.",
         "Mira handled Common Room work. Skills: Hospitality +1, Scouting +1. History: scouting runs +1, hospitality +1.",
         "Nessa rested and came back steadier for tomorrow.",
-        "Zia worked the Common Room as a hospitality job for 159 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
+        "Zia worked the Common Room as a hospitality job for 157 gold, 1 materials, 20 arcane residue, and 1 prep quality.",
         "Zia handled Common Room work. Skills: Scouting +1, Hospitality +1. History: scouting runs +1, hospitality +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
@@ -837,7 +837,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 8.333333333333334,
-      "average_reputation": 8.333333333333334,
+      "average_reputation": 8.0,
       "graded_eggs": 6,
       "role_diversity": 1,
       "town_projects": 0,
@@ -914,11 +914,11 @@
         ]
       },
       "resources": {
-        "gold": 217,
+        "gold": 215,
         "tower_materials": 256,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 87
+        "arcane_residue": 85
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -952,7 +952,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 9.666666666666666,
-      "average_reputation": 10.666666666666666,
+      "average_reputation": 10.0,
       "graded_eggs": 6,
       "role_diversity": 1,
       "town_projects": 0,
@@ -962,8 +962,8 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 184,
-      "guild_job_arcane_residue": 25,
+      "guild_job_gold": 183,
+      "guild_job_arcane_residue": 24,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1029,11 +1029,11 @@
         ]
       },
       "resources": {
-        "gold": 371,
+        "gold": 368,
         "tower_materials": 338,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 117
+        "arcane_residue": 114
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1050,7 +1050,7 @@
         "Mira handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
-        "Zia worked the Common Room as a hospitality job for 162 gold, 1 materials, 22 arcane residue, and 2 prep quality.",
+        "Zia worked the Common Room as a hospitality job for 161 gold, 1 materials, 21 arcane residue, and 2 prep quality.",
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1, completed contracts +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
@@ -1071,7 +1071,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 8.5,
-      "average_reputation": 9.0,
+      "average_reputation": 8.5,
       "graded_eggs": 5,
       "role_diversity": 1,
       "town_projects": 0,
@@ -1148,11 +1148,11 @@
         ]
       },
       "resources": {
-        "gold": 306,
+        "gold": 303,
         "tower_materials": 419,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 119
+        "arcane_residue": 116
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1185,7 +1185,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 10.0,
-      "average_reputation": 11.25,
+      "average_reputation": 10.5,
       "graded_eggs": 5,
       "role_diversity": 1,
       "town_projects": 0,
@@ -1195,8 +1195,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 203,
-      "guild_job_arcane_residue": 29,
+      "guild_job_gold": 201,
+      "guild_job_arcane_residue": 27,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1262,11 +1262,11 @@
         ]
       },
       "resources": {
-        "gold": 455,
+        "gold": 450,
         "tower_materials": 501,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 153
+        "arcane_residue": 148
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1287,7 +1287,7 @@
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1, hospitality +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
-        "Melle worked the Common Room as a hospitality job for 159 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
+        "Melle worked the Common Room as a hospitality job for 157 gold, 1 materials, 20 arcane residue, and 1 prep quality.",
         "Melle handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract expired unmet and cost the guild 14 gold.",
@@ -1309,7 +1309,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 11.0,
-      "average_reputation": 12.25,
+      "average_reputation": 11.5,
       "graded_eggs": 5,
       "role_diversity": 1,
       "town_projects": 0,
@@ -1386,11 +1386,11 @@
         ]
       },
       "resources": {
-        "gold": 463,
+        "gold": 458,
         "tower_materials": 501,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 160
+        "arcane_residue": 155
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1425,7 +1425,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 11.0,
-      "average_reputation": 13.0,
+      "average_reputation": 12.0,
       "graded_eggs": 4,
       "role_diversity": 2,
       "town_projects": 0,
@@ -1435,8 +1435,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 359,
-      "guild_job_arcane_residue": 50,
+      "guild_job_gold": 357,
+      "guild_job_arcane_residue": 47,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1502,11 +1502,11 @@
         ]
       },
       "resources": {
-        "gold": 747,
+        "gold": 740,
         "tower_materials": 584,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 212
+        "arcane_residue": 204
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1526,8 +1526,8 @@
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
-        "Melle worked the Common Room as a hospitality job for 159 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
-        "Iria worked the Common Room as a hospitality job for 159 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
+        "Melle worked the Common Room as a hospitality job for 159 gold, 1 materials, 21 arcane residue, and 1 prep quality.",
+        "Iria worked the Common Room as a hospitality job for 157 gold, 1 materials, 20 arcane residue, and 1 prep quality.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract was fulfilled by Zia through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
@@ -1548,7 +1548,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 11.2,
-      "average_reputation": 13.2,
+      "average_reputation": 12.2,
       "graded_eggs": 4,
       "role_diversity": 2,
       "town_projects": 0,
@@ -1625,11 +1625,11 @@
         ]
       },
       "resources": {
-        "gold": 171,
+        "gold": 164,
         "tower_materials": 565,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 167
+        "arcane_residue": 159
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1663,7 +1663,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 12.0,
-      "average_reputation": 14.6,
+      "average_reputation": 13.4,
       "graded_eggs": 4,
       "role_diversity": 2,
       "town_projects": 0,
@@ -1673,7 +1673,7 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 184,
+      "guild_job_gold": 183,
       "guild_job_arcane_residue": 26,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -1740,11 +1740,11 @@
         ]
       },
       "resources": {
-        "gold": 279,
+        "gold": 271,
         "tower_materials": 647,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 198
+        "arcane_residue": 190
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1762,7 +1762,7 @@
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
         "Zia rested and came back steadier for tomorrow.",
-        "Melle worked the Common Room as a hospitality job for 162 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
+        "Melle worked the Common Room as a hospitality job for 161 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
         "Melle handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Iria rested and came back steadier for tomorrow.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
@@ -1783,7 +1783,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 11.666666666666666,
-      "average_reputation": 14.666666666666666,
+      "average_reputation": 13.333333333333334,
       "graded_eggs": 3,
       "role_diversity": 2,
       "town_projects": 0,
@@ -1793,8 +1793,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 367,
-      "guild_job_arcane_residue": 51,
+      "guild_job_gold": 359,
+      "guild_job_arcane_residue": 49,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -1860,11 +1860,11 @@
         ]
       },
       "resources": {
-        "gold": 539,
+        "gold": 523,
         "tower_materials": 649,
         "eggs": 3,
         "relics": 0,
-        "arcane_residue": 246
+        "arcane_residue": 236
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -1884,9 +1884,9 @@
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa rested and came back steadier for tomorrow.",
         "Melle rested and came back steadier for tomorrow.",
-        "Iria worked the Common Room as a hospitality job for 162 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
+        "Iria worked the Common Room as a hospitality job for 158 gold, 1 materials, 21 arcane residue, and 1 prep quality.",
         "Iria handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
-        "Rielle worked the Common Room as a hospitality job for 162 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
+        "Rielle worked the Common Room as a hospitality job for 158 gold, 1 materials, 21 arcane residue, and 1 prep quality.",
         "Rielle handled Common Room work. Skills: Scouting +1. History: scouting runs +1, hospitality +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract was fulfilled by Zia through the Common Room.",
@@ -1905,7 +1905,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 12.833333333333334,
-      "average_reputation": 16.833333333333332,
+      "average_reputation": 15.166666666666666,
       "graded_eggs": 3,
       "role_diversity": 2,
       "town_projects": 0,
@@ -1915,7 +1915,7 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 368,
+      "guild_job_gold": 364,
       "guild_job_arcane_residue": 50,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -1982,11 +1982,11 @@
         ]
       },
       "resources": {
-        "gold": 821,
+        "gold": 801,
         "tower_materials": 732,
         "eggs": 3,
         "relics": 0,
-        "arcane_residue": 301
+        "arcane_residue": 291
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2006,10 +2006,10 @@
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
-        "Melle worked the Common Room as a hospitality job for 164 gold, 1 materials, 22 arcane residue, and 2 prep quality.",
+        "Melle worked the Common Room as a hospitality job for 161 gold, 1 materials, 22 arcane residue, and 2 prep quality.",
         "Melle handled Common Room work. Skills: Scouting +1, Hospitality +1. History: scouting runs +1, hospitality +1.",
         "Iria rested and came back steadier for tomorrow.",
-        "Rielle worked the Common Room as a hospitality job for 162 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
+        "Rielle worked the Common Room as a hospitality job for 161 gold, 1 materials, 22 arcane residue, and 1 prep quality.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract was fulfilled by Zia through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
@@ -2030,7 +2030,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 13.0,
-      "average_reputation": 17.0,
+      "average_reputation": 15.333333333333334,
       "graded_eggs": 5,
       "role_diversity": 2,
       "town_projects": 0,
@@ -2049,8 +2049,8 @@
       "upkeep_wage_gold": 59,
       "upkeep_cleaning_gold": 15,
       "upkeep_maintenance_gold": 47,
-      "upkeep_gold": 66,
-      "upkeep_shortfall": 55,
+      "upkeep_gold": 46,
+      "upkeep_shortfall": 75,
       "upkeep_forecast": {
         "wage_gold": 59,
         "cleaning_gold": 15,
@@ -2111,7 +2111,7 @@
         "tower_materials": 617,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 259
+        "arcane_residue": 249
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2121,7 +2121,7 @@
         "status_message": "Founding Note Due due in 13 days."
       },
       "day_summary": [
-        "Upkeep cost 121 gold, but only 66 was paid. Shortfall 55 stressed the roster by 1.",
+        "Upkeep cost 121 gold, but only 46 was paid. Shortfall 75 stressed the roster by 2.",
         "The creditors stay the blade for now: 250 due in 13 days.",
         "Mira rested and came back steadier for tomorrow.",
         "Nessa rested and came back steadier for tomorrow.",
@@ -2144,7 +2144,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 14.166666666666666,
-      "average_reputation": 19.166666666666668,
+      "average_reputation": 17.166666666666668,
       "graded_eggs": 5,
       "role_diversity": 2,
       "town_projects": 0,
@@ -2154,7 +2154,7 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 393,
+      "guild_job_gold": 387,
       "guild_job_arcane_residue": 52,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -2221,11 +2221,11 @@
         ]
       },
       "resources": {
-        "gold": 255,
+        "gold": 249,
         "tower_materials": 700,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 316
+        "arcane_residue": 306
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2246,10 +2246,10 @@
         "Zia handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 1 instability from Drowned Larder.",
-        "Melle worked the Common Room as a hospitality tier 1 job for 178 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
+        "Melle worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
         "Melle handled Common Room work. History: completed contracts +1.",
         "Iria rested and came back steadier for tomorrow.",
-        "Rielle worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
+        "Rielle worked the Common Room as a hospitality tier 1 job for 172 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
         "Rielle handled Common Room work. Skills: Hospitality +1. History: scouting runs +1, hospitality +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract expired unmet and cost the guild 14 gold.",
@@ -2272,7 +2272,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 14.333333333333334,
-      "average_reputation": 19.333333333333332,
+      "average_reputation": 17.333333333333332,
       "graded_eggs": 5,
       "role_diversity": 2,
       "town_projects": 0,
@@ -2349,11 +2349,11 @@
         ]
       },
       "resources": {
-        "gold": 130,
+        "gold": 124,
         "tower_materials": 781,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 321
+        "arcane_residue": 311
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2388,7 +2388,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 15.0,
-      "average_reputation": 20.5,
+      "average_reputation": 18.333333333333332,
       "graded_eggs": 5,
       "role_diversity": 3,
       "town_projects": 0,
@@ -2398,7 +2398,7 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 198,
+      "guild_job_gold": 194,
       "guild_job_arcane_residue": 27,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -2465,11 +2465,11 @@
         ]
       },
       "resources": {
-        "gold": 203,
+        "gold": 193,
         "tower_materials": 863,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 353
+        "arcane_residue": 343
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2488,7 +2488,7 @@
         "Zia rested and came back steadier for tomorrow.",
         "Melle rested and came back steadier for tomorrow.",
         "Iria rested and came back steadier for tomorrow.",
-        "Rielle worked the Common Room as a hospitality tier 1 job for 176 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
+        "Rielle worked the Common Room as a hospitality tier 1 job for 172 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
         "Rielle handled Common Room work. Skills: Scouting +1, Hospitality +1. History: scouting runs +1, hospitality +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
@@ -2509,7 +2509,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 16.0,
-      "average_reputation": 22.0,
+      "average_reputation": 19.666666666666668,
       "graded_eggs": 5,
       "role_diversity": 3,
       "town_projects": 0,
@@ -2519,7 +2519,7 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 215,
+      "guild_job_gold": 213,
       "guild_job_arcane_residue": 30,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -2586,11 +2586,11 @@
         ]
       },
       "resources": {
-        "gold": 290,
+        "gold": 278,
         "tower_materials": 945,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 388
+        "arcane_residue": 378
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2611,7 +2611,7 @@
         "Nessa rested and came back steadier for tomorrow.",
         "Melle returned from Drowned Larder with fresh loot.",
         "Melle came back carrying 1 instability from Drowned Larder.",
-        "Iria worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
+        "Iria worked the Common Room as a hospitality tier 1 job for 172 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
         "Iria handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Rielle rested and came back steadier for tomorrow.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
@@ -2633,7 +2633,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 16.666666666666668,
-      "average_reputation": 23.166666666666668,
+      "average_reputation": 20.666666666666668,
       "graded_eggs": 5,
       "role_diversity": 3,
       "town_projects": 0,
@@ -2643,7 +2643,7 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 194,
+      "guild_job_gold": 192,
       "guild_job_arcane_residue": 26,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -2710,11 +2710,11 @@
         ]
       },
       "resources": {
-        "gold": 356,
+        "gold": 342,
         "tower_materials": 1027,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 419
+        "arcane_residue": 409
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2734,7 +2734,7 @@
         "Zia came back carrying 1 instability from Drowned Larder.",
         "Melle rested and came back steadier for tomorrow.",
         "Iria rested and came back steadier for tomorrow.",
-        "Rielle worked the Common Room as a hospitality tier 1 job for 176 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
+        "Rielle worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
         "Rielle handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
@@ -2754,7 +2754,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 17.833333333333332,
-      "average_reputation": 25.333333333333332,
+      "average_reputation": 22.5,
       "graded_eggs": 5,
       "role_diversity": 3,
       "town_projects": 0,
@@ -2764,7 +2764,7 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 398,
+      "guild_job_gold": 390,
       "guild_job_arcane_residue": 53,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -2831,11 +2831,11 @@
         ]
       },
       "resources": {
-        "gold": 626,
+        "gold": 604,
         "tower_materials": 1116,
         "eggs": 5,
         "relics": 0,
-        "arcane_residue": 486
+        "arcane_residue": 476
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2854,9 +2854,9 @@
         "Zia completed a contract for 24 gold.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 2 instability from Drowned Larder.",
-        "Melle worked the Common Room as a hospitality tier 1 job for 178 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
+        "Melle worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
         "Melle handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
-        "Iria worked the Common Room as a hospitality tier 1 job for 176 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
+        "Iria worked the Common Room as a hospitality tier 1 job for 172 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
         "Iria handled Common Room work. Skills: Scouting +1, Hospitality +1. History: scouting runs +1, hospitality +1.",
         "Rielle rested and came back steadier for tomorrow.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
@@ -2879,7 +2879,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 16.428571428571427,
-      "average_reputation": 23.142857142857142,
+      "average_reputation": 20.571428571428573,
       "graded_eggs": 4,
       "role_diversity": 3,
       "town_projects": 0,
@@ -2889,7 +2889,7 @@
       "guest_bookings_assigned": 1,
       "hatches": 1,
       "buildings_purchased": 0,
-      "guild_job_gold": 191,
+      "guild_job_gold": 187,
       "guild_job_arcane_residue": 26,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -2956,11 +2956,11 @@
         ]
       },
       "resources": {
-        "gold": 654,
+        "gold": 628,
         "tower_materials": 1198,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 514
+        "arcane_residue": 504
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -2981,7 +2981,7 @@
         "Iria rested and came back steadier for tomorrow.",
         "Rielle returned from Drowned Larder with fresh loot.",
         "Rielle came back carrying 1 instability from Drowned Larder.",
-        "Mina worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
+        "Mina worked the Common Room as a hospitality tier 1 job for 170 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
         "Mina handled Common Room work. Skills: Scouting +1. History: scouting runs +1, hospitality +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
@@ -3001,7 +3001,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 17.428571428571427,
-      "average_reputation": 25.0,
+      "average_reputation": 22.142857142857142,
       "graded_eggs": 4,
       "role_diversity": 3,
       "town_projects": 0,
@@ -3011,7 +3011,7 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 393,
+      "guild_job_gold": 387,
       "guild_job_arcane_residue": 52,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -3078,11 +3078,11 @@
         ]
       },
       "resources": {
-        "gold": 909,
+        "gold": 877,
         "tower_materials": 1287,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 580
+        "arcane_residue": 570
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3101,11 +3101,11 @@
         "Zia handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 2 instability from Drowned Larder.",
-        "Melle worked the Common Room as a hospitality tier 1 job for 178 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
+        "Melle worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
         "Melle handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Iria rested and came back steadier for tomorrow.",
         "Rielle rested and came back steadier for tomorrow.",
-        "Mina worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
+        "Mina worked the Common Room as a hospitality tier 1 job for 172 gold, 1 materials, 23 arcane residue, and 1 prep quality.",
         "Mina handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract was fulfilled by Zia through the Common Room.",
@@ -3127,7 +3127,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 18.0,
-      "average_reputation": 26.0,
+      "average_reputation": 23.0,
       "graded_eggs": 4,
       "role_diversity": 3,
       "town_projects": 0,
@@ -3137,7 +3137,7 @@
       "guest_bookings_assigned": 1,
       "hatches": 0,
       "buildings_purchased": 1,
-      "guild_job_gold": 196,
+      "guild_job_gold": 192,
       "guild_job_arcane_residue": 26,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
@@ -3204,11 +3204,11 @@
         ]
       },
       "resources": {
-        "gold": 126,
+        "gold": 90,
         "tower_materials": 1219,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 561
+        "arcane_residue": 551
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3228,7 +3228,7 @@
         "Melle rested and came back steadier for tomorrow.",
         "Iria returned from Drowned Larder with fresh loot.",
         "Iria came back carrying 1 instability from Drowned Larder.",
-        "Rielle worked the Common Room as a hospitality tier 1 job for 178 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
+        "Rielle worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
         "Rielle handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Mina rested and came back steadier for tomorrow.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
@@ -3249,7 +3249,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 19.0,
-      "average_reputation": 27.857142857142858,
+      "average_reputation": 24.714285714285715,
       "graded_eggs": 4,
       "role_diversity": 3,
       "town_projects": 0,
@@ -3259,8 +3259,8 @@
       "guest_bookings_assigned": 2,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 395,
-      "guild_job_arcane_residue": 52,
+      "guild_job_gold": 390,
+      "guild_job_arcane_residue": 53,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -3326,11 +3326,11 @@
         ]
       },
       "resources": {
-        "gold": 341,
+        "gold": 300,
         "tower_materials": 1308,
         "eggs": 4,
         "relics": 0,
-        "arcane_residue": 627
+        "arcane_residue": 618
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3350,11 +3350,11 @@
         "Zia handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 2 instability from Drowned Larder.",
-        "Melle worked the Common Room as a hospitality tier 1 job for 178 gold, 1 materials, 23 arcane residue, and 3 prep quality.",
+        "Melle worked the Common Room as a hospitality tier 1 job for 177 gold, 1 materials, 24 arcane residue, and 3 prep quality.",
         "Melle handled Common Room work. Skills: Hospitality +1. History: hospitality +1.",
         "Iria rested and came back steadier for tomorrow.",
         "Rielle rested and came back steadier for tomorrow.",
-        "Mina worked the Common Room as a hospitality tier 1 job for 176 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
+        "Mina worked the Common Room as a hospitality tier 1 job for 172 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract was fulfilled by Zia through the Common Room.",
         "Prepared Resource Run for 3 gold, 0 materials, and 0 arcane residue.",
@@ -3375,7 +3375,7 @@
       "patron_tiers": 1,
       "active_contracts": 4,
       "average_bond": 19.142857142857142,
-      "average_reputation": 28.0,
+      "average_reputation": 24.857142857142858,
       "graded_eggs": 6,
       "role_diversity": 3,
       "town_projects": 0,
@@ -3452,11 +3452,11 @@
         ]
       },
       "resources": {
-        "gold": 159,
+        "gold": 118,
         "tower_materials": 1343,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 635
+        "arcane_residue": 626
       },
       "debt": {
         "active_milestone_id": "scrap_note_1",
@@ -3490,7 +3490,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 20.428571428571427,
-      "average_reputation": 30.142857142857142,
+      "average_reputation": 26.857142857142858,
       "graded_eggs": 6,
       "role_diversity": 3,
       "town_projects": 0,
@@ -3500,8 +3500,8 @@
       "guest_bookings_assigned": 3,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 423,
-      "guild_job_arcane_residue": 57,
+      "guild_job_gold": 418,
+      "guild_job_arcane_residue": 58,
       "expedition_prep_gold": 3,
       "expedition_prep_materials": 0,
       "expedition_prep_arcane_residue": 0,
@@ -3567,11 +3567,11 @@
         ]
       },
       "resources": {
-        "gold": 152,
+        "gold": 106,
         "tower_materials": 1432,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 706
+        "arcane_residue": 698
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -3595,9 +3595,9 @@
         "Nessa returned from Drowned Larder with fresh loot.",
         "Nessa came back carrying 2 instability from Drowned Larder.",
         "Iria rested and came back steadier for tomorrow.",
-        "Rielle worked the Common Room as a hospitality tier 1 job for 178 gold, 1 materials, 23 arcane residue, and 3 prep quality.",
+        "Rielle worked the Common Room as a hospitality tier 1 job for 177 gold, 1 materials, 24 arcane residue, and 3 prep quality.",
         "Rielle handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
-        "Mina worked the Common Room as a hospitality tier 1 job for 176 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
+        "Mina worked the Common Room as a hospitality tier 1 job for 172 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
         "Mina handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Local Delver Contract was fulfilled by Mira through the Common Room.",
         "Local Delver Contract was fulfilled by Zia through the Common Room.",
@@ -3623,7 +3623,7 @@
       "patron_tiers": 1,
       "active_contracts": 3,
       "average_bond": 21.428571428571427,
-      "average_reputation": 31.571428571428573,
+      "average_reputation": 28.142857142857142,
       "graded_eggs": 6,
       "role_diversity": 3,
       "town_projects": 0,
@@ -3633,7 +3633,7 @@
       "guest_bookings_assigned": 3,
       "hatches": 0,
       "buildings_purchased": 0,
-      "guild_job_gold": 241,
+      "guild_job_gold": 239,
       "guild_job_arcane_residue": 33,
       "expedition_prep_gold": 0,
       "expedition_prep_materials": 0,
@@ -3700,11 +3700,11 @@
         ]
       },
       "resources": {
-        "gold": 215,
+        "gold": 167,
         "tower_materials": 1433,
         "eggs": 6,
         "relics": 0,
-        "arcane_residue": 739
+        "arcane_residue": 731
       },
       "debt": {
         "active_milestone_id": "collector_visit_2",
@@ -3725,7 +3725,7 @@
         "Melle completed a contract for 25 gold.",
         "Melle handled Common Room work. History: completed contracts +1.",
         "Nessa rested and came back steadier for tomorrow.",
-        "Iria worked the Common Room as a hospitality tier 1 job for 176 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
+        "Iria worked the Common Room as a hospitality tier 1 job for 174 gold, 1 materials, 23 arcane residue, and 2 prep quality.",
         "Iria handled Common Room work. Skills: Scouting +1. History: scouting runs +1.",
         "Rielle rested and came back steadier for tomorrow.",
         "Mina rested and came back steadier for tomorrow.",

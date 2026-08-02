@@ -348,25 +348,19 @@ pub(super) fn preview_guild_job_for_town(
 
     let stats = effective_stats(data, monster);
 
-    // `guild_income_pct` lands here, on the guild job's Score, which the worker
-    // card shows the player. It is *not* a percentage of the fee, despite its
-    // name and despite the building card having advertised it as one: Score
-    // becomes gold at `success_score / 4`, so a building sold as "+4%" adds a
-    // single point of base gold.
+    // `guild_income_pct` is deliberately absent from this Score. It is authored
+    // as a percentage, named as one and shown as one, so it multiplies what the
+    // shift returns rather than adding a quarter-gold per point to a score that
+    // is not a percentage of anything.
     //
-    // Applying it as the percentage it claims to be was built and measured, and
-    // it is too strong for this economy: buildings alone sum to 55%, and with it
-    // every one of the ten seeds cleared the Founder's Due, which the campaign
-    // spec forbids. The mechanic stays; the building card no longer calls it a
-    // percentage. See TODO.md — making it faithful is a balance change that
-    // needs the economy retuned around it.
+    // Its sibling `expedition_success_pct` stays a score term and is right to:
+    // an expedition's success score *is* a percentage, so a point there is a
+    // point of success chance. Guild jobs have no such scale.
     let success_score = data.config.day_cycle.base_guild_job_success
         + stats.charm * 3
         + skill_bonus
         + room_trait_bonus
         + room_species_bonus
-        + building_bonus.guild_income_pct
-        + trait_modifier.guild_income_pct
         + depth_profile.success_bonus;
 
     let base_gold = room.base_gold_yield
@@ -394,7 +388,13 @@ pub(super) fn preview_guild_job_for_town(
         day_cycle.understrength_income_pct
     };
 
-    // Five percentage multipliers stacked on a fee overflows u32 once the rank
+    // What the guild's buildings and this companion's traits add to the shift,
+    // as the percentage both are authored as. Floored at zero so a companion
+    // whose traits all sour cannot invert the payment.
+    let income_multiplier_pct =
+        (100 + building_bonus.guild_income_pct + trait_modifier.guild_income_pct).max(0) as u64;
+
+    // Six percentage multipliers stacked on a fee overflows u32 once the rank
     // curve reaches the top of the ladder, so the escort fee is computed wide.
     let escort_fee_gold = u64::from(base_gold)
         * u64::from(patron_tier.income_multiplier_pct)
@@ -404,15 +404,25 @@ pub(super) fn preview_guild_job_for_town(
             monster.quality_rank,
         ))
         * u64::from(escort_rate_pct)
-        / 100_000_000;
+        * income_multiplier_pct
+        / 10_000_000_000;
 
     // A companion run ragged escorts worse parties for less coin. Applied here,
     // in the preview both the planning screen and day resolution read, so the
     // number the player is quoted is the number the guild is paid.
     let effectiveness_pct = companion_effectiveness_pct(day_cycle, monster);
-    let base_residue_income =
-        base_residue * patron_tier.residue_multiplier_pct * depth_profile.residue_multiplier_pct
-            / 10_000;
+    // The same multiplier rides the residue a shift brings back. The term it
+    // replaces lived in `success_score`, which fed gold *and* residue, so
+    // applying it to coin alone would have cut the guild's residue income by a
+    // sixth — a balance change smuggled in under a labelling fix.
+    let base_residue_income = u32::try_from(
+        u64::from(base_residue)
+            * u64::from(patron_tier.residue_multiplier_pct)
+            * u64::from(depth_profile.residue_multiplier_pct)
+            * income_multiplier_pct
+            / 1_000_000,
+    )
+    .unwrap_or(u32::MAX);
 
     Ok(GuildJobPreview {
         success_score,
@@ -448,4 +458,77 @@ pub(super) fn guild_job_skill_bonus(
             }
         })
         .sum()
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::data::test_game_data;
+    use crate::state::{CompanionState, GameState, PlayerTownState};
+
+    /// `guild_income_pct` has to behave like the percentage its name, its
+    /// authored values and the building card all claim.
+    ///
+    /// It spent most of this game's life as a term inside `success_score`, which
+    /// becomes gold at a quarter per point — so a building advertised at "+4%"
+    /// paid about 1.3% of a shift. This drives a real preview twice, changing
+    /// nothing but one building's percentage, and checks the fee moves by that
+    /// percentage rather than by a quarter-gold a point.
+    #[test]
+    fn a_guild_income_percent_moves_the_fee_by_that_percent() {
+        let mut data = test_game_data();
+        let building_id = data.buildings.buildings[0].id.clone();
+        let room_id = data.guild_rooms.rooms[0].id.clone();
+        let species_id = data.species.species[0].id.clone();
+
+        let game_state = GameState {
+            current_day: 1,
+            town: PlayerTownState {
+                constructed_building_ids: vec![building_id.clone()],
+                unlocked_room_ids: vec![room_id.clone()],
+                unlocked_species_ids: vec![species_id.clone()],
+                patron_tiers: vec![data.patron_tiers.patron_tiers[0].id.clone()],
+                party_size: 3,
+                town_job_limit: 2,
+                ..PlayerTownState::default()
+            },
+            monsters: vec![CompanionState {
+                id: "m1".to_owned(),
+                name: "Fixture".to_owned(),
+                species_id: species_id.clone(),
+                quality_rank: 1,
+                stats: data.species.species[0].base_stats.clone(),
+                ..CompanionState::default()
+            }],
+            ..GameState::default()
+        };
+        let monster = game_state.monsters[0].clone();
+
+        for building in &mut data.buildings.buildings {
+            if building.id == building_id {
+                building.passive_modifiers.guild_income_pct = 0;
+            }
+        }
+        let baseline = super::preview_guild_job(&data, &game_state, &monster, &room_id)
+            .expect("the fixture room accepts the fixture companion");
+
+        for building in &mut data.buildings.buildings {
+            if building.id == building_id {
+                building.passive_modifiers.guild_income_pct = 50;
+            }
+        }
+        let boosted = super::preview_guild_job(&data, &game_state, &monster, &room_id)
+            .expect("the fixture room still accepts her");
+
+        assert_eq!(
+            boosted.success_score, baseline.success_score,
+            "guild income is a percentage of the fee, not a term in the job score"
+        );
+        let expected = baseline.projected_gold * 3 / 2;
+        assert!(
+            boosted.projected_gold.abs_diff(expected) <= 2,
+            "+50% guild income should pay about {expected} against a baseline of {}, but paid {}",
+            baseline.projected_gold,
+            boosted.projected_gold
+        );
+    }
 }

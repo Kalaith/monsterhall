@@ -21,7 +21,7 @@
         "patron_tiers": []
       },
       "passive_modifiers": {
-        "guild_income_pct": 4,
+        "guild_income_pct": 1,
         "expedition_success_pct": 0,
         "egg_discovery_flat": 0,
         "injury_recovery_flat": 0,
@@ -57,7 +57,7 @@
         ]
       },
       "passive_modifiers": {
-        "guild_income_pct": 8,
+        "guild_income_pct": 2,
         "expedition_success_pct": 0,
         "egg_discovery_flat": 0,
         "injury_recovery_flat": 0,
@@ -91,7 +91,7 @@
         "patron_tiers": []
       },
       "passive_modifiers": {
-        "guild_income_pct": 6,
+        "guild_income_pct": 2,
         "expedition_success_pct": 5,
         "egg_discovery_flat": 0,
         "injury_recovery_flat": 0,
@@ -128,7 +128,7 @@
         ]
       },
       "passive_modifiers": {
-        "guild_income_pct": 9,
+        "guild_income_pct": 2,
         "expedition_success_pct": 3,
         "egg_discovery_flat": 0,
         "injury_recovery_flat": 0,
@@ -194,7 +194,7 @@
         "patron_tiers": []
       },
       "passive_modifiers": {
-        "guild_income_pct": 4,
+        "guild_income_pct": 1,
         "expedition_success_pct": 0,
         "egg_discovery_flat": 0,
         "injury_recovery_flat": 1,
@@ -260,7 +260,7 @@
         ]
       },
       "passive_modifiers": {
-        "guild_income_pct": 8,
+        "guild_income_pct": 2,
         "expedition_success_pct": 6,
         "egg_discovery_flat": 0,
         "injury_recovery_flat": 0,
@@ -326,7 +326,7 @@
         "patron_tiers": []
       },
       "passive_modifiers": {
-        "guild_income_pct": 6,
+        "guild_income_pct": 2,
         "expedition_success_pct": 0,
         "egg_discovery_flat": 0,
         "injury_recovery_flat": 0,
@@ -356,7 +356,7 @@
         "patron_tiers": []
       },
       "passive_modifiers": {
-        "guild_income_pct": 2,
+        "guild_income_pct": 1,
         "expedition_success_pct": 2,
         "egg_discovery_flat": 5,
         "injury_recovery_flat": 0,
@@ -386,7 +386,7 @@
         "patron_tiers": []
       },
       "passive_modifiers": {
-        "guild_income_pct": 8,
+        "guild_income_pct": 2,
         "expedition_success_pct": 0,
         "egg_discovery_flat": 0,
         "injury_recovery_flat": 0,
