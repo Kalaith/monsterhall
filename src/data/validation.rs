@@ -124,10 +124,25 @@ where
     Ok(())
 }
 
+/// Every skill the engine can actually train, score and name.
+///
+/// The five newer ones were declared on `CompanionSkillState` and plumbed
+/// nowhere, so a room that listed one would have trained a value no code
+/// incremented and displayed it as "Unknown". They work now; whether any room
+/// opts into them is a content decision.
 fn is_valid_companion_skill_id(skill_id: &str) -> bool {
     matches!(
         skill_id,
-        "scouting" | "guarding" | "hospitality" | "crafting" | "charm"
+        "scouting"
+            | "guarding"
+            | "hospitality"
+            | "crafting"
+            | "charm"
+            | "recovery"
+            | "bargaining"
+            | "navigation"
+            | "arcana"
+            | "strength"
     )
 }
 
@@ -137,6 +152,11 @@ fn companion_skill_progression_is_empty(progression: &CompanionSkillProgressionD
         && progression.hospitality == 0
         && progression.crafting == 0
         && progression.charm == 0
+        && progression.recovery == 0
+        && progression.bargaining == 0
+        && progression.navigation == 0
+        && progression.arcana == 0
+        && progression.strength == 0
 }
 
 fn work_history_progression_is_empty(progression: &CompanionWorkHistoryProgressionData) -> bool {

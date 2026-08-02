@@ -138,6 +138,16 @@ pub(super) fn skill_ids_from_work_history_gains(
     if gains.craft_jobs > 0 {
         skill_ids.push("crafting".to_owned());
     }
+    // A shift spent nursing someone back teaches recovery; a shift spent
+    // closing a booking teaches bargaining. Both are inert until a room lists
+    // the skill in `trained_skill_ids` — this list is filtered by that — so
+    // adding them here turns nothing on by itself.
+    if gains.recovery_shifts > 0 {
+        skill_ids.push("recovery".to_owned());
+    }
+    if gains.contracts_completed > 0 {
+        skill_ids.push("bargaining".to_owned());
+    }
 
     skill_ids
 }
@@ -259,6 +269,26 @@ pub(super) fn increment_skill(skills: &mut CompanionSkillState, skill_id: &str, 
             skills.charm = skills.charm.saturating_add(gain);
             true
         }
+        "recovery" => {
+            skills.recovery = skills.recovery.saturating_add(gain);
+            true
+        }
+        "bargaining" => {
+            skills.bargaining = skills.bargaining.saturating_add(gain);
+            true
+        }
+        "navigation" => {
+            skills.navigation = skills.navigation.saturating_add(gain);
+            true
+        }
+        "arcana" => {
+            skills.arcana = skills.arcana.saturating_add(gain);
+            true
+        }
+        "strength" => {
+            skills.strength = skills.strength.saturating_add(gain);
+            true
+        }
         _ => false,
     }
 }
@@ -270,6 +300,11 @@ pub(super) fn companion_skill_value(skills: &CompanionSkillState, skill_id: &str
         "hospitality" => skills.hospitality,
         "crafting" => skills.crafting,
         "charm" => skills.charm,
+        "recovery" => skills.recovery,
+        "bargaining" => skills.bargaining,
+        "navigation" => skills.navigation,
+        "arcana" => skills.arcana,
+        "strength" => skills.strength,
         _ => 0,
     }
 }
@@ -281,6 +316,11 @@ pub(super) fn format_skill_name(skill_id: &str) -> &'static str {
         "hospitality" => "Hospitality",
         "crafting" => "Crafting",
         "charm" => "Charm",
+        "recovery" => "Recovery",
+        "bargaining" => "Bargaining",
+        "navigation" => "Navigation",
+        "arcana" => "Arcana",
+        "strength" => "Strength",
         _ => "Unknown",
     }
 }

@@ -185,6 +185,38 @@ impl GameData {
                     request.id
                 ));
             }
+            // A contract may only ask for a skill some guild room actually
+            // teaches. Nothing trains recovery, bargaining, navigation, arcana
+            // or strength today, so asking for one would be a booking no
+            // companion could ever qualify for — the same shape of dead content
+            // as a room advertising odds for work it cannot bank.
+            for (skill_id, threshold) in [
+                ("scouting", request.required_skill_thresholds.scouting),
+                ("guarding", request.required_skill_thresholds.guarding),
+                ("hospitality", request.required_skill_thresholds.hospitality),
+                ("crafting", request.required_skill_thresholds.crafting),
+                ("charm", request.required_skill_thresholds.charm),
+                ("recovery", request.required_skill_thresholds.recovery),
+                ("bargaining", request.required_skill_thresholds.bargaining),
+                ("navigation", request.required_skill_thresholds.navigation),
+                ("arcana", request.required_skill_thresholds.arcana),
+                ("strength", request.required_skill_thresholds.strength),
+            ] {
+                if threshold == 0 {
+                    continue;
+                }
+                if !self
+                    .guild_rooms
+                    .rooms
+                    .iter()
+                    .any(|room| room.trained_skill_ids.iter().any(|id| id == skill_id))
+                {
+                    return Err(format!(
+                        "contract '{}' requires {skill_id} {threshold}, but no guild room trains {skill_id} - no companion could ever qualify.",
+                        request.id
+                    ));
+                }
+            }
             if companion_skill_progression_is_empty(&request.required_skill_thresholds)
                 && work_history_progression_is_empty(&request.required_work_history_thresholds)
                 && request.required_species_ids.is_empty()

@@ -510,6 +510,36 @@ fn a_resolved_contract_never_re_enters_the_workload() {
     ));
 }
 
+#[test]
+fn every_skill_the_data_names_can_actually_be_trained_and_scored() {
+    let data = crate::data::test_game_data();
+    let mut skills = CompanionSkillState::default();
+
+    // A skill id that reaches `increment_skill` and is not recognised silently
+    // trains nothing and renders as "Unknown". Anything a room claims to teach
+    // has to survive the whole round trip.
+    for room in &data.guild_rooms.rooms {
+        for skill_id in &room.trained_skill_ids {
+            assert!(
+                increment_skill(&mut skills, skill_id, 1),
+                "room '{}' trains '{skill_id}', which increment_skill does not recognise",
+                room.id
+            );
+            assert_ne!(
+                format_skill_name(skill_id),
+                "Unknown",
+                "room '{}' trains '{skill_id}', which has no display name",
+                room.id
+            );
+            assert!(
+                companion_skill_value(&skills, skill_id) > 0,
+                "room '{}' trains '{skill_id}', which companion_skill_value reads as zero",
+                room.id
+            );
+        }
+    }
+}
+
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),
