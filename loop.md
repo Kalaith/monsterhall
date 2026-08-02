@@ -1005,6 +1005,42 @@ Stop the loop and report if:
   20-companion roster, **patron tiers 3** with upkeep bands already referencing a
   fourth, and relics with no patron who asks for one by name.
 
+- **2026-08-03 — the action layer, and a pass that found nothing.** Eight passes
+  each found several defects; this one found none, and that is the result. It was
+  not reached by giving up: the seventh pass's lesson was *ask what the harness
+  never runs*, and the last surface that answered was `apply_action` itself.
+  Every test here and the entire balance harness call engine functions directly;
+  nothing exercised the action dispatch, the phase machine, or the transitions
+  between them.
+  **Sixty days driven through the actions a player actually sends came back
+  clean** — staffing the hall, booking the desk and sending a party down each day
+  before ending it, so the exclusivity rules from passes five and six and their
+  refusals are on the path. The day advances every cycle, nothing wedges, and the
+  campaign still validates at the end. That test is the deliverable: the first
+  coverage of the route a player takes rather than the functions underneath it.
+  **The one real finding was a testability hole in the worst possible place.**
+  `apply_action` called `get_time()` inline to stamp a hatch reveal, which panics
+  without a macroquad window — so the **opening chapter**, the sequence every new
+  player hits first, could not be driven through the action layer at all. Time is
+  sampled once per frame in `update` now and the action layer reads the stored
+  value; the reveal's animation still reads real time when it draws, which is
+  where wall-clock belongs. The opening plays out in a test through
+  `ContinueOpening` / `BuildOpeningRoom` / `ResolveOpeningClient`, checking the
+  dispatch and phase transitions rather than only the engine arithmetic two
+  journal tests already covered. It matters because the opening is linear with no
+  way to earn: a step the player cannot take soft-locks every new campaign.
+  **Result:** 110 tests (was 108), balance byte-identical, no save file written,
+  fmt and clippy clean, publish green.
+  **Next iteration should know:** the bug-hunting is done. Nine passes have
+  closed the panel-capacity, frozen-threshold, duplicated-formula, advice-surface,
+  double-booking, save-path and action-layer classes, the authored-data audit
+  comes back empty, and this pass found nothing at all. **Two slices with real
+  substance remain, both already scoped:** the `ui_text` migration (~40 hardcoded
+  strings across six screens — see `TODO.md`, eighth pass) and content
+  (**guild rooms 4** for a 20-companion roster, **patron tiers 3** with upkeep
+  bands already referencing a fourth, relics with no patron who asks for one by
+  name). A tenth bug-hunting pass is not the best use of the next iteration.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

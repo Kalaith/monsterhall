@@ -55,6 +55,15 @@ pub struct Game {
     settings_status: Option<String>,
     pending_action: Option<UiAction>,
     last_error: Option<String>,
+    /// Wall-clock seconds, sampled once per frame in `update`.
+    ///
+    /// `apply_action` used to call `get_time()` inline to stamp a hatch reveal,
+    /// which panics without a macroquad window — so the whole opening chapter
+    /// was undrivable from a test, and it is the sequence every new player hits
+    /// first. Sampling it at the frame boundary makes the action layer a pure
+    /// function of state, and the reveal's own animation still reads real time
+    /// when it draws.
+    now_seconds: f64,
 }
 
 impl Game {
@@ -89,10 +98,12 @@ impl Game {
             settings_status: None,
             pending_action: None,
             last_error,
+            now_seconds: 0.0,
         }
     }
 
     pub fn update(&mut self) {
+        self.now_seconds = macroquad::time::get_time();
         if self.last_error.is_some() && is_mouse_button_pressed(MouseButton::Left) {
             self.last_error = None;
         }
@@ -276,5 +287,202 @@ impl Game {
         };
 
         self.pending_action = overlay_action.or(base_action);
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// A `Game` wired to test data with autosave off, so driving it touches no
+    /// files. Everything else is the real thing: the same `apply_action`
+    /// dispatch and the same phase machine a player goes through.
+    fn headless_game() -> Game {
+        let mut data = crate::data::test_game_data();
+        data.config.persistence.autosave_enabled = false;
+        Game {
+            data: Some(data),
+            phase: GamePhase::MainMenu(MainMenuState::new(false)),
+            game_state: None,
+            app_settings: None,
+            is_settings_open: false,
+            settings_status: None,
+            pending_action: None,
+            last_error: None,
+            now_seconds: 0.0,
+        }
+    }
+
+    /// Plays the scripted opening through the same actions the opening screen
+    /// sends, and leaves the campaign where a player would be on day one.
+    ///
+    /// This became drivable only once `apply_action` stopped calling
+    /// `get_time()` inline: that panics without a macroquad window, so the
+    /// opening — the sequence every new player hits first — could not be
+    /// exercised through the action layer at all.
+    fn game_through_the_opening() -> Game {
+        let mut game = headless_game();
+        game.game_state = Some(crate::engine::create_new_game_state(
+            game.data.as_ref().expect("test data should load"),
+        ));
+        game.phase = GamePhase::OpeningChapter(OpeningChapterState::new(OpeningChapterStep::Camp));
+
+        for _ in 0..24 {
+            match &game.phase {
+                GamePhase::OpeningChapter(state) => match state.step {
+                    OpeningChapterStep::BuildRoom => game.apply_action(UiAction::BuildOpeningRoom),
+                    OpeningChapterStep::FirstClient => {
+                        game.apply_action(UiAction::ResolveOpeningClient)
+                    }
+                    OpeningChapterStep::Complete => break,
+                    _ => game.apply_action(UiAction::ContinueOpening),
+                },
+                GamePhase::HatchReveal(_) => game.apply_action(UiAction::ContinueAfterHatch),
+                _ => break,
+            }
+            assert!(
+                game.last_error.is_none(),
+                "the opening should never refuse a step a player can only take in order: {:?}",
+                game.last_error
+            );
+        }
+        game
+    }
+
+    /// The opening is a linear phase with no way to earn, so a step the player
+    /// cannot afford is a permanent soft-lock on every new campaign. Driving it
+    /// through the real actions checks the dispatch and the phase transitions
+    /// too, not just the engine arithmetic two journal tests already cover.
+    #[test]
+    fn the_opening_plays_out_through_the_actions_a_player_sends() {
+        let game = game_through_the_opening();
+        let state = game
+            .game_state
+            .as_ref()
+            .expect("the opening should leave a campaign");
+
+        assert_eq!(
+            state.story_progress.opening_step,
+            OpeningChapterStep::Complete,
+            "the opening did not finish"
+        );
+        assert!(state.story_progress.first_companion_hatched);
+        assert!(state.story_progress.first_room_built);
+        assert!(state.story_progress.first_client_completed);
+        assert_eq!(state.monsters.len(), 1, "the guild should have its founder");
+        assert!(
+            state
+                .town
+                .unlocked_room_ids
+                .iter()
+                .any(|id| id == "common_room"),
+            "the first room should be open for business"
+        );
+    }
+
+    /// Starts a campaign at the point the scripted opening ends.
+    fn game_past_the_opening() -> Game {
+        let mut game = game_through_the_opening();
+        let data = game.data.as_ref().expect("test data should load");
+        let mut game_state = game.game_state.take().expect("opening leaves a campaign");
+        crate::engine::initialize_first_debt(data, &mut game_state)
+            .expect("first debt should initialize");
+        game.game_state = Some(game_state);
+        game.phase = GamePhase::TownOverview(TownOverviewState::new("ready"));
+        game
+    }
+
+    /// Plays sixty days through the actions a player actually sends.
+    ///
+    /// Every other test in this repo calls engine functions directly, and so
+    /// does the balance harness — nothing exercised `apply_action`, the phase
+    /// machine, or the transitions between them. That is the same blind spot
+    /// that hid the save-path bugs: a surface the simulation never runs. This
+    /// staffs the hall, books the desk and sends a party down each day before
+    /// ending it, so the assignment rules and their refusals are on the path
+    /// too.
+    #[test]
+    fn a_campaign_plays_through_the_action_layer_without_getting_stuck() {
+        let mut game = game_past_the_opening();
+        let mut days_played = 0;
+
+        for _ in 0..200 {
+            match &game.phase {
+                GamePhase::DayResults(_) => game.apply_action(UiAction::ContinueAfterResults),
+                _ => {
+                    let (monster_ids, offered, floor_id) = {
+                        let state = game.game_state.as_ref().expect("campaign should be active");
+                        (
+                            state
+                                .monsters
+                                .iter()
+                                .map(|m| m.id.clone())
+                                .collect::<Vec<_>>(),
+                            state
+                                .active_contracts
+                                .iter()
+                                .filter(|contract| {
+                                    matches!(contract.status, crate::state::ContractStatus::Pending)
+                                })
+                                .map(|contract| contract.request_id.clone())
+                                .collect::<Vec<_>>(),
+                            state.town.unlocked_floor_ids.first().cloned(),
+                        )
+                    };
+
+                    // Spread the roster across all three kinds of work. Some of
+                    // these are legitimately refused — a booked companion cannot
+                    // take a room shift — so the errors are cleared rather than
+                    // asserted on; what matters is that nothing wedges.
+                    for (index, monster_id) in monster_ids.iter().enumerate() {
+                        match index % 3 {
+                            0 => game.apply_action(UiAction::AssignMonsterToRoom(
+                                monster_id.clone(),
+                                "common_room".to_owned(),
+                            )),
+                            1 => {
+                                if let Some(request_id) = offered.first() {
+                                    game.apply_action(UiAction::AssignMonsterToGuest(
+                                        request_id.clone(),
+                                        monster_id.clone(),
+                                    ));
+                                }
+                            }
+                            _ => {
+                                if let Some(floor_id) = &floor_id {
+                                    game.apply_action(UiAction::AssignMonsterToExpedition(
+                                        monster_id.clone(),
+                                        floor_id.clone(),
+                                    ));
+                                }
+                            }
+                        }
+                        game.last_error = None;
+                    }
+
+                    let before = game.game_state.as_ref().map(|state| state.current_day);
+                    game.apply_action(UiAction::ResolveDay);
+                    let after = game.game_state.as_ref().map(|state| state.current_day);
+                    assert_ne!(
+                        before, after,
+                        "ending the day did not advance it: {:?}",
+                        game.last_error
+                    );
+                    days_played += 1;
+                    if days_played == 60 {
+                        break;
+                    }
+                }
+            }
+        }
+
+        assert_eq!(days_played, 60, "the campaign stalled before sixty days");
+        let data = game.data.as_ref().expect("test data");
+        let state = game
+            .game_state
+            .as_ref()
+            .expect("campaign should still exist");
+        crate::engine::validate_game_state_references(data, state)
+            .expect("sixty days of play should leave a valid campaign");
     }
 }

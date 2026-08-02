@@ -1,4 +1,3 @@
-use macroquad::time::get_time;
 use std::collections::HashSet;
 
 use crate::state::{HatchRevealReturn, HatchRevealState};
@@ -82,7 +81,7 @@ impl Game {
                     self.phase = GamePhase::HatchReveal(HatchRevealState::new(
                         egg_snapshot,
                         monster_id,
-                        get_time(),
+                        self.now_seconds,
                         HatchRevealReturn::OpeningChapter { next_step },
                     ));
                     return;

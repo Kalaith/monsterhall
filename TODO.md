@@ -171,6 +171,42 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, ninth pass)
+
+**This pass found no defect.** After eight passes that each found several, that is
+itself the result worth recording — but it was not found by giving up early. The
+last untried surface was the one the seventh pass's lesson pointed at: *what does
+the harness never run?* The answer was **the action layer**. Every test in this
+repo, and the whole balance harness, calls engine functions directly; nothing
+exercised `apply_action`, the phase machine, or the transitions between them.
+
+- **Sixty days driven through the actions a player actually sends: clean.** The
+  new smoke test staffs the hall, books the desk and sends a party down each day
+  before ending it — so the assignment rules added in passes five and six, and
+  their refusals, are on the path too. The day advances every cycle, nothing
+  wedges, and the campaign still passes `validate_game_state_references` at the
+  end. No stuck state, no phase that fails to return, no action that errors where
+  a player would expect it to work.
+
+- ~~The opening chapter could not be driven through the action layer at all.~~
+  Fixed, and this was the one real finding. `apply_action` called `get_time()`
+  inline to stamp a hatch reveal, which panics without a macroquad window — so
+  the sequence **every new player hits first** was untestable through the path
+  they take. Time is sampled once per frame in `update` now and the action layer
+  reads the stored value, which makes it a pure function of state; the reveal's
+  own animation still reads real time when it *draws*, which is where wall-clock
+  belongs.
+
+  The opening now plays out through `ContinueOpening` / `BuildOpeningRoom` /
+  `ResolveOpeningClient` in a test, checking the dispatch and the phase
+  transitions rather than only the engine arithmetic that two journal tests
+  already covered. That matters because the opening is linear with no way to
+  earn: a step the player cannot take is a permanent soft-lock on every new
+  campaign, and until now nothing exercised the route they actually use to take
+  it.
+
+110 tests (was 108). Balance byte-identical, no save file written by the run.
+
 ### Found by review, not by the audit (2026-08-03, eighth pass)
 
 Three systematic sweeps came back clean before the one that did not, and the
