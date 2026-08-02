@@ -297,6 +297,20 @@ impl Game {
             })
             .unwrap_or(ExpeditionPriority::Balanced);
 
+        // Keep an already-formed expedition in step with the plan on screen. Without this the
+        // preview reflects the new floor/mission/stance while day resolution still runs the
+        // values captured when the first companion was assigned.
+        if let Some(game_state) = self.game_state.as_mut() {
+            if game_state.active_expedition.is_some() {
+                configure_expedition_plan(
+                    game_state,
+                    &selected_floor_id,
+                    &selected_mission_id,
+                    priority.clone(),
+                );
+            }
+        }
+
         self.phase = GamePhase::ExpeditionPlanning(ExpeditionPlanningState::new(
             selected_floor_id,
             selected_mission_id,

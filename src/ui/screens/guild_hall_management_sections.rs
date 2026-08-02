@@ -360,13 +360,21 @@ fn draw_worker_cards(
         let prediction = preview
             .as_ref()
             .map(|value| {
+                // Only call out condition when it is actually costing the guild
+                // something, so a healthy roster's card stays quiet.
+                let condition_note = if value.effectiveness_pct < 100 {
+                    format!(" | Worn: {}% output", value.effectiveness_pct)
+                } else {
+                    String::new()
+                };
                 format!(
-                    "{} gold / {} mat / {} residue | Prep {} | Score {} | {}",
+                    "{} gold / {} mat / {} residue | Prep {} | Score {}{} | {}",
                     value.projected_gold,
                     value.projected_materials,
                     value.projected_arcane_residue,
                     value.preparation_quality,
                     value.success_score,
+                    condition_note,
                     history_gain_label(data, &value.projected_work_history_gains)
                 )
             })

@@ -200,6 +200,44 @@ pub struct DayCycleConfigData {
     pub expedition_egg_reward_threshold: i32,
     pub expedition_relic_reward_threshold: i32,
     pub expedition_injury_threshold: i32,
+    /// How far a worn-down companion's output falls off.
+    #[serde(default = "default_condition_effects")]
+    pub condition_effects: ConditionEffectData,
+}
+
+/// The price of running a companion into the ground.
+///
+/// Fatigue, stress and injury are written by every job, rest, and expedition,
+/// and were read by nothing — a burned-out roster earned exactly what a fresh
+/// one did, which made the whole recovery economy (Resting, `recovery_bonus`,
+/// the stress/injury recovery buildings) decoration. Each point of condition
+/// damage past its allowance now shaves effectiveness off what that companion
+/// contributes, floored so an exhausted worker is weak rather than useless.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct ConditionEffectData {
+    /// Condition damage a companion carries before it costs anything. A day's
+    /// work should not immediately dent the payout.
+    pub fatigue_allowance: u32,
+    pub stress_allowance: u32,
+    pub injury_allowance: u32,
+    /// Effectiveness lost per ten points past the matching allowance.
+    pub fatigue_penalty_pct_per_ten: u32,
+    pub stress_penalty_pct_per_ten: u32,
+    pub injury_penalty_pct_per_ten: u32,
+    /// Floor on effectiveness — even a wreck still shows up for the shift.
+    pub min_effectiveness_pct: u32,
+}
+
+fn default_condition_effects() -> ConditionEffectData {
+    ConditionEffectData {
+        fatigue_allowance: 20,
+        stress_allowance: 14,
+        injury_allowance: 0,
+        fatigue_penalty_pct_per_ten: 4,
+        stress_penalty_pct_per_ten: 5,
+        injury_penalty_pct_per_ten: 10,
+        min_effectiveness_pct: 40,
+    }
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

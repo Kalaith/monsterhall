@@ -312,6 +312,108 @@ fn incubating_and_hatching_use_egg_inventory() {
     );
 }
 
+#[test]
+fn a_rested_companion_works_at_full_rate() {
+    let data = crate::data::test_game_data();
+    let monster = test_monster(Vec::new());
+
+    assert_eq!(
+        companion_effectiveness_pct(&data.config.day_cycle, &monster),
+        100
+    );
+}
+
+#[test]
+fn condition_allowances_absorb_a_single_shift() {
+    let data = crate::data::test_game_data();
+    let effects = &data.config.day_cycle.condition_effects;
+    let mut monster = test_monster(Vec::new());
+    monster.fatigue = effects.fatigue_allowance;
+    monster.stress = effects.stress_allowance;
+
+    assert_eq!(
+        companion_effectiveness_pct(&data.config.day_cycle, &monster),
+        100,
+        "one honest day's work must not dent the payout"
+    );
+}
+
+#[test]
+fn sustained_condition_damage_costs_output() {
+    let data = crate::data::test_game_data();
+    let mut monster = test_monster(Vec::new());
+    monster.fatigue = data.config.day_cycle.condition_effects.fatigue_allowance + 50;
+
+    let worn = companion_effectiveness_pct(&data.config.day_cycle, &monster);
+    assert!(worn < 100, "fatigue past the allowance must cost output");
+
+    monster.injury = 6;
+    assert!(
+        companion_effectiveness_pct(&data.config.day_cycle, &monster) < worn,
+        "injury must stack on top of fatigue"
+    );
+}
+
+#[test]
+fn effectiveness_never_falls_through_its_floor() {
+    let data = crate::data::test_game_data();
+    let mut monster = test_monster(Vec::new());
+    monster.fatigue = 5_000;
+    monster.stress = 5_000;
+    monster.injury = 5_000;
+
+    assert_eq!(
+        companion_effectiveness_pct(&data.config.day_cycle, &monster),
+        data.config
+            .day_cycle
+            .condition_effects
+            .min_effectiveness_pct,
+        "even a wreck still shows up for the shift"
+    );
+}
+
+#[test]
+fn a_worn_down_worker_earns_the_guild_less() {
+    let data = crate::data::test_game_data();
+    let room = data
+        .guild_rooms
+        .rooms
+        .first()
+        .expect("at least one guild room is authored");
+    let town = PlayerTownState {
+        constructed_building_ids: Vec::new(),
+        unlocked_room_ids: vec![room.id.clone()],
+        unlocked_floor_ids: Vec::new(),
+        unlocked_species_ids: vec!["slime_companion".to_owned()],
+        patron_tiers: room.patron_tiers.clone(),
+        completed_project_ids: Vec::new(),
+        floor_surveys: Vec::new(),
+        active_situations: Vec::new(),
+        party_size: 3,
+        town_job_limit: 2,
+    };
+    let building_bonus = BuildingAggregate::default();
+
+    let fresh = test_monster(Vec::new());
+    let mut worn = test_monster(Vec::new());
+    worn.fatigue = 200;
+    worn.stress = 120;
+    worn.injury = 30;
+
+    let fresh_preview = preview_guild_job_for_town(&data, &town, &building_bonus, &fresh, &room.id)
+        .expect("preview");
+    let worn_preview = preview_guild_job_for_town(&data, &town, &building_bonus, &worn, &room.id)
+        .expect("preview");
+
+    assert_eq!(fresh_preview.effectiveness_pct, 100);
+    assert!(worn_preview.effectiveness_pct < 100);
+    assert!(
+        worn_preview.projected_gold < fresh_preview.projected_gold,
+        "a burned-out escort must not earn what a rested one does"
+    );
+    assert!(worn_preview.preparation_quality <= fresh_preview.preparation_quality);
+}
+
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),

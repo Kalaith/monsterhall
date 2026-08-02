@@ -9,6 +9,8 @@ pub struct GuildJobPreview {
     pub projected_reputation: i32,
     pub preparation_quality: u32,
     pub recovery_bonus: u32,
+    /// Share of full output this companion delivers given her condition.
+    pub effectiveness_pct: u32,
     pub projected_work_history_gains: CompanionWorkHistoryState,
 }
 
@@ -19,7 +21,11 @@ pub struct ExpeditionPlanPreview {
     pub projected_arcane_residue: u32,
     pub projected_eggs: u32,
     pub projected_relics: u32,
+    /// How far past the injury threshold the most exposed companion is. Above
+    /// zero, somebody comes home hurt.
     pub injury_risk_score: i32,
+    /// Average share of full output the assigned party can deliver.
+    pub party_effectiveness_pct: u32,
 }
 
 #[derive(Debug, Clone, Default)]

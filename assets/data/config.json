@@ -152,6 +152,15 @@
     "mission_focus_reward_relief_pct": 17,
     "expedition_egg_reward_threshold": 68,
     "expedition_relic_reward_threshold": 88,
-    "expedition_injury_threshold": 55
+    "expedition_injury_threshold": 55,
+    "condition_effects": {
+      "fatigue_allowance": 30,
+      "stress_allowance": 20,
+      "injury_allowance": 0,
+      "fatigue_penalty_pct_per_ten": 3,
+      "stress_penalty_pct_per_ten": 3,
+      "injury_penalty_pct_per_ten": 6,
+      "min_effectiveness_pct": 65
+    }
   }
 }

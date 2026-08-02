@@ -1,4 +1,4 @@
-use macroquad::prelude::{screen_height, screen_width};
+use macroquad::prelude::{screen_height, screen_width, Color};
 
 use crate::data::GameData;
 use crate::engine::preview_expedition_plan;
@@ -105,6 +105,16 @@ fn risk_label(score: i32) -> &'static str {
         "Risk: Medium"
     } else {
         "Risk: Low"
+    }
+}
+
+fn risk_color(score: i32) -> Color {
+    if score >= 12 {
+        theme::DANGER
+    } else if score >= 6 {
+        theme::WARNING
+    } else {
+        theme::POSITIVE
     }
 }
 
@@ -254,15 +264,7 @@ pub fn draw_expedition_planning(
         ),
         preview
             .as_ref()
-            .map(|preview| {
-                if preview.injury_risk_score >= 12 {
-                    theme::DANGER
-                } else if preview.injury_risk_score >= 6 {
-                    theme::WARNING
-                } else {
-                    theme::POSITIVE
-                }
-            })
+            .map(|preview| risk_color(preview.injury_risk_score))
             .unwrap_or_else(|| {
                 if selected_floor.difficulty >= 5 {
                     theme::DANGER
@@ -398,12 +400,17 @@ pub fn draw_expedition_planning(
             (
                 "Injury Risk".to_owned(),
                 preview.injury_risk_score.to_string(),
-                if preview.injury_risk_score >= 12 {
-                    theme::DANGER
-                } else if preview.injury_risk_score >= 6 {
+                risk_color(preview.injury_risk_score),
+            ),
+            (
+                "Party Condition".to_owned(),
+                format!("{}%", preview.party_effectiveness_pct),
+                if preview.party_effectiveness_pct >= 95 {
+                    theme::POSITIVE
+                } else if preview.party_effectiveness_pct >= 75 {
                     theme::WARNING
                 } else {
-                    theme::POSITIVE
+                    theme::DANGER
                 },
             ),
         ];

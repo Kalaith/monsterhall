@@ -20,6 +20,7 @@ use crate::state::{
 };
 
 mod actions;
+mod condition;
 mod eggs;
 mod events;
 mod helpers;
@@ -35,6 +36,7 @@ mod upkeep;
 #[cfg(test)]
 mod tests;
 
+use condition::*;
 use eggs::*;
 use events::*;
 use helpers::*;

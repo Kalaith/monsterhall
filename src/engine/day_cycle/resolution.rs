@@ -314,7 +314,6 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                         ));
                         continue;
                     };
-                    let trait_modifier = collect_trait_modifiers(data, monster);
                     let Some(mission) = data
                         .missions
                         .missions
@@ -327,13 +326,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                         ));
                         continue;
                     };
-                    let priority_injury_risk = match expedition.priority {
-                        ExpeditionPriority::Balanced => 0,
-                        ExpeditionPriority::Aggressive => 8,
-                        ExpeditionPriority::Safe => -10,
-                        ExpeditionPriority::RecoveryFocused => -14,
-                        ExpeditionPriority::Curiosity => 5,
-                    };
+                    let priority_injury_risk = priority_injury_risk(&expedition.priority);
                     if !expedition
                         .assigned_monster_ids
                         .iter()
@@ -357,6 +350,18 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     };
                     let total_success = plan_preview.success_score;
 
+                    // Read the party's condition before the day's toll is added,
+                    // so this matches the margin the planning screen quoted.
+                    let safety_score = expedition_safety_score(
+                        data,
+                        monster,
+                        mission,
+                        depth_profile.injury_risk_delta,
+                        priority_injury_risk,
+                        total_success,
+                    );
+
+                    let trait_modifier = collect_trait_modifiers(data, monster);
                     monster.fatigue = monster
                         .fatigue
                         .saturating_add(data.config.day_cycle.expedition_fatigue);
@@ -364,15 +369,6 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                         data.config.day_cycle.expedition_stress
                             + trait_modifier.stress_change_flat.max(0) as u32,
                     );
-                    let safety_score = total_success
-                        + (monster.stats.endurance * 4)
-                        + ((monster.stats.endurance.max(0) as u32
-                            / data.config.day_cycle.expedition_endurance_safety_divisor)
-                            as i32)
-                        - trait_modifier.injury_risk_pct
-                        - mission.injury_risk_pct
-                        - depth_profile.injury_risk_delta
-                        - priority_injury_risk;
                     if safety_score < data.config.day_cycle.expedition_injury_threshold {
                         monster.injury = monster.injury.saturating_add(6);
                         summary.roster_updates.push(format!(

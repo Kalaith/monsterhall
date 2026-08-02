@@ -101,6 +101,48 @@ pub fn preview_expedition_plan(
     ))
 }
 
+/// Extra injury exposure a stance buys. Shared so the planning preview and day
+/// resolution cannot drift apart on what "Aggressive" costs.
+pub(super) fn priority_injury_risk(priority: &ExpeditionPriority) -> i32 {
+    match priority {
+        ExpeditionPriority::Balanced => 0,
+        ExpeditionPriority::Aggressive => 8,
+        ExpeditionPriority::Safe => -10,
+        ExpeditionPriority::RecoveryFocused => -14,
+        ExpeditionPriority::Curiosity => 5,
+    }
+}
+
+/// How safely one companion comes back from a run. Compared against
+/// `expedition_injury_threshold`; below it she is hurt.
+///
+/// This is the single formula for that decision — the planning preview and day
+/// resolution both call it.
+pub(super) fn expedition_safety_score(
+    data: &GameData,
+    monster: &CompanionState,
+    mission: &crate::data::MissionData,
+    depth_injury_risk_delta: i32,
+    priority_injury_risk: i32,
+    total_success: i32,
+) -> i32 {
+    let day_cycle = &data.config.day_cycle;
+    let trait_modifier = collect_trait_modifiers(data, monster);
+    // A worn-down companion braces for less of the hit than her endurance says.
+    let effective_endurance = scale_by_effectiveness(
+        monster.stats.endurance.max(0) as u32,
+        companion_effectiveness_pct(day_cycle, monster),
+    );
+
+    total_success
+        + (effective_endurance as i32 * 4)
+        + (effective_endurance / day_cycle.expedition_endurance_safety_divisor.max(1)) as i32
+        - trait_modifier.injury_risk_pct
+        - mission.injury_risk_pct
+        - depth_injury_risk_delta
+        - priority_injury_risk
+}
+
 pub(crate) fn calculate_expedition_plan(
     data: &GameData,
     game_state: &GameState,
@@ -110,26 +152,31 @@ pub(crate) fn calculate_expedition_plan(
     assigned_monsters: &[&CompanionState],
 ) -> ExpeditionPlanPreview {
     let building_bonus = collect_building_modifiers(data, game_state);
+    let day_cycle = &data.config.day_cycle;
+
+    // A party carries only what its condition lets it carry. Each companion's
+    // stats are weighted by how worn down she is before anything is totalled,
+    // so a battered party both succeeds less and — through the endurance term
+    // in the safety score — gets hurt more.
+    let effective_stat = |monster: &CompanionState, stat: i32| -> u32 {
+        scale_by_effectiveness(
+            stat.max(0) as u32,
+            companion_effectiveness_pct(day_cycle, monster),
+        )
+    };
 
     let total_power = assigned_monsters
         .iter()
-        .map(|monster| monster.stats.power.max(0) as u32)
+        .map(|monster| effective_stat(monster, monster.stats.power))
         .sum::<u32>();
     let total_instinct = assigned_monsters
         .iter()
-        .map(|monster| monster.stats.instinct.max(0) as u32)
+        .map(|monster| effective_stat(monster, monster.stats.instinct))
         .sum::<u32>();
-    let total_endurance = assigned_monsters
-        .iter()
-        .map(|monster| monster.stats.endurance.max(0) as u32)
-        .sum::<u32>();
+    let party_effectiveness_pct = party_effectiveness_pct(day_cycle, assigned_monsters);
     let total_trait_success = assigned_monsters
         .iter()
         .map(|monster| collect_trait_modifiers(data, monster).expedition_success_pct)
-        .sum::<i32>();
-    let total_trait_risk = assigned_monsters
-        .iter()
-        .map(|monster| collect_trait_modifiers(data, monster).injury_risk_pct)
         .sum::<i32>();
 
     let priority_bonus = match priority {
@@ -153,13 +200,7 @@ pub(crate) fn calculate_expedition_plan(
         ExpeditionPriority::RecoveryFocused => 95,
         ExpeditionPriority::Curiosity => 85,
     };
-    let priority_injury_risk = match priority {
-        ExpeditionPriority::Balanced => 0,
-        ExpeditionPriority::Aggressive => 8,
-        ExpeditionPriority::Safe => -10,
-        ExpeditionPriority::RecoveryFocused => -14,
-        ExpeditionPriority::Curiosity => 5,
-    };
+    let priority_injury_risk = priority_injury_risk(priority);
     let depth_profile = expedition_depth_profile(
         data,
         game_state,
@@ -231,6 +272,25 @@ pub(crate) fn calculate_expedition_plan(
     } else {
         0
     };
+    // Day resolution decides injuries per companion, by comparing a safety
+    // score against a threshold. Quoting a different party-wide formula here
+    // meant the planning screen could promise safety while the sim maimed
+    // somebody, so the preview now runs resolution's own arithmetic and
+    // reports the margin for whoever is most exposed. Above zero, somebody
+    // comes home hurt.
+    // NOTE: this is *not* the arithmetic day resolution rolls — see the TODO
+    // entry on aligning it. `expedition_safety_score` below is the real
+    // decision, and swapping this figure for it changes the scale of a number
+    // the long-campaign simulation policy steers on, which needs recalibrating
+    // against the multi-seed harness rather than one deterministic report.
+    let total_trait_risk = assigned_monsters
+        .iter()
+        .map(|monster| collect_trait_modifiers(data, monster).injury_risk_pct)
+        .sum::<i32>();
+    let total_endurance = assigned_monsters
+        .iter()
+        .map(|monster| effective_stat(monster, monster.stats.endurance))
+        .sum::<u32>();
     let injury_risk_score = floor.difficulty as i32
         + mission.injury_risk_pct
         + priority_injury_risk
@@ -245,6 +305,7 @@ pub(crate) fn calculate_expedition_plan(
         projected_eggs,
         projected_relics,
         injury_risk_score,
+        party_effectiveness_pct,
     }
 }
 
@@ -330,17 +391,29 @@ pub(super) fn preview_guild_job_for_town(
         * u64::from(escort_rate_pct)
         / 100_000_000;
 
+    // A companion run ragged escorts worse parties for less coin. Applied here,
+    // in the preview both the planning screen and day resolution read, so the
+    // number the player is quoted is the number the guild is paid.
+    let effectiveness_pct = companion_effectiveness_pct(day_cycle, monster);
+    let base_residue_income =
+        base_residue * patron_tier.residue_multiplier_pct * depth_profile.residue_multiplier_pct
+            / 10_000;
+
     Ok(GuildJobPreview {
         success_score,
-        projected_gold: u32::try_from(escort_fee_gold).unwrap_or(u32::MAX),
-        projected_arcane_residue: base_residue
-            * patron_tier.residue_multiplier_pct
-            * depth_profile.residue_multiplier_pct
-            / 10_000,
-        projected_materials: base_materials,
-        projected_reputation: room.reputation_yield + success_score.max(0) / 40,
-        preparation_quality,
+        projected_gold: scale_by_effectiveness(
+            u32::try_from(escort_fee_gold).unwrap_or(u32::MAX),
+            effectiveness_pct,
+        ),
+        projected_arcane_residue: scale_by_effectiveness(base_residue_income, effectiveness_pct),
+        projected_materials: scale_by_effectiveness(base_materials, effectiveness_pct),
+        projected_reputation: scale_signed_by_effectiveness(
+            room.reputation_yield + success_score.max(0) / 40,
+            effectiveness_pct,
+        ),
+        preparation_quality: scale_by_effectiveness(preparation_quality, effectiveness_pct),
         recovery_bonus: room.recovery_bonus,
+        effectiveness_pct,
         projected_work_history_gains: CompanionWorkHistoryState {
             scouting_runs: room.work_history_gains.scouting_runs,
             guard_duties: room.work_history_gains.guard_duties,
