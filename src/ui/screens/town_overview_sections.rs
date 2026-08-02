@@ -442,6 +442,28 @@ pub(super) fn draw_priority_panel(
     None
 }
 
+/// What the debt tile is warning about.
+///
+/// It used to turn red on the calendar alone — `days_until_due <= 2` — so a
+/// guild sitting on ten times the payment was painted as though it were about
+/// to default, and one that could not cover the amount at all read as merely
+/// amber until the last two days. The question the tile answers is whether this
+/// payment is *at risk*, and that is a fact about the purse: the guild can
+/// clear it now (and the Pay Debt button beside it says so), or it cannot and
+/// the day it falls due is the day it is missed.
+fn debt_tile_color(game_state: &GameState) -> Color {
+    let Some(debt) = game_state.debt.as_ref() else {
+        return theme::POSITIVE;
+    };
+    if game_state.resources.gold >= debt.current_balance_due {
+        theme::POSITIVE
+    } else if debt.days_until_due == 0 {
+        theme::DANGER
+    } else {
+        theme::WARNING
+    }
+}
+
 pub(super) fn draw_summary_strip(
     data: &GameData,
     game_state: &GameState,
@@ -491,17 +513,7 @@ pub(super) fn draw_summary_strip(
         .as_ref()
         .map(|debt| format!("{} in {}d", debt.current_balance_due, debt.days_until_due))
         .unwrap_or_else(|| "Clear".to_owned());
-    let debt_color = game_state
-        .debt
-        .as_ref()
-        .map(|debt| {
-            if debt.days_until_due <= 2 {
-                theme::DANGER
-            } else {
-                theme::WARNING
-            }
-        })
-        .unwrap_or(theme::POSITIVE);
+    let debt_color = debt_tile_color(game_state);
     let metrics = [
         (
             "Gold",
@@ -648,6 +660,53 @@ pub(super) fn draw_error_panel(layout: &TownOverviewLayout, last_error: Option<&
             layout.footer_y - 30.0,
             layout.content_width,
             error_message,
+        );
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::debt_tile_color;
+    use crate::state::{DebtState, GameState};
+    use crate::ui::theme;
+
+    fn state_with(gold: u32, due: u32, days_until_due: u32) -> GameState {
+        let mut game_state = GameState::default();
+        game_state.resources.gold = gold;
+        game_state.debt = Some(DebtState {
+            active_milestone_id: "scrap_note_1".to_owned(),
+            current_balance_due: due,
+            days_until_due,
+            ..DebtState::default()
+        });
+        game_state
+    }
+
+    /// The tile turned red on the calendar alone, so a guild holding ten times
+    /// the payment was painted as though it were about to default, and a guild
+    /// that could not cover the amount at all read as merely amber until the
+    /// last two days.
+    #[test]
+    fn the_debt_tile_warns_about_the_purse_and_not_the_calendar() {
+        assert_eq!(
+            debt_tile_color(&state_with(2_500, 250, 1)),
+            theme::POSITIVE,
+            "a guild that can clear the payment today is not at risk"
+        );
+        assert_eq!(
+            debt_tile_color(&state_with(10, 250, 9)),
+            theme::WARNING,
+            "short of the amount with days left is a warning"
+        );
+        assert_eq!(
+            debt_tile_color(&state_with(10, 250, 0)),
+            theme::DANGER,
+            "short of the amount on the day it falls due is the miss itself"
+        );
+        assert_eq!(
+            debt_tile_color(&GameState::default()),
+            theme::POSITIVE,
+            "no debt at all is the best case, not a warning"
         );
     }
 }

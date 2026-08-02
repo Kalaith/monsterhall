@@ -245,6 +245,43 @@ mutation and the check names golemkin).
   is a `corruption_adept` exactly like the warden she replaces. Variety means a
   different *role*, not a different name.
 
+### Found by review, not by the audit (2026-08-03, twenty-ninth pass)
+
+Swept the shape that produced the last three passes' finds — *a screen that
+invents a threshold the engine already authors* — across every conditional colour
+in the UI. Three sites, two of them wrong, and the sweep is now complete.
+
+- ~~The Expedition Desk's floor header was permanently red.~~ Fixed. With no
+  party assigned — which is how that screen opens, every time — the header falls
+  back to `difficulty >= 5`, a threshold from when the tower was three floors
+  deep. Authored difficulty now runs **20 to 104** against a validated ceiling of
+  120, so the test was true for every floor in the game and the amber branch was
+  dead code. It bands against `max_floor_difficulty` now, so the Slick Cellars
+  read as what they are.
+
+- ~~"Party Condition" turned amber at 95% and red at 75%.~~ Fixed. Both numbers
+  were the screen's own. The engine authors the two that matter: anything under
+  100 is already taking output off the run, and `min_effectiveness_pct` (65) is
+  the floor it cannot fall past — the same calm / strained / spent rule the
+  roster badges and profile tiles now use for the meters underneath it.
+
+- ~~The debt tile warned about the calendar instead of the purse.~~ Fixed.
+  `days_until_due <= 2` painted a guild sitting on **ten times** the payment as
+  though it were about to default, while a guild that could not cover the amount
+  at all read as merely amber until the last two days. The tile answers whether
+  the payment is at risk, and that is a fact about the purse: green when the
+  guild can clear it today (which is exactly when the Pay Debt button beside it
+  appears), amber when it cannot and days remain, red when it cannot and the day
+  has come.
+
+- **Checked and clean**: `risk_color`'s zero boundary is the engine's own
+  semantic (zero margin means somebody is certain to come home hurt) and was
+  deliberately re-banded when the preview was aligned with resolution; every
+  other conditional colour keys off a boolean or a label, not a number.
+
+- **Balance byte-identical**; three guards, one verified by planting the stale
+  threshold.
+
 ### Found by review, not by the audit (2026-08-03, twenty-eighth pass)
 
 Took the previous pass's own note — *the deep mutation tree is now unexercised by

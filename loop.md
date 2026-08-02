@@ -1616,6 +1616,34 @@ Stop the loop and report if:
   deliberate player sees, which is defensible but worth a decision; (c) two recorded
   slices remain: the `ui_text` migration and the unbounded event log.
 
+- **2026-08-03 — twenty-ninth pass (the sweep the last three passes earned).** Pointed
+  the shape that produced three finds in three passes — *a screen inventing a threshold
+  the engine already authors* — at every conditional colour in the UI, and it is now
+  swept. Two of the three numeric sites were wrong. The **Expedition Desk's floor header
+  was permanently red**: with no party assigned, which is how the screen opens every
+  time, it fell back to `difficulty >= 5` from the three-floor era, and authored
+  difficulty now runs 20–104 against a ceiling of 120, so the amber branch was dead code.
+  It bands against `max_floor_difficulty` now. **"Party Condition" turned amber at 95%
+  and red at 75%**, both the screen's own numbers, where the engine authors the two that
+  matter — under 100 is already costing the run, and `min_effectiveness_pct` is the floor
+  — so it uses the same calm/strained/spent rule as the meters underneath it. And the
+  **debt tile warned about the calendar rather than the purse**: `days_until_due <= 2`
+  painted a guild holding ten times the payment as about to default, while one that
+  could not cover it at all read amber until the last two days. It is green when the
+  guild can clear the payment today (exactly when the Pay Debt button appears), amber
+  when it cannot and days remain, red when it cannot and the day has come.
+  **Result:** 139 tests (was 136), fmt and clippy clean, publish green, **balance
+  byte-identical**, no data file touched. `risk_color` was checked and left: its zero
+  boundary is resolution's own arithmetic, not an invented band.
+  **Next iteration should know:** (a) that seam is now genuinely worked out — every
+  remaining conditional colour keys off a boolean or a label, so a fourth find would be
+  new code rather than a survivor; (b) the two recorded slices are unchanged and both
+  engine-side (the `ui_text` migration, the unbounded event log), and the
+  `salamander_corekeeper` reachability question from the last pass is still open as a
+  content decision; (c) the captures now show a worn, mutating, mixed-species guild —
+  the Expedition Desk cards read `Worn 95% | Instability 204`, which is the first time
+  those two numbers have appeared on a screen at all.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

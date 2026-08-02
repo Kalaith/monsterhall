@@ -134,6 +134,47 @@ fn risk_color(score: Option<i32>) -> Color {
     }
 }
 
+/// How dangerous this floor reads before anybody is assigned to it.
+///
+/// The fallback used to be `difficulty >= 5`, from when the tower was three
+/// floors deep. Authored difficulty now runs 20 to 104 against a validated
+/// ceiling of 120, so that test was true for every floor in the game and the
+/// header of the Expedition Desk — which opens with no party every single time —
+/// was permanently red. Banded against the authored ceiling instead, so a
+/// shallow floor reads shallow.
+fn floor_difficulty_color(data: &GameData, difficulty: u32) -> Color {
+    let ceiling = data.config.day_cycle.max_floor_difficulty.max(1);
+    if difficulty * 3 >= ceiling * 2 {
+        theme::DANGER
+    } else if difficulty * 3 >= ceiling {
+        theme::WARNING
+    } else {
+        theme::POSITIVE
+    }
+}
+
+/// What the party's condition costs this run.
+///
+/// The bands were 95 and 75, which are numbers this screen invented. The engine
+/// authors the two that matter: anything under 100 is already taking output off
+/// the run, and `min_effectiveness_pct` is the floor it cannot fall past — the
+/// same calm / strained / spent rule the roster badges and the profile tiles
+/// use for the meters underneath it.
+fn party_condition_color(data: &GameData, effectiveness_pct: u32) -> Color {
+    let floor = data
+        .config
+        .day_cycle
+        .condition_effects
+        .min_effectiveness_pct;
+    if effectiveness_pct >= 100 {
+        theme::POSITIVE
+    } else if effectiveness_pct > floor {
+        theme::WARNING
+    } else {
+        theme::DANGER
+    }
+}
+
 pub fn draw_expedition_planning(
     data: &GameData,
     expedition_state: &ExpeditionPlanningState,
@@ -283,13 +324,7 @@ pub fn draw_expedition_planning(
         preview
             .as_ref()
             .map(|preview| risk_color(preview.injury_risk_score))
-            .unwrap_or_else(|| {
-                if selected_floor.difficulty >= 5 {
-                    theme::DANGER
-                } else {
-                    theme::WARNING
-                }
-            }),
+            .unwrap_or_else(|| floor_difficulty_color(data, selected_floor.difficulty)),
     );
     draw_body_text_in_box(
         &compact_text(&selected_floor.description, 160),
@@ -425,13 +460,7 @@ pub fn draw_expedition_planning(
             (
                 "Party Condition".to_owned(),
                 format!("{}%", preview.party_effectiveness_pct),
-                if preview.party_effectiveness_pct >= 95 {
-                    theme::POSITIVE
-                } else if preview.party_effectiveness_pct >= 75 {
-                    theme::WARNING
-                } else {
-                    theme::DANGER
-                },
+                party_condition_color(data, preview.party_effectiveness_pct),
             ),
         ];
         if preview.projected_materials > 0 {
@@ -696,4 +725,62 @@ pub fn draw_expedition_planning(
     }
 
     None
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{floor_difficulty_color, party_condition_color};
+    use crate::data::test_game_data;
+    use crate::ui::theme;
+
+    /// The Expedition Desk opens with nobody assigned, so the floor's own colour
+    /// is the first thing a player reads about it — and `difficulty >= 5`, from
+    /// when the tower was three floors deep, made every floor in a 20-to-104
+    /// catalogue read as lethal.
+    #[test]
+    fn a_shallow_floor_does_not_read_as_lethal() {
+        let data = test_game_data();
+        let shallowest = data
+            .floors
+            .floors
+            .iter()
+            .map(|floor| floor.difficulty)
+            .min()
+            .expect("the tower should have floors");
+        let deepest = data
+            .floors
+            .floors
+            .iter()
+            .map(|floor| floor.difficulty)
+            .max()
+            .expect("the tower should have floors");
+
+        assert_eq!(
+            floor_difficulty_color(&data, shallowest),
+            theme::POSITIVE,
+            "the first floor of the tower should not be painted as its worst"
+        );
+        assert_eq!(
+            floor_difficulty_color(&data, deepest),
+            theme::DANGER,
+            "the bottom of the tower should be"
+        );
+    }
+
+    /// Condition costs output the moment it is under 100, and cannot fall past
+    /// the authored floor. Those are the two numbers; 95 and 75 were not.
+    #[test]
+    fn party_condition_turns_where_the_engine_says_it_costs_something() {
+        let data = test_game_data();
+        let floor = data
+            .config
+            .day_cycle
+            .condition_effects
+            .min_effectiveness_pct;
+
+        assert_eq!(party_condition_color(&data, 100), theme::POSITIVE);
+        assert_eq!(party_condition_color(&data, 99), theme::WARNING);
+        assert_eq!(party_condition_color(&data, floor + 1), theme::WARNING);
+        assert_eq!(party_condition_color(&data, floor), theme::DANGER);
+    }
 }
