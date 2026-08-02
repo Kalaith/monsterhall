@@ -48,8 +48,8 @@ pub use decisions::{
 };
 pub use progression_labels::{
     companion_skill_summary, history_gain_chance_label_from_progress,
-    history_gain_label_from_progress, opening_skill_gain_label, primary_skill_label,
-    trained_skills_label, work_history_summary,
+    history_gain_label_from_progress, opening_skill_gain_label, primary_skill_label, skill_code,
+    skill_label, trained_skill_codes_label, work_history_summary,
 };
 
 pub fn fill_template(template: &str, replacements: &[(&str, String)]) -> String {
@@ -293,61 +293,21 @@ pub fn guest_skill_requirement_label(
     data: &GameData,
     skills: &crate::state::ContractSkillRequirementState,
 ) -> String {
-    let common_text = &data.ui_text.common;
-    let mut parts = Vec::new();
-    if skills.scouting > 0 {
-        parts.push(format!(
-            "{}{}",
-            common_text
-                .skill_label_scouting
-                .chars()
-                .next()
-                .unwrap_or('K'),
-            skills.scouting
-        ));
-    }
-    if skills.guarding > 0 {
-        parts.push(format!(
-            "{}{}",
-            common_text
-                .skill_label_guarding
-                .chars()
-                .next()
-                .unwrap_or('O'),
-            skills.guarding
-        ));
-    }
-    if skills.hospitality > 0 {
-        parts.push(format!(
-            "{}{}",
-            common_text
-                .skill_label_hospitality
-                .chars()
-                .next()
-                .unwrap_or('V'),
-            skills.hospitality
-        ));
-    }
-    if skills.crafting > 0 {
-        parts.push(format!(
-            "{}{}",
-            common_text
-                .skill_label_crafting
-                .chars()
-                .next()
-                .unwrap_or('A'),
-            skills.crafting
-        ));
-    }
-    if skills.charm > 0 {
-        parts.push(format!(
-            "{}{}",
-            common_text.skill_label_charm.chars().next().unwrap_or('S'),
-            skills.charm
-        ));
-    }
+    let parts = crate::engine::SKILL_IDS
+        .iter()
+        .filter_map(|skill_id| {
+            let required = crate::engine::required_skill_value(skills, skill_id);
+            (required > 0).then(|| {
+                format!(
+                    "{}{required}",
+                    crate::ui::view_models::skill_code(data, skill_id)
+                )
+            })
+        })
+        .collect::<Vec<_>>();
+
     if parts.is_empty() {
-        common_text.none_label.clone()
+        data.ui_text.common.none_label.clone()
     } else {
         parts.join(" / ")
     }

@@ -5,53 +5,79 @@
 use crate::data::GameData;
 use crate::ui::view_models::fill_template;
 
-pub fn trained_skills_label(data: &GameData, skill_ids: &[String]) -> String {
-    let common_text = &data.ui_text.common;
-    let labels = skill_ids
+/// A skill's authored name, or the unknown label if nothing authored it.
+///
+/// The lookup every screen shares. It used to be a five-arm `match` copied into
+/// each label builder, so a room that trains `recovery` — three of the four do —
+/// read to the player as training "Unknown".
+pub fn skill_label<'a>(data: &'a GameData, skill_id: &str) -> &'a str {
+    data.ui_text
+        .common
+        .skills
         .iter()
-        .map(|skill_id| match skill_id.as_str() {
-            "scouting" => common_text.skill_label_scouting.as_str(),
-            "guarding" => common_text.skill_label_guarding.as_str(),
-            "hospitality" => common_text.skill_label_hospitality.as_str(),
-            "crafting" => common_text.skill_label_crafting.as_str(),
-            "charm" => common_text.skill_label_charm.as_str(),
-            _ => common_text.unknown_label.as_str(),
-        })
-        .collect::<Vec<_>>();
+        .find(|skill| skill.id == skill_id)
+        .map(|skill| skill.label.as_str())
+        .unwrap_or(&data.ui_text.common.unknown_label)
+}
 
-    if labels.is_empty() {
-        common_text.none_label.clone()
-    } else {
-        labels.join(", ")
+/// The compact code for a skill, for lines that cannot fit ten full names.
+pub fn skill_code<'a>(data: &'a GameData, skill_id: &str) -> &'a str {
+    data.ui_text
+        .common
+        .skills
+        .iter()
+        .find(|skill| skill.id == skill_id)
+        .map(|skill| skill.code.as_str())
+        .unwrap_or(&data.ui_text.common.unknown_label)
+}
+
+/// The same list in compact codes, for the room card's badge.
+///
+/// That badge is 168px in a row that exactly fills its 432, so full names
+/// cannot fit there and were being cut to a 20-character stub: the common room
+/// trains Scouting, Hospitality and Charm, and the card read "Trains Scouting,"
+/// — which does not look truncated, it looks like one skill. Choosing a room is
+/// the whole decision this screen exists for. Codes say all of it.
+pub fn trained_skill_codes_label(data: &GameData, skill_ids: &[String]) -> String {
+    if skill_ids.is_empty() {
+        return data.ui_text.common.none_label.clone();
     }
+    skill_ids
+        .iter()
+        .map(|skill_id| skill_code(data, skill_id))
+        .collect::<Vec<_>>()
+        .join("/")
 }
 
 pub fn primary_skill_label<'a>(data: &'a GameData, skill_ids: &[String]) -> &'a str {
-    let common_text = &data.ui_text.common;
     skill_ids
         .first()
-        .map(|skill_id| match skill_id.as_str() {
-            "scouting" => common_text.skill_label_scouting.as_str(),
-            "guarding" => common_text.skill_label_guarding.as_str(),
-            "hospitality" => common_text.skill_label_hospitality.as_str(),
-            "crafting" => common_text.skill_label_crafting.as_str(),
-            "charm" => common_text.skill_label_charm.as_str(),
-            _ => common_text.unknown_label.as_str(),
-        })
-        .unwrap_or(&common_text.unknown_label)
+        .map(|skill_id| skill_label(data, skill_id))
+        .unwrap_or(&data.ui_text.common.unknown_label)
 }
 
+/// The roster strip's skill line.
+///
+/// Lists only the skills a companion actually has. It used to print all five of
+/// the skills the game shipped with, zeros included, and none of the five added
+/// later — so a companion could train `recovery` at the packroom for fifty
+/// shifts and her line never changed. Showing the non-zero ones keeps the line
+/// the same length it was in practice while making all ten reachable.
 pub fn companion_skill_summary(data: &GameData, monster: &crate::state::CompanionState) -> String {
-    let skill_summary = fill_template(
-        &data.ui_text.common.skill_summary_template,
-        &[
-            ("{scouting}", monster.skills.scouting.to_string()),
-            ("{guarding}", monster.skills.guarding.to_string()),
-            ("{hospitality}", monster.skills.hospitality.to_string()),
-            ("{crafting}", monster.skills.crafting.to_string()),
-            ("{charm}", monster.skills.charm.to_string()),
-        ],
-    );
+    let parts = crate::engine::SKILL_IDS
+        .iter()
+        .filter_map(|skill_id| {
+            let value = crate::engine::companion_skill_value(&monster.skills, skill_id);
+            (value > 0).then(|| format!("{}{value}", skill_code(data, skill_id)))
+        })
+        .collect::<Vec<_>>();
+
+    let skill_summary = if parts.is_empty() {
+        data.ui_text.common.none_label.clone()
+    } else {
+        parts.join(" ")
+    };
+
     format!(
         "{} | Bond {} / Rep {}",
         skill_summary, monster.bond, monster.reputation
@@ -224,23 +250,13 @@ pub fn opening_skill_gain_label(
     data: &GameData,
     skills: &crate::data::CompanionSkillProgressionData,
 ) -> String {
-    let mut parts = Vec::new();
-
-    if skills.scouting > 0 {
-        parts.push(format!("K+{}", skills.scouting));
-    }
-    if skills.guarding > 0 {
-        parts.push(format!("O+{}", skills.guarding));
-    }
-    if skills.hospitality > 0 {
-        parts.push(format!("V+{}", skills.hospitality));
-    }
-    if skills.crafting > 0 {
-        parts.push(format!("A+{}", skills.crafting));
-    }
-    if skills.charm > 0 {
-        parts.push(format!("S+{}", skills.charm));
-    }
+    let parts = crate::engine::SKILL_IDS
+        .iter()
+        .filter_map(|skill_id| {
+            let value = crate::engine::progression_skill_value(skills, skill_id);
+            (value > 0).then(|| format!("{}+{value}", skill_code(data, skill_id)))
+        })
+        .collect::<Vec<_>>();
 
     if parts.is_empty() {
         data.ui_text.common.none_label.clone()

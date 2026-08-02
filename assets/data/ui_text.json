@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "common": {
     "settings_button": "Settings",
     "return_to_town_button": "Guild Hall",
@@ -36,11 +36,59 @@
     "guest_status_failed_label": "Failed",
     "guest_status_declined_label": "Declined",
     "species_any_label": "Any",
-    "skill_label_scouting": "Scouting",
-    "skill_label_guarding": "Guarding",
-    "skill_label_hospitality": "Hospitality",
-    "skill_label_crafting": "Crafting",
-    "skill_label_charm": "Charm",
+    "skills": [
+      {
+        "id": "scouting",
+        "label": "Scouting",
+        "code": "Sc"
+      },
+      {
+        "id": "guarding",
+        "label": "Guarding",
+        "code": "Gd"
+      },
+      {
+        "id": "hospitality",
+        "label": "Hospitality",
+        "code": "Ho"
+      },
+      {
+        "id": "crafting",
+        "label": "Crafting",
+        "code": "Cr"
+      },
+      {
+        "id": "charm",
+        "label": "Charm",
+        "code": "Ch"
+      },
+      {
+        "id": "recovery",
+        "label": "Recovery",
+        "code": "Rc"
+      },
+      {
+        "id": "bargaining",
+        "label": "Bargaining",
+        "code": "Bg"
+      },
+      {
+        "id": "navigation",
+        "label": "Navigation",
+        "code": "Nv"
+      },
+      {
+        "id": "arcana",
+        "label": "Arcana",
+        "code": "Ar"
+      },
+      {
+        "id": "strength",
+        "label": "Strength",
+        "code": "St"
+      }
+    ],
+    "bond_label": "Bond",
     "work_history_label_scouting": "Scouting Runs",
     "work_history_label_guarding": "Guard Duties",
     "work_history_label_hospitality": "Hospitality Jobs",
@@ -56,7 +104,6 @@
     "egg_locked_outcome_message": "Locked to one hatchery outcome",
     "egg_possible_species_template": "{count} possible species",
     "egg_prepared_for_template": "Prepared for {species}",
-    "skill_summary_template": "Sc{scouting} G{guarding} H{hospitality} Cr{crafting} Ch{charm}",
     "work_history_summary_template": "{scouting runs} scouting / {guarding} guard / {hospitality} hospitality / {crafting} craft / {completed contracts} contracts",
     "building_guild_income_template": "Guild service income +{value}%",
     "building_expedition_success_template": "Expedition success +{value}%",

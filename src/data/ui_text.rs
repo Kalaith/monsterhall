@@ -18,6 +18,17 @@ pub struct UiTextData {
     pub settings: SettingsUiText,
 }
 
+/// A skill's player-facing name and the short code compact lines use.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct SkillUiText {
+    pub id: String,
+    pub label: String,
+    /// Two or three characters for the roster strip, where ten full names will
+    /// not fit. `Sc` and `St` rather than one letter each, because Scouting and
+    /// Strength — and Charm and Crafting — collide on their first.
+    pub code: String,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CommonUiText {
     pub settings_button: String,
@@ -58,11 +69,17 @@ pub struct CommonUiText {
     pub guest_status_failed_label: String,
     pub guest_status_declined_label: String,
     pub species_any_label: String,
-    pub skill_label_scouting: String,
-    pub skill_label_guarding: String,
-    pub skill_label_hospitality: String,
-    pub skill_label_crafting: String,
-    pub skill_label_charm: String,
+    /// One entry per skill the engine knows, in listing order.
+    ///
+    /// This was five flat `skill_label_*` fields against a ten-skill system, so
+    /// every screen that reached for the *authored* vocabulary — the correct
+    /// place to reach — could only name half the game. Three of the four guild
+    /// rooms train `recovery` or `bargaining`, and the hall card printed those
+    /// as "Unknown". A list cannot be half-authored without
+    /// `every_skill_the_engine_knows_has_authored_text` saying so.
+    pub skills: Vec<SkillUiText>,
+    /// The bond chip on the profile panel, which sits alongside the skills.
+    pub bond_label: String,
     pub work_history_label_scouting: String,
     pub work_history_label_guarding: String,
     pub work_history_label_hospitality: String,
@@ -78,7 +95,6 @@ pub struct CommonUiText {
     pub egg_locked_outcome_message: String,
     pub egg_possible_species_template: String,
     pub egg_prepared_for_template: String,
-    pub skill_summary_template: String,
     pub work_history_summary_template: String,
     pub building_guild_income_template: String,
     pub building_expedition_success_template: String,

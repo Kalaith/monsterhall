@@ -81,16 +81,88 @@ pub fn species_stat_total(species: &crate::data::SpeciesData) -> u32 {
 /// so a companion who trained recovery or bargaining read as more expendable
 /// than an identical one who had learned nothing, while costing more to keep.
 pub fn companion_skill_total(skills: &crate::state::CompanionSkillState) -> u32 {
-    skills.scouting
-        + skills.guarding
-        + skills.hospitality
-        + skills.crafting
-        + skills.charm
-        + skills.recovery
-        + skills.bargaining
-        + skills.navigation
-        + skills.arcana
-        + skills.strength
+    SKILL_IDS
+        .iter()
+        .map(|skill_id| companion_skill_value(skills, skill_id))
+        .sum()
+}
+
+/// The ten skills, in the order a screen should list them.
+///
+/// There was no such list. Every site that needed all ten wrote them out by
+/// hand, and the count kept coming out five — the number of skills the game
+/// shipped with — in `companion_daily_wage`, `replacement_score`,
+/// `monster_service_score`, the contract desk's gap badges, and both of the
+/// label builders in `view_models`. Iterating this is how a site stops being
+/// able to miss one.
+pub const SKILL_IDS: [&str; 10] = [
+    "scouting",
+    "guarding",
+    "hospitality",
+    "crafting",
+    "charm",
+    "recovery",
+    "bargaining",
+    "navigation",
+    "arcana",
+    "strength",
+];
+
+/// One skill off a companion, by id. Unknown ids read as zero.
+pub fn companion_skill_value(skills: &crate::state::CompanionSkillState, skill_id: &str) -> u32 {
+    match skill_id {
+        "scouting" => skills.scouting,
+        "guarding" => skills.guarding,
+        "hospitality" => skills.hospitality,
+        "crafting" => skills.crafting,
+        "charm" => skills.charm,
+        "recovery" => skills.recovery,
+        "bargaining" => skills.bargaining,
+        "navigation" => skills.navigation,
+        "arcana" => skills.arcana,
+        "strength" => skills.strength,
+        _ => 0,
+    }
+}
+
+/// The same lookup against an authored skill gain.
+pub fn progression_skill_value(
+    skills: &crate::data::CompanionSkillProgressionData,
+    skill_id: &str,
+) -> u32 {
+    match skill_id {
+        "scouting" => skills.scouting,
+        "guarding" => skills.guarding,
+        "hospitality" => skills.hospitality,
+        "crafting" => skills.crafting,
+        "charm" => skills.charm,
+        "recovery" => skills.recovery,
+        "bargaining" => skills.bargaining,
+        "navigation" => skills.navigation,
+        "arcana" => skills.arcana,
+        "strength" => skills.strength,
+        _ => 0,
+    }
+}
+
+/// The same lookup against a contract's required thresholds.
+pub fn required_skill_value(
+    skills: &crate::state::ContractSkillRequirementState,
+    skill_id: &str,
+) -> u32 {
+    match skill_id {
+        "scouting" => skills.scouting,
+        "guarding" => skills.guarding,
+        "hospitality" => skills.hospitality,
+        "crafting" => skills.crafting,
+        "charm" => skills.charm,
+        "recovery" => skills.recovery,
+        "bargaining" => skills.bargaining,
+        "navigation" => skills.navigation,
+        "arcana" => skills.arcana,
+        "strength" => skills.strength,
+        _ => 0,
+    }
 }
 
 /// Share of full output this companion delivers today, 100 when rested.
@@ -103,4 +175,66 @@ pub fn companion_skill_total(skills: &crate::state::CompanionSkillState) -> u32 
 /// the screen advised resting her for a day at no benefit.
 pub fn companion_effectiveness(data: &GameData, monster: &CompanionState) -> u32 {
     crate::engine::day_cycle::companion_effectiveness_pct(&data.config.day_cycle, monster)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::{companion_skill_value, required_skill_value, SKILL_IDS};
+    use crate::state::{CompanionSkillState, ContractSkillRequirementState};
+
+    /// [`SKILL_IDS`] has to stay the whole list, not most of it.
+    ///
+    /// Every site that needed all ten skills used to write them out by hand and
+    /// kept coming out five. The list fixes that only while it is complete, so
+    /// this fills each field with a distinct value and checks the list can see
+    /// every one of them: adding an eleventh skill without adding its id here
+    /// leaves a number this sum cannot reach.
+    #[test]
+    fn the_skill_list_reaches_every_field_of_a_companions_skills() {
+        let skills = CompanionSkillState {
+            scouting: 1,
+            guarding: 2,
+            hospitality: 4,
+            crafting: 8,
+            charm: 16,
+            recovery: 32,
+            bargaining: 64,
+            navigation: 128,
+            arcana: 256,
+            strength: 512,
+        };
+        let seen: u32 = SKILL_IDS
+            .iter()
+            .map(|skill_id| companion_skill_value(&skills, skill_id))
+            .sum();
+        assert_eq!(
+            seen, 1023,
+            "SKILL_IDS does not name every field on CompanionSkillState."
+        );
+    }
+
+    /// The same, for the requirement side the contract desk reads.
+    #[test]
+    fn the_skill_list_reaches_every_field_of_a_contracts_requirement() {
+        let required = ContractSkillRequirementState {
+            scouting: 1,
+            guarding: 2,
+            hospitality: 4,
+            crafting: 8,
+            charm: 16,
+            recovery: 32,
+            bargaining: 64,
+            navigation: 128,
+            arcana: 256,
+            strength: 512,
+        };
+        let seen: u32 = SKILL_IDS
+            .iter()
+            .map(|skill_id| required_skill_value(&required, skill_id))
+            .sum();
+        assert_eq!(
+            seen, 1023,
+            "SKILL_IDS does not name every field on ContractSkillRequirementState."
+        );
+    }
 }

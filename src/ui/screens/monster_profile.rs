@@ -426,6 +426,55 @@ fn draw_best_use_panel(
     );
 }
 
+/// The skill band is two fixed rows between the panel title and the tower
+/// stats, so it holds this many chips and no more.
+const SKILL_CHIP_COLUMNS: usize = 4;
+const SKILL_CHIP_ROWS: usize = 2;
+const SKILL_CHIP_SLOTS: usize = SKILL_CHIP_COLUMNS * SKILL_CHIP_ROWS;
+
+/// What a companion has learned, plus her bond.
+///
+/// This was five hardcoded English chips — `Scout`, `Guard`, `Hosp.`, `Craft`,
+/// `Charm` — against a ten-skill game, on the one screen a player opens to find
+/// out what a companion has learned. Three of the four guild rooms train
+/// `recovery` or `bargaining`, so a companion could train for a season and this
+/// panel would show her exactly the same five numbers.
+///
+/// Only non-zero skills are listed, which is what keeps ten skills inside a
+/// band sized for six. `every_trainable_skill_fits_the_profile_panel` is the
+/// guard on that: if a room ever teaches enough skills to overflow the band,
+/// the test fails rather than the panel silently dropping the last one.
+fn skill_chips(data: &GameData, monster: &CompanionState) -> Vec<(String, String, Color)> {
+    let palette = [
+        theme::INFO,
+        theme::WARNING,
+        theme::POSITIVE,
+        theme::GOLD,
+        theme::ROSE,
+    ];
+    let mut chips: Vec<(String, String, Color)> = crate::engine::SKILL_IDS
+        .iter()
+        .enumerate()
+        .filter_map(|(index, skill_id)| {
+            let value = crate::engine::companion_skill_value(&monster.skills, skill_id);
+            (value > 0).then(|| {
+                (
+                    crate::ui::view_models::skill_label(data, skill_id).to_owned(),
+                    value.to_string(),
+                    palette[index % palette.len()],
+                )
+            })
+        })
+        .collect();
+    chips.push((
+        data.ui_text.common.bond_label.clone(),
+        monster.bond.to_string(),
+        theme::PRIMARY,
+    ));
+    chips.truncate(SKILL_CHIP_SLOTS);
+    chips
+}
+
 fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w: f32, h: f32) {
     draw_tier_panel(
         x,
@@ -438,28 +487,14 @@ fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w
     );
 
     draw_gold_separator(x + 18.0, y + 46.0, w - 36.0);
-    let chip_w = (w - 58.0) / 3.0;
+    let chip_w = (w - 58.0) / SKILL_CHIP_COLUMNS as f32;
     let chip_h = 30.0;
     let mut chip_x = x + 18.0;
     let mut chip_y = y + 62.0;
-    for (index, (label, value, color)) in [
-        ("Scout", monster.skills.scouting.to_string(), theme::INFO),
-        ("Guard", monster.skills.guarding.to_string(), theme::WARNING),
-        (
-            "Hosp.",
-            monster.skills.hospitality.to_string(),
-            theme::POSITIVE,
-        ),
-        ("Craft", monster.skills.crafting.to_string(), theme::GOLD),
-        ("Charm", monster.skills.charm.to_string(), theme::ROSE),
-        ("Bond", monster.bond.to_string(), theme::PRIMARY),
-    ]
-    .iter()
-    .enumerate()
-    {
+    for (index, (label, value, color)) in skill_chips(data, monster).iter().enumerate() {
         draw_profile_chip(chip_x, chip_y, chip_w, chip_h, label, value, *color);
         chip_x += chip_w + 6.0;
-        if index == 2 {
+        if index + 1 == SKILL_CHIP_COLUMNS {
             chip_x = x + 18.0;
             chip_y += chip_h + 10.0;
         }
@@ -580,5 +615,74 @@ fn condition_color(value: u32, warning_threshold: u32, any_is_danger: bool) -> C
         theme::WARNING
     } else {
         theme::POSITIVE
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::SKILL_CHIP_SLOTS;
+    use crate::data::test_game_data;
+
+    /// Every skill the engine knows must have authored text.
+    ///
+    /// The catalogue had five `skill_label_*` keys against ten skills, so any
+    /// screen reaching for the authored vocabulary could only name half the
+    /// game and printed "Unknown" for the rest — which is what the guild hall
+    /// told the player the packroom trains. A list can go stale the same way a
+    /// set of flat fields did; this is what stops it.
+    #[test]
+    fn every_skill_the_engine_knows_has_authored_text() {
+        let data = test_game_data();
+        for skill_id in crate::engine::SKILL_IDS {
+            let entry = data
+                .ui_text
+                .common
+                .skills
+                .iter()
+                .find(|skill| skill.id == skill_id);
+            let entry = entry.unwrap_or_else(|| {
+                panic!("skill '{skill_id}' has no entry in ui_text.common.skills")
+            });
+            assert!(
+                !entry.label.trim().is_empty() && !entry.code.trim().is_empty(),
+                "skill '{skill_id}' is authored with a blank label or code."
+            );
+        }
+
+        for entry in &data.ui_text.common.skills {
+            assert!(
+                crate::engine::SKILL_IDS.contains(&entry.id.as_str()),
+                "ui_text.common.skills names '{}', which the engine does not know.",
+                entry.id
+            );
+        }
+    }
+
+    /// The skill band is two fixed rows, and the panel below it starts at a
+    /// fixed offset, so the chips have to fit rather than run into the tower
+    /// stats.
+    ///
+    /// A companion shows one chip per non-zero skill plus her bond. Only skills
+    /// some room teaches can ever be non-zero, so that count is what has to fit.
+    /// If a room is ever authored to teach enough skills to overflow the band,
+    /// this fails instead of the panel quietly dropping the last one.
+    #[test]
+    fn every_trainable_skill_fits_the_profile_panel() {
+        let data = test_game_data();
+        let mut trainable: Vec<&str> = Vec::new();
+        for room in &data.guild_rooms.rooms {
+            for skill_id in &room.trained_skill_ids {
+                if !trainable.contains(&skill_id.as_str()) {
+                    trainable.push(skill_id);
+                }
+            }
+        }
+
+        let chips = trainable.len() + 1;
+        assert!(
+            chips <= SKILL_CHIP_SLOTS,
+            "{} trainable skills plus bond need {chips} chips, but the profile band holds {SKILL_CHIP_SLOTS}. Widen the band or give it a pager — do not let it truncate.",
+            trainable.len()
+        );
     }
 }

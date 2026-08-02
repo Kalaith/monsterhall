@@ -171,6 +171,64 @@ in the spec.
 What was fixed this pass is the measurement, not the balance: the collapse is
 now in every report instead of only visible by running the probe by hand.
 
+### Found by review, not by the audit (2026-08-03, thirteenth pass)
+
+Followed the twelfth pass's note to the other monotonic meters. `bond`,
+`reputation`, `corruption`, `skills` and `work_history` are **all** strictly
+monotonic — not one of them is ever decremented anywhere in the game. The
+threshold sweep over them turned up no second latch worth the name, but it
+walked straight into the shape this ledger has now recorded six times, and this
+time with a root cause rather than another instance.
+
+- ~~The authored text catalogue named five skills; the game has ten.~~ Fixed.
+  `ui_text.common` carried five flat `skill_label_*` keys, so **every screen
+  that reached for the authored vocabulary — the correct place to reach — could
+  only name half the game**, and screens that needed all ten had to hardcode
+  English in Rust (`format_skill_name`). That is why this keeps recurring: the
+  right instinct produced the wrong list.
+
+  Live consequences, all on screens a player uses to decide something:
+  - `packroom_annex` and `reception_hall` train **recovery**, `nursery_wing`
+    trains **bargaining**. The guild hall's room card mapped both to
+    `unknown_label`, so it read *"Trains Crafting, Charm, Unknown"*.
+  - `companion_skill_summary` — the roster strip and the contract desk's
+    candidate line — printed the five original skills including their zeros and
+    none of the five added later, so a companion could train recovery for a
+    season and her line never changed.
+  - The **profile screen**, the one place a player opens to see what a companion
+    has learned, drew five hardcoded English chips (`Scout`, `Guard`, `Hosp.`,
+    `Craft`, `Charm`).
+  - `guest_skill_requirement_label` and `opening_skill_gain_label` covered the
+    same five, with letter codes (`K+`, `O+`, `V+`) left over from the premise
+    this game was reskinned from.
+
+  The catalogue is now a **list** — `common.skills`, one `{id, label, code}` per
+  skill — and the engine has `SKILL_IDS` plus `companion_skill_value` /
+  `required_skill_value` / `progression_skill_value`, so a site iterates instead
+  of hand-listing. Hand-listing is what produced five every single time.
+
+  **Three guards, each verified by planting.** Every skill the engine knows has
+  authored text, and no authored entry names a skill it does not (planted:
+  dropping recovery and bargaining from the list). `SKILL_IDS` reaches every
+  field of both skill structs, via distinct powers of two so an eleventh field
+  added without its id leaves a sum this cannot reach. And the profile band —
+  two fixed rows, now four columns — holds every skill any room can teach plus
+  bond, so a room authored to teach an eighth skill fails the test instead of
+  the panel silently dropping a chip (planted: a room teaching eight).
+
+- ~~The room card said the common room trains one skill when it trains three.~~
+  Fixed, and it was pre-existing rather than fallout. The badge is 168px in a
+  row that exactly fills its 432, with a hard 20-character cap, so
+  *"Scouting, Hospitality, Charm"* was cut to **"Trains Scouting,"** — which does
+  not look truncated, it looks like a room that teaches one thing. Choosing a
+  room is the entire decision that screen exists for. It now uses the compact
+  codes the vocabulary authors for exactly this and reads "Trains Sc/Ho/Ch",
+  complete. Verified in a capture rather than by reasoning about pixels.
+
+- **Balance byte-identical** — the only line that moved in any report is
+  `content_version`. This pass changed what the game tells the player, not what
+  it does.
+
 ### Found by review, not by the audit (2026-08-03, twelfth pass)
 
 Swept the remaining axes the reachability heuristic had not been pointed at —

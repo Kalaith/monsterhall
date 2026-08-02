@@ -21,7 +21,7 @@ use crate::ui::screens::roster_window::{
 use crate::ui::theme;
 use crate::ui::view_models::{
     assignment_label, history_gain_chance_label_from_progress, primary_skill_label,
-    species_name_by_id, trained_skills_label, worker_decision_summary,
+    species_name_by_id, trained_skill_codes_label, worker_decision_summary,
 };
 
 pub(super) struct GuildHallManagementLayout {
@@ -259,10 +259,7 @@ pub(super) fn draw_selected_room_panel(
         24.0,
         &format!(
             "Trains {}",
-            compact_sentence(
-                &trained_skills_label(data, &selected_room.trained_skill_ids),
-                20
-            )
+            trained_skill_codes_label(data, &selected_room.trained_skill_ids)
         ),
         theme::INFO,
     );

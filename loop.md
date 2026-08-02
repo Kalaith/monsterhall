@@ -1137,6 +1137,38 @@ Stop the loop and report if:
   defect that would have defeated fixing it; (c) the `ui_text` migration (~40 hardcoded
   strings) remains the largest untaken slice.
 
+- **2026-08-03 — thirteenth pass (five skill names for a ten-skill game).** Took the
+  twelfth pass's note to the other monotonic meters and confirmed the shape is
+  everywhere — `bond`, `reputation`, `corruption`, `skills` and `work_history` are all
+  strictly monotonic, none is decremented anywhere — but found no second latch worth
+  fixing. What the sweep did find is the **root cause** of the five-of-ten omission this
+  ledger has now recorded six times: `ui_text.common` authored five `skill_label_*` keys
+  against a ten-skill game, so every screen reaching for the *authored* vocabulary could
+  only name half of it, and any screen needing all ten hardcoded English in Rust. The
+  right instinct produced the wrong list, repeatedly. Live: the guild hall read "Trains
+  Crafting, Charm, **Unknown**" for rooms that train recovery (three of the four do), the
+  roster strip and contract desk printed the original five with their zeros and none of
+  the later five, and the **profile screen** — where a player goes to see what a
+  companion has learned — drew five hardcoded chips. Replaced with a list
+  (`common.skills` of `{id, label, code}`) plus `SKILL_IDS` and three by-id accessors in
+  the engine, so sites iterate rather than hand-list. Also fixed a pre-existing clip on
+  the room card: a 20-character cap in a 168px badge cut "Scouting, Hospitality, Charm"
+  to "Trains Scouting," — which reads as one skill, not as truncation — now "Trains
+  Sc/Ho/Ch", verified in a capture.
+  **Result:** 120 tests (was 116), fmt and clippy clean, publish green,
+  `content_version` 1.21.0, `ui_text` 1.1.0. **Balance byte-identical** — the only line
+  that moved in any report is the version stamp; this pass changed what the game says,
+  not what it does. Three guards, each verified by planting: authored text covers
+  exactly the engine's skills; `SKILL_IDS` reaches every field of both skill structs
+  (powers of two, so an eleventh field cannot hide); and every trainable skill plus bond
+  fits the profile's two-row band, so a room teaching an eighth fails the test rather
+  than the panel dropping a chip.
+  **Next iteration should know:** (a) the five-of-ten shape should now be *structurally*
+  dead — if it recurs, the guard was wrong, not the author; (b) `work_history_summary`
+  still fills a five-placeholder template against seven categories, which is the same
+  shape in the sibling vocabulary and the obvious next target; (c) captures earn their
+  cost on any layout change — this pass found a real clipped badge that no test saw.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and
