@@ -502,7 +502,21 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         summary.event_lines.push(event_text);
     }
     game_state.event_log.extend(summary.event_lines.clone());
+    trim_event_log(data, game_state);
     summary
+}
+
+/// Keeps the campaign log to the authored maximum, discarding the oldest first.
+///
+/// Once a day, at the end of resolution, because that is the only place the log
+/// grows by more than a line.
+fn trim_event_log(data: &GameData, game_state: &mut GameState) {
+    let maximum = data.config.persistence.max_event_log_entries;
+    if maximum == 0 || game_state.event_log.len() <= maximum {
+        return;
+    }
+    let surplus = game_state.event_log.len() - maximum;
+    game_state.event_log.drain(..surplus);
 }
 
 /// Charges the day's operating costs.

@@ -21,6 +21,21 @@ pub struct PersistenceConfigData {
     pub native_settings_path: String,
     pub web_settings_key: String,
     pub autosave_enabled: bool,
+    /// Most campaign-log entries kept, oldest discarded first. `0` keeps
+    /// everything.
+    ///
+    /// The log was the only unbounded structure in the save: it gains about
+    /// twelve and a half entries a day and was never trimmed, measured at 189 by
+    /// day 30 and **4,586 by day 365** — roughly 300KB of the JSON a web build
+    /// writes into a localStorage quota that every game on the same origin
+    /// shares. Bounding it is fine; bounding it without saying so is what turns
+    /// a full box into a wrong report, so the Journal says what it is holding.
+    #[serde(default = "default_max_event_log_entries")]
+    pub max_event_log_entries: usize,
+}
+
+fn default_max_event_log_entries() -> usize {
+    1_500
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

@@ -15,7 +15,9 @@ use crate::ui::core::{
 use crate::ui::feedback::draw_inline_error;
 use crate::ui::layout;
 use crate::ui::theme;
-use crate::ui::view_models::{action_from_action_hint, daily_priority_summary, onboarding_lines};
+use crate::ui::view_models::{
+    action_from_action_hint, daily_priority_summary, fill_template, onboarding_lines,
+};
 
 pub fn draw_journal(
     data: &GameData,
@@ -149,6 +151,26 @@ pub fn draw_journal(
     if start_index < max_scroll {
         draw_body_text(
             &ui.scroll_down_message,
+            left_margin + layout::PANEL_PADDING,
+            log_y + log_h - 16.0,
+            14.0,
+            theme::TEXT_MUTED,
+        );
+    } else if game_state.event_log.len() >= data.config.persistence.max_event_log_entries
+        && data.config.persistence.max_event_log_entries > 0
+    {
+        // The log is bounded now, and a bound nobody mentions reads as a
+        // campaign that began later than it did — the same silent clipping the
+        // day report was fixed for. This is the bottom of the list, so it is
+        // where the truth about it belongs.
+        draw_body_text(
+            &fill_template(
+                &ui.log_trimmed_message,
+                &[(
+                    "{count}",
+                    data.config.persistence.max_event_log_entries.to_string(),
+                )],
+            ),
             left_margin + layout::PANEL_PADDING,
             log_y + log_h - 16.0,
             14.0,

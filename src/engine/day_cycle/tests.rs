@@ -1472,3 +1472,43 @@ fn every_authored_mutation_fires_when_its_conditions_are_met() {
         );
     }
 }
+
+/// The campaign log was the only unbounded structure in the save: about twelve
+/// and a half entries a day, never trimmed, measured at 4,586 by day 365 —
+/// roughly 300KB of the JSON a web build writes into a localStorage quota that
+/// every game on the same origin shares.
+#[test]
+fn the_campaign_log_stops_growing_at_the_authored_bound() {
+    let data = crate::data::test_game_data();
+    let maximum = data.config.persistence.max_event_log_entries;
+    assert!(maximum > 0, "this test is about the authored bound");
+
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    game_state.monsters = vec![test_monster(Vec::new())];
+    // Start it over the line so one resolved day has to bring it back.
+    game_state.event_log = (0..maximum + 40)
+        .map(|index| format!("old entry {index}"))
+        .collect();
+
+    let _ = resolve_day(&data, &mut game_state);
+
+    assert!(
+        game_state.event_log.len() <= maximum,
+        "the log should be held to {maximum}, got {}",
+        game_state.event_log.len()
+    );
+    assert!(
+        !game_state
+            .event_log
+            .iter()
+            .any(|entry| entry == "old entry 0"),
+        "the oldest entries are the ones let go"
+    );
+    assert!(
+        game_state
+            .event_log
+            .iter()
+            .any(|entry| entry == &format!("old entry {}", maximum + 39)),
+        "the newest entries must survive"
+    );
+}

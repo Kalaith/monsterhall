@@ -245,6 +245,36 @@ mutation and the check names golemkin).
   is a `corruption_adept` exactly like the warden she replaces. Variety means a
   different *role*, not a different name.
 
+### Found by review, not by the audit (2026-08-03, thirtieth pass)
+
+Took the recorded design call this loop had carried longest after the roster
+one: **the campaign log was the only unbounded structure in the save.**
+
+- ~~The log grew for the life of a campaign and was never trimmed.~~ Bounded.
+  About twelve and a half entries a day — 189 by day 30, 912 by day 90, **4,586
+  by day 365** — is roughly 300KB of the JSON a web build writes, into a
+  localStorage quota that **every game on the shared WebHatchery origin
+  competes for**. `persistence.max_event_log_entries` (1,500, `0` keeps
+  everything) trims the oldest once a day at the end of resolution, which is the
+  only place the log grows by more than a line. Measured: the day-365 report's
+  `final_event_log_entries` 4,587 → 1,500, with every economic figure
+  byte-identical.
+
+  1,500 is about four months of scrollback, so the Journal still opens on a log
+  a player can get lost in.
+
+- **And it says so.** A bound nobody mentions reads as a campaign that began
+  later than it did — the same silent clipping the day report was fixed for — so
+  the bottom of the log now names what the guild is holding rather than simply
+  ending. The save path itself was checked while here: both the explicit save and
+  the autosave surface a failure to the player rather than swallowing it.
+
+- The capture harness padded the log to 4,380 entries, which is now a state the
+  game trims away on the next resolved day; it fills to the authored bound
+  instead.
+
+- **Balance byte-identical.**
+
 ### Found by review, not by the audit (2026-08-03, twenty-ninth pass)
 
 Swept the shape that produced the last three passes' finds — *a screen that

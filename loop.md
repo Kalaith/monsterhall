@@ -1644,6 +1644,30 @@ Stop the loop and report if:
   the Expedition Desk cards read `Worn 95% | Instability 204`, which is the first time
   those two numbers have appeared on a screen at all.
 
+- **2026-08-03 — thirtieth pass (the only unbounded thing in the save).** Took the
+  design call this loop had carried longest after the roster one. The campaign log gains
+  about twelve and a half entries a day and was never trimmed — 189 by day 30, 912 by
+  day 90, **4,586 by day 365** — roughly 300KB of the JSON a web build writes into a
+  localStorage quota that every game on the shared WebHatchery origin competes for.
+  `persistence.max_event_log_entries` (1,500; `0` keeps everything) trims the oldest once
+  a day at the end of resolution, the only place the log grows by more than a line. About
+  four months of scrollback survives, so the Journal still opens on a log a player can
+  get lost in. **And the Journal says what it is holding**, because a bound nobody
+  mentions reads as a campaign that began later than it did — the same silent clipping
+  the day report was fixed for.
+  **Result:** 140 tests (was 139), fmt and clippy clean, publish green,
+  `content_version` 1.31.0, `ui_text` 1.7.0. `final_event_log_entries` 4,587 → 1,500 with
+  **every economic figure byte-identical**. Checked while here: both the explicit save
+  and the autosave surface a write failure to the player rather than swallowing it. The
+  capture harness padded the log to 4,380, a state the game now trims away, so it fills
+  to the authored bound instead.
+  **Next iteration should know:** (a) with the log bounded, the save has no unbounded
+  structure left — `resolved_contracts` and `floor_surveys` grow with content, not with
+  time; (b) the `ui_text` migration (~40 hardcoded strings) is now the **only** recorded
+  slice left standing, and this loop has added to it four times without taking it;
+  (c) the `salamander_corekeeper` reachability question is still an open content
+  decision.
+
 ## Deferred (needs a new system or a decision; not for this loop)
 
 - **Make the validation policy's build order a plan rather than a shopping list.** Measured and

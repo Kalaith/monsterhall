@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.7.0",
   "common": {
     "settings_button": "Settings",
     "return_to_town_button": "Guild Hall",
@@ -344,7 +344,8 @@
     "priority_label": "Priority",
     "recent_events_empty_message": "No journal entries have been recorded yet.",
     "scroll_up_message": "Scroll up for newer entries.",
-    "scroll_down_message": "Scroll down for older entries."
+    "scroll_down_message": "Scroll down for older entries.",
+    "log_trimmed_message": "The guild keeps its last {count} entries; older days have been let go."
   },
   "expedition_planning": {
     "title": "Expedition Planning",

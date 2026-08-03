@@ -1,11 +1,11 @@
 {
-  "content_version": "1.30.0",
+  "content_version": "1.31.0",
   "rng_seed": 6840157140829518803,
   "simulation_days": 365,
   "starting_day": 1,
   "ending_day": 366,
   "opening_event_log_entries": 9,
-  "final_event_log_entries": 4587,
+  "final_event_log_entries": 1500,
   "final_roster_size": 20,
   "final_buildings": 15,
   "final_unlocked_floors": 23,

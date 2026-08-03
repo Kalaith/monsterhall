@@ -178,11 +178,14 @@ impl Game {
         // carries roughly 4,600. A journal photographed at nine entries is a
         // journal photographed in the one state where nothing about it can be
         // wrong.
-        let logged_days = 365;
-        for day in game_state.event_log.len()..logged_days * 12 {
+        // Filled to the bound the campaign log is now held to, which is what a
+        // long campaign actually carries — padding past it photographs a state
+        // the game trims away on the next resolved day.
+        let logged_entries = data.config.persistence.max_event_log_entries.max(1);
+        for entry in game_state.event_log.len()..logged_entries {
             game_state.event_log.push(format!(
                 "Day {} of the guild's business was recorded.",
-                day / 12
+                entry / 12
             ));
         }
 

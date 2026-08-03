@@ -320,6 +320,7 @@ pub struct JournalUiText {
     pub recent_events_empty_message: String,
     pub scroll_up_message: String,
     pub scroll_down_message: String,
+    pub log_trimmed_message: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
