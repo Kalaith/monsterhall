@@ -261,6 +261,7 @@ pub struct ContractDeskUiText {
     pub assigned_button: String,
     pub status_label: String,
     pub deadline_day_template: String,
+    pub deadline_day_short_template: String,
     pub category_label: String,
     pub patron_tier_label: String,
     pub preparation_quality_label: String,

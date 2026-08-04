@@ -63,7 +63,12 @@ pub(super) fn draw_monster_roster(
         ROSTER_STRIP_COLUMNS,
     );
     let visible_count = roster.visible_count;
-    let columns = ROSTER_STRIP_COLUMNS.min(visible_count.max(1));
+    // Fixed, not `min(visible_count)`. Narrowing to the number of cards drew a
+    // guild of one as a single card stretched across the whole panel, with its
+    // Profile and Rest buttons a screen-width from the name it belongs to — on
+    // the first screen of a new campaign, where the guild is always one. A card
+    // is a card at every roster size.
+    let columns = ROSTER_STRIP_COLUMNS;
     let total_gap = layout::SECTION_GAP * (columns as f32 - 1.0);
     let card_width =
         (layout.content_width - layout::PANEL_PADDING * 2.0 - total_gap) / columns as f32;

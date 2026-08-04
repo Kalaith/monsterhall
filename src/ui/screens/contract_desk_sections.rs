@@ -214,11 +214,15 @@ pub(super) fn draw_requests_panel(
 
     for (index, request) in requests.iter().take(max_visible_requests).enumerate() {
         let y = 166.0 + index as f32 * 36.0;
+        // The row is a 266px button and the full "… | Deadline: Day 4" ran past
+        // it, so every offer in the list was clipped at the panel edge. The
+        // detail panel beside it spells the deadline out; the picker only has
+        // to say which day.
         let label = format!(
             "{} | {}",
             request.guest_name,
             fill_template(
-                &data.ui_text.contract_desk.deadline_day_template,
+                &data.ui_text.contract_desk.deadline_day_short_template,
                 &[("{day}", request.deadline_day.to_string())],
             )
         );

@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "common": {
     "settings_button": "Settings",
     "return_to_town_button": "Guild Hall",
@@ -294,6 +294,7 @@
     "assigned_button": "Assigned",
     "status_label": "Status",
     "deadline_day_template": "Deadline: Day {day}",
+    "deadline_day_short_template": "Day {day}",
     "species_label": "Species",
     "penalty_gold_template": "Penalty: {gold} gold",
     "assigned_label": "Assigned",
