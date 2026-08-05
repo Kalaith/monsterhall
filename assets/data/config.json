@@ -1,6 +1,6 @@
 {
   "title": "Monsterhall",
-  "content_version": "1.32.0",
+  "content_version": "1.33.0",
   "save_version": 10,
   "input": {
     "primary_mode": "mouse",
@@ -168,6 +168,12 @@
     "expedition_egg_reward_threshold": 68,
     "expedition_relic_reward_threshold": 88,
     "expedition_injury_threshold": 55,
+    "expedition_min_success_chance_pct": 5,
+    "expedition_max_success_chance_pct": 95,
+    "expedition_failure_salvage_pct": 20,
+    "expedition_prep_shortfall_success_penalty": 3,
+    "recovery_focused_condition_cost_pct": 50,
+    "recovery_focused_corruption_relief": 3,
     "role_affinity": {
       "matched_bonus": 12,
       "versatile_bonus": 4,

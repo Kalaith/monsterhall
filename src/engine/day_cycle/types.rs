@@ -13,7 +13,10 @@ pub struct GuildJobPreview {
 
 #[derive(Debug, Clone)]
 pub struct ExpeditionPlanPreview {
+    /// Raw capability margin used by reward and injury formulas.
     pub success_score: i32,
+    /// Actual percentage chance the expedition roll succeeds.
+    pub success_chance_pct: u32,
     pub projected_materials: u32,
     pub projected_arcane_residue: u32,
     pub projected_eggs: u32,

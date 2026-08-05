@@ -107,8 +107,8 @@ pub(super) fn priority_injury_risk(priority: &ExpeditionPriority) -> i32 {
     match priority {
         ExpeditionPriority::Balanced => 0,
         ExpeditionPriority::Aggressive => 8,
-        ExpeditionPriority::Safe => -10,
-        ExpeditionPriority::RecoveryFocused => -14,
+        ExpeditionPriority::Safe => -14,
+        ExpeditionPriority::RecoveryFocused => -6,
         ExpeditionPriority::Curiosity => 5,
     }
 }
@@ -219,6 +219,10 @@ pub(crate) fn calculate_expedition_plan(
         + total_trait_success
         + depth_profile.success_bonus
         - floor.difficulty as i32;
+    let success_chance_pct = success_score.clamp(
+        data.config.day_cycle.expedition_min_success_chance_pct as i32,
+        data.config.day_cycle.expedition_max_success_chance_pct as i32,
+    ) as u32;
     let reward_bonus = (success_score.max(0) as u32
         / data.config.day_cycle.expedition_reward_success_divisor)
         .max(1);
@@ -304,6 +308,7 @@ pub(crate) fn calculate_expedition_plan(
 
     ExpeditionPlanPreview {
         success_score,
+        success_chance_pct,
         projected_materials,
         projected_arcane_residue,
         projected_eggs,

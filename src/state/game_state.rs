@@ -624,6 +624,8 @@ pub struct DayResolutionSummary {
     pub expedition_arcane_residue: u32,
     pub expedition_eggs: u32,
     pub expedition_relics: u32,
+    pub expedition_successes: u32,
+    pub expedition_failures: u32,
     pub upkeep_wage_gold: u32,
     pub upkeep_cleaning_gold: u32,
     pub upkeep_maintenance_gold: u32,

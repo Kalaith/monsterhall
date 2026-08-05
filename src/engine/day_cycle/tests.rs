@@ -1260,6 +1260,55 @@ fn an_unassigned_expedition_reports_no_injury_risk_rather_than_a_number() {
     );
 }
 
+#[test]
+fn the_starting_companion_has_dependable_egg_hunt_odds() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut monster = test_monster(Vec::new());
+    let floor = data
+        .floors
+        .floors
+        .iter()
+        .find(|floor| game_state.town.unlocked_floor_ids.contains(&floor.id))
+        .expect("a starting floor is unlocked");
+    let mission = data
+        .missions
+        .missions
+        .iter()
+        .find(|mission| mission.id == "egg_hunt")
+        .expect("the opening needs an egg hunt");
+    monster.current_job = CompanionJobState::OnExpedition {
+        expedition_id: "expedition_001".to_owned(),
+    };
+    game_state.monsters = vec![monster];
+    game_state.active_expedition = Some(ExpeditionState {
+        expedition_id: "expedition_001".to_owned(),
+        floor_id: floor.id.clone(),
+        mission_id: mission.id.clone(),
+        priority: ExpeditionPriority::Balanced,
+        assigned_monster_ids: vec!["monster_001".to_owned()],
+    });
+
+    let preview = preview_expedition_plan(
+        &data,
+        &game_state,
+        &floor.id,
+        &mission.id,
+        &ExpeditionPriority::Balanced,
+    )
+    .expect("opening egg hunt preview");
+
+    assert!(
+        preview.success_chance_pct >= 80,
+        "the only starting companion must not be luck-locked out of recruitment, got {}%",
+        preview.success_chance_pct
+    );
+    assert!(
+        preview.projected_eggs > 0,
+        "the dependable opening egg hunt must actually offer recruitment"
+    );
+}
+
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {
     CompanionState {
         id: "monster_001".to_owned(),

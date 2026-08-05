@@ -9,9 +9,9 @@
 use super::*;
 use crate::state::FloorSurveyState;
 
-/// Records one completed expedition against `floor_id`, worth the mission's
-/// `survey_value`. Runs regardless of haul: the party walked the route, so the
-/// guild knows the route a little better.
+/// Records one successful expedition against `floor_id`, worth the mission's
+/// `survey_value`. Failed runs do not call this: reaching a floor is not the
+/// same as bringing home a route the next party can trust.
 pub(super) fn record_floor_survey(town: &mut PlayerTownState, floor_id: &str, survey_value: u32) {
     if survey_value == 0 {
         return;

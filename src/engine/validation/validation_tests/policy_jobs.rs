@@ -159,7 +159,9 @@ pub(super) fn best_growth_expedition_assignment(
                 {
                     continue;
                 }
-                if !can_survive_debt_after_growth_assignment(game_state, 1) {
+                if !should_reserve_egg_expedition
+                    && !can_survive_debt_after_growth_assignment(game_state, 1)
+                {
                     continue;
                 }
                 if best_assignment

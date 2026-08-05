@@ -106,6 +106,8 @@ pub(super) fn run_simulation_report(
     let mut egg_reward_days_after_day_90 = 0u32;
     let mut last_expedition_day = None;
     let mut total_expedition_eggs = 0u32;
+    let mut total_expedition_successes = 0u32;
+    let mut total_expedition_failures = 0u32;
     let mut milestone_snapshots = Vec::new();
 
     for _ in 0..simulation_days {
@@ -162,6 +164,8 @@ pub(super) fn run_simulation_report(
             }
         }
         total_expedition_eggs += summary.expedition_eggs;
+        total_expedition_successes += summary.expedition_successes;
+        total_expedition_failures += summary.expedition_failures;
         if [30, 90, 180, 365].contains(&summary.resolved_day) {
             milestone_snapshots.push(milestone_snapshot(data, &game_state, summary.resolved_day));
         }
@@ -224,6 +228,8 @@ pub(super) fn run_simulation_report(
         egg_reward_days_after_day_90,
         last_expedition_day,
         total_expedition_eggs,
+        total_expedition_successes,
+        total_expedition_failures,
         final_resources: resources_snapshot(&game_state),
         final_debt: debt_snapshot(&game_state),
         final_upkeep_forecast: upkeep_forecast_snapshot(data, &game_state),

@@ -64,6 +64,13 @@ pub(super) fn should_defer_guest_for_growth(
     game_state: &GameState,
     request: &crate::state::ContractState,
 ) -> bool {
+    // A one-companion guild that loses its first egg runs must keep its only
+    // worker available for another attempt and for recovery. Booking her into
+    // the contract chain runs fatigue to the cap and turns two unlucky rolls
+    // into a permanent recruitment deadlock.
+    if game_state.monsters.len() < 5 && game_state.egg_inventory.is_empty() {
+        return true;
+    }
     if request.deadline_day <= game_state.current_day {
         return false;
     }

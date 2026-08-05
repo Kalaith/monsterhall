@@ -244,6 +244,27 @@ pub struct DayCycleConfigData {
     pub expedition_egg_reward_threshold: i32,
     pub expedition_relic_reward_threshold: i32,
     pub expedition_injury_threshold: i32,
+    /// Success scores are genuine percentage chances at resolution, clamped to
+    /// this authored band so neither an awful nor an exceptional plan erases all
+    /// uncertainty.
+    #[serde(default = "default_expedition_min_success_chance_pct")]
+    pub expedition_min_success_chance_pct: u32,
+    #[serde(default = "default_expedition_max_success_chance_pct")]
+    pub expedition_max_success_chance_pct: u32,
+    /// Materials and residue a failed party can drag home. Eggs, relics and
+    /// survey progress always require success.
+    #[serde(default = "default_expedition_failure_salvage_pct")]
+    pub expedition_failure_salvage_pct: u32,
+    /// Percentage points removed from the roll for every unpaid unit of mission
+    /// preparation.
+    #[serde(default = "default_expedition_prep_shortfall_success_penalty")]
+    pub expedition_prep_shortfall_success_penalty: u32,
+    /// Recovery Focused is not a second Safe stance: it reduces the condition
+    /// toll and instability rather than providing the best injury protection.
+    #[serde(default = "default_recovery_focused_condition_cost_pct")]
+    pub recovery_focused_condition_cost_pct: u32,
+    #[serde(default = "default_recovery_focused_corruption_relief")]
+    pub recovery_focused_corruption_relief: u32,
     /// How far a worn-down companion's output falls off.
     #[serde(default = "default_condition_effects")]
     pub condition_effects: ConditionEffectData,
@@ -511,4 +532,28 @@ fn default_reward_threshold_depth_relief_pct() -> i32 {
 
 fn default_mission_focus_reward_relief_pct() -> i32 {
     15
+}
+
+fn default_expedition_min_success_chance_pct() -> u32 {
+    5
+}
+
+fn default_expedition_max_success_chance_pct() -> u32 {
+    95
+}
+
+fn default_expedition_failure_salvage_pct() -> u32 {
+    20
+}
+
+fn default_expedition_prep_shortfall_success_penalty() -> u32 {
+    3
+}
+
+fn default_recovery_focused_condition_cost_pct() -> u32 {
+    50
+}
+
+fn default_recovery_focused_corruption_relief() -> u32 {
+    3
 }

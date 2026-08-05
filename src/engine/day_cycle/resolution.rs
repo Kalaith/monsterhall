@@ -27,6 +27,8 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         expedition_arcane_residue: 0,
         expedition_eggs: 0,
         expedition_relics: 0,
+        expedition_successes: 0,
+        expedition_failures: 0,
         upkeep_wage_gold: 0,
         upkeep_cleaning_gold: 0,
         upkeep_maintenance_gold: 0,
@@ -124,44 +126,70 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         }
     }
 
+    let mut expedition_succeeded = None;
     if let Some((floor_id, egg_species_entries, depth_profile, plan_preview)) =
         &active_expedition_context
     {
+        let shortfall_penalty = summary.expedition_prep_shortfall.saturating_mul(
+            data.config
+                .day_cycle
+                .expedition_prep_shortfall_success_penalty,
+        );
+        let success_chance = plan_preview
+            .success_chance_pct
+            .saturating_sub(shortfall_penalty)
+            .max(data.config.day_cycle.expedition_min_success_chance_pct);
+        let success_roll = gen_range(0, 100) as u32;
+        let succeeded = success_roll < success_chance;
+        expedition_succeeded = Some(succeeded);
+        if succeeded {
+            summary.expedition_successes = 1;
+        } else {
+            summary.expedition_failures = 1;
+        }
+        let rewards = realized_expedition_rewards(data, plan_preview, succeeded);
+
         game_state.resources.tower_materials = game_state
             .resources
             .tower_materials
-            .saturating_add(plan_preview.projected_materials);
+            .saturating_add(rewards.materials);
         game_state.resources.arcane_residue = game_state
             .resources
             .arcane_residue
-            .saturating_add(plan_preview.projected_arcane_residue);
-        game_state.resources.relics = game_state
-            .resources
-            .relics
-            .saturating_add(plan_preview.projected_relics);
+            .saturating_add(rewards.arcane_residue);
+        game_state.resources.relics = game_state.resources.relics.saturating_add(rewards.relics);
         pending_egg_rewards.push((
             floor_id.clone(),
             egg_species_entries.clone(),
-            plan_preview.projected_eggs,
+            rewards.eggs,
             depth_profile.egg_grade_score,
         ));
 
         summary.expedition_materials = summary
             .expedition_materials
-            .saturating_add(plan_preview.projected_materials);
+            .saturating_add(rewards.materials);
         summary.expedition_arcane_residue = summary
             .expedition_arcane_residue
-            .saturating_add(plan_preview.projected_arcane_residue);
-        summary.expedition_eggs = summary
-            .expedition_eggs
-            .saturating_add(plan_preview.projected_eggs);
-        summary.expedition_relics = summary
-            .expedition_relics
-            .saturating_add(plan_preview.projected_relics);
-        if let Some(expedition) = &active_expedition {
-            record_expedition_survey(data, &mut game_state.town, expedition, floor_id);
+            .saturating_add(rewards.arcane_residue);
+        summary.expedition_eggs = summary.expedition_eggs.saturating_add(rewards.eggs);
+        summary.expedition_relics = summary.expedition_relics.saturating_add(rewards.relics);
+        if succeeded {
+            if let Some(expedition) = &active_expedition {
+                record_expedition_survey(data, &mut game_state.town, expedition, floor_id);
+            }
+            summary.event_lines.push(format!(
+                "The expedition succeeded at {}% odds (rolled {}).",
+                success_chance, success_roll
+            ));
+        } else {
+            summary.event_lines.push(format!(
+                "The expedition failed at {}% odds (rolled {}); the party recovered only {}% salvage and learned no safe route.",
+                success_chance,
+                success_roll,
+                data.config.day_cycle.expedition_failure_salvage_pct
+            ));
         }
-        if plan_preview.projected_relics > 0 {
+        if rewards.relics > 0 {
             if let Some(floor) = data
                 .floors
                 .floors
@@ -392,13 +420,19 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     );
 
                     let trait_modifier = collect_trait_modifiers(data, monster);
-                    monster.fatigue = monster
-                        .fatigue
-                        .saturating_add(data.config.day_cycle.expedition_fatigue);
-                    monster.stress = monster.stress.saturating_add(
+                    let condition_cost_pct =
+                        expedition_condition_cost_pct(data, &expedition.priority);
+                    let fatigue_gain = scale_by_effectiveness(
+                        data.config.day_cycle.expedition_fatigue,
+                        condition_cost_pct,
+                    );
+                    let stress_gain = scale_by_effectiveness(
                         data.config.day_cycle.expedition_stress
                             + trait_modifier.stress_change_flat.max(0) as u32,
+                        condition_cost_pct,
                     );
+                    monster.fatigue = monster.fatigue.saturating_add(fatigue_gain);
+                    monster.stress = monster.stress.saturating_add(stress_gain);
                     if safety_score < data.config.day_cycle.expedition_injury_threshold {
                         monster.injury = monster
                             .injury
@@ -407,14 +441,26 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                             "{} returned from {} banged up.",
                             monster.name, floor.name
                         ));
-                    } else {
+                    } else if expedition_succeeded == Some(true) {
                         summary.roster_updates.push(format!(
                             "{} returned from {} with fresh loot.",
                             monster.name, floor.name
                         ));
+                    } else {
+                        summary.roster_updates.push(format!(
+                            "{} returned from {} after the route broke down.",
+                            monster.name, floor.name
+                        ));
                     }
+                    let recovery_relief =
+                        if matches!(expedition.priority, ExpeditionPriority::RecoveryFocused) {
+                            data.config.day_cycle.recovery_focused_corruption_relief
+                        } else {
+                            0
+                        };
                     let corruption_gain = expedition_corruption_gain(floor, mission, monster)
-                        .saturating_add(depth_profile.corruption_pressure);
+                        .saturating_add(depth_profile.corruption_pressure)
+                        .saturating_sub(recovery_relief);
                     if corruption_gain > 0 {
                         monster.corruption = monster.corruption.saturating_add(corruption_gain);
                         summary.roster_updates.push(format!(
@@ -429,7 +475,13 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
                     }
 
                     monster.current_job = CompanionJobState::Idle;
-                    apply_monster_relationship_gain(data, monster, None, 1, 1);
+                    apply_monster_relationship_gain(
+                        data,
+                        monster,
+                        None,
+                        1,
+                        i32::from(expedition_succeeded == Some(true)),
+                    );
                     if let Some(mutation_text) = try_apply_mutation(data, monster) {
                         summary.event_lines.push(mutation_text);
                     }

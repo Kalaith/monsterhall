@@ -446,8 +446,8 @@ pub fn draw_expedition_planning(
         let metric_gap = 8.0;
         let mut metrics = vec![
             (
-                "Success".to_owned(),
-                preview.success_score.to_string(),
+                "Success Chance".to_owned(),
+                format!("{}%", preview.success_chance_pct),
                 theme::POSITIVE,
             ),
             (

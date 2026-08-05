@@ -156,6 +156,22 @@ impl GameData {
             );
         }
 
+        let day_cycle = &self.config.day_cycle;
+        if day_cycle.expedition_min_success_chance_pct == 0
+            || day_cycle.expedition_max_success_chance_pct > 100
+            || day_cycle.expedition_min_success_chance_pct
+                >= day_cycle.expedition_max_success_chance_pct
+            || day_cycle.expedition_failure_salvage_pct >= 100
+            || day_cycle.expedition_prep_shortfall_success_penalty == 0
+            || day_cycle.recovery_focused_condition_cost_pct == 0
+            || day_cycle.recovery_focused_condition_cost_pct >= 100
+        {
+            return Err(
+                "config.json expedition chance, salvage, shortfall, and recovery values must define percentages inside 0..=100."
+                    .to_owned(),
+            );
+        }
+
         self.validate_quality_rank_ladder()?;
 
         Ok(())
