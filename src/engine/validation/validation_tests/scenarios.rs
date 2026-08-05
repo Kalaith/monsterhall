@@ -510,6 +510,25 @@ fn long_campaign_simulation_reports_stay_valid() {
                     report.total_expedition_successes,
                     report.total_expedition_failures
                 );
+                let largest_party = report
+                    .per_day
+                    .iter()
+                    .map(|day| day.expedition_members_assigned)
+                    .max()
+                    .unwrap_or_default();
+                assert!(
+                    largest_party >= 2,
+                    "representative policy should exercise multi-companion expeditions, largest party was {largest_party}"
+                );
+                let selected_stances = report
+                    .per_day
+                    .iter()
+                    .filter_map(|day| day.expedition_priority.as_deref())
+                    .collect::<std::collections::BTreeSet<_>>();
+                assert!(
+                    selected_stances.len() >= 2,
+                    "representative policy should select more than one viable expedition stance, got {selected_stances:?}"
+                );
                 for skill_id in crate::engine::SKILL_IDS {
                     assert!(
                         report

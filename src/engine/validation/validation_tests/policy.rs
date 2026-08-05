@@ -1,7 +1,7 @@
 use super::policy_buildings::purchase_priority_buildings;
 use super::policy_eggs::hatch_affordable_eggs;
 use super::policy_guests::{accepted_guest_booking_count, assign_guest_bookings};
-use super::policy_jobs::assign_daily_jobs;
+use super::policy_jobs::{assign_daily_jobs, expedition_priority_id};
 use super::*;
 
 pub(super) fn play_opening_sequence(data: &GameData, game_state: &mut GameState) {
@@ -25,6 +25,7 @@ pub(super) fn run_daily_policy(data: &GameData, game_state: &mut GameState) -> D
     metrics.guild_job_workers_assigned = guild_job_workers;
     metrics.expedition_members_assigned = expedition_members;
     if let Some(expedition) = &game_state.active_expedition {
+        metrics.expedition_priority = Some(expedition_priority_id(&expedition.priority).to_owned());
         metrics.expedition_mission_id = Some(expedition.mission_id.clone());
         metrics.expedition_reward_focus = data
             .missions

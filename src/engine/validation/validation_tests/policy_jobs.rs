@@ -19,17 +19,12 @@ pub(super) fn assign_daily_jobs(data: &GameData, game_state: &mut GameState) -> 
         .map(|monster| monster.id.clone())
         .collect::<Vec<_>>();
 
-    if let Some((monster_id, floor_id, mission_id)) =
-        best_growth_expedition_assignment(data, game_state, &reserved_guest_monster_ids)
-    {
-        configure_expedition_plan(
-            game_state,
-            &floor_id,
-            &mission_id,
-            ExpeditionPriority::Balanced,
-        );
-        if assign_monster_to_expedition(data, game_state, &monster_id, &floor_id).is_ok() {
-            expedition_members += 1;
+    if let Some(plan) = best_growth_expedition_plan(data, game_state, &reserved_guest_monster_ids) {
+        configure_expedition_plan(game_state, &plan.floor_id, &plan.mission_id, plan.priority);
+        for monster_id in plan.monster_ids {
+            if assign_monster_to_expedition(data, game_state, &monster_id, &plan.floor_id).is_ok() {
+                expedition_members += 1;
+            }
         }
     }
 
@@ -110,94 +105,253 @@ pub(super) fn best_unlocked_room_id(
         .map(|room| room.id.clone())
 }
 
-pub(super) fn best_growth_expedition_assignment(
+#[derive(Debug, Clone)]
+pub(super) struct ExpeditionPolicyPlan {
+    pub(super) monster_ids: Vec<String>,
+    pub(super) floor_id: String,
+    pub(super) mission_id: String,
+    pub(super) priority: ExpeditionPriority,
+    score: i32,
+}
+
+pub(super) fn best_growth_expedition_plan(
     data: &GameData,
     game_state: &GameState,
     reserved_guest_monster_ids: &std::collections::HashSet<String>,
-) -> Option<(String, String, String)> {
-    let mut best_assignment: Option<(String, String, String, i32)> = None;
-    let should_reserve_egg_expedition = should_reserve_egg_expedition(game_state);
+) -> Option<ExpeditionPolicyPlan> {
+    let mut best_plan = None::<ExpeditionPolicyPlan>;
+    let reserve_egg_run = should_reserve_egg_expedition(game_state);
+    let mut available_monster_ids = game_state
+        .monsters
+        .iter()
+        .filter(|monster| {
+            !reserved_guest_monster_ids.contains(&monster.id)
+                && monster.injury == 0
+                && monster.fatigue < 34
+                && monster.stress < 20
+        })
+        .map(|monster| monster.id.clone())
+        .collect::<Vec<_>>();
+    available_monster_ids.sort();
+    let max_party_size = usize::from(game_state.town.party_size).min(available_monster_ids.len());
+    if max_party_size == 0
+        || (!reserve_egg_run
+            && !can_spare_worker_for_growth(game_state, reserved_guest_monster_ids.len()))
+    {
+        return None;
+    }
+    let mut simulated_state = game_state.clone();
 
-    for monster in &game_state.monsters {
-        if reserved_guest_monster_ids.contains(&monster.id)
-            || monster.injury > 0
-            || monster.fatigue >= 34
-            || monster.stress >= 20
-        {
-            continue;
-        }
-
-        let mut simulated_state = game_state.clone();
-        for simulated_monster in &mut simulated_state.monsters {
-            simulated_monster.current_job = crate::state::CompanionJobState::Idle;
-        }
-
-        for floor in data.floors.floors.iter().filter(|floor| {
-            game_state
-                .town
-                .unlocked_floor_ids
+    for floor in data.floors.floors.iter().filter(|floor| {
+        game_state
+            .town
+            .unlocked_floor_ids
+            .iter()
+            .any(|floor_id| floor_id == &floor.id)
+    }) {
+        for mission_id in &floor.mission_ids {
+            let Some(mission) = data
+                .missions
+                .missions
                 .iter()
-                .any(|floor_id| floor_id == &floor.id)
-        }) {
-            for mission_id in &floor.mission_ids {
-                let Some(mission) = data
-                    .missions
-                    .missions
-                    .iter()
-                    .find(|entry| entry.id == *mission_id)
-                else {
-                    continue;
+                .find(|entry| entry.id == *mission_id)
+            else {
+                continue;
+            };
+            if reserve_egg_run && mission.reward_focus != "eggs" {
+                continue;
+            }
+            let mut mission_monster_ids = available_monster_ids.clone();
+            mission_monster_ids.sort_by(|left_id, right_id| {
+                let score = |monster_id: &String| {
+                    game_state
+                        .monsters
+                        .iter()
+                        .find(|monster| &monster.id == monster_id)
+                        .map(|monster| {
+                            expedition_candidate_score(data, game_state, mission, monster)
+                        })
+                        .unwrap_or(i32::MIN)
                 };
-                if should_reserve_egg_expedition && mission.reward_focus != "eggs" {
-                    continue;
-                }
-                configure_expedition_plan(
-                    &mut simulated_state,
-                    &floor.id,
-                    mission_id,
-                    ExpeditionPriority::Balanced,
-                );
-                if assign_monster_to_expedition(data, &mut simulated_state, &monster.id, &floor.id)
-                    .is_err()
-                {
-                    continue;
-                }
-                let Ok(preview) = preview_expedition_plan(
-                    data,
-                    &simulated_state,
-                    &floor.id,
-                    mission_id,
-                    &ExpeditionPriority::Balanced,
-                ) else {
-                    continue;
-                };
-                let score = expedition_growth_score(game_state, &preview);
-                if !should_reserve_egg_expedition
-                    && !can_spare_worker_for_growth(game_state, reserved_guest_monster_ids.len())
-                {
-                    continue;
-                }
-                if !should_reserve_egg_expedition
-                    && !can_survive_debt_after_growth_assignment(game_state, 1)
-                {
-                    continue;
-                }
-                if best_assignment
-                    .as_ref()
-                    .is_none_or(|(_, _, _, best_score)| score > *best_score)
-                {
-                    best_assignment = Some((
-                        monster.id.clone(),
-                        floor.id.clone(),
-                        mission_id.clone(),
-                        score,
-                    ));
+                score(right_id)
+                    .cmp(&score(left_id))
+                    .then_with(|| left_id.cmp(right_id))
+            });
+            for priority in expedition_priority_options() {
+                let mut party = Vec::<String>::new();
+                for monster_id in mission_monster_ids.iter().take(max_party_size) {
+                    party.push(monster_id.clone());
+                    let Some(preview) = preview_expedition_party(
+                        data,
+                        &mut simulated_state,
+                        &party,
+                        &floor.id,
+                        mission_id,
+                        &priority,
+                    ) else {
+                        break;
+                    };
+                    let score = expedition_growth_score(game_state, &preview)
+                        - expedition_party_opportunity_cost(data, game_state, &party)
+                        + expedition_stance_value(data, game_state, &party, &priority);
+
+                    if !reserve_egg_run
+                        && (!can_survive_debt_after_growth_assignment(
+                            game_state,
+                            party.len() as u32,
+                        ) || available_monster_ids.len() <= party.len())
+                    {
+                        continue;
+                    }
+                    if best_plan.as_ref().is_none_or(|best| score > best.score) {
+                        best_plan = Some(ExpeditionPolicyPlan {
+                            monster_ids: party.clone(),
+                            floor_id: floor.id.clone(),
+                            mission_id: mission_id.clone(),
+                            priority: priority.clone(),
+                            score,
+                        });
+                    }
                 }
             }
         }
     }
 
-    best_assignment.map(|(monster_id, floor_id, mission_id, _)| (monster_id, floor_id, mission_id))
+    best_plan
+}
+
+fn expedition_candidate_score(
+    data: &GameData,
+    game_state: &GameState,
+    mission: &crate::data::MissionData,
+    monster: &crate::state::CompanionState,
+) -> i32 {
+    let stats = crate::engine::effective_stats(data, monster);
+    let role_fit = i32::from(
+        mission
+            .preferred_role
+            .as_deref()
+            .is_some_and(|role| crate::engine::monster_role(data, monster) == role),
+    ) * 20;
+    let capability = stats.power * 4
+        + stats.instinct * 2
+        + monster.skills.scouting as i32
+        + monster.skills.guarding as i32
+        + monster.skills.navigation as i32
+        + monster.skills.arcana as i32
+        + monster.skills.strength as i32;
+    capability + role_fit
+        - i32::try_from(guest_room_alternative_gold(data, game_state, monster) / 2)
+            .unwrap_or(i32::MAX)
+}
+
+fn guest_room_alternative_gold(
+    data: &GameData,
+    game_state: &GameState,
+    monster: &crate::state::CompanionState,
+) -> u32 {
+    best_unlocked_room_id(data, game_state, monster)
+        .and_then(|room_id| preview_guild_job(data, game_state, monster, &room_id).ok())
+        .map(|preview| preview.projected_gold)
+        .unwrap_or(0)
+}
+
+fn preview_expedition_party(
+    data: &GameData,
+    simulated_state: &mut GameState,
+    monster_ids: &[String],
+    floor_id: &str,
+    mission_id: &str,
+    priority: &ExpeditionPriority,
+) -> Option<crate::engine::day_cycle::ExpeditionPlanPreview> {
+    simulated_state.active_expedition = None;
+    for simulated_monster in &mut simulated_state.monsters {
+        simulated_monster.current_job = crate::state::CompanionJobState::Idle;
+    }
+    configure_expedition_plan(simulated_state, floor_id, mission_id, priority.clone());
+    for monster_id in monster_ids {
+        assign_monster_to_expedition(data, simulated_state, monster_id, floor_id).ok()?;
+    }
+    preview_expedition_plan(data, simulated_state, floor_id, mission_id, priority).ok()
+}
+
+fn expedition_party_opportunity_cost(
+    data: &GameData,
+    game_state: &GameState,
+    monster_ids: &[String],
+) -> i32 {
+    let foregone_gold = monster_ids
+        .iter()
+        .filter_map(|monster_id| {
+            game_state
+                .monsters
+                .iter()
+                .find(|monster| &monster.id == monster_id)
+        })
+        .map(|monster| guest_room_alternative_gold(data, game_state, monster))
+        .sum::<u32>();
+    i32::try_from(foregone_gold / 2).unwrap_or(i32::MAX)
+}
+
+fn expedition_stance_value(
+    data: &GameData,
+    game_state: &GameState,
+    monster_ids: &[String],
+    priority: &ExpeditionPriority,
+) -> i32 {
+    match priority {
+        ExpeditionPriority::RecoveryFocused => {
+            let raw_condition_cost = data
+                .config
+                .day_cycle
+                .expedition_fatigue
+                .saturating_add(data.config.day_cycle.expedition_stress);
+            let saved_per_companion = raw_condition_cost.saturating_mul(
+                100u32.saturating_sub(data.config.day_cycle.recovery_focused_condition_cost_pct),
+            ) / 100;
+            let existing_condition = monster_ids
+                .iter()
+                .filter_map(|monster_id| {
+                    game_state
+                        .monsters
+                        .iter()
+                        .find(|monster| &monster.id == monster_id)
+                })
+                .map(|monster| monster.fatigue.saturating_add(monster.stress))
+                .sum::<u32>()
+                / 4;
+            i32::try_from(
+                saved_per_companion
+                    .saturating_mul(monster_ids.len() as u32)
+                    .saturating_add(existing_condition),
+            )
+            .unwrap_or(i32::MAX)
+        }
+        ExpeditionPriority::Balanced => 2,
+        ExpeditionPriority::Aggressive
+        | ExpeditionPriority::Safe
+        | ExpeditionPriority::Curiosity => 0,
+    }
+}
+
+pub(super) fn expedition_priority_options() -> [ExpeditionPriority; 5] {
+    [
+        ExpeditionPriority::Balanced,
+        ExpeditionPriority::Aggressive,
+        ExpeditionPriority::Safe,
+        ExpeditionPriority::RecoveryFocused,
+        ExpeditionPriority::Curiosity,
+    ]
+}
+
+pub(super) fn expedition_priority_id(priority: &ExpeditionPriority) -> &'static str {
+    match priority {
+        ExpeditionPriority::Balanced => "balanced",
+        ExpeditionPriority::Aggressive => "aggressive",
+        ExpeditionPriority::Safe => "safe",
+        ExpeditionPriority::RecoveryFocused => "recovery_focused",
+        ExpeditionPriority::Curiosity => "curiosity",
+    }
 }
 
 /// How much daylight above the injury threshold the simulated guild insists on
@@ -217,7 +371,11 @@ pub(super) fn expedition_growth_score(
     };
     let relic_value = 70;
     let material_value = 2;
-    let residue_value = 1;
+    let residue_value = if game_state.resources.arcane_residue < 1_000 {
+        3
+    } else {
+        1
+    };
     // `injury_risk_score` is now the margin past the injury threshold for the
     // most exposed companion: at or above zero somebody is certain to come home
     // hurt, and everything below it is daylight. A guild worth simulating starts
@@ -242,4 +400,28 @@ pub(super) fn should_reserve_egg_expedition(game_state: &GameState) -> bool {
         .len()
         .saturating_add(game_state.egg_inventory.len())
         < workforce_demand(game_state).saturating_add(2)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn expedition_policy_considers_every_player_stance() {
+        let stance_ids = expedition_priority_options()
+            .iter()
+            .map(expedition_priority_id)
+            .collect::<Vec<_>>();
+
+        assert_eq!(
+            stance_ids,
+            [
+                "balanced",
+                "aggressive",
+                "safe",
+                "recovery_focused",
+                "curiosity"
+            ]
+        );
+    }
 }

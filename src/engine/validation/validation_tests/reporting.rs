@@ -130,6 +130,7 @@ pub(super) struct SimulationDayReport {
     pub(super) active_situations: usize,
     pub(super) guild_job_workers_assigned: usize,
     pub(super) expedition_members_assigned: usize,
+    pub(super) expedition_priority: Option<String>,
     pub(super) guest_bookings_assigned: usize,
     pub(super) hatches: usize,
     pub(super) buildings_purchased: usize,
@@ -299,6 +300,7 @@ pub(super) struct DailyPolicyMetrics {
     pub(super) guest_bookings_assigned: usize,
     pub(super) guild_job_workers_assigned: usize,
     pub(super) expedition_members_assigned: usize,
+    pub(super) expedition_priority: Option<String>,
     pub(super) expedition_mission_id: Option<String>,
     pub(super) expedition_reward_focus: Option<String>,
 }
@@ -421,6 +423,7 @@ pub(super) fn build_day_report(
         active_situations: game_state.town.active_situations.len(),
         guild_job_workers_assigned: policy_metrics.guild_job_workers_assigned,
         expedition_members_assigned: policy_metrics.expedition_members_assigned,
+        expedition_priority: policy_metrics.expedition_priority.clone(),
         guest_bookings_assigned: policy_metrics.guest_bookings_assigned,
         hatches: policy_metrics.hatches,
         buildings_purchased: policy_metrics.buildings_purchased,
