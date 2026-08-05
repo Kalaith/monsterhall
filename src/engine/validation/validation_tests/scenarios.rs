@@ -274,6 +274,28 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
 }
 
 #[test]
+fn a_fixed_seed_report_ignores_process_global_rng_noise() {
+    let _rng_guard = simulation_rng_guard();
+    let data = test_game_data();
+    let seed = SIMULATION_BASE_SEED ^ 0x0D37_E2A1;
+    let first = run_simulation_report_with_seed(&data, 30, seed);
+
+    // This is the stream visual effects and unrelated tests share. A campaign
+    // report used to draw from it too, so any parallel test could rewrite the
+    // supposedly fixed-seed artifact by landing between two day-cycle draws.
+    for _ in 0..10_000 {
+        let _ = macroquad_toolkit::rng::gen_range(0, 100);
+    }
+
+    let second = run_simulation_report_with_seed(&data, 30, seed);
+    assert_eq!(
+        serde_json::to_vec(&first).expect("first report should serialize"),
+        serde_json::to_vec(&second).expect("second report should serialize"),
+        "a fixed seed should produce byte-identical reports despite global RNG activity"
+    );
+}
+
+#[test]
 fn debt_chain_stays_active_beyond_three_months() {
     let _rng_guard = simulation_rng_guard();
     seed_simulation(SIMULATION_BASE_SEED ^ 91);
@@ -657,5 +679,5 @@ fn multi_seed_365_simulation_summary_reports_variance() {
     );
 }
 pub(super) fn seed_simulation(seed: u64) {
-    srand(seed);
+    day_cycle::random::seed_simulation_rng(seed);
 }

@@ -18,7 +18,7 @@ use super::*;
 #[ignore]
 fn probe_floor_usage() {
     let _rng_guard = simulation_rng_guard();
-    srand(SIMULATION_BASE_SEED ^ 365);
+    super::scenarios::seed_simulation(SIMULATION_BASE_SEED ^ 365);
     let data = test_game_data();
     let mut game_state = create_new_game_state(&data);
     play_opening_sequence(&data, &mut game_state);

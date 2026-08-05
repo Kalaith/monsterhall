@@ -2,8 +2,6 @@
 
 use std::collections::HashSet;
 
-use macroquad_toolkit::rng::gen_range;
-
 use super::{
     apply_monster_relationship_gain, companion::effective_stats, complete_town_project_if_needed,
     debt::resolve_debt_cycle, expedition_depth_profile, floor_roster_gate_report,
@@ -28,6 +26,7 @@ mod helpers;
 mod modifiers;
 mod previews;
 mod progression;
+pub(crate) mod random;
 mod relics;
 mod resolution;
 mod surveys;
@@ -45,6 +44,7 @@ use helpers::*;
 use modifiers::*;
 use previews::*;
 use progression::*;
+use random::gen_range;
 use relics::*;
 use resolution::*;
 use surveys::*;

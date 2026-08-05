@@ -2,7 +2,6 @@ use std::fs;
 use std::path::PathBuf;
 use std::sync::{Mutex, MutexGuard, OnceLock};
 
-use macroquad_toolkit::rng::srand;
 use serde::Serialize;
 
 use super::*;
@@ -35,12 +34,26 @@ const MULTI_SAMPLE_365_SEEDS: [u64; 10] = [
     0x3650_000A,
 ];
 
-fn simulation_rng_guard() -> MutexGuard<'static, ()> {
+struct SimulationRngGuard {
+    _report_lock: MutexGuard<'static, ()>,
+}
+
+impl Drop for SimulationRngGuard {
+    fn drop(&mut self) {
+        day_cycle::random::clear_simulation_rng();
+    }
+}
+
+fn simulation_rng_guard() -> SimulationRngGuard {
     static SIMULATION_RNG_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
-    SIMULATION_RNG_LOCK
+    let report_lock = SIMULATION_RNG_LOCK
         .get_or_init(|| Mutex::new(()))
         .lock()
-        .unwrap_or_else(|poisoned| poisoned.into_inner())
+        .unwrap_or_else(|poisoned| poisoned.into_inner());
+    day_cycle::random::clear_simulation_rng();
+    SimulationRngGuard {
+        _report_lock: report_lock,
+    }
 }
 
 mod fixtures;
