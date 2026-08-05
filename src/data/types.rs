@@ -115,6 +115,12 @@ pub struct BuildingData {
     pub name: String,
     pub category: String,
     pub description: String,
+    /// Explicitly marks a foundation players may choose without prior works.
+    /// Every other building must name at least one prerequisite.
+    #[serde(default)]
+    pub is_root_choice: bool,
+    #[serde(default)]
+    pub prerequisite_building_ids: Vec<String>,
     pub build_limit: u8,
     pub cost: ResourceAmountData,
     pub unlocks: BuildingUnlocksData,

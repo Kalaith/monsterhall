@@ -209,7 +209,7 @@ pub fn draw_town_management(
         2,
     );
     draw_body_text(
-        &ui.locked_by_cost_label,
+        &ui.locked_legend_label,
         layout.left_margin + 40.0,
         legend_y + 35.0,
         12.0,
@@ -257,7 +257,20 @@ pub fn draw_town_management(
         theme::TEXT_BODY,
     );
     let is_built_out = summary.status_label == ui.built_out_label;
-    if summary.next_destination != data.ui_text.common.return_to_town_button {
+    if !summary.missing_prerequisite_names.is_empty() {
+        draw_badge(
+            layout.detail_x + 252.0,
+            detail_top_y + 98.0,
+            360.0,
+            24.0,
+            &format!(
+                "{}: {}",
+                ui.requires_label,
+                summary.missing_prerequisite_names.join(", ")
+            ),
+            theme::WARNING,
+        );
+    } else if summary.next_destination != data.ui_text.common.return_to_town_button {
         draw_badge(
             layout.detail_x + 252.0,
             detail_top_y + 98.0,
@@ -269,6 +282,7 @@ pub fn draw_town_management(
     }
 
     if !is_built_out
+        && summary.missing_prerequisite_names.is_empty()
         && primary_button(
             layout.detail_x + layout.detail_w - 192.0,
             detail_top_y + 96.0,

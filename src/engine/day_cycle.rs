@@ -54,7 +54,8 @@ pub use actions::is_booked_for_contract;
 pub use actions::{
     assign_monster_to_expedition, assign_monster_to_idle, assign_monster_to_rest,
     assign_monster_to_room, configure_expedition_plan, convert_egg, hatch_selected_egg,
-    hatch_species, purchase_building, release_monster, replace_monster_with_selected_egg,
+    hatch_species, missing_building_prerequisite_names, purchase_building, release_monster,
+    replace_monster_with_selected_egg,
 };
 pub(crate) use condition::{companion_effectiveness_pct, scale_by_effectiveness};
 pub use eggs::{create_opening_egg, sync_egg_resource_count};

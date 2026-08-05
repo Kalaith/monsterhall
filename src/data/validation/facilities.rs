@@ -1,4 +1,6 @@
 //! Room, building, and floor validation.
+use std::collections::HashMap;
+
 use super::IdIndex;
 use super::{is_valid_companion_skill_id, validate_reference_list};
 use crate::data::types::*;
@@ -75,6 +77,7 @@ impl GameData {
 
     pub(super) fn validate_buildings(&self, ids: &IdIndex<'_>) -> Result<(), String> {
         let IdIndex {
+            building_ids,
             room_ids,
             floor_ids,
             patron_tier_ids,
@@ -82,6 +85,24 @@ impl GameData {
             ..
         } = ids;
         for building in &self.buildings.buildings {
+            validate_reference_list(
+                &building.prerequisite_building_ids,
+                building_ids,
+                &format!("building '{}'.prerequisite_building_ids", building.id),
+            )?;
+            if building
+                .prerequisite_building_ids
+                .iter()
+                .any(|required_id| required_id == &building.id)
+            {
+                return Err(format!("building '{}' cannot require itself.", building.id));
+            }
+            if building.is_root_choice != building.prerequisite_building_ids.is_empty() {
+                return Err(format!(
+                    "building '{}' must either be an explicit root choice or name prerequisites.",
+                    building.id
+                ));
+            }
             validate_reference_list(
                 &building.unlocks.room_ids,
                 room_ids,
@@ -109,6 +130,7 @@ impl GameData {
                 ));
             }
         }
+        validate_building_prerequisite_cycles(&self.buildings.buildings)?;
         Ok(())
     }
 
@@ -264,5 +286,107 @@ impl GameData {
             }
         }
         Ok(())
+    }
+}
+
+fn validate_building_prerequisite_cycles(buildings: &[BuildingData]) -> Result<(), String> {
+    let mut visit_states = HashMap::<&str, u8>::new();
+    let mut path = Vec::<&str>::new();
+    for building in buildings {
+        visit_building_prerequisites(&building.id, buildings, &mut visit_states, &mut path)?;
+    }
+    Ok(())
+}
+
+fn visit_building_prerequisites<'a>(
+    building_id: &'a str,
+    buildings: &'a [BuildingData],
+    visit_states: &mut HashMap<&'a str, u8>,
+    path: &mut Vec<&'a str>,
+) -> Result<(), String> {
+    match visit_states.get(building_id) {
+        Some(2) => return Ok(()),
+        Some(1) => {
+            let cycle_start = path
+                .iter()
+                .position(|entry| *entry == building_id)
+                .unwrap_or(0);
+            let mut cycle = path[cycle_start..].to_vec();
+            cycle.push(building_id);
+            return Err(format!(
+                "building prerequisites contain a cycle: {}.",
+                cycle.join(" -> ")
+            ));
+        }
+        _ => {}
+    }
+
+    visit_states.insert(building_id, 1);
+    path.push(building_id);
+    let building = buildings
+        .iter()
+        .find(|building| building.id == building_id)
+        .expect("prerequisite ids are validated before cycle detection");
+    for prerequisite_id in &building.prerequisite_building_ids {
+        visit_building_prerequisites(prerequisite_id, buildings, visit_states, path)?;
+    }
+    path.pop();
+    visit_states.insert(building_id, 2);
+    Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn every_shipped_building_is_an_explicit_root_or_names_a_prerequisite() {
+        let data = crate::data::test_game_data();
+
+        data.validate()
+            .expect("the shipped building tree should be valid");
+        for building in &data.buildings.buildings {
+            assert_eq!(
+                building.is_root_choice,
+                building.prerequisite_building_ids.is_empty(),
+                "building '{}' has no explicit place in the tree",
+                building.id
+            );
+        }
+    }
+
+    #[test]
+    fn an_unknown_building_prerequisite_fails_validation() {
+        let mut data = crate::data::test_game_data();
+        let building = data
+            .buildings
+            .buildings
+            .iter_mut()
+            .find(|building| !building.is_root_choice)
+            .expect("the catalogue should include a dependent building");
+        building.prerequisite_building_ids = vec!["missing_foundation".to_owned()];
+
+        let error = data
+            .validate()
+            .expect_err("an unknown prerequisite should reject the catalogue");
+        assert!(error.contains("missing_foundation"), "{error}");
+    }
+
+    #[test]
+    fn a_building_prerequisite_cycle_fails_validation() {
+        let mut data = crate::data::test_game_data();
+        let first_id = data.buildings.buildings[0].id.clone();
+        let second_id = data.buildings.buildings[1].id.clone();
+        data.buildings.buildings[0].is_root_choice = false;
+        data.buildings.buildings[0].prerequisite_building_ids = vec![second_id.clone()];
+        data.buildings.buildings[1].is_root_choice = false;
+        data.buildings.buildings[1].prerequisite_building_ids = vec![first_id.clone()];
+
+        let error = data
+            .validate()
+            .expect_err("a prerequisite cycle should reject the catalogue");
+        assert!(error.contains("cycle"), "{error}");
+        assert!(
+            error.contains(&first_id) && error.contains(&second_id),
+            "{error}"
+        );
     }
 }

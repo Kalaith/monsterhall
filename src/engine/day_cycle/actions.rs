@@ -164,6 +164,15 @@ pub fn purchase_building(
         return Err(format!("{} is already at its build limit.", building.name));
     }
 
+    let missing_prerequisites = missing_building_prerequisite_names(data, game_state, building);
+    if !missing_prerequisites.is_empty() {
+        return Err(format!(
+            "Build {} before {}.",
+            missing_prerequisites.join(" and "),
+            building.name
+        ));
+    }
+
     if !can_afford(&game_state.resources, &building.cost) {
         return Err(format!("Not enough resources to build {}.", building.name));
     }
@@ -181,6 +190,31 @@ pub fn purchase_building(
         .push(format!("Constructed {}", building.name));
 
     Ok(format!("{} is now part of the keep.", building.name))
+}
+
+pub fn missing_building_prerequisite_names(
+    data: &GameData,
+    game_state: &GameState,
+    building: &BuildingData,
+) -> Vec<String> {
+    building
+        .prerequisite_building_ids
+        .iter()
+        .filter(|building_id| {
+            !game_state
+                .town
+                .constructed_building_ids
+                .contains(building_id)
+        })
+        .map(|building_id| {
+            data.buildings
+                .buildings
+                .iter()
+                .find(|candidate| &candidate.id == building_id)
+                .map(|candidate| candidate.name.clone())
+                .unwrap_or_else(|| building_id.clone())
+        })
+        .collect()
 }
 
 pub fn hatch_species(

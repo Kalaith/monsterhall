@@ -1,11 +1,13 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "buildings": [
     {
       "id": "slime_pool",
       "name": "Slime Pool",
       "category": "habitat",
       "description": "A warm nutrient basin that keeps basic slime companions healthy, calm, and ready for guild work.",
+      "is_root_choice": true,
+      "prerequisite_building_ids": [],
       "build_limit": 1,
       "cost": {
         "gold": 500,
@@ -36,6 +38,11 @@
       "name": "Nursery Wing",
       "category": "habitat",
       "description": "A plush nesting wing for egg care, companion recovery, and sensitive patron contracts.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "slime_pool",
+        "hatchery_scrying_pool"
+      ],
       "build_limit": 1,
       "cost": {
         "gold": 1650,
@@ -72,6 +79,8 @@
       "name": "Alchemy Bench",
       "category": "workshop",
       "description": "Brews residue stabilizers, field salves, and recovery draughts that improve both guild service and delves.",
+      "is_root_choice": true,
+      "prerequisite_building_ids": [],
       "build_limit": 1,
       "cost": {
         "gold": 750,
@@ -106,6 +115,10 @@
       "name": "Forge Corner",
       "category": "workshop",
       "description": "Produces reinforced cord, climbing gear, stage fixtures, and expedition kit for controlled hazard work.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "residue_alchemy_bench"
+      ],
       "build_limit": 1,
       "cost": {
         "gold": 1350,
@@ -143,6 +156,8 @@
       "name": "Recovery Baths",
       "category": "recovery",
       "description": "Mineral baths soothe bruises after hard contracts or rougher expeditions.",
+      "is_root_choice": true,
+      "prerequisite_building_ids": [],
       "build_limit": 1,
       "cost": {
         "gold": 800,
@@ -175,6 +190,10 @@
       "name": "Recovery Lounge",
       "category": "recovery",
       "description": "Comfortable recovery space reduces burnout and keeps demanding guild work sustainable.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "slime_pool"
+      ],
       "build_limit": 1,
       "cost": {
         "gold": 750,
@@ -209,6 +228,8 @@
       "name": "Hatchery Scrying Pool",
       "category": "research",
       "description": "A still ritual basin that reads heat trails through the tower and points expeditions toward viable eggs.",
+      "is_root_choice": true,
+      "prerequisite_building_ids": [],
       "build_limit": 1,
       "cost": {
         "gold": 1000,
@@ -239,6 +260,10 @@
       "name": "Species Archive",
       "category": "research",
       "description": "A dedicated study wing for tower species: sealed cases, warded incubation drawers, and enough archive discipline that an egg from below the auction floor keeps instead of going cold.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "nursery_habitat"
+      ],
       "build_limit": 1,
       "cost": {
         "gold": 2450,
@@ -275,6 +300,11 @@
       "name": "Route Map Chamber",
       "category": "research",
       "description": "A mapping office that turns survey notes into routes the guild can walk twice, including the ones that end at the bottom of the tower and come back with something living.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "species_archive",
+        "forge_corner"
+      ],
       "build_limit": 1,
       "cost": {
         "gold": 3100,
@@ -311,6 +341,10 @@
       "name": "Guild Room Renovation",
       "category": "prestige",
       "description": "A costly refit of panels, privacy wards, and service fixtures for rooms that already attract serious coin.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "forge_corner"
+      ],
       "build_limit": 3,
       "cost": {
         "gold": 4500,
@@ -341,6 +375,11 @@
       "name": "Relic Residue Condenser",
       "category": "project",
       "description": "A repeatable ritual machine that burns relics and arcane residue into stable tower infrastructure instead of immediate roster growth.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "species_archive",
+        "residue_alchemy_bench"
+      ],
       "build_limit": 10,
       "cost": {
         "gold": 13000,
@@ -371,6 +410,11 @@
       "name": "Prestige Hospitality Wing",
       "category": "prestige",
       "description": "A lavish patron-facing wing with private baths, screened waiting rooms, and enough polish to justify elite maintenance costs.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "nursery_habitat",
+        "recovery_baths"
+      ],
       "build_limit": 2,
       "cost": {
         "gold": 6500,
@@ -401,6 +445,10 @@
       "name": "Reliquary Vault",
       "category": "project",
       "description": "Sealed shelving for what the deep tower gives up. Relics logged here stop being loose treasure and start being the guild's standing claim on the stair.",
+      "is_root_choice": false,
+      "prerequisite_building_ids": [
+        "tower_route_cartography"
+      ],
       "build_limit": 40,
       "cost": {
         "gold": 9000,

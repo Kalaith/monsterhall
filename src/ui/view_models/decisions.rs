@@ -193,8 +193,12 @@ pub fn building_decision_summary(
         && game_state.resources.eggs >= building.cost.eggs
         && game_state.resources.relics >= building.cost.relics
         && game_state.resources.arcane_residue >= building.cost.arcane_residue;
+    let missing_prerequisite_names =
+        crate::engine::missing_building_prerequisite_names(data, game_state, building);
     let (status_label, status_color) = if build_count >= usize::from(building.build_limit) {
         (ui.built_out_label.clone(), theme::DANGER)
+    } else if !missing_prerequisite_names.is_empty() {
+        (ui.locked_by_prerequisite_label.clone(), theme::WARNING)
     } else if can_afford {
         (ui.available_label.clone(), theme::POSITIVE)
     } else {
@@ -259,6 +263,7 @@ pub fn building_decision_summary(
         status_label,
         status_color,
         can_afford,
+        missing_prerequisite_names,
         build_count,
         effect_lines: describe_building_effects(&data.ui_text, building),
         unlock_labels,
@@ -604,5 +609,30 @@ mod tests {
             "the fixtures should exercise most roles, only reached {:?}",
             seen.keys().collect::<Vec<_>>()
         );
+    }
+
+    #[test]
+    fn a_locked_building_names_the_foundation_the_player_needs() {
+        let data = crate::data::test_game_data();
+        let mut game_state = crate::engine::create_new_game_state(&data);
+        game_state.resources.gold = u32::MAX;
+        game_state.resources.tower_materials = u32::MAX;
+        game_state.resources.relics = u32::MAX;
+        game_state.resources.arcane_residue = u32::MAX;
+        let forge = data
+            .buildings
+            .buildings
+            .iter()
+            .find(|building| building.id == "forge_corner")
+            .expect("the shipped catalogue should include the forge");
+
+        let summary = building_decision_summary(&data, &game_state, forge);
+
+        assert!(summary.can_afford, "this fixture isolates prerequisites");
+        assert_eq!(
+            summary.status_label,
+            data.ui_text.town_management.locked_by_prerequisite_label
+        );
+        assert_eq!(summary.missing_prerequisite_names, ["Alchemy Bench"]);
     }
 }

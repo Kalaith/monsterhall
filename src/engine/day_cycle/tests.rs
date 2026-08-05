@@ -1650,3 +1650,31 @@ fn the_campaign_log_stops_growing_at_the_authored_bound() {
         "the newest entries must survive"
     );
 }
+
+#[test]
+fn a_building_cannot_skip_its_authored_foundation() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    game_state.resources = ResourcesState {
+        gold: 100_000,
+        tower_materials: 100_000,
+        eggs: 100_000,
+        relics: 100_000,
+        arcane_residue: 100_000,
+    };
+    let starting_resources = game_state.resources.clone();
+
+    let error = purchase_building(&data, &mut game_state, "forge_corner")
+        .expect_err("the forge should require its authored foundation");
+    assert!(error.contains("Alchemy Bench"), "{error}");
+    assert_eq!(game_state.resources.gold, starting_resources.gold);
+    assert!(!game_state
+        .town
+        .constructed_building_ids
+        .contains(&"forge_corner".to_owned()));
+
+    purchase_building(&data, &mut game_state, "residue_alchemy_bench")
+        .expect("a root foundation should be purchasable");
+    purchase_building(&data, &mut game_state, "forge_corner")
+        .expect("the forge should unlock after its foundation stands");
+}

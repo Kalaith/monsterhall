@@ -21,8 +21,9 @@ pub use day_cycle::{
     assign_monster_to_room, charm_training_chance_pct, configure_expedition_plan, convert_egg,
     create_opening_egg, effective_population_cap, egg_quality_rank, format_skill_name,
     hatch_selected_egg, hatch_species, is_booked_for_contract, max_quality_rank,
-    preview_expedition_plan, preview_guild_job, preview_upkeep, purchase_building, release_monster,
-    replace_monster_with_selected_egg, resolve_day,
+    missing_building_prerequisite_names, preview_expedition_plan, preview_guild_job,
+    preview_upkeep, purchase_building, release_monster, replace_monster_with_selected_egg,
+    resolve_day,
 };
 pub use debt::{debt_intro_status, initialize_first_debt, pay_debt_now};
 pub(crate) use depth::{

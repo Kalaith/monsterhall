@@ -26,6 +26,7 @@ pub struct BuildingDecisionSummary {
     pub status_label: String,
     pub status_color: Color,
     pub can_afford: bool,
+    pub missing_prerequisite_names: Vec<String>,
     pub build_count: usize,
     pub effect_lines: Vec<String>,
     pub unlock_labels: Vec<String>,
