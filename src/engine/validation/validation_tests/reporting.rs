@@ -268,6 +268,18 @@ pub(super) struct MultiSeedSimulationSample {
     pub(super) campaign_failure_reason: Option<String>,
     pub(super) max_active_requests: usize,
     pub(super) expirations: usize,
+    pub(super) room_income_share_basis_points: u32,
+    pub(super) room_gold: u32,
+    pub(super) contract_gold: u32,
+    pub(super) contract_completions: usize,
+    pub(super) contract_bookings_assigned: usize,
+    pub(super) room_workers_assigned: usize,
+    pub(super) expedition_successes: u32,
+    pub(super) expedition_failures: u32,
+    pub(super) expedition_days_after_day_90: u32,
+    pub(super) largest_expedition_party: usize,
+    pub(super) role_diversity: usize,
+    pub(super) species_diversity: usize,
 }
 
 #[derive(Debug, Serialize)]
@@ -291,6 +303,13 @@ pub(super) struct MultiSeedSimulationSummary {
     pub(super) missed_payments: NumericRangeSummary<u32>,
     pub(super) max_active_requests: NumericRangeSummary<usize>,
     pub(super) expirations: NumericRangeSummary<usize>,
+    pub(super) room_income_share_basis_points: NumericRangeSummary<u32>,
+    pub(super) expedition_successes: NumericRangeSummary<u32>,
+    pub(super) expedition_failures: NumericRangeSummary<u32>,
+    pub(super) expedition_days_after_day_90: NumericRangeSummary<u32>,
+    pub(super) largest_expedition_party: NumericRangeSummary<usize>,
+    pub(super) role_diversity: NumericRangeSummary<usize>,
+    pub(super) species_diversity: NumericRangeSummary<usize>,
 }
 
 #[derive(Debug, Default)]

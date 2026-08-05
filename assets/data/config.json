@@ -1,6 +1,6 @@
 {
   "title": "Monsterhall",
-  "content_version": "1.37.0",
+  "content_version": "1.38.0",
   "save_version": 11,
   "input": {
     "primary_mode": "mouse",
@@ -120,7 +120,7 @@
     "skill_wage_divisor": 3,
     "species_stat_wage_divisor": 4,
     "contract_preparation_score_cap": 10,
-    "contract_income_multiplier_pct": 125,
+    "contract_income_multiplier_pct": 135,
     "contract_penalty_pct": 50,
     "understrength_income_pct": 70,
     "building_maintenance_cost_divisor": 20,

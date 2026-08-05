@@ -597,6 +597,45 @@ fn multi_seed_365_simulation_summary_reports_variance() {
                     .map(|failure| failure.reason.clone()),
                 max_active_requests: max_active_contracts(&report),
                 expirations: report.total_guest_expirations,
+                room_income_share_basis_points: {
+                    let room_gold = report
+                        .total_guild_job_gold
+                        .saturating_sub(report.total_contract_gold);
+                    if report.total_guild_job_gold == 0 {
+                        0
+                    } else {
+                        u32::try_from(
+                            u64::from(room_gold) * 10_000 / u64::from(report.total_guild_job_gold),
+                        )
+                        .unwrap_or(u32::MAX)
+                    }
+                },
+                room_gold: report
+                    .total_guild_job_gold
+                    .saturating_sub(report.total_contract_gold),
+                contract_gold: report.total_contract_gold,
+                contract_completions: report.total_guest_completions,
+                contract_bookings_assigned: report
+                    .per_day
+                    .iter()
+                    .map(|day| day.guest_bookings_assigned)
+                    .sum(),
+                room_workers_assigned: report
+                    .per_day
+                    .iter()
+                    .map(|day| day.guild_job_workers_assigned)
+                    .sum(),
+                expedition_successes: report.total_expedition_successes,
+                expedition_failures: report.total_expedition_failures,
+                expedition_days_after_day_90: report.expedition_days_after_day_90,
+                largest_expedition_party: report
+                    .per_day
+                    .iter()
+                    .map(|day| day.expedition_members_assigned)
+                    .max()
+                    .unwrap_or_default(),
+                role_diversity: report.final_role_diversity,
+                species_diversity: report.final_species_counts.len(),
             }
         })
         .collect::<Vec<_>>();
@@ -617,6 +656,25 @@ fn multi_seed_365_simulation_summary_reports_variance() {
             samples.iter().map(|sample| sample.max_active_requests),
         ),
         expirations: summarize_usize(samples.iter().map(|sample| sample.expirations)),
+        room_income_share_basis_points: summarize_u32(
+            samples
+                .iter()
+                .map(|sample| sample.room_income_share_basis_points),
+        ),
+        expedition_successes: summarize_u32(
+            samples.iter().map(|sample| sample.expedition_successes),
+        ),
+        expedition_failures: summarize_u32(samples.iter().map(|sample| sample.expedition_failures)),
+        expedition_days_after_day_90: summarize_u32(
+            samples
+                .iter()
+                .map(|sample| sample.expedition_days_after_day_90),
+        ),
+        largest_expedition_party: summarize_usize(
+            samples.iter().map(|sample| sample.largest_expedition_party),
+        ),
+        role_diversity: summarize_usize(samples.iter().map(|sample| sample.role_diversity)),
+        species_diversity: summarize_usize(samples.iter().map(|sample| sample.species_diversity)),
         samples,
     };
     let report_path =
@@ -630,10 +688,9 @@ fn multi_seed_365_simulation_summary_reports_variance() {
             .all(|sample| sample.companions <= usize::from(data.config.new_game.max_population_cap)),
         "multi-seed samples should stay within population cap"
     );
-    // Also relaxed with the wage economy. Across seeds the roster now lands in
-    // a band rather than pinning to the ceiling, which is the variance wages are
-    // supposed to introduce. Two things still have to be true: some campaigns do
-    // fill the hall, and none of them collapse.
+    // Wages must not collapse growth before the current campaign has had time
+    // to reach the authored population ceiling. The infrastructure and debt
+    // routes are allowed to vary even when mature guilds all staff up.
     let population_cap = usize::from(data.config.new_game.max_population_cap);
     assert!(
         summary
@@ -646,6 +703,37 @@ fn multi_seed_365_simulation_summary_reports_variance() {
         summary.companions.average >= (population_cap as f64) * 0.75,
         "multi-seed roster averaged {:.1}, well short of the {population_cap} cap - the wage load has broken growth",
         summary.companions.average
+    );
+    assert!(
+        summary.room_income_share_basis_points.average <= 8_500.0,
+        "room work should average no more than 85% of earned gold across representative seeds, got {:.2}%",
+        summary.room_income_share_basis_points.average / 100.0
+    );
+    assert!(
+        summary.room_income_share_basis_points.max <= 9_500,
+        "no representative seed should let room work overwhelm the contract desk, worst seed was {:.2}%",
+        f64::from(summary.room_income_share_basis_points.max) / 100.0
+    );
+    assert!(
+        summary.expedition_failures.min > 0,
+        "every representative year should exercise expedition failure consequences"
+    );
+    assert!(
+        summary.expedition_days_after_day_90.min > 0,
+        "every representative year should continue tower work after day 90"
+    );
+    assert!(
+        summary.largest_expedition_party.min >= 2,
+        "every representative year should exercise a multi-companion expedition"
+    );
+    assert!(
+        summary.role_diversity.average >= 3.0
+            && summary.role_diversity.min >= 2
+            && summary.species_diversity.min >= 3,
+        "representative years should average three roles, never collapse to one role, and retain at least three species; roles averaged {:.1} with minimum {}, species minimum {}",
+        summary.role_diversity.average,
+        summary.role_diversity.min,
+        summary.species_diversity.min,
     );
     // The terminal debt state makes an actual loss visible when a seed reaches
     // it. Unit coverage forces that path; this cohort caps it so most stewards
