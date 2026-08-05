@@ -13,8 +13,8 @@ use crate::engine::{
     advance_opening_step, assign_monster_to_contract, assign_monster_to_expedition,
     assign_monster_to_idle, assign_monster_to_rest, assign_monster_to_room, build_first_room,
     clear_contract_assignment, configure_expedition_plan, convert_egg, create_new_game_state,
-    debt_intro_status, hatch_selected_egg, initialize_first_debt, pay_debt_now, purchase_building,
-    reconcile_game_state_after_load, refresh_contracts, release_monster,
+    debt_intro_status, decline_contract, hatch_selected_egg, initialize_first_debt, pay_debt_now,
+    purchase_building, reconcile_game_state_after_load, refresh_contracts, release_monster,
     replace_monster_with_selected_egg, resolve_day, resolve_first_client,
     validate_game_state_references,
 };

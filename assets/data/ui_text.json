@@ -294,6 +294,7 @@
     "no_requests_title": "No Active Contracts Today",
     "no_selected_request_title": "No Contract Selected",
     "clear_assignment_button": "Clear Assignment",
+    "decline_contract_button": "Decline Offer",
     "assigned_button": "Assigned",
     "status_label": "Status",
     "deadline_day_template": "Deadline: Day {day}",

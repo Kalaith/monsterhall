@@ -83,12 +83,15 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
 
     let starting_log_len = game_state.event_log.len();
     let starting_day = game_state.current_day;
+    let starting_active_contracts = game_state.live_contract_count();
     let starting_resources = resources_snapshot(&game_state);
     let mut per_day = Vec::new();
     let mut total_hatches = 0usize;
     let mut total_buildings_purchased = 0usize;
     let mut total_guest_completions = 0usize;
+    let mut total_guest_failures = 0usize;
     let mut total_guest_expirations = 0usize;
+    let mut total_guest_declines = 0usize;
     let mut total_contracts_generated = 0usize;
     let mut total_contracts_rejected = 0usize;
     let mut total_guild_job_gold = 0u32;
@@ -130,11 +133,11 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
             .expect("simulated day should preserve valid references");
         total_hatches += policy_metrics.hatches;
         total_buildings_purchased += policy_metrics.buildings_purchased;
-        let guest_completions = count_guest_completions(&summary);
-        let guest_expirations = count_guest_expirations(&summary);
         let guest_pressure = guest_pressure_metrics(&data, &game_state, &request_start, &summary);
-        total_guest_completions += guest_completions;
-        total_guest_expirations += guest_expirations;
+        total_guest_completions += summary.contracts_completed;
+        total_guest_failures += summary.contracts_failed;
+        total_guest_expirations += summary.contracts_expired;
+        total_guest_declines += summary.contracts_declined;
         total_contracts_generated += guest_pressure.generated;
         total_contracts_rejected += guest_pressure.rejected;
         total_guild_job_gold += summary.guild_job_gold;
@@ -175,8 +178,6 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
             &summary,
             &policy_metrics,
             &request_start,
-            guest_completions,
-            guest_expirations,
         ));
     }
 
@@ -198,6 +199,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         simulation_days: 30,
         starting_day,
         ending_day: game_state.current_day,
+        starting_active_contracts,
         opening_event_log_entries: starting_log_len,
         final_event_log_entries: game_state.event_log.len(),
         final_roster_size: game_state.monsters.len(),
@@ -221,7 +223,9 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         total_hatches,
         total_buildings_purchased,
         total_guest_completions,
+        total_guest_failures,
         total_guest_expirations,
+        total_guest_declines,
         total_contracts_generated,
         total_contracts_rejected,
         total_guild_job_gold,
@@ -259,6 +263,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         milestone_snapshots: vec![milestone_snapshot(&data, &game_state, 30)],
         per_day,
     };
+    assert_contract_accounting(&report);
     let report_path = write_simulation_report(&report);
     println!("SIMULATION_REPORT={}", report_path.display());
     assert!(

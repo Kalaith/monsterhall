@@ -46,6 +46,10 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         special_event_count: 0,
         contracts_generated: 0,
         contracts_rejected: 0,
+        contracts_completed: 0,
+        contracts_failed: 0,
+        contracts_expired: 0,
+        contracts_declined: 0,
         special_event_lines: Vec::new(),
         debt_updates: Vec::new(),
         contract_updates: Vec::new(),
@@ -61,7 +65,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         .extend(tick_town_situations(game_state));
     let building_bonus = collect_building_modifiers(data, game_state);
     let active_expedition = game_state.active_expedition.clone();
-    let guest_serviced_monster_ids = resolve_contracts(
+    let contract_resolution = resolve_contracts(
         data,
         game_state,
         &mut summary.guild_job_gold,
@@ -71,6 +75,12 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         &mut summary.event_lines,
         &mut summary.roster_updates,
     );
+    let guest_serviced_monster_ids = contract_resolution.serviced_monster_ids;
+    summary.contracts_generated += contract_resolution.generated_follow_ups;
+    summary.contracts_completed = contract_resolution.completed;
+    summary.contracts_failed = contract_resolution.failed;
+    summary.contracts_expired = contract_resolution.expired;
+    summary.contracts_declined = contract_resolution.declined;
 
     let active_expedition_context = active_expedition.as_ref().and_then(|expedition| {
         let floor = data
@@ -557,7 +567,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
     );
     game_state.current_day += 1;
     if let Ok(guest_refresh) = refresh_contracts(data, game_state) {
-        summary.contracts_generated = guest_refresh.generated;
+        summary.contracts_generated += guest_refresh.generated;
         summary.contracts_rejected = guest_refresh.rejected;
     }
     if let Some(event_text) = select_town_event_text(data, &game_state.monsters) {

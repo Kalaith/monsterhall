@@ -24,7 +24,7 @@ pub fn draw_contract_desk(
 
     let (requests, selected_request) = selected_request(guest_state, game_state);
 
-    if requests.is_empty() {
+    if requests.is_empty() && game_state.resolved_contracts.is_empty() {
         draw_no_requests_state(data, game_state, &layout);
         if let Some(action) = draw_footer_actions(data, &layout) {
             return Some(action);

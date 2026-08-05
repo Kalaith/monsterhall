@@ -261,6 +261,7 @@ pub struct ContractDeskUiText {
     pub no_requests_title: String,
     pub no_selected_request_title: String,
     pub clear_assignment_button: String,
+    pub decline_contract_button: String,
     pub assigned_button: String,
     pub status_label: String,
     pub deadline_day_template: String,

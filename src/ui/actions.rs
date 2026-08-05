@@ -23,6 +23,7 @@ pub enum UiAction {
     SelectContractRequest(String),
     AssignMonsterToGuest(String, String),
     ClearGuestAssignment(String),
+    DeclineContract(String),
     SelectChamberEgg(String),
     ReturnToTownOverview,
     SelectGuildRoom(String),

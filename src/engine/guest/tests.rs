@@ -501,3 +501,133 @@ fn the_desk_and_the_assignment_agree_on_what_a_booking_is_worth() {
         );
     }
 }
+
+#[test]
+fn declining_an_offer_releases_it_without_charging_a_penalty() {
+    let data = test_game_data();
+    let mut game_state = GameState {
+        current_day: 4,
+        resources: ResourcesState {
+            gold: 73,
+            ..ResourcesState::default()
+        },
+        monsters: vec![CompanionState {
+            id: "monster_001".to_owned(),
+            species_id: "slime_companion".to_owned(),
+            name: "Mira".to_owned(),
+            ..CompanionState::default()
+        }],
+        active_contracts: vec![ContractState {
+            request_id: "contract_001".to_owned(),
+            assigned_monster_id: Some("monster_001".to_owned()),
+            status: ContractStatus::Accepted,
+            penalty_gold: 40,
+            ..ContractState::default()
+        }],
+        ..GameState::default()
+    };
+
+    decline_contract(&mut game_state, "contract_001").expect("live offer should be declineable");
+
+    assert_eq!(game_state.resources.gold, 73);
+    assert!(game_state.active_contracts.is_empty());
+    assert!(!crate::engine::is_booked_for_contract(
+        &game_state,
+        "monster_001"
+    ));
+    assert_eq!(game_state.resolved_contracts.len(), 1);
+    assert!(matches!(
+        game_state.resolved_contracts[0].status,
+        ContractStatus::Declined
+    ));
+    assert!(game_state.resolved_contracts[0]
+        .assigned_monster_id
+        .is_none());
+
+    let (mut job_gold, mut contract_gold, mut residue) = (0, 0, 0);
+    let (mut updates, mut events, mut roster) = (Vec::new(), Vec::new(), Vec::new());
+    let report = resolve_contracts(
+        &data,
+        &mut game_state,
+        &mut job_gold,
+        &mut contract_gold,
+        &mut residue,
+        &mut updates,
+        &mut events,
+        &mut roster,
+    );
+    assert_eq!(report.declined, 1);
+    assert_eq!(report.completed + report.failed + report.expired, 0);
+}
+
+#[test]
+fn a_completed_contract_counts_its_follow_up_as_generated() {
+    let data = test_game_data();
+    let mut game_state = GameState {
+        current_day: 4,
+        town: PlayerTownState {
+            unlocked_room_ids: vec!["common_room".to_owned()],
+            unlocked_species_ids: vec!["slime_companion".to_owned()],
+            patron_tiers: vec!["local_delvers".to_owned()],
+            ..PlayerTownState::default()
+        },
+        monsters: vec![CompanionState {
+            id: "monster_001".to_owned(),
+            species_id: "slime_companion".to_owned(),
+            name: "Mira".to_owned(),
+            quality_rank: 1,
+            skills: CompanionSkillState {
+                scouting: 1,
+                hospitality: 1,
+                ..CompanionSkillState::default()
+            },
+            ..CompanionState::default()
+        }],
+        active_contracts: vec![ContractState {
+            request_id: "contract_001".to_owned(),
+            template_id: "starter_slime_bedding".to_owned(),
+            guest_name: "Curious Delver".to_owned(),
+            archetype_id: "curious_local".to_owned(),
+            requested_room_id: "common_room".to_owned(),
+            required_species_ids: vec!["slime_companion".to_owned()],
+            minimum_quality_rank: 1,
+            required_skill_thresholds: ContractSkillRequirementState {
+                scouting: 1,
+                hospitality: 1,
+                ..ContractSkillRequirementState::default()
+            },
+            reward: ResourcesState {
+                gold: 22,
+                arcane_residue: 4,
+                ..ResourcesState::default()
+            },
+            deadline_day: 6,
+            status: ContractStatus::Accepted,
+            assigned_monster_id: Some("monster_001".to_owned()),
+            ..ContractState::default()
+        }],
+        ..GameState::default()
+    };
+    let (mut job_gold, mut contract_gold, mut residue) = (0, 0, 0);
+    let (mut updates, mut events, mut roster) = (Vec::new(), Vec::new(), Vec::new());
+
+    let report = resolve_contracts(
+        &data,
+        &mut game_state,
+        &mut job_gold,
+        &mut contract_gold,
+        &mut residue,
+        &mut updates,
+        &mut events,
+        &mut roster,
+    );
+
+    assert_eq!(report.completed, 1);
+    assert_eq!(report.generated_follow_ups, 1);
+    assert_eq!(game_state.active_contracts.len(), 1);
+    assert_eq!(
+        game_state.active_contracts[0].template_id,
+        "repeat_client_confidence"
+    );
+    assert_eq!(game_state.active_contracts[0].chain_depth, 1);
+}

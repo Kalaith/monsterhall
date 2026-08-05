@@ -106,19 +106,3 @@ pub(super) fn accepted_guest_booking_count(game_state: &GameState) -> usize {
         .filter(|request| matches!(request.status, crate::state::ContractStatus::Accepted))
         .count()
 }
-
-pub(super) fn count_guest_completions(summary: &crate::state::DayResolutionSummary) -> usize {
-    summary
-        .contract_updates
-        .iter()
-        .filter(|line| line.contains(" completed: "))
-        .count()
-}
-
-pub(super) fn count_guest_expirations(summary: &crate::state::DayResolutionSummary) -> usize {
-    summary
-        .contract_updates
-        .iter()
-        .filter(|line| line.contains(" expired: "))
-        .count()
-}

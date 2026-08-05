@@ -262,6 +262,7 @@ pub(super) fn draw_requests_panel(
             ),
             match request.status {
                 ContractStatus::Completed => theme::POSITIVE,
+                ContractStatus::Declined => theme::WARNING,
                 _ => theme::DANGER,
             },
         );
@@ -551,6 +552,16 @@ pub(super) fn draw_selected_request_panel(
         )
     {
         return Some(UiAction::ClearGuestAssignment(request.request_id.clone()));
+    }
+
+    if utility_button(
+        layout.detail_x + layout.detail_w - 348.0,
+        282.0,
+        156.0,
+        26.0,
+        &data.ui_text.contract_desk.decline_contract_button,
+    ) {
+        return Some(UiAction::DeclineContract(request.request_id.clone()));
     }
 
     if let Some(error_message) = last_error {

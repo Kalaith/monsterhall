@@ -34,7 +34,7 @@ pub(crate) use depth::{
 pub use depth::{hall_preparation_quality, monster_role};
 pub use guest::{
     assign_monster_to_contract, clear_contract_assignment, contract_service_outcome,
-    evaluate_contract_eligibility, refresh_contracts, work_history_label,
+    decline_contract, evaluate_contract_eligibility, refresh_contracts, work_history_label,
     ContractEligibilityReport, ContractServiceOutcome,
 };
 pub use opening::{advance_opening_step, build_first_room, resolve_first_client};

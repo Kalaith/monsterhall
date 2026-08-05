@@ -58,7 +58,9 @@ pub(super) struct GuestPressureMetrics {
     pub(super) accepted: usize,
     pub(super) generated: usize,
     pub(super) completed: usize,
+    pub(super) failed: usize,
     pub(super) expired: usize,
+    pub(super) declined: usize,
     pub(super) rejected: usize,
     pub(super) next_deadline_days: Option<u32>,
     pub(super) by_tier: Vec<GuestTierMetrics>,
@@ -154,7 +156,9 @@ pub(super) struct SimulationDayReport {
     pub(super) expedition_failures: u32,
     pub(super) expedition_opportunity: ExpeditionOpportunityMetrics,
     pub(super) guest_completions: usize,
+    pub(super) guest_failures: usize,
     pub(super) guest_expirations: usize,
+    pub(super) guest_declines: usize,
     pub(super) guest_pressure: GuestPressureMetrics,
     pub(super) resources: SimulationResourcesSnapshot,
     pub(super) debt: Option<SimulationDebtSnapshot>,
@@ -172,6 +176,7 @@ pub(super) struct SimulationReport {
     pub(super) simulation_days: u32,
     pub(super) starting_day: u32,
     pub(super) ending_day: u32,
+    pub(super) starting_active_contracts: usize,
     pub(super) opening_event_log_entries: usize,
     pub(super) final_event_log_entries: usize,
     pub(super) final_roster_size: usize,
@@ -209,7 +214,9 @@ pub(super) struct SimulationReport {
     pub(super) total_hatches: usize,
     pub(super) total_buildings_purchased: usize,
     pub(super) total_guest_completions: usize,
+    pub(super) total_guest_failures: usize,
     pub(super) total_guest_expirations: usize,
+    pub(super) total_guest_declines: usize,
     pub(super) total_contracts_generated: usize,
     pub(super) total_contracts_rejected: usize,
     pub(super) total_guild_job_gold: u32,
@@ -389,8 +396,6 @@ pub(super) fn build_day_report(
     summary: &crate::state::DayResolutionSummary,
     policy_metrics: &DailyPolicyMetrics,
     request_start: &[GuestRequestStartSnapshot],
-    guest_completions: usize,
-    guest_expirations: usize,
 ) -> SimulationDayReport {
     let mut day_summary = Vec::new();
     day_summary.extend(summary.debt_updates.iter().cloned());
@@ -446,8 +451,10 @@ pub(super) fn build_day_report(
             summary.resolved_day,
             summary,
         ),
-        guest_completions,
-        guest_expirations,
+        guest_completions: summary.contracts_completed,
+        guest_failures: summary.contracts_failed,
+        guest_expirations: summary.contracts_expired,
+        guest_declines: summary.contracts_declined,
         guest_pressure: guest_pressure_metrics(data, game_state, request_start, summary),
         resources: resources_snapshot(game_state),
         debt: debt_snapshot(game_state),
@@ -478,26 +485,6 @@ pub(super) fn guest_pressure_metrics(
     summary: &crate::state::DayResolutionSummary,
 ) -> GuestPressureMetrics {
     let generated = summary.contracts_generated;
-    let completed = request_start
-        .iter()
-        .filter(|start| {
-            matches!(start.status, ContractStatus::Accepted)
-                && !game_state
-                    .active_contracts
-                    .iter()
-                    .any(|request| request.request_id == start.request_id)
-        })
-        .count();
-    let expired = request_start
-        .iter()
-        .filter(|start| {
-            matches!(start.status, ContractStatus::Pending)
-                && !game_state
-                    .active_contracts
-                    .iter()
-                    .any(|request| request.request_id == start.request_id)
-        })
-        .count();
     let pending = game_state
         .active_contracts
         .iter()
@@ -519,12 +506,27 @@ pub(super) fn guest_pressure_metrics(
         pending,
         accepted,
         generated,
-        completed,
-        expired,
+        completed: summary.contracts_completed,
+        failed: summary.contracts_failed,
+        expired: summary.contracts_expired,
+        declined: summary.contracts_declined,
         rejected: summary.contracts_rejected,
         next_deadline_days,
         by_tier: guest_pressure_by_tier(data, game_state, request_start, summary),
     }
+}
+
+pub(super) fn assert_contract_accounting(report: &SimulationReport) {
+    let supplied = report.starting_active_contracts + report.total_contracts_generated;
+    let accounted = report.total_guest_completions
+        + report.total_guest_failures
+        + report.total_guest_expirations
+        + report.total_guest_declines
+        + report.final_active_contracts;
+    assert_eq!(
+        supplied, accounted,
+        "contract accounting should balance: {supplied} starting/generated versus {accounted} resolved/live"
+    );
 }
 
 pub(super) fn guest_pressure_by_tier(

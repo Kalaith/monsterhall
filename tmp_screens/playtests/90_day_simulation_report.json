@@ -1,9 +1,10 @@
 {
-  "content_version": "1.35.0",
+  "content_version": "1.36.0",
   "rng_seed": 6840157140829518564,
   "simulation_days": 90,
   "starting_day": 1,
   "ending_day": 91,
+  "starting_active_contracts": 3,
   "opening_event_log_entries": 9,
   "final_event_log_entries": 966,
   "final_roster_size": 14,
@@ -51,8 +52,10 @@
   "total_hatches": 13,
   "total_buildings_purchased": 9,
   "total_guest_completions": 173,
+  "total_guest_failures": 0,
   "total_guest_expirations": 47,
-  "total_contracts_generated": 130,
+  "total_guest_declines": 0,
+  "total_contracts_generated": 223,
   "total_contracts_rejected": 25,
   "total_guild_job_gold": 116954,
   "total_contract_gold": 48712,
@@ -273,14 +276,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 0,
         "completed": 0,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -386,14 +393,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 0,
         "completed": 0,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -499,14 +510,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -619,14 +634,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -735,14 +754,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 0,
         "completed": 0,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -849,14 +872,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -966,14 +993,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
-        "generated": 0,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 2,
         "by_tier": [
@@ -1083,14 +1114,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -1205,14 +1240,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 0,
         "completed": 0,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -1323,14 +1362,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 2,
         "by_tier": [
@@ -1451,14 +1494,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -1570,14 +1617,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 4,
         "pending": 4,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 2,
         "by_tier": [
@@ -1700,14 +1751,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 4,
         "pending": 4,
         "accepted": 0,
         "generated": 0,
         "completed": 0,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -1817,14 +1872,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 4,
         "pending": 4,
         "accepted": 0,
-        "generated": 0,
+        "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -1941,14 +2000,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 4,
         "pending": 4,
         "accepted": 0,
-        "generated": 0,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -2066,14 +2129,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 1,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -2198,14 +2265,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
         "generated": 0,
         "completed": 0,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -2321,14 +2392,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 3,
         "pending": 3,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -2451,14 +2526,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 4,
         "pending": 4,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -2575,14 +2654,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 4,
         "pending": 4,
         "accepted": 0,
         "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -2705,14 +2788,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 5,
         "pending": 5,
         "accepted": 0,
-        "generated": 1,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -2837,14 +2924,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -2965,14 +3056,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 5,
         "pending": 5,
         "accepted": 0,
         "generated": 0,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -3094,14 +3189,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 4,
         "pending": 4,
         "accepted": 0,
         "generated": 1,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -3225,14 +3324,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 5,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 2,
         "by_tier": [
@@ -3372,14 +3475,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 0,
         "completed": 0,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -3503,14 +3610,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -3641,14 +3752,18 @@
         "missed_guest_deadlines": 3
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 3,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 5,
         "pending": 5,
         "accepted": 0,
         "generated": 4,
         "completed": 2,
+        "failed": 0,
         "expired": 3,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 2,
         "by_tier": [
@@ -3791,14 +3906,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 5,
         "pending": 5,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -3928,14 +4047,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -4073,14 +4196,18 @@
         "missed_guest_deadlines": 2
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 2,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 1,
+        "failed": 0,
         "expired": 2,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 1,
         "by_tier": [
@@ -4216,14 +4343,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 0,
+        "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -4355,14 +4486,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -4497,14 +4632,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 5,
         "pending": 5,
         "accepted": 0,
         "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -4641,14 +4780,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 5,
         "pending": 5,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -4784,14 +4927,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -4930,14 +5077,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -5074,14 +5225,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 5,
         "pending": 5,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 3,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -5221,14 +5376,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 4,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -5360,14 +5519,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 4,
         "completed": 3,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -5512,14 +5675,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 0,
         "completed": 0,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -5644,14 +5811,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 4,
         "completed": 3,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -5795,14 +5966,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 4,
         "completed": 3,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -5950,14 +6125,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 0,
+        "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -6090,14 +6269,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 1,
         "completed": 0,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -6225,14 +6408,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 5,
         "completed": 4,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 1,
         "by_tier": [
@@ -6390,14 +6577,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 4,
         "completed": 4,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 1,
         "by_tier": [
@@ -6531,14 +6722,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
-        "completed": 2,
+        "generated": 3,
+        "completed": 3,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -6691,14 +6886,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -6842,14 +7041,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 0,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 1,
         "completed": 0,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -6978,14 +7181,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 3,
         "completed": 3,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -7129,14 +7336,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -7275,14 +7486,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -7418,14 +7633,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 5,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 5,
         "completed": 5,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -7580,14 +7799,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
-        "completed": 1,
+        "generated": 3,
+        "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -7729,14 +7952,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -7876,14 +8103,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 4,
         "completed": 3,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -8034,14 +8265,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -8189,14 +8424,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -8335,14 +8574,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 4,
         "completed": 3,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -8495,14 +8738,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 5,
         "completed": 4,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 1,
         "by_tier": [
@@ -8663,14 +8910,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 0,
-        "completed": 0,
+        "generated": 1,
+        "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -8806,14 +9057,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 4,
         "completed": 3,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -8961,14 +9216,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 4,
         "completed": 3,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 1,
         "by_tier": [
@@ -9125,14 +9384,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -9274,14 +9537,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -9422,14 +9689,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 4,
+        "generated": 5,
         "completed": 4,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 1,
         "by_tier": [
@@ -9584,14 +9855,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 3,
         "completed": 3,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -9743,14 +10018,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 1,
         "completed": 1,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -9887,14 +10166,18 @@
         "missed_guest_deadlines": 2
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 2,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
-        "completed": 1,
+        "generated": 4,
+        "completed": 2,
+        "failed": 0,
         "expired": 2,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -10039,14 +10322,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 3,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 3,
         "completed": 3,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 1,
         "by_tier": [
@@ -10195,14 +10482,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 4,
         "completed": 4,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -10362,14 +10653,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
         "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 1,
         "by_tier": [
@@ -10522,14 +10817,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
-        "completed": 3,
+        "generated": 4,
+        "completed": 4,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -10681,14 +10980,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
-        "completed": 3,
+        "generated": 4,
+        "completed": 4,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 0,
         "by_tier": [
@@ -10836,14 +11139,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 5,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 3,
+        "generated": 6,
         "completed": 5,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 1,
         "next_deadline_days": 2,
         "by_tier": [
@@ -10993,14 +11300,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
-        "completed": 3,
+        "generated": 4,
+        "completed": 4,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -11151,14 +11462,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 5,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
-        "completed": 4,
+        "generated": 5,
+        "completed": 5,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 2,
         "by_tier": [
@@ -11313,14 +11628,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 4,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 4,
         "completed": 4,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 1,
         "by_tier": [
@@ -11460,14 +11779,18 @@
         "missed_guest_deadlines": 0
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 0,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 2,
+        "failed": 0,
         "expired": 0,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -11606,14 +11929,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
-        "expired": 0,
+        "failed": 0,
+        "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -11762,14 +12089,18 @@
         "missed_guest_deadlines": 2
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 2,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 1,
-        "expired": 1,
+        "failed": 0,
+        "expired": 2,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -11911,14 +12242,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -12059,14 +12394,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -12211,14 +12550,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -12366,14 +12709,18 @@
         "missed_guest_deadlines": 2
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 2,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 1,
-        "expired": 1,
+        "failed": 0,
+        "expired": 2,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -12513,14 +12860,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 2,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 3,
         "completed": 2,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -12673,14 +13024,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -12832,14 +13187,18 @@
         "missed_guest_deadlines": 1
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 1,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 1,
+        "generated": 2,
         "completed": 1,
+        "failed": 0,
         "expired": 1,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [
@@ -12977,14 +13336,18 @@
         "missed_guest_deadlines": 2
       },
       "guest_completions": 1,
+      "guest_failures": 0,
       "guest_expirations": 2,
+      "guest_declines": 0,
       "guest_pressure": {
         "active": 6,
         "pending": 6,
         "accepted": 0,
-        "generated": 2,
+        "generated": 3,
         "completed": 1,
-        "expired": 1,
+        "failed": 0,
+        "expired": 2,
+        "declined": 0,
         "rejected": 0,
         "next_deadline_days": 0,
         "by_tier": [

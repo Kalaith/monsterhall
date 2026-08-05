@@ -39,6 +39,16 @@ pub struct ContractRefreshReport {
     pub rejected: usize,
 }
 
+#[derive(Debug, Default)]
+pub(crate) struct ContractResolutionReport {
+    pub(crate) serviced_monster_ids: HashSet<String>,
+    pub(crate) generated_follow_ups: usize,
+    pub(crate) completed: usize,
+    pub(crate) failed: usize,
+    pub(crate) expired: usize,
+    pub(crate) declined: usize,
+}
+
 pub fn refresh_contracts(
     data: &GameData,
     game_state: &mut GameState,
@@ -285,95 +295,6 @@ pub fn contract_service_outcome(
     ContractServiceOutcome::Refused
 }
 
-pub fn assign_monster_to_contract(
-    data: &GameData,
-    game_state: &mut GameState,
-    request_id: &str,
-    monster_id: &str,
-) -> Result<(), String> {
-    let request_index = game_state
-        .active_contracts
-        .iter()
-        .position(|request| request.request_id == request_id)
-        .ok_or_else(|| format!("Unknown contract id '{request_id}'."))?;
-    let monster = game_state
-        .monsters
-        .iter()
-        .find(|monster| monster.id == monster_id)
-        .ok_or_else(|| format!("Unknown monster id '{monster_id}'."))?;
-    if contract_service_outcome(
-        data,
-        game_state,
-        &game_state.active_contracts[request_index],
-        monster,
-    ) == ContractServiceOutcome::Refused
-    {
-        return Err(evaluate_contract_eligibility(
-            data,
-            game_state,
-            &game_state.active_contracts[request_index],
-            monster,
-        )
-        .failure_reasons
-        .join(" "));
-    }
-    if !game_state.active_contracts[request_index].status.is_live() {
-        return Err("That contract has already been resolved.".to_owned());
-    }
-    if game_state.active_contracts.iter().any(|request| {
-        request.request_id != request_id
-            && request.assigned_monster_id.as_deref() == Some(monster_id)
-            && matches!(request.status, ContractStatus::Accepted)
-    }) {
-        return Err("That companion is already assigned to another contract.".to_owned());
-    }
-
-    let request = &mut game_state.active_contracts[request_index];
-    request.assigned_monster_id = Some(monster_id.to_owned());
-    request.status = ContractStatus::Accepted;
-
-    // Taking a booking releases whatever she was rostered for, the same way
-    // every other assignment releases her from an expedition.
-    //
-    // Blocking the reverse order was only half the fix: `assign_monster_to_room`
-    // refuses a companion who is already booked, but booking a companion who is
-    // already working the hall was still allowed — and `resolve_day` settles the
-    // contract first and discards her shift, so the guild-job slot was held by
-    // somebody whose work would never happen. Refusing here would be wrong; she
-    // is perfectly able to take the contract. It is the slot that is wasted, so
-    // the slot goes back.
-    if let Some(monster) = game_state
-        .monsters
-        .iter_mut()
-        .find(|monster| monster.id == monster_id)
-    {
-        if matches!(
-            monster.current_job,
-            CompanionJobState::GuildJob { .. } | CompanionJobState::Resting
-        ) {
-            monster.current_job = CompanionJobState::Idle;
-        }
-    }
-    Ok(())
-}
-
-pub fn clear_contract_assignment(
-    game_state: &mut GameState,
-    request_id: &str,
-) -> Result<(), String> {
-    let request = game_state
-        .active_contracts
-        .iter_mut()
-        .find(|request| request.request_id == request_id)
-        .ok_or_else(|| format!("Unknown contract id '{request_id}'."))?;
-    if !request.status.is_live() {
-        return Err("That contract has already been resolved.".to_owned());
-    }
-    request.assigned_monster_id = None;
-    request.status = ContractStatus::Pending;
-    Ok(())
-}
-
 pub fn resolve_contracts(
     data: &GameData,
     game_state: &mut GameState,
@@ -383,9 +304,15 @@ pub fn resolve_contracts(
     contract_updates: &mut Vec<String>,
     event_lines: &mut Vec<String>,
     roster_updates: &mut Vec<String>,
-) -> HashSet<String> {
+) -> ContractResolutionReport {
     let resolved_day = game_state.current_day;
-    let mut serviced_monster_ids = HashSet::new();
+    let mut report = ContractResolutionReport {
+        declined: std::mem::take(&mut game_state.resolved_contracts)
+            .into_iter()
+            .filter(|request| matches!(request.status, ContractStatus::Declined))
+            .count(),
+        ..ContractResolutionReport::default()
+    };
     let mut remaining_requests = Vec::new();
     let mut follow_up_requests = Vec::new();
     let mut resolved_contracts = Vec::new();
@@ -420,6 +347,7 @@ pub fn resolve_contracts(
                     ));
                     request.status = ContractStatus::Failed;
                     resolved_contracts.push(request);
+                    report.failed += 1;
                     continue;
                 };
 
@@ -430,7 +358,7 @@ pub fn resolve_contracts(
                     &game_state.monsters[monster_index],
                 );
                 let partial_success = outcome == ContractServiceOutcome::Partial;
-                let report = evaluate_contract_eligibility(
+                let eligibility_report = evaluate_contract_eligibility(
                     data,
                     game_state,
                     &request,
@@ -447,12 +375,12 @@ pub fn resolve_contracts(
                 // not. Delivering under-prepared is a completion, not a
                 // failure; it is worth half.
                 let under_prepared = town_preparation < request.preparation_quality_required;
-                if !report.is_eligible && !partial_success {
+                if !eligibility_report.is_eligible && !partial_success {
                     event_lines.push(story_text(
                         &data.story_events.guest_failed_event_template,
                         &[
                             ("{guest}", request.guest_name.clone()),
-                            ("{reason}", report.failure_reasons.join(" ")),
+                            ("{reason}", eligibility_report.failure_reasons.join(" ")),
                         ],
                     ));
                     game_state.resources.gold = game_state
@@ -461,6 +389,7 @@ pub fn resolve_contracts(
                         .saturating_sub(request.penalty_gold);
                     request.status = ContractStatus::Failed;
                     resolved_contracts.push(request);
+                    report.failed += 1;
                     continue;
                 }
 
@@ -517,7 +446,7 @@ pub fn resolve_contracts(
                     if partial_success { 0 } else { 1 },
                 );
                 monster.current_job = CompanionJobState::Idle;
-                serviced_monster_ids.insert(monster.id.clone());
+                report.serviced_monster_ids.insert(monster.id.clone());
 
                 event_lines.push(story_text(
                     &data.story_events.guest_satisfied_event_template,
@@ -573,6 +502,7 @@ pub fn resolve_contracts(
                 }
                 request.status = ContractStatus::Completed;
                 resolved_contracts.push(request);
+                report.completed += 1;
             }
             ContractStatus::Pending if request.deadline_day <= resolved_day => {
                 game_state.resources.gold = game_state
@@ -595,6 +525,7 @@ pub fn resolve_contracts(
                 ));
                 request.status = ContractStatus::Failed;
                 resolved_contracts.push(request);
+                report.expired += 1;
             }
             ContractStatus::Pending => remaining_requests.push(request),
             // Swept a day after they resolved, which is what gives the player a
@@ -603,10 +534,11 @@ pub fn resolve_contracts(
         }
     }
 
+    report.generated_follow_ups = follow_up_requests.len();
     remaining_requests.extend(follow_up_requests);
     game_state.active_contracts = remaining_requests;
     game_state.resolved_contracts = resolved_contracts;
-    serviced_monster_ids
+    report
 }
 
 /// Price a booking against the ordinary room shift it displaces.
@@ -727,10 +659,12 @@ fn species_name_by_id(data: &GameData, species_id: &str) -> String {
         .unwrap_or_else(|| species_id.to_owned())
 }
 
+mod actions;
 mod eligibility;
 
 #[cfg(test)]
 mod tests;
 
+pub use actions::{assign_monster_to_contract, clear_contract_assignment, decline_contract};
 use eligibility::*;
 pub use eligibility::{evaluate_contract_eligibility, work_history_label};

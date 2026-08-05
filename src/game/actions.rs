@@ -34,6 +34,9 @@ impl Game {
                     clear_contract_assignment(game_state, &request_id)
                 });
             }
+            UiAction::DeclineContract(request_id) => {
+                self.with_game_state(|game_state, _| decline_contract(game_state, &request_id));
+            }
             UiAction::SelectChamberEgg(egg_id) => {
                 if egg_id.is_empty() {
                     if let GamePhase::HatcheryManagement(state) = &self.phase {

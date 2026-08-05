@@ -58,7 +58,6 @@ mod scenarios;
 
 use fixtures::*;
 use policy::*;
-use policy_guests::*;
 use reporting::*;
 use reporting_roster::*;
 use reporting_runs::*;
