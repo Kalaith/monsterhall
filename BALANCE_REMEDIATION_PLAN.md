@@ -141,3 +141,10 @@ that changes it.
 The remediation is complete only when the worktree is clean, the publisher
 passes, and the final review can answer that the game's major choices are both
 mechanically coherent and economically meaningful.
+
+## Completion Record
+
+Completed on 2026-08-05 against content version 1.38.0. Every phase above
+landed as an independently reviewed commit, the complete validation and
+publisher paths pass, and the final findings are recorded in
+`BALANCE_REVIEW.md`.
