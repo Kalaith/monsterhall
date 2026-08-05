@@ -17,6 +17,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
     let mut summary = DayResolutionSummary {
         resolved_day,
         guild_job_gold: 0,
+        contract_gold: 0,
         guild_job_arcane_residue: 0,
         expedition_prep_gold: 0,
         expedition_prep_materials: 0,
@@ -54,6 +55,7 @@ pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolution
         data,
         game_state,
         &mut summary.guild_job_gold,
+        &mut summary.contract_gold,
         &mut summary.guild_job_arcane_residue,
         &mut summary.contract_updates,
         &mut summary.event_lines,
@@ -647,7 +649,8 @@ pub(super) fn apply_special_day_event(
 
     let mut gold_delta = 0i32;
     if let Some(cost) = &event.cost {
-        let gold_paid = game_state.resources.gold.min(cost.gold);
+        let scaled_gold = scaled_special_event_gold(data, game_state, cost.gold);
+        let gold_paid = game_state.resources.gold.min(scaled_gold);
         game_state.resources.gold = game_state.resources.gold.saturating_sub(gold_paid);
         game_state.resources.tower_materials = game_state
             .resources
@@ -663,7 +666,8 @@ pub(super) fn apply_special_day_event(
     }
 
     if let Some(reward) = &event.reward {
-        game_state.resources.gold = game_state.resources.gold.saturating_add(reward.gold);
+        let scaled_gold = scaled_special_event_gold(data, game_state, reward.gold);
+        game_state.resources.gold = game_state.resources.gold.saturating_add(scaled_gold);
         game_state.resources.tower_materials = game_state
             .resources
             .tower_materials
@@ -674,7 +678,7 @@ pub(super) fn apply_special_day_event(
             .resources
             .arcane_residue
             .saturating_add(reward.arcane_residue);
-        gold_delta += reward.gold as i32;
+        gold_delta += scaled_gold as i32;
     }
 
     summary.special_event_count += 1;
@@ -692,5 +696,57 @@ pub(super) fn apply_special_day_event(
         let line = format!("Special event expense: {} gold.", gold_delta);
         summary.debt_updates.push(line.clone());
         summary.special_event_lines.push(line);
+    }
+}
+
+pub(super) fn scaled_special_event_gold(data: &GameData, game_state: &GameState, gold: u32) -> u32 {
+    if gold == 0 {
+        return 0;
+    }
+    let tier_index = game_state.town.patron_tiers.len().saturating_sub(1);
+    let multiplier = data
+        .config
+        .day_cycle
+        .special_event_gold_multipliers_pct
+        .get(tier_index)
+        .copied()
+        .or_else(|| {
+            data.config
+                .day_cycle
+                .special_event_gold_multipliers_pct
+                .last()
+                .copied()
+        })
+        .unwrap_or(100);
+    u32::try_from(
+        u64::from(gold)
+            .saturating_mul(u64::from(multiplier))
+            .div_ceil(100),
+    )
+    .unwrap_or(u32::MAX)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::data::test_game_data;
+    use crate::state::PlayerTownState;
+
+    #[test]
+    fn special_event_gold_keeps_pace_with_the_patron_market() {
+        let data = test_game_data();
+        let game_state = GameState {
+            town: PlayerTownState {
+                patron_tiers: vec![
+                    "local_delvers".to_owned(),
+                    "guild_sponsors".to_owned(),
+                    "frontier_factions".to_owned(),
+                ],
+                ..PlayerTownState::default()
+            },
+            ..GameState::default()
+        };
+
+        assert_eq!(scaled_special_event_gold(&data, &game_state, 100), 275);
     }
 }

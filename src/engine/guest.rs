@@ -4,7 +4,7 @@ use std::collections::HashSet;
 
 use super::day_cycle::{
     apply_guild_job_progression, charm_training_bonus, companion_effectiveness_pct,
-    scale_by_effectiveness,
+    preview_guild_job, scale_by_effectiveness,
 };
 use super::{
     active_situation_guest_bonus, apply_monster_relationship_gain, contract_follow_up_request,
@@ -86,7 +86,7 @@ pub fn refresh_contracts(
             game_state.story_progress.first_special_guest_seen = true;
         }
 
-        let candidate_request = ContractState {
+        let mut candidate_request = ContractState {
             request_id: format!(
                 "contract_{:03}",
                 game_state.current_day as usize * 10 + next_sequence
@@ -151,6 +151,8 @@ pub fn refresh_contracts(
             report.rejected += 1;
             continue;
         }
+
+        price_contract_request(data, game_state, &mut candidate_request);
 
         game_state.active_contracts.push(candidate_request);
         report.generated += 1;
@@ -376,6 +378,7 @@ pub fn resolve_contracts(
     data: &GameData,
     game_state: &mut GameState,
     guild_job_gold: &mut u32,
+    contract_gold: &mut u32,
     guild_job_arcane_residue: &mut u32,
     contract_updates: &mut Vec<String>,
     event_lines: &mut Vec<String>,
@@ -493,6 +496,7 @@ pub fn resolve_contracts(
                 game_state.resources.relics += scaled(request.reward.relics);
                 game_state.resources.arcane_residue += residue_reward;
                 *guild_job_gold += gold_reward;
+                *contract_gold += gold_reward;
                 *guild_job_arcane_residue += residue_reward;
                 monster.fatigue = monster.fatigue.saturating_add(room.stamina_cost);
                 monster.stress = monster
@@ -560,8 +564,10 @@ pub fn resolve_contracts(
                     roster_updates.push(progression_update);
                 }
                 if !partial_success {
-                    if let Some(follow_up) = contract_follow_up_request(data, game_state, &request)
+                    if let Some(mut follow_up) =
+                        contract_follow_up_request(data, game_state, &request)
                     {
+                        price_contract_request(data, game_state, &mut follow_up);
                         follow_up_requests.push(follow_up);
                     }
                 }
@@ -601,6 +607,48 @@ pub fn resolve_contracts(
     game_state.active_contracts = remaining_requests;
     game_state.resolved_contracts = resolved_contracts;
     serviced_monster_ids
+}
+
+/// Price a booking against the ordinary room shift it displaces.
+///
+/// Contract gold used to stay at its day-one authored amount while room income
+/// multiplied with rank, patrons, skills, buildings and depth. By the end of a
+/// campaign a booking paid tens of gold against thousands for the same worker's
+/// shift. Quote the best currently eligible companion at full condition, then
+/// let resolution apply her real condition exactly once when she serves it.
+fn price_contract_request(data: &GameData, game_state: &GameState, request: &mut ContractState) {
+    let best_shift_gold = request_candidates(data, game_state, request)
+        .into_iter()
+        .filter(|(monster, _)| {
+            contract_service_outcome(data, game_state, request, monster)
+                != ContractServiceOutcome::Refused
+        })
+        .filter_map(|(monster, _)| {
+            let mut ready_monster = monster.clone();
+            ready_monster.fatigue = 0;
+            ready_monster.stress = 0;
+            ready_monster.injury = 0;
+            preview_guild_job(data, game_state, &ready_monster, &request.requested_room_id)
+                .ok()
+                .map(|preview| preview.projected_gold)
+        })
+        .max()
+        .unwrap_or(0);
+    let market_quote = u64::from(best_shift_gold)
+        .saturating_mul(u64::from(
+            data.config.day_cycle.contract_income_multiplier_pct,
+        ))
+        .div_ceil(100);
+    request.reward.gold = request
+        .reward
+        .gold
+        .max(u32::try_from(market_quote).unwrap_or(u32::MAX));
+    let market_penalty = u64::from(request.reward.gold)
+        .saturating_mul(u64::from(data.config.day_cycle.contract_penalty_pct))
+        .div_ceil(100);
+    request.penalty_gold = request
+        .penalty_gold
+        .max(u32::try_from(market_penalty).unwrap_or(u32::MAX));
 }
 
 fn request_candidates<'a>(

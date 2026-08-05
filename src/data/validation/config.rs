@@ -134,6 +134,8 @@ impl GameData {
             || self.config.day_cycle.expedition_endurance_safety_divisor == 0
             || self.config.day_cycle.expedition_reward_success_divisor == 0
             || self.config.day_cycle.companion_base_wage_gold == 0
+            || self.config.day_cycle.contract_income_multiplier_pct == 0
+            || self.config.day_cycle.contract_penalty_pct == 0
             || self.config.day_cycle.building_maintenance_cost_divisor == 0
         {
             return Err(
@@ -143,6 +145,7 @@ impl GameData {
         }
 
         self.validate_upkeep_bands()?;
+        self.validate_economy_curves()?;
         self.validate_role_thresholds()?;
 
         if self.config.day_cycle.expedition_egg_reward_threshold <= 0
@@ -155,6 +158,23 @@ impl GameData {
 
         self.validate_quality_rank_ladder()?;
 
+        Ok(())
+    }
+
+    fn validate_economy_curves(&self) -> Result<(), String> {
+        let event_curve = &self.config.day_cycle.special_event_gold_multipliers_pct;
+        if event_curve.len() < self.patron_tiers.patron_tiers.len() || event_curve.contains(&0) {
+            return Err(format!(
+                "config.json day_cycle.special_event_gold_multipliers_pct must hold one positive entry for each of the {} patron tiers.",
+                self.patron_tiers.patron_tiers.len()
+            ));
+        }
+        if event_curve.windows(2).any(|pair| pair[0] > pair[1]) {
+            return Err(
+                "config.json day_cycle.special_event_gold_multipliers_pct must not decrease."
+                    .to_owned(),
+            );
+        }
         Ok(())
     }
 

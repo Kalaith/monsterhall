@@ -612,6 +612,9 @@ pub struct ExpeditionState {
 pub struct DayResolutionSummary {
     pub resolved_day: u32,
     pub guild_job_gold: u32,
+    /// Contract share of `guild_job_gold`, retained separately so reports can
+    /// tell whether the mixed economy is actually mixed.
+    pub contract_gold: u32,
     pub guild_job_arcane_residue: u32,
     pub expedition_prep_gold: u32,
     pub expedition_prep_materials: u32,

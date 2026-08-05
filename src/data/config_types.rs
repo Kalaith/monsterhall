@@ -180,6 +180,15 @@ pub struct DayCycleConfigData {
     /// help; it must not answer the question.
     #[serde(default = "default_contract_preparation_score_cap")]
     pub contract_preparation_score_cap: u32,
+    /// A booking displaces the ordinary room shift its companion could have
+    /// worked. The quoted contract gold is at least this percentage of that
+    /// ready companion's room preview, priced when the request is offered.
+    #[serde(default = "default_contract_income_multiplier_pct")]
+    pub contract_income_multiplier_pct: u32,
+    /// An ignored or failed booking costs this percentage of its quoted gold,
+    /// with the template's authored penalty retained as a minimum.
+    #[serde(default = "default_contract_penalty_pct")]
+    pub contract_penalty_pct: u32,
     /// Fee an adventuring party pays when the escort is below the calibre their
     /// patron tier demands. They still hire, but they do not pay full rate.
     #[serde(default = "default_understrength_income_pct")]
@@ -187,6 +196,11 @@ pub struct DayCycleConfigData {
     pub building_maintenance_cost_divisor: u32,
     #[serde(default)]
     pub upkeep_bands: Vec<UpkeepBandData>,
+    /// Gold-only special-event scale by number of unlocked patron tiers. The
+    /// first entry is the starting guild; later entries keep a fixed authored
+    /// expense visible against the larger market it belongs to.
+    #[serde(default = "default_special_event_gold_multipliers_pct")]
+    pub special_event_gold_multipliers_pct: Vec<u32>,
     /// Hazard added per floor of depth. The primary depth dial is each floor's
     /// authored `difficulty`; this is the engine's slope on top of it.
     #[serde(default = "default_depth_hazard_per_floor")]
@@ -471,12 +485,24 @@ fn default_contract_preparation_score_cap() -> u32 {
     10
 }
 
+fn default_contract_income_multiplier_pct() -> u32 {
+    125
+}
+
+fn default_contract_penalty_pct() -> u32 {
+    50
+}
+
 fn default_skill_wage_divisor() -> u32 {
     4
 }
 
 fn default_understrength_income_pct() -> u32 {
     45
+}
+
+fn default_special_event_gold_multipliers_pct() -> Vec<u32> {
+    vec![100, 175, 275]
 }
 
 fn default_reward_threshold_depth_relief_pct() -> i32 {

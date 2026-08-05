@@ -84,6 +84,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
     let mut total_contracts_generated = 0usize;
     let mut total_contracts_rejected = 0usize;
     let mut total_guild_job_gold = 0u32;
+    let mut total_contract_gold = 0u32;
     let mut total_expedition_prep_gold = 0u32;
     let mut total_expedition_prep_materials = 0u32;
     let mut total_expedition_prep_arcane_residue = 0u32;
@@ -127,6 +128,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         total_contracts_generated += guest_pressure.generated;
         total_contracts_rejected += guest_pressure.rejected;
         total_guild_job_gold += summary.guild_job_gold;
+        total_contract_gold += summary.contract_gold;
         total_expedition_prep_gold += summary.expedition_prep_gold;
         total_expedition_prep_materials += summary.expedition_prep_materials;
         total_expedition_prep_arcane_residue += summary.expedition_prep_arcane_residue;
@@ -210,6 +212,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         total_contracts_generated,
         total_contracts_rejected,
         total_guild_job_gold,
+        total_contract_gold,
         total_expedition_prep_gold,
         total_expedition_prep_materials,
         total_expedition_prep_arcane_residue,
@@ -395,6 +398,19 @@ fn long_campaign_simulation_reports_stay_valid() {
                 );
             }
             365 => {
+                let room_gold = report
+                    .total_guild_job_gold
+                    .saturating_sub(report.total_contract_gold);
+                assert!(
+                    report.total_contract_gold > 0,
+                    "the contract desk should contribute campaign income"
+                );
+                assert!(
+                    u64::from(room_gold) * 100
+                        <= u64::from(report.total_guild_job_gold) * 85,
+                    "one repeatable source should not own the economy: room work supplied {room_gold} of {} earned gold",
+                    report.total_guild_job_gold
+                );
                 // Deliberately relaxed from `== population_cap` when wages
                 // landed. Filling the last slots used to be free and therefore
                 // inevitable: a companion cost a flat 4 gold a day whatever she

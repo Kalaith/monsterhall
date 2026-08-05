@@ -87,6 +87,7 @@ pub(super) fn run_simulation_report(
     let mut total_contracts_generated = 0usize;
     let mut total_contracts_rejected = 0usize;
     let mut total_guild_job_gold = 0u32;
+    let mut total_contract_gold = 0u32;
     let mut total_expedition_prep_gold = 0u32;
     let mut total_expedition_prep_materials = 0u32;
     let mut total_expedition_prep_arcane_residue = 0u32;
@@ -132,6 +133,7 @@ pub(super) fn run_simulation_report(
         total_contracts_generated += guest_pressure.generated;
         total_contracts_rejected += guest_pressure.rejected;
         total_guild_job_gold += summary.guild_job_gold;
+        total_contract_gold += summary.contract_gold;
         total_expedition_prep_gold += summary.expedition_prep_gold;
         total_expedition_prep_materials += summary.expedition_prep_materials;
         total_expedition_prep_arcane_residue += summary.expedition_prep_arcane_residue;
@@ -203,6 +205,7 @@ pub(super) fn run_simulation_report(
         total_contracts_generated,
         total_contracts_rejected,
         total_guild_job_gold,
+        total_contract_gold,
         total_expedition_prep_gold,
         total_expedition_prep_materials,
         total_expedition_prep_arcane_residue,

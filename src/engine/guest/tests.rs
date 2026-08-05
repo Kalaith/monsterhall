@@ -6,6 +6,53 @@ use crate::state::{
 };
 
 #[test]
+fn a_contract_is_quoted_against_the_shift_it_displaces() {
+    let data = test_game_data();
+    let monster = CompanionState {
+        id: "monster_001".to_owned(),
+        species_id: "slime_companion".to_owned(),
+        name: "Mira".to_owned(),
+        quality_rank: 1,
+        ..CompanionState::default()
+    };
+    let game_state = GameState {
+        town: PlayerTownState {
+            unlocked_room_ids: vec!["common_room".to_owned()],
+            patron_tiers: vec!["local_delvers".to_owned()],
+            ..PlayerTownState::default()
+        },
+        monsters: vec![monster.clone()],
+        ..GameState::default()
+    };
+    let shift_gold = preview_guild_job(&data, &game_state, &monster, "common_room")
+        .expect("the starting room should quote a shift")
+        .projected_gold;
+    let mut request = ContractState {
+        requested_room_id: "common_room".to_owned(),
+        minimum_quality_rank: 1,
+        reward: ResourcesState {
+            gold: 1,
+            ..ResourcesState::default()
+        },
+        penalty_gold: 1,
+        ..ContractState::default()
+    };
+
+    price_contract_request(&data, &game_state, &mut request);
+
+    let minimum_quote = shift_gold
+        .saturating_mul(data.config.day_cycle.contract_income_multiplier_pct)
+        .div_ceil(100);
+    let minimum_penalty = request
+        .reward
+        .gold
+        .saturating_mul(data.config.day_cycle.contract_penalty_pct)
+        .div_ceil(100);
+    assert!(request.reward.gold >= minimum_quote);
+    assert!(request.penalty_gold >= minimum_penalty);
+}
+
+#[test]
 fn guest_eligibility_rejects_wrong_species_and_missing_room() {
     let data = test_game_data();
     let game_state = GameState {
@@ -281,17 +328,20 @@ fn a_hall_that_did_not_staff_up_delivers_the_booking_for_half() {
         }];
 
         let mut gold = 0;
+        let mut contract_gold = 0;
         let mut residue = 0;
         let (mut updates, mut events, mut roster) = (Vec::new(), Vec::new(), Vec::new());
         resolve_contracts(
             &data,
             &mut game_state,
             &mut gold,
+            &mut contract_gold,
             &mut residue,
             &mut updates,
             &mut events,
             &mut roster,
         );
+        assert_eq!(contract_gold, gold);
         (gold, updates)
     };
 
