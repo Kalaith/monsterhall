@@ -14,7 +14,7 @@ use crate::engine::{
     initialize_first_debt, preview_expedition_plan, purchase_building, refresh_contracts,
     replace_monster_with_selected_egg, resolve_day, resolve_first_client,
 };
-use crate::state::{ContractStatus, EggConversionKind, ExpeditionPriority};
+use crate::state::{CampaignFailureState, ContractStatus, EggConversionKind, ExpeditionPriority};
 
 const SIMULATION_BASE_SEED: u64 = 0x5EED_1EAD_CAFE_BABE;
 const LONG_CAMPAIGN_SEEDS: [(u32, u64); 3] = [

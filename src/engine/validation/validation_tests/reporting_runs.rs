@@ -117,7 +117,17 @@ pub(super) fn run_simulation_report(
         let summary = resolve_day(data, &mut game_state);
 
         assert_eq!(summary.resolved_day, resolved_day);
-        assert_eq!(game_state.current_day, resolved_day + 1);
+        assert_eq!(
+            game_state.current_day,
+            resolved_day + 1,
+            "simulation campaign stopped: {:?}; gold {}, debt {:?}",
+            game_state.campaign_failure,
+            game_state.resources.gold,
+            game_state
+                .debt
+                .as_ref()
+                .map(|debt| (debt.current_balance_due, debt.days_until_due))
+        );
         assert_eq!(
             game_state.resources.eggs as usize,
             game_state.egg_inventory.len()
@@ -178,6 +188,9 @@ pub(super) fn run_simulation_report(
             guest_completions,
             guest_expirations,
         ));
+        if game_state.campaign_failure.is_some() {
+            break;
+        }
     }
 
     SimulationReport {
@@ -232,6 +245,7 @@ pub(super) fn run_simulation_report(
         total_expedition_failures,
         final_resources: resources_snapshot(&game_state),
         final_debt: debt_snapshot(&game_state),
+        final_campaign_failure: game_state.campaign_failure.clone(),
         final_upkeep_forecast: upkeep_forecast_snapshot(data, &game_state),
         surplus_summary: surplus_summary(
             starting_resources,

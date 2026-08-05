@@ -431,6 +431,13 @@ pub struct DebtState {
     pub status_message: String,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, Default, PartialEq, Eq)]
+#[serde(default)]
+pub struct CampaignFailureState {
+    pub day: u32,
+    pub reason: String,
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, Default)]
 #[serde(default)]
 pub struct ContractSkillRequirementState {
@@ -608,7 +615,7 @@ pub struct ExpeditionState {
     pub assigned_monster_ids: Vec<String>,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Default)]
 pub struct DayResolutionSummary {
     pub resolved_day: u32,
     pub guild_job_gold: u32,
@@ -650,6 +657,9 @@ pub struct GameState {
     pub town: PlayerTownState,
     pub egg_inventory: Vec<EggState>,
     pub debt: Option<DebtState>,
+    /// A terminal campaign outcome. Once set, the day-cycle guard refuses to
+    /// advance the calendar, and serde preserves it across saves.
+    pub campaign_failure: Option<CampaignFailureState>,
     #[serde(alias = "active_contracts")]
     pub active_contracts: Vec<ContractState>,
     pub monsters: Vec<CompanionState>,

@@ -235,6 +235,7 @@ pub(super) struct SimulationReport {
     pub(super) total_expedition_failures: u32,
     pub(super) final_resources: SimulationResourcesSnapshot,
     pub(super) final_debt: Option<SimulationDebtSnapshot>,
+    pub(super) final_campaign_failure: Option<CampaignFailureState>,
     pub(super) final_upkeep_forecast: UpkeepForecastSnapshot,
     pub(super) surplus_summary: SimulationSurplusSummary,
     pub(super) milestone_snapshots: Vec<SimulationMilestoneSnapshot>,
@@ -245,6 +246,7 @@ pub(super) struct SimulationReport {
 pub(super) struct MultiSeedSimulationSample {
     pub(super) sample: usize,
     pub(super) rng_seed: u64,
+    pub(super) ending_day: u32,
     pub(super) companions: usize,
     pub(super) buildings: usize,
     pub(super) gold: u32,
@@ -254,6 +256,7 @@ pub(super) struct MultiSeedSimulationSample {
     pub(super) missed_payments: u32,
     pub(super) debt_milestone_id: Option<String>,
     pub(super) debt_status: String,
+    pub(super) campaign_failure_reason: Option<String>,
     pub(super) max_active_requests: usize,
     pub(super) expirations: usize,
 }
@@ -268,6 +271,7 @@ pub(super) struct NumericRangeSummary<T> {
 #[derive(Debug, Serialize)]
 pub(super) struct MultiSeedSimulationSummary {
     pub(super) simulation_days: u32,
+    pub(super) foreclosures: usize,
     pub(super) samples: Vec<MultiSeedSimulationSample>,
     pub(super) companions: NumericRangeSummary<usize>,
     pub(super) buildings: NumericRangeSummary<usize>,

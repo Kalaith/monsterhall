@@ -1,6 +1,9 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "first_milestone_id": "scrap_note_1",
+  "maximum_consecutive_misses": 5,
+  "miss_penalty_growth_pct": 100,
+  "miss_grace_days": 21,
   "milestones": [
     {
       "id": "scrap_note_1",

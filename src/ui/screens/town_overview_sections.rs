@@ -452,6 +452,9 @@ pub(super) fn draw_priority_panel(
 /// clear it now (and the Pay Debt button beside it says so), or it cannot and
 /// the day it falls due is the day it is missed.
 fn debt_tile_color(game_state: &GameState) -> Color {
+    if game_state.campaign_failure.is_some() {
+        return theme::DANGER;
+    }
     let Some(debt) = game_state.debt.as_ref() else {
         return theme::POSITIVE;
     };
@@ -480,11 +483,15 @@ pub(super) fn draw_summary_strip(
     );
 
     if layout.compact_height {
-        let debt_value = game_state
-            .debt
-            .as_ref()
-            .map(|debt| format!("{} in {}d", debt.current_balance_due, debt.days_until_due))
-            .unwrap_or_else(|| "Clear".to_owned());
+        let debt_value = if game_state.campaign_failure.is_some() {
+            "Foreclosed".to_owned()
+        } else {
+            game_state
+                .debt
+                .as_ref()
+                .map(|debt| format!("{} in {}d", debt.current_balance_due, debt.days_until_due))
+                .unwrap_or_else(|| "Clear".to_owned())
+        };
         let upkeep = preview_upkeep(data, game_state);
         let compact_summary = format!(
             "Gold {}   Materials {}\nEggs {}   Relics {}\nResidue {}   Debt {}\nNext upkeep {}g",
@@ -508,11 +515,15 @@ pub(super) fn draw_summary_strip(
         return None;
     }
 
-    let due_value = game_state
-        .debt
-        .as_ref()
-        .map(|debt| format!("{} in {}d", debt.current_balance_due, debt.days_until_due))
-        .unwrap_or_else(|| "Clear".to_owned());
+    let due_value = if game_state.campaign_failure.is_some() {
+        "Foreclosed".to_owned()
+    } else {
+        game_state
+            .debt
+            .as_ref()
+            .map(|debt| format!("{} in {}d", debt.current_balance_due, debt.days_until_due))
+            .unwrap_or_else(|| "Clear".to_owned())
+    };
     let debt_color = debt_tile_color(game_state);
     let metrics = [
         (
@@ -555,10 +566,11 @@ pub(super) fn draw_summary_strip(
     let upkeep = preview_upkeep(data, game_state);
     let debt_button_w = 132.0;
     let debt_button_gap = 12.0;
-    let can_pay_debt = game_state
-        .debt
-        .as_ref()
-        .is_some_and(|debt| game_state.resources.gold >= debt.current_balance_due);
+    let can_pay_debt = game_state.campaign_failure.is_none()
+        && game_state
+            .debt
+            .as_ref()
+            .is_some_and(|debt| game_state.resources.gold >= debt.current_balance_due);
     let upkeep_width = if can_pay_debt {
         layout.summary_width - layout::PANEL_PADDING * 2.0 - debt_button_w - debt_button_gap
     } else {
@@ -642,11 +654,12 @@ pub(super) fn draw_summary_strip(
 
 pub(super) fn draw_footer_actions(
     data: &GameData,
-    _game_state: &GameState,
+    game_state: &GameState,
     layout: &TownOverviewLayout,
 ) -> Option<UiAction> {
     draw_town_overview_footer(
         data,
+        game_state,
         layout.left_margin,
         layout.footer_y,
         layout.content_width,
@@ -667,7 +680,7 @@ pub(super) fn draw_error_panel(layout: &TownOverviewLayout, last_error: Option<&
 #[cfg(test)]
 mod tests {
     use super::debt_tile_color;
-    use crate::state::{DebtState, GameState};
+    use crate::state::{CampaignFailureState, DebtState, GameState};
     use crate::ui::theme;
 
     fn state_with(gold: u32, due: u32, days_until_due: u32) -> GameState {
@@ -708,5 +721,14 @@ mod tests {
             theme::POSITIVE,
             "no debt at all is the best case, not a warning"
         );
+
+        let foreclosed = GameState {
+            campaign_failure: Some(CampaignFailureState {
+                day: 42,
+                reason: "Foreclosed".to_owned(),
+            }),
+            ..GameState::default()
+        };
+        assert_eq!(debt_tile_color(&foreclosed), theme::DANGER);
     }
 }

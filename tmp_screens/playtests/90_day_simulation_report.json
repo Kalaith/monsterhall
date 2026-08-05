@@ -1,5 +1,5 @@
 {
-  "content_version": "1.33.0",
+  "content_version": "1.34.0",
   "rng_seed": 6840157140829518564,
   "simulation_days": 90,
   "starting_day": 1,
@@ -78,6 +78,7 @@
     "missed_payment_count": 0,
     "status_message": "Interest Crush due in 33 days."
   },
+  "final_campaign_failure": null,
   "final_upkeep_forecast": {
     "wage_gold": 384,
     "cleaning_gold": 215,

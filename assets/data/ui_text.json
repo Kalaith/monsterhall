@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "common": {
     "settings_button": "Settings",
     "return_to_town_button": "Guild Hall",
@@ -174,6 +174,9 @@
     "priority_eggs_detail": "You have eggs waiting. Review their source floor, choose the best outcome, and grow the roster before the day gets busy.",
     "priority_debt_title": "Cover the debt window",
     "priority_debt_detail_template": "{gold} gold is due in {days} day(s). Favor reliable guild work and contract fulfilment over speculative tower runs.",
+    "priority_foreclosed_title": "Monsterhall has been foreclosed",
+    "priority_foreclosed_detail": "The creditors have ended this campaign. You can still review the guild and its journal, but the calendar cannot advance.",
+    "foreclosed_end_day_label": "Foreclosed",
     "priority_guests_title": "Turn contracts into pay",
     "priority_guests_detail": "Contract work is active. Match the best companion to the request before the deadline burns value.",
     "priority_growth_title": "Push the next growth step",

@@ -225,6 +225,8 @@ pub struct StoryEventCatalogData {
     pub debt_missed_update_template: String,
     pub debt_missed_event_template: String,
     pub debt_missed_stress_template: String,
+    pub debt_foreclosed_status_template: String,
+    pub debt_foreclosed_event_template: String,
     pub guest_name_template: String,
     pub guest_missing_assigned_companion_event_template: String,
     pub guest_failed_event_template: String,
@@ -243,6 +245,9 @@ pub struct StoryEventCatalogData {
 pub struct DebtMilestoneCatalogData {
     pub version: String,
     pub first_milestone_id: String,
+    pub maximum_consecutive_misses: u32,
+    pub miss_penalty_growth_pct: u32,
+    pub miss_grace_days: u32,
     pub milestones: Vec<DebtMilestoneData>,
 }
 

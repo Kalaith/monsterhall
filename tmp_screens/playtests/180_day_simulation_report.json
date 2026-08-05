@@ -1,5 +1,5 @@
 {
-  "content_version": "1.33.0",
+  "content_version": "1.34.0",
   "rng_seed": 6840157140829518346,
   "simulation_days": 180,
   "starting_day": 1,
@@ -51,9 +51,9 @@
   "total_upkeep_wage_gold": 56877,
   "total_upkeep_cleaning_gold": 31028,
   "total_upkeep_maintenance_gold": 86951,
-  "total_upkeep_gold": 171877,
-  "total_upkeep_shortfall": 2979,
-  "total_special_event_gold_delta": 15486,
+  "total_upkeep_gold": 171100,
+  "total_upkeep_shortfall": 3756,
+  "total_special_event_gold_delta": 15816,
   "total_special_event_count": 49,
   "total_expedition_days": 66,
   "total_egg_focused_expedition_days": 23,
@@ -65,7 +65,7 @@
   "total_expedition_successes": 53,
   "total_expedition_failures": 13,
   "final_resources": {
-    "gold": 15423,
+    "gold": 17682,
     "tower_materials": 1752,
     "eggs": 23,
     "relics": 174,
@@ -74,10 +74,11 @@
   "final_debt": {
     "active_milestone_id": "ledgers_bared_4",
     "current_balance_due": 65000,
-    "days_until_due": 20,
+    "days_until_due": 15,
     "missed_payment_count": 0,
-    "status_message": "Ledgers Bared due in 20 days."
+    "status_message": "Ledgers Bared due in 15 days."
   },
+  "final_campaign_failure": null,
   "final_upkeep_forecast": {
     "wage_gold": 572,
     "cleaning_gold": 215,
@@ -99,21 +100,21 @@
       "arcane_residue": 19
     },
     "ending_resources": {
-      "gold": 15423,
+      "gold": 17682,
       "tower_materials": 1752,
       "eggs": 23,
       "relics": 174,
       "arcane_residue": 27244
     },
     "net_change": {
-      "gold": 15280,
+      "gold": 17539,
       "tower_materials": 1712,
       "eggs": 23,
       "relics": 174,
       "arcane_residue": 27225
     },
-    "debt_gold_gap": -49577,
-    "upkeep_shortfall_gold": 2979,
+    "debt_gold_gap": -47318,
+    "upkeep_shortfall_gold": 3756,
     "expedition_prep_shortfall": 30
   },
   "milestone_snapshots": [
@@ -202,7 +203,7 @@
       "reputation_proxy": 3,
       "active_contracts": 6,
       "resources": {
-        "gold": 15423,
+        "gold": 17682,
         "tower_materials": 1752,
         "eggs": 23,
         "relics": 174,
@@ -211,9 +212,9 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 20,
+        "days_until_due": 15,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 20 days."
+        "status_message": "Ledgers Bared due in 15 days."
       },
       "upkeep_forecast": {
         "wage_gold": 572,
@@ -17726,14 +17727,14 @@
       "debt": {
         "active_milestone_id": "interest_crush_3",
         "current_balance_due": 35055,
-        "days_until_due": 2,
+        "days_until_due": 21,
         "missed_payment_count": 1,
-        "status_message": "Payment missed. 35055 gold due in 2 days."
+        "status_message": "Payment missed. 35055 gold due in 21 days."
       },
       "day_summary": [
         "Paid 1233 gold in upkeep: 417 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +413 gold.",
-        "Missed Interest Crush. New balance 35055 gold, due in 2 days.",
+        "Missed Interest Crush. New balance 35055 gold, due in 21 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +395 gold, +6 residue.",
         "Mina completed a contract for 395 gold.",
@@ -17873,14 +17874,14 @@
       "debt": {
         "active_milestone_id": "interest_crush_3",
         "current_balance_due": 35055,
-        "days_until_due": 1,
+        "days_until_due": 20,
         "missed_payment_count": 1,
-        "status_message": "Interest Crush due in 1 days."
+        "status_message": "Interest Crush due in 20 days."
       },
       "day_summary": [
         "Paid 1236 gold in upkeep: 420 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +825 gold.",
-        "The creditors stay the blade for now: 35055 due in 1 days.",
+        "The creditors stay the blade for now: 35055 due in 20 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +395 gold, +6 residue.",
         "Mina completed a contract for 395 gold.",
@@ -18017,7 +18018,7 @@
         ]
       },
       "resources": {
-        "gold": 28254,
+        "gold": 28309,
         "tower_materials": 1414,
         "eggs": 23,
         "relics": 173,
@@ -18025,14 +18026,14 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35110,
-        "days_until_due": 2,
-        "missed_payment_count": 2,
-        "status_message": "Payment missed. 35110 gold due in 2 days."
+        "current_balance_due": 35055,
+        "days_until_due": 19,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 19 days."
       },
       "day_summary": [
         "Paid 1242 gold in upkeep: 426 wages, 215 supplies, 601 repairs.",
-        "Missed Interest Crush. New balance 35110 gold, due in 2 days.",
+        "The creditors stay the blade for now: 35055 due in 19 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -163 gold.",
         "Caravan Captain Contract completed: +397 gold, +6 residue.",
@@ -18055,7 +18056,6 @@
         "Oona absorbed 2 instability from the Reception Hall.",
         "Oona worked the Reception Hall as a reception tier 4 job for 435 gold, 1 materials, 68 arcane residue, and 7 prep quality.",
         "Oona handled Reception Hall work. Skills: Recovery +1. History: scouting runs +1, guarding +1, recovery +1.",
-        "Creditor pressure raised roster stress by 8.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Local Delver Contract expired unmet and cost the guild 163 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
@@ -18067,7 +18067,6 @@
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "Two eggs brought up from below the auction floor have gone cold and hard overnight in the open hatchery. Whatever they were, the guild will not find out without a warded room to keep them in."
       ]
     },
@@ -18170,7 +18169,7 @@
         ]
       },
       "resources": {
-        "gold": 28467,
+        "gold": 28522,
         "tower_materials": 1417,
         "eggs": 23,
         "relics": 173,
@@ -18178,14 +18177,14 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35110,
-        "days_until_due": 1,
-        "missed_payment_count": 2,
-        "status_message": "Interest Crush due in 1 days."
+        "current_balance_due": 35055,
+        "days_until_due": 18,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 18 days."
       },
       "day_summary": [
         "Paid 1245 gold in upkeep: 429 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 35110 due in 1 days.",
+        "The creditors stay the blade for now: 35055 due in 18 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +397 gold, +6 residue.",
         "Local Delver Contract completed: +324 gold, +4 residue.",
@@ -18313,7 +18312,7 @@
         ]
       },
       "resources": {
-        "gold": 28632,
+        "gold": 28742,
         "tower_materials": 1421,
         "eggs": 23,
         "relics": 173,
@@ -18321,14 +18320,14 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35165,
-        "days_until_due": 2,
-        "missed_payment_count": 3,
-        "status_message": "Payment missed. 35165 gold due in 2 days."
+        "current_balance_due": 35055,
+        "days_until_due": 17,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 17 days."
       },
       "day_summary": [
         "Paid 1245 gold in upkeep: 429 wages, 215 supplies, 601 repairs.",
-        "Missed Interest Crush. New balance 35165 gold, due in 2 days.",
+        "The creditors stay the blade for now: 35055 due in 17 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +397 gold, +6 residue.",
         "Mina completed a contract for 397 gold.",
@@ -18348,7 +18347,6 @@
         "Nori worked the Reception Hall as a reception tier 4 job for 339 gold, 1 materials, 50 arcane residue, and 6 prep quality.",
         "Nori handled Reception Hall work. Skills: Recovery +1. History: scouting runs +1, guarding +1, recovery +1.",
         "Oona rested and came back steadier for tomorrow.",
-        "Creditor pressure raised roster stress by 8.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
@@ -18357,7 +18355,6 @@
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -18460,7 +18457,7 @@
         ]
       },
       "resources": {
-        "gold": 30877,
+        "gold": 30987,
         "tower_materials": 1427,
         "eggs": 23,
         "relics": 173,
@@ -18468,15 +18465,15 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35165,
-        "days_until_due": 1,
-        "missed_payment_count": 3,
-        "status_message": "Interest Crush due in 1 days."
+        "current_balance_due": 35055,
+        "days_until_due": 16,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 16 days."
       },
       "day_summary": [
         "Paid 1247 gold in upkeep: 431 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +990 gold.",
-        "The creditors stay the blade for now: 35165 due in 1 days.",
+        "The creditors stay the blade for now: 35055 due in 16 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +397 gold, +6 residue.",
         "Mina completed a contract for 397 gold.",
@@ -18622,7 +18619,7 @@
         ]
       },
       "resources": {
-        "gold": 31408,
+        "gold": 31573,
         "tower_materials": 1429,
         "eggs": 23,
         "relics": 174,
@@ -18630,15 +18627,15 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35220,
-        "days_until_due": 2,
-        "missed_payment_count": 4,
-        "status_message": "Payment missed. 35220 gold due in 2 days."
+        "current_balance_due": 35055,
+        "days_until_due": 15,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 15 days."
       },
       "day_summary": [
         "Paid 1251 gold in upkeep: 435 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +1430 gold.",
-        "Missed Interest Crush. New balance 35220 gold, due in 2 days.",
+        "The creditors stay the blade for now: 35055 due in 15 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -164 gold.",
         "Caravan Captain Contract completed: +198 gold, +3 residue.",
@@ -18657,7 +18654,6 @@
         "Lumi rested and came back steadier for tomorrow.",
         "Nori rested and came back steadier for tomorrow.",
         "Oona rested and came back steadier for tomorrow.",
-        "Creditor pressure raised roster stress by 8.",
         "The Species Archive authenticates a rare relic note, drawing a collector who pays before asking questions.",
         "Special event windfall: +1430 gold.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
@@ -18665,7 +18661,6 @@
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "Two eggs brought up from below the auction floor have gone cold and hard overnight in the open hatchery. Whatever they were, the guild will not find out without a warded room to keep them in."
       ]
     },
@@ -18768,7 +18763,7 @@
         ]
       },
       "resources": {
-        "gold": 32358,
+        "gold": 32523,
         "tower_materials": 1433,
         "eggs": 23,
         "relics": 174,
@@ -18776,15 +18771,15 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35220,
-        "days_until_due": 1,
-        "missed_payment_count": 4,
-        "status_message": "Interest Crush due in 1 days."
+        "current_balance_due": 35055,
+        "days_until_due": 14,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 14 days."
       },
       "day_summary": [
         "Paid 1251 gold in upkeep: 435 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +413 gold.",
-        "The creditors stay the blade for now: 35220 due in 1 days.",
+        "The creditors stay the blade for now: 35055 due in 14 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +399 gold, +6 residue.",
         "Local Delver Contract completed: +318 gold, +4 residue.",
@@ -18920,7 +18915,7 @@
         ]
       },
       "resources": {
-        "gold": 33322,
+        "gold": 33542,
         "tower_materials": 1439,
         "eggs": 23,
         "relics": 174,
@@ -18928,15 +18923,15 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35275,
-        "days_until_due": 2,
-        "missed_payment_count": 5,
-        "status_message": "Payment missed. 35275 gold due in 2 days."
+        "current_balance_due": 35055,
+        "days_until_due": 13,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 13 days."
       },
       "day_summary": [
         "Recovery Reputation has passed.",
         "Paid 1256 gold in upkeep: 440 wages, 215 supplies, 601 repairs.",
-        "Missed Interest Crush. New balance 35275 gold, due in 2 days.",
+        "The creditors stay the blade for now: 35055 due in 13 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +401 gold, +6 residue.",
         "Mina completed a contract for 401 gold.",
@@ -18960,7 +18955,6 @@
         "Oona absorbed 2 instability from the Reception Hall.",
         "Oona worked the Reception Hall as a reception tier 4 job for 437 gold, 1 materials, 69 arcane residue, and 8 prep quality.",
         "Oona handled Reception Hall work. Skills: Charm +1. History: scouting runs +1, recovery +1.",
-        "Creditor pressure raised roster stress by 8.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
@@ -18973,7 +18967,6 @@
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "Two eggs brought up from below the auction floor have gone cold and hard overnight in the open hatchery. Whatever they were, the guild will not find out without a warded room to keep them in."
       ]
     },
@@ -19076,7 +19069,7 @@
         ]
       },
       "resources": {
-        "gold": 32635,
+        "gold": 32855,
         "tower_materials": 1441,
         "eggs": 23,
         "relics": 174,
@@ -19084,14 +19077,14 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35275,
-        "days_until_due": 1,
-        "missed_payment_count": 5,
-        "status_message": "Interest Crush due in 1 days."
+        "current_balance_due": 35055,
+        "days_until_due": 12,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 12 days."
       },
       "day_summary": [
         "Paid 1260 gold in upkeep: 444 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 35275 due in 1 days.",
+        "The creditors stay the blade for now: 35055 due in 12 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +200 gold, +3 residue.",
         "Caravan Captain Contract was served by an under-prepared hall (9/12) and paid half.",
@@ -19215,7 +19208,7 @@
         ]
       },
       "resources": {
-        "gold": 32866,
+        "gold": 33141,
         "tower_materials": 1445,
         "eggs": 23,
         "relics": 174,
@@ -19223,14 +19216,14 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35330,
-        "days_until_due": 2,
-        "missed_payment_count": 6,
-        "status_message": "Payment missed. 35330 gold due in 2 days."
+        "current_balance_due": 35055,
+        "days_until_due": 11,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 11 days."
       },
       "day_summary": [
         "Paid 1262 gold in upkeep: 446 wages, 215 supplies, 601 repairs.",
-        "Missed Interest Crush. New balance 35330 gold, due in 2 days.",
+        "The creditors stay the blade for now: 35055 due in 11 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -165 gold.",
         "Caravan Captain Contract completed: +401 gold, +6 residue.",
@@ -19254,7 +19247,6 @@
         "Nori worked the Reception Hall as a reception tier 4 job for 342 gold, 1 materials, 50 arcane residue, and 7 prep quality.",
         "Nori handled Reception Hall work. Skills: Recovery +1. History: scouting runs +1, recovery +1.",
         "Oona rested and came back steadier for tomorrow.",
-        "Creditor pressure raised roster stress by 8.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Local Delver Contract expired unmet and cost the guild 165 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
@@ -19266,7 +19258,6 @@
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -19369,7 +19360,7 @@
         ]
       },
       "resources": {
-        "gold": 33835,
+        "gold": 34110,
         "tower_materials": 1451,
         "eggs": 23,
         "relics": 174,
@@ -19377,15 +19368,15 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35330,
-        "days_until_due": 1,
-        "missed_payment_count": 6,
-        "status_message": "Interest Crush due in 1 days."
+        "current_balance_due": 35055,
+        "days_until_due": 10,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 10 days."
       },
       "day_summary": [
         "Paid 1263 gold in upkeep: 447 wages, 215 supplies, 601 repairs.",
         "Special event expense: -358 gold.",
-        "The creditors stay the blade for now: 35330 due in 1 days.",
+        "The creditors stay the blade for now: 35055 due in 10 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +401 gold, +6 residue.",
         "Local Delver Contract completed: +310 gold, +4 residue.",
@@ -19530,7 +19521,7 @@
         ]
       },
       "resources": {
-        "gold": 33611,
+        "gold": 33941,
         "tower_materials": 1473,
         "eggs": 23,
         "relics": 174,
@@ -19538,15 +19529,15 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35385,
-        "days_until_due": 2,
-        "missed_payment_count": 7,
-        "status_message": "Payment missed. 35385 gold due in 2 days."
+        "current_balance_due": 35055,
+        "days_until_due": 9,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 9 days."
       },
       "day_summary": [
         "Paid 1461 gold in upkeep: 521 wages, 248 supplies, 692 repairs.",
         "Special event windfall: +715 gold.",
-        "Missed Interest Crush. New balance 35385 gold, due in 2 days.",
+        "The creditors stay the blade for now: 35055 due in 9 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +202 gold, +3 residue.",
         "Caravan Captain Contract was served by an under-prepared hall (9/12) and paid half.",
@@ -19564,14 +19555,12 @@
         "Lumi rested and came back steadier for tomorrow.",
         "Nori rested and came back steadier for tomorrow.",
         "Oona rested and came back steadier for tomorrow.",
-        "Creditor pressure raised roster stress by 8.",
         "The Forge Corner completes a private commission for reinforced travel gear and sealed sample cases.",
         "Special event windfall: +715 gold.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "Two eggs brought up from below the auction floor have gone cold and hard overnight in the open hatchery. Whatever they were, the guild will not find out without a warded room to keep them in."
       ]
     },
@@ -19674,7 +19663,7 @@
         ]
       },
       "resources": {
-        "gold": 33627,
+        "gold": 33957,
         "tower_materials": 1477,
         "eggs": 23,
         "relics": 174,
@@ -19682,14 +19671,14 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35385,
-        "days_until_due": 1,
-        "missed_payment_count": 7,
-        "status_message": "Interest Crush due in 1 days."
+        "current_balance_due": 35055,
+        "days_until_due": 8,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 8 days."
       },
       "day_summary": [
         "Paid 1464 gold in upkeep: 524 wages, 248 supplies, 692 repairs.",
-        "The creditors stay the blade for now: 35385 due in 1 days.",
+        "The creditors stay the blade for now: 35055 due in 8 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +404 gold, +6 residue.",
         "Mina completed a contract for 404 gold.",
@@ -19819,7 +19808,7 @@
         ]
       },
       "resources": {
-        "gold": 34224,
+        "gold": 34609,
         "tower_materials": 1483,
         "eggs": 23,
         "relics": 174,
@@ -19827,15 +19816,15 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35440,
-        "days_until_due": 2,
-        "missed_payment_count": 8,
-        "status_message": "Payment missed. 35440 gold due in 2 days."
+        "current_balance_due": 35055,
+        "days_until_due": 7,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 7 days."
       },
       "day_summary": [
         "Roof Repair Rush has passed.",
         "Paid 1467 gold in upkeep: 527 wages, 248 supplies, 692 repairs.",
-        "Missed Interest Crush. New balance 35440 gold, due in 2 days.",
+        "The creditors stay the blade for now: 35055 due in 7 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -167 gold.",
         "Caravan Captain Contract completed: +405 gold, +6 residue.",
@@ -19860,7 +19849,6 @@
         "Oona absorbed 2 instability from the Reception Hall.",
         "Oona worked the Reception Hall as a reception tier 4 job for 437 gold, 1 materials, 69 arcane residue, and 8 prep quality.",
         "Oona handled Reception Hall work. Skills: Guarding +1. History: scouting runs +1, guarding +1, recovery +1.",
-        "Creditor pressure raised roster stress by 8.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Local Delver Contract expired unmet and cost the guild 167 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
@@ -19874,7 +19862,6 @@
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -19977,7 +19964,7 @@
         ]
       },
       "resources": {
-        "gold": 33861,
+        "gold": 34246,
         "tower_materials": 1485,
         "eggs": 23,
         "relics": 174,
@@ -19985,14 +19972,14 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35440,
-        "days_until_due": 1,
-        "missed_payment_count": 8,
-        "status_message": "Interest Crush due in 1 days."
+        "current_balance_due": 35055,
+        "days_until_due": 6,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 6 days."
       },
       "day_summary": [
         "Paid 1277 gold in upkeep: 461 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 35440 due in 1 days.",
+        "The creditors stay the blade for now: 35055 due in 6 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +204 gold, +3 residue.",
         "Caravan Captain Contract was served by an under-prepared hall (9/12) and paid half.",
@@ -20119,7 +20106,7 @@
         ]
       },
       "resources": {
-        "gold": 34253,
+        "gold": 34693,
         "tower_materials": 1489,
         "eggs": 23,
         "relics": 174,
@@ -20127,14 +20114,14 @@
       },
       "debt": {
         "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35495,
-        "days_until_due": 2,
-        "missed_payment_count": 9,
-        "status_message": "Payment missed. 35495 gold due in 2 days."
+        "current_balance_due": 35055,
+        "days_until_due": 5,
+        "missed_payment_count": 1,
+        "status_message": "Interest Crush due in 5 days."
       },
       "day_summary": [
         "Paid 1278 gold in upkeep: 462 wages, 215 supplies, 601 repairs.",
-        "Missed Interest Crush. New balance 35495 gold, due in 2 days.",
+        "The creditors stay the blade for now: 35055 due in 5 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +408 gold, +6 residue.",
         "Mina completed a contract for 408 gold.",
@@ -20157,7 +20144,6 @@
         "Nori worked the Reception Hall as a reception tier 4 job for 342 gold, 1 materials, 50 arcane residue, and 7 prep quality.",
         "Nori handled Reception Hall work. Skills: Scouting +1, Charm +1. History: scouting runs +1, recovery +1.",
         "Oona rested and came back steadier for tomorrow.",
-        "Creditor pressure raised roster stress by 8.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
@@ -20168,7 +20154,6 @@
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -20271,23 +20256,24 @@
         ]
       },
       "resources": {
-        "gold": 34909,
-        "tower_materials": 1495,
+        "gold": 294,
+        "tower_materials": 1505,
         "eggs": 23,
         "relics": 174,
-        "arcane_residue": 18716
+        "arcane_residue": 18720
       },
       "debt": {
-        "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35495,
-        "days_until_due": 1,
-        "missed_payment_count": 9,
-        "status_message": "Interest Crush due in 1 days."
+        "active_milestone_id": "ledgers_bared_4",
+        "current_balance_due": 65000,
+        "days_until_due": 55,
+        "missed_payment_count": 0,
+        "status_message": "Ledgers Bared due in 55 days."
       },
       "day_summary": [
         "Paid 1283 gold in upkeep: 467 wages, 215 supplies, 601 repairs.",
         "Special event expense: -358 gold.",
-        "The creditors stay the blade for now: 35495 due in 1 days.",
+        "Paid Interest Crush for 35055 gold.",
+        "Next due: Ledgers Bared in 55 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +408 gold, +6 residue.",
         "Mina completed a contract for 408 gold.",
@@ -20326,6 +20312,8 @@
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
+        "Debt paid: Interest Crush settled for 35055 gold.",
+        "Next debt milestone: Ledgers Bared due in 55 days.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -20359,8 +20347,8 @@
       "upkeep_wage_gold": 542,
       "upkeep_cleaning_gold": 248,
       "upkeep_maintenance_gold": 692,
-      "upkeep_gold": 1482,
-      "upkeep_shortfall": 0,
+      "upkeep_gold": 705,
+      "upkeep_shortfall": 777,
       "upkeep_forecast": {
         "wage_gold": 544,
         "cleaning_gold": 248,
@@ -20373,7 +20361,7 @@
         "next_building_total_gold": 1568,
         "next_building_delta_gold": 84
       },
-      "special_event_gold_delta": -330,
+      "special_event_gold_delta": 0,
       "special_event_count": 1,
       "expedition_materials": 0,
       "expedition_arcane_residue": 0,
@@ -20428,23 +20416,22 @@
         ]
       },
       "resources": {
-        "gold": 33453,
-        "tower_materials": 1497,
+        "gold": 0,
+        "tower_materials": 1507,
         "eggs": 23,
         "relics": 174,
-        "arcane_residue": 18792
+        "arcane_residue": 18796
       },
       "debt": {
-        "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35550,
-        "days_until_due": 2,
-        "missed_payment_count": 10,
-        "status_message": "Payment missed. 35550 gold due in 2 days."
+        "active_milestone_id": "ledgers_bared_4",
+        "current_balance_due": 65000,
+        "days_until_due": 54,
+        "missed_payment_count": 0,
+        "status_message": "Ledgers Bared due in 54 days."
       },
       "day_summary": [
-        "Paid 1482 gold in upkeep: 542 wages, 248 supplies, 692 repairs.",
-        "Special event expense: -330 gold.",
-        "Missed Interest Crush. New balance 35550 gold, due in 2 days.",
+        "Upkeep cost 1482 gold, but only 705 was paid. Shortfall 777 stressed the roster by 11.",
+        "The creditors stay the blade for now: 65000 due in 54 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -168 gold.",
         "Caravan Captain Contract completed: +204 gold, +3 residue.",
@@ -20463,15 +20450,12 @@
         "Lumi rested and came back steadier for tomorrow.",
         "Nori rested and came back steadier for tomorrow.",
         "Oona rested and came back steadier for tomorrow.",
-        "Creditor pressure raised roster stress by 8.",
         "The Nursery Wing needs a full bedding and ward refresh after a demanding hatchery week.",
-        "Special event expense: -330 gold.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Local Delver Contract expired unmet and cost the guild 168 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "Beneath the hall, the hatchery bubbles louder than usual. Something new wants to be born soon."
       ]
     },
@@ -20574,22 +20558,22 @@
         ]
       },
       "resources": {
-        "gold": 34153,
-        "tower_materials": 1502,
+        "gold": 752,
+        "tower_materials": 1512,
         "eggs": 23,
         "relics": 174,
-        "arcane_residue": 19034
+        "arcane_residue": 19038
       },
       "debt": {
-        "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35550,
-        "days_until_due": 1,
-        "missed_payment_count": 10,
-        "status_message": "Interest Crush due in 1 days."
+        "active_milestone_id": "ledgers_bared_4",
+        "current_balance_due": 65000,
+        "days_until_due": 53,
+        "missed_payment_count": 0,
+        "status_message": "Ledgers Bared due in 53 days."
       },
       "day_summary": [
         "Paid 1484 gold in upkeep: 544 wages, 248 supplies, 692 repairs.",
-        "The creditors stay the blade for now: 35550 due in 1 days.",
+        "The creditors stay the blade for now: 65000 due in 53 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +409 gold, +6 residue.",
         "Local Delver Contract completed: +338 gold, +5 residue.",
@@ -20727,23 +20711,23 @@
         ]
       },
       "resources": {
-        "gold": 34559,
-        "tower_materials": 1507,
+        "gold": 1213,
+        "tower_materials": 1517,
         "eggs": 23,
         "relics": 174,
-        "arcane_residue": 19291
+        "arcane_residue": 19295
       },
       "debt": {
-        "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35605,
-        "days_until_due": 2,
-        "missed_payment_count": 11,
-        "status_message": "Payment missed. 35605 gold due in 2 days."
+        "active_milestone_id": "ledgers_bared_4",
+        "current_balance_due": 65000,
+        "days_until_due": 52,
+        "missed_payment_count": 0,
+        "status_message": "Ledgers Bared due in 52 days."
       },
       "day_summary": [
         "Roof Repair Rush has passed.",
         "Paid 1488 gold in upkeep: 548 wages, 248 supplies, 692 repairs.",
-        "Missed Interest Crush. New balance 35605 gold, due in 2 days.",
+        "The creditors stay the blade for now: 65000 due in 52 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +409 gold, +6 residue.",
         "Mina completed a contract for 409 gold.",
@@ -20765,7 +20749,6 @@
         "Oona absorbed 2 instability from the Reception Hall.",
         "Oona worked the Reception Hall as a reception tier 4 job for 440 gold, 1 materials, 69 arcane residue, and 8 prep quality.",
         "Oona handled Reception Hall work. Skills: Charm +1. History: guarding +1, recovery +1.",
-        "Creditor pressure raised roster stress by 8.",
         "Tower Scholar Contract expired unmet and cost the guild 52 gold.",
         "Caravan Captain Contract was fulfilled by Mina through the Reception Hall.",
         "The tower leaves a warm shimmer under slime skin, as if something beneath the surface wants out.",
@@ -20776,7 +20759,6 @@
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt missed: Interest Crush was not paid. 55 gold was squeezed out of the guild.",
         "The Recovery Lounge glows warm into the night as overworked companions unwind and trade notes about the next day's routes."
       ]
     },
@@ -20879,22 +20861,22 @@
         ]
       },
       "resources": {
-        "gold": 34291,
-        "tower_materials": 1509,
+        "gold": 945,
+        "tower_materials": 1519,
         "eggs": 23,
         "relics": 174,
-        "arcane_residue": 19427
+        "arcane_residue": 19431
       },
       "debt": {
-        "active_milestone_id": "interest_crush_3",
-        "current_balance_due": 35605,
-        "days_until_due": 1,
-        "missed_payment_count": 11,
-        "status_message": "Interest Crush due in 1 days."
+        "active_milestone_id": "ledgers_bared_4",
+        "current_balance_due": 65000,
+        "days_until_due": 51,
+        "missed_payment_count": 0,
+        "status_message": "Ledgers Bared due in 51 days."
       },
       "day_summary": [
         "Paid 1296 gold in upkeep: 480 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 35605 due in 1 days.",
+        "The creditors stay the blade for now: 65000 due in 51 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +412 gold, +6 residue.",
         "Mina completed a contract for 412 gold.",
@@ -21020,7 +21002,7 @@
         ]
       },
       "resources": {
-        "gold": 224,
+        "gold": 2483,
         "tower_materials": 1545,
         "eggs": 23,
         "relics": 174,
@@ -21029,15 +21011,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 55,
+        "days_until_due": 50,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 55 days."
+        "status_message": "Ledgers Bared due in 50 days."
       },
       "day_summary": [
         "Paid 1299 gold in upkeep: 483 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +715 gold.",
-        "Paid Interest Crush for 35605 gold.",
-        "Next due: Ledgers Bared in 55 days.",
+        "The creditors stay the blade for now: 65000 due in 50 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -169 gold.",
         "Caravan Captain Contract completed: +412 gold, +6 residue.",
@@ -21073,8 +21054,6 @@
         "The patron expected a simple cleanup job; the slime companion retrieves residue from places no ordinary worker could reach.",
         "The companion's pulse syncs with the tower's hidden rhythm and she comes back visibly more sensitive to its call.",
         "A nervous delver leaves the Common Room with clear route notes, a packed satchel, and more confidence than they arrived with.",
-        "Debt paid: Interest Crush settled for 35605 gold.",
-        "Next debt milestone: Ledgers Bared due in 55 days.",
         "Two eggs brought up from below the auction floor have gone cold and hard overnight in the open hatchery. Whatever they were, the guild will not find out without a warded room to keep them in."
       ]
     },
@@ -21177,7 +21156,7 @@
         ]
       },
       "resources": {
-        "gold": 1185,
+        "gold": 3444,
         "tower_materials": 1549,
         "eggs": 23,
         "relics": 174,
@@ -21186,14 +21165,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 54,
+        "days_until_due": 49,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 54 days."
+        "status_message": "Ledgers Bared due in 49 days."
       },
       "day_summary": [
         "Paid 1299 gold in upkeep: 483 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +413 gold.",
-        "The creditors stay the blade for now: 65000 due in 54 days.",
+        "The creditors stay the blade for now: 65000 due in 49 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +412 gold, +6 residue.",
         "Local Delver Contract completed: +333 gold, +4 residue.",
@@ -21327,7 +21306,7 @@
         ]
       },
       "resources": {
-        "gold": 1075,
+        "gold": 3334,
         "tower_materials": 1551,
         "eggs": 23,
         "relics": 174,
@@ -21336,14 +21315,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 53,
+        "days_until_due": 48,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 53 days."
+        "status_message": "Ledgers Bared due in 48 days."
       },
       "day_summary": [
         "Paid 1299 gold in upkeep: 483 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +605 gold.",
-        "The creditors stay the blade for now: 65000 due in 53 days.",
+        "The creditors stay the blade for now: 65000 due in 48 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +206 gold, +3 residue.",
         "Caravan Captain Contract was served by an under-prepared hall (10/12) and paid half.",
@@ -21468,7 +21447,7 @@
         ]
       },
       "resources": {
-        "gold": 2853,
+        "gold": 5112,
         "tower_materials": 1560,
         "eggs": 23,
         "relics": 174,
@@ -21477,13 +21456,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 52,
+        "days_until_due": 47,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 52 days."
+        "status_message": "Ledgers Bared due in 47 days."
       },
       "day_summary": [
         "Paid 1299 gold in upkeep: 483 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 52 days.",
+        "The creditors stay the blade for now: 65000 due in 47 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +412 gold, +6 residue.",
         "Mina completed a contract for 412 gold.",
@@ -21629,7 +21608,7 @@
         ]
       },
       "resources": {
-        "gold": 2346,
+        "gold": 4605,
         "tower_materials": 1561,
         "eggs": 23,
         "relics": 174,
@@ -21638,13 +21617,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 51,
+        "days_until_due": 46,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 51 days."
+        "status_message": "Ledgers Bared due in 46 days."
       },
       "day_summary": [
         "Paid 1307 gold in upkeep: 491 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 51 days.",
+        "The creditors stay the blade for now: 65000 due in 46 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -170 gold.",
         "Caravan Captain Contract completed: +412 gold, +6 residue.",
@@ -21773,7 +21752,7 @@
         ]
       },
       "resources": {
-        "gold": 2588,
+        "gold": 4847,
         "tower_materials": 1565,
         "eggs": 23,
         "relics": 174,
@@ -21782,13 +21761,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 50,
+        "days_until_due": 45,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 50 days."
+        "status_message": "Ledgers Bared due in 45 days."
       },
       "day_summary": [
         "Paid 1308 gold in upkeep: 492 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 50 days.",
+        "The creditors stay the blade for now: 65000 due in 45 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +414 gold, +6 residue.",
         "Local Delver Contract completed: +323 gold, +4 residue.",
@@ -21917,7 +21896,7 @@
         ]
       },
       "resources": {
-        "gold": 2609,
+        "gold": 4868,
         "tower_materials": 1527,
         "eggs": 23,
         "relics": 174,
@@ -21926,14 +21905,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 49,
+        "days_until_due": 44,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 49 days."
+        "status_message": "Ledgers Bared due in 44 days."
       },
       "day_summary": [
         "Paid 1311 gold in upkeep: 495 wages, 215 supplies, 601 repairs.",
         "Special event expense: -1320 gold.",
-        "The creditors stay the blade for now: 65000 due in 49 days.",
+        "The creditors stay the blade for now: 65000 due in 44 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +414 gold, +6 residue.",
         "Mina completed a contract for 414 gold.",
@@ -22077,7 +22056,7 @@
         ]
       },
       "resources": {
-        "gold": 2281,
+        "gold": 4540,
         "tower_materials": 1528,
         "eggs": 23,
         "relics": 174,
@@ -22086,14 +22065,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 48,
+        "days_until_due": 43,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 48 days."
+        "status_message": "Ledgers Bared due in 43 days."
       },
       "day_summary": [
         "Paid 1311 gold in upkeep: 495 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +248 gold.",
-        "The creditors stay the blade for now: 65000 due in 48 days.",
+        "The creditors stay the blade for now: 65000 due in 43 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +414 gold, +6 residue.",
         "Mina completed a contract for 414 gold.",
@@ -22219,7 +22198,7 @@
         ]
       },
       "resources": {
-        "gold": 2268,
+        "gold": 4527,
         "tower_materials": 1532,
         "eggs": 23,
         "relics": 174,
@@ -22228,13 +22207,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 47,
+        "days_until_due": 42,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 47 days."
+        "status_message": "Ledgers Bared due in 42 days."
       },
       "day_summary": [
         "Paid 1313 gold in upkeep: 497 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 47 days.",
+        "The creditors stay the blade for now: 65000 due in 42 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -170 gold.",
         "Caravan Captain Contract completed: +416 gold, +6 residue.",
@@ -22367,7 +22346,7 @@
         ]
       },
       "resources": {
-        "gold": 3926,
+        "gold": 6185,
         "tower_materials": 1539,
         "eggs": 23,
         "relics": 174,
@@ -22376,14 +22355,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 46,
+        "days_until_due": 41,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 46 days."
+        "status_message": "Ledgers Bared due in 41 days."
       },
       "day_summary": [
         "Grateful Locals has passed.",
         "Paid 1314 gold in upkeep: 498 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 46 days.",
+        "The creditors stay the blade for now: 65000 due in 41 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +416 gold, +6 residue.",
         "Local Delver Contract completed: +318 gold, +4 residue.",
@@ -22528,7 +22507,7 @@
         ]
       },
       "resources": {
-        "gold": 4057,
+        "gold": 6316,
         "tower_materials": 1560,
         "eggs": 23,
         "relics": 174,
@@ -22537,14 +22516,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 45,
+        "days_until_due": 40,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 45 days."
+        "status_message": "Ledgers Bared due in 40 days."
       },
       "day_summary": [
         "Paid 1322 gold in upkeep: 506 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +715 gold.",
-        "The creditors stay the blade for now: 65000 due in 45 days.",
+        "The creditors stay the blade for now: 65000 due in 40 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +417 gold, +6 residue.",
         "Mina completed a contract for 417 gold.",
@@ -22669,7 +22648,7 @@
         ]
       },
       "resources": {
-        "gold": 3964,
+        "gold": 6223,
         "tower_materials": 1564,
         "eggs": 23,
         "relics": 174,
@@ -22678,13 +22657,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 44,
+        "days_until_due": 39,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 44 days."
+        "status_message": "Ledgers Bared due in 39 days."
       },
       "day_summary": [
         "Paid 1323 gold in upkeep: 507 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 44 days.",
+        "The creditors stay the blade for now: 65000 due in 39 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +417 gold, +6 residue.",
         "Mina completed a contract for 417 gold.",
@@ -22811,7 +22790,7 @@
         ]
       },
       "resources": {
-        "gold": 5136,
+        "gold": 7395,
         "tower_materials": 1571,
         "eggs": 23,
         "relics": 174,
@@ -22820,13 +22799,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 43,
+        "days_until_due": 38,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 43 days."
+        "status_message": "Ledgers Bared due in 38 days."
       },
       "day_summary": [
         "Paid 1326 gold in upkeep: 510 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 43 days.",
+        "The creditors stay the blade for now: 65000 due in 38 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -172 gold.",
         "Caravan Captain Contract completed: +420 gold, +6 residue.",
@@ -22970,7 +22949,7 @@
         ]
       },
       "resources": {
-        "gold": 4999,
+        "gold": 7258,
         "tower_materials": 1574,
         "eggs": 23,
         "relics": 174,
@@ -22979,14 +22958,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 42,
+        "days_until_due": 37,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 42 days."
+        "status_message": "Ledgers Bared due in 37 days."
       },
       "day_summary": [
         "Paid 1328 gold in upkeep: 512 wages, 215 supplies, 601 repairs.",
         "Special event expense: -330 gold.",
-        "The creditors stay the blade for now: 65000 due in 42 days.",
+        "The creditors stay the blade for now: 65000 due in 37 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +420 gold, +6 residue.",
         "Local Delver Contract completed: +345 gold, +5 residue.",
@@ -23116,7 +23095,7 @@
         ]
       },
       "resources": {
-        "gold": 4839,
+        "gold": 7098,
         "tower_materials": 1577,
         "eggs": 23,
         "relics": 174,
@@ -23125,13 +23104,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 41,
+        "days_until_due": 36,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 41 days."
+        "status_message": "Ledgers Bared due in 36 days."
       },
       "day_summary": [
         "Paid 1329 gold in upkeep: 513 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 41 days.",
+        "The creditors stay the blade for now: 65000 due in 36 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +420 gold, +6 residue.",
         "Mina completed a contract for 420 gold.",
@@ -23258,7 +23237,7 @@
         ]
       },
       "resources": {
-        "gold": 6063,
+        "gold": 8322,
         "tower_materials": 1583,
         "eggs": 23,
         "relics": 174,
@@ -23267,13 +23246,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 40,
+        "days_until_due": 35,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 40 days."
+        "status_message": "Ledgers Bared due in 35 days."
       },
       "day_summary": [
         "Paid 1331 gold in upkeep: 515 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 40 days.",
+        "The creditors stay the blade for now: 65000 due in 35 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +421 gold, +6 residue.",
         "Mina completed a contract for 421 gold.",
@@ -23412,7 +23391,7 @@
         ]
       },
       "resources": {
-        "gold": 5733,
+        "gold": 7992,
         "tower_materials": 1586,
         "eggs": 23,
         "relics": 174,
@@ -23421,13 +23400,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 39,
+        "days_until_due": 34,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 39 days."
+        "status_message": "Ledgers Bared due in 34 days."
       },
       "day_summary": [
         "Paid 1334 gold in upkeep: 518 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 39 days.",
+        "The creditors stay the blade for now: 65000 due in 34 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -173 gold.",
         "Caravan Captain Contract completed: +421 gold, +6 residue.",
@@ -23556,7 +23535,7 @@
         ]
       },
       "resources": {
-        "gold": 6070,
+        "gold": 8329,
         "tower_materials": 1635,
         "eggs": 23,
         "relics": 174,
@@ -23565,14 +23544,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 38,
+        "days_until_due": 33,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 38 days."
+        "status_message": "Ledgers Bared due in 33 days."
       },
       "day_summary": [
         "Paid 1338 gold in upkeep: 522 wages, 215 supplies, 601 repairs.",
         "Special event expense: -193 gold.",
-        "The creditors stay the blade for now: 65000 due in 38 days.",
+        "The creditors stay the blade for now: 65000 due in 33 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +421 gold, +6 residue.",
         "Local Delver Contract completed: +345 gold, +5 residue.",
@@ -23706,7 +23685,7 @@
         ]
       },
       "resources": {
-        "gold": 6696,
+        "gold": 8955,
         "tower_materials": 1640,
         "eggs": 23,
         "relics": 174,
@@ -23715,13 +23694,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 37,
+        "days_until_due": 32,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 37 days."
+        "status_message": "Ledgers Bared due in 32 days."
       },
       "day_summary": [
         "Paid 1338 gold in upkeep: 522 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 37 days.",
+        "The creditors stay the blade for now: 65000 due in 32 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +421 gold, +6 residue.",
         "Mina completed a contract for 421 gold.",
@@ -23856,7 +23835,7 @@
         ]
       },
       "resources": {
-        "gold": 9111,
+        "gold": 11370,
         "tower_materials": 1703,
         "eggs": 23,
         "relics": 174,
@@ -23865,14 +23844,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 36,
+        "days_until_due": 31,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 36 days."
+        "status_message": "Ledgers Bared due in 31 days."
       },
       "day_summary": [
         "Paid 1344 gold in upkeep: 528 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +2338 gold.",
-        "The creditors stay the blade for now: 65000 due in 36 days.",
+        "The creditors stay the blade for now: 65000 due in 31 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +421 gold, +6 residue.",
         "Mina completed a contract for 421 gold.",
@@ -24005,7 +23984,7 @@
         ]
       },
       "resources": {
-        "gold": 9118,
+        "gold": 11377,
         "tower_materials": 1707,
         "eggs": 23,
         "relics": 174,
@@ -24014,13 +23993,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 35,
+        "days_until_due": 30,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 35 days."
+        "status_message": "Ledgers Bared due in 30 days."
       },
       "day_summary": [
         "Paid 1346 gold in upkeep: 530 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 35 days.",
+        "The creditors stay the blade for now: 65000 due in 30 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -173 gold.",
         "Caravan Captain Contract completed: +424 gold, +6 residue.",
@@ -24153,7 +24132,7 @@
         ]
       },
       "resources": {
-        "gold": 10069,
+        "gold": 12328,
         "tower_materials": 1712,
         "eggs": 23,
         "relics": 174,
@@ -24162,13 +24141,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 34,
+        "days_until_due": 29,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 34 days."
+        "status_message": "Ledgers Bared due in 29 days."
       },
       "day_summary": [
         "Paid 1350 gold in upkeep: 534 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 34 days.",
+        "The creditors stay the blade for now: 65000 due in 29 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +424 gold, +6 residue.",
         "Local Delver Contract completed: +334 gold, +4 residue.",
@@ -24305,7 +24284,7 @@
         ]
       },
       "resources": {
-        "gold": 9904,
+        "gold": 12163,
         "tower_materials": 1715,
         "eggs": 23,
         "relics": 174,
@@ -24314,13 +24293,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 33,
+        "days_until_due": 28,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 33 days."
+        "status_message": "Ledgers Bared due in 28 days."
       },
       "day_summary": [
         "Paid 1350 gold in upkeep: 534 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 33 days.",
+        "The creditors stay the blade for now: 65000 due in 28 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +424 gold, +6 residue.",
         "Mina completed a contract for 424 gold.",
@@ -24447,7 +24426,7 @@
         ]
       },
       "resources": {
-        "gold": 10084,
+        "gold": 12343,
         "tower_materials": 1719,
         "eggs": 23,
         "relics": 174,
@@ -24456,13 +24435,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 32,
+        "days_until_due": 27,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 32 days."
+        "status_message": "Ledgers Bared due in 27 days."
       },
       "day_summary": [
         "Paid 1352 gold in upkeep: 536 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 32 days.",
+        "The creditors stay the blade for now: 65000 due in 27 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +424 gold, +6 residue.",
         "Mina completed a contract for 424 gold.",
@@ -24593,7 +24572,7 @@
         ]
       },
       "resources": {
-        "gold": 11155,
+        "gold": 13414,
         "tower_materials": 1725,
         "eggs": 23,
         "relics": 174,
@@ -24602,13 +24581,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 31,
+        "days_until_due": 26,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 31 days."
+        "status_message": "Ledgers Bared due in 26 days."
       },
       "day_summary": [
         "Paid 1353 gold in upkeep: 537 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 31 days.",
+        "The creditors stay the blade for now: 65000 due in 26 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -173 gold.",
         "Caravan Captain Contract completed: +424 gold, +6 residue.",
@@ -24753,7 +24732,7 @@
         ]
       },
       "resources": {
-        "gold": 11320,
+        "gold": 13579,
         "tower_materials": 1727,
         "eggs": 23,
         "relics": 174,
@@ -24762,14 +24741,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 30,
+        "days_until_due": 25,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 30 days."
+        "status_message": "Ledgers Bared due in 25 days."
       },
       "day_summary": [
         "Paid 1359 gold in upkeep: 543 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +605 gold.",
-        "The creditors stay the blade for now: 65000 due in 30 days.",
+        "The creditors stay the blade for now: 65000 due in 25 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +212 gold, +3 residue.",
         "Caravan Captain Contract was served by an under-prepared hall (11/12) and paid half.",
@@ -24898,7 +24877,7 @@
         ]
       },
       "resources": {
-        "gold": 13830,
+        "gold": 16089,
         "tower_materials": 1791,
         "eggs": 23,
         "relics": 174,
@@ -24907,14 +24886,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 29,
+        "days_until_due": 24,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 29 days."
+        "status_message": "Ledgers Bared due in 24 days."
       },
       "day_summary": [
         "Paid 1361 gold in upkeep: 545 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +2338 gold.",
-        "The creditors stay the blade for now: 65000 due in 29 days.",
+        "The creditors stay the blade for now: 65000 due in 24 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +425 gold, +6 residue.",
         "Mina completed a contract for 425 gold.",
@@ -25046,7 +25025,7 @@
         ]
       },
       "resources": {
-        "gold": 14827,
+        "gold": 17086,
         "tower_materials": 1797,
         "eggs": 23,
         "relics": 174,
@@ -25055,13 +25034,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 28,
+        "days_until_due": 23,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 28 days."
+        "status_message": "Ledgers Bared due in 23 days."
       },
       "day_summary": [
         "Paid 1362 gold in upkeep: 546 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 28 days.",
+        "The creditors stay the blade for now: 65000 due in 23 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +428 gold, +6 residue.",
         "Mina completed a contract for 428 gold.",
@@ -25200,7 +25179,7 @@
         ]
       },
       "resources": {
-        "gold": 14949,
+        "gold": 17208,
         "tower_materials": 1799,
         "eggs": 23,
         "relics": 174,
@@ -25209,14 +25188,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 27,
+        "days_until_due": 22,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 27 days."
+        "status_message": "Ledgers Bared due in 22 days."
       },
       "day_summary": [
         "Paid 1367 gold in upkeep: 551 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +605 gold.",
-        "The creditors stay the blade for now: 65000 due in 27 days.",
+        "The creditors stay the blade for now: 65000 due in 22 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -174 gold.",
         "Caravan Captain Contract completed: +428 gold, +6 residue.",
@@ -25347,7 +25326,7 @@
         ]
       },
       "resources": {
-        "gold": 15438,
+        "gold": 17697,
         "tower_materials": 1803,
         "eggs": 23,
         "relics": 174,
@@ -25356,13 +25335,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 26,
+        "days_until_due": 21,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 26 days."
+        "status_message": "Ledgers Bared due in 21 days."
       },
       "day_summary": [
         "Paid 1370 gold in upkeep: 554 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 26 days.",
+        "The creditors stay the blade for now: 65000 due in 21 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +428 gold, +6 residue.",
         "Local Delver Contract completed: +320 gold, +4 residue.",
@@ -25496,7 +25475,7 @@
         ]
       },
       "resources": {
-        "gold": 17421,
+        "gold": 19680,
         "tower_materials": 1809,
         "eggs": 23,
         "relics": 174,
@@ -25505,14 +25484,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 25,
+        "days_until_due": 20,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 25 days."
+        "status_message": "Ledgers Bared due in 20 days."
       },
       "day_summary": [
         "Paid 1373 gold in upkeep: 557 wages, 215 supplies, 601 repairs.",
         "Special event windfall: +990 gold.",
-        "The creditors stay the blade for now: 65000 due in 25 days.",
+        "The creditors stay the blade for now: 65000 due in 20 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +430 gold, +6 residue.",
         "Mina completed a contract for 430 gold.",
@@ -25654,7 +25633,7 @@
         ]
       },
       "resources": {
-        "gold": 16645,
+        "gold": 18904,
         "tower_materials": 1811,
         "eggs": 23,
         "relics": 174,
@@ -25663,13 +25642,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 24,
+        "days_until_due": 19,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 24 days."
+        "status_message": "Ledgers Bared due in 19 days."
       },
       "day_summary": [
         "Paid 1376 gold in upkeep: 560 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 24 days.",
+        "The creditors stay the blade for now: 65000 due in 19 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +215 gold, +3 residue.",
         "Caravan Captain Contract was served by an under-prepared hall (11/12) and paid half.",
@@ -25792,7 +25771,7 @@
         ]
       },
       "resources": {
-        "gold": 15759,
+        "gold": 18018,
         "tower_materials": 1785,
         "eggs": 23,
         "relics": 174,
@@ -25801,14 +25780,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 23,
+        "days_until_due": 18,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 23 days."
+        "status_message": "Ledgers Bared due in 18 days."
       },
       "day_summary": [
         "Paid 1377 gold in upkeep: 561 wages, 215 supplies, 601 repairs.",
         "Special event expense: -880 gold.",
-        "The creditors stay the blade for now: 65000 due in 23 days.",
+        "The creditors stay the blade for now: 65000 due in 18 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Local Delver Contract expired: -176 gold.",
         "Caravan Captain Contract completed: +432 gold, +6 residue.",
@@ -25942,7 +25921,7 @@
         ]
       },
       "resources": {
-        "gold": 17109,
+        "gold": 19368,
         "tower_materials": 1791,
         "eggs": 23,
         "relics": 174,
@@ -25951,14 +25930,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 22,
+        "days_until_due": 17,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 22 days."
+        "status_message": "Ledgers Bared due in 17 days."
       },
       "day_summary": [
         "Recovery Reputation has passed.",
         "Paid 1377 gold in upkeep: 561 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 22 days.",
+        "The creditors stay the blade for now: 65000 due in 17 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +432 gold, +6 residue.",
         "Local Delver Contract completed: +354 gold, +5 residue.",
@@ -26098,7 +26077,7 @@
         ]
       },
       "resources": {
-        "gold": 16329,
+        "gold": 18588,
         "tower_materials": 1793,
         "eggs": 23,
         "relics": 174,
@@ -26107,13 +26086,13 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 21,
+        "days_until_due": 16,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 21 days."
+        "status_message": "Ledgers Bared due in 16 days."
       },
       "day_summary": [
         "Paid 1380 gold in upkeep: 564 wages, 215 supplies, 601 repairs.",
-        "The creditors stay the blade for now: 65000 due in 21 days.",
+        "The creditors stay the blade for now: 65000 due in 16 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +215 gold, +3 residue.",
         "Caravan Captain Contract was served by an under-prepared hall (11/12) and paid half.",
@@ -26237,7 +26216,7 @@
         ]
       },
       "resources": {
-        "gold": 15423,
+        "gold": 17682,
         "tower_materials": 1752,
         "eggs": 23,
         "relics": 174,
@@ -26246,14 +26225,14 @@
       "debt": {
         "active_milestone_id": "ledgers_bared_4",
         "current_balance_due": 65000,
-        "days_until_due": 20,
+        "days_until_due": 15,
         "missed_payment_count": 0,
-        "status_message": "Ledgers Bared due in 20 days."
+        "status_message": "Ledgers Bared due in 15 days."
       },
       "day_summary": [
         "Paid 1382 gold in upkeep: 566 wages, 215 supplies, 601 repairs.",
         "Special event expense: -1320 gold.",
-        "The creditors stay the blade for now: 65000 due in 20 days.",
+        "The creditors stay the blade for now: 65000 due in 15 days.",
         "Tower Scholar Contract expired: -52 gold.",
         "Caravan Captain Contract completed: +432 gold, +6 residue.",
         "Mina completed a contract for 432 gold.",

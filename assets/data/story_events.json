@@ -115,6 +115,8 @@
   "debt_missed_update_template": "Missed {name}. New balance {gold} gold, due in {days} days.",
   "debt_missed_event_template": "Debt missed: {name} was not paid. {gold} gold was squeezed out of the guild.",
   "debt_missed_stress_template": "Creditor pressure raised roster stress by {stress}.",
+  "debt_foreclosed_status_template": "Foreclosed on day {day} after {misses} consecutive missed payments.",
+  "debt_foreclosed_event_template": "Monsterhall was foreclosed after {misses} consecutive missed payments on {name}. The campaign can no longer advance.",
   "guest_name_template": "{archetype} Contract",
   "guest_missing_assigned_companion_event_template": "{guest} fell through because the assigned companion is gone.",
   "guest_failed_event_template": "{guest} failed: {reason}",

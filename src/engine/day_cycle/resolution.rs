@@ -13,6 +13,14 @@ use super::*;
 /// the roster with nothing anywhere to say when or why.
 pub fn resolve_day(data: &GameData, game_state: &mut GameState) -> DayResolutionSummary {
     let resolved_day = game_state.current_day;
+    if let Some(failure) = &game_state.campaign_failure {
+        return DayResolutionSummary {
+            resolved_day,
+            debt_updates: vec![failure.reason.clone()],
+            event_lines: vec![failure.reason.clone()],
+            ..DayResolutionSummary::default()
+        };
+    }
     let mut pending_egg_rewards: Vec<(String, Vec<EggSpeciesEntryData>, u32, u32)> = Vec::new();
     let mut summary = DayResolutionSummary {
         resolved_day,

@@ -68,6 +68,7 @@ pub fn create_new_game_state(data: &GameData) -> GameState {
         town,
         egg_inventory: Vec::new(),
         debt: None,
+        campaign_failure: None,
         active_contracts: Vec::new(),
         monsters,
         active_expedition: None,

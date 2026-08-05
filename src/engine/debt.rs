@@ -1,9 +1,14 @@
 //! Debt initialization and milestone helpers.
 
 use crate::data::GameData;
-use crate::state::{DebtResolution, DebtState, GameState};
+use crate::state::{CampaignFailureState, DebtResolution, DebtState, GameState};
 
-const MISSED_PAYMENT_GRACE_DAYS: u32 = 2;
+fn escalating_miss_cost(base: u32, miss_number: u32, growth_pct: u32) -> u32 {
+    let multiplier_pct = 100u64.saturating_add(
+        u64::from(miss_number.saturating_sub(1)).saturating_mul(u64::from(growth_pct)),
+    );
+    u32::try_from(u64::from(base).saturating_mul(multiplier_pct).div_ceil(100)).unwrap_or(u32::MAX)
+}
 
 fn story_text(template: &str, replacements: &[(&str, String)]) -> String {
     let mut output = template.to_owned();
@@ -80,6 +85,9 @@ pub fn debt_intro_status(data: &GameData, game_state: &GameState) -> String {
 }
 
 pub fn pay_debt_now(data: &GameData, game_state: &mut GameState) -> Result<(), String> {
+    if let Some(failure) = &game_state.campaign_failure {
+        return Err(failure.reason.clone());
+    }
     let Some(mut debt) = game_state.debt.clone() else {
         return Err("There is no active debt to pay.".to_owned());
     };
@@ -268,41 +276,74 @@ pub fn resolve_debt_cycle(
     } else if debt.days_until_due == 0 {
         debt.last_resolution = Some(DebtResolution::Missed);
         debt.missed_payment_count += 1;
-        debt.current_balance_due += milestone.failure_penalty_gold;
-        debt.days_until_due = MISSED_PAYMENT_GRACE_DAYS;
-        debt.status_message = story_text(
-            &data.story_events.debt_missed_status_template,
-            &[
-                ("{gold}", debt.current_balance_due.to_string()),
-                ("{days}", debt.days_until_due.to_string()),
-            ],
+        let penalty_gold = escalating_miss_cost(
+            milestone.failure_penalty_gold,
+            debt.missed_payment_count,
+            data.debt_milestones.miss_penalty_growth_pct,
         );
-        debt_updates.push(story_text(
+        let stress = escalating_miss_cost(
+            milestone.failure_stress_flat,
+            debt.missed_payment_count,
+            data.debt_milestones.miss_penalty_growth_pct,
+        );
+        debt.current_balance_due = debt.current_balance_due.saturating_add(penalty_gold);
+        debt.days_until_due = data.debt_milestones.miss_grace_days;
+        let missed_update = story_text(
             &data.story_events.debt_missed_update_template,
             &[
                 ("{name}", milestone.name.clone()),
                 ("{gold}", debt.current_balance_due.to_string()),
                 ("{days}", debt.days_until_due.to_string()),
             ],
-        ));
-        game_state.resources.gold = game_state
-            .resources
-            .gold
-            .saturating_sub(milestone.failure_penalty_gold);
+        );
+        debt_updates.push(missed_update);
+        game_state.resources.gold = game_state.resources.gold.saturating_sub(penalty_gold);
         for monster in &mut game_state.monsters {
-            monster.stress = monster.stress.saturating_add(milestone.failure_stress_flat);
+            monster.stress = monster.stress.saturating_add(stress);
         }
         event_lines.push(story_text(
             &data.story_events.debt_missed_event_template,
             &[
                 ("{name}", milestone.name.clone()),
-                ("{gold}", milestone.failure_penalty_gold.to_string()),
+                ("{gold}", penalty_gold.to_string()),
             ],
         ));
         roster_updates.push(story_text(
             &data.story_events.debt_missed_stress_template,
-            &[("{stress}", milestone.failure_stress_flat.to_string())],
+            &[("{stress}", stress.to_string())],
         ));
+
+        if debt.missed_payment_count >= data.debt_milestones.maximum_consecutive_misses {
+            debt.days_until_due = 0;
+            debt.status_message = story_text(
+                &data.story_events.debt_foreclosed_status_template,
+                &[
+                    ("{day}", game_state.current_day.to_string()),
+                    ("{misses}", debt.missed_payment_count.to_string()),
+                ],
+            );
+            let reason = story_text(
+                &data.story_events.debt_foreclosed_event_template,
+                &[
+                    ("{name}", milestone.name.clone()),
+                    ("{misses}", debt.missed_payment_count.to_string()),
+                ],
+            );
+            debt_updates.push(debt.status_message.clone());
+            event_lines.push(reason.clone());
+            game_state.campaign_failure = Some(CampaignFailureState {
+                day: game_state.current_day,
+                reason,
+            });
+        } else {
+            debt.status_message = story_text(
+                &data.story_events.debt_missed_status_template,
+                &[
+                    ("{gold}", debt.current_balance_due.to_string()),
+                    ("{days}", debt.days_until_due.to_string()),
+                ],
+            );
+        }
         game_state.debt = Some(debt);
     } else {
         debt.status_message = story_text(
@@ -369,9 +410,69 @@ mod tests {
 
         let debt = game_state.debt.expect("missed debt should remain active");
         assert!(debt.current_balance_due > 120);
-        assert_eq!(debt.days_until_due, MISSED_PAYMENT_GRACE_DAYS);
+        assert_eq!(debt.days_until_due, data.debt_milestones.miss_grace_days);
         assert!(game_state.monsters[0].stress > 0);
         assert!(debt_updates.iter().any(|line| line.contains("Missed")));
+    }
+
+    #[test]
+    fn repeated_misses_escalate_until_the_creditors_foreclose() {
+        let data = test_game_data();
+        let mut game_state = GameState {
+            current_day: 42,
+            town: PlayerTownState::default(),
+            monsters: vec![CompanionState::default()],
+            story_progress: StoryProgressState {
+                opening_step: OpeningChapterStep::Complete,
+                first_client_completed: true,
+                ..StoryProgressState::default()
+            },
+            ..GameState::default()
+        };
+        initialize_first_debt(&data, &mut game_state).expect("first debt should initialize");
+
+        let mut balance = game_state
+            .debt
+            .as_ref()
+            .expect("debt should be active")
+            .current_balance_due;
+        let mut penalties = Vec::new();
+        for miss in 1..=data.debt_milestones.maximum_consecutive_misses {
+            game_state
+                .debt
+                .as_mut()
+                .expect("debt should remain visible")
+                .days_until_due = 1;
+            resolve_debt_cycle(
+                &data,
+                &mut game_state,
+                &mut Vec::new(),
+                &mut Vec::new(),
+                &mut Vec::new(),
+            );
+            let debt = game_state
+                .debt
+                .as_ref()
+                .expect("debt should remain visible");
+            penalties.push(debt.current_balance_due - balance);
+            balance = debt.current_balance_due;
+            assert_eq!(debt.missed_payment_count, miss);
+        }
+
+        assert_eq!(penalties, vec![25, 50, 75, 100, 125]);
+        assert_eq!(game_state.monsters[0].stress, 60);
+        let failure = game_state
+            .campaign_failure
+            .as_ref()
+            .expect("the authored maximum consecutive miss should foreclose");
+        assert_eq!(failure.day, 42);
+        assert!(failure.reason.contains("campaign can no longer advance"));
+
+        let frozen_day = game_state.current_day;
+        let summary = crate::engine::resolve_day(&data, &mut game_state);
+        assert_eq!(summary.resolved_day, frozen_day);
+        assert_eq!(game_state.current_day, frozen_day);
+        assert!(pay_debt_now(&data, &mut game_state).is_err());
     }
 
     #[test]
@@ -395,7 +496,7 @@ mod tests {
         initialize_first_debt(&data, &mut game_state).expect("first debt should initialize");
         if let Some(debt) = &mut game_state.debt {
             debt.current_balance_due = 130;
-            debt.days_until_due = MISSED_PAYMENT_GRACE_DAYS;
+            debt.days_until_due = data.debt_milestones.miss_grace_days;
             debt.missed_payment_count = 1;
         }
 

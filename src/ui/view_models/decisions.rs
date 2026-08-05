@@ -1,6 +1,19 @@
 use super::*;
 
 pub fn daily_priority_summary(data: &GameData, game_state: &GameState) -> DailyPrioritySummary {
+    if game_state.campaign_failure.is_some() {
+        return DailyPrioritySummary {
+            title: data.ui_text.town_overview.priority_foreclosed_title.clone(),
+            detail: data
+                .ui_text
+                .town_overview
+                .priority_foreclosed_detail
+                .clone(),
+            action_hint: data.ui_text.common.journal_button.clone(),
+            color: theme::DANGER,
+        };
+    }
+
     if game_state.monsters.is_empty() {
         return DailyPrioritySummary {
             title: data.ui_text.town_overview.priority_no_roster_title.clone(),
@@ -402,6 +415,24 @@ mod tests {
             priority.title, data.ui_text.town_overview.priority_debt_title,
             "a payment due tomorrow must not be hidden behind an egg"
         );
+    }
+
+    #[test]
+    fn foreclosure_outranks_every_daily_priority() {
+        let data = test_game_data();
+        let mut game_state = create_new_game_state(&data);
+        game_state.campaign_failure = Some(crate::state::CampaignFailureState {
+            day: 42,
+            reason: "Monsterhall was foreclosed.".to_owned(),
+        });
+
+        let priority = daily_priority_summary(&data, &game_state);
+
+        assert_eq!(
+            priority.title,
+            data.ui_text.town_overview.priority_foreclosed_title
+        );
+        assert_eq!(priority.color, theme::DANGER);
     }
 
     /// And once the guild is full, "grow the roster before the day ends" is the

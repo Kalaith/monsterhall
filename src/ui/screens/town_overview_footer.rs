@@ -1,6 +1,7 @@
 use macroquad::prelude::*;
 
 use crate::data::GameData;
+use crate::state::GameState;
 use crate::ui::actions::UiAction;
 use crate::ui::art::{draw_ui_icon, UiIcon};
 use crate::ui::core::draw_body_text_in_box;
@@ -11,11 +12,18 @@ use super::town_overview_sections::draw_organic_panel;
 
 pub(super) fn draw_town_overview_footer(
     data: &GameData,
+    game_state: &GameState,
     x: f32,
     y: f32,
     w: f32,
 ) -> Option<UiAction> {
     let common = &data.ui_text.common;
+    let campaign_failed = game_state.campaign_failure.is_some();
+    let end_day_label = if campaign_failed {
+        data.ui_text.town_overview.foreclosed_end_day_label.as_str()
+    } else {
+        common.end_day_button.as_str()
+    };
     let actions: [(&str, UiAction); 8] = [
         ("Guild Hall", UiAction::ReturnToTownOverview),
         (
@@ -39,7 +47,7 @@ pub(super) fn draw_town_overview_footer(
             UiAction::OpenExpeditionPlanning,
         ),
         (common.journal_button.as_str(), UiAction::OpenJournal),
-        (common.end_day_button.as_str(), UiAction::ResolveDay),
+        (end_day_label, UiAction::ResolveDay),
     ];
 
     draw_organic_panel(x, y, w, layout::FOOTER_H, None, theme::BORDER_1, false);
@@ -51,6 +59,7 @@ pub(super) fn draw_town_overview_footer(
     for (index, (label, action)) in actions.iter().enumerate() {
         let button_x = inner_x + index as f32 * (button_w + gap);
         let is_current_screen = same_footer_action(action, &UiAction::ReturnToTownOverview);
+        let disabled = campaign_failed && matches!(action, UiAction::ResolveDay);
         if draw_footer_tile(
             button_x,
             y + 8.0,
@@ -59,6 +68,7 @@ pub(super) fn draw_town_overview_footer(
             label,
             action,
             is_current_screen,
+            disabled,
         ) {
             return Some(action.clone());
         }
@@ -75,11 +85,12 @@ fn draw_footer_tile(
     label: &str,
     action: &UiAction,
     highlighted: bool,
+    disabled: bool,
 ) -> bool {
     let (mouse_x, mouse_y) = mouse_position();
     let hovered = mouse_x >= x && mouse_x <= x + w && mouse_y >= y && mouse_y <= y + h;
     let pressed = hovered && is_mouse_button_down(MouseButton::Left);
-    let clicked = hovered && is_mouse_button_pressed(MouseButton::Left);
+    let clicked = !disabled && hovered && is_mouse_button_pressed(MouseButton::Left);
     let is_end_day = matches!(action, UiAction::ResolveDay);
     let accent = if highlighted {
         theme::GOLD
@@ -93,7 +104,9 @@ fn draw_footer_tile(
     } else {
         theme::PANEL_1
     };
-    let fill_alpha = if pressed {
+    let fill_alpha = if disabled {
+        0.38
+    } else if pressed {
         0.98
     } else if hovered {
         0.88
@@ -154,7 +167,13 @@ fn draw_footer_tile(
             1.0,
             1.0,
             1.0,
-            if highlighted || is_end_day { 0.92 } else { 0.7 },
+            if disabled {
+                0.42
+            } else if highlighted || is_end_day {
+                0.92
+            } else {
+                0.7
+            },
         ),
     );
     draw_body_text_in_box(

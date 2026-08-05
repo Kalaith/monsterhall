@@ -87,6 +87,9 @@ pub(super) fn can_spend_on_late_game_sink(
     let Some(debt) = game_state.debt.as_ref() else {
         return game_state.resources.gold.saturating_sub(gold_cost) >= scheduled_debt_reserve;
     };
+    if debt.missed_payment_count > 0 {
+        return game_state.resources.gold.saturating_sub(gold_cost) >= debt.current_balance_due;
+    }
     if debt.active_milestone_id == "founders_due_7" {
         return game_state.resources.gold.saturating_sub(gold_cost)
             >= debt

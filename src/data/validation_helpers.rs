@@ -97,6 +97,14 @@ pub(super) fn validate_story_event_text_fields(
             &story_events.debt_missed_stress_template,
         ),
         (
+            "story_events.debt_foreclosed_status_template",
+            &story_events.debt_foreclosed_status_template,
+        ),
+        (
+            "story_events.debt_foreclosed_event_template",
+            &story_events.debt_foreclosed_event_template,
+        ),
+        (
             "story_events.guest_name_template",
             &story_events.guest_name_template,
         ),

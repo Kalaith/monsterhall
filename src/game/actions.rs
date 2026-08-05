@@ -503,6 +503,11 @@ impl Game {
             return;
         };
 
+        if let Some(failure) = &game_state.campaign_failure {
+            self.last_error = Some(failure.reason.clone());
+            return;
+        }
+
         if game_state.monsters.is_empty() {
             self.last_error = Some(
                 "Hatch a monster companion before ending the day. A campaign cannot progress with an empty roster."

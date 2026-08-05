@@ -30,6 +30,19 @@ impl GameData {
                 self.debt_milestones.first_milestone_id
             ));
         }
+        if self.debt_milestones.maximum_consecutive_misses == 0 {
+            return Err(
+                "debt_milestones.json maximum_consecutive_misses must be positive.".to_owned(),
+            );
+        }
+        if self.debt_milestones.miss_penalty_growth_pct == 0 {
+            return Err(
+                "debt_milestones.json miss_penalty_growth_pct must be positive.".to_owned(),
+            );
+        }
+        if self.debt_milestones.miss_grace_days == 0 {
+            return Err("debt_milestones.json miss_grace_days must be positive.".to_owned());
+        }
 
         for required_step_id in [
             "camp",

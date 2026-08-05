@@ -33,6 +33,14 @@ pub(super) fn can_make_growth_investment(
     };
 
     let post_spend_gold = game_state.resources.gold.saturating_sub(gold_cost);
+    // Once a payment has actually been missed, the simulated steward stops
+    // calling discretionary purchases "growth" and holds every coin until the
+    // balance can be cleared. Without this it resumed buying as soon as the
+    // grace calendar looked long, guaranteeing the next miss despite the new
+    // terminal campaign state.
+    if debt.missed_payment_count > 0 {
+        return post_spend_gold >= debt.current_balance_due;
+    }
     let projected_daily_income = match investment_kind {
         GrowthInvestmentKind::Hatch => growth_daily_gold_income(game_state, added_income_units),
         GrowthInvestmentKind::Building => {
@@ -80,7 +88,9 @@ pub(super) fn can_survive_debt_after_growth_assignment(
         return true;
     };
 
-    if debt.days_until_due <= 1 && game_state.resources.gold < debt.current_balance_due {
+    if (debt.days_until_due <= 1 || debt.missed_payment_count > 0)
+        && game_state.resources.gold < debt.current_balance_due
+    {
         return false;
     }
 

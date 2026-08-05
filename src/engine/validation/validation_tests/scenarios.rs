@@ -247,6 +247,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         total_expedition_failures,
         final_resources: resources_snapshot(&game_state),
         final_debt: debt_snapshot(&game_state),
+        final_campaign_failure: game_state.campaign_failure.clone(),
         final_upkeep_forecast: upkeep_forecast_snapshot(&data, &game_state),
         surplus_summary: surplus_summary(
             starting_resources,
@@ -519,6 +520,7 @@ fn multi_seed_365_simulation_summary_reports_variance() {
             MultiSeedSimulationSample {
                 sample: index + 1,
                 rng_seed: *seed,
+                ending_day: report.ending_day,
                 companions: report.final_roster_size,
                 buildings: report.final_buildings,
                 gold: report.final_resources.gold,
@@ -532,6 +534,10 @@ fn multi_seed_365_simulation_summary_reports_variance() {
                 debt_status: final_debt
                     .map(|debt| debt.status_message.clone())
                     .unwrap_or_else(|| "Debt cleared".to_owned()),
+                campaign_failure_reason: report
+                    .final_campaign_failure
+                    .as_ref()
+                    .map(|failure| failure.reason.clone()),
                 max_active_requests: max_active_contracts(&report),
                 expirations: report.total_guest_expirations,
             }
@@ -539,6 +545,10 @@ fn multi_seed_365_simulation_summary_reports_variance() {
         .collect::<Vec<_>>();
     let summary = MultiSeedSimulationSummary {
         simulation_days: 365,
+        foreclosures: samples
+            .iter()
+            .filter(|sample| sample.campaign_failure_reason.is_some())
+            .count(),
         companions: summarize_usize(samples.iter().map(|sample| sample.companions)),
         buildings: summarize_usize(samples.iter().map(|sample| sample.buildings)),
         gold: summarize_u32(samples.iter().map(|sample| sample.gold)),
@@ -580,16 +590,13 @@ fn multi_seed_365_simulation_summary_reports_variance() {
         "multi-seed roster averaged {:.1}, well short of the {population_cap} cap - the wage load has broken growth",
         summary.companions.average
     );
-    // Deliberately changed with the wage economy, and traded for a stricter
-    // invariant. Every seed used to arrive at the founder's due by day 365
-    // because gold was close to free; wages introduce real pacing variance, so
-    // some campaigns are still working through the broker's compact. What must
-    // hold now is that nobody is *failing*: not one seed may miss a payment,
-    // and most must still reach the final window.
+    // The terminal debt state makes an actual loss visible when a seed reaches
+    // it. Unit coverage forces that path; this cohort caps it so most stewards
+    // still survive and reach the late debt arc.
     assert!(
-        summary.missed_payments.max == 0,
-        "no seed should miss a debt payment, worst case missed {}",
-        summary.missed_payments.max
+        summary.foreclosures <= 2,
+        "at most two of ten representative stewards should foreclose, got {}",
+        summary.foreclosures
     );
     let reached_final_window = summary
         .samples

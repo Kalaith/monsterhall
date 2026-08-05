@@ -119,6 +119,7 @@ fn removing_last_monster_clears_expedition() {
         },
         egg_inventory: Vec::new(),
         debt: None,
+        campaign_failure: None,
         active_contracts: Vec::new(),
         monsters: vec![test_monster(Vec::new())],
         active_expedition: Some(ExpeditionState {
@@ -174,6 +175,7 @@ fn release_monster_clears_assignments_without_emptying_roster() {
         },
         egg_inventory: Vec::new(),
         debt: None,
+        campaign_failure: None,
         active_contracts: vec![ContractState {
             request_id: "contract_001".to_owned(),
             status: ContractStatus::Accepted,
@@ -286,6 +288,7 @@ fn incubating_and_hatching_use_egg_inventory() {
         },
         egg_inventory: Vec::new(),
         debt: None,
+        campaign_failure: None,
         active_contracts: Vec::new(),
         monsters: Vec::new(),
         active_expedition: None,

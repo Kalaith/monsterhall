@@ -188,6 +188,30 @@ fn exists(save_key: &str) -> bool {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::state::{CampaignFailureState, GameState};
+
+    #[test]
+    fn foreclosure_survives_a_save_round_trip() {
+        let save = SaveData::new(
+            11,
+            GameState {
+                current_day: 42,
+                campaign_failure: Some(CampaignFailureState {
+                    day: 42,
+                    reason: "Monsterhall was foreclosed.".to_owned(),
+                }),
+                ..GameState::default()
+            },
+        );
+
+        let encoded = serde_json::to_string(&save).expect("save should serialize");
+        let restored: SaveData = serde_json::from_str(&encoded).expect("save should deserialize");
+
+        assert_eq!(
+            restored.game_state.campaign_failure,
+            save.game_state.campaign_failure
+        );
+    }
 
     #[test]
     #[cfg(not(target_arch = "wasm32"))]
