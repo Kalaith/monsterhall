@@ -5,9 +5,9 @@ use super::policy_growth::{
 };
 use super::policy_guests::accepted_guest_monster_ids;
 use super::*;
+use crate::engine::preview_guild_job;
 
 pub(super) fn assign_daily_jobs(data: &GameData, game_state: &mut GameState) -> (usize, usize) {
-    let room_id = best_unlocked_room_id(data, game_state);
     let guild_job_limit = usize::from(game_state.town.town_job_limit);
     let reserved_guest_monster_ids = accepted_guest_monster_ids(game_state);
     let mut guild_job_workers = 0usize;
@@ -65,8 +65,8 @@ pub(super) fn assign_daily_jobs(data: &GameData, game_state: &mut GameState) -> 
         }
 
         if guild_job_workers < guild_job_limit {
-            if let Some(room_id) = &room_id {
-                if assign_monster_to_room(game_state, &monster_id, room_id).is_ok() {
+            if let Some(room_id) = best_unlocked_room_id(data, game_state, monster) {
+                if assign_monster_to_room(game_state, &monster_id, &room_id).is_ok() {
                     guild_job_workers += 1;
                     continue;
                 }
@@ -77,7 +77,11 @@ pub(super) fn assign_daily_jobs(data: &GameData, game_state: &mut GameState) -> 
     (guild_job_workers, expedition_members)
 }
 
-pub(super) fn best_unlocked_room_id(data: &GameData, game_state: &GameState) -> Option<String> {
+pub(super) fn best_unlocked_room_id(
+    data: &GameData,
+    game_state: &GameState,
+    monster: &crate::state::CompanionState,
+) -> Option<String> {
     data.guild_rooms
         .rooms
         .iter()
@@ -88,7 +92,21 @@ pub(super) fn best_unlocked_room_id(data: &GameData, game_state: &GameState) -> 
                 .iter()
                 .any(|room_id| room_id == &room.id)
         })
-        .max_by_key(|room| room.base_gold_yield)
+        .max_by_key(|room| {
+            let untrained_curriculum = room
+                .trained_skill_ids
+                .iter()
+                .filter(|skill_id| {
+                    game_state.monsters.iter().all(|entry| {
+                        crate::engine::companion_skill_value(&entry.skills, skill_id) == 0
+                    })
+                })
+                .count();
+            let ready_gold = preview_guild_job(data, game_state, monster, &room.id)
+                .map(|preview| preview.projected_gold)
+                .unwrap_or_default();
+            (untrained_curriculum > 0, untrained_curriculum, ready_gold)
+        })
         .map(|room| room.id.clone())
 }
 

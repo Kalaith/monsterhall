@@ -213,6 +213,7 @@ fn thirty_day_simulation_keeps_gameplay_state_valid() {
         final_graded_eggs: graded_egg_count(&game_state),
         final_role_diversity: role_diversity(&data, &game_state),
         final_species_counts: species_counts(&game_state),
+        final_skill_totals: skill_totals(&game_state),
         final_corruption_max: corruption_max(&game_state),
         final_town_projects: game_state.town.completed_project_ids.len(),
         sink_absorbed: sink_absorbed(&data, &game_state),
@@ -482,6 +483,16 @@ fn long_campaign_simulation_reports_stay_valid() {
                     report.total_expedition_successes,
                     report.total_expedition_failures
                 );
+                for skill_id in crate::engine::SKILL_IDS {
+                    assert!(
+                        report
+                            .final_skill_totals
+                            .get(skill_id)
+                            .is_some_and(|total| *total > 0),
+                        "365-day shipped-content campaign never trained {skill_id}: {:?}",
+                        report.final_skill_totals
+                    );
+                }
                 let final_debt = report.final_debt.as_ref().expect(
                     "365-day simulation should leave Founder's Due active for future floors",
                 );

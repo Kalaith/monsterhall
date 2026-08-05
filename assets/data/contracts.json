@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "requests": [
     {
       "id": "starter_slime_bedding",
@@ -350,7 +350,8 @@
         "guarding": 0,
         "hospitality": 0,
         "crafting": 1,
-        "charm": 1
+        "charm": 1,
+        "strength": 2
       },
       "required_work_history_thresholds": {
         "scouting_runs": 0,
@@ -398,7 +399,8 @@
         "guarding": 0,
         "hospitality": 2,
         "crafting": 0,
-        "charm": 2
+        "charm": 2,
+        "navigation": 2
       },
       "required_work_history_thresholds": {
         "scouting_runs": 1,
@@ -446,7 +448,9 @@
         "guarding": 1,
         "hospitality": 1,
         "crafting": 2,
-        "charm": 3
+        "charm": 3,
+        "arcana": 3,
+        "strength": 2
       },
       "required_work_history_thresholds": {
         "scouting_runs": 0,
@@ -494,7 +498,8 @@
         "guarding": 1,
         "hospitality": 2,
         "crafting": 0,
-        "charm": 3
+        "charm": 3,
+        "arcana": 3
       },
       "required_work_history_thresholds": {
         "scouting_runs": 1,
@@ -588,7 +593,8 @@
         "guarding": 0,
         "hospitality": 2,
         "crafting": 0,
-        "charm": 3
+        "charm": 3,
+        "navigation": 3
       },
       "required_work_history_thresholds": {
         "scouting_runs": 1,
@@ -636,7 +642,9 @@
         "guarding": 3,
         "hospitality": 0,
         "crafting": 1,
-        "charm": 0
+        "charm": 0,
+        "navigation": 3,
+        "strength": 3
       },
       "required_work_history_thresholds": {
         "scouting_runs": 2,
@@ -732,7 +740,9 @@
         "guarding": 0,
         "hospitality": 3,
         "crafting": 2,
-        "charm": 4
+        "charm": 4,
+        "arcana": 4,
+        "strength": 2
       },
       "required_work_history_thresholds": {
         "scouting_runs": 0,

@@ -139,15 +139,18 @@ pub(super) fn skill_ids_from_work_history_gains(
 
     if gains.scouting_runs > 0 {
         skill_ids.push("scouting".to_owned());
+        skill_ids.push("navigation".to_owned());
     }
     if gains.guard_duties > 0 {
         skill_ids.push("guarding".to_owned());
+        skill_ids.push("strength".to_owned());
     }
     if gains.hospitality_jobs > 0 {
         skill_ids.push("hospitality".to_owned());
     }
     if gains.craft_jobs > 0 {
         skill_ids.push("crafting".to_owned());
+        skill_ids.push("strength".to_owned());
     }
     // A shift spent nursing someone back teaches recovery; a shift spent
     // closing a booking teaches bargaining. Both are inert until a room lists
@@ -158,6 +161,9 @@ pub(super) fn skill_ids_from_work_history_gains(
     }
     if gains.contracts_completed > 0 {
         skill_ids.push("bargaining".to_owned());
+    }
+    if gains.hatchery_assists > 0 {
+        skill_ids.push("arcana".to_owned());
     }
 
     skill_ids

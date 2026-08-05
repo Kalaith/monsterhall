@@ -52,6 +52,7 @@ mod policy_guests;
 mod policy_jobs;
 mod probe;
 mod reporting;
+mod reporting_roster;
 mod reporting_runs;
 mod scenarios;
 
@@ -59,4 +60,5 @@ use fixtures::*;
 use policy::*;
 use policy_guests::*;
 use reporting::*;
+use reporting_roster::*;
 use reporting_runs::*;

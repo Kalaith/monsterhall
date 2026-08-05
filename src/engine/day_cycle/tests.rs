@@ -936,6 +936,36 @@ fn every_skill_the_data_names_can_actually_be_trained_and_scored() {
 }
 
 #[test]
+fn shipped_rooms_offer_a_real_training_route_for_every_displayed_skill() {
+    let data = crate::data::test_game_data();
+
+    for skill_id in crate::engine::SKILL_IDS {
+        assert!(
+            data.guild_rooms.rooms.iter().any(|room| room
+                .trained_skill_ids
+                .iter()
+                .any(|trained| trained == skill_id)),
+            "displayed skill '{skill_id}' has no shipped room training route"
+        );
+    }
+}
+
+#[test]
+fn advanced_contracts_value_navigation_arcana_and_strength() {
+    let data = crate::data::test_game_data();
+
+    for skill_id in ["navigation", "arcana", "strength"] {
+        assert!(
+            data.contracts.requests.iter().any(|request| {
+                crate::engine::progression_skill_value(&request.required_skill_thresholds, skill_id)
+                    > 0
+            }),
+            "no authored contract values {skill_id}"
+        );
+    }
+}
+
+#[test]
 fn traits_change_what_a_companion_is_worth() {
     let data = crate::data::test_game_data();
     let plain = test_monster(Vec::new());
@@ -1310,6 +1340,62 @@ fn the_starting_companion_has_dependable_egg_hunt_odds() {
         preview.projected_eggs > 0,
         "the dependable opening egg hunt must actually offer recruitment"
     );
+}
+
+#[test]
+fn advanced_training_changes_the_expedition_preview_it_describes() {
+    let data = crate::data::test_game_data();
+    let mut game_state = crate::engine::create_new_game_state(&data);
+    let mut monster = test_monster(Vec::new());
+    let floor = data
+        .floors
+        .floors
+        .iter()
+        .find(|floor| game_state.town.unlocked_floor_ids.contains(&floor.id))
+        .expect("a starting floor is unlocked");
+    let mission = data
+        .missions
+        .missions
+        .iter()
+        .find(|mission| mission.id == "resource_run")
+        .expect("the opening floor should support a resource run");
+    monster.current_job = CompanionJobState::OnExpedition {
+        expedition_id: "expedition_001".to_owned(),
+    };
+    game_state.monsters = vec![monster];
+    game_state.active_expedition = Some(ExpeditionState {
+        expedition_id: "expedition_001".to_owned(),
+        floor_id: floor.id.clone(),
+        mission_id: mission.id.clone(),
+        priority: ExpeditionPriority::Balanced,
+        assigned_monster_ids: vec!["monster_001".to_owned()],
+    });
+
+    let preview = |state: &GameState| {
+        preview_expedition_plan(
+            &data,
+            state,
+            &floor.id,
+            &mission.id,
+            &ExpeditionPriority::Balanced,
+        )
+        .expect("expedition preview")
+    };
+    let base = preview(&game_state);
+
+    game_state.monsters[0].skills.navigation = 12;
+    let navigated = preview(&game_state);
+    assert!(navigated.success_score > base.success_score);
+
+    game_state.monsters[0].skills.navigation = 0;
+    game_state.monsters[0].skills.strength = 12;
+    let strengthened = preview(&game_state);
+    assert!(strengthened.projected_materials > base.projected_materials);
+
+    game_state.monsters[0].skills.strength = 0;
+    game_state.monsters[0].skills.arcana = 12;
+    let arcane = preview(&game_state);
+    assert!(arcane.projected_arcane_residue > base.projected_arcane_residue);
 }
 
 fn test_monster(trait_ids: Vec<String>) -> CompanionState {

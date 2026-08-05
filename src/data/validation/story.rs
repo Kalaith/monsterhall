@@ -216,10 +216,9 @@ impl GameData {
                 ));
             }
             // A contract may only ask for a skill some guild room actually
-            // teaches. Nothing trains recovery, bargaining, navigation, arcana
-            // or strength today, so asking for one would be a booking no
-            // companion could ever qualify for — the same shape of dead content
-            // as a room advertising odds for work it cannot bank.
+            // teaches. Otherwise it is a booking no companion could ever
+            // qualify for — the same shape of dead content as a room
+            // advertising odds for work it cannot bank.
             for (skill_id, threshold) in [
                 ("scouting", request.required_skill_thresholds.scouting),
                 ("guarding", request.required_skill_thresholds.guarding),

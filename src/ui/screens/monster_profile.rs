@@ -427,10 +427,10 @@ fn draw_best_use_panel(
     );
 }
 
-/// The skill band is two fixed rows between the panel title and the tower
+/// The skill band is three fixed rows between the panel title and the tower
 /// stats, so it holds this many chips and no more.
 const SKILL_CHIP_COLUMNS: usize = 4;
-const SKILL_CHIP_ROWS: usize = 2;
+const SKILL_CHIP_ROWS: usize = 3;
 const SKILL_CHIP_SLOTS: usize = SKILL_CHIP_COLUMNS * SKILL_CHIP_ROWS;
 
 /// What a companion has learned, plus her bond.
@@ -441,10 +441,9 @@ const SKILL_CHIP_SLOTS: usize = SKILL_CHIP_COLUMNS * SKILL_CHIP_ROWS;
 /// `recovery` or `bargaining`, so a companion could train for a season and this
 /// panel would show her exactly the same five numbers.
 ///
-/// Only non-zero skills are listed, which is what keeps ten skills inside a
-/// band sized for six. `every_trainable_skill_fits_the_profile_panel` is the
-/// guard on that: if a room ever teaches enough skills to overflow the band,
-/// the test fails rather than the panel silently dropping the last one.
+/// Only non-zero skills are listed. `every_trainable_skill_fits_the_profile_panel`
+/// guards the fixed band: if the vocabulary ever outgrows it, the test fails
+/// rather than the panel silently dropping the last one.
 fn skill_chips(data: &GameData, monster: &CompanionState) -> Vec<(String, String, Color)> {
     let palette = [
         theme::INFO,
@@ -495,14 +494,14 @@ fn draw_stats_panel(data: &GameData, monster: &CompanionState, x: f32, y: f32, w
     for (index, (label, value, color)) in skill_chips(data, monster).iter().enumerate() {
         draw_profile_chip(chip_x, chip_y, chip_w, chip_h, label, value, *color);
         chip_x += chip_w + 6.0;
-        if index + 1 == SKILL_CHIP_COLUMNS {
+        if (index + 1) % SKILL_CHIP_COLUMNS == 0 {
             chip_x = x + 18.0;
             chip_y += chip_h + 10.0;
         }
     }
 
-    draw_gold_separator(x + 18.0, y + 148.0, w - 36.0);
-    let tower_y = y + 164.0;
+    draw_gold_separator(x + 18.0, y + 188.0, w - 36.0);
+    let tower_y = y + 204.0;
     let tower_w = (w - 60.0) / 4.0;
     let stats = crate::engine::effective_stats(data, monster);
     let trait_bonus = crate::engine::trait_stat_bonus(data, monster);
@@ -724,7 +723,7 @@ mod tests {
         }
     }
 
-    /// The skill band is two fixed rows, and the panel below it starts at a
+    /// The skill band is three fixed rows, and the panel below it starts at a
     /// fixed offset, so the chips have to fit rather than run into the tower
     /// stats.
     ///

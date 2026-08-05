@@ -165,13 +165,29 @@ pub(crate) fn calculate_expedition_plan(
         )
     };
 
+    // Room training follows the party into the tower. Cap each learned skill's
+    // contribution so a veteran's hundreds of routine shifts cannot replace
+    // species stats, party composition, or floor difficulty by themselves.
+    let expedition_skill = |monster: &CompanionState, skill: u32| -> u32 {
+        condition_weighted(monster, skill.min(12) as i32)
+    };
     let total_power = assigned_monsters
         .iter()
-        .map(|monster| condition_weighted(monster, effective_stats(data, monster).power))
+        .map(|monster| {
+            condition_weighted(monster, effective_stats(data, monster).power)
+                .saturating_add(expedition_skill(monster, monster.skills.strength) / 2)
+        })
         .sum::<u32>();
     let total_instinct = assigned_monsters
         .iter()
-        .map(|monster| condition_weighted(monster, effective_stats(data, monster).instinct))
+        .map(|monster| {
+            condition_weighted(monster, effective_stats(data, monster).instinct)
+                .saturating_add(expedition_skill(monster, monster.skills.arcana) / 2)
+        })
+        .sum::<u32>();
+    let total_navigation = assigned_monsters
+        .iter()
+        .map(|monster| expedition_skill(monster, monster.skills.navigation))
         .sum::<u32>();
     let party_effectiveness_pct = party_effectiveness_pct(day_cycle, assigned_monsters);
     let total_trait_success = assigned_monsters
@@ -213,6 +229,7 @@ pub(crate) fn calculate_expedition_plan(
     let success_score = data.config.day_cycle.base_expedition_success
         + total_power as i32 * 4
         + total_instinct as i32 * 2
+        + total_navigation as i32
         + mission.success_bonus_pct
         + priority_bonus
         + building_bonus.expedition_success_pct

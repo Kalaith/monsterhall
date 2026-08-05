@@ -211,6 +211,7 @@ pub(super) fn run_simulation_report(
         final_graded_eggs: graded_egg_count(&game_state),
         final_role_diversity: role_diversity(data, &game_state),
         final_species_counts: species_counts(&game_state),
+        final_skill_totals: skill_totals(&game_state),
         final_corruption_max: corruption_max(&game_state),
         final_town_projects: game_state.town.completed_project_ids.len(),
         sink_absorbed: sink_absorbed(data, &game_state),
